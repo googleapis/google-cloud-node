@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const retail = require('@google-cloud/retail');
 
@@ -24,8 +25,7 @@ function main() {
   const catalogServiceClient = new retail.CatalogServiceClient();
   const completionServiceClient = new retail.CompletionServiceClient();
   const controlServiceClient = new retail.ControlServiceClient();
-  const generativeQuestionServiceClient =
-    new retail.GenerativeQuestionServiceClient();
+  const generativeQuestionServiceClient = new retail.GenerativeQuestionServiceClient();
   const modelServiceClient = new retail.ModelServiceClient();
   const predictionServiceClient = new retail.PredictionServiceClient();
   const productServiceClient = new retail.ProductServiceClient();

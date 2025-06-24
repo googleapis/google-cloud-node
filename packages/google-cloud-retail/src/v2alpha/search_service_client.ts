@@ -18,17 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -115,41 +105,20 @@ export class SearchServiceClient {
    *     const client = new SearchServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof SearchServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'retail.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -175,7 +144,7 @@ export class SearchServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -191,9 +160,13 @@ export class SearchServiceClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -259,11 +232,8 @@ export class SearchServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      search: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'results'
-      ),
+      search:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'results')
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -272,48 +242,23 @@ export class SearchServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',
-          additional_bindings: [
-            {
-              get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/places/*/operations/*}',
-            },
-            {
-              get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/operations/*}',
-            },
-            {get: '/v2alpha/{name=projects/*/locations/*/operations/*}'},
-            {get: '/v2alpha/{name=projects/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v2alpha/{name=projects/*/locations/*/catalogs/*}/operations',
-          additional_bindings: [
-            {get: '/v2alpha/{name=projects/*/locations/*}/operations'},
-            {get: '/v2alpha/{name=projects/*}/operations'},
-          ],
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',additional_bindings: [{get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/places/*/operations/*}',},{get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/operations/*}',},{get: '/v2alpha/{name=projects/*/locations/*/operations/*}',},{get: '/v2alpha/{name=projects/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v2alpha/{name=projects/*/locations/*/catalogs/*}/operations',additional_bindings: [{get: '/v2alpha/{name=projects/*/locations/*}/operations',},{get: '/v2alpha/{name=projects/*}/operations',}],
+      }];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
 
-    this.descriptors.longrunning = {};
+    this.descriptors.longrunning = {
+    };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.retail.v2alpha.SearchService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.retail.v2alpha.SearchService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -344,35 +289,32 @@ export class SearchServiceClient {
     // Put together the "service stub" for
     // google.cloud.retail.v2alpha.SearchService.
     this.searchServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.retail.v2alpha.SearchService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.retail.v2alpha.SearchService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.retail.v2alpha.SearchService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const searchServiceStubMethods = ['search'];
+    const searchServiceStubMethods =
+        ['search'];
     for (const methodName of searchServiceStubMethods) {
       const callPromise = this.searchServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -392,14 +334,8 @@ export class SearchServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'retail.googleapis.com';
   }
@@ -410,14 +346,8 @@ export class SearchServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'retail.googleapis.com';
   }
@@ -448,7 +378,9 @@ export class SearchServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -457,9 +389,8 @@ export class SearchServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -471,399 +402,384 @@ export class SearchServiceClient {
   // -- Service calls --
   // -------------------
 
-  /**
-   * Performs a search.
-   *
-   * This feature is only available for users who have Retail Search enabled.
-   * Enable Retail Search on Cloud Console before using this feature.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.placement
-   *   Required. The resource name of the Retail Search serving config, such as
-   *   `projects/* /locations/global/catalogs/default_catalog/servingConfigs/default_serving_config`
-   *   or the name of the legacy placement resource, such as
-   *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
-   *   This field is used to identify the serving config name and the set
-   *   of models that are used to make the search.
-   * @param {string} request.branch
-   *   The branch resource name, such as
-   *   `projects/* /locations/global/catalogs/default_catalog/branches/0`.
-   *
-   *   Use "default_branch" as the branch ID or leave this field empty, to search
-   *   products under the default branch.
-   * @param {string} request.query
-   *   Raw search query.
-   *
-   *   If this field is empty, the request is considered a category browsing
-   *   request and returned results are based on
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.filter|filter} and
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.page_categories|page_categories}.
-   * @param {string} request.visitorId
-   *   Required. A unique identifier for tracking visitors. For example, this
-   *   could be implemented with an HTTP cookie, which should be able to uniquely
-   *   identify a visitor on a single device. This unique identifier should not
-   *   change if the visitor logs in or out of the website.
-   *
-   *   This should be the same identifier as
-   *   {@link protos.google.cloud.retail.v2alpha.UserEvent.visitor_id|UserEvent.visitor_id}.
-   *
-   *   The field must be a UTF-8 encoded string with a length limit of 128
-   *   characters. Otherwise, an INVALID_ARGUMENT error is returned.
-   * @param {google.cloud.retail.v2alpha.UserInfo} request.userInfo
-   *   User information.
-   * @param {number} request.pageSize
-   *   Maximum number of {@link protos.google.cloud.retail.v2alpha.Product|Product}s to
-   *   return. If unspecified, defaults to a reasonable value. The maximum allowed
-   *   value is 120. Values above 120 will be coerced to 120.
-   *
-   *   If this field is negative, an INVALID_ARGUMENT is returned.
-   * @param {string} request.pageToken
-   *   A page token
-   *   {@link protos.google.cloud.retail.v2alpha.SearchResponse.next_page_token|SearchResponse.next_page_token},
-   *   received from a previous
-   *   {@link protos.google.cloud.retail.v2alpha.SearchService.Search|SearchService.Search}
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   {@link protos.google.cloud.retail.v2alpha.SearchService.Search|SearchService.Search}
-   *   must match the call that provided the page token. Otherwise, an
-   *   INVALID_ARGUMENT error is returned.
-   * @param {number} request.offset
-   *   A 0-indexed integer that specifies the current offset (that is, starting
-   *   result location, amongst the
-   *   {@link protos.google.cloud.retail.v2alpha.Product|Product}s deemed by the API as
-   *   relevant) in search results. This field is only considered if
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.page_token|page_token} is
-   *   unset.
-   *
-   *   If this field is negative, an INVALID_ARGUMENT is returned.
-   * @param {string} request.filter
-   *   The filter syntax consists of an expression language for constructing a
-   *   predicate from one or more fields of the products being filtered. Filter
-   *   expression is case-sensitive. For more information, see
-   *   [Filter](https://cloud.google.com/retail/docs/filter-and-order#filter).
-   *
-   *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
-   * @param {string} request.canonicalFilter
-   *   The default filter that is applied when a user performs a search without
-   *   checking any filters on the search page.
-   *
-   *   The filter applied to every search request when quality improvement such as
-   *   query expansion is needed. In the case a query does not have a sufficient
-   *   amount of results this filter will be used to determine whether or not to
-   *   enable the query expansion flow. The original filter will still be used for
-   *   the query expanded search.
-   *   This field is strongly recommended to achieve high search quality.
-   *
-   *   For more information about filter syntax, see
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.filter|SearchRequest.filter}.
-   * @param {string} request.orderBy
-   *   The order in which products are returned. Products can be ordered by
-   *   a field in an {@link protos.google.cloud.retail.v2alpha.Product|Product} object. Leave
-   *   it unset if ordered by relevance. OrderBy expression is case-sensitive. For
-   *   more information, see
-   *   [Order](https://cloud.google.com/retail/docs/filter-and-order#order).
-   *
-   *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
-   * @param {number[]} request.facetSpecs
-   *   Facet specifications for faceted search. If empty, no facets are returned.
-   *
-   *   A maximum of 200 values are allowed. Otherwise, an INVALID_ARGUMENT error
-   *   is returned.
-   * @param {google.cloud.retail.v2alpha.SearchRequest.DynamicFacetSpec} request.dynamicFacetSpec
-   *   Deprecated. Refer to https://cloud.google.com/retail/docs/configs#dynamic
-   *   to enable dynamic facets. Do not set this field.
-   *
-   *   The specification for dynamically generated facets. Notice that only
-   *   textual facets can be dynamically generated.
-   * @param {google.cloud.retail.v2alpha.SearchRequest.BoostSpec} request.boostSpec
-   *   Boost specification to boost certain products. For more information, see
-   *   [Boost results](https://cloud.google.com/retail/docs/boosting).
-   *
-   *   Notice that if both
-   *   {@link protos.google.cloud.retail.v2alpha.ServingConfig.boost_control_ids|ServingConfig.boost_control_ids}
-   *   and
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.boost_spec|SearchRequest.boost_spec}
-   *   are set, the boost conditions from both places are evaluated. If a search
-   *   request matches multiple boost conditions, the final boost score is equal
-   *   to the sum of the boost scores from all matched boost conditions.
-   * @param {google.cloud.retail.v2alpha.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
-   *   The query expansion specification that specifies the conditions under which
-   *   query expansion occurs. For more information, see [Query
-   *   expansion](https://cloud.google.com/retail/docs/result-size#query_expansion).
-   * @param {google.cloud.retail.v2alpha.SearchRequest.RelevanceThreshold} request.relevanceThreshold
-   *   The relevance threshold of the search results.
-   *
-   *   Defaults to
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.RelevanceThreshold.HIGH|RelevanceThreshold.HIGH},
-   *   which means only the most relevant results are shown, and the least number
-   *   of results are returned. For more information, see [Adjust result
-   *   size](https://cloud.google.com/retail/docs/result-size#relevance_thresholding).
-   * @param {string[]} request.variantRollupKeys
-   *   The keys to fetch and rollup the matching
-   *   {@link protos.google.cloud.retail.v2alpha.Product.Type.VARIANT|variant}
-   *   {@link protos.google.cloud.retail.v2alpha.Product|Product}s attributes,
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo|FulfillmentInfo} or
-   *   {@link protos.google.cloud.retail.v2alpha.LocalInventory|LocalInventory}s attributes.
-   *   The attributes from all the matching
-   *   {@link protos.google.cloud.retail.v2alpha.Product.Type.VARIANT|variant}
-   *   {@link protos.google.cloud.retail.v2alpha.Product|Product}s or
-   *   {@link protos.google.cloud.retail.v2alpha.LocalInventory|LocalInventory}s are merged
-   *   and de-duplicated. Notice that rollup attributes will lead to extra query
-   *   latency. Maximum number of keys is 30.
-   *
-   *   For {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo|FulfillmentInfo}, a
-   *   fulfillment type and a fulfillment ID must be provided in the format of
-   *   "fulfillmentType.fulfillmentId". E.g., in "pickupInStore.store123",
-   *   "pickupInStore" is fulfillment type and "store123" is the store ID.
-   *
-   *   Supported keys are:
-   *
-   *   * colorFamilies
-   *   * price
-   *   * originalPrice
-   *   * discount
-   *   * variantId
-   *   * inventory(place_id,price)
-   *   * inventory(place_id,original_price)
-   *   * inventory(place_id,attributes.key), where key is any key in the
-   *     {@link protos.google.cloud.retail.v2alpha.LocalInventory.attributes|Product.local_inventories.attributes}
-   *     map.
-   *   * attributes.key, where key is any key in the
-   *     {@link protos.google.cloud.retail.v2alpha.Product.attributes|Product.attributes} map.
-   *   * pickupInStore.id, where id is any
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
-   *   for
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
-   *     "pickup-in-store".
-   *   * shipToStore.id, where id is any
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
-   *   for
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
-   *     "ship-to-store".
-   *   * sameDayDelivery.id, where id is any
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
-   *   for
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
-   *     "same-day-delivery".
-   *   * nextDayDelivery.id, where id is any
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
-   *   for
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
-   *     "next-day-delivery".
-   *   * customFulfillment1.id, where id is any
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
-   *   for
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
-   *     "custom-type-1".
-   *   * customFulfillment2.id, where id is any
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
-   *   for
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
-   *     "custom-type-2".
-   *   * customFulfillment3.id, where id is any
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
-   *   for
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
-   *     "custom-type-3".
-   *   * customFulfillment4.id, where id is any
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
-   *   for
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
-   *     "custom-type-4".
-   *   * customFulfillment5.id, where id is any
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
-   *   for
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
-   *     "custom-type-5".
-   *
-   *   If this field is set to an invalid value other than these, an
-   *   INVALID_ARGUMENT error is returned.
-   * @param {string[]} request.pageCategories
-   *   The categories associated with a category page. Must be set for category
-   *   navigation queries to achieve good search quality. The format should be
-   *   the same as
-   *   {@link protos.google.cloud.retail.v2alpha.UserEvent.page_categories|UserEvent.page_categories};
-   *
-   *   To represent full path of category, use '>' sign to separate different
-   *   hierarchies. If '>' is part of the category name, replace it with
-   *   other character(s).
-   *
-   *   Category pages include special pages such as sales or promotions. For
-   *   instance, a special sale page may have the category hierarchy:
-   *   "pageCategories" : ["Sales > 2017 Black Friday Deals"].
-   * @param {google.cloud.retail.v2alpha.SearchRequest.SearchMode} request.searchMode
-   *   The search mode of the search request. If not specified, a single search
-   *   request triggers both product search and faceted search.
-   * @param {google.cloud.retail.v2alpha.SearchRequest.PersonalizationSpec} request.personalizationSpec
-   *   The specification for personalization.
-   *
-   *   Notice that if both
-   *   {@link protos.google.cloud.retail.v2alpha.ServingConfig.personalization_spec|ServingConfig.personalization_spec}
-   *   and
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
-   *   are set.
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
-   *   will override
-   *   {@link protos.google.cloud.retail.v2alpha.ServingConfig.personalization_spec|ServingConfig.personalization_spec}.
-   * @param {number[]} request.labels
-   *   The labels applied to a resource must meet the following requirements:
-   *
-   *   * Each resource can have multiple labels, up to a maximum of 64.
-   *   * Each label must be a key-value pair.
-   *   * Keys have a minimum length of 1 character and a maximum length of 63
-   *     characters and cannot be empty. Values can be empty and have a maximum
-   *     length of 63 characters.
-   *   * Keys and values can contain only lowercase letters, numeric characters,
-   *     underscores, and dashes. All characters must use UTF-8 encoding, and
-   *     international characters are allowed.
-   *   * The key portion of a label must be unique. However, you can use the same
-   *     key with multiple resources.
-   *   * Keys must start with a lowercase letter or international character.
-   *
-   *   For more information, see [Requirements for
-   *   labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
-   *   in the Resource Manager documentation.
-   * @param {google.cloud.retail.v2alpha.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
-   *   The spell correction specification that specifies the mode under
-   *   which spell correction will take effect.
-   * @param {string} request.entity
-   *   The entity for customers that may run multiple different entities, domains,
-   *   sites or regions, for example, `Google US`, `Google Ads`, `Waymo`,
-   *   `google.com`, `youtube.com`, etc.
-   *   If this is set, it should be exactly matched with
-   *   {@link protos.google.cloud.retail.v2alpha.UserEvent.entity|UserEvent.entity} to get
-   *   search results boosted by entity.
-   * @param {google.cloud.retail.v2alpha.SearchRequest.ConversationalSearchSpec} [request.conversationalSearchSpec]
-   *   Optional. This field specifies all conversational related parameters
-   *   addition to traditional retail search.
-   * @param {google.cloud.retail.v2alpha.SearchRequest.TileNavigationSpec} [request.tileNavigationSpec]
-   *   Optional. This field specifies tile navigation related parameters.
-   * @param {string} [request.languageCode]
-   *   Optional. The BCP-47 language code, such as "en-US" or "sr-Latn"
-   *   [list](https://www.unicode.org/cldr/charts/46/summary/root.html). For more
-   *   information, see [Standardized codes](https://google.aip.dev/143). This
-   *   field helps to better interpret the query. If a value isn't specified, the
-   *   query language code is automatically detected, which may not be accurate.
-   * @param {string} [request.regionCode]
-   *   Optional. The Unicode country/region code (CLDR) of a location, such as
-   *   "US" and "419"
-   *   [list](https://www.unicode.org/cldr/charts/46/supplemental/territory_information.html).
-   *   For more information, see [Standardized codes](https://google.aip.dev/143).
-   *   If set, then results will be boosted based on the region_code provided.
-   * @param {string} [request.placeId]
-   *   Optional. An id corresponding to a place, such as a store id or region id.
-   *   When specified, we use the price from the local inventory with the matching
-   *   product's
-   *   {@link protos.google.cloud.retail.v2alpha.LocalInventory.place_id|LocalInventory.place_id}
-   *   for revenue optimization.
-   * @param {number[]} [request.userAttributes]
-   *   Optional. The user attributes that could be used for personalization of
-   *   search results.
-   *   * Populate at most 100 key-value pairs per query.
-   *   * Only supports string keys and repeated string values.
-   *   * Duplcate keys are not allowed within a single query.
-   *
-   *   Example:
-   *      user_attributes: [
-   *       { key: "pets"
-   *         value {
-   *           values: "dog"
-   *           values: "cat"
-   *         }
-   *       },
-   *       { key: "state"
-   *         value {
-   *           values: "CA"
-   *         }
-   *       }
-   *      ]
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.retail.v2alpha.SearchResponse.SearchResult|SearchResult}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `searchAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Performs a search.
+ *
+ * This feature is only available for users who have Retail Search enabled.
+ * Enable Retail Search on Cloud Console before using this feature.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.placement
+ *   Required. The resource name of the Retail Search serving config, such as
+ *   `projects/* /locations/global/catalogs/default_catalog/servingConfigs/default_serving_config`
+ *   or the name of the legacy placement resource, such as
+ *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
+ *   This field is used to identify the serving config name and the set
+ *   of models that are used to make the search.
+ * @param {string} request.branch
+ *   The branch resource name, such as
+ *   `projects/* /locations/global/catalogs/default_catalog/branches/0`.
+ *
+ *   Use "default_branch" as the branch ID or leave this field empty, to search
+ *   products under the default branch.
+ * @param {string} request.query
+ *   Raw search query.
+ *
+ *   If this field is empty, the request is considered a category browsing
+ *   request and returned results are based on
+ *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.filter|filter} and
+ *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.page_categories|page_categories}.
+ * @param {string} request.visitorId
+ *   Required. A unique identifier for tracking visitors. For example, this
+ *   could be implemented with an HTTP cookie, which should be able to uniquely
+ *   identify a visitor on a single device. This unique identifier should not
+ *   change if the visitor logs in or out of the website.
+ *
+ *   This should be the same identifier as
+ *   {@link protos.google.cloud.retail.v2alpha.UserEvent.visitor_id|UserEvent.visitor_id}.
+ *
+ *   The field must be a UTF-8 encoded string with a length limit of 128
+ *   characters. Otherwise, an INVALID_ARGUMENT error is returned.
+ * @param {google.cloud.retail.v2alpha.UserInfo} request.userInfo
+ *   User information.
+ * @param {number} request.pageSize
+ *   Maximum number of {@link protos.google.cloud.retail.v2alpha.Product|Product}s to
+ *   return. If unspecified, defaults to a reasonable value. The maximum allowed
+ *   value is 120. Values above 120 will be coerced to 120.
+ *
+ *   If this field is negative, an INVALID_ARGUMENT is returned.
+ * @param {string} request.pageToken
+ *   A page token
+ *   {@link protos.google.cloud.retail.v2alpha.SearchResponse.next_page_token|SearchResponse.next_page_token},
+ *   received from a previous
+ *   {@link protos.google.cloud.retail.v2alpha.SearchService.Search|SearchService.Search}
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   {@link protos.google.cloud.retail.v2alpha.SearchService.Search|SearchService.Search}
+ *   must match the call that provided the page token. Otherwise, an
+ *   INVALID_ARGUMENT error is returned.
+ * @param {number} request.offset
+ *   A 0-indexed integer that specifies the current offset (that is, starting
+ *   result location, amongst the
+ *   {@link protos.google.cloud.retail.v2alpha.Product|Product}s deemed by the API as
+ *   relevant) in search results. This field is only considered if
+ *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.page_token|page_token} is
+ *   unset.
+ *
+ *   If this field is negative, an INVALID_ARGUMENT is returned.
+ * @param {string} request.filter
+ *   The filter syntax consists of an expression language for constructing a
+ *   predicate from one or more fields of the products being filtered. Filter
+ *   expression is case-sensitive. For more information, see
+ *   [Filter](https://cloud.google.com/retail/docs/filter-and-order#filter).
+ *
+ *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
+ * @param {string} request.canonicalFilter
+ *   The default filter that is applied when a user performs a search without
+ *   checking any filters on the search page.
+ *
+ *   The filter applied to every search request when quality improvement such as
+ *   query expansion is needed. In the case a query does not have a sufficient
+ *   amount of results this filter will be used to determine whether or not to
+ *   enable the query expansion flow. The original filter will still be used for
+ *   the query expanded search.
+ *   This field is strongly recommended to achieve high search quality.
+ *
+ *   For more information about filter syntax, see
+ *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.filter|SearchRequest.filter}.
+ * @param {string} request.orderBy
+ *   The order in which products are returned. Products can be ordered by
+ *   a field in an {@link protos.google.cloud.retail.v2alpha.Product|Product} object. Leave
+ *   it unset if ordered by relevance. OrderBy expression is case-sensitive. For
+ *   more information, see
+ *   [Order](https://cloud.google.com/retail/docs/filter-and-order#order).
+ *
+ *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
+ * @param {number[]} request.facetSpecs
+ *   Facet specifications for faceted search. If empty, no facets are returned.
+ *
+ *   A maximum of 200 values are allowed. Otherwise, an INVALID_ARGUMENT error
+ *   is returned.
+ * @param {google.cloud.retail.v2alpha.SearchRequest.DynamicFacetSpec} request.dynamicFacetSpec
+ *   Deprecated. Refer to https://cloud.google.com/retail/docs/configs#dynamic
+ *   to enable dynamic facets. Do not set this field.
+ *
+ *   The specification for dynamically generated facets. Notice that only
+ *   textual facets can be dynamically generated.
+ * @param {google.cloud.retail.v2alpha.SearchRequest.BoostSpec} request.boostSpec
+ *   Boost specification to boost certain products. For more information, see
+ *   [Boost results](https://cloud.google.com/retail/docs/boosting).
+ *
+ *   Notice that if both
+ *   {@link protos.google.cloud.retail.v2alpha.ServingConfig.boost_control_ids|ServingConfig.boost_control_ids}
+ *   and
+ *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.boost_spec|SearchRequest.boost_spec}
+ *   are set, the boost conditions from both places are evaluated. If a search
+ *   request matches multiple boost conditions, the final boost score is equal
+ *   to the sum of the boost scores from all matched boost conditions.
+ * @param {google.cloud.retail.v2alpha.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
+ *   The query expansion specification that specifies the conditions under which
+ *   query expansion occurs. For more information, see [Query
+ *   expansion](https://cloud.google.com/retail/docs/result-size#query_expansion).
+ * @param {google.cloud.retail.v2alpha.SearchRequest.RelevanceThreshold} request.relevanceThreshold
+ *   The relevance threshold of the search results.
+ *
+ *   Defaults to
+ *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.RelevanceThreshold.HIGH|RelevanceThreshold.HIGH},
+ *   which means only the most relevant results are shown, and the least number
+ *   of results are returned. For more information, see [Adjust result
+ *   size](https://cloud.google.com/retail/docs/result-size#relevance_thresholding).
+ * @param {string[]} request.variantRollupKeys
+ *   The keys to fetch and rollup the matching
+ *   {@link protos.google.cloud.retail.v2alpha.Product.Type.VARIANT|variant}
+ *   {@link protos.google.cloud.retail.v2alpha.Product|Product}s attributes,
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo|FulfillmentInfo} or
+ *   {@link protos.google.cloud.retail.v2alpha.LocalInventory|LocalInventory}s attributes.
+ *   The attributes from all the matching
+ *   {@link protos.google.cloud.retail.v2alpha.Product.Type.VARIANT|variant}
+ *   {@link protos.google.cloud.retail.v2alpha.Product|Product}s or
+ *   {@link protos.google.cloud.retail.v2alpha.LocalInventory|LocalInventory}s are merged
+ *   and de-duplicated. Notice that rollup attributes will lead to extra query
+ *   latency. Maximum number of keys is 30.
+ *
+ *   For {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo|FulfillmentInfo}, a
+ *   fulfillment type and a fulfillment ID must be provided in the format of
+ *   "fulfillmentType.fulfillmentId". E.g., in "pickupInStore.store123",
+ *   "pickupInStore" is fulfillment type and "store123" is the store ID.
+ *
+ *   Supported keys are:
+ *
+ *   * colorFamilies
+ *   * price
+ *   * originalPrice
+ *   * discount
+ *   * variantId
+ *   * inventory(place_id,price)
+ *   * inventory(place_id,original_price)
+ *   * inventory(place_id,attributes.key), where key is any key in the
+ *     {@link protos.google.cloud.retail.v2alpha.LocalInventory.attributes|Product.local_inventories.attributes}
+ *     map.
+ *   * attributes.key, where key is any key in the
+ *     {@link protos.google.cloud.retail.v2alpha.Product.attributes|Product.attributes} map.
+ *   * pickupInStore.id, where id is any
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
+ *   for
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
+ *     "pickup-in-store".
+ *   * shipToStore.id, where id is any
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
+ *   for
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
+ *     "ship-to-store".
+ *   * sameDayDelivery.id, where id is any
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
+ *   for
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
+ *     "same-day-delivery".
+ *   * nextDayDelivery.id, where id is any
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
+ *   for
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
+ *     "next-day-delivery".
+ *   * customFulfillment1.id, where id is any
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
+ *   for
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
+ *     "custom-type-1".
+ *   * customFulfillment2.id, where id is any
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
+ *   for
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
+ *     "custom-type-2".
+ *   * customFulfillment3.id, where id is any
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
+ *   for
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
+ *     "custom-type-3".
+ *   * customFulfillment4.id, where id is any
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
+ *   for
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
+ *     "custom-type-4".
+ *   * customFulfillment5.id, where id is any
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
+ *   for
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
+ *     "custom-type-5".
+ *
+ *   If this field is set to an invalid value other than these, an
+ *   INVALID_ARGUMENT error is returned.
+ * @param {string[]} request.pageCategories
+ *   The categories associated with a category page. Must be set for category
+ *   navigation queries to achieve good search quality. The format should be
+ *   the same as
+ *   {@link protos.google.cloud.retail.v2alpha.UserEvent.page_categories|UserEvent.page_categories};
+ *
+ *   To represent full path of category, use '>' sign to separate different
+ *   hierarchies. If '>' is part of the category name, replace it with
+ *   other character(s).
+ *
+ *   Category pages include special pages such as sales or promotions. For
+ *   instance, a special sale page may have the category hierarchy:
+ *   "pageCategories" : ["Sales > 2017 Black Friday Deals"].
+ * @param {google.cloud.retail.v2alpha.SearchRequest.SearchMode} request.searchMode
+ *   The search mode of the search request. If not specified, a single search
+ *   request triggers both product search and faceted search.
+ * @param {google.cloud.retail.v2alpha.SearchRequest.PersonalizationSpec} request.personalizationSpec
+ *   The specification for personalization.
+ *
+ *   Notice that if both
+ *   {@link protos.google.cloud.retail.v2alpha.ServingConfig.personalization_spec|ServingConfig.personalization_spec}
+ *   and
+ *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+ *   are set.
+ *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+ *   will override
+ *   {@link protos.google.cloud.retail.v2alpha.ServingConfig.personalization_spec|ServingConfig.personalization_spec}.
+ * @param {number[]} request.labels
+ *   The labels applied to a resource must meet the following requirements:
+ *
+ *   * Each resource can have multiple labels, up to a maximum of 64.
+ *   * Each label must be a key-value pair.
+ *   * Keys have a minimum length of 1 character and a maximum length of 63
+ *     characters and cannot be empty. Values can be empty and have a maximum
+ *     length of 63 characters.
+ *   * Keys and values can contain only lowercase letters, numeric characters,
+ *     underscores, and dashes. All characters must use UTF-8 encoding, and
+ *     international characters are allowed.
+ *   * The key portion of a label must be unique. However, you can use the same
+ *     key with multiple resources.
+ *   * Keys must start with a lowercase letter or international character.
+ *
+ *   For more information, see [Requirements for
+ *   labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+ *   in the Resource Manager documentation.
+ * @param {google.cloud.retail.v2alpha.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
+ *   The spell correction specification that specifies the mode under
+ *   which spell correction will take effect.
+ * @param {string} request.entity
+ *   The entity for customers that may run multiple different entities, domains,
+ *   sites or regions, for example, `Google US`, `Google Ads`, `Waymo`,
+ *   `google.com`, `youtube.com`, etc.
+ *   If this is set, it should be exactly matched with
+ *   {@link protos.google.cloud.retail.v2alpha.UserEvent.entity|UserEvent.entity} to get
+ *   search results boosted by entity.
+ * @param {google.cloud.retail.v2alpha.SearchRequest.ConversationalSearchSpec} [request.conversationalSearchSpec]
+ *   Optional. This field specifies all conversational related parameters
+ *   addition to traditional retail search.
+ * @param {google.cloud.retail.v2alpha.SearchRequest.TileNavigationSpec} [request.tileNavigationSpec]
+ *   Optional. This field specifies tile navigation related parameters.
+ * @param {string} [request.languageCode]
+ *   Optional. The BCP-47 language code, such as "en-US" or "sr-Latn"
+ *   [list](https://www.unicode.org/cldr/charts/46/summary/root.html). For more
+ *   information, see [Standardized codes](https://google.aip.dev/143). This
+ *   field helps to better interpret the query. If a value isn't specified, the
+ *   query language code is automatically detected, which may not be accurate.
+ * @param {string} [request.regionCode]
+ *   Optional. The Unicode country/region code (CLDR) of a location, such as
+ *   "US" and "419"
+ *   [list](https://www.unicode.org/cldr/charts/46/supplemental/territory_information.html).
+ *   For more information, see [Standardized codes](https://google.aip.dev/143).
+ *   If set, then results will be boosted based on the region_code provided.
+ * @param {string} [request.placeId]
+ *   Optional. An id corresponding to a place, such as a store id or region id.
+ *   When specified, we use the price from the local inventory with the matching
+ *   product's
+ *   {@link protos.google.cloud.retail.v2alpha.LocalInventory.place_id|LocalInventory.place_id}
+ *   for revenue optimization.
+ * @param {number[]} [request.userAttributes]
+ *   Optional. The user attributes that could be used for personalization of
+ *   search results.
+ *   * Populate at most 100 key-value pairs per query.
+ *   * Only supports string keys and repeated string values.
+ *   * Duplcate keys are not allowed within a single query.
+ *
+ *   Example:
+ *      user_attributes: [
+ *       { key: "pets"
+ *         value {
+ *           values: "dog"
+ *           values: "cat"
+ *         }
+ *       },
+ *       { key: "state"
+ *         value {
+ *           values: "CA"
+ *         }
+ *       }
+ *      ]
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.retail.v2alpha.SearchResponse.SearchResult|SearchResult}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `searchAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   search(
-    request?: protos.google.cloud.retail.v2alpha.ISearchRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.SearchResponse.ISearchResult[],
-      protos.google.cloud.retail.v2alpha.ISearchRequest | null,
-      protos.google.cloud.retail.v2alpha.ISearchResponse,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2alpha.ISearchRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.SearchResponse.ISearchResult[],
+        protos.google.cloud.retail.v2alpha.ISearchRequest|null,
+        protos.google.cloud.retail.v2alpha.ISearchResponse
+      ]>;
   search(
-    request: protos.google.cloud.retail.v2alpha.ISearchRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.retail.v2alpha.ISearchRequest,
-      protos.google.cloud.retail.v2alpha.ISearchResponse | null | undefined,
-      protos.google.cloud.retail.v2alpha.SearchResponse.ISearchResult
-    >
-  ): void;
-  search(
-    request: protos.google.cloud.retail.v2alpha.ISearchRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.retail.v2alpha.ISearchRequest,
-      protos.google.cloud.retail.v2alpha.ISearchResponse | null | undefined,
-      protos.google.cloud.retail.v2alpha.SearchResponse.ISearchResult
-    >
-  ): void;
-  search(
-    request?: protos.google.cloud.retail.v2alpha.ISearchRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.retail.v2alpha.ISearchRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.retail.v2alpha.ISearchRequest,
-          protos.google.cloud.retail.v2alpha.ISearchResponse | null | undefined,
-          protos.google.cloud.retail.v2alpha.SearchResponse.ISearchResult
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.retail.v2alpha.ISearchRequest,
-      protos.google.cloud.retail.v2alpha.ISearchResponse | null | undefined,
-      protos.google.cloud.retail.v2alpha.SearchResponse.ISearchResult
-    >
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.SearchResponse.ISearchResult[],
-      protos.google.cloud.retail.v2alpha.ISearchRequest | null,
-      protos.google.cloud.retail.v2alpha.ISearchResponse,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2alpha.ISearchResponse|null|undefined,
+          protos.google.cloud.retail.v2alpha.SearchResponse.ISearchResult>): void;
+  search(
+      request: protos.google.cloud.retail.v2alpha.ISearchRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.retail.v2alpha.ISearchRequest,
+          protos.google.cloud.retail.v2alpha.ISearchResponse|null|undefined,
+          protos.google.cloud.retail.v2alpha.SearchResponse.ISearchResult>): void;
+  search(
+      request?: protos.google.cloud.retail.v2alpha.ISearchRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.retail.v2alpha.ISearchRequest,
+          protos.google.cloud.retail.v2alpha.ISearchResponse|null|undefined,
+          protos.google.cloud.retail.v2alpha.SearchResponse.ISearchResult>,
+      callback?: PaginationCallback<
+          protos.google.cloud.retail.v2alpha.ISearchRequest,
+          protos.google.cloud.retail.v2alpha.ISearchResponse|null|undefined,
+          protos.google.cloud.retail.v2alpha.SearchResponse.ISearchResult>):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.SearchResponse.ISearchResult[],
+        protos.google.cloud.retail.v2alpha.ISearchRequest|null,
+        protos.google.cloud.retail.v2alpha.ISearchResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        placement: request.placement ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'placement': request.placement ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.retail.v2alpha.ISearchRequest,
-          protos.google.cloud.retail.v2alpha.ISearchResponse | null | undefined,
-          protos.google.cloud.retail.v2alpha.SearchResponse.ISearchResult
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.retail.v2alpha.ISearchRequest,
+      protos.google.cloud.retail.v2alpha.ISearchResponse|null|undefined,
+      protos.google.cloud.retail.v2alpha.SearchResponse.ISearchResult>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('search values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -872,350 +788,347 @@ export class SearchServiceClient {
     this._log.info('search request %j', request);
     return this.innerApiCalls
       .search(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.retail.v2alpha.SearchResponse.ISearchResult[],
-          protos.google.cloud.retail.v2alpha.ISearchRequest | null,
-          protos.google.cloud.retail.v2alpha.ISearchResponse,
-        ]) => {
-          this._log.info('search values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.retail.v2alpha.SearchResponse.ISearchResult[],
+        protos.google.cloud.retail.v2alpha.ISearchRequest|null,
+        protos.google.cloud.retail.v2alpha.ISearchResponse
+      ]) => {
+        this._log.info('search values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `search`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.placement
-   *   Required. The resource name of the Retail Search serving config, such as
-   *   `projects/* /locations/global/catalogs/default_catalog/servingConfigs/default_serving_config`
-   *   or the name of the legacy placement resource, such as
-   *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
-   *   This field is used to identify the serving config name and the set
-   *   of models that are used to make the search.
-   * @param {string} request.branch
-   *   The branch resource name, such as
-   *   `projects/* /locations/global/catalogs/default_catalog/branches/0`.
-   *
-   *   Use "default_branch" as the branch ID or leave this field empty, to search
-   *   products under the default branch.
-   * @param {string} request.query
-   *   Raw search query.
-   *
-   *   If this field is empty, the request is considered a category browsing
-   *   request and returned results are based on
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.filter|filter} and
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.page_categories|page_categories}.
-   * @param {string} request.visitorId
-   *   Required. A unique identifier for tracking visitors. For example, this
-   *   could be implemented with an HTTP cookie, which should be able to uniquely
-   *   identify a visitor on a single device. This unique identifier should not
-   *   change if the visitor logs in or out of the website.
-   *
-   *   This should be the same identifier as
-   *   {@link protos.google.cloud.retail.v2alpha.UserEvent.visitor_id|UserEvent.visitor_id}.
-   *
-   *   The field must be a UTF-8 encoded string with a length limit of 128
-   *   characters. Otherwise, an INVALID_ARGUMENT error is returned.
-   * @param {google.cloud.retail.v2alpha.UserInfo} request.userInfo
-   *   User information.
-   * @param {number} request.pageSize
-   *   Maximum number of {@link protos.google.cloud.retail.v2alpha.Product|Product}s to
-   *   return. If unspecified, defaults to a reasonable value. The maximum allowed
-   *   value is 120. Values above 120 will be coerced to 120.
-   *
-   *   If this field is negative, an INVALID_ARGUMENT is returned.
-   * @param {string} request.pageToken
-   *   A page token
-   *   {@link protos.google.cloud.retail.v2alpha.SearchResponse.next_page_token|SearchResponse.next_page_token},
-   *   received from a previous
-   *   {@link protos.google.cloud.retail.v2alpha.SearchService.Search|SearchService.Search}
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   {@link protos.google.cloud.retail.v2alpha.SearchService.Search|SearchService.Search}
-   *   must match the call that provided the page token. Otherwise, an
-   *   INVALID_ARGUMENT error is returned.
-   * @param {number} request.offset
-   *   A 0-indexed integer that specifies the current offset (that is, starting
-   *   result location, amongst the
-   *   {@link protos.google.cloud.retail.v2alpha.Product|Product}s deemed by the API as
-   *   relevant) in search results. This field is only considered if
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.page_token|page_token} is
-   *   unset.
-   *
-   *   If this field is negative, an INVALID_ARGUMENT is returned.
-   * @param {string} request.filter
-   *   The filter syntax consists of an expression language for constructing a
-   *   predicate from one or more fields of the products being filtered. Filter
-   *   expression is case-sensitive. For more information, see
-   *   [Filter](https://cloud.google.com/retail/docs/filter-and-order#filter).
-   *
-   *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
-   * @param {string} request.canonicalFilter
-   *   The default filter that is applied when a user performs a search without
-   *   checking any filters on the search page.
-   *
-   *   The filter applied to every search request when quality improvement such as
-   *   query expansion is needed. In the case a query does not have a sufficient
-   *   amount of results this filter will be used to determine whether or not to
-   *   enable the query expansion flow. The original filter will still be used for
-   *   the query expanded search.
-   *   This field is strongly recommended to achieve high search quality.
-   *
-   *   For more information about filter syntax, see
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.filter|SearchRequest.filter}.
-   * @param {string} request.orderBy
-   *   The order in which products are returned. Products can be ordered by
-   *   a field in an {@link protos.google.cloud.retail.v2alpha.Product|Product} object. Leave
-   *   it unset if ordered by relevance. OrderBy expression is case-sensitive. For
-   *   more information, see
-   *   [Order](https://cloud.google.com/retail/docs/filter-and-order#order).
-   *
-   *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
-   * @param {number[]} request.facetSpecs
-   *   Facet specifications for faceted search. If empty, no facets are returned.
-   *
-   *   A maximum of 200 values are allowed. Otherwise, an INVALID_ARGUMENT error
-   *   is returned.
-   * @param {google.cloud.retail.v2alpha.SearchRequest.DynamicFacetSpec} request.dynamicFacetSpec
-   *   Deprecated. Refer to https://cloud.google.com/retail/docs/configs#dynamic
-   *   to enable dynamic facets. Do not set this field.
-   *
-   *   The specification for dynamically generated facets. Notice that only
-   *   textual facets can be dynamically generated.
-   * @param {google.cloud.retail.v2alpha.SearchRequest.BoostSpec} request.boostSpec
-   *   Boost specification to boost certain products. For more information, see
-   *   [Boost results](https://cloud.google.com/retail/docs/boosting).
-   *
-   *   Notice that if both
-   *   {@link protos.google.cloud.retail.v2alpha.ServingConfig.boost_control_ids|ServingConfig.boost_control_ids}
-   *   and
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.boost_spec|SearchRequest.boost_spec}
-   *   are set, the boost conditions from both places are evaluated. If a search
-   *   request matches multiple boost conditions, the final boost score is equal
-   *   to the sum of the boost scores from all matched boost conditions.
-   * @param {google.cloud.retail.v2alpha.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
-   *   The query expansion specification that specifies the conditions under which
-   *   query expansion occurs. For more information, see [Query
-   *   expansion](https://cloud.google.com/retail/docs/result-size#query_expansion).
-   * @param {google.cloud.retail.v2alpha.SearchRequest.RelevanceThreshold} request.relevanceThreshold
-   *   The relevance threshold of the search results.
-   *
-   *   Defaults to
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.RelevanceThreshold.HIGH|RelevanceThreshold.HIGH},
-   *   which means only the most relevant results are shown, and the least number
-   *   of results are returned. For more information, see [Adjust result
-   *   size](https://cloud.google.com/retail/docs/result-size#relevance_thresholding).
-   * @param {string[]} request.variantRollupKeys
-   *   The keys to fetch and rollup the matching
-   *   {@link protos.google.cloud.retail.v2alpha.Product.Type.VARIANT|variant}
-   *   {@link protos.google.cloud.retail.v2alpha.Product|Product}s attributes,
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo|FulfillmentInfo} or
-   *   {@link protos.google.cloud.retail.v2alpha.LocalInventory|LocalInventory}s attributes.
-   *   The attributes from all the matching
-   *   {@link protos.google.cloud.retail.v2alpha.Product.Type.VARIANT|variant}
-   *   {@link protos.google.cloud.retail.v2alpha.Product|Product}s or
-   *   {@link protos.google.cloud.retail.v2alpha.LocalInventory|LocalInventory}s are merged
-   *   and de-duplicated. Notice that rollup attributes will lead to extra query
-   *   latency. Maximum number of keys is 30.
-   *
-   *   For {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo|FulfillmentInfo}, a
-   *   fulfillment type and a fulfillment ID must be provided in the format of
-   *   "fulfillmentType.fulfillmentId". E.g., in "pickupInStore.store123",
-   *   "pickupInStore" is fulfillment type and "store123" is the store ID.
-   *
-   *   Supported keys are:
-   *
-   *   * colorFamilies
-   *   * price
-   *   * originalPrice
-   *   * discount
-   *   * variantId
-   *   * inventory(place_id,price)
-   *   * inventory(place_id,original_price)
-   *   * inventory(place_id,attributes.key), where key is any key in the
-   *     {@link protos.google.cloud.retail.v2alpha.LocalInventory.attributes|Product.local_inventories.attributes}
-   *     map.
-   *   * attributes.key, where key is any key in the
-   *     {@link protos.google.cloud.retail.v2alpha.Product.attributes|Product.attributes} map.
-   *   * pickupInStore.id, where id is any
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
-   *   for
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
-   *     "pickup-in-store".
-   *   * shipToStore.id, where id is any
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
-   *   for
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
-   *     "ship-to-store".
-   *   * sameDayDelivery.id, where id is any
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
-   *   for
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
-   *     "same-day-delivery".
-   *   * nextDayDelivery.id, where id is any
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
-   *   for
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
-   *     "next-day-delivery".
-   *   * customFulfillment1.id, where id is any
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
-   *   for
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
-   *     "custom-type-1".
-   *   * customFulfillment2.id, where id is any
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
-   *   for
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
-   *     "custom-type-2".
-   *   * customFulfillment3.id, where id is any
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
-   *   for
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
-   *     "custom-type-3".
-   *   * customFulfillment4.id, where id is any
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
-   *   for
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
-   *     "custom-type-4".
-   *   * customFulfillment5.id, where id is any
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
-   *   for
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
-   *     "custom-type-5".
-   *
-   *   If this field is set to an invalid value other than these, an
-   *   INVALID_ARGUMENT error is returned.
-   * @param {string[]} request.pageCategories
-   *   The categories associated with a category page. Must be set for category
-   *   navigation queries to achieve good search quality. The format should be
-   *   the same as
-   *   {@link protos.google.cloud.retail.v2alpha.UserEvent.page_categories|UserEvent.page_categories};
-   *
-   *   To represent full path of category, use '>' sign to separate different
-   *   hierarchies. If '>' is part of the category name, replace it with
-   *   other character(s).
-   *
-   *   Category pages include special pages such as sales or promotions. For
-   *   instance, a special sale page may have the category hierarchy:
-   *   "pageCategories" : ["Sales > 2017 Black Friday Deals"].
-   * @param {google.cloud.retail.v2alpha.SearchRequest.SearchMode} request.searchMode
-   *   The search mode of the search request. If not specified, a single search
-   *   request triggers both product search and faceted search.
-   * @param {google.cloud.retail.v2alpha.SearchRequest.PersonalizationSpec} request.personalizationSpec
-   *   The specification for personalization.
-   *
-   *   Notice that if both
-   *   {@link protos.google.cloud.retail.v2alpha.ServingConfig.personalization_spec|ServingConfig.personalization_spec}
-   *   and
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
-   *   are set.
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
-   *   will override
-   *   {@link protos.google.cloud.retail.v2alpha.ServingConfig.personalization_spec|ServingConfig.personalization_spec}.
-   * @param {number[]} request.labels
-   *   The labels applied to a resource must meet the following requirements:
-   *
-   *   * Each resource can have multiple labels, up to a maximum of 64.
-   *   * Each label must be a key-value pair.
-   *   * Keys have a minimum length of 1 character and a maximum length of 63
-   *     characters and cannot be empty. Values can be empty and have a maximum
-   *     length of 63 characters.
-   *   * Keys and values can contain only lowercase letters, numeric characters,
-   *     underscores, and dashes. All characters must use UTF-8 encoding, and
-   *     international characters are allowed.
-   *   * The key portion of a label must be unique. However, you can use the same
-   *     key with multiple resources.
-   *   * Keys must start with a lowercase letter or international character.
-   *
-   *   For more information, see [Requirements for
-   *   labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
-   *   in the Resource Manager documentation.
-   * @param {google.cloud.retail.v2alpha.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
-   *   The spell correction specification that specifies the mode under
-   *   which spell correction will take effect.
-   * @param {string} request.entity
-   *   The entity for customers that may run multiple different entities, domains,
-   *   sites or regions, for example, `Google US`, `Google Ads`, `Waymo`,
-   *   `google.com`, `youtube.com`, etc.
-   *   If this is set, it should be exactly matched with
-   *   {@link protos.google.cloud.retail.v2alpha.UserEvent.entity|UserEvent.entity} to get
-   *   search results boosted by entity.
-   * @param {google.cloud.retail.v2alpha.SearchRequest.ConversationalSearchSpec} [request.conversationalSearchSpec]
-   *   Optional. This field specifies all conversational related parameters
-   *   addition to traditional retail search.
-   * @param {google.cloud.retail.v2alpha.SearchRequest.TileNavigationSpec} [request.tileNavigationSpec]
-   *   Optional. This field specifies tile navigation related parameters.
-   * @param {string} [request.languageCode]
-   *   Optional. The BCP-47 language code, such as "en-US" or "sr-Latn"
-   *   [list](https://www.unicode.org/cldr/charts/46/summary/root.html). For more
-   *   information, see [Standardized codes](https://google.aip.dev/143). This
-   *   field helps to better interpret the query. If a value isn't specified, the
-   *   query language code is automatically detected, which may not be accurate.
-   * @param {string} [request.regionCode]
-   *   Optional. The Unicode country/region code (CLDR) of a location, such as
-   *   "US" and "419"
-   *   [list](https://www.unicode.org/cldr/charts/46/supplemental/territory_information.html).
-   *   For more information, see [Standardized codes](https://google.aip.dev/143).
-   *   If set, then results will be boosted based on the region_code provided.
-   * @param {string} [request.placeId]
-   *   Optional. An id corresponding to a place, such as a store id or region id.
-   *   When specified, we use the price from the local inventory with the matching
-   *   product's
-   *   {@link protos.google.cloud.retail.v2alpha.LocalInventory.place_id|LocalInventory.place_id}
-   *   for revenue optimization.
-   * @param {number[]} [request.userAttributes]
-   *   Optional. The user attributes that could be used for personalization of
-   *   search results.
-   *   * Populate at most 100 key-value pairs per query.
-   *   * Only supports string keys and repeated string values.
-   *   * Duplcate keys are not allowed within a single query.
-   *
-   *   Example:
-   *      user_attributes: [
-   *       { key: "pets"
-   *         value {
-   *           values: "dog"
-   *           values: "cat"
-   *         }
-   *       },
-   *       { key: "state"
-   *         value {
-   *           values: "CA"
-   *         }
-   *       }
-   *      ]
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.retail.v2alpha.SearchResponse.SearchResult|SearchResult} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `searchAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `search`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.placement
+ *   Required. The resource name of the Retail Search serving config, such as
+ *   `projects/* /locations/global/catalogs/default_catalog/servingConfigs/default_serving_config`
+ *   or the name of the legacy placement resource, such as
+ *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
+ *   This field is used to identify the serving config name and the set
+ *   of models that are used to make the search.
+ * @param {string} request.branch
+ *   The branch resource name, such as
+ *   `projects/* /locations/global/catalogs/default_catalog/branches/0`.
+ *
+ *   Use "default_branch" as the branch ID or leave this field empty, to search
+ *   products under the default branch.
+ * @param {string} request.query
+ *   Raw search query.
+ *
+ *   If this field is empty, the request is considered a category browsing
+ *   request and returned results are based on
+ *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.filter|filter} and
+ *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.page_categories|page_categories}.
+ * @param {string} request.visitorId
+ *   Required. A unique identifier for tracking visitors. For example, this
+ *   could be implemented with an HTTP cookie, which should be able to uniquely
+ *   identify a visitor on a single device. This unique identifier should not
+ *   change if the visitor logs in or out of the website.
+ *
+ *   This should be the same identifier as
+ *   {@link protos.google.cloud.retail.v2alpha.UserEvent.visitor_id|UserEvent.visitor_id}.
+ *
+ *   The field must be a UTF-8 encoded string with a length limit of 128
+ *   characters. Otherwise, an INVALID_ARGUMENT error is returned.
+ * @param {google.cloud.retail.v2alpha.UserInfo} request.userInfo
+ *   User information.
+ * @param {number} request.pageSize
+ *   Maximum number of {@link protos.google.cloud.retail.v2alpha.Product|Product}s to
+ *   return. If unspecified, defaults to a reasonable value. The maximum allowed
+ *   value is 120. Values above 120 will be coerced to 120.
+ *
+ *   If this field is negative, an INVALID_ARGUMENT is returned.
+ * @param {string} request.pageToken
+ *   A page token
+ *   {@link protos.google.cloud.retail.v2alpha.SearchResponse.next_page_token|SearchResponse.next_page_token},
+ *   received from a previous
+ *   {@link protos.google.cloud.retail.v2alpha.SearchService.Search|SearchService.Search}
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   {@link protos.google.cloud.retail.v2alpha.SearchService.Search|SearchService.Search}
+ *   must match the call that provided the page token. Otherwise, an
+ *   INVALID_ARGUMENT error is returned.
+ * @param {number} request.offset
+ *   A 0-indexed integer that specifies the current offset (that is, starting
+ *   result location, amongst the
+ *   {@link protos.google.cloud.retail.v2alpha.Product|Product}s deemed by the API as
+ *   relevant) in search results. This field is only considered if
+ *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.page_token|page_token} is
+ *   unset.
+ *
+ *   If this field is negative, an INVALID_ARGUMENT is returned.
+ * @param {string} request.filter
+ *   The filter syntax consists of an expression language for constructing a
+ *   predicate from one or more fields of the products being filtered. Filter
+ *   expression is case-sensitive. For more information, see
+ *   [Filter](https://cloud.google.com/retail/docs/filter-and-order#filter).
+ *
+ *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
+ * @param {string} request.canonicalFilter
+ *   The default filter that is applied when a user performs a search without
+ *   checking any filters on the search page.
+ *
+ *   The filter applied to every search request when quality improvement such as
+ *   query expansion is needed. In the case a query does not have a sufficient
+ *   amount of results this filter will be used to determine whether or not to
+ *   enable the query expansion flow. The original filter will still be used for
+ *   the query expanded search.
+ *   This field is strongly recommended to achieve high search quality.
+ *
+ *   For more information about filter syntax, see
+ *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.filter|SearchRequest.filter}.
+ * @param {string} request.orderBy
+ *   The order in which products are returned. Products can be ordered by
+ *   a field in an {@link protos.google.cloud.retail.v2alpha.Product|Product} object. Leave
+ *   it unset if ordered by relevance. OrderBy expression is case-sensitive. For
+ *   more information, see
+ *   [Order](https://cloud.google.com/retail/docs/filter-and-order#order).
+ *
+ *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
+ * @param {number[]} request.facetSpecs
+ *   Facet specifications for faceted search. If empty, no facets are returned.
+ *
+ *   A maximum of 200 values are allowed. Otherwise, an INVALID_ARGUMENT error
+ *   is returned.
+ * @param {google.cloud.retail.v2alpha.SearchRequest.DynamicFacetSpec} request.dynamicFacetSpec
+ *   Deprecated. Refer to https://cloud.google.com/retail/docs/configs#dynamic
+ *   to enable dynamic facets. Do not set this field.
+ *
+ *   The specification for dynamically generated facets. Notice that only
+ *   textual facets can be dynamically generated.
+ * @param {google.cloud.retail.v2alpha.SearchRequest.BoostSpec} request.boostSpec
+ *   Boost specification to boost certain products. For more information, see
+ *   [Boost results](https://cloud.google.com/retail/docs/boosting).
+ *
+ *   Notice that if both
+ *   {@link protos.google.cloud.retail.v2alpha.ServingConfig.boost_control_ids|ServingConfig.boost_control_ids}
+ *   and
+ *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.boost_spec|SearchRequest.boost_spec}
+ *   are set, the boost conditions from both places are evaluated. If a search
+ *   request matches multiple boost conditions, the final boost score is equal
+ *   to the sum of the boost scores from all matched boost conditions.
+ * @param {google.cloud.retail.v2alpha.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
+ *   The query expansion specification that specifies the conditions under which
+ *   query expansion occurs. For more information, see [Query
+ *   expansion](https://cloud.google.com/retail/docs/result-size#query_expansion).
+ * @param {google.cloud.retail.v2alpha.SearchRequest.RelevanceThreshold} request.relevanceThreshold
+ *   The relevance threshold of the search results.
+ *
+ *   Defaults to
+ *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.RelevanceThreshold.HIGH|RelevanceThreshold.HIGH},
+ *   which means only the most relevant results are shown, and the least number
+ *   of results are returned. For more information, see [Adjust result
+ *   size](https://cloud.google.com/retail/docs/result-size#relevance_thresholding).
+ * @param {string[]} request.variantRollupKeys
+ *   The keys to fetch and rollup the matching
+ *   {@link protos.google.cloud.retail.v2alpha.Product.Type.VARIANT|variant}
+ *   {@link protos.google.cloud.retail.v2alpha.Product|Product}s attributes,
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo|FulfillmentInfo} or
+ *   {@link protos.google.cloud.retail.v2alpha.LocalInventory|LocalInventory}s attributes.
+ *   The attributes from all the matching
+ *   {@link protos.google.cloud.retail.v2alpha.Product.Type.VARIANT|variant}
+ *   {@link protos.google.cloud.retail.v2alpha.Product|Product}s or
+ *   {@link protos.google.cloud.retail.v2alpha.LocalInventory|LocalInventory}s are merged
+ *   and de-duplicated. Notice that rollup attributes will lead to extra query
+ *   latency. Maximum number of keys is 30.
+ *
+ *   For {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo|FulfillmentInfo}, a
+ *   fulfillment type and a fulfillment ID must be provided in the format of
+ *   "fulfillmentType.fulfillmentId". E.g., in "pickupInStore.store123",
+ *   "pickupInStore" is fulfillment type and "store123" is the store ID.
+ *
+ *   Supported keys are:
+ *
+ *   * colorFamilies
+ *   * price
+ *   * originalPrice
+ *   * discount
+ *   * variantId
+ *   * inventory(place_id,price)
+ *   * inventory(place_id,original_price)
+ *   * inventory(place_id,attributes.key), where key is any key in the
+ *     {@link protos.google.cloud.retail.v2alpha.LocalInventory.attributes|Product.local_inventories.attributes}
+ *     map.
+ *   * attributes.key, where key is any key in the
+ *     {@link protos.google.cloud.retail.v2alpha.Product.attributes|Product.attributes} map.
+ *   * pickupInStore.id, where id is any
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
+ *   for
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
+ *     "pickup-in-store".
+ *   * shipToStore.id, where id is any
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
+ *   for
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
+ *     "ship-to-store".
+ *   * sameDayDelivery.id, where id is any
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
+ *   for
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
+ *     "same-day-delivery".
+ *   * nextDayDelivery.id, where id is any
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
+ *   for
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
+ *     "next-day-delivery".
+ *   * customFulfillment1.id, where id is any
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
+ *   for
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
+ *     "custom-type-1".
+ *   * customFulfillment2.id, where id is any
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
+ *   for
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
+ *     "custom-type-2".
+ *   * customFulfillment3.id, where id is any
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
+ *   for
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
+ *     "custom-type-3".
+ *   * customFulfillment4.id, where id is any
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
+ *   for
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
+ *     "custom-type-4".
+ *   * customFulfillment5.id, where id is any
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
+ *   for
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
+ *     "custom-type-5".
+ *
+ *   If this field is set to an invalid value other than these, an
+ *   INVALID_ARGUMENT error is returned.
+ * @param {string[]} request.pageCategories
+ *   The categories associated with a category page. Must be set for category
+ *   navigation queries to achieve good search quality. The format should be
+ *   the same as
+ *   {@link protos.google.cloud.retail.v2alpha.UserEvent.page_categories|UserEvent.page_categories};
+ *
+ *   To represent full path of category, use '>' sign to separate different
+ *   hierarchies. If '>' is part of the category name, replace it with
+ *   other character(s).
+ *
+ *   Category pages include special pages such as sales or promotions. For
+ *   instance, a special sale page may have the category hierarchy:
+ *   "pageCategories" : ["Sales > 2017 Black Friday Deals"].
+ * @param {google.cloud.retail.v2alpha.SearchRequest.SearchMode} request.searchMode
+ *   The search mode of the search request. If not specified, a single search
+ *   request triggers both product search and faceted search.
+ * @param {google.cloud.retail.v2alpha.SearchRequest.PersonalizationSpec} request.personalizationSpec
+ *   The specification for personalization.
+ *
+ *   Notice that if both
+ *   {@link protos.google.cloud.retail.v2alpha.ServingConfig.personalization_spec|ServingConfig.personalization_spec}
+ *   and
+ *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+ *   are set.
+ *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+ *   will override
+ *   {@link protos.google.cloud.retail.v2alpha.ServingConfig.personalization_spec|ServingConfig.personalization_spec}.
+ * @param {number[]} request.labels
+ *   The labels applied to a resource must meet the following requirements:
+ *
+ *   * Each resource can have multiple labels, up to a maximum of 64.
+ *   * Each label must be a key-value pair.
+ *   * Keys have a minimum length of 1 character and a maximum length of 63
+ *     characters and cannot be empty. Values can be empty and have a maximum
+ *     length of 63 characters.
+ *   * Keys and values can contain only lowercase letters, numeric characters,
+ *     underscores, and dashes. All characters must use UTF-8 encoding, and
+ *     international characters are allowed.
+ *   * The key portion of a label must be unique. However, you can use the same
+ *     key with multiple resources.
+ *   * Keys must start with a lowercase letter or international character.
+ *
+ *   For more information, see [Requirements for
+ *   labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+ *   in the Resource Manager documentation.
+ * @param {google.cloud.retail.v2alpha.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
+ *   The spell correction specification that specifies the mode under
+ *   which spell correction will take effect.
+ * @param {string} request.entity
+ *   The entity for customers that may run multiple different entities, domains,
+ *   sites or regions, for example, `Google US`, `Google Ads`, `Waymo`,
+ *   `google.com`, `youtube.com`, etc.
+ *   If this is set, it should be exactly matched with
+ *   {@link protos.google.cloud.retail.v2alpha.UserEvent.entity|UserEvent.entity} to get
+ *   search results boosted by entity.
+ * @param {google.cloud.retail.v2alpha.SearchRequest.ConversationalSearchSpec} [request.conversationalSearchSpec]
+ *   Optional. This field specifies all conversational related parameters
+ *   addition to traditional retail search.
+ * @param {google.cloud.retail.v2alpha.SearchRequest.TileNavigationSpec} [request.tileNavigationSpec]
+ *   Optional. This field specifies tile navigation related parameters.
+ * @param {string} [request.languageCode]
+ *   Optional. The BCP-47 language code, such as "en-US" or "sr-Latn"
+ *   [list](https://www.unicode.org/cldr/charts/46/summary/root.html). For more
+ *   information, see [Standardized codes](https://google.aip.dev/143). This
+ *   field helps to better interpret the query. If a value isn't specified, the
+ *   query language code is automatically detected, which may not be accurate.
+ * @param {string} [request.regionCode]
+ *   Optional. The Unicode country/region code (CLDR) of a location, such as
+ *   "US" and "419"
+ *   [list](https://www.unicode.org/cldr/charts/46/supplemental/territory_information.html).
+ *   For more information, see [Standardized codes](https://google.aip.dev/143).
+ *   If set, then results will be boosted based on the region_code provided.
+ * @param {string} [request.placeId]
+ *   Optional. An id corresponding to a place, such as a store id or region id.
+ *   When specified, we use the price from the local inventory with the matching
+ *   product's
+ *   {@link protos.google.cloud.retail.v2alpha.LocalInventory.place_id|LocalInventory.place_id}
+ *   for revenue optimization.
+ * @param {number[]} [request.userAttributes]
+ *   Optional. The user attributes that could be used for personalization of
+ *   search results.
+ *   * Populate at most 100 key-value pairs per query.
+ *   * Only supports string keys and repeated string values.
+ *   * Duplcate keys are not allowed within a single query.
+ *
+ *   Example:
+ *      user_attributes: [
+ *       { key: "pets"
+ *         value {
+ *           values: "dog"
+ *           values: "cat"
+ *         }
+ *       },
+ *       { key: "state"
+ *         value {
+ *           values: "CA"
+ *         }
+ *       }
+ *      ]
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.retail.v2alpha.SearchResponse.SearchResult|SearchResult} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `searchAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchStream(
-    request?: protos.google.cloud.retail.v2alpha.ISearchRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.retail.v2alpha.ISearchRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        placement: request.placement ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'placement': request.placement ?? '',
+    });
     const defaultCallSettings = this._defaults['search'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('search stream %j', request);
     return this.descriptors.page.search.createStream(
       this.innerApiCalls.search as GaxCall,
@@ -1224,341 +1137,340 @@ export class SearchServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `search`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.placement
-   *   Required. The resource name of the Retail Search serving config, such as
-   *   `projects/* /locations/global/catalogs/default_catalog/servingConfigs/default_serving_config`
-   *   or the name of the legacy placement resource, such as
-   *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
-   *   This field is used to identify the serving config name and the set
-   *   of models that are used to make the search.
-   * @param {string} request.branch
-   *   The branch resource name, such as
-   *   `projects/* /locations/global/catalogs/default_catalog/branches/0`.
-   *
-   *   Use "default_branch" as the branch ID or leave this field empty, to search
-   *   products under the default branch.
-   * @param {string} request.query
-   *   Raw search query.
-   *
-   *   If this field is empty, the request is considered a category browsing
-   *   request and returned results are based on
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.filter|filter} and
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.page_categories|page_categories}.
-   * @param {string} request.visitorId
-   *   Required. A unique identifier for tracking visitors. For example, this
-   *   could be implemented with an HTTP cookie, which should be able to uniquely
-   *   identify a visitor on a single device. This unique identifier should not
-   *   change if the visitor logs in or out of the website.
-   *
-   *   This should be the same identifier as
-   *   {@link protos.google.cloud.retail.v2alpha.UserEvent.visitor_id|UserEvent.visitor_id}.
-   *
-   *   The field must be a UTF-8 encoded string with a length limit of 128
-   *   characters. Otherwise, an INVALID_ARGUMENT error is returned.
-   * @param {google.cloud.retail.v2alpha.UserInfo} request.userInfo
-   *   User information.
-   * @param {number} request.pageSize
-   *   Maximum number of {@link protos.google.cloud.retail.v2alpha.Product|Product}s to
-   *   return. If unspecified, defaults to a reasonable value. The maximum allowed
-   *   value is 120. Values above 120 will be coerced to 120.
-   *
-   *   If this field is negative, an INVALID_ARGUMENT is returned.
-   * @param {string} request.pageToken
-   *   A page token
-   *   {@link protos.google.cloud.retail.v2alpha.SearchResponse.next_page_token|SearchResponse.next_page_token},
-   *   received from a previous
-   *   {@link protos.google.cloud.retail.v2alpha.SearchService.Search|SearchService.Search}
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   {@link protos.google.cloud.retail.v2alpha.SearchService.Search|SearchService.Search}
-   *   must match the call that provided the page token. Otherwise, an
-   *   INVALID_ARGUMENT error is returned.
-   * @param {number} request.offset
-   *   A 0-indexed integer that specifies the current offset (that is, starting
-   *   result location, amongst the
-   *   {@link protos.google.cloud.retail.v2alpha.Product|Product}s deemed by the API as
-   *   relevant) in search results. This field is only considered if
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.page_token|page_token} is
-   *   unset.
-   *
-   *   If this field is negative, an INVALID_ARGUMENT is returned.
-   * @param {string} request.filter
-   *   The filter syntax consists of an expression language for constructing a
-   *   predicate from one or more fields of the products being filtered. Filter
-   *   expression is case-sensitive. For more information, see
-   *   [Filter](https://cloud.google.com/retail/docs/filter-and-order#filter).
-   *
-   *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
-   * @param {string} request.canonicalFilter
-   *   The default filter that is applied when a user performs a search without
-   *   checking any filters on the search page.
-   *
-   *   The filter applied to every search request when quality improvement such as
-   *   query expansion is needed. In the case a query does not have a sufficient
-   *   amount of results this filter will be used to determine whether or not to
-   *   enable the query expansion flow. The original filter will still be used for
-   *   the query expanded search.
-   *   This field is strongly recommended to achieve high search quality.
-   *
-   *   For more information about filter syntax, see
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.filter|SearchRequest.filter}.
-   * @param {string} request.orderBy
-   *   The order in which products are returned. Products can be ordered by
-   *   a field in an {@link protos.google.cloud.retail.v2alpha.Product|Product} object. Leave
-   *   it unset if ordered by relevance. OrderBy expression is case-sensitive. For
-   *   more information, see
-   *   [Order](https://cloud.google.com/retail/docs/filter-and-order#order).
-   *
-   *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
-   * @param {number[]} request.facetSpecs
-   *   Facet specifications for faceted search. If empty, no facets are returned.
-   *
-   *   A maximum of 200 values are allowed. Otherwise, an INVALID_ARGUMENT error
-   *   is returned.
-   * @param {google.cloud.retail.v2alpha.SearchRequest.DynamicFacetSpec} request.dynamicFacetSpec
-   *   Deprecated. Refer to https://cloud.google.com/retail/docs/configs#dynamic
-   *   to enable dynamic facets. Do not set this field.
-   *
-   *   The specification for dynamically generated facets. Notice that only
-   *   textual facets can be dynamically generated.
-   * @param {google.cloud.retail.v2alpha.SearchRequest.BoostSpec} request.boostSpec
-   *   Boost specification to boost certain products. For more information, see
-   *   [Boost results](https://cloud.google.com/retail/docs/boosting).
-   *
-   *   Notice that if both
-   *   {@link protos.google.cloud.retail.v2alpha.ServingConfig.boost_control_ids|ServingConfig.boost_control_ids}
-   *   and
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.boost_spec|SearchRequest.boost_spec}
-   *   are set, the boost conditions from both places are evaluated. If a search
-   *   request matches multiple boost conditions, the final boost score is equal
-   *   to the sum of the boost scores from all matched boost conditions.
-   * @param {google.cloud.retail.v2alpha.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
-   *   The query expansion specification that specifies the conditions under which
-   *   query expansion occurs. For more information, see [Query
-   *   expansion](https://cloud.google.com/retail/docs/result-size#query_expansion).
-   * @param {google.cloud.retail.v2alpha.SearchRequest.RelevanceThreshold} request.relevanceThreshold
-   *   The relevance threshold of the search results.
-   *
-   *   Defaults to
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.RelevanceThreshold.HIGH|RelevanceThreshold.HIGH},
-   *   which means only the most relevant results are shown, and the least number
-   *   of results are returned. For more information, see [Adjust result
-   *   size](https://cloud.google.com/retail/docs/result-size#relevance_thresholding).
-   * @param {string[]} request.variantRollupKeys
-   *   The keys to fetch and rollup the matching
-   *   {@link protos.google.cloud.retail.v2alpha.Product.Type.VARIANT|variant}
-   *   {@link protos.google.cloud.retail.v2alpha.Product|Product}s attributes,
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo|FulfillmentInfo} or
-   *   {@link protos.google.cloud.retail.v2alpha.LocalInventory|LocalInventory}s attributes.
-   *   The attributes from all the matching
-   *   {@link protos.google.cloud.retail.v2alpha.Product.Type.VARIANT|variant}
-   *   {@link protos.google.cloud.retail.v2alpha.Product|Product}s or
-   *   {@link protos.google.cloud.retail.v2alpha.LocalInventory|LocalInventory}s are merged
-   *   and de-duplicated. Notice that rollup attributes will lead to extra query
-   *   latency. Maximum number of keys is 30.
-   *
-   *   For {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo|FulfillmentInfo}, a
-   *   fulfillment type and a fulfillment ID must be provided in the format of
-   *   "fulfillmentType.fulfillmentId". E.g., in "pickupInStore.store123",
-   *   "pickupInStore" is fulfillment type and "store123" is the store ID.
-   *
-   *   Supported keys are:
-   *
-   *   * colorFamilies
-   *   * price
-   *   * originalPrice
-   *   * discount
-   *   * variantId
-   *   * inventory(place_id,price)
-   *   * inventory(place_id,original_price)
-   *   * inventory(place_id,attributes.key), where key is any key in the
-   *     {@link protos.google.cloud.retail.v2alpha.LocalInventory.attributes|Product.local_inventories.attributes}
-   *     map.
-   *   * attributes.key, where key is any key in the
-   *     {@link protos.google.cloud.retail.v2alpha.Product.attributes|Product.attributes} map.
-   *   * pickupInStore.id, where id is any
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
-   *   for
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
-   *     "pickup-in-store".
-   *   * shipToStore.id, where id is any
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
-   *   for
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
-   *     "ship-to-store".
-   *   * sameDayDelivery.id, where id is any
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
-   *   for
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
-   *     "same-day-delivery".
-   *   * nextDayDelivery.id, where id is any
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
-   *   for
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
-   *     "next-day-delivery".
-   *   * customFulfillment1.id, where id is any
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
-   *   for
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
-   *     "custom-type-1".
-   *   * customFulfillment2.id, where id is any
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
-   *   for
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
-   *     "custom-type-2".
-   *   * customFulfillment3.id, where id is any
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
-   *   for
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
-   *     "custom-type-3".
-   *   * customFulfillment4.id, where id is any
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
-   *   for
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
-   *     "custom-type-4".
-   *   * customFulfillment5.id, where id is any
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
-   *   for
-   *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
-   *     "custom-type-5".
-   *
-   *   If this field is set to an invalid value other than these, an
-   *   INVALID_ARGUMENT error is returned.
-   * @param {string[]} request.pageCategories
-   *   The categories associated with a category page. Must be set for category
-   *   navigation queries to achieve good search quality. The format should be
-   *   the same as
-   *   {@link protos.google.cloud.retail.v2alpha.UserEvent.page_categories|UserEvent.page_categories};
-   *
-   *   To represent full path of category, use '>' sign to separate different
-   *   hierarchies. If '>' is part of the category name, replace it with
-   *   other character(s).
-   *
-   *   Category pages include special pages such as sales or promotions. For
-   *   instance, a special sale page may have the category hierarchy:
-   *   "pageCategories" : ["Sales > 2017 Black Friday Deals"].
-   * @param {google.cloud.retail.v2alpha.SearchRequest.SearchMode} request.searchMode
-   *   The search mode of the search request. If not specified, a single search
-   *   request triggers both product search and faceted search.
-   * @param {google.cloud.retail.v2alpha.SearchRequest.PersonalizationSpec} request.personalizationSpec
-   *   The specification for personalization.
-   *
-   *   Notice that if both
-   *   {@link protos.google.cloud.retail.v2alpha.ServingConfig.personalization_spec|ServingConfig.personalization_spec}
-   *   and
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
-   *   are set.
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
-   *   will override
-   *   {@link protos.google.cloud.retail.v2alpha.ServingConfig.personalization_spec|ServingConfig.personalization_spec}.
-   * @param {number[]} request.labels
-   *   The labels applied to a resource must meet the following requirements:
-   *
-   *   * Each resource can have multiple labels, up to a maximum of 64.
-   *   * Each label must be a key-value pair.
-   *   * Keys have a minimum length of 1 character and a maximum length of 63
-   *     characters and cannot be empty. Values can be empty and have a maximum
-   *     length of 63 characters.
-   *   * Keys and values can contain only lowercase letters, numeric characters,
-   *     underscores, and dashes. All characters must use UTF-8 encoding, and
-   *     international characters are allowed.
-   *   * The key portion of a label must be unique. However, you can use the same
-   *     key with multiple resources.
-   *   * Keys must start with a lowercase letter or international character.
-   *
-   *   For more information, see [Requirements for
-   *   labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
-   *   in the Resource Manager documentation.
-   * @param {google.cloud.retail.v2alpha.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
-   *   The spell correction specification that specifies the mode under
-   *   which spell correction will take effect.
-   * @param {string} request.entity
-   *   The entity for customers that may run multiple different entities, domains,
-   *   sites or regions, for example, `Google US`, `Google Ads`, `Waymo`,
-   *   `google.com`, `youtube.com`, etc.
-   *   If this is set, it should be exactly matched with
-   *   {@link protos.google.cloud.retail.v2alpha.UserEvent.entity|UserEvent.entity} to get
-   *   search results boosted by entity.
-   * @param {google.cloud.retail.v2alpha.SearchRequest.ConversationalSearchSpec} [request.conversationalSearchSpec]
-   *   Optional. This field specifies all conversational related parameters
-   *   addition to traditional retail search.
-   * @param {google.cloud.retail.v2alpha.SearchRequest.TileNavigationSpec} [request.tileNavigationSpec]
-   *   Optional. This field specifies tile navigation related parameters.
-   * @param {string} [request.languageCode]
-   *   Optional. The BCP-47 language code, such as "en-US" or "sr-Latn"
-   *   [list](https://www.unicode.org/cldr/charts/46/summary/root.html). For more
-   *   information, see [Standardized codes](https://google.aip.dev/143). This
-   *   field helps to better interpret the query. If a value isn't specified, the
-   *   query language code is automatically detected, which may not be accurate.
-   * @param {string} [request.regionCode]
-   *   Optional. The Unicode country/region code (CLDR) of a location, such as
-   *   "US" and "419"
-   *   [list](https://www.unicode.org/cldr/charts/46/supplemental/territory_information.html).
-   *   For more information, see [Standardized codes](https://google.aip.dev/143).
-   *   If set, then results will be boosted based on the region_code provided.
-   * @param {string} [request.placeId]
-   *   Optional. An id corresponding to a place, such as a store id or region id.
-   *   When specified, we use the price from the local inventory with the matching
-   *   product's
-   *   {@link protos.google.cloud.retail.v2alpha.LocalInventory.place_id|LocalInventory.place_id}
-   *   for revenue optimization.
-   * @param {number[]} [request.userAttributes]
-   *   Optional. The user attributes that could be used for personalization of
-   *   search results.
-   *   * Populate at most 100 key-value pairs per query.
-   *   * Only supports string keys and repeated string values.
-   *   * Duplcate keys are not allowed within a single query.
-   *
-   *   Example:
-   *      user_attributes: [
-   *       { key: "pets"
-   *         value {
-   *           values: "dog"
-   *           values: "cat"
-   *         }
-   *       },
-   *       { key: "state"
-   *         value {
-   *           values: "CA"
-   *         }
-   *       }
-   *      ]
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.retail.v2alpha.SearchResponse.SearchResult|SearchResult}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/search_service.search.js</caption>
-   * region_tag:retail_v2alpha_generated_SearchService_Search_async
-   */
+/**
+ * Equivalent to `search`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.placement
+ *   Required. The resource name of the Retail Search serving config, such as
+ *   `projects/* /locations/global/catalogs/default_catalog/servingConfigs/default_serving_config`
+ *   or the name of the legacy placement resource, such as
+ *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
+ *   This field is used to identify the serving config name and the set
+ *   of models that are used to make the search.
+ * @param {string} request.branch
+ *   The branch resource name, such as
+ *   `projects/* /locations/global/catalogs/default_catalog/branches/0`.
+ *
+ *   Use "default_branch" as the branch ID or leave this field empty, to search
+ *   products under the default branch.
+ * @param {string} request.query
+ *   Raw search query.
+ *
+ *   If this field is empty, the request is considered a category browsing
+ *   request and returned results are based on
+ *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.filter|filter} and
+ *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.page_categories|page_categories}.
+ * @param {string} request.visitorId
+ *   Required. A unique identifier for tracking visitors. For example, this
+ *   could be implemented with an HTTP cookie, which should be able to uniquely
+ *   identify a visitor on a single device. This unique identifier should not
+ *   change if the visitor logs in or out of the website.
+ *
+ *   This should be the same identifier as
+ *   {@link protos.google.cloud.retail.v2alpha.UserEvent.visitor_id|UserEvent.visitor_id}.
+ *
+ *   The field must be a UTF-8 encoded string with a length limit of 128
+ *   characters. Otherwise, an INVALID_ARGUMENT error is returned.
+ * @param {google.cloud.retail.v2alpha.UserInfo} request.userInfo
+ *   User information.
+ * @param {number} request.pageSize
+ *   Maximum number of {@link protos.google.cloud.retail.v2alpha.Product|Product}s to
+ *   return. If unspecified, defaults to a reasonable value. The maximum allowed
+ *   value is 120. Values above 120 will be coerced to 120.
+ *
+ *   If this field is negative, an INVALID_ARGUMENT is returned.
+ * @param {string} request.pageToken
+ *   A page token
+ *   {@link protos.google.cloud.retail.v2alpha.SearchResponse.next_page_token|SearchResponse.next_page_token},
+ *   received from a previous
+ *   {@link protos.google.cloud.retail.v2alpha.SearchService.Search|SearchService.Search}
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   {@link protos.google.cloud.retail.v2alpha.SearchService.Search|SearchService.Search}
+ *   must match the call that provided the page token. Otherwise, an
+ *   INVALID_ARGUMENT error is returned.
+ * @param {number} request.offset
+ *   A 0-indexed integer that specifies the current offset (that is, starting
+ *   result location, amongst the
+ *   {@link protos.google.cloud.retail.v2alpha.Product|Product}s deemed by the API as
+ *   relevant) in search results. This field is only considered if
+ *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.page_token|page_token} is
+ *   unset.
+ *
+ *   If this field is negative, an INVALID_ARGUMENT is returned.
+ * @param {string} request.filter
+ *   The filter syntax consists of an expression language for constructing a
+ *   predicate from one or more fields of the products being filtered. Filter
+ *   expression is case-sensitive. For more information, see
+ *   [Filter](https://cloud.google.com/retail/docs/filter-and-order#filter).
+ *
+ *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
+ * @param {string} request.canonicalFilter
+ *   The default filter that is applied when a user performs a search without
+ *   checking any filters on the search page.
+ *
+ *   The filter applied to every search request when quality improvement such as
+ *   query expansion is needed. In the case a query does not have a sufficient
+ *   amount of results this filter will be used to determine whether or not to
+ *   enable the query expansion flow. The original filter will still be used for
+ *   the query expanded search.
+ *   This field is strongly recommended to achieve high search quality.
+ *
+ *   For more information about filter syntax, see
+ *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.filter|SearchRequest.filter}.
+ * @param {string} request.orderBy
+ *   The order in which products are returned. Products can be ordered by
+ *   a field in an {@link protos.google.cloud.retail.v2alpha.Product|Product} object. Leave
+ *   it unset if ordered by relevance. OrderBy expression is case-sensitive. For
+ *   more information, see
+ *   [Order](https://cloud.google.com/retail/docs/filter-and-order#order).
+ *
+ *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
+ * @param {number[]} request.facetSpecs
+ *   Facet specifications for faceted search. If empty, no facets are returned.
+ *
+ *   A maximum of 200 values are allowed. Otherwise, an INVALID_ARGUMENT error
+ *   is returned.
+ * @param {google.cloud.retail.v2alpha.SearchRequest.DynamicFacetSpec} request.dynamicFacetSpec
+ *   Deprecated. Refer to https://cloud.google.com/retail/docs/configs#dynamic
+ *   to enable dynamic facets. Do not set this field.
+ *
+ *   The specification for dynamically generated facets. Notice that only
+ *   textual facets can be dynamically generated.
+ * @param {google.cloud.retail.v2alpha.SearchRequest.BoostSpec} request.boostSpec
+ *   Boost specification to boost certain products. For more information, see
+ *   [Boost results](https://cloud.google.com/retail/docs/boosting).
+ *
+ *   Notice that if both
+ *   {@link protos.google.cloud.retail.v2alpha.ServingConfig.boost_control_ids|ServingConfig.boost_control_ids}
+ *   and
+ *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.boost_spec|SearchRequest.boost_spec}
+ *   are set, the boost conditions from both places are evaluated. If a search
+ *   request matches multiple boost conditions, the final boost score is equal
+ *   to the sum of the boost scores from all matched boost conditions.
+ * @param {google.cloud.retail.v2alpha.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
+ *   The query expansion specification that specifies the conditions under which
+ *   query expansion occurs. For more information, see [Query
+ *   expansion](https://cloud.google.com/retail/docs/result-size#query_expansion).
+ * @param {google.cloud.retail.v2alpha.SearchRequest.RelevanceThreshold} request.relevanceThreshold
+ *   The relevance threshold of the search results.
+ *
+ *   Defaults to
+ *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.RelevanceThreshold.HIGH|RelevanceThreshold.HIGH},
+ *   which means only the most relevant results are shown, and the least number
+ *   of results are returned. For more information, see [Adjust result
+ *   size](https://cloud.google.com/retail/docs/result-size#relevance_thresholding).
+ * @param {string[]} request.variantRollupKeys
+ *   The keys to fetch and rollup the matching
+ *   {@link protos.google.cloud.retail.v2alpha.Product.Type.VARIANT|variant}
+ *   {@link protos.google.cloud.retail.v2alpha.Product|Product}s attributes,
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo|FulfillmentInfo} or
+ *   {@link protos.google.cloud.retail.v2alpha.LocalInventory|LocalInventory}s attributes.
+ *   The attributes from all the matching
+ *   {@link protos.google.cloud.retail.v2alpha.Product.Type.VARIANT|variant}
+ *   {@link protos.google.cloud.retail.v2alpha.Product|Product}s or
+ *   {@link protos.google.cloud.retail.v2alpha.LocalInventory|LocalInventory}s are merged
+ *   and de-duplicated. Notice that rollup attributes will lead to extra query
+ *   latency. Maximum number of keys is 30.
+ *
+ *   For {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo|FulfillmentInfo}, a
+ *   fulfillment type and a fulfillment ID must be provided in the format of
+ *   "fulfillmentType.fulfillmentId". E.g., in "pickupInStore.store123",
+ *   "pickupInStore" is fulfillment type and "store123" is the store ID.
+ *
+ *   Supported keys are:
+ *
+ *   * colorFamilies
+ *   * price
+ *   * originalPrice
+ *   * discount
+ *   * variantId
+ *   * inventory(place_id,price)
+ *   * inventory(place_id,original_price)
+ *   * inventory(place_id,attributes.key), where key is any key in the
+ *     {@link protos.google.cloud.retail.v2alpha.LocalInventory.attributes|Product.local_inventories.attributes}
+ *     map.
+ *   * attributes.key, where key is any key in the
+ *     {@link protos.google.cloud.retail.v2alpha.Product.attributes|Product.attributes} map.
+ *   * pickupInStore.id, where id is any
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
+ *   for
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
+ *     "pickup-in-store".
+ *   * shipToStore.id, where id is any
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
+ *   for
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
+ *     "ship-to-store".
+ *   * sameDayDelivery.id, where id is any
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
+ *   for
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
+ *     "same-day-delivery".
+ *   * nextDayDelivery.id, where id is any
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
+ *   for
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
+ *     "next-day-delivery".
+ *   * customFulfillment1.id, where id is any
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
+ *   for
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
+ *     "custom-type-1".
+ *   * customFulfillment2.id, where id is any
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
+ *   for
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
+ *     "custom-type-2".
+ *   * customFulfillment3.id, where id is any
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
+ *   for
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
+ *     "custom-type-3".
+ *   * customFulfillment4.id, where id is any
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
+ *   for
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
+ *     "custom-type-4".
+ *   * customFulfillment5.id, where id is any
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|FulfillmentInfo.place_ids}
+ *   for
+ *   {@link protos.google.cloud.retail.v2alpha.FulfillmentInfo.type|FulfillmentInfo.type}
+ *     "custom-type-5".
+ *
+ *   If this field is set to an invalid value other than these, an
+ *   INVALID_ARGUMENT error is returned.
+ * @param {string[]} request.pageCategories
+ *   The categories associated with a category page. Must be set for category
+ *   navigation queries to achieve good search quality. The format should be
+ *   the same as
+ *   {@link protos.google.cloud.retail.v2alpha.UserEvent.page_categories|UserEvent.page_categories};
+ *
+ *   To represent full path of category, use '>' sign to separate different
+ *   hierarchies. If '>' is part of the category name, replace it with
+ *   other character(s).
+ *
+ *   Category pages include special pages such as sales or promotions. For
+ *   instance, a special sale page may have the category hierarchy:
+ *   "pageCategories" : ["Sales > 2017 Black Friday Deals"].
+ * @param {google.cloud.retail.v2alpha.SearchRequest.SearchMode} request.searchMode
+ *   The search mode of the search request. If not specified, a single search
+ *   request triggers both product search and faceted search.
+ * @param {google.cloud.retail.v2alpha.SearchRequest.PersonalizationSpec} request.personalizationSpec
+ *   The specification for personalization.
+ *
+ *   Notice that if both
+ *   {@link protos.google.cloud.retail.v2alpha.ServingConfig.personalization_spec|ServingConfig.personalization_spec}
+ *   and
+ *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+ *   are set.
+ *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+ *   will override
+ *   {@link protos.google.cloud.retail.v2alpha.ServingConfig.personalization_spec|ServingConfig.personalization_spec}.
+ * @param {number[]} request.labels
+ *   The labels applied to a resource must meet the following requirements:
+ *
+ *   * Each resource can have multiple labels, up to a maximum of 64.
+ *   * Each label must be a key-value pair.
+ *   * Keys have a minimum length of 1 character and a maximum length of 63
+ *     characters and cannot be empty. Values can be empty and have a maximum
+ *     length of 63 characters.
+ *   * Keys and values can contain only lowercase letters, numeric characters,
+ *     underscores, and dashes. All characters must use UTF-8 encoding, and
+ *     international characters are allowed.
+ *   * The key portion of a label must be unique. However, you can use the same
+ *     key with multiple resources.
+ *   * Keys must start with a lowercase letter or international character.
+ *
+ *   For more information, see [Requirements for
+ *   labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+ *   in the Resource Manager documentation.
+ * @param {google.cloud.retail.v2alpha.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
+ *   The spell correction specification that specifies the mode under
+ *   which spell correction will take effect.
+ * @param {string} request.entity
+ *   The entity for customers that may run multiple different entities, domains,
+ *   sites or regions, for example, `Google US`, `Google Ads`, `Waymo`,
+ *   `google.com`, `youtube.com`, etc.
+ *   If this is set, it should be exactly matched with
+ *   {@link protos.google.cloud.retail.v2alpha.UserEvent.entity|UserEvent.entity} to get
+ *   search results boosted by entity.
+ * @param {google.cloud.retail.v2alpha.SearchRequest.ConversationalSearchSpec} [request.conversationalSearchSpec]
+ *   Optional. This field specifies all conversational related parameters
+ *   addition to traditional retail search.
+ * @param {google.cloud.retail.v2alpha.SearchRequest.TileNavigationSpec} [request.tileNavigationSpec]
+ *   Optional. This field specifies tile navigation related parameters.
+ * @param {string} [request.languageCode]
+ *   Optional. The BCP-47 language code, such as "en-US" or "sr-Latn"
+ *   [list](https://www.unicode.org/cldr/charts/46/summary/root.html). For more
+ *   information, see [Standardized codes](https://google.aip.dev/143). This
+ *   field helps to better interpret the query. If a value isn't specified, the
+ *   query language code is automatically detected, which may not be accurate.
+ * @param {string} [request.regionCode]
+ *   Optional. The Unicode country/region code (CLDR) of a location, such as
+ *   "US" and "419"
+ *   [list](https://www.unicode.org/cldr/charts/46/supplemental/territory_information.html).
+ *   For more information, see [Standardized codes](https://google.aip.dev/143).
+ *   If set, then results will be boosted based on the region_code provided.
+ * @param {string} [request.placeId]
+ *   Optional. An id corresponding to a place, such as a store id or region id.
+ *   When specified, we use the price from the local inventory with the matching
+ *   product's
+ *   {@link protos.google.cloud.retail.v2alpha.LocalInventory.place_id|LocalInventory.place_id}
+ *   for revenue optimization.
+ * @param {number[]} [request.userAttributes]
+ *   Optional. The user attributes that could be used for personalization of
+ *   search results.
+ *   * Populate at most 100 key-value pairs per query.
+ *   * Only supports string keys and repeated string values.
+ *   * Duplcate keys are not allowed within a single query.
+ *
+ *   Example:
+ *      user_attributes: [
+ *       { key: "pets"
+ *         value {
+ *           values: "dog"
+ *           values: "cat"
+ *         }
+ *       },
+ *       { key: "state"
+ *         value {
+ *           values: "CA"
+ *         }
+ *       }
+ *      ]
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.retail.v2alpha.SearchResponse.SearchResult|SearchResult}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2alpha/search_service.search.js</caption>
+ * region_tag:retail_v2alpha_generated_SearchService_Search_async
+ */
   searchAsync(
-    request?: protos.google.cloud.retail.v2alpha.ISearchRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.retail.v2alpha.SearchResponse.ISearchResult> {
+      request?: protos.google.cloud.retail.v2alpha.ISearchRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.retail.v2alpha.SearchResponse.ISearchResult>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        placement: request.placement ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'placement': request.placement ?? '',
+    });
     const defaultCallSettings = this._defaults['search'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('search iterate %j', request);
     return this.descriptors.page.search.asyncIterate(
       this.innerApiCalls['search'] as GaxCall,
@@ -1566,7 +1478,7 @@ export class SearchServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.retail.v2alpha.SearchResponse.ISearchResult>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1606,7 +1518,7 @@ export class SearchServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1644,7 +1556,7 @@ export class SearchServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1689,20 +1601,20 @@ export class SearchServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1739,13 +1651,13 @@ export class SearchServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1779,7 +1691,7 @@ export class SearchServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1794,20 +1706,20 @@ export class SearchServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1851,20 +1763,20 @@ export class SearchServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1878,7 +1790,7 @@ export class SearchServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  alertConfigPath(project: string) {
+  alertConfigPath(project:string) {
     return this.pathTemplates.alertConfigPathTemplate.render({
       project: project,
     });
@@ -1892,8 +1804,7 @@ export class SearchServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAlertConfigName(alertConfigName: string) {
-    return this.pathTemplates.alertConfigPathTemplate.match(alertConfigName)
-      .project;
+    return this.pathTemplates.alertConfigPathTemplate.match(alertConfigName).project;
   }
 
   /**
@@ -1904,7 +1815,7 @@ export class SearchServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  attributesConfigPath(project: string, location: string, catalog: string) {
+  attributesConfigPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.attributesConfigPathTemplate.render({
       project: project,
       location: location,
@@ -1920,9 +1831,7 @@ export class SearchServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).project;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).project;
   }
 
   /**
@@ -1933,9 +1842,7 @@ export class SearchServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).location;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).location;
   }
 
   /**
@@ -1946,9 +1853,7 @@ export class SearchServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).catalog;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).catalog;
   }
 
   /**
@@ -1960,12 +1865,7 @@ export class SearchServiceClient {
    * @param {string} branch
    * @returns {string} Resource name string.
    */
-  branchPath(
-    project: string,
-    location: string,
-    catalog: string,
-    branch: string
-  ) {
+  branchPath(project:string,location:string,catalog:string,branch:string) {
     return this.pathTemplates.branchPathTemplate.render({
       project: project,
       location: location,
@@ -2026,7 +1926,7 @@ export class SearchServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  catalogPath(project: string, location: string, catalog: string) {
+  catalogPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.catalogPathTemplate.render({
       project: project,
       location: location,
@@ -2075,7 +1975,7 @@ export class SearchServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  completionConfigPath(project: string, location: string, catalog: string) {
+  completionConfigPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.completionConfigPathTemplate.render({
       project: project,
       location: location,
@@ -2091,9 +1991,7 @@ export class SearchServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).project;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).project;
   }
 
   /**
@@ -2104,9 +2002,7 @@ export class SearchServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).location;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).location;
   }
 
   /**
@@ -2117,9 +2013,7 @@ export class SearchServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).catalog;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).catalog;
   }
 
   /**
@@ -2131,12 +2025,7 @@ export class SearchServiceClient {
    * @param {string} control
    * @returns {string} Resource name string.
    */
-  controlPath(
-    project: string,
-    location: string,
-    catalog: string,
-    control: string
-  ) {
+  controlPath(project:string,location:string,catalog:string,control:string) {
     return this.pathTemplates.controlPathTemplate.render({
       project: project,
       location: location,
@@ -2198,12 +2087,7 @@ export class SearchServiceClient {
    * @param {string} experiment
    * @returns {string} Resource name string.
    */
-  experimentPath(
-    project: string,
-    location: string,
-    catalog: string,
-    experiment: string
-  ) {
+  experimentPath(project:string,location:string,catalog:string,experiment:string) {
     return this.pathTemplates.experimentPathTemplate.render({
       project: project,
       location: location,
@@ -2220,8 +2104,7 @@ export class SearchServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromExperimentName(experimentName: string) {
-    return this.pathTemplates.experimentPathTemplate.match(experimentName)
-      .project;
+    return this.pathTemplates.experimentPathTemplate.match(experimentName).project;
   }
 
   /**
@@ -2232,8 +2115,7 @@ export class SearchServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromExperimentName(experimentName: string) {
-    return this.pathTemplates.experimentPathTemplate.match(experimentName)
-      .location;
+    return this.pathTemplates.experimentPathTemplate.match(experimentName).location;
   }
 
   /**
@@ -2244,8 +2126,7 @@ export class SearchServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromExperimentName(experimentName: string) {
-    return this.pathTemplates.experimentPathTemplate.match(experimentName)
-      .catalog;
+    return this.pathTemplates.experimentPathTemplate.match(experimentName).catalog;
   }
 
   /**
@@ -2256,8 +2137,7 @@ export class SearchServiceClient {
    * @returns {string} A string representing the experiment.
    */
   matchExperimentFromExperimentName(experimentName: string) {
-    return this.pathTemplates.experimentPathTemplate.match(experimentName)
-      .experiment;
+    return this.pathTemplates.experimentPathTemplate.match(experimentName).experiment;
   }
 
   /**
@@ -2266,7 +2146,7 @@ export class SearchServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  loggingConfigPath(project: string) {
+  loggingConfigPath(project:string) {
     return this.pathTemplates.loggingConfigPathTemplate.render({
       project: project,
     });
@@ -2280,8 +2160,7 @@ export class SearchServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromLoggingConfigName(loggingConfigName: string) {
-    return this.pathTemplates.loggingConfigPathTemplate.match(loggingConfigName)
-      .project;
+    return this.pathTemplates.loggingConfigPathTemplate.match(loggingConfigName).project;
   }
 
   /**
@@ -2293,12 +2172,7 @@ export class SearchServiceClient {
    * @param {string} merchant_center_account_link
    * @returns {string} Resource name string.
    */
-  merchantCenterAccountLinkPath(
-    project: string,
-    location: string,
-    catalog: string,
-    merchantCenterAccountLink: string
-  ) {
+  merchantCenterAccountLinkPath(project:string,location:string,catalog:string,merchantCenterAccountLink:string) {
     return this.pathTemplates.merchantCenterAccountLinkPathTemplate.render({
       project: project,
       location: location,
@@ -2314,12 +2188,8 @@ export class SearchServiceClient {
    *   A fully-qualified path representing MerchantCenterAccountLink resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromMerchantCenterAccountLinkName(
-    merchantCenterAccountLinkName: string
-  ) {
-    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
-      merchantCenterAccountLinkName
-    ).project;
+  matchProjectFromMerchantCenterAccountLinkName(merchantCenterAccountLinkName: string) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(merchantCenterAccountLinkName).project;
   }
 
   /**
@@ -2329,12 +2199,8 @@ export class SearchServiceClient {
    *   A fully-qualified path representing MerchantCenterAccountLink resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromMerchantCenterAccountLinkName(
-    merchantCenterAccountLinkName: string
-  ) {
-    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
-      merchantCenterAccountLinkName
-    ).location;
+  matchLocationFromMerchantCenterAccountLinkName(merchantCenterAccountLinkName: string) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(merchantCenterAccountLinkName).location;
   }
 
   /**
@@ -2344,12 +2210,8 @@ export class SearchServiceClient {
    *   A fully-qualified path representing MerchantCenterAccountLink resource.
    * @returns {string} A string representing the catalog.
    */
-  matchCatalogFromMerchantCenterAccountLinkName(
-    merchantCenterAccountLinkName: string
-  ) {
-    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
-      merchantCenterAccountLinkName
-    ).catalog;
+  matchCatalogFromMerchantCenterAccountLinkName(merchantCenterAccountLinkName: string) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(merchantCenterAccountLinkName).catalog;
   }
 
   /**
@@ -2359,12 +2221,8 @@ export class SearchServiceClient {
    *   A fully-qualified path representing MerchantCenterAccountLink resource.
    * @returns {string} A string representing the merchant_center_account_link.
    */
-  matchMerchantCenterAccountLinkFromMerchantCenterAccountLinkName(
-    merchantCenterAccountLinkName: string
-  ) {
-    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
-      merchantCenterAccountLinkName
-    ).merchant_center_account_link;
+  matchMerchantCenterAccountLinkFromMerchantCenterAccountLinkName(merchantCenterAccountLinkName: string) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(merchantCenterAccountLinkName).merchant_center_account_link;
   }
 
   /**
@@ -2376,7 +2234,7 @@ export class SearchServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(project: string, location: string, catalog: string, model: string) {
+  modelPath(project:string,location:string,catalog:string,model:string) {
     return this.pathTemplates.modelPathTemplate.render({
       project: project,
       location: location,
@@ -2439,13 +2297,7 @@ export class SearchServiceClient {
    * @param {string} product
    * @returns {string} Resource name string.
    */
-  productPath(
-    project: string,
-    location: string,
-    catalog: string,
-    branch: string,
-    product: string
-  ) {
+  productPath(project:string,location:string,catalog:string,branch:string,product:string) {
     return this.pathTemplates.productPathTemplate.render({
       project: project,
       location: location,
@@ -2516,7 +2368,7 @@ export class SearchServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  retailProjectPath(project: string) {
+  retailProjectPath(project:string) {
     return this.pathTemplates.retailProjectPathTemplate.render({
       project: project,
     });
@@ -2530,8 +2382,7 @@ export class SearchServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRetailProjectName(retailProjectName: string) {
-    return this.pathTemplates.retailProjectPathTemplate.match(retailProjectName)
-      .project;
+    return this.pathTemplates.retailProjectPathTemplate.match(retailProjectName).project;
   }
 
   /**
@@ -2543,12 +2394,7 @@ export class SearchServiceClient {
    * @param {string} serving_config
    * @returns {string} Resource name string.
    */
-  servingConfigPath(
-    project: string,
-    location: string,
-    catalog: string,
-    servingConfig: string
-  ) {
+  servingConfigPath(project:string,location:string,catalog:string,servingConfig:string) {
     return this.pathTemplates.servingConfigPathTemplate.render({
       project: project,
       location: location,
@@ -2565,8 +2411,7 @@ export class SearchServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .project;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).project;
   }
 
   /**
@@ -2577,8 +2422,7 @@ export class SearchServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .location;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).location;
   }
 
   /**
@@ -2589,8 +2433,7 @@ export class SearchServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .catalog;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).catalog;
   }
 
   /**
@@ -2601,8 +2444,7 @@ export class SearchServiceClient {
    * @returns {string} A string representing the serving_config.
    */
   matchServingConfigFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .serving_config;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).serving_config;
   }
 
   /**
@@ -2617,9 +2459,7 @@ export class SearchServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

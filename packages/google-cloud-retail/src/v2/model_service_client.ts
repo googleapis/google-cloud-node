@@ -18,18 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -124,41 +113,20 @@ export class ModelServiceClient {
    *     const client = new ModelServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ModelServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'retail.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -184,7 +152,7 @@ export class ModelServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -200,9 +168,13 @@ export class ModelServiceClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -250,11 +222,8 @@ export class ModelServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listModels: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'models'
-      ),
+      listModels:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'models')
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -263,68 +232,39 @@ export class ModelServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v2/{name=projects/*/locations/*/operations/*}',
-          additional_bindings: [
-            {
-              get: '/v2/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',
-            },
-            {get: '/v2/{name=projects/*/locations/*/catalogs/*/operations/*}'},
-            {get: '/v2/{name=projects/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v2/{name=projects/*/locations/*}/operations',
-          additional_bindings: [
-            {get: '/v2/{name=projects/*/locations/*/catalogs/*}/operations'},
-            {get: '/v2/{name=projects/*}/operations'},
-          ],
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v2/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/v2/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',},{get: '/v2/{name=projects/*/locations/*/catalogs/*/operations/*}',},{get: '/v2/{name=projects/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v2/{name=projects/*/locations/*}/operations',additional_bindings: [{get: '/v2/{name=projects/*/locations/*/catalogs/*}/operations',},{get: '/v2/{name=projects/*}/operations',}],
+      }];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createModelResponse = protoFilesRoot.lookup(
-      '.google.cloud.retail.v2.Model'
-    ) as gax.protobuf.Type;
+      '.google.cloud.retail.v2.Model') as gax.protobuf.Type;
     const createModelMetadata = protoFilesRoot.lookup(
-      '.google.cloud.retail.v2.CreateModelMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.retail.v2.CreateModelMetadata') as gax.protobuf.Type;
     const tuneModelResponse = protoFilesRoot.lookup(
-      '.google.cloud.retail.v2.TuneModelResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.retail.v2.TuneModelResponse') as gax.protobuf.Type;
     const tuneModelMetadata = protoFilesRoot.lookup(
-      '.google.cloud.retail.v2.TuneModelMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.retail.v2.TuneModelMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createModel: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createModelResponse.decode.bind(createModelResponse),
-        createModelMetadata.decode.bind(createModelMetadata)
-      ),
+        createModelMetadata.decode.bind(createModelMetadata)),
       tuneModel: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         tuneModelResponse.decode.bind(tuneModelResponse),
-        tuneModelMetadata.decode.bind(tuneModelMetadata)
-      ),
+        tuneModelMetadata.decode.bind(tuneModelMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.retail.v2.ModelService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.retail.v2.ModelService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -355,42 +295,28 @@ export class ModelServiceClient {
     // Put together the "service stub" for
     // google.cloud.retail.v2.ModelService.
     this.modelServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.retail.v2.ModelService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.retail.v2.ModelService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.retail.v2.ModelService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const modelServiceStubMethods = [
-      'createModel',
-      'getModel',
-      'pauseModel',
-      'resumeModel',
-      'deleteModel',
-      'listModels',
-      'updateModel',
-      'tuneModel',
-    ];
+    const modelServiceStubMethods =
+        ['createModel', 'getModel', 'pauseModel', 'resumeModel', 'deleteModel', 'listModels', 'updateModel', 'tuneModel'];
     for (const methodName of modelServiceStubMethods) {
       const callPromise = this.modelServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -415,14 +341,8 @@ export class ModelServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'retail.googleapis.com';
   }
@@ -433,14 +353,8 @@ export class ModelServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'retail.googleapis.com';
   }
@@ -471,7 +385,9 @@ export class ModelServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -480,9 +396,8 @@ export class ModelServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -493,1088 +408,799 @@ export class ModelServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets a model.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the {@link protos.google.cloud.retail.v2.Model|Model} to
-   *   get. Format:
-   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog}/models/{model_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2.Model|Model}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/model_service.get_model.js</caption>
-   * region_tag:retail_v2_generated_ModelService_GetModel_async
-   */
+/**
+ * Gets a model.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the {@link protos.google.cloud.retail.v2.Model|Model} to
+ *   get. Format:
+ *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog}/models/{model_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2.Model|Model}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/model_service.get_model.js</caption>
+ * region_tag:retail_v2_generated_ModelService_GetModel_async
+ */
   getModel(
-    request?: protos.google.cloud.retail.v2.IGetModelRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2.IModel,
-      protos.google.cloud.retail.v2.IGetModelRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2.IGetModelRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.retail.v2.IModel,
+        protos.google.cloud.retail.v2.IGetModelRequest|undefined, {}|undefined
+      ]>;
   getModel(
-    request: protos.google.cloud.retail.v2.IGetModelRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.retail.v2.IModel,
-      protos.google.cloud.retail.v2.IGetModelRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getModel(
-    request: protos.google.cloud.retail.v2.IGetModelRequest,
-    callback: Callback<
-      protos.google.cloud.retail.v2.IModel,
-      protos.google.cloud.retail.v2.IGetModelRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getModel(
-    request?: protos.google.cloud.retail.v2.IGetModelRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.retail.v2.IGetModelRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.retail.v2.IModel,
-          protos.google.cloud.retail.v2.IGetModelRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.retail.v2.IModel,
-      protos.google.cloud.retail.v2.IGetModelRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2.IModel,
-      protos.google.cloud.retail.v2.IGetModelRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2.IGetModelRequest|null|undefined,
+          {}|null|undefined>): void;
+  getModel(
+      request: protos.google.cloud.retail.v2.IGetModelRequest,
+      callback: Callback<
+          protos.google.cloud.retail.v2.IModel,
+          protos.google.cloud.retail.v2.IGetModelRequest|null|undefined,
+          {}|null|undefined>): void;
+  getModel(
+      request?: protos.google.cloud.retail.v2.IGetModelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.retail.v2.IModel,
+          protos.google.cloud.retail.v2.IGetModelRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.retail.v2.IModel,
+          protos.google.cloud.retail.v2.IGetModelRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.retail.v2.IModel,
+        protos.google.cloud.retail.v2.IGetModelRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getModel request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.retail.v2.IModel,
-          protos.google.cloud.retail.v2.IGetModelRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.retail.v2.IModel,
+        protos.google.cloud.retail.v2.IGetModelRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getModel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getModel(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.retail.v2.IModel,
-          protos.google.cloud.retail.v2.IGetModelRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getModel response %j', response);
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.getModel(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.retail.v2.IModel,
+        protos.google.cloud.retail.v2.IGetModelRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getModel response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
-  /**
-   * Pauses the training of an existing model.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the model to pause.
-   *   Format:
-   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/models/{model_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2.Model|Model}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/model_service.pause_model.js</caption>
-   * region_tag:retail_v2_generated_ModelService_PauseModel_async
-   */
+/**
+ * Pauses the training of an existing model.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the model to pause.
+ *   Format:
+ *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/models/{model_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2.Model|Model}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/model_service.pause_model.js</caption>
+ * region_tag:retail_v2_generated_ModelService_PauseModel_async
+ */
   pauseModel(
-    request?: protos.google.cloud.retail.v2.IPauseModelRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2.IModel,
-      protos.google.cloud.retail.v2.IPauseModelRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2.IPauseModelRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.retail.v2.IModel,
+        protos.google.cloud.retail.v2.IPauseModelRequest|undefined, {}|undefined
+      ]>;
   pauseModel(
-    request: protos.google.cloud.retail.v2.IPauseModelRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.retail.v2.IModel,
-      protos.google.cloud.retail.v2.IPauseModelRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  pauseModel(
-    request: protos.google.cloud.retail.v2.IPauseModelRequest,
-    callback: Callback<
-      protos.google.cloud.retail.v2.IModel,
-      protos.google.cloud.retail.v2.IPauseModelRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  pauseModel(
-    request?: protos.google.cloud.retail.v2.IPauseModelRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.retail.v2.IPauseModelRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.retail.v2.IModel,
-          protos.google.cloud.retail.v2.IPauseModelRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.retail.v2.IModel,
-      protos.google.cloud.retail.v2.IPauseModelRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2.IModel,
-      protos.google.cloud.retail.v2.IPauseModelRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2.IPauseModelRequest|null|undefined,
+          {}|null|undefined>): void;
+  pauseModel(
+      request: protos.google.cloud.retail.v2.IPauseModelRequest,
+      callback: Callback<
+          protos.google.cloud.retail.v2.IModel,
+          protos.google.cloud.retail.v2.IPauseModelRequest|null|undefined,
+          {}|null|undefined>): void;
+  pauseModel(
+      request?: protos.google.cloud.retail.v2.IPauseModelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.retail.v2.IModel,
+          protos.google.cloud.retail.v2.IPauseModelRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.retail.v2.IModel,
+          protos.google.cloud.retail.v2.IPauseModelRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.retail.v2.IModel,
+        protos.google.cloud.retail.v2.IPauseModelRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('pauseModel request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.retail.v2.IModel,
-          protos.google.cloud.retail.v2.IPauseModelRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.retail.v2.IModel,
+        protos.google.cloud.retail.v2.IPauseModelRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('pauseModel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .pauseModel(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.retail.v2.IModel,
-          protos.google.cloud.retail.v2.IPauseModelRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('pauseModel response %j', response);
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.pauseModel(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.retail.v2.IModel,
+        protos.google.cloud.retail.v2.IPauseModelRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('pauseModel response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
-  /**
-   * Resumes the training of an existing model.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the model to resume.
-   *   Format:
-   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/models/{model_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2.Model|Model}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/model_service.resume_model.js</caption>
-   * region_tag:retail_v2_generated_ModelService_ResumeModel_async
-   */
+/**
+ * Resumes the training of an existing model.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the model to resume.
+ *   Format:
+ *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/models/{model_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2.Model|Model}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/model_service.resume_model.js</caption>
+ * region_tag:retail_v2_generated_ModelService_ResumeModel_async
+ */
   resumeModel(
-    request?: protos.google.cloud.retail.v2.IResumeModelRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2.IModel,
-      protos.google.cloud.retail.v2.IResumeModelRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2.IResumeModelRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.retail.v2.IModel,
+        protos.google.cloud.retail.v2.IResumeModelRequest|undefined, {}|undefined
+      ]>;
   resumeModel(
-    request: protos.google.cloud.retail.v2.IResumeModelRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.retail.v2.IModel,
-      protos.google.cloud.retail.v2.IResumeModelRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  resumeModel(
-    request: protos.google.cloud.retail.v2.IResumeModelRequest,
-    callback: Callback<
-      protos.google.cloud.retail.v2.IModel,
-      protos.google.cloud.retail.v2.IResumeModelRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  resumeModel(
-    request?: protos.google.cloud.retail.v2.IResumeModelRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.retail.v2.IResumeModelRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.retail.v2.IModel,
-          protos.google.cloud.retail.v2.IResumeModelRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.retail.v2.IModel,
-      protos.google.cloud.retail.v2.IResumeModelRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2.IModel,
-      protos.google.cloud.retail.v2.IResumeModelRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2.IResumeModelRequest|null|undefined,
+          {}|null|undefined>): void;
+  resumeModel(
+      request: protos.google.cloud.retail.v2.IResumeModelRequest,
+      callback: Callback<
+          protos.google.cloud.retail.v2.IModel,
+          protos.google.cloud.retail.v2.IResumeModelRequest|null|undefined,
+          {}|null|undefined>): void;
+  resumeModel(
+      request?: protos.google.cloud.retail.v2.IResumeModelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.retail.v2.IModel,
+          protos.google.cloud.retail.v2.IResumeModelRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.retail.v2.IModel,
+          protos.google.cloud.retail.v2.IResumeModelRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.retail.v2.IModel,
+        protos.google.cloud.retail.v2.IResumeModelRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('resumeModel request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.retail.v2.IModel,
-          protos.google.cloud.retail.v2.IResumeModelRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.retail.v2.IModel,
+        protos.google.cloud.retail.v2.IResumeModelRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('resumeModel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .resumeModel(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.retail.v2.IModel,
-          protos.google.cloud.retail.v2.IResumeModelRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('resumeModel response %j', response);
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.resumeModel(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.retail.v2.IModel,
+        protos.google.cloud.retail.v2.IResumeModelRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('resumeModel response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
-  /**
-   * Deletes an existing model.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the {@link protos.google.cloud.retail.v2.Model|Model} to
-   *   delete. Format:
-   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/models/{model_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/model_service.delete_model.js</caption>
-   * region_tag:retail_v2_generated_ModelService_DeleteModel_async
-   */
+/**
+ * Deletes an existing model.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the {@link protos.google.cloud.retail.v2.Model|Model} to
+ *   delete. Format:
+ *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/models/{model_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/model_service.delete_model.js</caption>
+ * region_tag:retail_v2_generated_ModelService_DeleteModel_async
+ */
   deleteModel(
-    request?: protos.google.cloud.retail.v2.IDeleteModelRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.retail.v2.IDeleteModelRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2.IDeleteModelRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.retail.v2.IDeleteModelRequest|undefined, {}|undefined
+      ]>;
   deleteModel(
-    request: protos.google.cloud.retail.v2.IDeleteModelRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.retail.v2.IDeleteModelRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteModel(
-    request: protos.google.cloud.retail.v2.IDeleteModelRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.retail.v2.IDeleteModelRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteModel(
-    request?: protos.google.cloud.retail.v2.IDeleteModelRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.retail.v2.IDeleteModelRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.retail.v2.IDeleteModelRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.retail.v2.IDeleteModelRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.retail.v2.IDeleteModelRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2.IDeleteModelRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteModel(
+      request: protos.google.cloud.retail.v2.IDeleteModelRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.retail.v2.IDeleteModelRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteModel(
+      request?: protos.google.cloud.retail.v2.IDeleteModelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.retail.v2.IDeleteModelRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.retail.v2.IDeleteModelRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.retail.v2.IDeleteModelRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteModel request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.retail.v2.IDeleteModelRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.retail.v2.IDeleteModelRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteModel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteModel(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.retail.v2.IDeleteModelRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteModel response %j', response);
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.deleteModel(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.retail.v2.IDeleteModelRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteModel response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
-  /**
-   * Update of model metadata. Only fields that
-   * currently can be updated are: `filtering_option` and
-   * `periodic_tuning_state`.
-   * If other values are provided, this API method ignores them.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.retail.v2.Model} request.model
-   *   Required. The body of the updated {@link protos.google.cloud.retail.v2.Model|Model}.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Indicates which fields in the provided 'model' to
-   *   update. If not set, by default updates all fields.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2.Model|Model}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/model_service.update_model.js</caption>
-   * region_tag:retail_v2_generated_ModelService_UpdateModel_async
-   */
+/**
+ * Update of model metadata. Only fields that
+ * currently can be updated are: `filtering_option` and
+ * `periodic_tuning_state`.
+ * If other values are provided, this API method ignores them.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.retail.v2.Model} request.model
+ *   Required. The body of the updated {@link protos.google.cloud.retail.v2.Model|Model}.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Indicates which fields in the provided 'model' to
+ *   update. If not set, by default updates all fields.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2.Model|Model}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/model_service.update_model.js</caption>
+ * region_tag:retail_v2_generated_ModelService_UpdateModel_async
+ */
   updateModel(
-    request?: protos.google.cloud.retail.v2.IUpdateModelRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2.IModel,
-      protos.google.cloud.retail.v2.IUpdateModelRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2.IUpdateModelRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.retail.v2.IModel,
+        protos.google.cloud.retail.v2.IUpdateModelRequest|undefined, {}|undefined
+      ]>;
   updateModel(
-    request: protos.google.cloud.retail.v2.IUpdateModelRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.retail.v2.IModel,
-      protos.google.cloud.retail.v2.IUpdateModelRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateModel(
-    request: protos.google.cloud.retail.v2.IUpdateModelRequest,
-    callback: Callback<
-      protos.google.cloud.retail.v2.IModel,
-      protos.google.cloud.retail.v2.IUpdateModelRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateModel(
-    request?: protos.google.cloud.retail.v2.IUpdateModelRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.retail.v2.IUpdateModelRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.retail.v2.IModel,
-          protos.google.cloud.retail.v2.IUpdateModelRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.retail.v2.IModel,
-      protos.google.cloud.retail.v2.IUpdateModelRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2.IModel,
-      protos.google.cloud.retail.v2.IUpdateModelRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2.IUpdateModelRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateModel(
+      request: protos.google.cloud.retail.v2.IUpdateModelRequest,
+      callback: Callback<
+          protos.google.cloud.retail.v2.IModel,
+          protos.google.cloud.retail.v2.IUpdateModelRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateModel(
+      request?: protos.google.cloud.retail.v2.IUpdateModelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.retail.v2.IModel,
+          protos.google.cloud.retail.v2.IUpdateModelRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.retail.v2.IModel,
+          protos.google.cloud.retail.v2.IUpdateModelRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.retail.v2.IModel,
+        protos.google.cloud.retail.v2.IUpdateModelRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'model.name': request.model!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'model.name': request.model!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateModel request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.retail.v2.IModel,
-          protos.google.cloud.retail.v2.IUpdateModelRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.retail.v2.IModel,
+        protos.google.cloud.retail.v2.IUpdateModelRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateModel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateModel(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.retail.v2.IModel,
-          protos.google.cloud.retail.v2.IUpdateModelRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateModel response %j', response);
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.updateModel(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.retail.v2.IModel,
+        protos.google.cloud.retail.v2.IUpdateModelRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateModel response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
 
-  /**
-   * Creates a new model.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource under which to create the model. Format:
-   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
-   * @param {google.cloud.retail.v2.Model} request.model
-   *   Required. The payload of the {@link protos.google.cloud.retail.v2.Model|Model}  to
-   *   create.
-   * @param {boolean} [request.dryRun]
-   *   Optional. Whether to run a dry run to validate the request (without
-   *   actually creating the model).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/model_service.create_model.js</caption>
-   * region_tag:retail_v2_generated_ModelService_CreateModel_async
-   */
+/**
+ * Creates a new model.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource under which to create the model. Format:
+ *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
+ * @param {google.cloud.retail.v2.Model} request.model
+ *   Required. The payload of the {@link protos.google.cloud.retail.v2.Model|Model}  to
+ *   create.
+ * @param {boolean} [request.dryRun]
+ *   Optional. Whether to run a dry run to validate the request (without
+ *   actually creating the model).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/model_service.create_model.js</caption>
+ * region_tag:retail_v2_generated_ModelService_CreateModel_async
+ */
   createModel(
-    request?: protos.google.cloud.retail.v2.ICreateModelRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.retail.v2.IModel,
-        protos.google.cloud.retail.v2.ICreateModelMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2.ICreateModelRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.retail.v2.IModel, protos.google.cloud.retail.v2.ICreateModelMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createModel(
-    request: protos.google.cloud.retail.v2.ICreateModelRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2.IModel,
-        protos.google.cloud.retail.v2.ICreateModelMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.retail.v2.ICreateModelRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.retail.v2.IModel, protos.google.cloud.retail.v2.ICreateModelMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createModel(
-    request: protos.google.cloud.retail.v2.ICreateModelRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2.IModel,
-        protos.google.cloud.retail.v2.ICreateModelMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.retail.v2.ICreateModelRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.retail.v2.IModel, protos.google.cloud.retail.v2.ICreateModelMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createModel(
-    request?: protos.google.cloud.retail.v2.ICreateModelRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.retail.v2.IModel,
-            protos.google.cloud.retail.v2.ICreateModelMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2.IModel,
-        protos.google.cloud.retail.v2.ICreateModelMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.retail.v2.IModel,
-        protos.google.cloud.retail.v2.ICreateModelMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.retail.v2.ICreateModelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.retail.v2.IModel, protos.google.cloud.retail.v2.ICreateModelMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.retail.v2.IModel, protos.google.cloud.retail.v2.ICreateModelMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.retail.v2.IModel, protos.google.cloud.retail.v2.ICreateModelMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.retail.v2.IModel,
-            protos.google.cloud.retail.v2.ICreateModelMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.retail.v2.IModel, protos.google.cloud.retail.v2.ICreateModelMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createModel response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createModel request %j', request);
-    return this.innerApiCalls
-      .createModel(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.retail.v2.IModel,
-            protos.google.cloud.retail.v2.ICreateModelMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createModel response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createModel(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.retail.v2.IModel, protos.google.cloud.retail.v2.ICreateModelMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createModel response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createModel()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/model_service.create_model.js</caption>
-   * region_tag:retail_v2_generated_ModelService_CreateModel_async
-   */
-  async checkCreateModelProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.retail.v2.Model,
-      protos.google.cloud.retail.v2.CreateModelMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createModel()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/model_service.create_model.js</caption>
+ * region_tag:retail_v2_generated_ModelService_CreateModel_async
+ */
+  async checkCreateModelProgress(name: string): Promise<LROperation<protos.google.cloud.retail.v2.Model, protos.google.cloud.retail.v2.CreateModelMetadata>>{
     this._log.info('createModel long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createModel,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.retail.v2.Model,
-      protos.google.cloud.retail.v2.CreateModelMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createModel, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.retail.v2.Model, protos.google.cloud.retail.v2.CreateModelMetadata>;
   }
-  /**
-   * Tunes an existing model.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the model to tune.
-   *   Format:
-   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/models/{model_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/model_service.tune_model.js</caption>
-   * region_tag:retail_v2_generated_ModelService_TuneModel_async
-   */
+/**
+ * Tunes an existing model.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the model to tune.
+ *   Format:
+ *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/models/{model_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/model_service.tune_model.js</caption>
+ * region_tag:retail_v2_generated_ModelService_TuneModel_async
+ */
   tuneModel(
-    request?: protos.google.cloud.retail.v2.ITuneModelRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.retail.v2.ITuneModelResponse,
-        protos.google.cloud.retail.v2.ITuneModelMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2.ITuneModelRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.retail.v2.ITuneModelResponse, protos.google.cloud.retail.v2.ITuneModelMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   tuneModel(
-    request: protos.google.cloud.retail.v2.ITuneModelRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2.ITuneModelResponse,
-        protos.google.cloud.retail.v2.ITuneModelMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.retail.v2.ITuneModelRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.retail.v2.ITuneModelResponse, protos.google.cloud.retail.v2.ITuneModelMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   tuneModel(
-    request: protos.google.cloud.retail.v2.ITuneModelRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2.ITuneModelResponse,
-        protos.google.cloud.retail.v2.ITuneModelMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.retail.v2.ITuneModelRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.retail.v2.ITuneModelResponse, protos.google.cloud.retail.v2.ITuneModelMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   tuneModel(
-    request?: protos.google.cloud.retail.v2.ITuneModelRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.retail.v2.ITuneModelResponse,
-            protos.google.cloud.retail.v2.ITuneModelMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2.ITuneModelResponse,
-        protos.google.cloud.retail.v2.ITuneModelMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.retail.v2.ITuneModelResponse,
-        protos.google.cloud.retail.v2.ITuneModelMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.retail.v2.ITuneModelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.retail.v2.ITuneModelResponse, protos.google.cloud.retail.v2.ITuneModelMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.retail.v2.ITuneModelResponse, protos.google.cloud.retail.v2.ITuneModelMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.retail.v2.ITuneModelResponse, protos.google.cloud.retail.v2.ITuneModelMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.retail.v2.ITuneModelResponse,
-            protos.google.cloud.retail.v2.ITuneModelMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.retail.v2.ITuneModelResponse, protos.google.cloud.retail.v2.ITuneModelMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('tuneModel response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('tuneModel request %j', request);
-    return this.innerApiCalls
-      .tuneModel(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.retail.v2.ITuneModelResponse,
-            protos.google.cloud.retail.v2.ITuneModelMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('tuneModel response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.tuneModel(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.retail.v2.ITuneModelResponse, protos.google.cloud.retail.v2.ITuneModelMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('tuneModel response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `tuneModel()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/model_service.tune_model.js</caption>
-   * region_tag:retail_v2_generated_ModelService_TuneModel_async
-   */
-  async checkTuneModelProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.retail.v2.TuneModelResponse,
-      protos.google.cloud.retail.v2.TuneModelMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `tuneModel()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/model_service.tune_model.js</caption>
+ * region_tag:retail_v2_generated_ModelService_TuneModel_async
+ */
+  async checkTuneModelProgress(name: string): Promise<LROperation<protos.google.cloud.retail.v2.TuneModelResponse, protos.google.cloud.retail.v2.TuneModelMetadata>>{
     this._log.info('tuneModel long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.tuneModel,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.retail.v2.TuneModelResponse,
-      protos.google.cloud.retail.v2.TuneModelMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.tuneModel, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.retail.v2.TuneModelResponse, protos.google.cloud.retail.v2.TuneModelMetadata>;
   }
-  /**
-   * Lists all the models linked to this event store.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent for which to list models.
-   *   Format:
-   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of results to return. If unspecified, defaults
-   *   to 50. Max allowed value is 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListModels`
-   *   call. Provide this to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.retail.v2.Model|Model}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listModelsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all the models linked to this event store.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent for which to list models.
+ *   Format:
+ *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of results to return. If unspecified, defaults
+ *   to 50. Max allowed value is 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListModels`
+ *   call. Provide this to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.retail.v2.Model|Model}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listModelsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listModels(
-    request?: protos.google.cloud.retail.v2.IListModelsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2.IModel[],
-      protos.google.cloud.retail.v2.IListModelsRequest | null,
-      protos.google.cloud.retail.v2.IListModelsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2.IListModelsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.retail.v2.IModel[],
+        protos.google.cloud.retail.v2.IListModelsRequest|null,
+        protos.google.cloud.retail.v2.IListModelsResponse
+      ]>;
   listModels(
-    request: protos.google.cloud.retail.v2.IListModelsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.retail.v2.IListModelsRequest,
-      protos.google.cloud.retail.v2.IListModelsResponse | null | undefined,
-      protos.google.cloud.retail.v2.IModel
-    >
-  ): void;
-  listModels(
-    request: protos.google.cloud.retail.v2.IListModelsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.retail.v2.IListModelsRequest,
-      protos.google.cloud.retail.v2.IListModelsResponse | null | undefined,
-      protos.google.cloud.retail.v2.IModel
-    >
-  ): void;
-  listModels(
-    request?: protos.google.cloud.retail.v2.IListModelsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.retail.v2.IListModelsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.retail.v2.IListModelsRequest,
-          protos.google.cloud.retail.v2.IListModelsResponse | null | undefined,
-          protos.google.cloud.retail.v2.IModel
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.retail.v2.IListModelsRequest,
-      protos.google.cloud.retail.v2.IListModelsResponse | null | undefined,
-      protos.google.cloud.retail.v2.IModel
-    >
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2.IModel[],
-      protos.google.cloud.retail.v2.IListModelsRequest | null,
-      protos.google.cloud.retail.v2.IListModelsResponse,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2.IListModelsResponse|null|undefined,
+          protos.google.cloud.retail.v2.IModel>): void;
+  listModels(
+      request: protos.google.cloud.retail.v2.IListModelsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.retail.v2.IListModelsRequest,
+          protos.google.cloud.retail.v2.IListModelsResponse|null|undefined,
+          protos.google.cloud.retail.v2.IModel>): void;
+  listModels(
+      request?: protos.google.cloud.retail.v2.IListModelsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.retail.v2.IListModelsRequest,
+          protos.google.cloud.retail.v2.IListModelsResponse|null|undefined,
+          protos.google.cloud.retail.v2.IModel>,
+      callback?: PaginationCallback<
+          protos.google.cloud.retail.v2.IListModelsRequest,
+          protos.google.cloud.retail.v2.IListModelsResponse|null|undefined,
+          protos.google.cloud.retail.v2.IModel>):
+      Promise<[
+        protos.google.cloud.retail.v2.IModel[],
+        protos.google.cloud.retail.v2.IListModelsRequest|null,
+        protos.google.cloud.retail.v2.IListModelsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.retail.v2.IListModelsRequest,
-          protos.google.cloud.retail.v2.IListModelsResponse | null | undefined,
-          protos.google.cloud.retail.v2.IModel
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.retail.v2.IListModelsRequest,
+      protos.google.cloud.retail.v2.IListModelsResponse|null|undefined,
+      protos.google.cloud.retail.v2.IModel>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listModels values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1583,60 +1209,57 @@ export class ModelServiceClient {
     this._log.info('listModels request %j', request);
     return this.innerApiCalls
       .listModels(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.retail.v2.IModel[],
-          protos.google.cloud.retail.v2.IListModelsRequest | null,
-          protos.google.cloud.retail.v2.IListModelsResponse,
-        ]) => {
-          this._log.info('listModels values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.retail.v2.IModel[],
+        protos.google.cloud.retail.v2.IListModelsRequest|null,
+        protos.google.cloud.retail.v2.IListModelsResponse
+      ]) => {
+        this._log.info('listModels values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listModels`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent for which to list models.
-   *   Format:
-   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of results to return. If unspecified, defaults
-   *   to 50. Max allowed value is 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListModels`
-   *   call. Provide this to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.retail.v2.Model|Model} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listModelsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listModels`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent for which to list models.
+ *   Format:
+ *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of results to return. If unspecified, defaults
+ *   to 50. Max allowed value is 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListModels`
+ *   call. Provide this to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.retail.v2.Model|Model} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listModelsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listModelsStream(
-    request?: protos.google.cloud.retail.v2.IListModelsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.retail.v2.IListModelsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listModels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listModels stream %j', request);
     return this.descriptors.page.listModels.createStream(
       this.innerApiCalls.listModels as GaxCall,
@@ -1645,51 +1268,50 @@ export class ModelServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listModels`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent for which to list models.
-   *   Format:
-   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of results to return. If unspecified, defaults
-   *   to 50. Max allowed value is 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListModels`
-   *   call. Provide this to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.retail.v2.Model|Model}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/model_service.list_models.js</caption>
-   * region_tag:retail_v2_generated_ModelService_ListModels_async
-   */
+/**
+ * Equivalent to `listModels`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent for which to list models.
+ *   Format:
+ *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of results to return. If unspecified, defaults
+ *   to 50. Max allowed value is 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListModels`
+ *   call. Provide this to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.retail.v2.Model|Model}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/model_service.list_models.js</caption>
+ * region_tag:retail_v2_generated_ModelService_ListModels_async
+ */
   listModelsAsync(
-    request?: protos.google.cloud.retail.v2.IListModelsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.retail.v2.IModel> {
+      request?: protos.google.cloud.retail.v2.IListModelsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.retail.v2.IModel>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listModels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listModels iterate %j', request);
     return this.descriptors.page.listModels.asyncIterate(
       this.innerApiCalls['listModels'] as GaxCall,
@@ -1697,7 +1319,7 @@ export class ModelServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.retail.v2.IModel>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1737,7 +1359,7 @@ export class ModelServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1775,7 +1397,7 @@ export class ModelServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1820,20 +1442,20 @@ export class ModelServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1870,13 +1492,13 @@ export class ModelServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1910,7 +1532,7 @@ export class ModelServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1925,20 +1547,20 @@ export class ModelServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1982,20 +1604,20 @@ export class ModelServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -2011,7 +1633,7 @@ export class ModelServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  attributesConfigPath(project: string, location: string, catalog: string) {
+  attributesConfigPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.attributesConfigPathTemplate.render({
       project: project,
       location: location,
@@ -2027,9 +1649,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).project;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).project;
   }
 
   /**
@@ -2040,9 +1660,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).location;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).location;
   }
 
   /**
@@ -2053,9 +1671,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).catalog;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).catalog;
   }
 
   /**
@@ -2066,7 +1682,7 @@ export class ModelServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  catalogPath(project: string, location: string, catalog: string) {
+  catalogPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.catalogPathTemplate.render({
       project: project,
       location: location,
@@ -2115,7 +1731,7 @@ export class ModelServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  completionConfigPath(project: string, location: string, catalog: string) {
+  completionConfigPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.completionConfigPathTemplate.render({
       project: project,
       location: location,
@@ -2131,9 +1747,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).project;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).project;
   }
 
   /**
@@ -2144,9 +1758,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).location;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).location;
   }
 
   /**
@@ -2157,9 +1769,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).catalog;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).catalog;
   }
 
   /**
@@ -2171,12 +1781,7 @@ export class ModelServiceClient {
    * @param {string} control
    * @returns {string} Resource name string.
    */
-  controlPath(
-    project: string,
-    location: string,
-    catalog: string,
-    control: string
-  ) {
+  controlPath(project:string,location:string,catalog:string,control:string) {
     return this.pathTemplates.controlPathTemplate.render({
       project: project,
       location: location,
@@ -2238,7 +1843,7 @@ export class ModelServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(project: string, location: string, catalog: string, model: string) {
+  modelPath(project:string,location:string,catalog:string,model:string) {
     return this.pathTemplates.modelPathTemplate.render({
       project: project,
       location: location,
@@ -2301,13 +1906,7 @@ export class ModelServiceClient {
    * @param {string} product
    * @returns {string} Resource name string.
    */
-  productPath(
-    project: string,
-    location: string,
-    catalog: string,
-    branch: string,
-    product: string
-  ) {
+  productPath(project:string,location:string,catalog:string,branch:string,product:string) {
     return this.pathTemplates.productPathTemplate.render({
       project: project,
       location: location,
@@ -2381,12 +1980,7 @@ export class ModelServiceClient {
    * @param {string} serving_config
    * @returns {string} Resource name string.
    */
-  servingConfigPath(
-    project: string,
-    location: string,
-    catalog: string,
-    servingConfig: string
-  ) {
+  servingConfigPath(project:string,location:string,catalog:string,servingConfig:string) {
     return this.pathTemplates.servingConfigPathTemplate.render({
       project: project,
       location: location,
@@ -2403,8 +1997,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .project;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).project;
   }
 
   /**
@@ -2415,8 +2008,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .location;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).location;
   }
 
   /**
@@ -2427,8 +2019,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .catalog;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).catalog;
   }
 
   /**
@@ -2439,8 +2030,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the serving_config.
    */
   matchServingConfigFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .serving_config;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).serving_config;
   }
 
   /**
@@ -2455,9 +2045,7 @@ export class ModelServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }
