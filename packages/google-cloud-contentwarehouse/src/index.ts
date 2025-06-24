@@ -31,23 +31,7 @@ type RuleSetServiceClient = v1.RuleSetServiceClient;
 const SynonymSetServiceClient = v1.SynonymSetServiceClient;
 type SynonymSetServiceClient = v1.SynonymSetServiceClient;
 
-export {
-  v1,
-  DocumentLinkServiceClient,
-  DocumentSchemaServiceClient,
-  DocumentServiceClient,
-  PipelineServiceClient,
-  RuleSetServiceClient,
-  SynonymSetServiceClient,
-};
-export default {
-  v1,
-  DocumentLinkServiceClient,
-  DocumentSchemaServiceClient,
-  DocumentServiceClient,
-  PipelineServiceClient,
-  RuleSetServiceClient,
-  SynonymSetServiceClient,
-};
+export {v1, DocumentLinkServiceClient, DocumentSchemaServiceClient, DocumentServiceClient, PipelineServiceClient, RuleSetServiceClient, SynonymSetServiceClient};
+export default {v1, DocumentLinkServiceClient, DocumentSchemaServiceClient, DocumentServiceClient, PipelineServiceClient, RuleSetServiceClient, SynonymSetServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

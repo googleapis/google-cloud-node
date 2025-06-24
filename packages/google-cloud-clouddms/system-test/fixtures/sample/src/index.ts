@@ -19,9 +19,7 @@
 import {DataMigrationServiceClient} from '@google-cloud/dms';
 
 // check that the client class type name can be used
-function doStuffWithDataMigrationServiceClient(
-  client: DataMigrationServiceClient
-) {
+function doStuffWithDataMigrationServiceClient(client: DataMigrationServiceClient) {
   client.close();
 }
 

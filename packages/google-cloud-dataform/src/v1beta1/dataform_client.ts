@@ -18,22 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-  IamClient,
-  IamProtos,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -114,41 +103,20 @@ export class DataformClient {
    *     const client = new DataformClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DataformClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'dataform.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -174,7 +142,7 @@ export class DataformClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -187,14 +155,18 @@ export class DataformClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
-
+  
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -257,75 +229,36 @@ export class DataformClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listRepositories: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'repositories'
-      ),
-      queryRepositoryDirectoryContents: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'directoryEntries'
-      ),
-      fetchRepositoryHistory: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'commits'
-      ),
-      listWorkspaces: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'workspaces'
-      ),
-      queryDirectoryContents: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'directoryEntries'
-      ),
-      searchFiles: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'searchResults'
-      ),
-      listReleaseConfigs: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'releaseConfigs'
-      ),
-      listCompilationResults: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'compilationResults'
-      ),
-      queryCompilationResultActions: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'compilationResultActions'
-      ),
-      listWorkflowConfigs: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'workflowConfigs'
-      ),
-      listWorkflowInvocations: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'workflowInvocations'
-      ),
-      queryWorkflowInvocationActions: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'workflowInvocationActions'
-      ),
+      listRepositories:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'repositories'),
+      queryRepositoryDirectoryContents:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'directoryEntries'),
+      fetchRepositoryHistory:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'commits'),
+      listWorkspaces:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'workspaces'),
+      queryDirectoryContents:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'directoryEntries'),
+      searchFiles:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'searchResults'),
+      listReleaseConfigs:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'releaseConfigs'),
+      listCompilationResults:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'compilationResults'),
+      queryCompilationResultActions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'compilationResultActions'),
+      listWorkflowConfigs:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'workflowConfigs'),
+      listWorkflowInvocations:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'workflowInvocations'),
+      queryWorkflowInvocationActions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'workflowInvocationActions')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.dataform.v1beta1.Dataform',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.dataform.v1beta1.Dataform', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -356,90 +289,32 @@ export class DataformClient {
     // Put together the "service stub" for
     // google.cloud.dataform.v1beta1.Dataform.
     this.dataformStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.dataform.v1beta1.Dataform'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.dataform.v1beta1.Dataform') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.dataform.v1beta1.Dataform,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const dataformStubMethods = [
-      'listRepositories',
-      'getRepository',
-      'createRepository',
-      'updateRepository',
-      'deleteRepository',
-      'commitRepositoryChanges',
-      'readRepositoryFile',
-      'queryRepositoryDirectoryContents',
-      'fetchRepositoryHistory',
-      'computeRepositoryAccessTokenStatus',
-      'fetchRemoteBranches',
-      'listWorkspaces',
-      'getWorkspace',
-      'createWorkspace',
-      'deleteWorkspace',
-      'installNpmPackages',
-      'pullGitCommits',
-      'pushGitCommits',
-      'fetchFileGitStatuses',
-      'fetchGitAheadBehind',
-      'commitWorkspaceChanges',
-      'resetWorkspaceChanges',
-      'fetchFileDiff',
-      'queryDirectoryContents',
-      'searchFiles',
-      'makeDirectory',
-      'removeDirectory',
-      'moveDirectory',
-      'readFile',
-      'removeFile',
-      'moveFile',
-      'writeFile',
-      'listReleaseConfigs',
-      'getReleaseConfig',
-      'createReleaseConfig',
-      'updateReleaseConfig',
-      'deleteReleaseConfig',
-      'listCompilationResults',
-      'getCompilationResult',
-      'createCompilationResult',
-      'queryCompilationResultActions',
-      'listWorkflowConfigs',
-      'getWorkflowConfig',
-      'createWorkflowConfig',
-      'updateWorkflowConfig',
-      'deleteWorkflowConfig',
-      'listWorkflowInvocations',
-      'getWorkflowInvocation',
-      'createWorkflowInvocation',
-      'deleteWorkflowInvocation',
-      'cancelWorkflowInvocation',
-      'queryWorkflowInvocationActions',
-      'getConfig',
-      'updateConfig',
-    ];
+    const dataformStubMethods =
+        ['listRepositories', 'getRepository', 'createRepository', 'updateRepository', 'deleteRepository', 'commitRepositoryChanges', 'readRepositoryFile', 'queryRepositoryDirectoryContents', 'fetchRepositoryHistory', 'computeRepositoryAccessTokenStatus', 'fetchRemoteBranches', 'listWorkspaces', 'getWorkspace', 'createWorkspace', 'deleteWorkspace', 'installNpmPackages', 'pullGitCommits', 'pushGitCommits', 'fetchFileGitStatuses', 'fetchGitAheadBehind', 'commitWorkspaceChanges', 'resetWorkspaceChanges', 'fetchFileDiff', 'queryDirectoryContents', 'searchFiles', 'makeDirectory', 'removeDirectory', 'moveDirectory', 'readFile', 'removeFile', 'moveFile', 'writeFile', 'listReleaseConfigs', 'getReleaseConfig', 'createReleaseConfig', 'updateReleaseConfig', 'deleteReleaseConfig', 'listCompilationResults', 'getCompilationResult', 'createCompilationResult', 'queryCompilationResultActions', 'listWorkflowConfigs', 'getWorkflowConfig', 'createWorkflowConfig', 'updateWorkflowConfig', 'deleteWorkflowConfig', 'listWorkflowInvocations', 'getWorkflowInvocation', 'createWorkflowInvocation', 'deleteWorkflowInvocation', 'cancelWorkflowInvocation', 'queryWorkflowInvocationActions', 'getConfig', 'updateConfig'];
     for (const methodName of dataformStubMethods) {
       const callPromise = this.dataformStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -459,14 +334,8 @@ export class DataformClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'dataform.googleapis.com';
   }
@@ -477,14 +346,8 @@ export class DataformClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'dataform.googleapis.com';
   }
@@ -517,7 +380,7 @@ export class DataformClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/bigquery',
-      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/cloud-platform'
     ];
   }
 
@@ -527,9 +390,8 @@ export class DataformClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -540,5447 +402,4195 @@ export class DataformClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Fetches a single Repository.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The repository's name.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.Repository|Repository}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.get_repository.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_GetRepository_async
-   */
+/**
+ * Fetches a single Repository.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The repository's name.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.Repository|Repository}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.get_repository.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_GetRepository_async
+ */
   getRepository(
-    request?: protos.google.cloud.dataform.v1beta1.IGetRepositoryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IRepository,
-      protos.google.cloud.dataform.v1beta1.IGetRepositoryRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IGetRepositoryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IRepository,
+        protos.google.cloud.dataform.v1beta1.IGetRepositoryRequest|undefined, {}|undefined
+      ]>;
   getRepository(
-    request: protos.google.cloud.dataform.v1beta1.IGetRepositoryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IRepository,
-      | protos.google.cloud.dataform.v1beta1.IGetRepositoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRepository(
-    request: protos.google.cloud.dataform.v1beta1.IGetRepositoryRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IRepository,
-      | protos.google.cloud.dataform.v1beta1.IGetRepositoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRepository(
-    request?: protos.google.cloud.dataform.v1beta1.IGetRepositoryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IGetRepositoryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IRepository,
-          | protos.google.cloud.dataform.v1beta1.IGetRepositoryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IRepository,
-      | protos.google.cloud.dataform.v1beta1.IGetRepositoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IRepository,
-      protos.google.cloud.dataform.v1beta1.IGetRepositoryRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IGetRepositoryRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRepository(
+      request: protos.google.cloud.dataform.v1beta1.IGetRepositoryRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IRepository,
+          protos.google.cloud.dataform.v1beta1.IGetRepositoryRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRepository(
+      request?: protos.google.cloud.dataform.v1beta1.IGetRepositoryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IRepository,
+          protos.google.cloud.dataform.v1beta1.IGetRepositoryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IRepository,
+          protos.google.cloud.dataform.v1beta1.IGetRepositoryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IRepository,
+        protos.google.cloud.dataform.v1beta1.IGetRepositoryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getRepository request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IRepository,
-          | protos.google.cloud.dataform.v1beta1.IGetRepositoryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IRepository,
+        protos.google.cloud.dataform.v1beta1.IGetRepositoryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getRepository response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getRepository(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IRepository,
-          (
-            | protos.google.cloud.dataform.v1beta1.IGetRepositoryRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getRepository response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getRepository(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IRepository,
+        protos.google.cloud.dataform.v1beta1.IGetRepositoryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getRepository response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a new Repository in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The location in which to create the repository. Must be in the
-   *   format `projects/* /locations/*`.
-   * @param {google.cloud.dataform.v1beta1.Repository} request.repository
-   *   Required. The repository to create.
-   * @param {string} request.repositoryId
-   *   Required. The ID to use for the repository, which will become the final
-   *   component of the repository's resource name.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.Repository|Repository}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.create_repository.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_CreateRepository_async
-   */
+/**
+ * Creates a new Repository in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The location in which to create the repository. Must be in the
+ *   format `projects/* /locations/*`.
+ * @param {google.cloud.dataform.v1beta1.Repository} request.repository
+ *   Required. The repository to create.
+ * @param {string} request.repositoryId
+ *   Required. The ID to use for the repository, which will become the final
+ *   component of the repository's resource name.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.Repository|Repository}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.create_repository.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_CreateRepository_async
+ */
   createRepository(
-    request?: protos.google.cloud.dataform.v1beta1.ICreateRepositoryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IRepository,
-      protos.google.cloud.dataform.v1beta1.ICreateRepositoryRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.ICreateRepositoryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IRepository,
+        protos.google.cloud.dataform.v1beta1.ICreateRepositoryRequest|undefined, {}|undefined
+      ]>;
   createRepository(
-    request: protos.google.cloud.dataform.v1beta1.ICreateRepositoryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IRepository,
-      | protos.google.cloud.dataform.v1beta1.ICreateRepositoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createRepository(
-    request: protos.google.cloud.dataform.v1beta1.ICreateRepositoryRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IRepository,
-      | protos.google.cloud.dataform.v1beta1.ICreateRepositoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createRepository(
-    request?: protos.google.cloud.dataform.v1beta1.ICreateRepositoryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.ICreateRepositoryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IRepository,
-          | protos.google.cloud.dataform.v1beta1.ICreateRepositoryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IRepository,
-      | protos.google.cloud.dataform.v1beta1.ICreateRepositoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IRepository,
-      protos.google.cloud.dataform.v1beta1.ICreateRepositoryRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.ICreateRepositoryRequest|null|undefined,
+          {}|null|undefined>): void;
+  createRepository(
+      request: protos.google.cloud.dataform.v1beta1.ICreateRepositoryRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IRepository,
+          protos.google.cloud.dataform.v1beta1.ICreateRepositoryRequest|null|undefined,
+          {}|null|undefined>): void;
+  createRepository(
+      request?: protos.google.cloud.dataform.v1beta1.ICreateRepositoryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IRepository,
+          protos.google.cloud.dataform.v1beta1.ICreateRepositoryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IRepository,
+          protos.google.cloud.dataform.v1beta1.ICreateRepositoryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IRepository,
+        protos.google.cloud.dataform.v1beta1.ICreateRepositoryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createRepository request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IRepository,
-          | protos.google.cloud.dataform.v1beta1.ICreateRepositoryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IRepository,
+        protos.google.cloud.dataform.v1beta1.ICreateRepositoryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createRepository response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createRepository(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IRepository,
-          (
-            | protos.google.cloud.dataform.v1beta1.ICreateRepositoryRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createRepository response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createRepository(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IRepository,
+        protos.google.cloud.dataform.v1beta1.ICreateRepositoryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createRepository response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a single Repository.
-   *
-   * **Note:** *This method does not fully implement
-   * [AIP/134](https://google.aip.dev/134). The wildcard entry (\*) is treated
-   * as a bad request, and when the `field_mask` is omitted, the request is
-   * treated as a full update on all modifiable fields.*
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Specifies the fields to be updated in the repository. If left
-   *   unset, all fields will be updated.
-   * @param {google.cloud.dataform.v1beta1.Repository} request.repository
-   *   Required. The repository to update.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.Repository|Repository}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.update_repository.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_UpdateRepository_async
-   */
+/**
+ * Updates a single Repository.
+ *
+ * **Note:** *This method does not fully implement
+ * [AIP/134](https://google.aip.dev/134). The wildcard entry (\*) is treated
+ * as a bad request, and when the `field_mask` is omitted, the request is
+ * treated as a full update on all modifiable fields.*
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Specifies the fields to be updated in the repository. If left
+ *   unset, all fields will be updated.
+ * @param {google.cloud.dataform.v1beta1.Repository} request.repository
+ *   Required. The repository to update.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.Repository|Repository}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.update_repository.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_UpdateRepository_async
+ */
   updateRepository(
-    request?: protos.google.cloud.dataform.v1beta1.IUpdateRepositoryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IRepository,
-      protos.google.cloud.dataform.v1beta1.IUpdateRepositoryRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IUpdateRepositoryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IRepository,
+        protos.google.cloud.dataform.v1beta1.IUpdateRepositoryRequest|undefined, {}|undefined
+      ]>;
   updateRepository(
-    request: protos.google.cloud.dataform.v1beta1.IUpdateRepositoryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IRepository,
-      | protos.google.cloud.dataform.v1beta1.IUpdateRepositoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateRepository(
-    request: protos.google.cloud.dataform.v1beta1.IUpdateRepositoryRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IRepository,
-      | protos.google.cloud.dataform.v1beta1.IUpdateRepositoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateRepository(
-    request?: protos.google.cloud.dataform.v1beta1.IUpdateRepositoryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IUpdateRepositoryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IRepository,
-          | protos.google.cloud.dataform.v1beta1.IUpdateRepositoryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IRepository,
-      | protos.google.cloud.dataform.v1beta1.IUpdateRepositoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IRepository,
-      protos.google.cloud.dataform.v1beta1.IUpdateRepositoryRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IUpdateRepositoryRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateRepository(
+      request: protos.google.cloud.dataform.v1beta1.IUpdateRepositoryRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IRepository,
+          protos.google.cloud.dataform.v1beta1.IUpdateRepositoryRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateRepository(
+      request?: protos.google.cloud.dataform.v1beta1.IUpdateRepositoryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IRepository,
+          protos.google.cloud.dataform.v1beta1.IUpdateRepositoryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IRepository,
+          protos.google.cloud.dataform.v1beta1.IUpdateRepositoryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IRepository,
+        protos.google.cloud.dataform.v1beta1.IUpdateRepositoryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'repository.name': request.repository!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'repository.name': request.repository!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateRepository request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IRepository,
-          | protos.google.cloud.dataform.v1beta1.IUpdateRepositoryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IRepository,
+        protos.google.cloud.dataform.v1beta1.IUpdateRepositoryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateRepository response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateRepository(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IRepository,
-          (
-            | protos.google.cloud.dataform.v1beta1.IUpdateRepositoryRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateRepository response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateRepository(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IRepository,
+        protos.google.cloud.dataform.v1beta1.IUpdateRepositoryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateRepository response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a single Repository.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The repository's name.
-   * @param {boolean} [request.force]
-   *   Optional. If set to true, any child resources of this repository will also
-   *   be deleted. (Otherwise, the request will only succeed if the repository has
-   *   no child resources.)
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.delete_repository.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_DeleteRepository_async
-   */
+/**
+ * Deletes a single Repository.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The repository's name.
+ * @param {boolean} [request.force]
+ *   Optional. If set to true, any child resources of this repository will also
+ *   be deleted. (Otherwise, the request will only succeed if the repository has
+ *   no child resources.)
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.delete_repository.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_DeleteRepository_async
+ */
   deleteRepository(
-    request?: protos.google.cloud.dataform.v1beta1.IDeleteRepositoryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataform.v1beta1.IDeleteRepositoryRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IDeleteRepositoryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteRepositoryRequest|undefined, {}|undefined
+      ]>;
   deleteRepository(
-    request: protos.google.cloud.dataform.v1beta1.IDeleteRepositoryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dataform.v1beta1.IDeleteRepositoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteRepository(
-    request: protos.google.cloud.dataform.v1beta1.IDeleteRepositoryRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dataform.v1beta1.IDeleteRepositoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteRepository(
-    request?: protos.google.cloud.dataform.v1beta1.IDeleteRepositoryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IDeleteRepositoryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.dataform.v1beta1.IDeleteRepositoryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dataform.v1beta1.IDeleteRepositoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataform.v1beta1.IDeleteRepositoryRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IDeleteRepositoryRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteRepository(
+      request: protos.google.cloud.dataform.v1beta1.IDeleteRepositoryRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataform.v1beta1.IDeleteRepositoryRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteRepository(
+      request?: protos.google.cloud.dataform.v1beta1.IDeleteRepositoryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataform.v1beta1.IDeleteRepositoryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataform.v1beta1.IDeleteRepositoryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteRepositoryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteRepository request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.dataform.v1beta1.IDeleteRepositoryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteRepositoryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteRepository response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteRepository(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.dataform.v1beta1.IDeleteRepositoryRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteRepository response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteRepository(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteRepositoryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteRepository response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Applies a Git commit to a Repository. The Repository must not have a value
-   * for `git_remote_settings.url`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The repository's name.
-   * @param {google.cloud.dataform.v1beta1.CommitMetadata} request.commitMetadata
-   *   Required. The changes to commit to the repository.
-   * @param {string} [request.requiredHeadCommitSha]
-   *   Optional. The commit SHA which must be the repository's current HEAD before
-   *   applying this commit; otherwise this request will fail. If unset, no
-   *   validation on the current HEAD commit SHA is performed.
-   * @param {number[]} [request.fileOperations]
-   *   Optional. A map to the path of the file to the operation. The path is the
-   *   full file path including filename, from repository root.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.CommitRepositoryChangesResponse|CommitRepositoryChangesResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.commit_repository_changes.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_CommitRepositoryChanges_async
-   */
+/**
+ * Applies a Git commit to a Repository. The Repository must not have a value
+ * for `git_remote_settings.url`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The repository's name.
+ * @param {google.cloud.dataform.v1beta1.CommitMetadata} request.commitMetadata
+ *   Required. The changes to commit to the repository.
+ * @param {string} [request.requiredHeadCommitSha]
+ *   Optional. The commit SHA which must be the repository's current HEAD before
+ *   applying this commit; otherwise this request will fail. If unset, no
+ *   validation on the current HEAD commit SHA is performed.
+ * @param {number[]} [request.fileOperations]
+ *   Optional. A map to the path of the file to the operation. The path is the
+ *   full file path including filename, from repository root.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.CommitRepositoryChangesResponse|CommitRepositoryChangesResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.commit_repository_changes.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_CommitRepositoryChanges_async
+ */
   commitRepositoryChanges(
-    request?: protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesResponse,
-      (
-        | protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesResponse,
+        protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest|undefined, {}|undefined
+      ]>;
   commitRepositoryChanges(
-    request: protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesResponse,
-      | protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  commitRepositoryChanges(
-    request: protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesResponse,
-      | protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  commitRepositoryChanges(
-    request?: protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesResponse,
-          | protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesResponse,
-      | protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesResponse,
-      (
-        | protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest|null|undefined,
+          {}|null|undefined>): void;
+  commitRepositoryChanges(
+      request: protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesResponse,
+          protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest|null|undefined,
+          {}|null|undefined>): void;
+  commitRepositoryChanges(
+      request?: protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesResponse,
+          protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesResponse,
+          protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesResponse,
+        protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('commitRepositoryChanges request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesResponse,
-          | protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesResponse,
+        protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('commitRepositoryChanges response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .commitRepositoryChanges(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesResponse,
-          (
-            | protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('commitRepositoryChanges response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.commitRepositoryChanges(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesResponse,
+        protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('commitRepositoryChanges response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns the contents of a file (inside a Repository). The Repository
-   * must not have a value for `git_remote_settings.url`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The repository's name.
-   * @param {string} [request.commitSha]
-   *   Optional. The commit SHA for the commit to read from. If unset, the file
-   *   will be read from HEAD.
-   * @param {string} request.path
-   *   Required. Full file path to read including filename, from repository root.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.ReadRepositoryFileResponse|ReadRepositoryFileResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.read_repository_file.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_ReadRepositoryFile_async
-   */
+/**
+ * Returns the contents of a file (inside a Repository). The Repository
+ * must not have a value for `git_remote_settings.url`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The repository's name.
+ * @param {string} [request.commitSha]
+ *   Optional. The commit SHA for the commit to read from. If unset, the file
+ *   will be read from HEAD.
+ * @param {string} request.path
+ *   Required. Full file path to read including filename, from repository root.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.ReadRepositoryFileResponse|ReadRepositoryFileResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.read_repository_file.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_ReadRepositoryFile_async
+ */
   readRepositoryFile(
-    request?: protos.google.cloud.dataform.v1beta1.IReadRepositoryFileRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IReadRepositoryFileResponse,
-      (
-        | protos.google.cloud.dataform.v1beta1.IReadRepositoryFileRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IReadRepositoryFileRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IReadRepositoryFileResponse,
+        protos.google.cloud.dataform.v1beta1.IReadRepositoryFileRequest|undefined, {}|undefined
+      ]>;
   readRepositoryFile(
-    request: protos.google.cloud.dataform.v1beta1.IReadRepositoryFileRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IReadRepositoryFileResponse,
-      | protos.google.cloud.dataform.v1beta1.IReadRepositoryFileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  readRepositoryFile(
-    request: protos.google.cloud.dataform.v1beta1.IReadRepositoryFileRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IReadRepositoryFileResponse,
-      | protos.google.cloud.dataform.v1beta1.IReadRepositoryFileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  readRepositoryFile(
-    request?: protos.google.cloud.dataform.v1beta1.IReadRepositoryFileRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IReadRepositoryFileRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IReadRepositoryFileResponse,
-          | protos.google.cloud.dataform.v1beta1.IReadRepositoryFileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IReadRepositoryFileResponse,
-      | protos.google.cloud.dataform.v1beta1.IReadRepositoryFileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IReadRepositoryFileResponse,
-      (
-        | protos.google.cloud.dataform.v1beta1.IReadRepositoryFileRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IReadRepositoryFileRequest|null|undefined,
+          {}|null|undefined>): void;
+  readRepositoryFile(
+      request: protos.google.cloud.dataform.v1beta1.IReadRepositoryFileRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IReadRepositoryFileResponse,
+          protos.google.cloud.dataform.v1beta1.IReadRepositoryFileRequest|null|undefined,
+          {}|null|undefined>): void;
+  readRepositoryFile(
+      request?: protos.google.cloud.dataform.v1beta1.IReadRepositoryFileRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IReadRepositoryFileResponse,
+          protos.google.cloud.dataform.v1beta1.IReadRepositoryFileRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IReadRepositoryFileResponse,
+          protos.google.cloud.dataform.v1beta1.IReadRepositoryFileRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IReadRepositoryFileResponse,
+        protos.google.cloud.dataform.v1beta1.IReadRepositoryFileRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('readRepositoryFile request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IReadRepositoryFileResponse,
-          | protos.google.cloud.dataform.v1beta1.IReadRepositoryFileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IReadRepositoryFileResponse,
+        protos.google.cloud.dataform.v1beta1.IReadRepositoryFileRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('readRepositoryFile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .readRepositoryFile(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IReadRepositoryFileResponse,
-          (
-            | protos.google.cloud.dataform.v1beta1.IReadRepositoryFileRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('readRepositoryFile response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.readRepositoryFile(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IReadRepositoryFileResponse,
+        protos.google.cloud.dataform.v1beta1.IReadRepositoryFileRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('readRepositoryFile response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Computes a Repository's Git access token status.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The repository's name.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse|ComputeRepositoryAccessTokenStatusResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.compute_repository_access_token_status.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_ComputeRepositoryAccessTokenStatus_async
-   */
+/**
+ * Computes a Repository's Git access token status.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The repository's name.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse|ComputeRepositoryAccessTokenStatusResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.compute_repository_access_token_status.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_ComputeRepositoryAccessTokenStatus_async
+ */
   computeRepositoryAccessTokenStatus(
-    request?: protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusResponse,
-      (
-        | protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusResponse,
+        protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest|undefined, {}|undefined
+      ]>;
   computeRepositoryAccessTokenStatus(
-    request: protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusResponse,
-      | protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  computeRepositoryAccessTokenStatus(
-    request: protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusResponse,
-      | protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  computeRepositoryAccessTokenStatus(
-    request?: protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusResponse,
-          | protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusResponse,
-      | protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusResponse,
-      (
-        | protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest|null|undefined,
+          {}|null|undefined>): void;
+  computeRepositoryAccessTokenStatus(
+      request: protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusResponse,
+          protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest|null|undefined,
+          {}|null|undefined>): void;
+  computeRepositoryAccessTokenStatus(
+      request?: protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusResponse,
+          protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusResponse,
+          protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusResponse,
+        protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('computeRepositoryAccessTokenStatus request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusResponse,
-          | protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusResponse,
+        protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
-            'computeRepositoryAccessTokenStatus response %j',
-            response
-          );
+          this._log.info('computeRepositoryAccessTokenStatus response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .computeRepositoryAccessTokenStatus(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusResponse,
-          (
-            | protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'computeRepositoryAccessTokenStatus response %j',
-            response
-          );
-          return [response, options, rawResponse];
+    return this.innerApiCalls.computeRepositoryAccessTokenStatus(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusResponse,
+        protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('computeRepositoryAccessTokenStatus response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Fetches a Repository's remote branches.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The repository's name.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.FetchRemoteBranchesResponse|FetchRemoteBranchesResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.fetch_remote_branches.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_FetchRemoteBranches_async
-   */
+/**
+ * Fetches a Repository's remote branches.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The repository's name.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.FetchRemoteBranchesResponse|FetchRemoteBranchesResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.fetch_remote_branches.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_FetchRemoteBranches_async
+ */
   fetchRemoteBranches(
-    request?: protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesResponse,
-      (
-        | protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesResponse,
+        protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesRequest|undefined, {}|undefined
+      ]>;
   fetchRemoteBranches(
-    request: protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesResponse,
-      | protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  fetchRemoteBranches(
-    request: protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesResponse,
-      | protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  fetchRemoteBranches(
-    request?: protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesResponse,
-          | protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesResponse,
-      | protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesResponse,
-      (
-        | protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchRemoteBranches(
+      request: protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesResponse,
+          protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchRemoteBranches(
+      request?: protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesResponse,
+          protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesResponse,
+          protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesResponse,
+        protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('fetchRemoteBranches request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesResponse,
-          | protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesResponse,
+        protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('fetchRemoteBranches response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .fetchRemoteBranches(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesResponse,
-          (
-            | protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('fetchRemoteBranches response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.fetchRemoteBranches(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesResponse,
+        protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('fetchRemoteBranches response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Fetches a single Workspace.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The workspace's name.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.Workspace|Workspace}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.get_workspace.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_GetWorkspace_async
-   */
+/**
+ * Fetches a single Workspace.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The workspace's name.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.Workspace|Workspace}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.get_workspace.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_GetWorkspace_async
+ */
   getWorkspace(
-    request?: protos.google.cloud.dataform.v1beta1.IGetWorkspaceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IWorkspace,
-      protos.google.cloud.dataform.v1beta1.IGetWorkspaceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IGetWorkspaceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IWorkspace,
+        protos.google.cloud.dataform.v1beta1.IGetWorkspaceRequest|undefined, {}|undefined
+      ]>;
   getWorkspace(
-    request: protos.google.cloud.dataform.v1beta1.IGetWorkspaceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IWorkspace,
-      | protos.google.cloud.dataform.v1beta1.IGetWorkspaceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getWorkspace(
-    request: protos.google.cloud.dataform.v1beta1.IGetWorkspaceRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IWorkspace,
-      | protos.google.cloud.dataform.v1beta1.IGetWorkspaceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getWorkspace(
-    request?: protos.google.cloud.dataform.v1beta1.IGetWorkspaceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IGetWorkspaceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IWorkspace,
-          | protos.google.cloud.dataform.v1beta1.IGetWorkspaceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IWorkspace,
-      | protos.google.cloud.dataform.v1beta1.IGetWorkspaceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IWorkspace,
-      protos.google.cloud.dataform.v1beta1.IGetWorkspaceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IGetWorkspaceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getWorkspace(
+      request: protos.google.cloud.dataform.v1beta1.IGetWorkspaceRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IWorkspace,
+          protos.google.cloud.dataform.v1beta1.IGetWorkspaceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getWorkspace(
+      request?: protos.google.cloud.dataform.v1beta1.IGetWorkspaceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IWorkspace,
+          protos.google.cloud.dataform.v1beta1.IGetWorkspaceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IWorkspace,
+          protos.google.cloud.dataform.v1beta1.IGetWorkspaceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IWorkspace,
+        protos.google.cloud.dataform.v1beta1.IGetWorkspaceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getWorkspace request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IWorkspace,
-          | protos.google.cloud.dataform.v1beta1.IGetWorkspaceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IWorkspace,
+        protos.google.cloud.dataform.v1beta1.IGetWorkspaceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getWorkspace response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getWorkspace(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IWorkspace,
-          protos.google.cloud.dataform.v1beta1.IGetWorkspaceRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getWorkspace response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getWorkspace(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IWorkspace,
+        protos.google.cloud.dataform.v1beta1.IGetWorkspaceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getWorkspace response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a new Workspace in a given Repository.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The repository in which to create the workspace. Must be in the
-   *   format `projects/* /locations/* /repositories/*`.
-   * @param {google.cloud.dataform.v1beta1.Workspace} request.workspace
-   *   Required. The workspace to create.
-   * @param {string} request.workspaceId
-   *   Required. The ID to use for the workspace, which will become the final
-   *   component of the workspace's resource name.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.Workspace|Workspace}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.create_workspace.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_CreateWorkspace_async
-   */
+/**
+ * Creates a new Workspace in a given Repository.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The repository in which to create the workspace. Must be in the
+ *   format `projects/* /locations/* /repositories/*`.
+ * @param {google.cloud.dataform.v1beta1.Workspace} request.workspace
+ *   Required. The workspace to create.
+ * @param {string} request.workspaceId
+ *   Required. The ID to use for the workspace, which will become the final
+ *   component of the workspace's resource name.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.Workspace|Workspace}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.create_workspace.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_CreateWorkspace_async
+ */
   createWorkspace(
-    request?: protos.google.cloud.dataform.v1beta1.ICreateWorkspaceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IWorkspace,
-      protos.google.cloud.dataform.v1beta1.ICreateWorkspaceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.ICreateWorkspaceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IWorkspace,
+        protos.google.cloud.dataform.v1beta1.ICreateWorkspaceRequest|undefined, {}|undefined
+      ]>;
   createWorkspace(
-    request: protos.google.cloud.dataform.v1beta1.ICreateWorkspaceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IWorkspace,
-      | protos.google.cloud.dataform.v1beta1.ICreateWorkspaceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createWorkspace(
-    request: protos.google.cloud.dataform.v1beta1.ICreateWorkspaceRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IWorkspace,
-      | protos.google.cloud.dataform.v1beta1.ICreateWorkspaceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createWorkspace(
-    request?: protos.google.cloud.dataform.v1beta1.ICreateWorkspaceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.ICreateWorkspaceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IWorkspace,
-          | protos.google.cloud.dataform.v1beta1.ICreateWorkspaceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IWorkspace,
-      | protos.google.cloud.dataform.v1beta1.ICreateWorkspaceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IWorkspace,
-      protos.google.cloud.dataform.v1beta1.ICreateWorkspaceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.ICreateWorkspaceRequest|null|undefined,
+          {}|null|undefined>): void;
+  createWorkspace(
+      request: protos.google.cloud.dataform.v1beta1.ICreateWorkspaceRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IWorkspace,
+          protos.google.cloud.dataform.v1beta1.ICreateWorkspaceRequest|null|undefined,
+          {}|null|undefined>): void;
+  createWorkspace(
+      request?: protos.google.cloud.dataform.v1beta1.ICreateWorkspaceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IWorkspace,
+          protos.google.cloud.dataform.v1beta1.ICreateWorkspaceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IWorkspace,
+          protos.google.cloud.dataform.v1beta1.ICreateWorkspaceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IWorkspace,
+        protos.google.cloud.dataform.v1beta1.ICreateWorkspaceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createWorkspace request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IWorkspace,
-          | protos.google.cloud.dataform.v1beta1.ICreateWorkspaceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IWorkspace,
+        protos.google.cloud.dataform.v1beta1.ICreateWorkspaceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createWorkspace response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createWorkspace(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IWorkspace,
-          (
-            | protos.google.cloud.dataform.v1beta1.ICreateWorkspaceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createWorkspace response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createWorkspace(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IWorkspace,
+        protos.google.cloud.dataform.v1beta1.ICreateWorkspaceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createWorkspace response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a single Workspace.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The workspace resource's name.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.delete_workspace.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_DeleteWorkspace_async
-   */
+/**
+ * Deletes a single Workspace.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The workspace resource's name.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.delete_workspace.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_DeleteWorkspace_async
+ */
   deleteWorkspace(
-    request?: protos.google.cloud.dataform.v1beta1.IDeleteWorkspaceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataform.v1beta1.IDeleteWorkspaceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IDeleteWorkspaceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteWorkspaceRequest|undefined, {}|undefined
+      ]>;
   deleteWorkspace(
-    request: protos.google.cloud.dataform.v1beta1.IDeleteWorkspaceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dataform.v1beta1.IDeleteWorkspaceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteWorkspace(
-    request: protos.google.cloud.dataform.v1beta1.IDeleteWorkspaceRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dataform.v1beta1.IDeleteWorkspaceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteWorkspace(
-    request?: protos.google.cloud.dataform.v1beta1.IDeleteWorkspaceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IDeleteWorkspaceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.dataform.v1beta1.IDeleteWorkspaceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dataform.v1beta1.IDeleteWorkspaceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataform.v1beta1.IDeleteWorkspaceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IDeleteWorkspaceRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteWorkspace(
+      request: protos.google.cloud.dataform.v1beta1.IDeleteWorkspaceRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataform.v1beta1.IDeleteWorkspaceRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteWorkspace(
+      request?: protos.google.cloud.dataform.v1beta1.IDeleteWorkspaceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataform.v1beta1.IDeleteWorkspaceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataform.v1beta1.IDeleteWorkspaceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteWorkspaceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteWorkspace request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.dataform.v1beta1.IDeleteWorkspaceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteWorkspaceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteWorkspace response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteWorkspace(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.dataform.v1beta1.IDeleteWorkspaceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteWorkspace response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteWorkspace(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteWorkspaceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteWorkspace response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Installs dependency NPM packages (inside a Workspace).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.workspace
-   *   Required. The workspace's name.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.InstallNpmPackagesResponse|InstallNpmPackagesResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.install_npm_packages.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_InstallNpmPackages_async
-   */
+/**
+ * Installs dependency NPM packages (inside a Workspace).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.workspace
+ *   Required. The workspace's name.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.InstallNpmPackagesResponse|InstallNpmPackagesResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.install_npm_packages.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_InstallNpmPackages_async
+ */
   installNpmPackages(
-    request?: protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesResponse,
-      (
-        | protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesResponse,
+        protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesRequest|undefined, {}|undefined
+      ]>;
   installNpmPackages(
-    request: protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesResponse,
-      | protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  installNpmPackages(
-    request: protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesResponse,
-      | protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  installNpmPackages(
-    request?: protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesResponse,
-          | protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesResponse,
-      | protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesResponse,
-      (
-        | protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesRequest|null|undefined,
+          {}|null|undefined>): void;
+  installNpmPackages(
+      request: protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesResponse,
+          protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesRequest|null|undefined,
+          {}|null|undefined>): void;
+  installNpmPackages(
+      request?: protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesResponse,
+          protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesResponse,
+          protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesResponse,
+        protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        workspace: request.workspace ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'workspace': request.workspace ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('installNpmPackages request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesResponse,
-          | protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesResponse,
+        protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('installNpmPackages response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .installNpmPackages(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesResponse,
-          (
-            | protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('installNpmPackages response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.installNpmPackages(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesResponse,
+        protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('installNpmPackages response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Pulls Git commits from the Repository's remote into a Workspace.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The workspace's name.
-   * @param {string} [request.remoteBranch]
-   *   Optional. The name of the branch in the Git remote from which to pull
-   *   commits. If left unset, the repository's default branch name will be used.
-   * @param {google.cloud.dataform.v1beta1.CommitAuthor} request.author
-   *   Required. The author of any merge commit which may be created as a result
-   *   of merging fetched Git commits into this workspace.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.PullGitCommitsResponse|PullGitCommitsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.pull_git_commits.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_PullGitCommits_async
-   */
+/**
+ * Pulls Git commits from the Repository's remote into a Workspace.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The workspace's name.
+ * @param {string} [request.remoteBranch]
+ *   Optional. The name of the branch in the Git remote from which to pull
+ *   commits. If left unset, the repository's default branch name will be used.
+ * @param {google.cloud.dataform.v1beta1.CommitAuthor} request.author
+ *   Required. The author of any merge commit which may be created as a result
+ *   of merging fetched Git commits into this workspace.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.PullGitCommitsResponse|PullGitCommitsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.pull_git_commits.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_PullGitCommits_async
+ */
   pullGitCommits(
-    request?: protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IPullGitCommitsResponse,
-      protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IPullGitCommitsResponse,
+        protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest|undefined, {}|undefined
+      ]>;
   pullGitCommits(
-    request: protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IPullGitCommitsResponse,
-      | protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  pullGitCommits(
-    request: protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IPullGitCommitsResponse,
-      | protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  pullGitCommits(
-    request?: protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IPullGitCommitsResponse,
-          | protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IPullGitCommitsResponse,
-      | protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IPullGitCommitsResponse,
-      protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest|null|undefined,
+          {}|null|undefined>): void;
+  pullGitCommits(
+      request: protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IPullGitCommitsResponse,
+          protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest|null|undefined,
+          {}|null|undefined>): void;
+  pullGitCommits(
+      request?: protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IPullGitCommitsResponse,
+          protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IPullGitCommitsResponse,
+          protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IPullGitCommitsResponse,
+        protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('pullGitCommits request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IPullGitCommitsResponse,
-          | protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IPullGitCommitsResponse,
+        protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('pullGitCommits response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .pullGitCommits(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IPullGitCommitsResponse,
-          (
-            | protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('pullGitCommits response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.pullGitCommits(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IPullGitCommitsResponse,
+        protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('pullGitCommits response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Pushes Git commits from a Workspace to the Repository's remote.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The workspace's name.
-   * @param {string} [request.remoteBranch]
-   *   Optional. The name of the branch in the Git remote to which commits should
-   *   be pushed. If left unset, the repository's default branch name will be
-   *   used.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.PushGitCommitsResponse|PushGitCommitsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.push_git_commits.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_PushGitCommits_async
-   */
+/**
+ * Pushes Git commits from a Workspace to the Repository's remote.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The workspace's name.
+ * @param {string} [request.remoteBranch]
+ *   Optional. The name of the branch in the Git remote to which commits should
+ *   be pushed. If left unset, the repository's default branch name will be
+ *   used.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.PushGitCommitsResponse|PushGitCommitsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.push_git_commits.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_PushGitCommits_async
+ */
   pushGitCommits(
-    request?: protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IPushGitCommitsResponse,
-      protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IPushGitCommitsResponse,
+        protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest|undefined, {}|undefined
+      ]>;
   pushGitCommits(
-    request: protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IPushGitCommitsResponse,
-      | protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  pushGitCommits(
-    request: protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IPushGitCommitsResponse,
-      | protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  pushGitCommits(
-    request?: protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IPushGitCommitsResponse,
-          | protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IPushGitCommitsResponse,
-      | protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IPushGitCommitsResponse,
-      protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest|null|undefined,
+          {}|null|undefined>): void;
+  pushGitCommits(
+      request: protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IPushGitCommitsResponse,
+          protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest|null|undefined,
+          {}|null|undefined>): void;
+  pushGitCommits(
+      request?: protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IPushGitCommitsResponse,
+          protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IPushGitCommitsResponse,
+          protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IPushGitCommitsResponse,
+        protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('pushGitCommits request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IPushGitCommitsResponse,
-          | protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IPushGitCommitsResponse,
+        protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('pushGitCommits response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .pushGitCommits(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IPushGitCommitsResponse,
-          (
-            | protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('pushGitCommits response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.pushGitCommits(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IPushGitCommitsResponse,
+        protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('pushGitCommits response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Fetches Git statuses for the files in a Workspace.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The workspace's name.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.FetchFileGitStatusesResponse|FetchFileGitStatusesResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.fetch_file_git_statuses.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_FetchFileGitStatuses_async
-   */
+/**
+ * Fetches Git statuses for the files in a Workspace.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The workspace's name.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.FetchFileGitStatusesResponse|FetchFileGitStatusesResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.fetch_file_git_statuses.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_FetchFileGitStatuses_async
+ */
   fetchFileGitStatuses(
-    request?: protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesResponse,
-      (
-        | protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesResponse,
+        protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesRequest|undefined, {}|undefined
+      ]>;
   fetchFileGitStatuses(
-    request: protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesResponse,
-      | protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  fetchFileGitStatuses(
-    request: protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesResponse,
-      | protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  fetchFileGitStatuses(
-    request?: protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesResponse,
-          | protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesResponse,
-      | protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesResponse,
-      (
-        | protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchFileGitStatuses(
+      request: protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesResponse,
+          protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchFileGitStatuses(
+      request?: protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesResponse,
+          protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesResponse,
+          protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesResponse,
+        protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('fetchFileGitStatuses request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesResponse,
-          | protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesResponse,
+        protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('fetchFileGitStatuses response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .fetchFileGitStatuses(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesResponse,
-          (
-            | protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('fetchFileGitStatuses response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.fetchFileGitStatuses(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesResponse,
+        protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('fetchFileGitStatuses response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Fetches Git ahead/behind against a remote branch.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The workspace's name.
-   * @param {string} [request.remoteBranch]
-   *   Optional. The name of the branch in the Git remote against which this
-   *   workspace should be compared. If left unset, the repository's default
-   *   branch name will be used.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.FetchGitAheadBehindResponse|FetchGitAheadBehindResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.fetch_git_ahead_behind.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_FetchGitAheadBehind_async
-   */
+/**
+ * Fetches Git ahead/behind against a remote branch.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The workspace's name.
+ * @param {string} [request.remoteBranch]
+ *   Optional. The name of the branch in the Git remote against which this
+ *   workspace should be compared. If left unset, the repository's default
+ *   branch name will be used.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.FetchGitAheadBehindResponse|FetchGitAheadBehindResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.fetch_git_ahead_behind.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_FetchGitAheadBehind_async
+ */
   fetchGitAheadBehind(
-    request?: protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindResponse,
-      (
-        | protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindResponse,
+        protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindRequest|undefined, {}|undefined
+      ]>;
   fetchGitAheadBehind(
-    request: protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindResponse,
-      | protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  fetchGitAheadBehind(
-    request: protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindResponse,
-      | protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  fetchGitAheadBehind(
-    request?: protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindResponse,
-          | protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindResponse,
-      | protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindResponse,
-      (
-        | protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchGitAheadBehind(
+      request: protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindResponse,
+          protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchGitAheadBehind(
+      request?: protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindResponse,
+          protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindResponse,
+          protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindResponse,
+        protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('fetchGitAheadBehind request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindResponse,
-          | protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindResponse,
+        protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('fetchGitAheadBehind response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .fetchGitAheadBehind(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindResponse,
-          (
-            | protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('fetchGitAheadBehind response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.fetchGitAheadBehind(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindResponse,
+        protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('fetchGitAheadBehind response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Applies a Git commit for uncommitted files in a Workspace.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The workspace's name.
-   * @param {google.cloud.dataform.v1beta1.CommitAuthor} request.author
-   *   Required. The commit's author.
-   * @param {string} [request.commitMessage]
-   *   Optional. The commit's message.
-   * @param {string[]} [request.paths]
-   *   Optional. Full file paths to commit including filename, rooted at workspace
-   *   root. If left empty, all files will be committed.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.CommitWorkspaceChangesResponse|CommitWorkspaceChangesResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.commit_workspace_changes.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_CommitWorkspaceChanges_async
-   */
+/**
+ * Applies a Git commit for uncommitted files in a Workspace.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The workspace's name.
+ * @param {google.cloud.dataform.v1beta1.CommitAuthor} request.author
+ *   Required. The commit's author.
+ * @param {string} [request.commitMessage]
+ *   Optional. The commit's message.
+ * @param {string[]} [request.paths]
+ *   Optional. Full file paths to commit including filename, rooted at workspace
+ *   root. If left empty, all files will be committed.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.CommitWorkspaceChangesResponse|CommitWorkspaceChangesResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.commit_workspace_changes.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_CommitWorkspaceChanges_async
+ */
   commitWorkspaceChanges(
-    request?: protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesResponse,
-      (
-        | protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesResponse,
+        protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest|undefined, {}|undefined
+      ]>;
   commitWorkspaceChanges(
-    request: protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesResponse,
-      | protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  commitWorkspaceChanges(
-    request: protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesResponse,
-      | protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  commitWorkspaceChanges(
-    request?: protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesResponse,
-          | protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesResponse,
-      | protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesResponse,
-      (
-        | protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest|null|undefined,
+          {}|null|undefined>): void;
+  commitWorkspaceChanges(
+      request: protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesResponse,
+          protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest|null|undefined,
+          {}|null|undefined>): void;
+  commitWorkspaceChanges(
+      request?: protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesResponse,
+          protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesResponse,
+          protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesResponse,
+        protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('commitWorkspaceChanges request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesResponse,
-          | protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesResponse,
+        protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('commitWorkspaceChanges response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .commitWorkspaceChanges(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesResponse,
-          (
-            | protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('commitWorkspaceChanges response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.commitWorkspaceChanges(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesResponse,
+        protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('commitWorkspaceChanges response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Performs a Git reset for uncommitted files in a Workspace.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The workspace's name.
-   * @param {string[]} [request.paths]
-   *   Optional. Full file paths to reset back to their committed state including
-   *   filename, rooted at workspace root. If left empty, all files will be reset.
-   * @param {boolean} [request.clean]
-   *   Optional. If set to true, untracked files will be deleted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.ResetWorkspaceChangesResponse|ResetWorkspaceChangesResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.reset_workspace_changes.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_ResetWorkspaceChanges_async
-   */
+/**
+ * Performs a Git reset for uncommitted files in a Workspace.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The workspace's name.
+ * @param {string[]} [request.paths]
+ *   Optional. Full file paths to reset back to their committed state including
+ *   filename, rooted at workspace root. If left empty, all files will be reset.
+ * @param {boolean} [request.clean]
+ *   Optional. If set to true, untracked files will be deleted.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.ResetWorkspaceChangesResponse|ResetWorkspaceChangesResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.reset_workspace_changes.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_ResetWorkspaceChanges_async
+ */
   resetWorkspaceChanges(
-    request?: protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesResponse,
-      (
-        | protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesResponse,
+        protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest|undefined, {}|undefined
+      ]>;
   resetWorkspaceChanges(
-    request: protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesResponse,
-      | protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  resetWorkspaceChanges(
-    request: protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesResponse,
-      | protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  resetWorkspaceChanges(
-    request?: protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesResponse,
-          | protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesResponse,
-      | protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesResponse,
-      (
-        | protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest|null|undefined,
+          {}|null|undefined>): void;
+  resetWorkspaceChanges(
+      request: protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesResponse,
+          protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest|null|undefined,
+          {}|null|undefined>): void;
+  resetWorkspaceChanges(
+      request?: protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesResponse,
+          protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesResponse,
+          protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesResponse,
+        protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('resetWorkspaceChanges request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesResponse,
-          | protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesResponse,
+        protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('resetWorkspaceChanges response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .resetWorkspaceChanges(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesResponse,
-          (
-            | protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('resetWorkspaceChanges response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.resetWorkspaceChanges(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesResponse,
+        protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('resetWorkspaceChanges response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Fetches Git diff for an uncommitted file in a Workspace.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.workspace
-   *   Required. The workspace's name.
-   * @param {string} request.path
-   *   Required. The file's full path including filename, relative to the
-   *   workspace root.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.FetchFileDiffResponse|FetchFileDiffResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.fetch_file_diff.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_FetchFileDiff_async
-   */
+/**
+ * Fetches Git diff for an uncommitted file in a Workspace.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.workspace
+ *   Required. The workspace's name.
+ * @param {string} request.path
+ *   Required. The file's full path including filename, relative to the
+ *   workspace root.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.FetchFileDiffResponse|FetchFileDiffResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.fetch_file_diff.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_FetchFileDiff_async
+ */
   fetchFileDiff(
-    request?: protos.google.cloud.dataform.v1beta1.IFetchFileDiffRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IFetchFileDiffResponse,
-      protos.google.cloud.dataform.v1beta1.IFetchFileDiffRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IFetchFileDiffRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IFetchFileDiffResponse,
+        protos.google.cloud.dataform.v1beta1.IFetchFileDiffRequest|undefined, {}|undefined
+      ]>;
   fetchFileDiff(
-    request: protos.google.cloud.dataform.v1beta1.IFetchFileDiffRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IFetchFileDiffResponse,
-      | protos.google.cloud.dataform.v1beta1.IFetchFileDiffRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  fetchFileDiff(
-    request: protos.google.cloud.dataform.v1beta1.IFetchFileDiffRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IFetchFileDiffResponse,
-      | protos.google.cloud.dataform.v1beta1.IFetchFileDiffRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  fetchFileDiff(
-    request?: protos.google.cloud.dataform.v1beta1.IFetchFileDiffRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IFetchFileDiffRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IFetchFileDiffResponse,
-          | protos.google.cloud.dataform.v1beta1.IFetchFileDiffRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IFetchFileDiffResponse,
-      | protos.google.cloud.dataform.v1beta1.IFetchFileDiffRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IFetchFileDiffResponse,
-      protos.google.cloud.dataform.v1beta1.IFetchFileDiffRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IFetchFileDiffRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchFileDiff(
+      request: protos.google.cloud.dataform.v1beta1.IFetchFileDiffRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IFetchFileDiffResponse,
+          protos.google.cloud.dataform.v1beta1.IFetchFileDiffRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchFileDiff(
+      request?: protos.google.cloud.dataform.v1beta1.IFetchFileDiffRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IFetchFileDiffResponse,
+          protos.google.cloud.dataform.v1beta1.IFetchFileDiffRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IFetchFileDiffResponse,
+          protos.google.cloud.dataform.v1beta1.IFetchFileDiffRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IFetchFileDiffResponse,
+        protos.google.cloud.dataform.v1beta1.IFetchFileDiffRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        workspace: request.workspace ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'workspace': request.workspace ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('fetchFileDiff request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IFetchFileDiffResponse,
-          | protos.google.cloud.dataform.v1beta1.IFetchFileDiffRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IFetchFileDiffResponse,
+        protos.google.cloud.dataform.v1beta1.IFetchFileDiffRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('fetchFileDiff response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .fetchFileDiff(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IFetchFileDiffResponse,
-          (
-            | protos.google.cloud.dataform.v1beta1.IFetchFileDiffRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('fetchFileDiff response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.fetchFileDiff(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IFetchFileDiffResponse,
+        protos.google.cloud.dataform.v1beta1.IFetchFileDiffRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('fetchFileDiff response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a directory inside a Workspace.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.workspace
-   *   Required. The workspace's name.
-   * @param {string} request.path
-   *   Required. The directory's full path including directory name, relative to
-   *   the workspace root.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.MakeDirectoryResponse|MakeDirectoryResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.make_directory.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_MakeDirectory_async
-   */
+/**
+ * Creates a directory inside a Workspace.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.workspace
+ *   Required. The workspace's name.
+ * @param {string} request.path
+ *   Required. The directory's full path including directory name, relative to
+ *   the workspace root.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.MakeDirectoryResponse|MakeDirectoryResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.make_directory.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_MakeDirectory_async
+ */
   makeDirectory(
-    request?: protos.google.cloud.dataform.v1beta1.IMakeDirectoryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IMakeDirectoryResponse,
-      protos.google.cloud.dataform.v1beta1.IMakeDirectoryRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IMakeDirectoryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IMakeDirectoryResponse,
+        protos.google.cloud.dataform.v1beta1.IMakeDirectoryRequest|undefined, {}|undefined
+      ]>;
   makeDirectory(
-    request: protos.google.cloud.dataform.v1beta1.IMakeDirectoryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IMakeDirectoryResponse,
-      | protos.google.cloud.dataform.v1beta1.IMakeDirectoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  makeDirectory(
-    request: protos.google.cloud.dataform.v1beta1.IMakeDirectoryRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IMakeDirectoryResponse,
-      | protos.google.cloud.dataform.v1beta1.IMakeDirectoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  makeDirectory(
-    request?: protos.google.cloud.dataform.v1beta1.IMakeDirectoryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IMakeDirectoryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IMakeDirectoryResponse,
-          | protos.google.cloud.dataform.v1beta1.IMakeDirectoryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IMakeDirectoryResponse,
-      | protos.google.cloud.dataform.v1beta1.IMakeDirectoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IMakeDirectoryResponse,
-      protos.google.cloud.dataform.v1beta1.IMakeDirectoryRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IMakeDirectoryRequest|null|undefined,
+          {}|null|undefined>): void;
+  makeDirectory(
+      request: protos.google.cloud.dataform.v1beta1.IMakeDirectoryRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IMakeDirectoryResponse,
+          protos.google.cloud.dataform.v1beta1.IMakeDirectoryRequest|null|undefined,
+          {}|null|undefined>): void;
+  makeDirectory(
+      request?: protos.google.cloud.dataform.v1beta1.IMakeDirectoryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IMakeDirectoryResponse,
+          protos.google.cloud.dataform.v1beta1.IMakeDirectoryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IMakeDirectoryResponse,
+          protos.google.cloud.dataform.v1beta1.IMakeDirectoryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IMakeDirectoryResponse,
+        protos.google.cloud.dataform.v1beta1.IMakeDirectoryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        workspace: request.workspace ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'workspace': request.workspace ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('makeDirectory request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IMakeDirectoryResponse,
-          | protos.google.cloud.dataform.v1beta1.IMakeDirectoryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IMakeDirectoryResponse,
+        protos.google.cloud.dataform.v1beta1.IMakeDirectoryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('makeDirectory response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .makeDirectory(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IMakeDirectoryResponse,
-          (
-            | protos.google.cloud.dataform.v1beta1.IMakeDirectoryRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('makeDirectory response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.makeDirectory(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IMakeDirectoryResponse,
+        protos.google.cloud.dataform.v1beta1.IMakeDirectoryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('makeDirectory response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a directory (inside a Workspace) and all of its contents.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.workspace
-   *   Required. The workspace's name.
-   * @param {string} request.path
-   *   Required. The directory's full path including directory name, relative to
-   *   the workspace root.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.RemoveDirectoryResponse|RemoveDirectoryResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.remove_directory.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_RemoveDirectory_async
-   */
+/**
+ * Deletes a directory (inside a Workspace) and all of its contents.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.workspace
+ *   Required. The workspace's name.
+ * @param {string} request.path
+ *   Required. The directory's full path including directory name, relative to
+ *   the workspace root.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.RemoveDirectoryResponse|RemoveDirectoryResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.remove_directory.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_RemoveDirectory_async
+ */
   removeDirectory(
-    request?: protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IRemoveDirectoryResponse,
-      protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IRemoveDirectoryResponse,
+        protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest|undefined, {}|undefined
+      ]>;
   removeDirectory(
-    request: protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IRemoveDirectoryResponse,
-      | protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  removeDirectory(
-    request: protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IRemoveDirectoryResponse,
-      | protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  removeDirectory(
-    request?: protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IRemoveDirectoryResponse,
-          | protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IRemoveDirectoryResponse,
-      | protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IRemoveDirectoryResponse,
-      protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest|null|undefined,
+          {}|null|undefined>): void;
+  removeDirectory(
+      request: protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IRemoveDirectoryResponse,
+          protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest|null|undefined,
+          {}|null|undefined>): void;
+  removeDirectory(
+      request?: protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IRemoveDirectoryResponse,
+          protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IRemoveDirectoryResponse,
+          protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IRemoveDirectoryResponse,
+        protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        workspace: request.workspace ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'workspace': request.workspace ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('removeDirectory request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IRemoveDirectoryResponse,
-          | protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IRemoveDirectoryResponse,
+        protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('removeDirectory response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .removeDirectory(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IRemoveDirectoryResponse,
-          (
-            | protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('removeDirectory response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.removeDirectory(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IRemoveDirectoryResponse,
+        protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('removeDirectory response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Moves a directory (inside a Workspace), and all of its contents, to a new
-   * location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.workspace
-   *   Required. The workspace's name.
-   * @param {string} request.path
-   *   Required. The directory's full path including directory name, relative to
-   *   the workspace root.
-   * @param {string} request.newPath
-   *   Required. The new path for the directory including directory name, rooted
-   *   at workspace root.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.MoveDirectoryResponse|MoveDirectoryResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.move_directory.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_MoveDirectory_async
-   */
+/**
+ * Moves a directory (inside a Workspace), and all of its contents, to a new
+ * location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.workspace
+ *   Required. The workspace's name.
+ * @param {string} request.path
+ *   Required. The directory's full path including directory name, relative to
+ *   the workspace root.
+ * @param {string} request.newPath
+ *   Required. The new path for the directory including directory name, rooted
+ *   at workspace root.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.MoveDirectoryResponse|MoveDirectoryResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.move_directory.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_MoveDirectory_async
+ */
   moveDirectory(
-    request?: protos.google.cloud.dataform.v1beta1.IMoveDirectoryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IMoveDirectoryResponse,
-      protos.google.cloud.dataform.v1beta1.IMoveDirectoryRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IMoveDirectoryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IMoveDirectoryResponse,
+        protos.google.cloud.dataform.v1beta1.IMoveDirectoryRequest|undefined, {}|undefined
+      ]>;
   moveDirectory(
-    request: protos.google.cloud.dataform.v1beta1.IMoveDirectoryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IMoveDirectoryResponse,
-      | protos.google.cloud.dataform.v1beta1.IMoveDirectoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  moveDirectory(
-    request: protos.google.cloud.dataform.v1beta1.IMoveDirectoryRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IMoveDirectoryResponse,
-      | protos.google.cloud.dataform.v1beta1.IMoveDirectoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  moveDirectory(
-    request?: protos.google.cloud.dataform.v1beta1.IMoveDirectoryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IMoveDirectoryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IMoveDirectoryResponse,
-          | protos.google.cloud.dataform.v1beta1.IMoveDirectoryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IMoveDirectoryResponse,
-      | protos.google.cloud.dataform.v1beta1.IMoveDirectoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IMoveDirectoryResponse,
-      protos.google.cloud.dataform.v1beta1.IMoveDirectoryRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IMoveDirectoryRequest|null|undefined,
+          {}|null|undefined>): void;
+  moveDirectory(
+      request: protos.google.cloud.dataform.v1beta1.IMoveDirectoryRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IMoveDirectoryResponse,
+          protos.google.cloud.dataform.v1beta1.IMoveDirectoryRequest|null|undefined,
+          {}|null|undefined>): void;
+  moveDirectory(
+      request?: protos.google.cloud.dataform.v1beta1.IMoveDirectoryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IMoveDirectoryResponse,
+          protos.google.cloud.dataform.v1beta1.IMoveDirectoryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IMoveDirectoryResponse,
+          protos.google.cloud.dataform.v1beta1.IMoveDirectoryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IMoveDirectoryResponse,
+        protos.google.cloud.dataform.v1beta1.IMoveDirectoryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        workspace: request.workspace ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'workspace': request.workspace ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('moveDirectory request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IMoveDirectoryResponse,
-          | protos.google.cloud.dataform.v1beta1.IMoveDirectoryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IMoveDirectoryResponse,
+        protos.google.cloud.dataform.v1beta1.IMoveDirectoryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('moveDirectory response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .moveDirectory(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IMoveDirectoryResponse,
-          (
-            | protos.google.cloud.dataform.v1beta1.IMoveDirectoryRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('moveDirectory response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.moveDirectory(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IMoveDirectoryResponse,
+        protos.google.cloud.dataform.v1beta1.IMoveDirectoryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('moveDirectory response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns the contents of a file (inside a Workspace).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.workspace
-   *   Required. The workspace's name.
-   * @param {string} request.path
-   *   Required. The file's full path including filename, relative to the
-   *   workspace root.
-   * @param {string} [request.revision]
-   *   Optional. The Git revision of the file to return. If left empty, the
-   *   current contents of `path` will be returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.ReadFileResponse|ReadFileResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.read_file.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_ReadFile_async
-   */
+/**
+ * Returns the contents of a file (inside a Workspace).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.workspace
+ *   Required. The workspace's name.
+ * @param {string} request.path
+ *   Required. The file's full path including filename, relative to the
+ *   workspace root.
+ * @param {string} [request.revision]
+ *   Optional. The Git revision of the file to return. If left empty, the
+ *   current contents of `path` will be returned.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.ReadFileResponse|ReadFileResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.read_file.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_ReadFile_async
+ */
   readFile(
-    request?: protos.google.cloud.dataform.v1beta1.IReadFileRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IReadFileResponse,
-      protos.google.cloud.dataform.v1beta1.IReadFileRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IReadFileRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IReadFileResponse,
+        protos.google.cloud.dataform.v1beta1.IReadFileRequest|undefined, {}|undefined
+      ]>;
   readFile(
-    request: protos.google.cloud.dataform.v1beta1.IReadFileRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IReadFileResponse,
-      protos.google.cloud.dataform.v1beta1.IReadFileRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  readFile(
-    request: protos.google.cloud.dataform.v1beta1.IReadFileRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IReadFileResponse,
-      protos.google.cloud.dataform.v1beta1.IReadFileRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  readFile(
-    request?: protos.google.cloud.dataform.v1beta1.IReadFileRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IReadFileRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IReadFileResponse,
-          | protos.google.cloud.dataform.v1beta1.IReadFileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IReadFileResponse,
-      protos.google.cloud.dataform.v1beta1.IReadFileRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IReadFileResponse,
-      protos.google.cloud.dataform.v1beta1.IReadFileRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IReadFileRequest|null|undefined,
+          {}|null|undefined>): void;
+  readFile(
+      request: protos.google.cloud.dataform.v1beta1.IReadFileRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IReadFileResponse,
+          protos.google.cloud.dataform.v1beta1.IReadFileRequest|null|undefined,
+          {}|null|undefined>): void;
+  readFile(
+      request?: protos.google.cloud.dataform.v1beta1.IReadFileRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IReadFileResponse,
+          protos.google.cloud.dataform.v1beta1.IReadFileRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IReadFileResponse,
+          protos.google.cloud.dataform.v1beta1.IReadFileRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IReadFileResponse,
+        protos.google.cloud.dataform.v1beta1.IReadFileRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        workspace: request.workspace ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'workspace': request.workspace ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('readFile request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IReadFileResponse,
-          | protos.google.cloud.dataform.v1beta1.IReadFileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IReadFileResponse,
+        protos.google.cloud.dataform.v1beta1.IReadFileRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('readFile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .readFile(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IReadFileResponse,
-          protos.google.cloud.dataform.v1beta1.IReadFileRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('readFile response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.readFile(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IReadFileResponse,
+        protos.google.cloud.dataform.v1beta1.IReadFileRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('readFile response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a file (inside a Workspace).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.workspace
-   *   Required. The workspace's name.
-   * @param {string} request.path
-   *   Required. The file's full path including filename, relative to the
-   *   workspace root.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.RemoveFileResponse|RemoveFileResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.remove_file.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_RemoveFile_async
-   */
+/**
+ * Deletes a file (inside a Workspace).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.workspace
+ *   Required. The workspace's name.
+ * @param {string} request.path
+ *   Required. The file's full path including filename, relative to the
+ *   workspace root.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.RemoveFileResponse|RemoveFileResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.remove_file.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_RemoveFile_async
+ */
   removeFile(
-    request?: protos.google.cloud.dataform.v1beta1.IRemoveFileRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IRemoveFileResponse,
-      protos.google.cloud.dataform.v1beta1.IRemoveFileRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IRemoveFileRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IRemoveFileResponse,
+        protos.google.cloud.dataform.v1beta1.IRemoveFileRequest|undefined, {}|undefined
+      ]>;
   removeFile(
-    request: protos.google.cloud.dataform.v1beta1.IRemoveFileRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IRemoveFileResponse,
-      | protos.google.cloud.dataform.v1beta1.IRemoveFileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  removeFile(
-    request: protos.google.cloud.dataform.v1beta1.IRemoveFileRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IRemoveFileResponse,
-      | protos.google.cloud.dataform.v1beta1.IRemoveFileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  removeFile(
-    request?: protos.google.cloud.dataform.v1beta1.IRemoveFileRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IRemoveFileRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IRemoveFileResponse,
-          | protos.google.cloud.dataform.v1beta1.IRemoveFileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IRemoveFileResponse,
-      | protos.google.cloud.dataform.v1beta1.IRemoveFileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IRemoveFileResponse,
-      protos.google.cloud.dataform.v1beta1.IRemoveFileRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IRemoveFileRequest|null|undefined,
+          {}|null|undefined>): void;
+  removeFile(
+      request: protos.google.cloud.dataform.v1beta1.IRemoveFileRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IRemoveFileResponse,
+          protos.google.cloud.dataform.v1beta1.IRemoveFileRequest|null|undefined,
+          {}|null|undefined>): void;
+  removeFile(
+      request?: protos.google.cloud.dataform.v1beta1.IRemoveFileRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IRemoveFileResponse,
+          protos.google.cloud.dataform.v1beta1.IRemoveFileRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IRemoveFileResponse,
+          protos.google.cloud.dataform.v1beta1.IRemoveFileRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IRemoveFileResponse,
+        protos.google.cloud.dataform.v1beta1.IRemoveFileRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        workspace: request.workspace ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'workspace': request.workspace ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('removeFile request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IRemoveFileResponse,
-          | protos.google.cloud.dataform.v1beta1.IRemoveFileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IRemoveFileResponse,
+        protos.google.cloud.dataform.v1beta1.IRemoveFileRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('removeFile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .removeFile(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IRemoveFileResponse,
-          protos.google.cloud.dataform.v1beta1.IRemoveFileRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('removeFile response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.removeFile(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IRemoveFileResponse,
+        protos.google.cloud.dataform.v1beta1.IRemoveFileRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('removeFile response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Moves a file (inside a Workspace) to a new location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.workspace
-   *   Required. The workspace's name.
-   * @param {string} request.path
-   *   Required. The file's full path including filename, relative to the
-   *   workspace root.
-   * @param {string} request.newPath
-   *   Required. The file's new path including filename, relative to the workspace
-   *   root.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.MoveFileResponse|MoveFileResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.move_file.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_MoveFile_async
-   */
+/**
+ * Moves a file (inside a Workspace) to a new location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.workspace
+ *   Required. The workspace's name.
+ * @param {string} request.path
+ *   Required. The file's full path including filename, relative to the
+ *   workspace root.
+ * @param {string} request.newPath
+ *   Required. The file's new path including filename, relative to the workspace
+ *   root.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.MoveFileResponse|MoveFileResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.move_file.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_MoveFile_async
+ */
   moveFile(
-    request?: protos.google.cloud.dataform.v1beta1.IMoveFileRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IMoveFileResponse,
-      protos.google.cloud.dataform.v1beta1.IMoveFileRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IMoveFileRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IMoveFileResponse,
+        protos.google.cloud.dataform.v1beta1.IMoveFileRequest|undefined, {}|undefined
+      ]>;
   moveFile(
-    request: protos.google.cloud.dataform.v1beta1.IMoveFileRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IMoveFileResponse,
-      protos.google.cloud.dataform.v1beta1.IMoveFileRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  moveFile(
-    request: protos.google.cloud.dataform.v1beta1.IMoveFileRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IMoveFileResponse,
-      protos.google.cloud.dataform.v1beta1.IMoveFileRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  moveFile(
-    request?: protos.google.cloud.dataform.v1beta1.IMoveFileRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IMoveFileRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IMoveFileResponse,
-          | protos.google.cloud.dataform.v1beta1.IMoveFileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IMoveFileResponse,
-      protos.google.cloud.dataform.v1beta1.IMoveFileRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IMoveFileResponse,
-      protos.google.cloud.dataform.v1beta1.IMoveFileRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IMoveFileRequest|null|undefined,
+          {}|null|undefined>): void;
+  moveFile(
+      request: protos.google.cloud.dataform.v1beta1.IMoveFileRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IMoveFileResponse,
+          protos.google.cloud.dataform.v1beta1.IMoveFileRequest|null|undefined,
+          {}|null|undefined>): void;
+  moveFile(
+      request?: protos.google.cloud.dataform.v1beta1.IMoveFileRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IMoveFileResponse,
+          protos.google.cloud.dataform.v1beta1.IMoveFileRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IMoveFileResponse,
+          protos.google.cloud.dataform.v1beta1.IMoveFileRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IMoveFileResponse,
+        protos.google.cloud.dataform.v1beta1.IMoveFileRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        workspace: request.workspace ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'workspace': request.workspace ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('moveFile request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IMoveFileResponse,
-          | protos.google.cloud.dataform.v1beta1.IMoveFileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IMoveFileResponse,
+        protos.google.cloud.dataform.v1beta1.IMoveFileRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('moveFile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .moveFile(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IMoveFileResponse,
-          protos.google.cloud.dataform.v1beta1.IMoveFileRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('moveFile response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.moveFile(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IMoveFileResponse,
+        protos.google.cloud.dataform.v1beta1.IMoveFileRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('moveFile response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Writes to a file (inside a Workspace).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.workspace
-   *   Required. The workspace's name.
-   * @param {string} request.path
-   *   Required. The file.
-   * @param {Buffer} request.contents
-   *   Required. The file's contents.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.WriteFileResponse|WriteFileResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.write_file.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_WriteFile_async
-   */
+/**
+ * Writes to a file (inside a Workspace).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.workspace
+ *   Required. The workspace's name.
+ * @param {string} request.path
+ *   Required. The file.
+ * @param {Buffer} request.contents
+ *   Required. The file's contents.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.WriteFileResponse|WriteFileResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.write_file.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_WriteFile_async
+ */
   writeFile(
-    request?: protos.google.cloud.dataform.v1beta1.IWriteFileRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IWriteFileResponse,
-      protos.google.cloud.dataform.v1beta1.IWriteFileRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IWriteFileRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IWriteFileResponse,
+        protos.google.cloud.dataform.v1beta1.IWriteFileRequest|undefined, {}|undefined
+      ]>;
   writeFile(
-    request: protos.google.cloud.dataform.v1beta1.IWriteFileRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IWriteFileResponse,
-      protos.google.cloud.dataform.v1beta1.IWriteFileRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  writeFile(
-    request: protos.google.cloud.dataform.v1beta1.IWriteFileRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IWriteFileResponse,
-      protos.google.cloud.dataform.v1beta1.IWriteFileRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  writeFile(
-    request?: protos.google.cloud.dataform.v1beta1.IWriteFileRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IWriteFileRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IWriteFileResponse,
-          | protos.google.cloud.dataform.v1beta1.IWriteFileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IWriteFileResponse,
-      protos.google.cloud.dataform.v1beta1.IWriteFileRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IWriteFileResponse,
-      protos.google.cloud.dataform.v1beta1.IWriteFileRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IWriteFileRequest|null|undefined,
+          {}|null|undefined>): void;
+  writeFile(
+      request: protos.google.cloud.dataform.v1beta1.IWriteFileRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IWriteFileResponse,
+          protos.google.cloud.dataform.v1beta1.IWriteFileRequest|null|undefined,
+          {}|null|undefined>): void;
+  writeFile(
+      request?: protos.google.cloud.dataform.v1beta1.IWriteFileRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IWriteFileResponse,
+          protos.google.cloud.dataform.v1beta1.IWriteFileRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IWriteFileResponse,
+          protos.google.cloud.dataform.v1beta1.IWriteFileRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IWriteFileResponse,
+        protos.google.cloud.dataform.v1beta1.IWriteFileRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        workspace: request.workspace ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'workspace': request.workspace ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('writeFile request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IWriteFileResponse,
-          | protos.google.cloud.dataform.v1beta1.IWriteFileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IWriteFileResponse,
+        protos.google.cloud.dataform.v1beta1.IWriteFileRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('writeFile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .writeFile(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IWriteFileResponse,
-          protos.google.cloud.dataform.v1beta1.IWriteFileRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('writeFile response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.writeFile(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IWriteFileResponse,
+        protos.google.cloud.dataform.v1beta1.IWriteFileRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('writeFile response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Fetches a single ReleaseConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The release config's name.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.ReleaseConfig|ReleaseConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.get_release_config.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_GetReleaseConfig_async
-   */
+/**
+ * Fetches a single ReleaseConfig.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The release config's name.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.ReleaseConfig|ReleaseConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.get_release_config.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_GetReleaseConfig_async
+ */
   getReleaseConfig(
-    request?: protos.google.cloud.dataform.v1beta1.IGetReleaseConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IReleaseConfig,
-      protos.google.cloud.dataform.v1beta1.IGetReleaseConfigRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IGetReleaseConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IReleaseConfig,
+        protos.google.cloud.dataform.v1beta1.IGetReleaseConfigRequest|undefined, {}|undefined
+      ]>;
   getReleaseConfig(
-    request: protos.google.cloud.dataform.v1beta1.IGetReleaseConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IReleaseConfig,
-      | protos.google.cloud.dataform.v1beta1.IGetReleaseConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getReleaseConfig(
-    request: protos.google.cloud.dataform.v1beta1.IGetReleaseConfigRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IReleaseConfig,
-      | protos.google.cloud.dataform.v1beta1.IGetReleaseConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getReleaseConfig(
-    request?: protos.google.cloud.dataform.v1beta1.IGetReleaseConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IGetReleaseConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IReleaseConfig,
-          | protos.google.cloud.dataform.v1beta1.IGetReleaseConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IReleaseConfig,
-      | protos.google.cloud.dataform.v1beta1.IGetReleaseConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IReleaseConfig,
-      protos.google.cloud.dataform.v1beta1.IGetReleaseConfigRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IGetReleaseConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getReleaseConfig(
+      request: protos.google.cloud.dataform.v1beta1.IGetReleaseConfigRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IReleaseConfig,
+          protos.google.cloud.dataform.v1beta1.IGetReleaseConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getReleaseConfig(
+      request?: protos.google.cloud.dataform.v1beta1.IGetReleaseConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IReleaseConfig,
+          protos.google.cloud.dataform.v1beta1.IGetReleaseConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IReleaseConfig,
+          protos.google.cloud.dataform.v1beta1.IGetReleaseConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IReleaseConfig,
+        protos.google.cloud.dataform.v1beta1.IGetReleaseConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getReleaseConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IReleaseConfig,
-          | protos.google.cloud.dataform.v1beta1.IGetReleaseConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IReleaseConfig,
+        protos.google.cloud.dataform.v1beta1.IGetReleaseConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getReleaseConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getReleaseConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IReleaseConfig,
-          (
-            | protos.google.cloud.dataform.v1beta1.IGetReleaseConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getReleaseConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getReleaseConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IReleaseConfig,
+        protos.google.cloud.dataform.v1beta1.IGetReleaseConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getReleaseConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a new ReleaseConfig in a given Repository.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The repository in which to create the release config. Must be in
-   *   the format `projects/* /locations/* /repositories/*`.
-   * @param {google.cloud.dataform.v1beta1.ReleaseConfig} request.releaseConfig
-   *   Required. The release config to create.
-   * @param {string} request.releaseConfigId
-   *   Required. The ID to use for the release config, which will become the final
-   *   component of the release config's resource name.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.ReleaseConfig|ReleaseConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.create_release_config.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_CreateReleaseConfig_async
-   */
+/**
+ * Creates a new ReleaseConfig in a given Repository.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The repository in which to create the release config. Must be in
+ *   the format `projects/* /locations/* /repositories/*`.
+ * @param {google.cloud.dataform.v1beta1.ReleaseConfig} request.releaseConfig
+ *   Required. The release config to create.
+ * @param {string} request.releaseConfigId
+ *   Required. The ID to use for the release config, which will become the final
+ *   component of the release config's resource name.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.ReleaseConfig|ReleaseConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.create_release_config.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_CreateReleaseConfig_async
+ */
   createReleaseConfig(
-    request?: protos.google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IReleaseConfig,
-      (
-        | protos.google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IReleaseConfig,
+        protos.google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest|undefined, {}|undefined
+      ]>;
   createReleaseConfig(
-    request: protos.google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IReleaseConfig,
-      | protos.google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createReleaseConfig(
-    request: protos.google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IReleaseConfig,
-      | protos.google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createReleaseConfig(
-    request?: protos.google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IReleaseConfig,
-          | protos.google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IReleaseConfig,
-      | protos.google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IReleaseConfig,
-      (
-        | protos.google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  createReleaseConfig(
+      request: protos.google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IReleaseConfig,
+          protos.google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  createReleaseConfig(
+      request?: protos.google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IReleaseConfig,
+          protos.google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IReleaseConfig,
+          protos.google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IReleaseConfig,
+        protos.google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createReleaseConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IReleaseConfig,
-          | protos.google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IReleaseConfig,
+        protos.google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createReleaseConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createReleaseConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IReleaseConfig,
-          (
-            | protos.google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createReleaseConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createReleaseConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IReleaseConfig,
+        protos.google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createReleaseConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a single ReleaseConfig.
-   *
-   * **Note:** *This method does not fully implement
-   * [AIP/134](https://google.aip.dev/134). The wildcard entry (\*) is treated
-   * as a bad request, and when the `field_mask` is omitted, the request is
-   * treated as a full update on all modifiable fields.*
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Specifies the fields to be updated in the release config. If left
-   *   unset, all fields will be updated.
-   * @param {google.cloud.dataform.v1beta1.ReleaseConfig} request.releaseConfig
-   *   Required. The release config to update.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.ReleaseConfig|ReleaseConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.update_release_config.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_UpdateReleaseConfig_async
-   */
+/**
+ * Updates a single ReleaseConfig.
+ *
+ * **Note:** *This method does not fully implement
+ * [AIP/134](https://google.aip.dev/134). The wildcard entry (\*) is treated
+ * as a bad request, and when the `field_mask` is omitted, the request is
+ * treated as a full update on all modifiable fields.*
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Specifies the fields to be updated in the release config. If left
+ *   unset, all fields will be updated.
+ * @param {google.cloud.dataform.v1beta1.ReleaseConfig} request.releaseConfig
+ *   Required. The release config to update.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.ReleaseConfig|ReleaseConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.update_release_config.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_UpdateReleaseConfig_async
+ */
   updateReleaseConfig(
-    request?: protos.google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IReleaseConfig,
-      (
-        | protos.google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IReleaseConfig,
+        protos.google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest|undefined, {}|undefined
+      ]>;
   updateReleaseConfig(
-    request: protos.google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IReleaseConfig,
-      | protos.google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateReleaseConfig(
-    request: protos.google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IReleaseConfig,
-      | protos.google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateReleaseConfig(
-    request?: protos.google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IReleaseConfig,
-          | protos.google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IReleaseConfig,
-      | protos.google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IReleaseConfig,
-      (
-        | protos.google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateReleaseConfig(
+      request: protos.google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IReleaseConfig,
+          protos.google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateReleaseConfig(
+      request?: protos.google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IReleaseConfig,
+          protos.google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IReleaseConfig,
+          protos.google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IReleaseConfig,
+        protos.google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'release_config.name': request.releaseConfig!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'release_config.name': request.releaseConfig!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateReleaseConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IReleaseConfig,
-          | protos.google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IReleaseConfig,
+        protos.google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateReleaseConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateReleaseConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IReleaseConfig,
-          (
-            | protos.google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateReleaseConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateReleaseConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IReleaseConfig,
+        protos.google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateReleaseConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a single ReleaseConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The release config's name.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.delete_release_config.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_DeleteReleaseConfig_async
-   */
+/**
+ * Deletes a single ReleaseConfig.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The release config's name.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.delete_release_config.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_DeleteReleaseConfig_async
+ */
   deleteReleaseConfig(
-    request?: protos.google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest|undefined, {}|undefined
+      ]>;
   deleteReleaseConfig(
-    request: protos.google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteReleaseConfig(
-    request: protos.google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteReleaseConfig(
-    request?: protos.google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteReleaseConfig(
+      request: protos.google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteReleaseConfig(
+      request?: protos.google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteReleaseConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteReleaseConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteReleaseConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteReleaseConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteReleaseConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteReleaseConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Fetches a single CompilationResult.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The compilation result's name.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.CompilationResult|CompilationResult}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.get_compilation_result.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_GetCompilationResult_async
-   */
+/**
+ * Fetches a single CompilationResult.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The compilation result's name.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.CompilationResult|CompilationResult}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.get_compilation_result.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_GetCompilationResult_async
+ */
   getCompilationResult(
-    request?: protos.google.cloud.dataform.v1beta1.IGetCompilationResultRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.ICompilationResult,
-      (
-        | protos.google.cloud.dataform.v1beta1.IGetCompilationResultRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IGetCompilationResultRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.ICompilationResult,
+        protos.google.cloud.dataform.v1beta1.IGetCompilationResultRequest|undefined, {}|undefined
+      ]>;
   getCompilationResult(
-    request: protos.google.cloud.dataform.v1beta1.IGetCompilationResultRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.ICompilationResult,
-      | protos.google.cloud.dataform.v1beta1.IGetCompilationResultRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCompilationResult(
-    request: protos.google.cloud.dataform.v1beta1.IGetCompilationResultRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.ICompilationResult,
-      | protos.google.cloud.dataform.v1beta1.IGetCompilationResultRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCompilationResult(
-    request?: protos.google.cloud.dataform.v1beta1.IGetCompilationResultRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IGetCompilationResultRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.ICompilationResult,
-          | protos.google.cloud.dataform.v1beta1.IGetCompilationResultRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.ICompilationResult,
-      | protos.google.cloud.dataform.v1beta1.IGetCompilationResultRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.ICompilationResult,
-      (
-        | protos.google.cloud.dataform.v1beta1.IGetCompilationResultRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IGetCompilationResultRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCompilationResult(
+      request: protos.google.cloud.dataform.v1beta1.IGetCompilationResultRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.ICompilationResult,
+          protos.google.cloud.dataform.v1beta1.IGetCompilationResultRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCompilationResult(
+      request?: protos.google.cloud.dataform.v1beta1.IGetCompilationResultRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.ICompilationResult,
+          protos.google.cloud.dataform.v1beta1.IGetCompilationResultRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.ICompilationResult,
+          protos.google.cloud.dataform.v1beta1.IGetCompilationResultRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.ICompilationResult,
+        protos.google.cloud.dataform.v1beta1.IGetCompilationResultRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getCompilationResult request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.ICompilationResult,
-          | protos.google.cloud.dataform.v1beta1.IGetCompilationResultRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.ICompilationResult,
+        protos.google.cloud.dataform.v1beta1.IGetCompilationResultRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCompilationResult response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getCompilationResult(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.ICompilationResult,
-          (
-            | protos.google.cloud.dataform.v1beta1.IGetCompilationResultRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getCompilationResult response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getCompilationResult(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.ICompilationResult,
+        protos.google.cloud.dataform.v1beta1.IGetCompilationResultRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getCompilationResult response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a new CompilationResult in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The repository in which to create the compilation result. Must be
-   *   in the format `projects/* /locations/* /repositories/*`.
-   * @param {google.cloud.dataform.v1beta1.CompilationResult} request.compilationResult
-   *   Required. The compilation result to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.CompilationResult|CompilationResult}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.create_compilation_result.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_CreateCompilationResult_async
-   */
+/**
+ * Creates a new CompilationResult in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The repository in which to create the compilation result. Must be
+ *   in the format `projects/* /locations/* /repositories/*`.
+ * @param {google.cloud.dataform.v1beta1.CompilationResult} request.compilationResult
+ *   Required. The compilation result to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.CompilationResult|CompilationResult}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.create_compilation_result.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_CreateCompilationResult_async
+ */
   createCompilationResult(
-    request?: protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.ICompilationResult,
-      (
-        | protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.ICompilationResult,
+        protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest|undefined, {}|undefined
+      ]>;
   createCompilationResult(
-    request: protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.ICompilationResult,
-      | protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createCompilationResult(
-    request: protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.ICompilationResult,
-      | protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createCompilationResult(
-    request?: protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.ICompilationResult,
-          | protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.ICompilationResult,
-      | protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.ICompilationResult,
-      (
-        | protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest|null|undefined,
+          {}|null|undefined>): void;
+  createCompilationResult(
+      request: protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.ICompilationResult,
+          protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest|null|undefined,
+          {}|null|undefined>): void;
+  createCompilationResult(
+      request?: protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.ICompilationResult,
+          protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.ICompilationResult,
+          protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.ICompilationResult,
+        protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createCompilationResult request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.ICompilationResult,
-          | protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.ICompilationResult,
+        protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createCompilationResult response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createCompilationResult(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.ICompilationResult,
-          (
-            | protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createCompilationResult response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createCompilationResult(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.ICompilationResult,
+        protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createCompilationResult response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Fetches a single WorkflowConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The workflow config's name.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.WorkflowConfig|WorkflowConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.get_workflow_config.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_GetWorkflowConfig_async
-   */
+/**
+ * Fetches a single WorkflowConfig.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The workflow config's name.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.WorkflowConfig|WorkflowConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.get_workflow_config.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_GetWorkflowConfig_async
+ */
   getWorkflowConfig(
-    request?: protos.google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
-      (
-        | protos.google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
+        protos.google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest|undefined, {}|undefined
+      ]>;
   getWorkflowConfig(
-    request: protos.google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
-      | protos.google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getWorkflowConfig(
-    request: protos.google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
-      | protos.google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getWorkflowConfig(
-    request?: protos.google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
-          | protos.google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
-      | protos.google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
-      (
-        | protos.google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getWorkflowConfig(
+      request: protos.google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
+          protos.google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getWorkflowConfig(
+      request?: protos.google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
+          protos.google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
+          protos.google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
+        protos.google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getWorkflowConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
-          | protos.google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
+        protos.google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getWorkflowConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getWorkflowConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
-          (
-            | protos.google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getWorkflowConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getWorkflowConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
+        protos.google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getWorkflowConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a new WorkflowConfig in a given Repository.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The repository in which to create the workflow config. Must be in
-   *   the format `projects/* /locations/* /repositories/*`.
-   * @param {google.cloud.dataform.v1beta1.WorkflowConfig} request.workflowConfig
-   *   Required. The workflow config to create.
-   * @param {string} request.workflowConfigId
-   *   Required. The ID to use for the workflow config, which will become the
-   *   final component of the workflow config's resource name.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.WorkflowConfig|WorkflowConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.create_workflow_config.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_CreateWorkflowConfig_async
-   */
+/**
+ * Creates a new WorkflowConfig in a given Repository.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The repository in which to create the workflow config. Must be in
+ *   the format `projects/* /locations/* /repositories/*`.
+ * @param {google.cloud.dataform.v1beta1.WorkflowConfig} request.workflowConfig
+ *   Required. The workflow config to create.
+ * @param {string} request.workflowConfigId
+ *   Required. The ID to use for the workflow config, which will become the
+ *   final component of the workflow config's resource name.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.WorkflowConfig|WorkflowConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.create_workflow_config.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_CreateWorkflowConfig_async
+ */
   createWorkflowConfig(
-    request?: protos.google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
-      (
-        | protos.google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
+        protos.google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest|undefined, {}|undefined
+      ]>;
   createWorkflowConfig(
-    request: protos.google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
-      | protos.google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createWorkflowConfig(
-    request: protos.google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
-      | protos.google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createWorkflowConfig(
-    request?: protos.google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
-          | protos.google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
-      | protos.google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
-      (
-        | protos.google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  createWorkflowConfig(
+      request: protos.google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
+          protos.google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  createWorkflowConfig(
+      request?: protos.google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
+          protos.google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
+          protos.google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
+        protos.google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createWorkflowConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
-          | protos.google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
+        protos.google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createWorkflowConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createWorkflowConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
-          (
-            | protos.google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createWorkflowConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createWorkflowConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
+        protos.google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createWorkflowConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a single WorkflowConfig.
-   *
-   * **Note:** *This method does not fully implement
-   * [AIP/134](https://google.aip.dev/134). The wildcard entry (\*) is treated
-   * as a bad request, and when the `field_mask` is omitted, the request is
-   * treated as a full update on all modifiable fields.*
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Specifies the fields to be updated in the workflow config. If
-   *   left unset, all fields will be updated.
-   * @param {google.cloud.dataform.v1beta1.WorkflowConfig} request.workflowConfig
-   *   Required. The workflow config to update.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.WorkflowConfig|WorkflowConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.update_workflow_config.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_UpdateWorkflowConfig_async
-   */
+/**
+ * Updates a single WorkflowConfig.
+ *
+ * **Note:** *This method does not fully implement
+ * [AIP/134](https://google.aip.dev/134). The wildcard entry (\*) is treated
+ * as a bad request, and when the `field_mask` is omitted, the request is
+ * treated as a full update on all modifiable fields.*
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Specifies the fields to be updated in the workflow config. If
+ *   left unset, all fields will be updated.
+ * @param {google.cloud.dataform.v1beta1.WorkflowConfig} request.workflowConfig
+ *   Required. The workflow config to update.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.WorkflowConfig|WorkflowConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.update_workflow_config.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_UpdateWorkflowConfig_async
+ */
   updateWorkflowConfig(
-    request?: protos.google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
-      (
-        | protos.google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
+        protos.google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest|undefined, {}|undefined
+      ]>;
   updateWorkflowConfig(
-    request: protos.google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
-      | protos.google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateWorkflowConfig(
-    request: protos.google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
-      | protos.google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateWorkflowConfig(
-    request?: protos.google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
-          | protos.google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
-      | protos.google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
-      (
-        | protos.google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateWorkflowConfig(
+      request: protos.google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
+          protos.google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateWorkflowConfig(
+      request?: protos.google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
+          protos.google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
+          protos.google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
+        protos.google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'workflow_config.name': request.workflowConfig!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'workflow_config.name': request.workflowConfig!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateWorkflowConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
-          | protos.google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
+        protos.google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateWorkflowConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateWorkflowConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
-          (
-            | protos.google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateWorkflowConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateWorkflowConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
+        protos.google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateWorkflowConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a single WorkflowConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The workflow config's name.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.delete_workflow_config.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_DeleteWorkflowConfig_async
-   */
+/**
+ * Deletes a single WorkflowConfig.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The workflow config's name.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.delete_workflow_config.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_DeleteWorkflowConfig_async
+ */
   deleteWorkflowConfig(
-    request?: protos.google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest|undefined, {}|undefined
+      ]>;
   deleteWorkflowConfig(
-    request: protos.google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteWorkflowConfig(
-    request: protos.google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteWorkflowConfig(
-    request?: protos.google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteWorkflowConfig(
+      request: protos.google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteWorkflowConfig(
+      request?: protos.google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteWorkflowConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteWorkflowConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteWorkflowConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteWorkflowConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteWorkflowConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteWorkflowConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Fetches a single WorkflowInvocation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The workflow invocation resource's name.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.WorkflowInvocation|WorkflowInvocation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.get_workflow_invocation.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_GetWorkflowInvocation_async
-   */
+/**
+ * Fetches a single WorkflowInvocation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The workflow invocation resource's name.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.WorkflowInvocation|WorkflowInvocation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.get_workflow_invocation.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_GetWorkflowInvocation_async
+ */
   getWorkflowInvocation(
-    request?: protos.google.cloud.dataform.v1beta1.IGetWorkflowInvocationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
-      (
-        | protos.google.cloud.dataform.v1beta1.IGetWorkflowInvocationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IGetWorkflowInvocationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
+        protos.google.cloud.dataform.v1beta1.IGetWorkflowInvocationRequest|undefined, {}|undefined
+      ]>;
   getWorkflowInvocation(
-    request: protos.google.cloud.dataform.v1beta1.IGetWorkflowInvocationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
-      | protos.google.cloud.dataform.v1beta1.IGetWorkflowInvocationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getWorkflowInvocation(
-    request: protos.google.cloud.dataform.v1beta1.IGetWorkflowInvocationRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
-      | protos.google.cloud.dataform.v1beta1.IGetWorkflowInvocationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getWorkflowInvocation(
-    request?: protos.google.cloud.dataform.v1beta1.IGetWorkflowInvocationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IGetWorkflowInvocationRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
-          | protos.google.cloud.dataform.v1beta1.IGetWorkflowInvocationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
-      | protos.google.cloud.dataform.v1beta1.IGetWorkflowInvocationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
-      (
-        | protos.google.cloud.dataform.v1beta1.IGetWorkflowInvocationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IGetWorkflowInvocationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getWorkflowInvocation(
+      request: protos.google.cloud.dataform.v1beta1.IGetWorkflowInvocationRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
+          protos.google.cloud.dataform.v1beta1.IGetWorkflowInvocationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getWorkflowInvocation(
+      request?: protos.google.cloud.dataform.v1beta1.IGetWorkflowInvocationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
+          protos.google.cloud.dataform.v1beta1.IGetWorkflowInvocationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
+          protos.google.cloud.dataform.v1beta1.IGetWorkflowInvocationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
+        protos.google.cloud.dataform.v1beta1.IGetWorkflowInvocationRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getWorkflowInvocation request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
-          | protos.google.cloud.dataform.v1beta1.IGetWorkflowInvocationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
+        protos.google.cloud.dataform.v1beta1.IGetWorkflowInvocationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getWorkflowInvocation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getWorkflowInvocation(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
-          (
-            | protos.google.cloud.dataform.v1beta1.IGetWorkflowInvocationRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getWorkflowInvocation response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getWorkflowInvocation(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
+        protos.google.cloud.dataform.v1beta1.IGetWorkflowInvocationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getWorkflowInvocation response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a new WorkflowInvocation in a given Repository.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The repository in which to create the workflow invocation. Must
-   *   be in the format `projects/* /locations/* /repositories/*`.
-   * @param {google.cloud.dataform.v1beta1.WorkflowInvocation} request.workflowInvocation
-   *   Required. The workflow invocation resource to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.WorkflowInvocation|WorkflowInvocation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.create_workflow_invocation.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_CreateWorkflowInvocation_async
-   */
+/**
+ * Creates a new WorkflowInvocation in a given Repository.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The repository in which to create the workflow invocation. Must
+ *   be in the format `projects/* /locations/* /repositories/*`.
+ * @param {google.cloud.dataform.v1beta1.WorkflowInvocation} request.workflowInvocation
+ *   Required. The workflow invocation resource to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.WorkflowInvocation|WorkflowInvocation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.create_workflow_invocation.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_CreateWorkflowInvocation_async
+ */
   createWorkflowInvocation(
-    request?: protos.google.cloud.dataform.v1beta1.ICreateWorkflowInvocationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
-      (
-        | protos.google.cloud.dataform.v1beta1.ICreateWorkflowInvocationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.ICreateWorkflowInvocationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
+        protos.google.cloud.dataform.v1beta1.ICreateWorkflowInvocationRequest|undefined, {}|undefined
+      ]>;
   createWorkflowInvocation(
-    request: protos.google.cloud.dataform.v1beta1.ICreateWorkflowInvocationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
-      | protos.google.cloud.dataform.v1beta1.ICreateWorkflowInvocationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createWorkflowInvocation(
-    request: protos.google.cloud.dataform.v1beta1.ICreateWorkflowInvocationRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
-      | protos.google.cloud.dataform.v1beta1.ICreateWorkflowInvocationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createWorkflowInvocation(
-    request?: protos.google.cloud.dataform.v1beta1.ICreateWorkflowInvocationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.ICreateWorkflowInvocationRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
-          | protos.google.cloud.dataform.v1beta1.ICreateWorkflowInvocationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
-      | protos.google.cloud.dataform.v1beta1.ICreateWorkflowInvocationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
-      (
-        | protos.google.cloud.dataform.v1beta1.ICreateWorkflowInvocationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.ICreateWorkflowInvocationRequest|null|undefined,
+          {}|null|undefined>): void;
+  createWorkflowInvocation(
+      request: protos.google.cloud.dataform.v1beta1.ICreateWorkflowInvocationRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
+          protos.google.cloud.dataform.v1beta1.ICreateWorkflowInvocationRequest|null|undefined,
+          {}|null|undefined>): void;
+  createWorkflowInvocation(
+      request?: protos.google.cloud.dataform.v1beta1.ICreateWorkflowInvocationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
+          protos.google.cloud.dataform.v1beta1.ICreateWorkflowInvocationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
+          protos.google.cloud.dataform.v1beta1.ICreateWorkflowInvocationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
+        protos.google.cloud.dataform.v1beta1.ICreateWorkflowInvocationRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createWorkflowInvocation request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
-          | protos.google.cloud.dataform.v1beta1.ICreateWorkflowInvocationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
+        protos.google.cloud.dataform.v1beta1.ICreateWorkflowInvocationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createWorkflowInvocation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createWorkflowInvocation(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
-          (
-            | protos.google.cloud.dataform.v1beta1.ICreateWorkflowInvocationRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createWorkflowInvocation response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createWorkflowInvocation(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
+        protos.google.cloud.dataform.v1beta1.ICreateWorkflowInvocationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createWorkflowInvocation response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a single WorkflowInvocation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The workflow invocation resource's name.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.delete_workflow_invocation.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_DeleteWorkflowInvocation_async
-   */
+/**
+ * Deletes a single WorkflowInvocation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The workflow invocation resource's name.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.delete_workflow_invocation.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_DeleteWorkflowInvocation_async
+ */
   deleteWorkflowInvocation(
-    request?: protos.google.cloud.dataform.v1beta1.IDeleteWorkflowInvocationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.dataform.v1beta1.IDeleteWorkflowInvocationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IDeleteWorkflowInvocationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteWorkflowInvocationRequest|undefined, {}|undefined
+      ]>;
   deleteWorkflowInvocation(
-    request: protos.google.cloud.dataform.v1beta1.IDeleteWorkflowInvocationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dataform.v1beta1.IDeleteWorkflowInvocationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteWorkflowInvocation(
-    request: protos.google.cloud.dataform.v1beta1.IDeleteWorkflowInvocationRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dataform.v1beta1.IDeleteWorkflowInvocationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteWorkflowInvocation(
-    request?: protos.google.cloud.dataform.v1beta1.IDeleteWorkflowInvocationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IDeleteWorkflowInvocationRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.dataform.v1beta1.IDeleteWorkflowInvocationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dataform.v1beta1.IDeleteWorkflowInvocationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.dataform.v1beta1.IDeleteWorkflowInvocationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IDeleteWorkflowInvocationRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteWorkflowInvocation(
+      request: protos.google.cloud.dataform.v1beta1.IDeleteWorkflowInvocationRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataform.v1beta1.IDeleteWorkflowInvocationRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteWorkflowInvocation(
+      request?: protos.google.cloud.dataform.v1beta1.IDeleteWorkflowInvocationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataform.v1beta1.IDeleteWorkflowInvocationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataform.v1beta1.IDeleteWorkflowInvocationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteWorkflowInvocationRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteWorkflowInvocation request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.dataform.v1beta1.IDeleteWorkflowInvocationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteWorkflowInvocationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteWorkflowInvocation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteWorkflowInvocation(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.dataform.v1beta1.IDeleteWorkflowInvocationRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteWorkflowInvocation response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteWorkflowInvocation(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteWorkflowInvocationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteWorkflowInvocation response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Requests cancellation of a running WorkflowInvocation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The workflow invocation resource's name.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.CancelWorkflowInvocationResponse|CancelWorkflowInvocationResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.cancel_workflow_invocation.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_CancelWorkflowInvocation_async
-   */
+/**
+ * Requests cancellation of a running WorkflowInvocation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The workflow invocation resource's name.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.CancelWorkflowInvocationResponse|CancelWorkflowInvocationResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.cancel_workflow_invocation.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_CancelWorkflowInvocation_async
+ */
   cancelWorkflowInvocation(
-    request?: protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationResponse,
-      (
-        | protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationResponse,
+        protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest|undefined, {}|undefined
+      ]>;
   cancelWorkflowInvocation(
-    request: protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationResponse,
-      | protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  cancelWorkflowInvocation(
-    request: protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationResponse,
-      | protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  cancelWorkflowInvocation(
-    request?: protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationResponse,
-          | protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationResponse,
-      | protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationResponse,
-      (
-        | protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest|null|undefined,
+          {}|null|undefined>): void;
+  cancelWorkflowInvocation(
+      request: protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationResponse,
+          protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest|null|undefined,
+          {}|null|undefined>): void;
+  cancelWorkflowInvocation(
+      request?: protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationResponse,
+          protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationResponse,
+          protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationResponse,
+        protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('cancelWorkflowInvocation request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationResponse,
-          | protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationResponse,
+        protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('cancelWorkflowInvocation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .cancelWorkflowInvocation(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationResponse,
-          (
-            | protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('cancelWorkflowInvocation response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.cancelWorkflowInvocation(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationResponse,
+        protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('cancelWorkflowInvocation response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Get default config for a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The config name.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.Config|Config}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.get_config.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_GetConfig_async
-   */
+/**
+ * Get default config for a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The config name.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.Config|Config}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.get_config.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_GetConfig_async
+ */
   getConfig(
-    request?: protos.google.cloud.dataform.v1beta1.IGetConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IConfig,
-      protos.google.cloud.dataform.v1beta1.IGetConfigRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IGetConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IConfig,
+        protos.google.cloud.dataform.v1beta1.IGetConfigRequest|undefined, {}|undefined
+      ]>;
   getConfig(
-    request: protos.google.cloud.dataform.v1beta1.IGetConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IConfig,
-      protos.google.cloud.dataform.v1beta1.IGetConfigRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getConfig(
-    request: protos.google.cloud.dataform.v1beta1.IGetConfigRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IConfig,
-      protos.google.cloud.dataform.v1beta1.IGetConfigRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getConfig(
-    request?: protos.google.cloud.dataform.v1beta1.IGetConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IGetConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IConfig,
-          | protos.google.cloud.dataform.v1beta1.IGetConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IConfig,
-      protos.google.cloud.dataform.v1beta1.IGetConfigRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IConfig,
-      protos.google.cloud.dataform.v1beta1.IGetConfigRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IGetConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getConfig(
+      request: protos.google.cloud.dataform.v1beta1.IGetConfigRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IConfig,
+          protos.google.cloud.dataform.v1beta1.IGetConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getConfig(
+      request?: protos.google.cloud.dataform.v1beta1.IGetConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IConfig,
+          protos.google.cloud.dataform.v1beta1.IGetConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IConfig,
+          protos.google.cloud.dataform.v1beta1.IGetConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IConfig,
+        protos.google.cloud.dataform.v1beta1.IGetConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IConfig,
-          | protos.google.cloud.dataform.v1beta1.IGetConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IConfig,
+        protos.google.cloud.dataform.v1beta1.IGetConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IConfig,
-          protos.google.cloud.dataform.v1beta1.IGetConfigRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IConfig,
+        protos.google.cloud.dataform.v1beta1.IGetConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Update default config for a given project and location.
-   *
-   * **Note:** *This method does not fully implement
-   * [AIP/134](https://google.aip.dev/134). The wildcard entry (\*) is treated
-   * as a bad request, and when the `field_mask` is omitted, the request is
-   * treated as a full update on all modifiable fields.*
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.dataform.v1beta1.Config} request.config
-   *   Required. The config to update.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Specifies the fields to be updated in the config.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.Config|Config}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.update_config.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_UpdateConfig_async
-   */
+/**
+ * Update default config for a given project and location.
+ *
+ * **Note:** *This method does not fully implement
+ * [AIP/134](https://google.aip.dev/134). The wildcard entry (\*) is treated
+ * as a bad request, and when the `field_mask` is omitted, the request is
+ * treated as a full update on all modifiable fields.*
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.dataform.v1beta1.Config} request.config
+ *   Required. The config to update.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Specifies the fields to be updated in the config.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.Config|Config}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.update_config.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_UpdateConfig_async
+ */
   updateConfig(
-    request?: protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IConfig,
-      protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IConfig,
+        protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest|undefined, {}|undefined
+      ]>;
   updateConfig(
-    request: protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IConfig,
-      | protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateConfig(
-    request: protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest,
-    callback: Callback<
-      protos.google.cloud.dataform.v1beta1.IConfig,
-      | protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateConfig(
-    request?: protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataform.v1beta1.IConfig,
-          | protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataform.v1beta1.IConfig,
-      | protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IConfig,
-      protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateConfig(
+      request: protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest,
+      callback: Callback<
+          protos.google.cloud.dataform.v1beta1.IConfig,
+          protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateConfig(
+      request?: protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataform.v1beta1.IConfig,
+          protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataform.v1beta1.IConfig,
+          protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IConfig,
+        protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'config.name': request.config!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'config.name': request.config!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataform.v1beta1.IConfig,
-          | protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataform.v1beta1.IConfig,
+        protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataform.v1beta1.IConfig,
-          protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataform.v1beta1.IConfig,
+        protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Lists Repositories in a given project and location.
-   *
-   * **Note:** *This method can return repositories not shown in the [Dataform
-   * UI](https://console.cloud.google.com/bigquery/dataform)*.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The location in which to list repositories. Must be in the format
-   *   `projects/* /locations/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of repositories to return. The server may return
-   *   fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListRepositories` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListRepositories`,
-   *   with the exception of `page_size`, must match the call that provided the
-   *   page token.
-   * @param {string} [request.orderBy]
-   *   Optional. This field only supports ordering by `name`. If unspecified, the
-   *   server will choose the ordering. If specified, the default order is
-   *   ascending for the `name` field.
-   * @param {string} [request.filter]
-   *   Optional. Filter for the returned list.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1beta1.Repository|Repository}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listRepositoriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Repositories in a given project and location.
+ *
+ * **Note:** *This method can return repositories not shown in the [Dataform
+ * UI](https://console.cloud.google.com/bigquery/dataform)*.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The location in which to list repositories. Must be in the format
+ *   `projects/* /locations/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of repositories to return. The server may return
+ *   fewer items than requested. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListRepositories` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListRepositories`,
+ *   with the exception of `page_size`, must match the call that provided the
+ *   page token.
+ * @param {string} [request.orderBy]
+ *   Optional. This field only supports ordering by `name`. If unspecified, the
+ *   server will choose the ordering. If specified, the default order is
+ *   ascending for the `name` field.
+ * @param {string} [request.filter]
+ *   Optional. Filter for the returned list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1beta1.Repository|Repository}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listRepositoriesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRepositories(
-    request?: protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IRepository[],
-      protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest | null,
-      protos.google.cloud.dataform.v1beta1.IListRepositoriesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IRepository[],
+        protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest|null,
+        protos.google.cloud.dataform.v1beta1.IListRepositoriesResponse
+      ]>;
   listRepositories(
-    request: protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest,
-      | protos.google.cloud.dataform.v1beta1.IListRepositoriesResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.IRepository
-    >
-  ): void;
-  listRepositories(
-    request: protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest,
-      | protos.google.cloud.dataform.v1beta1.IListRepositoriesResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.IRepository
-    >
-  ): void;
-  listRepositories(
-    request?: protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest,
-          | protos.google.cloud.dataform.v1beta1.IListRepositoriesResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataform.v1beta1.IRepository
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest,
-      | protos.google.cloud.dataform.v1beta1.IListRepositoriesResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.IRepository
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IRepository[],
-      protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest | null,
-      protos.google.cloud.dataform.v1beta1.IListRepositoriesResponse,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IListRepositoriesResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IRepository>): void;
+  listRepositories(
+      request: protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest,
+          protos.google.cloud.dataform.v1beta1.IListRepositoriesResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IRepository>): void;
+  listRepositories(
+      request?: protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest,
+          protos.google.cloud.dataform.v1beta1.IListRepositoriesResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IRepository>,
+      callback?: PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest,
+          protos.google.cloud.dataform.v1beta1.IListRepositoriesResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IRepository>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IRepository[],
+        protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest|null,
+        protos.google.cloud.dataform.v1beta1.IListRepositoriesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest,
-          | protos.google.cloud.dataform.v1beta1.IListRepositoriesResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataform.v1beta1.IRepository
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest,
+      protos.google.cloud.dataform.v1beta1.IListRepositoriesResponse|null|undefined,
+      protos.google.cloud.dataform.v1beta1.IRepository>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listRepositories values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5989,70 +4599,67 @@ export class DataformClient {
     this._log.info('listRepositories request %j', request);
     return this.innerApiCalls
       .listRepositories(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.dataform.v1beta1.IRepository[],
-          protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest | null,
-          protos.google.cloud.dataform.v1beta1.IListRepositoriesResponse,
-        ]) => {
-          this._log.info('listRepositories values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.dataform.v1beta1.IRepository[],
+        protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest|null,
+        protos.google.cloud.dataform.v1beta1.IListRepositoriesResponse
+      ]) => {
+        this._log.info('listRepositories values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listRepositories`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The location in which to list repositories. Must be in the format
-   *   `projects/* /locations/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of repositories to return. The server may return
-   *   fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListRepositories` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListRepositories`,
-   *   with the exception of `page_size`, must match the call that provided the
-   *   page token.
-   * @param {string} [request.orderBy]
-   *   Optional. This field only supports ordering by `name`. If unspecified, the
-   *   server will choose the ordering. If specified, the default order is
-   *   ascending for the `name` field.
-   * @param {string} [request.filter]
-   *   Optional. Filter for the returned list.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1beta1.Repository|Repository} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listRepositoriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listRepositories`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The location in which to list repositories. Must be in the format
+ *   `projects/* /locations/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of repositories to return. The server may return
+ *   fewer items than requested. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListRepositories` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListRepositories`,
+ *   with the exception of `page_size`, must match the call that provided the
+ *   page token.
+ * @param {string} [request.orderBy]
+ *   Optional. This field only supports ordering by `name`. If unspecified, the
+ *   server will choose the ordering. If specified, the default order is
+ *   ascending for the `name` field.
+ * @param {string} [request.filter]
+ *   Optional. Filter for the returned list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1beta1.Repository|Repository} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listRepositoriesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRepositoriesStream(
-    request?: protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRepositories stream %j', request);
     return this.descriptors.page.listRepositories.createStream(
       this.innerApiCalls.listRepositories as GaxCall,
@@ -6061,61 +4668,60 @@ export class DataformClient {
     );
   }
 
-  /**
-   * Equivalent to `listRepositories`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The location in which to list repositories. Must be in the format
-   *   `projects/* /locations/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of repositories to return. The server may return
-   *   fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListRepositories` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListRepositories`,
-   *   with the exception of `page_size`, must match the call that provided the
-   *   page token.
-   * @param {string} [request.orderBy]
-   *   Optional. This field only supports ordering by `name`. If unspecified, the
-   *   server will choose the ordering. If specified, the default order is
-   *   ascending for the `name` field.
-   * @param {string} [request.filter]
-   *   Optional. Filter for the returned list.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.dataform.v1beta1.Repository|Repository}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.list_repositories.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_ListRepositories_async
-   */
+/**
+ * Equivalent to `listRepositories`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The location in which to list repositories. Must be in the format
+ *   `projects/* /locations/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of repositories to return. The server may return
+ *   fewer items than requested. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListRepositories` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListRepositories`,
+ *   with the exception of `page_size`, must match the call that provided the
+ *   page token.
+ * @param {string} [request.orderBy]
+ *   Optional. This field only supports ordering by `name`. If unspecified, the
+ *   server will choose the ordering. If specified, the default order is
+ *   ascending for the `name` field.
+ * @param {string} [request.filter]
+ *   Optional. Filter for the returned list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.dataform.v1beta1.Repository|Repository}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.list_repositories.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_ListRepositories_async
+ */
   listRepositoriesAsync(
-    request?: protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dataform.v1beta1.IRepository> {
+      request?: protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.dataform.v1beta1.IRepository>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRepositories iterate %j', request);
     return this.descriptors.page.listRepositories.asyncIterate(
       this.innerApiCalls['listRepositories'] as GaxCall,
@@ -6123,127 +4729,102 @@ export class DataformClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataform.v1beta1.IRepository>;
   }
-  /**
-   * Returns the contents of a given Repository directory. The Repository must
-   * not have a value for `git_remote_settings.url`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The repository's name.
-   * @param {string} [request.commitSha]
-   *   Optional. The Commit SHA for the commit to query from. If unset, the
-   *   directory will be queried from HEAD.
-   * @param {string} [request.path]
-   *   Optional. The directory's full path including directory name, relative to
-   *   root. If left unset, the root is used.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of paths to return. The server may return fewer
-   *   items than requested. If unspecified, the server will pick an appropriate
-   *   default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous
-   *   `QueryRepositoryDirectoryContents` call. Provide this to retrieve the
-   *   subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `QueryRepositoryDirectoryContents`, with the exception of `page_size`, must
-   *   match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1beta1.DirectoryEntry|DirectoryEntry}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `queryRepositoryDirectoryContentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Returns the contents of a given Repository directory. The Repository must
+ * not have a value for `git_remote_settings.url`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The repository's name.
+ * @param {string} [request.commitSha]
+ *   Optional. The Commit SHA for the commit to query from. If unset, the
+ *   directory will be queried from HEAD.
+ * @param {string} [request.path]
+ *   Optional. The directory's full path including directory name, relative to
+ *   root. If left unset, the root is used.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of paths to return. The server may return fewer
+ *   items than requested. If unspecified, the server will pick an appropriate
+ *   default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous
+ *   `QueryRepositoryDirectoryContents` call. Provide this to retrieve the
+ *   subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `QueryRepositoryDirectoryContents`, with the exception of `page_size`, must
+ *   match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1beta1.DirectoryEntry|DirectoryEntry}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `queryRepositoryDirectoryContentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   queryRepositoryDirectoryContents(
-    request?: protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IDirectoryEntry[],
-      protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest | null,
-      protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IDirectoryEntry[],
+        protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest|null,
+        protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsResponse
+      ]>;
   queryRepositoryDirectoryContents(
-    request: protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest,
-      | protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.IDirectoryEntry
-    >
-  ): void;
-  queryRepositoryDirectoryContents(
-    request: protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest,
-      | protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.IDirectoryEntry
-    >
-  ): void;
-  queryRepositoryDirectoryContents(
-    request?: protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest,
-          | protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataform.v1beta1.IDirectoryEntry
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest,
-      | protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.IDirectoryEntry
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IDirectoryEntry[],
-      protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest | null,
-      protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsResponse,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IDirectoryEntry>): void;
+  queryRepositoryDirectoryContents(
+      request: protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest,
+          protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IDirectoryEntry>): void;
+  queryRepositoryDirectoryContents(
+      request?: protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest,
+          protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IDirectoryEntry>,
+      callback?: PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest,
+          protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IDirectoryEntry>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IDirectoryEntry[],
+        protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest|null,
+        protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest,
-          | protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataform.v1beta1.IDirectoryEntry
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest,
+      protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsResponse|null|undefined,
+      protos.google.cloud.dataform.v1beta1.IDirectoryEntry>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('queryRepositoryDirectoryContents values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6252,74 +4833,67 @@ export class DataformClient {
     this._log.info('queryRepositoryDirectoryContents request %j', request);
     return this.innerApiCalls
       .queryRepositoryDirectoryContents(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.dataform.v1beta1.IDirectoryEntry[],
-          protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest | null,
-          protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsResponse,
-        ]) => {
-          this._log.info(
-            'queryRepositoryDirectoryContents values %j',
-            response
-          );
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.dataform.v1beta1.IDirectoryEntry[],
+        protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest|null,
+        protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsResponse
+      ]) => {
+        this._log.info('queryRepositoryDirectoryContents values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `queryRepositoryDirectoryContents`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The repository's name.
-   * @param {string} [request.commitSha]
-   *   Optional. The Commit SHA for the commit to query from. If unset, the
-   *   directory will be queried from HEAD.
-   * @param {string} [request.path]
-   *   Optional. The directory's full path including directory name, relative to
-   *   root. If left unset, the root is used.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of paths to return. The server may return fewer
-   *   items than requested. If unspecified, the server will pick an appropriate
-   *   default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous
-   *   `QueryRepositoryDirectoryContents` call. Provide this to retrieve the
-   *   subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `QueryRepositoryDirectoryContents`, with the exception of `page_size`, must
-   *   match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1beta1.DirectoryEntry|DirectoryEntry} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `queryRepositoryDirectoryContentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `queryRepositoryDirectoryContents`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The repository's name.
+ * @param {string} [request.commitSha]
+ *   Optional. The Commit SHA for the commit to query from. If unset, the
+ *   directory will be queried from HEAD.
+ * @param {string} [request.path]
+ *   Optional. The directory's full path including directory name, relative to
+ *   root. If left unset, the root is used.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of paths to return. The server may return fewer
+ *   items than requested. If unspecified, the server will pick an appropriate
+ *   default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous
+ *   `QueryRepositoryDirectoryContents` call. Provide this to retrieve the
+ *   subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `QueryRepositoryDirectoryContents`, with the exception of `page_size`, must
+ *   match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1beta1.DirectoryEntry|DirectoryEntry} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `queryRepositoryDirectoryContentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   queryRepositoryDirectoryContentsStream(
-    request?: protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    const defaultCallSettings =
-      this._defaults['queryRepositoryDirectoryContents'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    const defaultCallSettings = this._defaults['queryRepositoryDirectoryContents'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
     this._log.info('queryRepositoryDirectoryContents stream %j', request);
     return this.descriptors.page.queryRepositoryDirectoryContents.createStream(
       this.innerApiCalls.queryRepositoryDirectoryContents as GaxCall,
@@ -6328,62 +4902,60 @@ export class DataformClient {
     );
   }
 
-  /**
-   * Equivalent to `queryRepositoryDirectoryContents`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The repository's name.
-   * @param {string} [request.commitSha]
-   *   Optional. The Commit SHA for the commit to query from. If unset, the
-   *   directory will be queried from HEAD.
-   * @param {string} [request.path]
-   *   Optional. The directory's full path including directory name, relative to
-   *   root. If left unset, the root is used.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of paths to return. The server may return fewer
-   *   items than requested. If unspecified, the server will pick an appropriate
-   *   default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous
-   *   `QueryRepositoryDirectoryContents` call. Provide this to retrieve the
-   *   subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `QueryRepositoryDirectoryContents`, with the exception of `page_size`, must
-   *   match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.dataform.v1beta1.DirectoryEntry|DirectoryEntry}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.query_repository_directory_contents.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_QueryRepositoryDirectoryContents_async
-   */
+/**
+ * Equivalent to `queryRepositoryDirectoryContents`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The repository's name.
+ * @param {string} [request.commitSha]
+ *   Optional. The Commit SHA for the commit to query from. If unset, the
+ *   directory will be queried from HEAD.
+ * @param {string} [request.path]
+ *   Optional. The directory's full path including directory name, relative to
+ *   root. If left unset, the root is used.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of paths to return. The server may return fewer
+ *   items than requested. If unspecified, the server will pick an appropriate
+ *   default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous
+ *   `QueryRepositoryDirectoryContents` call. Provide this to retrieve the
+ *   subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `QueryRepositoryDirectoryContents`, with the exception of `page_size`, must
+ *   match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.dataform.v1beta1.DirectoryEntry|DirectoryEntry}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.query_repository_directory_contents.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_QueryRepositoryDirectoryContents_async
+ */
   queryRepositoryDirectoryContentsAsync(
-    request?: protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dataform.v1beta1.IDirectoryEntry> {
+      request?: protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.dataform.v1beta1.IDirectoryEntry>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    const defaultCallSettings =
-      this._defaults['queryRepositoryDirectoryContents'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    const defaultCallSettings = this._defaults['queryRepositoryDirectoryContents'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
     this._log.info('queryRepositoryDirectoryContents iterate %j', request);
     return this.descriptors.page.queryRepositoryDirectoryContents.asyncIterate(
       this.innerApiCalls['queryRepositoryDirectoryContents'] as GaxCall,
@@ -6391,120 +4963,95 @@ export class DataformClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataform.v1beta1.IDirectoryEntry>;
   }
-  /**
-   * Fetches a Repository's history of commits.  The Repository must not have a
-   * value for `git_remote_settings.url`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The repository's name.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of commits to return. The server may return fewer
-   *   items than requested. If unspecified, the server will pick an appropriate
-   *   default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `FetchRepositoryHistory`
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `FetchRepositoryHistory`,
-   *   with the exception of `page_size`, must match the call that provided the
-   *   page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1beta1.CommitLogEntry|CommitLogEntry}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `fetchRepositoryHistoryAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Fetches a Repository's history of commits.  The Repository must not have a
+ * value for `git_remote_settings.url`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The repository's name.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of commits to return. The server may return fewer
+ *   items than requested. If unspecified, the server will pick an appropriate
+ *   default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `FetchRepositoryHistory`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `FetchRepositoryHistory`,
+ *   with the exception of `page_size`, must match the call that provided the
+ *   page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1beta1.CommitLogEntry|CommitLogEntry}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `fetchRepositoryHistoryAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   fetchRepositoryHistory(
-    request?: protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.ICommitLogEntry[],
-      protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest | null,
-      protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryResponse,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.ICommitLogEntry[],
+        protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest|null,
+        protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryResponse
+      ]>;
   fetchRepositoryHistory(
-    request: protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest,
-      | protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.ICommitLogEntry
-    >
-  ): void;
-  fetchRepositoryHistory(
-    request: protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest,
-      | protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.ICommitLogEntry
-    >
-  ): void;
-  fetchRepositoryHistory(
-    request?: protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest,
-          | protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataform.v1beta1.ICommitLogEntry
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest,
-      | protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.ICommitLogEntry
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.ICommitLogEntry[],
-      protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest | null,
-      protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryResponse,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.ICommitLogEntry>): void;
+  fetchRepositoryHistory(
+      request: protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest,
+          protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.ICommitLogEntry>): void;
+  fetchRepositoryHistory(
+      request?: protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest,
+          protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.ICommitLogEntry>,
+      callback?: PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest,
+          protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.ICommitLogEntry>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.ICommitLogEntry[],
+        protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest|null,
+        protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest,
-          | protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataform.v1beta1.ICommitLogEntry
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest,
+      protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryResponse|null|undefined,
+      protos.google.cloud.dataform.v1beta1.ICommitLogEntry>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('fetchRepositoryHistory values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6513,63 +5060,60 @@ export class DataformClient {
     this._log.info('fetchRepositoryHistory request %j', request);
     return this.innerApiCalls
       .fetchRepositoryHistory(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.dataform.v1beta1.ICommitLogEntry[],
-          protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest | null,
-          protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryResponse,
-        ]) => {
-          this._log.info('fetchRepositoryHistory values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.dataform.v1beta1.ICommitLogEntry[],
+        protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest|null,
+        protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryResponse
+      ]) => {
+        this._log.info('fetchRepositoryHistory values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `fetchRepositoryHistory`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The repository's name.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of commits to return. The server may return fewer
-   *   items than requested. If unspecified, the server will pick an appropriate
-   *   default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `FetchRepositoryHistory`
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `FetchRepositoryHistory`,
-   *   with the exception of `page_size`, must match the call that provided the
-   *   page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1beta1.CommitLogEntry|CommitLogEntry} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `fetchRepositoryHistoryAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `fetchRepositoryHistory`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The repository's name.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of commits to return. The server may return fewer
+ *   items than requested. If unspecified, the server will pick an appropriate
+ *   default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `FetchRepositoryHistory`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `FetchRepositoryHistory`,
+ *   with the exception of `page_size`, must match the call that provided the
+ *   page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1beta1.CommitLogEntry|CommitLogEntry} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `fetchRepositoryHistoryAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   fetchRepositoryHistoryStream(
-    request?: protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     const defaultCallSettings = this._defaults['fetchRepositoryHistory'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('fetchRepositoryHistory stream %j', request);
     return this.descriptors.page.fetchRepositoryHistory.createStream(
       this.innerApiCalls.fetchRepositoryHistory as GaxCall,
@@ -6578,54 +5122,53 @@ export class DataformClient {
     );
   }
 
-  /**
-   * Equivalent to `fetchRepositoryHistory`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The repository's name.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of commits to return. The server may return fewer
-   *   items than requested. If unspecified, the server will pick an appropriate
-   *   default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `FetchRepositoryHistory`
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `FetchRepositoryHistory`,
-   *   with the exception of `page_size`, must match the call that provided the
-   *   page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.dataform.v1beta1.CommitLogEntry|CommitLogEntry}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.fetch_repository_history.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_FetchRepositoryHistory_async
-   */
+/**
+ * Equivalent to `fetchRepositoryHistory`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The repository's name.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of commits to return. The server may return fewer
+ *   items than requested. If unspecified, the server will pick an appropriate
+ *   default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `FetchRepositoryHistory`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `FetchRepositoryHistory`,
+ *   with the exception of `page_size`, must match the call that provided the
+ *   page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.dataform.v1beta1.CommitLogEntry|CommitLogEntry}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.fetch_repository_history.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_FetchRepositoryHistory_async
+ */
   fetchRepositoryHistoryAsync(
-    request?: protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dataform.v1beta1.ICommitLogEntry> {
+      request?: protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.dataform.v1beta1.ICommitLogEntry>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     const defaultCallSettings = this._defaults['fetchRepositoryHistory'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('fetchRepositoryHistory iterate %j', request);
     return this.descriptors.page.fetchRepositoryHistory.asyncIterate(
       this.innerApiCalls['fetchRepositoryHistory'] as GaxCall,
@@ -6633,126 +5176,101 @@ export class DataformClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataform.v1beta1.ICommitLogEntry>;
   }
-  /**
-   * Lists Workspaces in a given Repository.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The repository in which to list workspaces. Must be in the
-   *   format `projects/* /locations/* /repositories/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of workspaces to return. The server may return
-   *   fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListWorkspaces` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListWorkspaces`, with
-   *   the exception of `page_size`, must match the call that provided the page
-   *   token.
-   * @param {string} [request.orderBy]
-   *   Optional. This field only supports ordering by `name`. If unspecified, the
-   *   server will choose the ordering. If specified, the default order is
-   *   ascending for the `name` field.
-   * @param {string} [request.filter]
-   *   Optional. Filter for the returned list.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1beta1.Workspace|Workspace}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listWorkspacesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Workspaces in a given Repository.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The repository in which to list workspaces. Must be in the
+ *   format `projects/* /locations/* /repositories/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of workspaces to return. The server may return
+ *   fewer items than requested. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListWorkspaces` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListWorkspaces`, with
+ *   the exception of `page_size`, must match the call that provided the page
+ *   token.
+ * @param {string} [request.orderBy]
+ *   Optional. This field only supports ordering by `name`. If unspecified, the
+ *   server will choose the ordering. If specified, the default order is
+ *   ascending for the `name` field.
+ * @param {string} [request.filter]
+ *   Optional. Filter for the returned list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1beta1.Workspace|Workspace}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listWorkspacesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listWorkspaces(
-    request?: protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IWorkspace[],
-      protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest | null,
-      protos.google.cloud.dataform.v1beta1.IListWorkspacesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IWorkspace[],
+        protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest|null,
+        protos.google.cloud.dataform.v1beta1.IListWorkspacesResponse
+      ]>;
   listWorkspaces(
-    request: protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest,
-      | protos.google.cloud.dataform.v1beta1.IListWorkspacesResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.IWorkspace
-    >
-  ): void;
-  listWorkspaces(
-    request: protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest,
-      | protos.google.cloud.dataform.v1beta1.IListWorkspacesResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.IWorkspace
-    >
-  ): void;
-  listWorkspaces(
-    request?: protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest,
-          | protos.google.cloud.dataform.v1beta1.IListWorkspacesResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataform.v1beta1.IWorkspace
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest,
-      | protos.google.cloud.dataform.v1beta1.IListWorkspacesResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.IWorkspace
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IWorkspace[],
-      protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest | null,
-      protos.google.cloud.dataform.v1beta1.IListWorkspacesResponse,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IListWorkspacesResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IWorkspace>): void;
+  listWorkspaces(
+      request: protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest,
+          protos.google.cloud.dataform.v1beta1.IListWorkspacesResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IWorkspace>): void;
+  listWorkspaces(
+      request?: protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest,
+          protos.google.cloud.dataform.v1beta1.IListWorkspacesResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IWorkspace>,
+      callback?: PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest,
+          protos.google.cloud.dataform.v1beta1.IListWorkspacesResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IWorkspace>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IWorkspace[],
+        protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest|null,
+        protos.google.cloud.dataform.v1beta1.IListWorkspacesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest,
-          | protos.google.cloud.dataform.v1beta1.IListWorkspacesResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataform.v1beta1.IWorkspace
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest,
+      protos.google.cloud.dataform.v1beta1.IListWorkspacesResponse|null|undefined,
+      protos.google.cloud.dataform.v1beta1.IWorkspace>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listWorkspaces values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6761,70 +5279,67 @@ export class DataformClient {
     this._log.info('listWorkspaces request %j', request);
     return this.innerApiCalls
       .listWorkspaces(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.dataform.v1beta1.IWorkspace[],
-          protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest | null,
-          protos.google.cloud.dataform.v1beta1.IListWorkspacesResponse,
-        ]) => {
-          this._log.info('listWorkspaces values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.dataform.v1beta1.IWorkspace[],
+        protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest|null,
+        protos.google.cloud.dataform.v1beta1.IListWorkspacesResponse
+      ]) => {
+        this._log.info('listWorkspaces values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listWorkspaces`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The repository in which to list workspaces. Must be in the
-   *   format `projects/* /locations/* /repositories/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of workspaces to return. The server may return
-   *   fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListWorkspaces` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListWorkspaces`, with
-   *   the exception of `page_size`, must match the call that provided the page
-   *   token.
-   * @param {string} [request.orderBy]
-   *   Optional. This field only supports ordering by `name`. If unspecified, the
-   *   server will choose the ordering. If specified, the default order is
-   *   ascending for the `name` field.
-   * @param {string} [request.filter]
-   *   Optional. Filter for the returned list.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1beta1.Workspace|Workspace} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listWorkspacesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listWorkspaces`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The repository in which to list workspaces. Must be in the
+ *   format `projects/* /locations/* /repositories/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of workspaces to return. The server may return
+ *   fewer items than requested. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListWorkspaces` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListWorkspaces`, with
+ *   the exception of `page_size`, must match the call that provided the page
+ *   token.
+ * @param {string} [request.orderBy]
+ *   Optional. This field only supports ordering by `name`. If unspecified, the
+ *   server will choose the ordering. If specified, the default order is
+ *   ascending for the `name` field.
+ * @param {string} [request.filter]
+ *   Optional. Filter for the returned list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1beta1.Workspace|Workspace} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listWorkspacesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listWorkspacesStream(
-    request?: protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listWorkspaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listWorkspaces stream %j', request);
     return this.descriptors.page.listWorkspaces.createStream(
       this.innerApiCalls.listWorkspaces as GaxCall,
@@ -6833,61 +5348,60 @@ export class DataformClient {
     );
   }
 
-  /**
-   * Equivalent to `listWorkspaces`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The repository in which to list workspaces. Must be in the
-   *   format `projects/* /locations/* /repositories/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of workspaces to return. The server may return
-   *   fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListWorkspaces` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListWorkspaces`, with
-   *   the exception of `page_size`, must match the call that provided the page
-   *   token.
-   * @param {string} [request.orderBy]
-   *   Optional. This field only supports ordering by `name`. If unspecified, the
-   *   server will choose the ordering. If specified, the default order is
-   *   ascending for the `name` field.
-   * @param {string} [request.filter]
-   *   Optional. Filter for the returned list.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.dataform.v1beta1.Workspace|Workspace}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.list_workspaces.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_ListWorkspaces_async
-   */
+/**
+ * Equivalent to `listWorkspaces`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The repository in which to list workspaces. Must be in the
+ *   format `projects/* /locations/* /repositories/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of workspaces to return. The server may return
+ *   fewer items than requested. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListWorkspaces` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListWorkspaces`, with
+ *   the exception of `page_size`, must match the call that provided the page
+ *   token.
+ * @param {string} [request.orderBy]
+ *   Optional. This field only supports ordering by `name`. If unspecified, the
+ *   server will choose the ordering. If specified, the default order is
+ *   ascending for the `name` field.
+ * @param {string} [request.filter]
+ *   Optional. Filter for the returned list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.dataform.v1beta1.Workspace|Workspace}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.list_workspaces.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_ListWorkspaces_async
+ */
   listWorkspacesAsync(
-    request?: protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dataform.v1beta1.IWorkspace> {
+      request?: protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.dataform.v1beta1.IWorkspace>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listWorkspaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listWorkspaces iterate %j', request);
     return this.descriptors.page.listWorkspaces.asyncIterate(
       this.innerApiCalls['listWorkspaces'] as GaxCall,
@@ -6895,122 +5409,97 @@ export class DataformClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataform.v1beta1.IWorkspace>;
   }
-  /**
-   * Returns the contents of a given Workspace directory.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.workspace
-   *   Required. The workspace's name.
-   * @param {string} [request.path]
-   *   Optional. The directory's full path including directory name, relative to
-   *   the workspace root. If left unset, the workspace root is used.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of paths to return. The server may return fewer
-   *   items than requested. If unspecified, the server will pick an appropriate
-   *   default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `QueryDirectoryContents`
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `QueryDirectoryContents`, with the exception of `page_size`, must match the
-   *   call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1beta1.DirectoryEntry|DirectoryEntry}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `queryDirectoryContentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Returns the contents of a given Workspace directory.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.workspace
+ *   Required. The workspace's name.
+ * @param {string} [request.path]
+ *   Optional. The directory's full path including directory name, relative to
+ *   the workspace root. If left unset, the workspace root is used.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of paths to return. The server may return fewer
+ *   items than requested. If unspecified, the server will pick an appropriate
+ *   default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `QueryDirectoryContents`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `QueryDirectoryContents`, with the exception of `page_size`, must match the
+ *   call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1beta1.DirectoryEntry|DirectoryEntry}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `queryDirectoryContentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   queryDirectoryContents(
-    request?: protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IDirectoryEntry[],
-      protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest | null,
-      protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IDirectoryEntry[],
+        protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest|null,
+        protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsResponse
+      ]>;
   queryDirectoryContents(
-    request: protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest,
-      | protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.IDirectoryEntry
-    >
-  ): void;
-  queryDirectoryContents(
-    request: protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest,
-      | protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.IDirectoryEntry
-    >
-  ): void;
-  queryDirectoryContents(
-    request?: protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest,
-          | protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataform.v1beta1.IDirectoryEntry
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest,
-      | protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.IDirectoryEntry
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IDirectoryEntry[],
-      protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest | null,
-      protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsResponse,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IDirectoryEntry>): void;
+  queryDirectoryContents(
+      request: protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest,
+          protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IDirectoryEntry>): void;
+  queryDirectoryContents(
+      request?: protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest,
+          protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IDirectoryEntry>,
+      callback?: PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest,
+          protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IDirectoryEntry>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IDirectoryEntry[],
+        protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest|null,
+        protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        workspace: request.workspace ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'workspace': request.workspace ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest,
-          | protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataform.v1beta1.IDirectoryEntry
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest,
+      protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsResponse|null|undefined,
+      protos.google.cloud.dataform.v1beta1.IDirectoryEntry>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('queryDirectoryContents values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -7019,66 +5508,63 @@ export class DataformClient {
     this._log.info('queryDirectoryContents request %j', request);
     return this.innerApiCalls
       .queryDirectoryContents(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.dataform.v1beta1.IDirectoryEntry[],
-          protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest | null,
-          protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsResponse,
-        ]) => {
-          this._log.info('queryDirectoryContents values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.dataform.v1beta1.IDirectoryEntry[],
+        protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest|null,
+        protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsResponse
+      ]) => {
+        this._log.info('queryDirectoryContents values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `queryDirectoryContents`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.workspace
-   *   Required. The workspace's name.
-   * @param {string} [request.path]
-   *   Optional. The directory's full path including directory name, relative to
-   *   the workspace root. If left unset, the workspace root is used.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of paths to return. The server may return fewer
-   *   items than requested. If unspecified, the server will pick an appropriate
-   *   default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `QueryDirectoryContents`
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `QueryDirectoryContents`, with the exception of `page_size`, must match the
-   *   call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1beta1.DirectoryEntry|DirectoryEntry} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `queryDirectoryContentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `queryDirectoryContents`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.workspace
+ *   Required. The workspace's name.
+ * @param {string} [request.path]
+ *   Optional. The directory's full path including directory name, relative to
+ *   the workspace root. If left unset, the workspace root is used.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of paths to return. The server may return fewer
+ *   items than requested. If unspecified, the server will pick an appropriate
+ *   default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `QueryDirectoryContents`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `QueryDirectoryContents`, with the exception of `page_size`, must match the
+ *   call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1beta1.DirectoryEntry|DirectoryEntry} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `queryDirectoryContentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   queryDirectoryContentsStream(
-    request?: protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        workspace: request.workspace ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'workspace': request.workspace ?? '',
+    });
     const defaultCallSettings = this._defaults['queryDirectoryContents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('queryDirectoryContents stream %j', request);
     return this.descriptors.page.queryDirectoryContents.createStream(
       this.innerApiCalls.queryDirectoryContents as GaxCall,
@@ -7087,57 +5573,56 @@ export class DataformClient {
     );
   }
 
-  /**
-   * Equivalent to `queryDirectoryContents`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.workspace
-   *   Required. The workspace's name.
-   * @param {string} [request.path]
-   *   Optional. The directory's full path including directory name, relative to
-   *   the workspace root. If left unset, the workspace root is used.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of paths to return. The server may return fewer
-   *   items than requested. If unspecified, the server will pick an appropriate
-   *   default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `QueryDirectoryContents`
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `QueryDirectoryContents`, with the exception of `page_size`, must match the
-   *   call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.dataform.v1beta1.DirectoryEntry|DirectoryEntry}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.query_directory_contents.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_QueryDirectoryContents_async
-   */
+/**
+ * Equivalent to `queryDirectoryContents`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.workspace
+ *   Required. The workspace's name.
+ * @param {string} [request.path]
+ *   Optional. The directory's full path including directory name, relative to
+ *   the workspace root. If left unset, the workspace root is used.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of paths to return. The server may return fewer
+ *   items than requested. If unspecified, the server will pick an appropriate
+ *   default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `QueryDirectoryContents`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `QueryDirectoryContents`, with the exception of `page_size`, must match the
+ *   call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.dataform.v1beta1.DirectoryEntry|DirectoryEntry}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.query_directory_contents.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_QueryDirectoryContents_async
+ */
   queryDirectoryContentsAsync(
-    request?: protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dataform.v1beta1.IDirectoryEntry> {
+      request?: protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.dataform.v1beta1.IDirectoryEntry>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        workspace: request.workspace ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'workspace': request.workspace ?? '',
+    });
     const defaultCallSettings = this._defaults['queryDirectoryContents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('queryDirectoryContents iterate %j', request);
     return this.descriptors.page.queryDirectoryContents.asyncIterate(
       this.innerApiCalls['queryDirectoryContents'] as GaxCall,
@@ -7145,123 +5630,98 @@ export class DataformClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataform.v1beta1.IDirectoryEntry>;
   }
-  /**
-   * Finds the contents of a given Workspace directory by filter.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.workspace
-   *   Required. The workspace's name.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of search results to return. The server may return
-   *   fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `SearchFilesRequest`
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `SearchFilesRequest`,
-   *   with the exception of `page_size`, must match the call that provided the
-   *   page token.
-   * @param {string} [request.filter]
-   *   Optional. Optional filter for the returned list in filtering format.
-   *   Filtering is only currently supported on the `path` field.
-   *   See https://google.aip.dev/160 for details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1beta1.SearchResult|SearchResult}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `searchFilesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Finds the contents of a given Workspace directory by filter.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.workspace
+ *   Required. The workspace's name.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of search results to return. The server may return
+ *   fewer items than requested. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `SearchFilesRequest`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `SearchFilesRequest`,
+ *   with the exception of `page_size`, must match the call that provided the
+ *   page token.
+ * @param {string} [request.filter]
+ *   Optional. Optional filter for the returned list in filtering format.
+ *   Filtering is only currently supported on the `path` field.
+ *   See https://google.aip.dev/160 for details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1beta1.SearchResult|SearchResult}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `searchFilesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchFiles(
-    request?: protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.ISearchResult[],
-      protos.google.cloud.dataform.v1beta1.ISearchFilesRequest | null,
-      protos.google.cloud.dataform.v1beta1.ISearchFilesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.ISearchResult[],
+        protos.google.cloud.dataform.v1beta1.ISearchFilesRequest|null,
+        protos.google.cloud.dataform.v1beta1.ISearchFilesResponse
+      ]>;
   searchFiles(
-    request: protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
-      | protos.google.cloud.dataform.v1beta1.ISearchFilesResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.ISearchResult
-    >
-  ): void;
-  searchFiles(
-    request: protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
-      | protos.google.cloud.dataform.v1beta1.ISearchFilesResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.ISearchResult
-    >
-  ): void;
-  searchFiles(
-    request?: protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
-          | protos.google.cloud.dataform.v1beta1.ISearchFilesResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataform.v1beta1.ISearchResult
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
-      | protos.google.cloud.dataform.v1beta1.ISearchFilesResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.ISearchResult
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.ISearchResult[],
-      protos.google.cloud.dataform.v1beta1.ISearchFilesRequest | null,
-      protos.google.cloud.dataform.v1beta1.ISearchFilesResponse,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.ISearchFilesResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.ISearchResult>): void;
+  searchFiles(
+      request: protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
+          protos.google.cloud.dataform.v1beta1.ISearchFilesResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.ISearchResult>): void;
+  searchFiles(
+      request?: protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
+          protos.google.cloud.dataform.v1beta1.ISearchFilesResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.ISearchResult>,
+      callback?: PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
+          protos.google.cloud.dataform.v1beta1.ISearchFilesResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.ISearchResult>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.ISearchResult[],
+        protos.google.cloud.dataform.v1beta1.ISearchFilesRequest|null,
+        protos.google.cloud.dataform.v1beta1.ISearchFilesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        workspace: request.workspace ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'workspace': request.workspace ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
-          | protos.google.cloud.dataform.v1beta1.ISearchFilesResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataform.v1beta1.ISearchResult
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
+      protos.google.cloud.dataform.v1beta1.ISearchFilesResponse|null|undefined,
+      protos.google.cloud.dataform.v1beta1.ISearchResult>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('searchFiles values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -7270,67 +5730,64 @@ export class DataformClient {
     this._log.info('searchFiles request %j', request);
     return this.innerApiCalls
       .searchFiles(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.dataform.v1beta1.ISearchResult[],
-          protos.google.cloud.dataform.v1beta1.ISearchFilesRequest | null,
-          protos.google.cloud.dataform.v1beta1.ISearchFilesResponse,
-        ]) => {
-          this._log.info('searchFiles values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.dataform.v1beta1.ISearchResult[],
+        protos.google.cloud.dataform.v1beta1.ISearchFilesRequest|null,
+        protos.google.cloud.dataform.v1beta1.ISearchFilesResponse
+      ]) => {
+        this._log.info('searchFiles values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `searchFiles`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.workspace
-   *   Required. The workspace's name.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of search results to return. The server may return
-   *   fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `SearchFilesRequest`
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `SearchFilesRequest`,
-   *   with the exception of `page_size`, must match the call that provided the
-   *   page token.
-   * @param {string} [request.filter]
-   *   Optional. Optional filter for the returned list in filtering format.
-   *   Filtering is only currently supported on the `path` field.
-   *   See https://google.aip.dev/160 for details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1beta1.SearchResult|SearchResult} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `searchFilesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `searchFiles`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.workspace
+ *   Required. The workspace's name.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of search results to return. The server may return
+ *   fewer items than requested. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `SearchFilesRequest`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `SearchFilesRequest`,
+ *   with the exception of `page_size`, must match the call that provided the
+ *   page token.
+ * @param {string} [request.filter]
+ *   Optional. Optional filter for the returned list in filtering format.
+ *   Filtering is only currently supported on the `path` field.
+ *   See https://google.aip.dev/160 for details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1beta1.SearchResult|SearchResult} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `searchFilesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchFilesStream(
-    request?: protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        workspace: request.workspace ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'workspace': request.workspace ?? '',
+    });
     const defaultCallSettings = this._defaults['searchFiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchFiles stream %j', request);
     return this.descriptors.page.searchFiles.createStream(
       this.innerApiCalls.searchFiles as GaxCall,
@@ -7339,58 +5796,57 @@ export class DataformClient {
     );
   }
 
-  /**
-   * Equivalent to `searchFiles`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.workspace
-   *   Required. The workspace's name.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of search results to return. The server may return
-   *   fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `SearchFilesRequest`
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `SearchFilesRequest`,
-   *   with the exception of `page_size`, must match the call that provided the
-   *   page token.
-   * @param {string} [request.filter]
-   *   Optional. Optional filter for the returned list in filtering format.
-   *   Filtering is only currently supported on the `path` field.
-   *   See https://google.aip.dev/160 for details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.dataform.v1beta1.SearchResult|SearchResult}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.search_files.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_SearchFiles_async
-   */
+/**
+ * Equivalent to `searchFiles`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.workspace
+ *   Required. The workspace's name.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of search results to return. The server may return
+ *   fewer items than requested. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `SearchFilesRequest`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `SearchFilesRequest`,
+ *   with the exception of `page_size`, must match the call that provided the
+ *   page token.
+ * @param {string} [request.filter]
+ *   Optional. Optional filter for the returned list in filtering format.
+ *   Filtering is only currently supported on the `path` field.
+ *   See https://google.aip.dev/160 for details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.dataform.v1beta1.SearchResult|SearchResult}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.search_files.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_SearchFiles_async
+ */
   searchFilesAsync(
-    request?: protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dataform.v1beta1.ISearchResult> {
+      request?: protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.dataform.v1beta1.ISearchResult>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        workspace: request.workspace ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'workspace': request.workspace ?? '',
+    });
     const defaultCallSettings = this._defaults['searchFiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchFiles iterate %j', request);
     return this.descriptors.page.searchFiles.asyncIterate(
       this.innerApiCalls['searchFiles'] as GaxCall,
@@ -7398,120 +5854,95 @@ export class DataformClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataform.v1beta1.ISearchResult>;
   }
-  /**
-   * Lists ReleaseConfigs in a given Repository.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The repository in which to list release configs. Must be in the
-   *   format `projects/* /locations/* /repositories/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of release configs to return. The server may
-   *   return fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListReleaseConfigs` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListReleaseConfigs`,
-   *   with the exception of `page_size`, must match the call that provided the
-   *   page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1beta1.ReleaseConfig|ReleaseConfig}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listReleaseConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists ReleaseConfigs in a given Repository.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The repository in which to list release configs. Must be in the
+ *   format `projects/* /locations/* /repositories/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of release configs to return. The server may
+ *   return fewer items than requested. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListReleaseConfigs` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListReleaseConfigs`,
+ *   with the exception of `page_size`, must match the call that provided the
+ *   page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1beta1.ReleaseConfig|ReleaseConfig}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listReleaseConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listReleaseConfigs(
-    request?: protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IReleaseConfig[],
-      protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest | null,
-      protos.google.cloud.dataform.v1beta1.IListReleaseConfigsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IReleaseConfig[],
+        protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest|null,
+        protos.google.cloud.dataform.v1beta1.IListReleaseConfigsResponse
+      ]>;
   listReleaseConfigs(
-    request: protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest,
-      | protos.google.cloud.dataform.v1beta1.IListReleaseConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.IReleaseConfig
-    >
-  ): void;
-  listReleaseConfigs(
-    request: protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest,
-      | protos.google.cloud.dataform.v1beta1.IListReleaseConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.IReleaseConfig
-    >
-  ): void;
-  listReleaseConfigs(
-    request?: protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest,
-          | protos.google.cloud.dataform.v1beta1.IListReleaseConfigsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataform.v1beta1.IReleaseConfig
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest,
-      | protos.google.cloud.dataform.v1beta1.IListReleaseConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.IReleaseConfig
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IReleaseConfig[],
-      protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest | null,
-      protos.google.cloud.dataform.v1beta1.IListReleaseConfigsResponse,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IListReleaseConfigsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IReleaseConfig>): void;
+  listReleaseConfigs(
+      request: protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest,
+          protos.google.cloud.dataform.v1beta1.IListReleaseConfigsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IReleaseConfig>): void;
+  listReleaseConfigs(
+      request?: protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest,
+          protos.google.cloud.dataform.v1beta1.IListReleaseConfigsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IReleaseConfig>,
+      callback?: PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest,
+          protos.google.cloud.dataform.v1beta1.IListReleaseConfigsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IReleaseConfig>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IReleaseConfig[],
+        protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest|null,
+        protos.google.cloud.dataform.v1beta1.IListReleaseConfigsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest,
-          | protos.google.cloud.dataform.v1beta1.IListReleaseConfigsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataform.v1beta1.IReleaseConfig
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest,
+      protos.google.cloud.dataform.v1beta1.IListReleaseConfigsResponse|null|undefined,
+      protos.google.cloud.dataform.v1beta1.IReleaseConfig>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listReleaseConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -7520,64 +5951,61 @@ export class DataformClient {
     this._log.info('listReleaseConfigs request %j', request);
     return this.innerApiCalls
       .listReleaseConfigs(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.dataform.v1beta1.IReleaseConfig[],
-          protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest | null,
-          protos.google.cloud.dataform.v1beta1.IListReleaseConfigsResponse,
-        ]) => {
-          this._log.info('listReleaseConfigs values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.dataform.v1beta1.IReleaseConfig[],
+        protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest|null,
+        protos.google.cloud.dataform.v1beta1.IListReleaseConfigsResponse
+      ]) => {
+        this._log.info('listReleaseConfigs values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listReleaseConfigs`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The repository in which to list release configs. Must be in the
-   *   format `projects/* /locations/* /repositories/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of release configs to return. The server may
-   *   return fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListReleaseConfigs` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListReleaseConfigs`,
-   *   with the exception of `page_size`, must match the call that provided the
-   *   page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1beta1.ReleaseConfig|ReleaseConfig} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listReleaseConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listReleaseConfigs`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The repository in which to list release configs. Must be in the
+ *   format `projects/* /locations/* /repositories/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of release configs to return. The server may
+ *   return fewer items than requested. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListReleaseConfigs` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListReleaseConfigs`,
+ *   with the exception of `page_size`, must match the call that provided the
+ *   page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1beta1.ReleaseConfig|ReleaseConfig} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listReleaseConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listReleaseConfigsStream(
-    request?: protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listReleaseConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listReleaseConfigs stream %j', request);
     return this.descriptors.page.listReleaseConfigs.createStream(
       this.innerApiCalls.listReleaseConfigs as GaxCall,
@@ -7586,55 +6014,54 @@ export class DataformClient {
     );
   }
 
-  /**
-   * Equivalent to `listReleaseConfigs`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The repository in which to list release configs. Must be in the
-   *   format `projects/* /locations/* /repositories/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of release configs to return. The server may
-   *   return fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListReleaseConfigs` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListReleaseConfigs`,
-   *   with the exception of `page_size`, must match the call that provided the
-   *   page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.dataform.v1beta1.ReleaseConfig|ReleaseConfig}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.list_release_configs.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_ListReleaseConfigs_async
-   */
+/**
+ * Equivalent to `listReleaseConfigs`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The repository in which to list release configs. Must be in the
+ *   format `projects/* /locations/* /repositories/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of release configs to return. The server may
+ *   return fewer items than requested. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListReleaseConfigs` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListReleaseConfigs`,
+ *   with the exception of `page_size`, must match the call that provided the
+ *   page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.dataform.v1beta1.ReleaseConfig|ReleaseConfig}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.list_release_configs.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_ListReleaseConfigs_async
+ */
   listReleaseConfigsAsync(
-    request?: protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dataform.v1beta1.IReleaseConfig> {
+      request?: protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.dataform.v1beta1.IReleaseConfig>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listReleaseConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listReleaseConfigs iterate %j', request);
     return this.descriptors.page.listReleaseConfigs.asyncIterate(
       this.innerApiCalls['listReleaseConfigs'] as GaxCall,
@@ -7642,126 +6069,101 @@ export class DataformClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataform.v1beta1.IReleaseConfig>;
   }
-  /**
-   * Lists CompilationResults in a given Repository.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The repository in which to list compilation results. Must be in
-   *   the format `projects/* /locations/* /repositories/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of compilation results to return. The server may
-   *   return fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListCompilationResults`
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListCompilationResults`,
-   *   with the exception of `page_size`, must match the call that provided the
-   *   page token.
-   * @param {string} [request.orderBy]
-   *   Optional. This field only supports ordering by `name` and `create_time`.
-   *   If unspecified, the server will choose the ordering.
-   *   If specified, the default order is ascending for the `name` field.
-   * @param {string} [request.filter]
-   *   Optional. Filter for the returned list.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1beta1.CompilationResult|CompilationResult}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listCompilationResultsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists CompilationResults in a given Repository.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The repository in which to list compilation results. Must be in
+ *   the format `projects/* /locations/* /repositories/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of compilation results to return. The server may
+ *   return fewer items than requested. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListCompilationResults`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListCompilationResults`,
+ *   with the exception of `page_size`, must match the call that provided the
+ *   page token.
+ * @param {string} [request.orderBy]
+ *   Optional. This field only supports ordering by `name` and `create_time`.
+ *   If unspecified, the server will choose the ordering.
+ *   If specified, the default order is ascending for the `name` field.
+ * @param {string} [request.filter]
+ *   Optional. Filter for the returned list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1beta1.CompilationResult|CompilationResult}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listCompilationResultsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCompilationResults(
-    request?: protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.ICompilationResult[],
-      protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest | null,
-      protos.google.cloud.dataform.v1beta1.IListCompilationResultsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.ICompilationResult[],
+        protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest|null,
+        protos.google.cloud.dataform.v1beta1.IListCompilationResultsResponse
+      ]>;
   listCompilationResults(
-    request: protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest,
-      | protos.google.cloud.dataform.v1beta1.IListCompilationResultsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.ICompilationResult
-    >
-  ): void;
-  listCompilationResults(
-    request: protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest,
-      | protos.google.cloud.dataform.v1beta1.IListCompilationResultsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.ICompilationResult
-    >
-  ): void;
-  listCompilationResults(
-    request?: protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest,
-          | protos.google.cloud.dataform.v1beta1.IListCompilationResultsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataform.v1beta1.ICompilationResult
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest,
-      | protos.google.cloud.dataform.v1beta1.IListCompilationResultsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.ICompilationResult
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.ICompilationResult[],
-      protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest | null,
-      protos.google.cloud.dataform.v1beta1.IListCompilationResultsResponse,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IListCompilationResultsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.ICompilationResult>): void;
+  listCompilationResults(
+      request: protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest,
+          protos.google.cloud.dataform.v1beta1.IListCompilationResultsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.ICompilationResult>): void;
+  listCompilationResults(
+      request?: protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest,
+          protos.google.cloud.dataform.v1beta1.IListCompilationResultsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.ICompilationResult>,
+      callback?: PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest,
+          protos.google.cloud.dataform.v1beta1.IListCompilationResultsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.ICompilationResult>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.ICompilationResult[],
+        protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest|null,
+        protos.google.cloud.dataform.v1beta1.IListCompilationResultsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest,
-          | protos.google.cloud.dataform.v1beta1.IListCompilationResultsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataform.v1beta1.ICompilationResult
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest,
+      protos.google.cloud.dataform.v1beta1.IListCompilationResultsResponse|null|undefined,
+      protos.google.cloud.dataform.v1beta1.ICompilationResult>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listCompilationResults values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -7770,70 +6172,67 @@ export class DataformClient {
     this._log.info('listCompilationResults request %j', request);
     return this.innerApiCalls
       .listCompilationResults(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.dataform.v1beta1.ICompilationResult[],
-          protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest | null,
-          protos.google.cloud.dataform.v1beta1.IListCompilationResultsResponse,
-        ]) => {
-          this._log.info('listCompilationResults values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.dataform.v1beta1.ICompilationResult[],
+        protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest|null,
+        protos.google.cloud.dataform.v1beta1.IListCompilationResultsResponse
+      ]) => {
+        this._log.info('listCompilationResults values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listCompilationResults`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The repository in which to list compilation results. Must be in
-   *   the format `projects/* /locations/* /repositories/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of compilation results to return. The server may
-   *   return fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListCompilationResults`
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListCompilationResults`,
-   *   with the exception of `page_size`, must match the call that provided the
-   *   page token.
-   * @param {string} [request.orderBy]
-   *   Optional. This field only supports ordering by `name` and `create_time`.
-   *   If unspecified, the server will choose the ordering.
-   *   If specified, the default order is ascending for the `name` field.
-   * @param {string} [request.filter]
-   *   Optional. Filter for the returned list.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1beta1.CompilationResult|CompilationResult} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listCompilationResultsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listCompilationResults`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The repository in which to list compilation results. Must be in
+ *   the format `projects/* /locations/* /repositories/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of compilation results to return. The server may
+ *   return fewer items than requested. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListCompilationResults`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListCompilationResults`,
+ *   with the exception of `page_size`, must match the call that provided the
+ *   page token.
+ * @param {string} [request.orderBy]
+ *   Optional. This field only supports ordering by `name` and `create_time`.
+ *   If unspecified, the server will choose the ordering.
+ *   If specified, the default order is ascending for the `name` field.
+ * @param {string} [request.filter]
+ *   Optional. Filter for the returned list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1beta1.CompilationResult|CompilationResult} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listCompilationResultsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCompilationResultsStream(
-    request?: protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCompilationResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCompilationResults stream %j', request);
     return this.descriptors.page.listCompilationResults.createStream(
       this.innerApiCalls.listCompilationResults as GaxCall,
@@ -7842,61 +6241,60 @@ export class DataformClient {
     );
   }
 
-  /**
-   * Equivalent to `listCompilationResults`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The repository in which to list compilation results. Must be in
-   *   the format `projects/* /locations/* /repositories/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of compilation results to return. The server may
-   *   return fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListCompilationResults`
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListCompilationResults`,
-   *   with the exception of `page_size`, must match the call that provided the
-   *   page token.
-   * @param {string} [request.orderBy]
-   *   Optional. This field only supports ordering by `name` and `create_time`.
-   *   If unspecified, the server will choose the ordering.
-   *   If specified, the default order is ascending for the `name` field.
-   * @param {string} [request.filter]
-   *   Optional. Filter for the returned list.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.dataform.v1beta1.CompilationResult|CompilationResult}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.list_compilation_results.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_ListCompilationResults_async
-   */
+/**
+ * Equivalent to `listCompilationResults`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The repository in which to list compilation results. Must be in
+ *   the format `projects/* /locations/* /repositories/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of compilation results to return. The server may
+ *   return fewer items than requested. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListCompilationResults`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListCompilationResults`,
+ *   with the exception of `page_size`, must match the call that provided the
+ *   page token.
+ * @param {string} [request.orderBy]
+ *   Optional. This field only supports ordering by `name` and `create_time`.
+ *   If unspecified, the server will choose the ordering.
+ *   If specified, the default order is ascending for the `name` field.
+ * @param {string} [request.filter]
+ *   Optional. Filter for the returned list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.dataform.v1beta1.CompilationResult|CompilationResult}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.list_compilation_results.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_ListCompilationResults_async
+ */
   listCompilationResultsAsync(
-    request?: protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dataform.v1beta1.ICompilationResult> {
+      request?: protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.dataform.v1beta1.ICompilationResult>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCompilationResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCompilationResults iterate %j', request);
     return this.descriptors.page.listCompilationResults.asyncIterate(
       this.innerApiCalls['listCompilationResults'] as GaxCall,
@@ -7904,123 +6302,98 @@ export class DataformClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataform.v1beta1.ICompilationResult>;
   }
-  /**
-   * Returns CompilationResultActions in a given CompilationResult.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The compilation result's name.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of compilation results to return. The server may
-   *   return fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous
-   *   `QueryCompilationResultActions` call. Provide this to retrieve the
-   *   subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `QueryCompilationResultActions`, with the exception of `page_size`, must
-   *   match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. Optional filter for the returned list. Filtering is only
-   *   currently supported on the `file_path` field.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1beta1.CompilationResultAction|CompilationResultAction}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `queryCompilationResultActionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Returns CompilationResultActions in a given CompilationResult.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The compilation result's name.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of compilation results to return. The server may
+ *   return fewer items than requested. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous
+ *   `QueryCompilationResultActions` call. Provide this to retrieve the
+ *   subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `QueryCompilationResultActions`, with the exception of `page_size`, must
+ *   match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. Optional filter for the returned list. Filtering is only
+ *   currently supported on the `file_path` field.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1beta1.CompilationResultAction|CompilationResultAction}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `queryCompilationResultActionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   queryCompilationResultActions(
-    request?: protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.ICompilationResultAction[],
-      protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest | null,
-      protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.ICompilationResultAction[],
+        protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest|null,
+        protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsResponse
+      ]>;
   queryCompilationResultActions(
-    request: protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest,
-      | protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.ICompilationResultAction
-    >
-  ): void;
-  queryCompilationResultActions(
-    request: protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest,
-      | protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.ICompilationResultAction
-    >
-  ): void;
-  queryCompilationResultActions(
-    request?: protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest,
-          | protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataform.v1beta1.ICompilationResultAction
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest,
-      | protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.ICompilationResultAction
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.ICompilationResultAction[],
-      protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest | null,
-      protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsResponse,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.ICompilationResultAction>): void;
+  queryCompilationResultActions(
+      request: protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest,
+          protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.ICompilationResultAction>): void;
+  queryCompilationResultActions(
+      request?: protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest,
+          protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.ICompilationResultAction>,
+      callback?: PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest,
+          protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.ICompilationResultAction>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.ICompilationResultAction[],
+        protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest|null,
+        protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest,
-          | protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataform.v1beta1.ICompilationResultAction
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest,
+      protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsResponse|null|undefined,
+      protos.google.cloud.dataform.v1beta1.ICompilationResultAction>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('queryCompilationResultActions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -8029,67 +6402,64 @@ export class DataformClient {
     this._log.info('queryCompilationResultActions request %j', request);
     return this.innerApiCalls
       .queryCompilationResultActions(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.dataform.v1beta1.ICompilationResultAction[],
-          protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest | null,
-          protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsResponse,
-        ]) => {
-          this._log.info('queryCompilationResultActions values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.dataform.v1beta1.ICompilationResultAction[],
+        protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest|null,
+        protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsResponse
+      ]) => {
+        this._log.info('queryCompilationResultActions values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `queryCompilationResultActions`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The compilation result's name.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of compilation results to return. The server may
-   *   return fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous
-   *   `QueryCompilationResultActions` call. Provide this to retrieve the
-   *   subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `QueryCompilationResultActions`, with the exception of `page_size`, must
-   *   match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. Optional filter for the returned list. Filtering is only
-   *   currently supported on the `file_path` field.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1beta1.CompilationResultAction|CompilationResultAction} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `queryCompilationResultActionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `queryCompilationResultActions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The compilation result's name.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of compilation results to return. The server may
+ *   return fewer items than requested. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous
+ *   `QueryCompilationResultActions` call. Provide this to retrieve the
+ *   subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `QueryCompilationResultActions`, with the exception of `page_size`, must
+ *   match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. Optional filter for the returned list. Filtering is only
+ *   currently supported on the `file_path` field.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1beta1.CompilationResultAction|CompilationResultAction} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `queryCompilationResultActionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   queryCompilationResultActionsStream(
-    request?: protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     const defaultCallSettings = this._defaults['queryCompilationResultActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('queryCompilationResultActions stream %j', request);
     return this.descriptors.page.queryCompilationResultActions.createStream(
       this.innerApiCalls.queryCompilationResultActions as GaxCall,
@@ -8098,58 +6468,57 @@ export class DataformClient {
     );
   }
 
-  /**
-   * Equivalent to `queryCompilationResultActions`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The compilation result's name.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of compilation results to return. The server may
-   *   return fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous
-   *   `QueryCompilationResultActions` call. Provide this to retrieve the
-   *   subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `QueryCompilationResultActions`, with the exception of `page_size`, must
-   *   match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. Optional filter for the returned list. Filtering is only
-   *   currently supported on the `file_path` field.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.dataform.v1beta1.CompilationResultAction|CompilationResultAction}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.query_compilation_result_actions.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_QueryCompilationResultActions_async
-   */
+/**
+ * Equivalent to `queryCompilationResultActions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The compilation result's name.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of compilation results to return. The server may
+ *   return fewer items than requested. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous
+ *   `QueryCompilationResultActions` call. Provide this to retrieve the
+ *   subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `QueryCompilationResultActions`, with the exception of `page_size`, must
+ *   match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. Optional filter for the returned list. Filtering is only
+ *   currently supported on the `file_path` field.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.dataform.v1beta1.CompilationResultAction|CompilationResultAction}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.query_compilation_result_actions.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_QueryCompilationResultActions_async
+ */
   queryCompilationResultActionsAsync(
-    request?: protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dataform.v1beta1.ICompilationResultAction> {
+      request?: protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.dataform.v1beta1.ICompilationResultAction>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     const defaultCallSettings = this._defaults['queryCompilationResultActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('queryCompilationResultActions iterate %j', request);
     return this.descriptors.page.queryCompilationResultActions.asyncIterate(
       this.innerApiCalls['queryCompilationResultActions'] as GaxCall,
@@ -8157,120 +6526,95 @@ export class DataformClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataform.v1beta1.ICompilationResultAction>;
   }
-  /**
-   * Lists WorkflowConfigs in a given Repository.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The repository in which to list workflow configs. Must be in the
-   *   format `projects/* /locations/* /repositories/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of workflow configs to return. The server may
-   *   return fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListWorkflowConfigs` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListWorkflowConfigs`,
-   *   with the exception of `page_size`, must match the call that provided the
-   *   page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1beta1.WorkflowConfig|WorkflowConfig}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listWorkflowConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists WorkflowConfigs in a given Repository.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The repository in which to list workflow configs. Must be in the
+ *   format `projects/* /locations/* /repositories/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of workflow configs to return. The server may
+ *   return fewer items than requested. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListWorkflowConfigs` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListWorkflowConfigs`,
+ *   with the exception of `page_size`, must match the call that provided the
+ *   page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1beta1.WorkflowConfig|WorkflowConfig}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listWorkflowConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listWorkflowConfigs(
-    request?: protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IWorkflowConfig[],
-      protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest | null,
-      protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IWorkflowConfig[],
+        protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest|null,
+        protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsResponse
+      ]>;
   listWorkflowConfigs(
-    request: protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest,
-      | protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.IWorkflowConfig
-    >
-  ): void;
-  listWorkflowConfigs(
-    request: protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest,
-      | protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.IWorkflowConfig
-    >
-  ): void;
-  listWorkflowConfigs(
-    request?: protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest,
-          | protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataform.v1beta1.IWorkflowConfig
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest,
-      | protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.IWorkflowConfig
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IWorkflowConfig[],
-      protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest | null,
-      protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsResponse,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IWorkflowConfig>): void;
+  listWorkflowConfigs(
+      request: protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest,
+          protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IWorkflowConfig>): void;
+  listWorkflowConfigs(
+      request?: protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest,
+          protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IWorkflowConfig>,
+      callback?: PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest,
+          protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IWorkflowConfig>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IWorkflowConfig[],
+        protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest|null,
+        protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest,
-          | protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataform.v1beta1.IWorkflowConfig
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest,
+      protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsResponse|null|undefined,
+      protos.google.cloud.dataform.v1beta1.IWorkflowConfig>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listWorkflowConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -8279,64 +6623,61 @@ export class DataformClient {
     this._log.info('listWorkflowConfigs request %j', request);
     return this.innerApiCalls
       .listWorkflowConfigs(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.dataform.v1beta1.IWorkflowConfig[],
-          protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest | null,
-          protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsResponse,
-        ]) => {
-          this._log.info('listWorkflowConfigs values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.dataform.v1beta1.IWorkflowConfig[],
+        protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest|null,
+        protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsResponse
+      ]) => {
+        this._log.info('listWorkflowConfigs values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listWorkflowConfigs`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The repository in which to list workflow configs. Must be in the
-   *   format `projects/* /locations/* /repositories/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of workflow configs to return. The server may
-   *   return fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListWorkflowConfigs` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListWorkflowConfigs`,
-   *   with the exception of `page_size`, must match the call that provided the
-   *   page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1beta1.WorkflowConfig|WorkflowConfig} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listWorkflowConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listWorkflowConfigs`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The repository in which to list workflow configs. Must be in the
+ *   format `projects/* /locations/* /repositories/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of workflow configs to return. The server may
+ *   return fewer items than requested. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListWorkflowConfigs` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListWorkflowConfigs`,
+ *   with the exception of `page_size`, must match the call that provided the
+ *   page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1beta1.WorkflowConfig|WorkflowConfig} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listWorkflowConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listWorkflowConfigsStream(
-    request?: protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listWorkflowConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listWorkflowConfigs stream %j', request);
     return this.descriptors.page.listWorkflowConfigs.createStream(
       this.innerApiCalls.listWorkflowConfigs as GaxCall,
@@ -8345,55 +6686,54 @@ export class DataformClient {
     );
   }
 
-  /**
-   * Equivalent to `listWorkflowConfigs`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The repository in which to list workflow configs. Must be in the
-   *   format `projects/* /locations/* /repositories/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of workflow configs to return. The server may
-   *   return fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListWorkflowConfigs` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListWorkflowConfigs`,
-   *   with the exception of `page_size`, must match the call that provided the
-   *   page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.dataform.v1beta1.WorkflowConfig|WorkflowConfig}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.list_workflow_configs.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_ListWorkflowConfigs_async
-   */
+/**
+ * Equivalent to `listWorkflowConfigs`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The repository in which to list workflow configs. Must be in the
+ *   format `projects/* /locations/* /repositories/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of workflow configs to return. The server may
+ *   return fewer items than requested. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListWorkflowConfigs` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListWorkflowConfigs`,
+ *   with the exception of `page_size`, must match the call that provided the
+ *   page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.dataform.v1beta1.WorkflowConfig|WorkflowConfig}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.list_workflow_configs.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_ListWorkflowConfigs_async
+ */
   listWorkflowConfigsAsync(
-    request?: protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dataform.v1beta1.IWorkflowConfig> {
+      request?: protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.dataform.v1beta1.IWorkflowConfig>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listWorkflowConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listWorkflowConfigs iterate %j', request);
     return this.descriptors.page.listWorkflowConfigs.asyncIterate(
       this.innerApiCalls['listWorkflowConfigs'] as GaxCall,
@@ -8401,126 +6741,101 @@ export class DataformClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataform.v1beta1.IWorkflowConfig>;
   }
-  /**
-   * Lists WorkflowInvocations in a given Repository.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource of the WorkflowInvocation type. Must be in
-   *   the format `projects/* /locations/* /repositories/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of workflow invocations to return. The server may
-   *   return fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListWorkflowInvocations`
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListWorkflowInvocations`, with the exception of `page_size`, must match
-   *   the call that provided the page token.
-   * @param {string} [request.orderBy]
-   *   Optional. This field only supports ordering by `name`. If unspecified, the
-   *   server will choose the ordering. If specified, the default order is
-   *   ascending for the `name` field.
-   * @param {string} [request.filter]
-   *   Optional. Filter for the returned list.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1beta1.WorkflowInvocation|WorkflowInvocation}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listWorkflowInvocationsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists WorkflowInvocations in a given Repository.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the WorkflowInvocation type. Must be in
+ *   the format `projects/* /locations/* /repositories/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of workflow invocations to return. The server may
+ *   return fewer items than requested. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListWorkflowInvocations`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListWorkflowInvocations`, with the exception of `page_size`, must match
+ *   the call that provided the page token.
+ * @param {string} [request.orderBy]
+ *   Optional. This field only supports ordering by `name`. If unspecified, the
+ *   server will choose the ordering. If specified, the default order is
+ *   ascending for the `name` field.
+ * @param {string} [request.filter]
+ *   Optional. Filter for the returned list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1beta1.WorkflowInvocation|WorkflowInvocation}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listWorkflowInvocationsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listWorkflowInvocations(
-    request?: protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IWorkflowInvocation[],
-      protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest | null,
-      protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IWorkflowInvocation[],
+        protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest|null,
+        protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsResponse
+      ]>;
   listWorkflowInvocations(
-    request: protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest,
-      | protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.IWorkflowInvocation
-    >
-  ): void;
-  listWorkflowInvocations(
-    request: protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest,
-      | protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.IWorkflowInvocation
-    >
-  ): void;
-  listWorkflowInvocations(
-    request?: protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest,
-          | protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataform.v1beta1.IWorkflowInvocation
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest,
-      | protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.IWorkflowInvocation
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IWorkflowInvocation[],
-      protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest | null,
-      protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsResponse,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IWorkflowInvocation>): void;
+  listWorkflowInvocations(
+      request: protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest,
+          protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IWorkflowInvocation>): void;
+  listWorkflowInvocations(
+      request?: protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest,
+          protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IWorkflowInvocation>,
+      callback?: PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest,
+          protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IWorkflowInvocation>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IWorkflowInvocation[],
+        protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest|null,
+        protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest,
-          | protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataform.v1beta1.IWorkflowInvocation
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest,
+      protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsResponse|null|undefined,
+      protos.google.cloud.dataform.v1beta1.IWorkflowInvocation>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listWorkflowInvocations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -8529,70 +6844,67 @@ export class DataformClient {
     this._log.info('listWorkflowInvocations request %j', request);
     return this.innerApiCalls
       .listWorkflowInvocations(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.dataform.v1beta1.IWorkflowInvocation[],
-          protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest | null,
-          protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsResponse,
-        ]) => {
-          this._log.info('listWorkflowInvocations values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.dataform.v1beta1.IWorkflowInvocation[],
+        protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest|null,
+        protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsResponse
+      ]) => {
+        this._log.info('listWorkflowInvocations values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listWorkflowInvocations`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource of the WorkflowInvocation type. Must be in
-   *   the format `projects/* /locations/* /repositories/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of workflow invocations to return. The server may
-   *   return fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListWorkflowInvocations`
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListWorkflowInvocations`, with the exception of `page_size`, must match
-   *   the call that provided the page token.
-   * @param {string} [request.orderBy]
-   *   Optional. This field only supports ordering by `name`. If unspecified, the
-   *   server will choose the ordering. If specified, the default order is
-   *   ascending for the `name` field.
-   * @param {string} [request.filter]
-   *   Optional. Filter for the returned list.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1beta1.WorkflowInvocation|WorkflowInvocation} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listWorkflowInvocationsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listWorkflowInvocations`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the WorkflowInvocation type. Must be in
+ *   the format `projects/* /locations/* /repositories/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of workflow invocations to return. The server may
+ *   return fewer items than requested. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListWorkflowInvocations`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListWorkflowInvocations`, with the exception of `page_size`, must match
+ *   the call that provided the page token.
+ * @param {string} [request.orderBy]
+ *   Optional. This field only supports ordering by `name`. If unspecified, the
+ *   server will choose the ordering. If specified, the default order is
+ *   ascending for the `name` field.
+ * @param {string} [request.filter]
+ *   Optional. Filter for the returned list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1beta1.WorkflowInvocation|WorkflowInvocation} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listWorkflowInvocationsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listWorkflowInvocationsStream(
-    request?: protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listWorkflowInvocations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listWorkflowInvocations stream %j', request);
     return this.descriptors.page.listWorkflowInvocations.createStream(
       this.innerApiCalls.listWorkflowInvocations as GaxCall,
@@ -8601,61 +6913,60 @@ export class DataformClient {
     );
   }
 
-  /**
-   * Equivalent to `listWorkflowInvocations`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource of the WorkflowInvocation type. Must be in
-   *   the format `projects/* /locations/* /repositories/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of workflow invocations to return. The server may
-   *   return fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListWorkflowInvocations`
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListWorkflowInvocations`, with the exception of `page_size`, must match
-   *   the call that provided the page token.
-   * @param {string} [request.orderBy]
-   *   Optional. This field only supports ordering by `name`. If unspecified, the
-   *   server will choose the ordering. If specified, the default order is
-   *   ascending for the `name` field.
-   * @param {string} [request.filter]
-   *   Optional. Filter for the returned list.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.dataform.v1beta1.WorkflowInvocation|WorkflowInvocation}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.list_workflow_invocations.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_ListWorkflowInvocations_async
-   */
+/**
+ * Equivalent to `listWorkflowInvocations`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the WorkflowInvocation type. Must be in
+ *   the format `projects/* /locations/* /repositories/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of workflow invocations to return. The server may
+ *   return fewer items than requested. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListWorkflowInvocations`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListWorkflowInvocations`, with the exception of `page_size`, must match
+ *   the call that provided the page token.
+ * @param {string} [request.orderBy]
+ *   Optional. This field only supports ordering by `name`. If unspecified, the
+ *   server will choose the ordering. If specified, the default order is
+ *   ascending for the `name` field.
+ * @param {string} [request.filter]
+ *   Optional. Filter for the returned list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.dataform.v1beta1.WorkflowInvocation|WorkflowInvocation}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.list_workflow_invocations.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_ListWorkflowInvocations_async
+ */
   listWorkflowInvocationsAsync(
-    request?: protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dataform.v1beta1.IWorkflowInvocation> {
+      request?: protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.dataform.v1beta1.IWorkflowInvocation>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listWorkflowInvocations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listWorkflowInvocations iterate %j', request);
     return this.descriptors.page.listWorkflowInvocations.asyncIterate(
       this.innerApiCalls['listWorkflowInvocations'] as GaxCall,
@@ -8663,120 +6974,95 @@ export class DataformClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataform.v1beta1.IWorkflowInvocation>;
   }
-  /**
-   * Returns WorkflowInvocationActions in a given WorkflowInvocation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The workflow invocation's name.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of workflow invocations to return. The server may
-   *   return fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous
-   *   `QueryWorkflowInvocationActions` call. Provide this to retrieve the
-   *   subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `QueryWorkflowInvocationActions`, with the exception of `page_size`, must
-   *   match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1beta1.WorkflowInvocationAction|WorkflowInvocationAction}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `queryWorkflowInvocationActionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Returns WorkflowInvocationActions in a given WorkflowInvocation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The workflow invocation's name.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of workflow invocations to return. The server may
+ *   return fewer items than requested. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous
+ *   `QueryWorkflowInvocationActions` call. Provide this to retrieve the
+ *   subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `QueryWorkflowInvocationActions`, with the exception of `page_size`, must
+ *   match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1beta1.WorkflowInvocationAction|WorkflowInvocationAction}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `queryWorkflowInvocationActionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   queryWorkflowInvocationActions(
-    request?: protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IWorkflowInvocationAction[],
-      protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest | null,
-      protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IWorkflowInvocationAction[],
+        protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest|null,
+        protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsResponse
+      ]>;
   queryWorkflowInvocationActions(
-    request: protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest,
-      | protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.IWorkflowInvocationAction
-    >
-  ): void;
-  queryWorkflowInvocationActions(
-    request: protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest,
-      | protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.IWorkflowInvocationAction
-    >
-  ): void;
-  queryWorkflowInvocationActions(
-    request?: protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest,
-          | protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataform.v1beta1.IWorkflowInvocationAction
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest,
-      | protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataform.v1beta1.IWorkflowInvocationAction
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataform.v1beta1.IWorkflowInvocationAction[],
-      protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest | null,
-      protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsResponse,
-    ]
-  > | void {
+          protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IWorkflowInvocationAction>): void;
+  queryWorkflowInvocationActions(
+      request: protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest,
+          protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IWorkflowInvocationAction>): void;
+  queryWorkflowInvocationActions(
+      request?: protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest,
+          protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IWorkflowInvocationAction>,
+      callback?: PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest,
+          protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsResponse|null|undefined,
+          protos.google.cloud.dataform.v1beta1.IWorkflowInvocationAction>):
+      Promise<[
+        protos.google.cloud.dataform.v1beta1.IWorkflowInvocationAction[],
+        protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest|null,
+        protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest,
-          | protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataform.v1beta1.IWorkflowInvocationAction
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest,
+      protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsResponse|null|undefined,
+      protos.google.cloud.dataform.v1beta1.IWorkflowInvocationAction>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('queryWorkflowInvocationActions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -8785,65 +7071,61 @@ export class DataformClient {
     this._log.info('queryWorkflowInvocationActions request %j', request);
     return this.innerApiCalls
       .queryWorkflowInvocationActions(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.dataform.v1beta1.IWorkflowInvocationAction[],
-          protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest | null,
-          protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsResponse,
-        ]) => {
-          this._log.info('queryWorkflowInvocationActions values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.dataform.v1beta1.IWorkflowInvocationAction[],
+        protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest|null,
+        protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsResponse
+      ]) => {
+        this._log.info('queryWorkflowInvocationActions values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `queryWorkflowInvocationActions`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The workflow invocation's name.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of workflow invocations to return. The server may
-   *   return fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous
-   *   `QueryWorkflowInvocationActions` call. Provide this to retrieve the
-   *   subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `QueryWorkflowInvocationActions`, with the exception of `page_size`, must
-   *   match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1beta1.WorkflowInvocationAction|WorkflowInvocationAction} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `queryWorkflowInvocationActionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `queryWorkflowInvocationActions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The workflow invocation's name.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of workflow invocations to return. The server may
+ *   return fewer items than requested. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous
+ *   `QueryWorkflowInvocationActions` call. Provide this to retrieve the
+ *   subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `QueryWorkflowInvocationActions`, with the exception of `page_size`, must
+ *   match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1beta1.WorkflowInvocationAction|WorkflowInvocationAction} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `queryWorkflowInvocationActionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   queryWorkflowInvocationActionsStream(
-    request?: protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    const defaultCallSettings =
-      this._defaults['queryWorkflowInvocationActions'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    const defaultCallSettings = this._defaults['queryWorkflowInvocationActions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
     this._log.info('queryWorkflowInvocationActions stream %j', request);
     return this.descriptors.page.queryWorkflowInvocationActions.createStream(
       this.innerApiCalls.queryWorkflowInvocationActions as GaxCall,
@@ -8852,56 +7134,54 @@ export class DataformClient {
     );
   }
 
-  /**
-   * Equivalent to `queryWorkflowInvocationActions`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The workflow invocation's name.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of workflow invocations to return. The server may
-   *   return fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous
-   *   `QueryWorkflowInvocationActions` call. Provide this to retrieve the
-   *   subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `QueryWorkflowInvocationActions`, with the exception of `page_size`, must
-   *   match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.dataform.v1beta1.WorkflowInvocationAction|WorkflowInvocationAction}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/dataform.query_workflow_invocation_actions.js</caption>
-   * region_tag:dataform_v1beta1_generated_Dataform_QueryWorkflowInvocationActions_async
-   */
+/**
+ * Equivalent to `queryWorkflowInvocationActions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The workflow invocation's name.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of workflow invocations to return. The server may
+ *   return fewer items than requested. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous
+ *   `QueryWorkflowInvocationActions` call. Provide this to retrieve the
+ *   subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `QueryWorkflowInvocationActions`, with the exception of `page_size`, must
+ *   match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.dataform.v1beta1.WorkflowInvocationAction|WorkflowInvocationAction}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/dataform.query_workflow_invocation_actions.js</caption>
+ * region_tag:dataform_v1beta1_generated_Dataform_QueryWorkflowInvocationActions_async
+ */
   queryWorkflowInvocationActionsAsync(
-    request?: protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dataform.v1beta1.IWorkflowInvocationAction> {
+      request?: protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.dataform.v1beta1.IWorkflowInvocationAction>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    const defaultCallSettings =
-      this._defaults['queryWorkflowInvocationActions'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    const defaultCallSettings = this._defaults['queryWorkflowInvocationActions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
     this._log.info('queryWorkflowInvocationActions iterate %j', request);
     return this.descriptors.page.queryWorkflowInvocationActions.asyncIterate(
       this.innerApiCalls['queryWorkflowInvocationActions'] as GaxCall,
@@ -8909,31 +7189,31 @@ export class DataformClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataform.v1beta1.IWorkflowInvocationAction>;
   }
-  /**
-   * Gets the access control policy for a resource. Returns an empty policy
-   * if the resource exists and does not have a policy set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {Object} [request.options]
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`. This field is only used by Cloud IAM.
-   *
-   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Gets the access control policy for a resource. Returns an empty policy
+ * if the resource exists and does not have a policy set.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {Object} [request.options]
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`. This field is only used by Cloud IAM.
+ *
+ *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -8948,39 +7228,39 @@ export class DataformClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+  ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -8995,40 +7275,40 @@ export class DataformClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+  ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ *
+ */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -9043,11 +7323,11 @@ export class DataformClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+  ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -9087,7 +7367,7 @@ export class DataformClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -9138,12 +7418,7 @@ export class DataformClient {
    * @param {string} compilation_result
    * @returns {string} Resource name string.
    */
-  compilationResultPath(
-    project: string,
-    location: string,
-    repository: string,
-    compilationResult: string
-  ) {
+  compilationResultPath(project:string,location:string,repository:string,compilationResult:string) {
     return this.pathTemplates.compilationResultPathTemplate.render({
       project: project,
       location: location,
@@ -9160,9 +7435,7 @@ export class DataformClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCompilationResultName(compilationResultName: string) {
-    return this.pathTemplates.compilationResultPathTemplate.match(
-      compilationResultName
-    ).project;
+    return this.pathTemplates.compilationResultPathTemplate.match(compilationResultName).project;
   }
 
   /**
@@ -9173,9 +7446,7 @@ export class DataformClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCompilationResultName(compilationResultName: string) {
-    return this.pathTemplates.compilationResultPathTemplate.match(
-      compilationResultName
-    ).location;
+    return this.pathTemplates.compilationResultPathTemplate.match(compilationResultName).location;
   }
 
   /**
@@ -9186,9 +7457,7 @@ export class DataformClient {
    * @returns {string} A string representing the repository.
    */
   matchRepositoryFromCompilationResultName(compilationResultName: string) {
-    return this.pathTemplates.compilationResultPathTemplate.match(
-      compilationResultName
-    ).repository;
+    return this.pathTemplates.compilationResultPathTemplate.match(compilationResultName).repository;
   }
 
   /**
@@ -9198,12 +7467,8 @@ export class DataformClient {
    *   A fully-qualified path representing CompilationResult resource.
    * @returns {string} A string representing the compilation_result.
    */
-  matchCompilationResultFromCompilationResultName(
-    compilationResultName: string
-  ) {
-    return this.pathTemplates.compilationResultPathTemplate.match(
-      compilationResultName
-    ).compilation_result;
+  matchCompilationResultFromCompilationResultName(compilationResultName: string) {
+    return this.pathTemplates.compilationResultPathTemplate.match(compilationResultName).compilation_result;
   }
 
   /**
@@ -9213,7 +7478,7 @@ export class DataformClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  configPath(project: string, location: string) {
+  configPath(project:string,location:string) {
     return this.pathTemplates.configPathTemplate.render({
       project: project,
       location: location,
@@ -9251,12 +7516,7 @@ export class DataformClient {
    * @param {string} crypto_key
    * @returns {string} Resource name string.
    */
-  cryptoKeyPath(
-    project: string,
-    location: string,
-    keyRing: string,
-    cryptoKey: string
-  ) {
+  cryptoKeyPath(project:string,location:string,keyRing:string,cryptoKey:string) {
     return this.pathTemplates.cryptoKeyPathTemplate.render({
       project: project,
       location: location,
@@ -9273,8 +7533,7 @@ export class DataformClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .project;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).project;
   }
 
   /**
@@ -9285,8 +7544,7 @@ export class DataformClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .location;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).location;
   }
 
   /**
@@ -9297,8 +7555,7 @@ export class DataformClient {
    * @returns {string} A string representing the key_ring.
    */
   matchKeyRingFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .key_ring;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).key_ring;
   }
 
   /**
@@ -9309,8 +7566,7 @@ export class DataformClient {
    * @returns {string} A string representing the crypto_key.
    */
   matchCryptoKeyFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .crypto_key;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).crypto_key;
   }
 
   /**
@@ -9323,13 +7579,7 @@ export class DataformClient {
    * @param {string} crypto_key_version
    * @returns {string} Resource name string.
    */
-  cryptoKeyVersionPath(
-    project: string,
-    location: string,
-    keyRing: string,
-    cryptoKey: string,
-    cryptoKeyVersion: string
-  ) {
+  cryptoKeyVersionPath(project:string,location:string,keyRing:string,cryptoKey:string,cryptoKeyVersion:string) {
     return this.pathTemplates.cryptoKeyVersionPathTemplate.render({
       project: project,
       location: location,
@@ -9347,9 +7597,7 @@ export class DataformClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
-      cryptoKeyVersionName
-    ).project;
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).project;
   }
 
   /**
@@ -9360,9 +7608,7 @@ export class DataformClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
-      cryptoKeyVersionName
-    ).location;
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).location;
   }
 
   /**
@@ -9373,9 +7619,7 @@ export class DataformClient {
    * @returns {string} A string representing the key_ring.
    */
   matchKeyRingFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
-      cryptoKeyVersionName
-    ).key_ring;
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).key_ring;
   }
 
   /**
@@ -9386,9 +7630,7 @@ export class DataformClient {
    * @returns {string} A string representing the crypto_key.
    */
   matchCryptoKeyFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
-      cryptoKeyVersionName
-    ).crypto_key;
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).crypto_key;
   }
 
   /**
@@ -9399,9 +7641,7 @@ export class DataformClient {
    * @returns {string} A string representing the crypto_key_version.
    */
   matchCryptoKeyVersionFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
-      cryptoKeyVersionName
-    ).crypto_key_version;
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).crypto_key_version;
   }
 
   /**
@@ -9411,7 +7651,7 @@ export class DataformClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -9448,11 +7688,7 @@ export class DataformClient {
    * @param {string} notebook_runtime_template
    * @returns {string} Resource name string.
    */
-  notebookRuntimeTemplatePath(
-    project: string,
-    location: string,
-    notebookRuntimeTemplate: string
-  ) {
+  notebookRuntimeTemplatePath(project:string,location:string,notebookRuntimeTemplate:string) {
     return this.pathTemplates.notebookRuntimeTemplatePathTemplate.render({
       project: project,
       location: location,
@@ -9467,12 +7703,8 @@ export class DataformClient {
    *   A fully-qualified path representing NotebookRuntimeTemplate resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromNotebookRuntimeTemplateName(
-    notebookRuntimeTemplateName: string
-  ) {
-    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
-      notebookRuntimeTemplateName
-    ).project;
+  matchProjectFromNotebookRuntimeTemplateName(notebookRuntimeTemplateName: string) {
+    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(notebookRuntimeTemplateName).project;
   }
 
   /**
@@ -9482,12 +7714,8 @@ export class DataformClient {
    *   A fully-qualified path representing NotebookRuntimeTemplate resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromNotebookRuntimeTemplateName(
-    notebookRuntimeTemplateName: string
-  ) {
-    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
-      notebookRuntimeTemplateName
-    ).location;
+  matchLocationFromNotebookRuntimeTemplateName(notebookRuntimeTemplateName: string) {
+    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(notebookRuntimeTemplateName).location;
   }
 
   /**
@@ -9497,12 +7725,8 @@ export class DataformClient {
    *   A fully-qualified path representing NotebookRuntimeTemplate resource.
    * @returns {string} A string representing the notebook_runtime_template.
    */
-  matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName(
-    notebookRuntimeTemplateName: string
-  ) {
-    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
-      notebookRuntimeTemplateName
-    ).notebook_runtime_template;
+  matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName(notebookRuntimeTemplateName: string) {
+    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(notebookRuntimeTemplateName).notebook_runtime_template;
   }
 
   /**
@@ -9514,12 +7738,7 @@ export class DataformClient {
    * @param {string} release_config
    * @returns {string} Resource name string.
    */
-  releaseConfigPath(
-    project: string,
-    location: string,
-    repository: string,
-    releaseConfig: string
-  ) {
+  releaseConfigPath(project:string,location:string,repository:string,releaseConfig:string) {
     return this.pathTemplates.releaseConfigPathTemplate.render({
       project: project,
       location: location,
@@ -9536,8 +7755,7 @@ export class DataformClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromReleaseConfigName(releaseConfigName: string) {
-    return this.pathTemplates.releaseConfigPathTemplate.match(releaseConfigName)
-      .project;
+    return this.pathTemplates.releaseConfigPathTemplate.match(releaseConfigName).project;
   }
 
   /**
@@ -9548,8 +7766,7 @@ export class DataformClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromReleaseConfigName(releaseConfigName: string) {
-    return this.pathTemplates.releaseConfigPathTemplate.match(releaseConfigName)
-      .location;
+    return this.pathTemplates.releaseConfigPathTemplate.match(releaseConfigName).location;
   }
 
   /**
@@ -9560,8 +7777,7 @@ export class DataformClient {
    * @returns {string} A string representing the repository.
    */
   matchRepositoryFromReleaseConfigName(releaseConfigName: string) {
-    return this.pathTemplates.releaseConfigPathTemplate.match(releaseConfigName)
-      .repository;
+    return this.pathTemplates.releaseConfigPathTemplate.match(releaseConfigName).repository;
   }
 
   /**
@@ -9572,8 +7788,7 @@ export class DataformClient {
    * @returns {string} A string representing the release_config.
    */
   matchReleaseConfigFromReleaseConfigName(releaseConfigName: string) {
-    return this.pathTemplates.releaseConfigPathTemplate.match(releaseConfigName)
-      .release_config;
+    return this.pathTemplates.releaseConfigPathTemplate.match(releaseConfigName).release_config;
   }
 
   /**
@@ -9584,7 +7799,7 @@ export class DataformClient {
    * @param {string} repository
    * @returns {string} Resource name string.
    */
-  repositoryPath(project: string, location: string, repository: string) {
+  repositoryPath(project:string,location:string,repository:string) {
     return this.pathTemplates.repositoryPathTemplate.render({
       project: project,
       location: location,
@@ -9600,8 +7815,7 @@ export class DataformClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRepositoryName(repositoryName: string) {
-    return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
-      .project;
+    return this.pathTemplates.repositoryPathTemplate.match(repositoryName).project;
   }
 
   /**
@@ -9612,8 +7826,7 @@ export class DataformClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromRepositoryName(repositoryName: string) {
-    return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
-      .location;
+    return this.pathTemplates.repositoryPathTemplate.match(repositoryName).location;
   }
 
   /**
@@ -9624,8 +7837,7 @@ export class DataformClient {
    * @returns {string} A string representing the repository.
    */
   matchRepositoryFromRepositoryName(repositoryName: string) {
-    return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
-      .repository;
+    return this.pathTemplates.repositoryPathTemplate.match(repositoryName).repository;
   }
 
   /**
@@ -9636,7 +7848,7 @@ export class DataformClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  secretVersionPath(project: string, secret: string, version: string) {
+  secretVersionPath(project:string,secret:string,version:string) {
     return this.pathTemplates.secretVersionPathTemplate.render({
       project: project,
       secret: secret,
@@ -9652,8 +7864,7 @@ export class DataformClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSecretVersionName(secretVersionName: string) {
-    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
-      .project;
+    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName).project;
   }
 
   /**
@@ -9664,8 +7875,7 @@ export class DataformClient {
    * @returns {string} A string representing the secret.
    */
   matchSecretFromSecretVersionName(secretVersionName: string) {
-    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
-      .secret;
+    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName).secret;
   }
 
   /**
@@ -9676,8 +7886,7 @@ export class DataformClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromSecretVersionName(secretVersionName: string) {
-    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
-      .version;
+    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName).version;
   }
 
   /**
@@ -9689,12 +7898,7 @@ export class DataformClient {
    * @param {string} workflow_config
    * @returns {string} Resource name string.
    */
-  workflowConfigPath(
-    project: string,
-    location: string,
-    repository: string,
-    workflowConfig: string
-  ) {
+  workflowConfigPath(project:string,location:string,repository:string,workflowConfig:string) {
     return this.pathTemplates.workflowConfigPathTemplate.render({
       project: project,
       location: location,
@@ -9711,9 +7915,7 @@ export class DataformClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromWorkflowConfigName(workflowConfigName: string) {
-    return this.pathTemplates.workflowConfigPathTemplate.match(
-      workflowConfigName
-    ).project;
+    return this.pathTemplates.workflowConfigPathTemplate.match(workflowConfigName).project;
   }
 
   /**
@@ -9724,9 +7926,7 @@ export class DataformClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromWorkflowConfigName(workflowConfigName: string) {
-    return this.pathTemplates.workflowConfigPathTemplate.match(
-      workflowConfigName
-    ).location;
+    return this.pathTemplates.workflowConfigPathTemplate.match(workflowConfigName).location;
   }
 
   /**
@@ -9737,9 +7937,7 @@ export class DataformClient {
    * @returns {string} A string representing the repository.
    */
   matchRepositoryFromWorkflowConfigName(workflowConfigName: string) {
-    return this.pathTemplates.workflowConfigPathTemplate.match(
-      workflowConfigName
-    ).repository;
+    return this.pathTemplates.workflowConfigPathTemplate.match(workflowConfigName).repository;
   }
 
   /**
@@ -9750,9 +7948,7 @@ export class DataformClient {
    * @returns {string} A string representing the workflow_config.
    */
   matchWorkflowConfigFromWorkflowConfigName(workflowConfigName: string) {
-    return this.pathTemplates.workflowConfigPathTemplate.match(
-      workflowConfigName
-    ).workflow_config;
+    return this.pathTemplates.workflowConfigPathTemplate.match(workflowConfigName).workflow_config;
   }
 
   /**
@@ -9764,12 +7960,7 @@ export class DataformClient {
    * @param {string} workflow_invocation
    * @returns {string} Resource name string.
    */
-  workflowInvocationPath(
-    project: string,
-    location: string,
-    repository: string,
-    workflowInvocation: string
-  ) {
+  workflowInvocationPath(project:string,location:string,repository:string,workflowInvocation:string) {
     return this.pathTemplates.workflowInvocationPathTemplate.render({
       project: project,
       location: location,
@@ -9786,9 +7977,7 @@ export class DataformClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromWorkflowInvocationName(workflowInvocationName: string) {
-    return this.pathTemplates.workflowInvocationPathTemplate.match(
-      workflowInvocationName
-    ).project;
+    return this.pathTemplates.workflowInvocationPathTemplate.match(workflowInvocationName).project;
   }
 
   /**
@@ -9799,9 +7988,7 @@ export class DataformClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromWorkflowInvocationName(workflowInvocationName: string) {
-    return this.pathTemplates.workflowInvocationPathTemplate.match(
-      workflowInvocationName
-    ).location;
+    return this.pathTemplates.workflowInvocationPathTemplate.match(workflowInvocationName).location;
   }
 
   /**
@@ -9812,9 +7999,7 @@ export class DataformClient {
    * @returns {string} A string representing the repository.
    */
   matchRepositoryFromWorkflowInvocationName(workflowInvocationName: string) {
-    return this.pathTemplates.workflowInvocationPathTemplate.match(
-      workflowInvocationName
-    ).repository;
+    return this.pathTemplates.workflowInvocationPathTemplate.match(workflowInvocationName).repository;
   }
 
   /**
@@ -9824,12 +8009,8 @@ export class DataformClient {
    *   A fully-qualified path representing WorkflowInvocation resource.
    * @returns {string} A string representing the workflow_invocation.
    */
-  matchWorkflowInvocationFromWorkflowInvocationName(
-    workflowInvocationName: string
-  ) {
-    return this.pathTemplates.workflowInvocationPathTemplate.match(
-      workflowInvocationName
-    ).workflow_invocation;
+  matchWorkflowInvocationFromWorkflowInvocationName(workflowInvocationName: string) {
+    return this.pathTemplates.workflowInvocationPathTemplate.match(workflowInvocationName).workflow_invocation;
   }
 
   /**
@@ -9841,12 +8022,7 @@ export class DataformClient {
    * @param {string} workspace
    * @returns {string} Resource name string.
    */
-  workspacePath(
-    project: string,
-    location: string,
-    repository: string,
-    workspace: string
-  ) {
+  workspacePath(project:string,location:string,repository:string,workspace:string) {
     return this.pathTemplates.workspacePathTemplate.render({
       project: project,
       location: location,
@@ -9863,8 +8039,7 @@ export class DataformClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromWorkspaceName(workspaceName: string) {
-    return this.pathTemplates.workspacePathTemplate.match(workspaceName)
-      .project;
+    return this.pathTemplates.workspacePathTemplate.match(workspaceName).project;
   }
 
   /**
@@ -9875,8 +8050,7 @@ export class DataformClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromWorkspaceName(workspaceName: string) {
-    return this.pathTemplates.workspacePathTemplate.match(workspaceName)
-      .location;
+    return this.pathTemplates.workspacePathTemplate.match(workspaceName).location;
   }
 
   /**
@@ -9887,8 +8061,7 @@ export class DataformClient {
    * @returns {string} A string representing the repository.
    */
   matchRepositoryFromWorkspaceName(workspaceName: string) {
-    return this.pathTemplates.workspacePathTemplate.match(workspaceName)
-      .repository;
+    return this.pathTemplates.workspacePathTemplate.match(workspaceName).repository;
   }
 
   /**
@@ -9899,8 +8072,7 @@ export class DataformClient {
    * @returns {string} A string representing the workspace.
    */
   matchWorkspaceFromWorkspaceName(workspaceName: string) {
-    return this.pathTemplates.workspacePathTemplate.match(workspaceName)
-      .workspace;
+    return this.pathTemplates.workspacePathTemplate.match(workspaceName).workspace;
   }
 
   /**
@@ -9915,12 +8087,8 @@ export class DataformClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch(err => {
-          throw err;
-        });
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.iamClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch(err => {throw err});
       });
     }
     return Promise.resolve();

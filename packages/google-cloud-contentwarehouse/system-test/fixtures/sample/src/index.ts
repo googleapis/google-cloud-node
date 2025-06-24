@@ -16,24 +16,13 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  DocumentLinkServiceClient,
-  DocumentSchemaServiceClient,
-  DocumentServiceClient,
-  PipelineServiceClient,
-  RuleSetServiceClient,
-  SynonymSetServiceClient,
-} from '@google-cloud/contentwarehouse';
+import {DocumentLinkServiceClient, DocumentSchemaServiceClient, DocumentServiceClient, PipelineServiceClient, RuleSetServiceClient, SynonymSetServiceClient} from '@google-cloud/contentwarehouse';
 
 // check that the client class type name can be used
-function doStuffWithDocumentLinkServiceClient(
-  client: DocumentLinkServiceClient
-) {
+function doStuffWithDocumentLinkServiceClient(client: DocumentLinkServiceClient) {
   client.close();
 }
-function doStuffWithDocumentSchemaServiceClient(
-  client: DocumentSchemaServiceClient
-) {
+function doStuffWithDocumentSchemaServiceClient(client: DocumentSchemaServiceClient) {
   client.close();
 }
 function doStuffWithDocumentServiceClient(client: DocumentServiceClient) {

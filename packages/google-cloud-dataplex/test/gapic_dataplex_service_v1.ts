@@ -25,9737 +25,7655 @@ import * as dataplexserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {
-  protobuf,
-  LROperation,
-  operationsProtos,
-  LocationProtos,
-} from 'google-gax';
+import {protobuf, LROperation, operationsProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.DataplexServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'dataplex.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          dataplexserviceModule.v1.DataplexServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'dataplex.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          dataplexserviceModule.v1.DataplexServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'dataplex.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'dataplex.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'dataplex.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new dataplexserviceModule.v1.DataplexServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'dataplex.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'dataplex.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new dataplexserviceModule.v1.DataplexServiceClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'dataplex.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new dataplexserviceModule.v1.DataplexServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = dataplexserviceModule.v1.DataplexServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.dataplexServiceStub, undefined);
-      await client.initialize();
-      assert(client.dataplexServiceStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.dataplexServiceStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.dataplexServiceStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getLake', () => {
-    it('invokes getLake without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetLakeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.GetLakeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.Lake()
-      );
-      client.innerApiCalls.getLake = stubSimpleCall(expectedResponse);
-      const [response] = await client.getLake(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.getLake as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getLake as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getLake without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetLakeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.GetLakeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.Lake()
-      );
-      client.innerApiCalls.getLake =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLake(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dataplex.v1.ILake | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.getLake as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getLake as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getLake with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetLakeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.GetLakeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getLake = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getLake(request), expectedError);
-      const actualRequest = (client.innerApiCalls.getLake as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getLake as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getLake with closed client', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetLakeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.GetLakeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getLake(request), expectedError);
-    });
-  });
-
-  describe('getZone', () => {
-    it('invokes getZone without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetZoneRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.GetZoneRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.Zone()
-      );
-      client.innerApiCalls.getZone = stubSimpleCall(expectedResponse);
-      const [response] = await client.getZone(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.getZone as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getZone without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetZoneRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.GetZoneRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.Zone()
-      );
-      client.innerApiCalls.getZone =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getZone(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dataplex.v1.IZone | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.getZone as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getZone with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetZoneRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.GetZoneRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getZone = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getZone(request), expectedError);
-      const actualRequest = (client.innerApiCalls.getZone as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getZone with closed client', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetZoneRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.GetZoneRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getZone(request), expectedError);
-    });
-  });
-
-  describe('getAsset', () => {
-    it('invokes getAsset without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetAssetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.GetAssetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.Asset()
-      );
-      client.innerApiCalls.getAsset = stubSimpleCall(expectedResponse);
-      const [response] = await client.getAsset(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAsset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAsset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAsset without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetAssetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.GetAssetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.Asset()
-      );
-      client.innerApiCalls.getAsset =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getAsset(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dataplex.v1.IAsset | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAsset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAsset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAsset with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetAssetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.GetAssetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getAsset = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getAsset(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getAsset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAsset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAsset with closed client', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetAssetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.GetAssetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getAsset(request), expectedError);
-    });
-  });
-
-  describe('getTask', () => {
-    it('invokes getTask without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetTaskRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.GetTaskRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.Task()
-      );
-      client.innerApiCalls.getTask = stubSimpleCall(expectedResponse);
-      const [response] = await client.getTask(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.getTask as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getTask as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getTask without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetTaskRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.GetTaskRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.Task()
-      );
-      client.innerApiCalls.getTask =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getTask(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dataplex.v1.ITask | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.getTask as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getTask as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getTask with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetTaskRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.GetTaskRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getTask = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getTask(request), expectedError);
-      const actualRequest = (client.innerApiCalls.getTask as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getTask as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getTask with closed client', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetTaskRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.GetTaskRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getTask(request), expectedError);
-    });
-  });
-
-  describe('runTask', () => {
-    it('invokes runTask without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.RunTaskRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.RunTaskRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.RunTaskResponse()
-      );
-      client.innerApiCalls.runTask = stubSimpleCall(expectedResponse);
-      const [response] = await client.runTask(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.runTask as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.runTask as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes runTask without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.RunTaskRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.RunTaskRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.RunTaskResponse()
-      );
-      client.innerApiCalls.runTask =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.runTask(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dataplex.v1.IRunTaskResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.runTask as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.runTask as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes runTask with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.RunTaskRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.RunTaskRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.runTask = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.runTask(request), expectedError);
-      const actualRequest = (client.innerApiCalls.runTask as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.runTask as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes runTask with closed client', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.RunTaskRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.RunTaskRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.runTask(request), expectedError);
-    });
-  });
-
-  describe('getJob', () => {
-    it('invokes getJob without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.GetJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.Job()
-      );
-      client.innerApiCalls.getJob = stubSimpleCall(expectedResponse);
-      const [response] = await client.getJob(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.getJob as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getJob without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.GetJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.Job()
-      );
-      client.innerApiCalls.getJob =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getJob(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dataplex.v1.IJob | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.getJob as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getJob with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.GetJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getJob(request), expectedError);
-      const actualRequest = (client.innerApiCalls.getJob as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getJob with closed client', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.GetJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getJob(request), expectedError);
-    });
-  });
-
-  describe('cancelJob', () => {
-    it('invokes cancelJob without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CancelJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.CancelJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.cancelJob = stubSimpleCall(expectedResponse);
-      const [response] = await client.cancelJob(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.cancelJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.cancelJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes cancelJob without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CancelJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.CancelJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.cancelJob =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.cancelJob(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.cancelJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.cancelJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes cancelJob with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CancelJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.CancelJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.cancelJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.cancelJob(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.cancelJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.cancelJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes cancelJob with closed client', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CancelJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.CancelJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.cancelJob(request), expectedError);
-    });
-  });
-
-  describe('getEnvironment', () => {
-    it('invokes getEnvironment without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.GetEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.Environment()
-      );
-      client.innerApiCalls.getEnvironment = stubSimpleCall(expectedResponse);
-      const [response] = await client.getEnvironment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEnvironment without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.GetEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.Environment()
-      );
-      client.innerApiCalls.getEnvironment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getEnvironment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dataplex.v1.IEnvironment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEnvironment with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.GetEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getEnvironment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getEnvironment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEnvironment with closed client', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.GetEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getEnvironment(request), expectedError);
-    });
-  });
-
-  describe('createLake', () => {
-    it('invokes createLake without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CreateLakeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.CreateLakeRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createLake = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createLake(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createLake as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createLake as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createLake without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CreateLakeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.CreateLakeRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createLake =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createLake(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.dataplex.v1.ILake,
-              protos.google.cloud.dataplex.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.dataplex.v1.ILake,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createLake as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createLake as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createLake with call error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CreateLakeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.CreateLakeRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createLake = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createLake(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createLake as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createLake as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createLake with LRO error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CreateLakeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.CreateLakeRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createLake = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createLake(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createLake as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createLake as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateLakeProgress without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateLakeProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateLakeProgress with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkCreateLakeProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateLake', () => {
-    it('invokes updateLake without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.UpdateLakeRequest()
-      );
-      request.lake ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.UpdateLakeRequest',
-        ['lake', 'name']
-      );
-      request.lake.name = defaultValue1;
-      const expectedHeaderRequestParams = `lake.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateLake = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateLake(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateLake as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateLake as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateLake without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.UpdateLakeRequest()
-      );
-      request.lake ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.UpdateLakeRequest',
-        ['lake', 'name']
-      );
-      request.lake.name = defaultValue1;
-      const expectedHeaderRequestParams = `lake.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateLake =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateLake(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.dataplex.v1.ILake,
-              protos.google.cloud.dataplex.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.dataplex.v1.ILake,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateLake as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateLake as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateLake with call error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.UpdateLakeRequest()
-      );
-      request.lake ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.UpdateLakeRequest',
-        ['lake', 'name']
-      );
-      request.lake.name = defaultValue1;
-      const expectedHeaderRequestParams = `lake.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateLake = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateLake(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateLake as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateLake as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateLake with LRO error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.UpdateLakeRequest()
-      );
-      request.lake ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.UpdateLakeRequest',
-        ['lake', 'name']
-      );
-      request.lake.name = defaultValue1;
-      const expectedHeaderRequestParams = `lake.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateLake = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateLake(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateLake as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateLake as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateLakeProgress without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateLakeProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateLakeProgress with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkUpdateLakeProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteLake', () => {
-    it('invokes deleteLake without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.DeleteLakeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.DeleteLakeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteLake = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteLake(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteLake as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteLake as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteLake without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.DeleteLakeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.DeleteLakeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteLake =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteLake(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.dataplex.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteLake as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteLake as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteLake with call error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.DeleteLakeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.DeleteLakeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteLake = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteLake(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteLake as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteLake as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteLake with LRO error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.DeleteLakeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.DeleteLakeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteLake = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteLake(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteLake as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteLake as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteLakeProgress without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteLakeProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteLakeProgress with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkDeleteLakeProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createZone', () => {
-    it('invokes createZone without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CreateZoneRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.CreateZoneRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createZone = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createZone(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createZone as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createZone without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CreateZoneRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.CreateZoneRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createZone =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createZone(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.dataplex.v1.IZone,
-              protos.google.cloud.dataplex.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.dataplex.v1.IZone,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createZone as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createZone with call error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CreateZoneRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.CreateZoneRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createZone = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createZone(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createZone as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createZone with LRO error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CreateZoneRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.CreateZoneRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createZone = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createZone(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createZone as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateZoneProgress without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateZoneProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateZoneProgress with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkCreateZoneProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateZone', () => {
-    it('invokes updateZone without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.UpdateZoneRequest()
-      );
-      request.zone ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.UpdateZoneRequest',
-        ['zone', 'name']
-      );
-      request.zone.name = defaultValue1;
-      const expectedHeaderRequestParams = `zone.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateZone = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateZone(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateZone as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateZone without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.UpdateZoneRequest()
-      );
-      request.zone ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.UpdateZoneRequest',
-        ['zone', 'name']
-      );
-      request.zone.name = defaultValue1;
-      const expectedHeaderRequestParams = `zone.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateZone =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateZone(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.dataplex.v1.IZone,
-              protos.google.cloud.dataplex.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.dataplex.v1.IZone,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateZone as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateZone with call error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.UpdateZoneRequest()
-      );
-      request.zone ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.UpdateZoneRequest',
-        ['zone', 'name']
-      );
-      request.zone.name = defaultValue1;
-      const expectedHeaderRequestParams = `zone.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateZone = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateZone(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateZone as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateZone with LRO error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.UpdateZoneRequest()
-      );
-      request.zone ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.UpdateZoneRequest',
-        ['zone', 'name']
-      );
-      request.zone.name = defaultValue1;
-      const expectedHeaderRequestParams = `zone.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateZone = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateZone(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateZone as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateZoneProgress without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateZoneProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateZoneProgress with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkUpdateZoneProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteZone', () => {
-    it('invokes deleteZone without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.DeleteZoneRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.DeleteZoneRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteZone = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteZone(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteZone as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteZone without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.DeleteZoneRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.DeleteZoneRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteZone =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteZone(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.dataplex.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteZone as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteZone with call error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.DeleteZoneRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.DeleteZoneRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteZone = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteZone(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteZone as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteZone with LRO error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.DeleteZoneRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.DeleteZoneRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteZone = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteZone(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteZone as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteZoneProgress without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteZoneProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteZoneProgress with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkDeleteZoneProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createAsset', () => {
-    it('invokes createAsset without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CreateAssetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.CreateAssetRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createAsset = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createAsset(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createAsset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAsset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAsset without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CreateAssetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.CreateAssetRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createAsset =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createAsset(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.dataplex.v1.IAsset,
-              protos.google.cloud.dataplex.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.dataplex.v1.IAsset,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createAsset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAsset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAsset with call error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CreateAssetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.CreateAssetRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createAsset = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createAsset(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createAsset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAsset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAsset with LRO error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CreateAssetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.CreateAssetRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createAsset = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createAsset(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createAsset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAsset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateAssetProgress without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateAssetProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateAssetProgress with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkCreateAssetProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateAsset', () => {
-    it('invokes updateAsset without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.UpdateAssetRequest()
-      );
-      request.asset ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.UpdateAssetRequest',
-        ['asset', 'name']
-      );
-      request.asset.name = defaultValue1;
-      const expectedHeaderRequestParams = `asset.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateAsset = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateAsset(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateAsset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAsset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAsset without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.UpdateAssetRequest()
-      );
-      request.asset ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.UpdateAssetRequest',
-        ['asset', 'name']
-      );
-      request.asset.name = defaultValue1;
-      const expectedHeaderRequestParams = `asset.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateAsset =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateAsset(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.dataplex.v1.IAsset,
-              protos.google.cloud.dataplex.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.dataplex.v1.IAsset,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateAsset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAsset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAsset with call error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.UpdateAssetRequest()
-      );
-      request.asset ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.UpdateAssetRequest',
-        ['asset', 'name']
-      );
-      request.asset.name = defaultValue1;
-      const expectedHeaderRequestParams = `asset.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateAsset = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateAsset(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateAsset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAsset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAsset with LRO error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.UpdateAssetRequest()
-      );
-      request.asset ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.UpdateAssetRequest',
-        ['asset', 'name']
-      );
-      request.asset.name = defaultValue1;
-      const expectedHeaderRequestParams = `asset.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateAsset = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateAsset(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateAsset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAsset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateAssetProgress without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateAssetProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateAssetProgress with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkUpdateAssetProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteAsset', () => {
-    it('invokes deleteAsset without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.DeleteAssetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.DeleteAssetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteAsset = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteAsset(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteAsset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAsset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAsset without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.DeleteAssetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.DeleteAssetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteAsset =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteAsset(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.dataplex.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteAsset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAsset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAsset with call error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.DeleteAssetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.DeleteAssetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteAsset = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteAsset(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteAsset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAsset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAsset with LRO error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.DeleteAssetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.DeleteAssetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteAsset = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteAsset(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteAsset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAsset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteAssetProgress without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteAssetProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteAssetProgress with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkDeleteAssetProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createTask', () => {
-    it('invokes createTask without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CreateTaskRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.CreateTaskRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createTask = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createTask(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createTask as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createTask as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createTask without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CreateTaskRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.CreateTaskRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createTask =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createTask(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.dataplex.v1.ITask,
-              protos.google.cloud.dataplex.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.dataplex.v1.ITask,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createTask as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createTask as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createTask with call error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CreateTaskRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.CreateTaskRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createTask = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createTask(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createTask as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createTask as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createTask with LRO error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CreateTaskRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.CreateTaskRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createTask = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createTask(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createTask as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createTask as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateTaskProgress without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateTaskProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateTaskProgress with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkCreateTaskProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateTask', () => {
-    it('invokes updateTask without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.UpdateTaskRequest()
-      );
-      request.task ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.UpdateTaskRequest',
-        ['task', 'name']
-      );
-      request.task.name = defaultValue1;
-      const expectedHeaderRequestParams = `task.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateTask = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateTask(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateTask as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateTask as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateTask without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.UpdateTaskRequest()
-      );
-      request.task ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.UpdateTaskRequest',
-        ['task', 'name']
-      );
-      request.task.name = defaultValue1;
-      const expectedHeaderRequestParams = `task.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateTask =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateTask(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.dataplex.v1.ITask,
-              protos.google.cloud.dataplex.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.dataplex.v1.ITask,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateTask as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateTask as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateTask with call error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.UpdateTaskRequest()
-      );
-      request.task ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.UpdateTaskRequest',
-        ['task', 'name']
-      );
-      request.task.name = defaultValue1;
-      const expectedHeaderRequestParams = `task.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateTask = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateTask(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateTask as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateTask as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateTask with LRO error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.UpdateTaskRequest()
-      );
-      request.task ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.UpdateTaskRequest',
-        ['task', 'name']
-      );
-      request.task.name = defaultValue1;
-      const expectedHeaderRequestParams = `task.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateTask = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateTask(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateTask as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateTask as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateTaskProgress without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateTaskProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateTaskProgress with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkUpdateTaskProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteTask', () => {
-    it('invokes deleteTask without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.DeleteTaskRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.DeleteTaskRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteTask = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteTask(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteTask as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteTask as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteTask without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.DeleteTaskRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.DeleteTaskRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteTask =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteTask(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.dataplex.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteTask as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteTask as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteTask with call error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.DeleteTaskRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.DeleteTaskRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteTask = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteTask(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteTask as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteTask as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteTask with LRO error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.DeleteTaskRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.DeleteTaskRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteTask = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteTask(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteTask as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteTask as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteTaskProgress without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteTaskProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteTaskProgress with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkDeleteTaskProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createEnvironment', () => {
-    it('invokes createEnvironment without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CreateEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.CreateEnvironmentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createEnvironment =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createEnvironment(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createEnvironment without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CreateEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.CreateEnvironmentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createEnvironment =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createEnvironment(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.dataplex.v1.IEnvironment,
-              protos.google.cloud.dataplex.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.dataplex.v1.IEnvironment,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createEnvironment with call error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CreateEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.CreateEnvironmentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createEnvironment = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createEnvironment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createEnvironment with LRO error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CreateEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.CreateEnvironmentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createEnvironment = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createEnvironment(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateEnvironmentProgress without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateEnvironmentProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateEnvironmentProgress with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateEnvironmentProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateEnvironment', () => {
-    it('invokes updateEnvironment without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.UpdateEnvironmentRequest()
-      );
-      request.environment ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.UpdateEnvironmentRequest',
-        ['environment', 'name']
-      );
-      request.environment.name = defaultValue1;
-      const expectedHeaderRequestParams = `environment.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateEnvironment =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateEnvironment(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateEnvironment without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.UpdateEnvironmentRequest()
-      );
-      request.environment ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.UpdateEnvironmentRequest',
-        ['environment', 'name']
-      );
-      request.environment.name = defaultValue1;
-      const expectedHeaderRequestParams = `environment.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateEnvironment =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateEnvironment(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.dataplex.v1.IEnvironment,
-              protos.google.cloud.dataplex.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.dataplex.v1.IEnvironment,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateEnvironment with call error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.UpdateEnvironmentRequest()
-      );
-      request.environment ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.UpdateEnvironmentRequest',
-        ['environment', 'name']
-      );
-      request.environment.name = defaultValue1;
-      const expectedHeaderRequestParams = `environment.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateEnvironment = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateEnvironment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateEnvironment with LRO error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.UpdateEnvironmentRequest()
-      );
-      request.environment ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.UpdateEnvironmentRequest',
-        ['environment', 'name']
-      );
-      request.environment.name = defaultValue1;
-      const expectedHeaderRequestParams = `environment.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateEnvironment = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateEnvironment(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateEnvironmentProgress without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateEnvironmentProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateEnvironmentProgress with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateEnvironmentProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteEnvironment', () => {
-    it('invokes deleteEnvironment without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.DeleteEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.DeleteEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteEnvironment =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteEnvironment(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteEnvironment without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.DeleteEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.DeleteEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteEnvironment =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteEnvironment(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.dataplex.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteEnvironment with call error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.DeleteEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.DeleteEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteEnvironment = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteEnvironment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteEnvironment with LRO error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.DeleteEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.DeleteEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteEnvironment = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteEnvironment(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteEnvironmentProgress without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteEnvironmentProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteEnvironmentProgress with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteEnvironmentProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listLakes', () => {
-    it('invokes listLakes without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListLakesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListLakesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
-      ];
-      client.innerApiCalls.listLakes = stubSimpleCall(expectedResponse);
-      const [response] = await client.listLakes(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listLakes as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listLakes as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listLakes without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListLakesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListLakesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
-      ];
-      client.innerApiCalls.listLakes =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listLakes(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dataplex.v1.ILake[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listLakes as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listLakes as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listLakes with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListLakesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListLakesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listLakes = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.listLakes(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listLakes as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listLakes as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listLakesStream without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListLakesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListLakesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
-      ];
-      client.descriptors.page.listLakes.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listLakesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataplex.v1.Lake[] = [];
-        stream.on('data', (response: protos.google.cloud.dataplex.v1.Lake) => {
-          responses.push(response);
-        });
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listLakes.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listLakes, request)
-      );
-      assert(
-        (client.descriptors.page.listLakes.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listLakesStream with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListLakesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListLakesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listLakes.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listLakesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataplex.v1.Lake[] = [];
-        stream.on('data', (response: protos.google.cloud.dataplex.v1.Lake) => {
-          responses.push(response);
-        });
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listLakes.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listLakes, request)
-      );
-      assert(
-        (client.descriptors.page.listLakes.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listLakes without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListLakesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListLakesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
-      ];
-      client.descriptors.page.listLakes.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.dataplex.v1.ILake[] = [];
-      const iterable = client.listLakesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listLakes.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listLakes.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listLakes with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListLakesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListLakesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listLakes.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listLakesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.dataplex.v1.ILake[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = dataplexserviceModule.v1.DataplexServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'dataplex.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = dataplexserviceModule.v1.DataplexServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'dataplex.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listLakes.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listLakes.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listLakeActions', () => {
-    it('invokes listLakeActions without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListLakeActionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListLakeActionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-      ];
-      client.innerApiCalls.listLakeActions = stubSimpleCall(expectedResponse);
-      const [response] = await client.listLakeActions(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listLakeActions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listLakeActions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listLakeActions without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListLakeActionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListLakeActionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-      ];
-      client.innerApiCalls.listLakeActions =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listLakeActions(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dataplex.v1.IAction[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listLakeActions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listLakeActions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listLakeActions with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListLakeActionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListLakeActionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listLakeActions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listLakeActions(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listLakeActions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listLakeActions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listLakeActionsStream without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListLakeActionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListLakeActionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-      ];
-      client.descriptors.page.listLakeActions.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listLakeActionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataplex.v1.Action[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.dataplex.v1.Action) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'dataplex.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listLakeActions.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listLakeActions, request)
-      );
-      assert(
-        (client.descriptors.page.listLakeActions.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listLakeActionsStream with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListLakeActionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListLakeActionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listLakeActions.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listLakeActionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataplex.v1.Action[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.dataplex.v1.Action) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'dataplex.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listLakeActions.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listLakeActions, request)
-      );
-      assert(
-        (client.descriptors.page.listLakeActions.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listLakeActions without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListLakeActionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListLakeActionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-      ];
-      client.descriptors.page.listLakeActions.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.dataplex.v1.IAction[] = [];
-      const iterable = client.listLakeActionsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listLakeActions.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listLakeActions.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new dataplexserviceModule.v1.DataplexServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'dataplex.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with listLakeActions with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListLakeActionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListLakeActionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listLakeActions.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLakeActionsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.dataplex.v1.IAction[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new dataplexserviceModule.v1.DataplexServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'dataplex.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listLakeActions.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listLakeActions.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new dataplexserviceModule.v1.DataplexServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-  describe('listZones', () => {
-    it('invokes listZones without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListZonesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListZonesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
-      ];
-      client.innerApiCalls.listZones = stubSimpleCall(expectedResponse);
-      const [response] = await client.listZones(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listZones as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listZones as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('has port', () => {
+            const port = dataplexserviceModule.v1.DataplexServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.dataplexServiceStub, undefined);
+            await client.initialize();
+            assert(client.dataplexServiceStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.dataplexServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.dataplexServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    it('invokes listZones without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListZonesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListZonesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
-      ];
-      client.innerApiCalls.listZones =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listZones(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dataplex.v1.IZone[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('getLake', () => {
+        it('invokes getLake without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetLakeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetLakeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.Lake()
+            );
+            client.innerApiCalls.getLake = stubSimpleCall(expectedResponse);
+            const [response] = await client.getLake(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getLake as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLake as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getLake without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetLakeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetLakeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.Lake()
+            );
+            client.innerApiCalls.getLake = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLake(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.ILake|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getLake as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLake as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getLake with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetLakeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetLakeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getLake = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLake(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getLake as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLake as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getLake with closed client', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetLakeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetLakeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getLake(request), expectedError);
+        });
+    });
+
+    describe('getZone', () => {
+        it('invokes getZone without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetZoneRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetZoneRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.Zone()
+            );
+            client.innerApiCalls.getZone = stubSimpleCall(expectedResponse);
+            const [response] = await client.getZone(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getZone without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetZoneRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetZoneRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.Zone()
+            );
+            client.innerApiCalls.getZone = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getZone(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.IZone|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getZone with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetZoneRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetZoneRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getZone = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getZone(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getZone with closed client', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetZoneRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetZoneRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getZone(request), expectedError);
+        });
+    });
+
+    describe('getAsset', () => {
+        it('invokes getAsset without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetAssetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetAssetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.Asset()
+            );
+            client.innerApiCalls.getAsset = stubSimpleCall(expectedResponse);
+            const [response] = await client.getAsset(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAsset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAsset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAsset without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetAssetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetAssetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.Asset()
+            );
+            client.innerApiCalls.getAsset = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getAsset(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.IAsset|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAsset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAsset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAsset with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetAssetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetAssetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getAsset = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getAsset(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getAsset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAsset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAsset with closed client', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetAssetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetAssetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getAsset(request), expectedError);
+        });
+    });
+
+    describe('getTask', () => {
+        it('invokes getTask without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetTaskRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetTaskRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.Task()
+            );
+            client.innerApiCalls.getTask = stubSimpleCall(expectedResponse);
+            const [response] = await client.getTask(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getTask as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getTask as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getTask without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetTaskRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetTaskRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.Task()
+            );
+            client.innerApiCalls.getTask = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getTask(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.ITask|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getTask as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getTask as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getTask with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetTaskRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetTaskRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getTask = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getTask(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getTask as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getTask as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getTask with closed client', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetTaskRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetTaskRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getTask(request), expectedError);
+        });
+    });
+
+    describe('runTask', () => {
+        it('invokes runTask without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.RunTaskRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.RunTaskRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.RunTaskResponse()
+            );
+            client.innerApiCalls.runTask = stubSimpleCall(expectedResponse);
+            const [response] = await client.runTask(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.runTask as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.runTask as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes runTask without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.RunTaskRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.RunTaskRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.RunTaskResponse()
+            );
+            client.innerApiCalls.runTask = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.runTask(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.IRunTaskResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.runTask as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.runTask as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes runTask with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.RunTaskRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.RunTaskRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.runTask = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.runTask(request), expectedError);
+            const actualRequest = (client.innerApiCalls.runTask as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.runTask as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes runTask with closed client', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.RunTaskRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.RunTaskRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.runTask(request), expectedError);
+        });
+    });
+
+    describe('getJob', () => {
+        it('invokes getJob without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.Job()
+            );
+            client.innerApiCalls.getJob = stubSimpleCall(expectedResponse);
+            const [response] = await client.getJob(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getJob without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.Job()
+            );
+            client.innerApiCalls.getJob = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getJob(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.IJob|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getJob with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getJob = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getJob with closed client', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getJob(request), expectedError);
+        });
+    });
+
+    describe('cancelJob', () => {
+        it('invokes cancelJob without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CancelJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CancelJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.cancelJob = stubSimpleCall(expectedResponse);
+            const [response] = await client.cancelJob(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.cancelJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.cancelJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes cancelJob without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CancelJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CancelJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.cancelJob = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.cancelJob(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.cancelJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.cancelJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes cancelJob with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CancelJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CancelJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.cancelJob = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.cancelJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.cancelJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.cancelJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes cancelJob with closed client', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CancelJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CancelJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.cancelJob(request), expectedError);
+        });
+    });
+
+    describe('getEnvironment', () => {
+        it('invokes getEnvironment without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.Environment()
+            );
+            client.innerApiCalls.getEnvironment = stubSimpleCall(expectedResponse);
+            const [response] = await client.getEnvironment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEnvironment without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.Environment()
+            );
+            client.innerApiCalls.getEnvironment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getEnvironment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.IEnvironment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEnvironment with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getEnvironment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getEnvironment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEnvironment with closed client', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getEnvironment(request), expectedError);
+        });
+    });
+
+    describe('createLake', () => {
+        it('invokes createLake without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CreateLakeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateLakeRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createLake = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createLake(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createLake as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createLake as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createLake without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CreateLakeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateLakeRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createLake = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createLake(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.dataplex.v1.ILake, protos.google.cloud.dataplex.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.dataplex.v1.ILake, protos.google.cloud.dataplex.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createLake as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createLake as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createLake with call error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CreateLakeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateLakeRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createLake = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createLake(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createLake as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createLake as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createLake with LRO error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CreateLakeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateLakeRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createLake = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createLake(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createLake as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createLake as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateLakeProgress without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateLakeProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateLakeProgress with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateLakeProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateLake', () => {
+        it('invokes updateLake without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.UpdateLakeRequest()
+            );
+            request.lake ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateLakeRequest', ['lake', 'name']);
+            request.lake.name = defaultValue1;
+            const expectedHeaderRequestParams = `lake.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateLake = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateLake(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateLake as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateLake as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateLake without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.UpdateLakeRequest()
+            );
+            request.lake ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateLakeRequest', ['lake', 'name']);
+            request.lake.name = defaultValue1;
+            const expectedHeaderRequestParams = `lake.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateLake = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateLake(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.dataplex.v1.ILake, protos.google.cloud.dataplex.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.dataplex.v1.ILake, protos.google.cloud.dataplex.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateLake as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateLake as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateLake with call error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.UpdateLakeRequest()
+            );
+            request.lake ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateLakeRequest', ['lake', 'name']);
+            request.lake.name = defaultValue1;
+            const expectedHeaderRequestParams = `lake.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateLake = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateLake(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateLake as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateLake as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateLake with LRO error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.UpdateLakeRequest()
+            );
+            request.lake ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateLakeRequest', ['lake', 'name']);
+            request.lake.name = defaultValue1;
+            const expectedHeaderRequestParams = `lake.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateLake = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateLake(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateLake as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateLake as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateLakeProgress without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateLakeProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateLakeProgress with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateLakeProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteLake', () => {
+        it('invokes deleteLake without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.DeleteLakeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteLakeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteLake = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteLake(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteLake as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteLake as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteLake without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.DeleteLakeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteLakeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteLake = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteLake(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteLake as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteLake as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteLake with call error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.DeleteLakeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteLakeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteLake = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteLake(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteLake as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteLake as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteLake with LRO error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.DeleteLakeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteLakeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteLake = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteLake(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteLake as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteLake as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteLakeProgress without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteLakeProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteLakeProgress with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteLakeProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createZone', () => {
+        it('invokes createZone without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CreateZoneRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateZoneRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createZone = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createZone(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createZone without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CreateZoneRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateZoneRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createZone = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createZone(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.dataplex.v1.IZone, protos.google.cloud.dataplex.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.dataplex.v1.IZone, protos.google.cloud.dataplex.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createZone with call error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CreateZoneRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateZoneRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createZone = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createZone(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createZone with LRO error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CreateZoneRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateZoneRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createZone = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createZone(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateZoneProgress without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateZoneProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateZoneProgress with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateZoneProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateZone', () => {
+        it('invokes updateZone without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.UpdateZoneRequest()
+            );
+            request.zone ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateZoneRequest', ['zone', 'name']);
+            request.zone.name = defaultValue1;
+            const expectedHeaderRequestParams = `zone.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateZone = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateZone(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateZone without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.UpdateZoneRequest()
+            );
+            request.zone ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateZoneRequest', ['zone', 'name']);
+            request.zone.name = defaultValue1;
+            const expectedHeaderRequestParams = `zone.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateZone = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateZone(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.dataplex.v1.IZone, protos.google.cloud.dataplex.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.dataplex.v1.IZone, protos.google.cloud.dataplex.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateZone with call error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.UpdateZoneRequest()
+            );
+            request.zone ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateZoneRequest', ['zone', 'name']);
+            request.zone.name = defaultValue1;
+            const expectedHeaderRequestParams = `zone.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateZone = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateZone(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateZone with LRO error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.UpdateZoneRequest()
+            );
+            request.zone ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateZoneRequest', ['zone', 'name']);
+            request.zone.name = defaultValue1;
+            const expectedHeaderRequestParams = `zone.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateZone = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateZone(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateZoneProgress without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateZoneProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateZoneProgress with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateZoneProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteZone', () => {
+        it('invokes deleteZone without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.DeleteZoneRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteZoneRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteZone = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteZone(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteZone without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.DeleteZoneRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteZoneRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteZone = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteZone(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteZone with call error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.DeleteZoneRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteZoneRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteZone = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteZone(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteZone with LRO error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.DeleteZoneRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteZoneRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteZone = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteZone(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteZoneProgress without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteZoneProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteZoneProgress with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteZoneProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createAsset', () => {
+        it('invokes createAsset without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CreateAssetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateAssetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createAsset = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createAsset(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createAsset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAsset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAsset without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CreateAssetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateAssetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createAsset = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createAsset(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.dataplex.v1.IAsset, protos.google.cloud.dataplex.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.dataplex.v1.IAsset, protos.google.cloud.dataplex.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createAsset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAsset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAsset with call error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CreateAssetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateAssetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createAsset = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createAsset(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createAsset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAsset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAsset with LRO error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CreateAssetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateAssetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createAsset = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createAsset(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createAsset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAsset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateAssetProgress without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateAssetProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateAssetProgress with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateAssetProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateAsset', () => {
+        it('invokes updateAsset without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.UpdateAssetRequest()
+            );
+            request.asset ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateAssetRequest', ['asset', 'name']);
+            request.asset.name = defaultValue1;
+            const expectedHeaderRequestParams = `asset.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateAsset = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateAsset(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAsset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAsset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAsset without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.UpdateAssetRequest()
+            );
+            request.asset ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateAssetRequest', ['asset', 'name']);
+            request.asset.name = defaultValue1;
+            const expectedHeaderRequestParams = `asset.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateAsset = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateAsset(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.dataplex.v1.IAsset, protos.google.cloud.dataplex.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.dataplex.v1.IAsset, protos.google.cloud.dataplex.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAsset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAsset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAsset with call error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.UpdateAssetRequest()
+            );
+            request.asset ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateAssetRequest', ['asset', 'name']);
+            request.asset.name = defaultValue1;
+            const expectedHeaderRequestParams = `asset.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAsset = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateAsset(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAsset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAsset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAsset with LRO error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.UpdateAssetRequest()
+            );
+            request.asset ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateAssetRequest', ['asset', 'name']);
+            request.asset.name = defaultValue1;
+            const expectedHeaderRequestParams = `asset.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAsset = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateAsset(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAsset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAsset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateAssetProgress without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateAssetProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateAssetProgress with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateAssetProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteAsset', () => {
+        it('invokes deleteAsset without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.DeleteAssetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteAssetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteAsset = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteAsset(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteAsset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAsset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAsset without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.DeleteAssetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteAssetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteAsset = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteAsset(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteAsset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAsset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAsset with call error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.DeleteAssetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteAssetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteAsset = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteAsset(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteAsset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAsset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAsset with LRO error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.DeleteAssetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteAssetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteAsset = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteAsset(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteAsset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAsset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteAssetProgress without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteAssetProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteAssetProgress with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteAssetProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createTask', () => {
+        it('invokes createTask without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CreateTaskRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateTaskRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createTask = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createTask(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createTask as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createTask as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createTask without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CreateTaskRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateTaskRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createTask = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createTask(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.dataplex.v1.ITask, protos.google.cloud.dataplex.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.dataplex.v1.ITask, protos.google.cloud.dataplex.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createTask as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createTask as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createTask with call error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CreateTaskRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateTaskRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createTask = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createTask(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createTask as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createTask as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createTask with LRO error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CreateTaskRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateTaskRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createTask = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createTask(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createTask as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createTask as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateTaskProgress without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateTaskProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateTaskProgress with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateTaskProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateTask', () => {
+        it('invokes updateTask without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.UpdateTaskRequest()
+            );
+            request.task ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateTaskRequest', ['task', 'name']);
+            request.task.name = defaultValue1;
+            const expectedHeaderRequestParams = `task.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateTask = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateTask(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateTask as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateTask as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateTask without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.UpdateTaskRequest()
+            );
+            request.task ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateTaskRequest', ['task', 'name']);
+            request.task.name = defaultValue1;
+            const expectedHeaderRequestParams = `task.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateTask = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateTask(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.dataplex.v1.ITask, protos.google.cloud.dataplex.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.dataplex.v1.ITask, protos.google.cloud.dataplex.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateTask as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateTask as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateTask with call error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.UpdateTaskRequest()
+            );
+            request.task ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateTaskRequest', ['task', 'name']);
+            request.task.name = defaultValue1;
+            const expectedHeaderRequestParams = `task.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateTask = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateTask(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateTask as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateTask as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateTask with LRO error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.UpdateTaskRequest()
+            );
+            request.task ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateTaskRequest', ['task', 'name']);
+            request.task.name = defaultValue1;
+            const expectedHeaderRequestParams = `task.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateTask = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateTask(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateTask as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateTask as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateTaskProgress without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateTaskProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateTaskProgress with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateTaskProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteTask', () => {
+        it('invokes deleteTask without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.DeleteTaskRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteTaskRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteTask = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteTask(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteTask as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteTask as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteTask without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.DeleteTaskRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteTaskRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteTask = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteTask(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteTask as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteTask as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteTask with call error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.DeleteTaskRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteTaskRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteTask = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteTask(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteTask as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteTask as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteTask with LRO error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.DeleteTaskRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteTaskRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteTask = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteTask(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteTask as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteTask as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteTaskProgress without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteTaskProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteTaskProgress with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteTaskProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createEnvironment', () => {
+        it('invokes createEnvironment without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CreateEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateEnvironmentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createEnvironment = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createEnvironment(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createEnvironment without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CreateEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateEnvironmentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createEnvironment = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createEnvironment(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.dataplex.v1.IEnvironment, protos.google.cloud.dataplex.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.dataplex.v1.IEnvironment, protos.google.cloud.dataplex.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createEnvironment with call error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CreateEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateEnvironmentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createEnvironment = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createEnvironment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createEnvironment with LRO error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CreateEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateEnvironmentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createEnvironment = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createEnvironment(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateEnvironmentProgress without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateEnvironmentProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateEnvironmentProgress with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateEnvironmentProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateEnvironment', () => {
+        it('invokes updateEnvironment without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.UpdateEnvironmentRequest()
+            );
+            request.environment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateEnvironmentRequest', ['environment', 'name']);
+            request.environment.name = defaultValue1;
+            const expectedHeaderRequestParams = `environment.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateEnvironment = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateEnvironment(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateEnvironment without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.UpdateEnvironmentRequest()
+            );
+            request.environment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateEnvironmentRequest', ['environment', 'name']);
+            request.environment.name = defaultValue1;
+            const expectedHeaderRequestParams = `environment.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateEnvironment = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateEnvironment(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.dataplex.v1.IEnvironment, protos.google.cloud.dataplex.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.dataplex.v1.IEnvironment, protos.google.cloud.dataplex.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateEnvironment with call error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.UpdateEnvironmentRequest()
+            );
+            request.environment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateEnvironmentRequest', ['environment', 'name']);
+            request.environment.name = defaultValue1;
+            const expectedHeaderRequestParams = `environment.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateEnvironment = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateEnvironment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateEnvironment with LRO error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.UpdateEnvironmentRequest()
+            );
+            request.environment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.UpdateEnvironmentRequest', ['environment', 'name']);
+            request.environment.name = defaultValue1;
+            const expectedHeaderRequestParams = `environment.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateEnvironment = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateEnvironment(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateEnvironmentProgress without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateEnvironmentProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateEnvironmentProgress with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateEnvironmentProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteEnvironment', () => {
+        it('invokes deleteEnvironment without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.DeleteEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteEnvironment = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteEnvironment(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteEnvironment without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.DeleteEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteEnvironment = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteEnvironment(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteEnvironment with call error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.DeleteEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteEnvironment = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteEnvironment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteEnvironment with LRO error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.DeleteEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteEnvironment = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteEnvironment(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteEnvironmentProgress without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteEnvironmentProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteEnvironmentProgress with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteEnvironmentProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listLakes', () => {
+        it('invokes listLakes without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListLakesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListLakesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
+            ];
+            client.innerApiCalls.listLakes = stubSimpleCall(expectedResponse);
+            const [response] = await client.listLakes(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listLakes as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLakes as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listLakes without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListLakesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListLakesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
+            ];
+            client.innerApiCalls.listLakes = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listLakes(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.ILake[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listLakes as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLakes as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listLakes with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListLakesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListLakesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listLakes = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listLakes(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listLakes as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLakes as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listLakesStream without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListLakesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListLakesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
+            ];
+            client.descriptors.page.listLakes.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listLakesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dataplex.v1.Lake[] = [];
+                stream.on('data', (response: protos.google.cloud.dataplex.v1.Lake) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listLakes.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listLakes, request));
+            assert(
+                (client.descriptors.page.listLakes.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listLakesStream with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListLakesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListLakesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listLakes.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listLakesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dataplex.v1.Lake[] = [];
+                stream.on('data', (response: protos.google.cloud.dataplex.v1.Lake) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listLakes.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listLakes, request));
+            assert(
+                (client.descriptors.page.listLakes.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listLakes without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListLakesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListLakesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
+            ];
+            client.descriptors.page.listLakes.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.dataplex.v1.ILake[] = [];
+            const iterable = client.listLakesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listZones as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listZones as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listZones with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListZonesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListZonesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listZones = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.listZones(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listZones as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listZones as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listZonesStream without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListZonesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListZonesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
-      ];
-      client.descriptors.page.listZones.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listZonesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataplex.v1.Zone[] = [];
-        stream.on('data', (response: protos.google.cloud.dataplex.v1.Zone) => {
-          responses.push(response);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listLakes.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listLakes.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('end', () => {
-          resolve(responses);
+
+        it('uses async iteration with listLakes with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListLakesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListLakesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listLakes.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLakesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.dataplex.v1.ILake[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listLakes.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listLakes.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listZones.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listZones, request)
-      );
-      assert(
-        (client.descriptors.page.listZones.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listZonesStream with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListZonesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListZonesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listZones.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listZonesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataplex.v1.Zone[] = [];
-        stream.on('data', (response: protos.google.cloud.dataplex.v1.Zone) => {
-          responses.push(response);
+    describe('listLakeActions', () => {
+        it('invokes listLakeActions without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListLakeActionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListLakeActionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+            ];
+            client.innerApiCalls.listLakeActions = stubSimpleCall(expectedResponse);
+            const [response] = await client.listLakeActions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listLakeActions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLakeActions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('end', () => {
-          resolve(responses);
+
+        it('invokes listLakeActions without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListLakeActionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListLakeActionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+            ];
+            client.innerApiCalls.listLakeActions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listLakeActions(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.IAction[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listLakeActions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLakeActions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listLakeActions with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListLakeActionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListLakeActionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listLakeActions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listLakeActions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listLakeActions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLakeActions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listZones.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listZones, request)
-      );
-      assert(
-        (client.descriptors.page.listZones.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listZones without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListZonesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListZonesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
-      ];
-      client.descriptors.page.listZones.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.dataplex.v1.IZone[] = [];
-      const iterable = client.listZonesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listZones.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listZones.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listLakeActionsStream without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListLakeActionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListLakeActionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+            ];
+            client.descriptors.page.listLakeActions.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listLakeActionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dataplex.v1.Action[] = [];
+                stream.on('data', (response: protos.google.cloud.dataplex.v1.Action) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listLakeActions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listLakeActions, request));
+            assert(
+                (client.descriptors.page.listLakeActions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-    it('uses async iteration with listZones with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListZonesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListZonesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listZones.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listZonesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.dataplex.v1.IZone[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listZones.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listZones.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listLakeActionsStream with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListLakeActionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListLakeActionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listLakeActions.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listLakeActionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dataplex.v1.Action[] = [];
+                stream.on('data', (response: protos.google.cloud.dataplex.v1.Action) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listLakeActions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listLakeActions, request));
+            assert(
+                (client.descriptors.page.listLakeActions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-  describe('listZoneActions', () => {
-    it('invokes listZoneActions without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListZoneActionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListZoneActionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-      ];
-      client.innerApiCalls.listZoneActions = stubSimpleCall(expectedResponse);
-      const [response] = await client.listZoneActions(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listZoneActions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listZoneActions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listZoneActions without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListZoneActionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListZoneActionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-      ];
-      client.innerApiCalls.listZoneActions =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listZoneActions(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dataplex.v1.IAction[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listLakeActions without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListLakeActionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListLakeActionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+            ];
+            client.descriptors.page.listLakeActions.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.dataplex.v1.IAction[] = [];
+            const iterable = client.listLakeActionsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listZoneActions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listZoneActions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listZoneActions with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListZoneActionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListZoneActionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listZoneActions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listZoneActions(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listZoneActions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listZoneActions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listZoneActionsStream without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListZoneActionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListZoneActionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-      ];
-      client.descriptors.page.listZoneActions.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listZoneActionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataplex.v1.Action[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.dataplex.v1.Action) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listLakeActions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listLakeActions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listLakeActions with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListLakeActionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListLakeActionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listLakeActions.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLakeActionsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.dataplex.v1.IAction[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listLakeActions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listLakeActions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listZoneActions.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listZoneActions, request)
-      );
-      assert(
-        (client.descriptors.page.listZoneActions.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listZoneActionsStream with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListZoneActionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListZoneActionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listZoneActions.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listZoneActionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataplex.v1.Action[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.dataplex.v1.Action) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listZones', () => {
+        it('invokes listZones without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListZonesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListZonesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
+            ];
+            client.innerApiCalls.listZones = stubSimpleCall(expectedResponse);
+            const [response] = await client.listZones(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listZones as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listZones as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listZones without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListZonesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListZonesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
+            ];
+            client.innerApiCalls.listZones = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listZones(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.IZone[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listZones as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listZones as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listZoneActions.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listZoneActions, request)
-      );
-      assert(
-        (client.descriptors.page.listZoneActions.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listZoneActions without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListZoneActionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListZoneActionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-      ];
-      client.descriptors.page.listZoneActions.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.dataplex.v1.IAction[] = [];
-      const iterable = client.listZoneActionsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listZoneActions.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listZoneActions.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listZones with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListZonesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListZonesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listZones = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listZones(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listZones as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listZones as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listZoneActions with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListZoneActionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListZoneActionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listZoneActions.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listZoneActionsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.dataplex.v1.IAction[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listZoneActions.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listZoneActions.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listZonesStream without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListZonesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListZonesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
+            ];
+            client.descriptors.page.listZones.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listZonesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dataplex.v1.Zone[] = [];
+                stream.on('data', (response: protos.google.cloud.dataplex.v1.Zone) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listZones.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listZones, request));
+            assert(
+                (client.descriptors.page.listZones.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listAssets', () => {
-    it('invokes listAssets without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
-      ];
-      client.innerApiCalls.listAssets = stubSimpleCall(expectedResponse);
-      const [response] = await client.listAssets(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAssets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAssets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listZonesStream with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListZonesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListZonesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listZones.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listZonesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dataplex.v1.Zone[] = [];
+                stream.on('data', (response: protos.google.cloud.dataplex.v1.Zone) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listZones.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listZones, request));
+            assert(
+                (client.descriptors.page.listZones.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listAssets without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
-      ];
-      client.innerApiCalls.listAssets =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listAssets(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dataplex.v1.IAsset[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listZones without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListZonesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListZonesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
+            ];
+            client.descriptors.page.listZones.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.dataplex.v1.IZone[] = [];
+            const iterable = client.listZonesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAssets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAssets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAssets with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listAssets = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listAssets(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listAssets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAssets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAssetsStream without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
-      ];
-      client.descriptors.page.listAssets.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listAssetsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataplex.v1.Asset[] = [];
-        stream.on('data', (response: protos.google.cloud.dataplex.v1.Asset) => {
-          responses.push(response);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listZones.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listZones.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('end', () => {
-          resolve(responses);
+
+        it('uses async iteration with listZones with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListZonesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListZonesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listZones.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listZonesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.dataplex.v1.IZone[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listZones.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listZones.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listAssets.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAssets, request)
-      );
-      assert(
-        (client.descriptors.page.listAssets.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listAssetsStream with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAssets.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listAssetsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataplex.v1.Asset[] = [];
-        stream.on('data', (response: protos.google.cloud.dataplex.v1.Asset) => {
-          responses.push(response);
+    describe('listZoneActions', () => {
+        it('invokes listZoneActions without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListZoneActionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListZoneActionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+            ];
+            client.innerApiCalls.listZoneActions = stubSimpleCall(expectedResponse);
+            const [response] = await client.listZoneActions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listZoneActions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listZoneActions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('end', () => {
-          resolve(responses);
+
+        it('invokes listZoneActions without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListZoneActionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListZoneActionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+            ];
+            client.innerApiCalls.listZoneActions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listZoneActions(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.IAction[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listZoneActions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listZoneActions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listZoneActions with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListZoneActionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListZoneActionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listZoneActions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listZoneActions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listZoneActions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listZoneActions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listAssets.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAssets, request)
-      );
-      assert(
-        (client.descriptors.page.listAssets.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listAssets without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
-      ];
-      client.descriptors.page.listAssets.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.dataplex.v1.IAsset[] = [];
-      const iterable = client.listAssetsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listAssets.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listAssets.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listZoneActionsStream without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListZoneActionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListZoneActionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+            ];
+            client.descriptors.page.listZoneActions.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listZoneActionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dataplex.v1.Action[] = [];
+                stream.on('data', (response: protos.google.cloud.dataplex.v1.Action) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listZoneActions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listZoneActions, request));
+            assert(
+                (client.descriptors.page.listZoneActions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-    it('uses async iteration with listAssets with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAssets.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listAssetsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.dataplex.v1.IAsset[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listAssets.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listAssets.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listZoneActionsStream with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListZoneActionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListZoneActionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listZoneActions.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listZoneActionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dataplex.v1.Action[] = [];
+                stream.on('data', (response: protos.google.cloud.dataplex.v1.Action) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listZoneActions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listZoneActions, request));
+            assert(
+                (client.descriptors.page.listZoneActions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-  describe('listAssetActions', () => {
-    it('invokes listAssetActions without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListAssetActionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListAssetActionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-      ];
-      client.innerApiCalls.listAssetActions = stubSimpleCall(expectedResponse);
-      const [response] = await client.listAssetActions(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAssetActions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAssetActions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAssetActions without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListAssetActionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListAssetActionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-      ];
-      client.innerApiCalls.listAssetActions =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listAssetActions(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dataplex.v1.IAction[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listZoneActions without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListZoneActionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListZoneActionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+            ];
+            client.descriptors.page.listZoneActions.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.dataplex.v1.IAction[] = [];
+            const iterable = client.listZoneActionsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAssetActions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAssetActions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAssetActions with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListAssetActionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListAssetActionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listAssetActions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listAssetActions(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listAssetActions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAssetActions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAssetActionsStream without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListAssetActionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListAssetActionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-      ];
-      client.descriptors.page.listAssetActions.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listAssetActionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataplex.v1.Action[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.dataplex.v1.Action) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listZoneActions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listZoneActions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listZoneActions with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListZoneActionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListZoneActionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listZoneActions.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listZoneActionsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.dataplex.v1.IAction[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listZoneActions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listZoneActions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listAssetActions.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAssetActions, request)
-      );
-      assert(
-        (client.descriptors.page.listAssetActions.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listAssetActionsStream with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListAssetActionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListAssetActionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAssetActions.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listAssetActionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataplex.v1.Action[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.dataplex.v1.Action) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listAssets', () => {
+        it('invokes listAssets without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
+            ];
+            client.innerApiCalls.listAssets = stubSimpleCall(expectedResponse);
+            const [response] = await client.listAssets(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAssets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAssets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listAssets without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
+            ];
+            client.innerApiCalls.listAssets = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listAssets(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.IAsset[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAssets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAssets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listAssetActions.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAssetActions, request)
-      );
-      assert(
-        (client.descriptors.page.listAssetActions.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listAssetActions without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListAssetActionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListAssetActionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
-      ];
-      client.descriptors.page.listAssetActions.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.dataplex.v1.IAction[] = [];
-      const iterable = client.listAssetActionsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAssetActions.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listAssetActions.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listAssets with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listAssets = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listAssets(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listAssets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAssets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listAssetActions with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListAssetActionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListAssetActionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAssetActions.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listAssetActionsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.dataplex.v1.IAction[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAssetActions.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listAssetActions.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listAssetsStream without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
+            ];
+            client.descriptors.page.listAssets.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listAssetsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dataplex.v1.Asset[] = [];
+                stream.on('data', (response: protos.google.cloud.dataplex.v1.Asset) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listAssets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAssets, request));
+            assert(
+                (client.descriptors.page.listAssets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listTasks', () => {
-    it('invokes listTasks without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListTasksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListTasksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
-      ];
-      client.innerApiCalls.listTasks = stubSimpleCall(expectedResponse);
-      const [response] = await client.listTasks(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listTasks as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listTasks as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listAssetsStream with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAssets.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listAssetsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dataplex.v1.Asset[] = [];
+                stream.on('data', (response: protos.google.cloud.dataplex.v1.Asset) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listAssets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAssets, request));
+            assert(
+                (client.descriptors.page.listAssets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listTasks without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListTasksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListTasksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
-      ];
-      client.innerApiCalls.listTasks =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listTasks(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dataplex.v1.ITask[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listAssets without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
+            ];
+            client.descriptors.page.listAssets.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.dataplex.v1.IAsset[] = [];
+            const iterable = client.listAssetsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listTasks as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listTasks as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listTasks with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListTasksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListTasksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listTasks = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.listTasks(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listTasks as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listTasks as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listTasksStream without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListTasksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListTasksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
-      ];
-      client.descriptors.page.listTasks.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listTasksStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataplex.v1.Task[] = [];
-        stream.on('data', (response: protos.google.cloud.dataplex.v1.Task) => {
-          responses.push(response);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAssets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAssets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('end', () => {
-          resolve(responses);
+
+        it('uses async iteration with listAssets with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAssets.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listAssetsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.dataplex.v1.IAsset[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAssets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAssets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listTasks.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listTasks, request)
-      );
-      assert(
-        (client.descriptors.page.listTasks.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listTasksStream with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListTasksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListTasksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listTasks.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listTasksStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataplex.v1.Task[] = [];
-        stream.on('data', (response: protos.google.cloud.dataplex.v1.Task) => {
-          responses.push(response);
+    describe('listAssetActions', () => {
+        it('invokes listAssetActions without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListAssetActionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListAssetActionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+            ];
+            client.innerApiCalls.listAssetActions = stubSimpleCall(expectedResponse);
+            const [response] = await client.listAssetActions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAssetActions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAssetActions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('end', () => {
-          resolve(responses);
+
+        it('invokes listAssetActions without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListAssetActionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListAssetActionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+            ];
+            client.innerApiCalls.listAssetActions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listAssetActions(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.IAction[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAssetActions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAssetActions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listAssetActions with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListAssetActionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListAssetActionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listAssetActions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listAssetActions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listAssetActions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAssetActions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listTasks.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listTasks, request)
-      );
-      assert(
-        (client.descriptors.page.listTasks.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listTasks without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListTasksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListTasksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
-      ];
-      client.descriptors.page.listTasks.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.dataplex.v1.ITask[] = [];
-      const iterable = client.listTasksAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listTasks.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listTasks.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listAssetActionsStream without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListAssetActionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListAssetActionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+            ];
+            client.descriptors.page.listAssetActions.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listAssetActionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dataplex.v1.Action[] = [];
+                stream.on('data', (response: protos.google.cloud.dataplex.v1.Action) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listAssetActions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAssetActions, request));
+            assert(
+                (client.descriptors.page.listAssetActions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-    it('uses async iteration with listTasks with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListTasksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListTasksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listTasks.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listTasksAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.dataplex.v1.ITask[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listTasks.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listTasks.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listAssetActionsStream with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListAssetActionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListAssetActionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAssetActions.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listAssetActionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dataplex.v1.Action[] = [];
+                stream.on('data', (response: protos.google.cloud.dataplex.v1.Action) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listAssetActions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAssetActions, request));
+            assert(
+                (client.descriptors.page.listAssetActions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-  describe('listJobs', () => {
-    it('invokes listJobs without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
-      ];
-      client.innerApiCalls.listJobs = stubSimpleCall(expectedResponse);
-      const [response] = await client.listJobs(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listJobs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listJobs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listJobs without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
-      ];
-      client.innerApiCalls.listJobs =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listJobs(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dataplex.v1.IJob[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listAssetActions without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListAssetActionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListAssetActionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
+            ];
+            client.descriptors.page.listAssetActions.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.dataplex.v1.IAction[] = [];
+            const iterable = client.listAssetActionsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listJobs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listJobs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listJobs with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listJobs = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.listJobs(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listJobs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listJobs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listJobsStream without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
-      ];
-      client.descriptors.page.listJobs.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listJobsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataplex.v1.Job[] = [];
-        stream.on('data', (response: protos.google.cloud.dataplex.v1.Job) => {
-          responses.push(response);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAssetActions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAssetActions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('end', () => {
-          resolve(responses);
+
+        it('uses async iteration with listAssetActions with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListAssetActionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListAssetActionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAssetActions.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listAssetActionsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.dataplex.v1.IAction[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAssetActions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAssetActions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listJobs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listJobs, request)
-      );
-      assert(
-        (client.descriptors.page.listJobs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listJobsStream with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listJobs.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listJobsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataplex.v1.Job[] = [];
-        stream.on('data', (response: protos.google.cloud.dataplex.v1.Job) => {
-          responses.push(response);
+    describe('listTasks', () => {
+        it('invokes listTasks without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListTasksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListTasksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
+            ];
+            client.innerApiCalls.listTasks = stubSimpleCall(expectedResponse);
+            const [response] = await client.listTasks(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listTasks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listTasks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('end', () => {
-          resolve(responses);
+
+        it('invokes listTasks without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListTasksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListTasksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
+            ];
+            client.innerApiCalls.listTasks = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listTasks(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.ITask[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listTasks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listTasks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listTasks with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListTasksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListTasksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listTasks = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listTasks(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listTasks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listTasks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listJobs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listJobs, request)
-      );
-      assert(
-        (client.descriptors.page.listJobs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listJobs without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
-      ];
-      client.descriptors.page.listJobs.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.dataplex.v1.IJob[] = [];
-      const iterable = client.listJobsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listJobs.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listJobs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listTasksStream without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListTasksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListTasksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
+            ];
+            client.descriptors.page.listTasks.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listTasksStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dataplex.v1.Task[] = [];
+                stream.on('data', (response: protos.google.cloud.dataplex.v1.Task) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listTasks.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listTasks, request));
+            assert(
+                (client.descriptors.page.listTasks.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-    it('uses async iteration with listJobs with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listJobs.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listJobsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.dataplex.v1.IJob[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listJobs.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listJobs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listTasksStream with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListTasksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListTasksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listTasks.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listTasksStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dataplex.v1.Task[] = [];
+                stream.on('data', (response: protos.google.cloud.dataplex.v1.Task) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listTasks.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listTasks, request));
+            assert(
+                (client.descriptors.page.listTasks.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-  describe('listEnvironments', () => {
-    it('invokes listEnvironments without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListEnvironmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListEnvironmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.dataplex.v1.Environment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dataplex.v1.Environment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dataplex.v1.Environment()
-        ),
-      ];
-      client.innerApiCalls.listEnvironments = stubSimpleCall(expectedResponse);
-      const [response] = await client.listEnvironments(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listEnvironments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listEnvironments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listEnvironments without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListEnvironmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListEnvironmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.dataplex.v1.Environment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dataplex.v1.Environment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dataplex.v1.Environment()
-        ),
-      ];
-      client.innerApiCalls.listEnvironments =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listEnvironments(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dataplex.v1.IEnvironment[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listTasks without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListTasksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListTasksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
+            ];
+            client.descriptors.page.listTasks.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.dataplex.v1.ITask[] = [];
+            const iterable = client.listTasksAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listEnvironments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listEnvironments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listEnvironments with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListEnvironmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListEnvironmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listEnvironments = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listEnvironments(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listEnvironments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listEnvironments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listEnvironmentsStream without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListEnvironmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListEnvironmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.dataplex.v1.Environment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dataplex.v1.Environment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dataplex.v1.Environment()
-        ),
-      ];
-      client.descriptors.page.listEnvironments.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listEnvironmentsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataplex.v1.Environment[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.dataplex.v1.Environment) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listTasks.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listTasks.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listTasks with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListTasksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListTasksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listTasks.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listTasksAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.dataplex.v1.ITask[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listTasks.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listTasks.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listEnvironments.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listEnvironments, request)
-      );
-      assert(
-        (client.descriptors.page.listEnvironments.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listEnvironmentsStream with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListEnvironmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListEnvironmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listEnvironments.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listEnvironmentsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataplex.v1.Environment[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.dataplex.v1.Environment) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listJobs', () => {
+        it('invokes listJobs without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
+            ];
+            client.innerApiCalls.listJobs = stubSimpleCall(expectedResponse);
+            const [response] = await client.listJobs(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listJobs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listJobs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listJobs without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
+            ];
+            client.innerApiCalls.listJobs = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listJobs(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.IJob[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listJobs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listJobs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listEnvironments.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listEnvironments, request)
-      );
-      assert(
-        (client.descriptors.page.listEnvironments.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listEnvironments without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListEnvironmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListEnvironmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.dataplex.v1.Environment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dataplex.v1.Environment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dataplex.v1.Environment()
-        ),
-      ];
-      client.descriptors.page.listEnvironments.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.dataplex.v1.IEnvironment[] = [];
-      const iterable = client.listEnvironmentsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listEnvironments.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listEnvironments.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listJobs with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listJobs = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listJobs(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listJobs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listJobs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listEnvironments with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListEnvironmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListEnvironmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listEnvironments.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listEnvironmentsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.dataplex.v1.IEnvironment[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listEnvironments.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listEnvironments.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listJobsStream without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
+            ];
+            client.descriptors.page.listJobs.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listJobsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dataplex.v1.Job[] = [];
+                stream.on('data', (response: protos.google.cloud.dataplex.v1.Job) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listJobs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listJobs, request));
+            assert(
+                (client.descriptors.page.listJobs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listSessions', () => {
-    it('invokes listSessions without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListSessionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListSessionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
-      ];
-      client.innerApiCalls.listSessions = stubSimpleCall(expectedResponse);
-      const [response] = await client.listSessions(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listSessions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSessions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listJobsStream with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listJobs.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listJobsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dataplex.v1.Job[] = [];
+                stream.on('data', (response: protos.google.cloud.dataplex.v1.Job) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listJobs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listJobs, request));
+            assert(
+                (client.descriptors.page.listJobs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listSessions without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListSessionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListSessionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
-      ];
-      client.innerApiCalls.listSessions =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listSessions(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dataplex.v1.ISession[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listJobs without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
+            ];
+            client.descriptors.page.listJobs.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.dataplex.v1.IJob[] = [];
+            const iterable = client.listJobsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listSessions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSessions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSessions with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListSessionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListSessionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listSessions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listSessions(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listSessions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSessions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSessionsStream without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListSessionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListSessionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
-      ];
-      client.descriptors.page.listSessions.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listSessionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataplex.v1.Session[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.dataplex.v1.Session) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listJobs with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listJobs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listJobsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.dataplex.v1.IJob[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listSessions.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listSessions, request)
-      );
-      assert(
-        (client.descriptors.page.listSessions.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listSessionsStream with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListSessionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListSessionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listSessions.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listSessionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataplex.v1.Session[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.dataplex.v1.Session) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listEnvironments', () => {
+        it('invokes listEnvironments without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListEnvironmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListEnvironmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Environment()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Environment()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Environment()),
+            ];
+            client.innerApiCalls.listEnvironments = stubSimpleCall(expectedResponse);
+            const [response] = await client.listEnvironments(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listEnvironments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listEnvironments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listEnvironments without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListEnvironmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListEnvironmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Environment()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Environment()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Environment()),
+            ];
+            client.innerApiCalls.listEnvironments = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listEnvironments(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.IEnvironment[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listEnvironments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listEnvironments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listSessions.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listSessions, request)
-      );
-      assert(
-        (client.descriptors.page.listSessions.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listSessions without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListSessionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListSessionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
-      ];
-      client.descriptors.page.listSessions.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.dataplex.v1.ISession[] = [];
-      const iterable = client.listSessionsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listSessions.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listSessions.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listEnvironments with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListEnvironmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListEnvironmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listEnvironments = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listEnvironments(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listEnvironments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listEnvironments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listSessions with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListSessionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataplex.v1.ListSessionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listSessions.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listSessionsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.dataplex.v1.ISession[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listSessions.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listSessions.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-  describe('getLocation', () => {
-    it('invokes getLocation without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
-      const response = await client.getLocation(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes getLocation without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLocation(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: LocationProtos.google.cloud.location.ILocation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('invokes listEnvironmentsStream without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListEnvironmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListEnvironmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Environment()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Environment()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Environment()),
+            ];
+            client.descriptors.page.listEnvironments.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listEnvironmentsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dataplex.v1.Environment[] = [];
+                stream.on('data', (response: protos.google.cloud.dataplex.v1.Environment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listEnvironments.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listEnvironments, request));
+            assert(
+                (client.descriptors.page.listEnvironments.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listEnvironmentsStream with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListEnvironmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListEnvironmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listEnvironments.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listEnvironmentsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dataplex.v1.Environment[] = [];
+                stream.on('data', (response: protos.google.cloud.dataplex.v1.Environment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listEnvironments.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listEnvironments, request));
+            assert(
+                (client.descriptors.page.listEnvironments.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listEnvironments without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListEnvironmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListEnvironmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Environment()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Environment()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Environment()),
+            ];
+            client.descriptors.page.listEnvironments.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.dataplex.v1.IEnvironment[] = [];
+            const iterable = client.listEnvironmentsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listEnvironments.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listEnvironments.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listEnvironments with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListEnvironmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListEnvironmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listEnvironments.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listEnvironmentsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.dataplex.v1.IEnvironment[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listEnvironments.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listEnvironments.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes getLocation with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.locationsClient.getLocation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getLocation(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('listLocationsAsync', () => {
-    it('uses async iteration with listLocations without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-      ];
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-      const iterable = client.listLocationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-    it('uses async iteration with listLocations with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedError = new Error('expected');
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLocationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes getOperation without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .getOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: operationsProtos.google.longrunning.Operation | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+
+    describe('listSessions', () => {
+        it('invokes listSessions without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListSessionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListSessionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
+            ];
+            client.innerApiCalls.listSessions = stubSimpleCall(expectedResponse);
+            const [response] = await client.listSessions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listSessions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSessions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listSessions without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListSessionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListSessionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
+            ];
+            client.innerApiCalls.listSessions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listSessions(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.ISession[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listSessions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSessions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listSessions with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListSessionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListSessionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listSessions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listSessions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listSessions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSessions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listSessionsStream without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListSessionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListSessionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
+            ];
+            client.descriptors.page.listSessions.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listSessionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dataplex.v1.Session[] = [];
+                stream.on('data', (response: protos.google.cloud.dataplex.v1.Session) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listSessions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listSessions, request));
+            assert(
+                (client.descriptors.page.listSessions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listSessionsStream with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListSessionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListSessionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listSessions.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listSessionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dataplex.v1.Session[] = [];
+                stream.on('data', (response: protos.google.cloud.dataplex.v1.Session) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listSessions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listSessions, request));
+            assert(
+                (client.descriptors.page.listSessions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listSessions without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListSessionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListSessionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
+              generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
+            ];
+            client.descriptors.page.listSessions.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.dataplex.v1.ISession[] = [];
+            const iterable = client.listSessionsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listSessions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listSessions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listSessions with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.ListSessionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.ListSessionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listSessions.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listSessionsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.dataplex.v1.ISession[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listSessions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listSessions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes getOperation with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('getLocation', () => {
+        it('invokes getLocation without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+            const response = await client.getLocation(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes getLocation without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLocation(
+                    request,
+                    expectedOptions,
+                    (
+                        err?: Error | null,
+                        result?: LocationProtos.google.cloud.location.ILocation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getLocation with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.locationsClient.getLocation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLocation(request, expectedOptions), expectedError);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .cancelOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+    describe('listLocationsAsync', () => {
+        it('uses async iteration with listLocations without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+                new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedResponse = [
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+            ];
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+            const iterable = client.listLocationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+        it('uses async iteration with listLocations with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedError = new Error('expected');
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLocationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes cancelOperation with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes getOperation without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .deleteOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.IOperation[] = [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.IOperation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('aspectType', async () => {
-      const fakePath = '/rendered/path/aspectType';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        aspect_type: 'aspectTypeValue',
-      };
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.aspectTypePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.aspectTypePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('aspectTypePath', () => {
-        const result = client.aspectTypePath(
-          'projectValue',
-          'locationValue',
-          'aspectTypeValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.aspectTypePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromAspectTypeName', () => {
-        const result = client.matchProjectFromAspectTypeName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.aspectTypePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromAspectTypeName', () => {
-        const result = client.matchLocationFromAspectTypeName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.aspectTypePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAspectTypeFromAspectTypeName', () => {
-        const result = client.matchAspectTypeFromAspectTypeName(fakePath);
-        assert.strictEqual(result, 'aspectTypeValue');
-        assert(
-          (client.pathTemplates.aspectTypePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
     });
 
-    describe('asset', async () => {
-      const fakePath = '/rendered/path/asset';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        lake: 'lakeValue',
-        zone: 'zoneValue',
-        asset: 'assetValue',
-      };
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.assetPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.assetPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('Path templates', () => {
 
-      it('assetPath', () => {
-        const result = client.assetPath(
-          'projectValue',
-          'locationValue',
-          'lakeValue',
-          'zoneValue',
-          'assetValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.assetPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('aspectType', async () => {
+            const fakePath = "/rendered/path/aspectType";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                aspect_type: "aspectTypeValue",
+            };
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.aspectTypePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.aspectTypePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromAssetName', () => {
-        const result = client.matchProjectFromAssetName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.assetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('aspectTypePath', () => {
+                const result = client.aspectTypePath("projectValue", "locationValue", "aspectTypeValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.aspectTypePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromAssetName', () => {
-        const result = client.matchLocationFromAssetName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.assetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromAspectTypeName', () => {
+                const result = client.matchProjectFromAspectTypeName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.aspectTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchLakeFromAssetName', () => {
-        const result = client.matchLakeFromAssetName(fakePath);
-        assert.strictEqual(result, 'lakeValue');
-        assert(
-          (client.pathTemplates.assetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchLocationFromAspectTypeName', () => {
+                const result = client.matchLocationFromAspectTypeName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.aspectTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchZoneFromAssetName', () => {
-        const result = client.matchZoneFromAssetName(fakePath);
-        assert.strictEqual(result, 'zoneValue');
-        assert(
-          (client.pathTemplates.assetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchAspectTypeFromAspectTypeName', () => {
+                const result = client.matchAspectTypeFromAspectTypeName(fakePath);
+                assert.strictEqual(result, "aspectTypeValue");
+                assert((client.pathTemplates.aspectTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
 
-      it('matchAssetFromAssetName', () => {
-        const result = client.matchAssetFromAssetName(fakePath);
-        assert.strictEqual(result, 'assetValue');
-        assert(
-          (client.pathTemplates.assetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        describe('asset', async () => {
+            const fakePath = "/rendered/path/asset";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                lake: "lakeValue",
+                zone: "zoneValue",
+                asset: "assetValue",
+            };
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.assetPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.assetPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('assetPath', () => {
+                const result = client.assetPath("projectValue", "locationValue", "lakeValue", "zoneValue", "assetValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.assetPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromAssetName', () => {
+                const result = client.matchProjectFromAssetName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.assetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromAssetName', () => {
+                const result = client.matchLocationFromAssetName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.assetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLakeFromAssetName', () => {
+                const result = client.matchLakeFromAssetName(fakePath);
+                assert.strictEqual(result, "lakeValue");
+                assert((client.pathTemplates.assetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchZoneFromAssetName', () => {
+                const result = client.matchZoneFromAssetName(fakePath);
+                assert.strictEqual(result, "zoneValue");
+                assert((client.pathTemplates.assetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAssetFromAssetName', () => {
+                const result = client.matchAssetFromAssetName(fakePath);
+                assert.strictEqual(result, "assetValue");
+                assert((client.pathTemplates.assetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('content', async () => {
+            const fakePath = "/rendered/path/content";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                lake: "lakeValue",
+                content: "contentValue",
+            };
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.contentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.contentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('contentPath', () => {
+                const result = client.contentPath("projectValue", "locationValue", "lakeValue", "contentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.contentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromContentName', () => {
+                const result = client.matchProjectFromContentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.contentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromContentName', () => {
+                const result = client.matchLocationFromContentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.contentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLakeFromContentName', () => {
+                const result = client.matchLakeFromContentName(fakePath);
+                assert.strictEqual(result, "lakeValue");
+                assert((client.pathTemplates.contentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchContentFromContentName', () => {
+                const result = client.matchContentFromContentName(fakePath);
+                assert.strictEqual(result, "contentValue");
+                assert((client.pathTemplates.contentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('dataAttribute', async () => {
+            const fakePath = "/rendered/path/dataAttribute";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                dataTaxonomy: "dataTaxonomyValue",
+                data_attribute_id: "dataAttributeIdValue",
+            };
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.dataAttributePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.dataAttributePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('dataAttributePath', () => {
+                const result = client.dataAttributePath("projectValue", "locationValue", "dataTaxonomyValue", "dataAttributeIdValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.dataAttributePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDataAttributeName', () => {
+                const result = client.matchProjectFromDataAttributeName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.dataAttributePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDataAttributeName', () => {
+                const result = client.matchLocationFromDataAttributeName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.dataAttributePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataTaxonomyFromDataAttributeName', () => {
+                const result = client.matchDataTaxonomyFromDataAttributeName(fakePath);
+                assert.strictEqual(result, "dataTaxonomyValue");
+                assert((client.pathTemplates.dataAttributePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataAttributeIdFromDataAttributeName', () => {
+                const result = client.matchDataAttributeIdFromDataAttributeName(fakePath);
+                assert.strictEqual(result, "dataAttributeIdValue");
+                assert((client.pathTemplates.dataAttributePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('dataAttributeBinding', async () => {
+            const fakePath = "/rendered/path/dataAttributeBinding";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_attribute_binding_id: "dataAttributeBindingIdValue",
+            };
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.dataAttributeBindingPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.dataAttributeBindingPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('dataAttributeBindingPath', () => {
+                const result = client.dataAttributeBindingPath("projectValue", "locationValue", "dataAttributeBindingIdValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.dataAttributeBindingPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDataAttributeBindingName', () => {
+                const result = client.matchProjectFromDataAttributeBindingName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.dataAttributeBindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDataAttributeBindingName', () => {
+                const result = client.matchLocationFromDataAttributeBindingName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.dataAttributeBindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataAttributeBindingIdFromDataAttributeBindingName', () => {
+                const result = client.matchDataAttributeBindingIdFromDataAttributeBindingName(fakePath);
+                assert.strictEqual(result, "dataAttributeBindingIdValue");
+                assert((client.pathTemplates.dataAttributeBindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('dataScan', async () => {
+            const fakePath = "/rendered/path/dataScan";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                dataScan: "dataScanValue",
+            };
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.dataScanPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.dataScanPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('dataScanPath', () => {
+                const result = client.dataScanPath("projectValue", "locationValue", "dataScanValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.dataScanPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDataScanName', () => {
+                const result = client.matchProjectFromDataScanName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.dataScanPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDataScanName', () => {
+                const result = client.matchLocationFromDataScanName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.dataScanPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataScanFromDataScanName', () => {
+                const result = client.matchDataScanFromDataScanName(fakePath);
+                assert.strictEqual(result, "dataScanValue");
+                assert((client.pathTemplates.dataScanPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('dataScanJob', async () => {
+            const fakePath = "/rendered/path/dataScanJob";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                dataScan: "dataScanValue",
+                job: "jobValue",
+            };
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.dataScanJobPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.dataScanJobPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('dataScanJobPath', () => {
+                const result = client.dataScanJobPath("projectValue", "locationValue", "dataScanValue", "jobValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.dataScanJobPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDataScanJobName', () => {
+                const result = client.matchProjectFromDataScanJobName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.dataScanJobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDataScanJobName', () => {
+                const result = client.matchLocationFromDataScanJobName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.dataScanJobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataScanFromDataScanJobName', () => {
+                const result = client.matchDataScanFromDataScanJobName(fakePath);
+                assert.strictEqual(result, "dataScanValue");
+                assert((client.pathTemplates.dataScanJobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchJobFromDataScanJobName', () => {
+                const result = client.matchJobFromDataScanJobName(fakePath);
+                assert.strictEqual(result, "jobValue");
+                assert((client.pathTemplates.dataScanJobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('dataTaxonomy', async () => {
+            const fakePath = "/rendered/path/dataTaxonomy";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_taxonomy_id: "dataTaxonomyIdValue",
+            };
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.dataTaxonomyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.dataTaxonomyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('dataTaxonomyPath', () => {
+                const result = client.dataTaxonomyPath("projectValue", "locationValue", "dataTaxonomyIdValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.dataTaxonomyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDataTaxonomyName', () => {
+                const result = client.matchProjectFromDataTaxonomyName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.dataTaxonomyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDataTaxonomyName', () => {
+                const result = client.matchLocationFromDataTaxonomyName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.dataTaxonomyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataTaxonomyIdFromDataTaxonomyName', () => {
+                const result = client.matchDataTaxonomyIdFromDataTaxonomyName(fakePath);
+                assert.strictEqual(result, "dataTaxonomyIdValue");
+                assert((client.pathTemplates.dataTaxonomyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('encryptionConfig', async () => {
+            const fakePath = "/rendered/path/encryptionConfig";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                encryption_config: "encryptionConfigValue",
+            };
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.encryptionConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.encryptionConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('encryptionConfigPath', () => {
+                const result = client.encryptionConfigPath("organizationValue", "locationValue", "encryptionConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.encryptionConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromEncryptionConfigName', () => {
+                const result = client.matchOrganizationFromEncryptionConfigName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.encryptionConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromEncryptionConfigName', () => {
+                const result = client.matchLocationFromEncryptionConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.encryptionConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEncryptionConfigFromEncryptionConfigName', () => {
+                const result = client.matchEncryptionConfigFromEncryptionConfigName(fakePath);
+                assert.strictEqual(result, "encryptionConfigValue");
+                assert((client.pathTemplates.encryptionConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('entity', async () => {
+            const fakePath = "/rendered/path/entity";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                lake: "lakeValue",
+                zone: "zoneValue",
+                entity: "entityValue",
+            };
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.entityPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.entityPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('entityPath', () => {
+                const result = client.entityPath("projectValue", "locationValue", "lakeValue", "zoneValue", "entityValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.entityPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromEntityName', () => {
+                const result = client.matchProjectFromEntityName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.entityPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromEntityName', () => {
+                const result = client.matchLocationFromEntityName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.entityPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLakeFromEntityName', () => {
+                const result = client.matchLakeFromEntityName(fakePath);
+                assert.strictEqual(result, "lakeValue");
+                assert((client.pathTemplates.entityPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchZoneFromEntityName', () => {
+                const result = client.matchZoneFromEntityName(fakePath);
+                assert.strictEqual(result, "zoneValue");
+                assert((client.pathTemplates.entityPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEntityFromEntityName', () => {
+                const result = client.matchEntityFromEntityName(fakePath);
+                assert.strictEqual(result, "entityValue");
+                assert((client.pathTemplates.entityPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('entry', async () => {
+            const fakePath = "/rendered/path/entry";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                entry_group: "entryGroupValue",
+                entry: "entryValue",
+            };
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.entryPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.entryPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('entryPath', () => {
+                const result = client.entryPath("projectValue", "locationValue", "entryGroupValue", "entryValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.entryPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromEntryName', () => {
+                const result = client.matchProjectFromEntryName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.entryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromEntryName', () => {
+                const result = client.matchLocationFromEntryName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.entryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEntryGroupFromEntryName', () => {
+                const result = client.matchEntryGroupFromEntryName(fakePath);
+                assert.strictEqual(result, "entryGroupValue");
+                assert((client.pathTemplates.entryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEntryFromEntryName', () => {
+                const result = client.matchEntryFromEntryName(fakePath);
+                assert.strictEqual(result, "entryValue");
+                assert((client.pathTemplates.entryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('entryGroup', async () => {
+            const fakePath = "/rendered/path/entryGroup";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                entry_group: "entryGroupValue",
+            };
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.entryGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.entryGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('entryGroupPath', () => {
+                const result = client.entryGroupPath("projectValue", "locationValue", "entryGroupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.entryGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromEntryGroupName', () => {
+                const result = client.matchProjectFromEntryGroupName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.entryGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromEntryGroupName', () => {
+                const result = client.matchLocationFromEntryGroupName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.entryGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEntryGroupFromEntryGroupName', () => {
+                const result = client.matchEntryGroupFromEntryGroupName(fakePath);
+                assert.strictEqual(result, "entryGroupValue");
+                assert((client.pathTemplates.entryGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('entryType', async () => {
+            const fakePath = "/rendered/path/entryType";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                entry_type: "entryTypeValue",
+            };
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.entryTypePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.entryTypePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('entryTypePath', () => {
+                const result = client.entryTypePath("projectValue", "locationValue", "entryTypeValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.entryTypePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromEntryTypeName', () => {
+                const result = client.matchProjectFromEntryTypeName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.entryTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromEntryTypeName', () => {
+                const result = client.matchLocationFromEntryTypeName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.entryTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEntryTypeFromEntryTypeName', () => {
+                const result = client.matchEntryTypeFromEntryTypeName(fakePath);
+                assert.strictEqual(result, "entryTypeValue");
+                assert((client.pathTemplates.entryTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('environment', async () => {
+            const fakePath = "/rendered/path/environment";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                lake: "lakeValue",
+                environment: "environmentValue",
+            };
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.environmentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.environmentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('environmentPath', () => {
+                const result = client.environmentPath("projectValue", "locationValue", "lakeValue", "environmentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.environmentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromEnvironmentName', () => {
+                const result = client.matchProjectFromEnvironmentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.environmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromEnvironmentName', () => {
+                const result = client.matchLocationFromEnvironmentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.environmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLakeFromEnvironmentName', () => {
+                const result = client.matchLakeFromEnvironmentName(fakePath);
+                assert.strictEqual(result, "lakeValue");
+                assert((client.pathTemplates.environmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEnvironmentFromEnvironmentName', () => {
+                const result = client.matchEnvironmentFromEnvironmentName(fakePath);
+                assert.strictEqual(result, "environmentValue");
+                assert((client.pathTemplates.environmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('job', async () => {
+            const fakePath = "/rendered/path/job";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                lake: "lakeValue",
+                task: "taskValue",
+                job: "jobValue",
+            };
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.jobPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.jobPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('jobPath', () => {
+                const result = client.jobPath("projectValue", "locationValue", "lakeValue", "taskValue", "jobValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.jobPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromJobName', () => {
+                const result = client.matchProjectFromJobName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.jobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromJobName', () => {
+                const result = client.matchLocationFromJobName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.jobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLakeFromJobName', () => {
+                const result = client.matchLakeFromJobName(fakePath);
+                assert.strictEqual(result, "lakeValue");
+                assert((client.pathTemplates.jobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTaskFromJobName', () => {
+                const result = client.matchTaskFromJobName(fakePath);
+                assert.strictEqual(result, "taskValue");
+                assert((client.pathTemplates.jobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchJobFromJobName', () => {
+                const result = client.matchJobFromJobName(fakePath);
+                assert.strictEqual(result, "jobValue");
+                assert((client.pathTemplates.jobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('lake', async () => {
+            const fakePath = "/rendered/path/lake";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                lake: "lakeValue",
+            };
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.lakePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.lakePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('lakePath', () => {
+                const result = client.lakePath("projectValue", "locationValue", "lakeValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.lakePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLakeName', () => {
+                const result = client.matchProjectFromLakeName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.lakePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLakeName', () => {
+                const result = client.matchLocationFromLakeName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.lakePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLakeFromLakeName', () => {
+                const result = client.matchLakeFromLakeName(fakePath);
+                assert.strictEqual(result, "lakeValue");
+                assert((client.pathTemplates.lakePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('metadataJob', async () => {
+            const fakePath = "/rendered/path/metadataJob";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                metadataJob: "metadataJobValue",
+            };
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.metadataJobPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.metadataJobPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('metadataJobPath', () => {
+                const result = client.metadataJobPath("projectValue", "locationValue", "metadataJobValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.metadataJobPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromMetadataJobName', () => {
+                const result = client.matchProjectFromMetadataJobName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.metadataJobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromMetadataJobName', () => {
+                const result = client.matchLocationFromMetadataJobName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.metadataJobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMetadataJobFromMetadataJobName', () => {
+                const result = client.matchMetadataJobFromMetadataJobName(fakePath);
+                assert.strictEqual(result, "metadataJobValue");
+                assert((client.pathTemplates.metadataJobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('partition', async () => {
+            const fakePath = "/rendered/path/partition";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                lake: "lakeValue",
+                zone: "zoneValue",
+                entity: "entityValue",
+                partition: "partitionValue",
+            };
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.partitionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.partitionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('partitionPath', () => {
+                const result = client.partitionPath("projectValue", "locationValue", "lakeValue", "zoneValue", "entityValue", "partitionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.partitionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromPartitionName', () => {
+                const result = client.matchProjectFromPartitionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.partitionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromPartitionName', () => {
+                const result = client.matchLocationFromPartitionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.partitionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLakeFromPartitionName', () => {
+                const result = client.matchLakeFromPartitionName(fakePath);
+                assert.strictEqual(result, "lakeValue");
+                assert((client.pathTemplates.partitionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchZoneFromPartitionName', () => {
+                const result = client.matchZoneFromPartitionName(fakePath);
+                assert.strictEqual(result, "zoneValue");
+                assert((client.pathTemplates.partitionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEntityFromPartitionName', () => {
+                const result = client.matchEntityFromPartitionName(fakePath);
+                assert.strictEqual(result, "entityValue");
+                assert((client.pathTemplates.partitionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPartitionFromPartitionName', () => {
+                const result = client.matchPartitionFromPartitionName(fakePath);
+                assert.strictEqual(result, "partitionValue");
+                assert((client.pathTemplates.partitionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationLakeAction', async () => {
+            const fakePath = "/rendered/path/projectLocationLakeAction";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                lake: "lakeValue",
+                action: "actionValue",
+            };
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationLakeActionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationLakeActionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationLakeActionPath', () => {
+                const result = client.projectLocationLakeActionPath("projectValue", "locationValue", "lakeValue", "actionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationLakeActionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationLakeActionName', () => {
+                const result = client.matchProjectFromProjectLocationLakeActionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationLakeActionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationLakeActionName', () => {
+                const result = client.matchLocationFromProjectLocationLakeActionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationLakeActionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLakeFromProjectLocationLakeActionName', () => {
+                const result = client.matchLakeFromProjectLocationLakeActionName(fakePath);
+                assert.strictEqual(result, "lakeValue");
+                assert((client.pathTemplates.projectLocationLakeActionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchActionFromProjectLocationLakeActionName', () => {
+                const result = client.matchActionFromProjectLocationLakeActionName(fakePath);
+                assert.strictEqual(result, "actionValue");
+                assert((client.pathTemplates.projectLocationLakeActionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationLakeZoneAction', async () => {
+            const fakePath = "/rendered/path/projectLocationLakeZoneAction";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                lake: "lakeValue",
+                zone: "zoneValue",
+                action: "actionValue",
+            };
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationLakeZoneActionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationLakeZoneActionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationLakeZoneActionPath', () => {
+                const result = client.projectLocationLakeZoneActionPath("projectValue", "locationValue", "lakeValue", "zoneValue", "actionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationLakeZoneActionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationLakeZoneActionName', () => {
+                const result = client.matchProjectFromProjectLocationLakeZoneActionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationLakeZoneActionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationLakeZoneActionName', () => {
+                const result = client.matchLocationFromProjectLocationLakeZoneActionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationLakeZoneActionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLakeFromProjectLocationLakeZoneActionName', () => {
+                const result = client.matchLakeFromProjectLocationLakeZoneActionName(fakePath);
+                assert.strictEqual(result, "lakeValue");
+                assert((client.pathTemplates.projectLocationLakeZoneActionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchZoneFromProjectLocationLakeZoneActionName', () => {
+                const result = client.matchZoneFromProjectLocationLakeZoneActionName(fakePath);
+                assert.strictEqual(result, "zoneValue");
+                assert((client.pathTemplates.projectLocationLakeZoneActionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchActionFromProjectLocationLakeZoneActionName', () => {
+                const result = client.matchActionFromProjectLocationLakeZoneActionName(fakePath);
+                assert.strictEqual(result, "actionValue");
+                assert((client.pathTemplates.projectLocationLakeZoneActionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationLakeZoneAssetAction', async () => {
+            const fakePath = "/rendered/path/projectLocationLakeZoneAssetAction";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                lake: "lakeValue",
+                zone: "zoneValue",
+                asset: "assetValue",
+                action: "actionValue",
+            };
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationLakeZoneAssetActionPath', () => {
+                const result = client.projectLocationLakeZoneAssetActionPath("projectValue", "locationValue", "lakeValue", "zoneValue", "assetValue", "actionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationLakeZoneAssetActionName', () => {
+                const result = client.matchProjectFromProjectLocationLakeZoneAssetActionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationLakeZoneAssetActionName', () => {
+                const result = client.matchLocationFromProjectLocationLakeZoneAssetActionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLakeFromProjectLocationLakeZoneAssetActionName', () => {
+                const result = client.matchLakeFromProjectLocationLakeZoneAssetActionName(fakePath);
+                assert.strictEqual(result, "lakeValue");
+                assert((client.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchZoneFromProjectLocationLakeZoneAssetActionName', () => {
+                const result = client.matchZoneFromProjectLocationLakeZoneAssetActionName(fakePath);
+                assert.strictEqual(result, "zoneValue");
+                assert((client.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAssetFromProjectLocationLakeZoneAssetActionName', () => {
+                const result = client.matchAssetFromProjectLocationLakeZoneAssetActionName(fakePath);
+                assert.strictEqual(result, "assetValue");
+                assert((client.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchActionFromProjectLocationLakeZoneAssetActionName', () => {
+                const result = client.matchActionFromProjectLocationLakeZoneAssetActionName(fakePath);
+                assert.strictEqual(result, "actionValue");
+                assert((client.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('session', async () => {
+            const fakePath = "/rendered/path/session";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                lake: "lakeValue",
+                environment: "environmentValue",
+                session: "sessionValue",
+            };
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.sessionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.sessionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('sessionPath', () => {
+                const result = client.sessionPath("projectValue", "locationValue", "lakeValue", "environmentValue", "sessionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.sessionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSessionName', () => {
+                const result = client.matchProjectFromSessionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.sessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSessionName', () => {
+                const result = client.matchLocationFromSessionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.sessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLakeFromSessionName', () => {
+                const result = client.matchLakeFromSessionName(fakePath);
+                assert.strictEqual(result, "lakeValue");
+                assert((client.pathTemplates.sessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEnvironmentFromSessionName', () => {
+                const result = client.matchEnvironmentFromSessionName(fakePath);
+                assert.strictEqual(result, "environmentValue");
+                assert((client.pathTemplates.sessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromSessionName', () => {
+                const result = client.matchSessionFromSessionName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.sessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('task', async () => {
+            const fakePath = "/rendered/path/task";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                lake: "lakeValue",
+                task: "taskValue",
+            };
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.taskPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.taskPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('taskPath', () => {
+                const result = client.taskPath("projectValue", "locationValue", "lakeValue", "taskValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.taskPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromTaskName', () => {
+                const result = client.matchProjectFromTaskName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.taskPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromTaskName', () => {
+                const result = client.matchLocationFromTaskName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.taskPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLakeFromTaskName', () => {
+                const result = client.matchLakeFromTaskName(fakePath);
+                assert.strictEqual(result, "lakeValue");
+                assert((client.pathTemplates.taskPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTaskFromTaskName', () => {
+                const result = client.matchTaskFromTaskName(fakePath);
+                assert.strictEqual(result, "taskValue");
+                assert((client.pathTemplates.taskPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('zone', async () => {
+            const fakePath = "/rendered/path/zone";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                lake: "lakeValue",
+                zone: "zoneValue",
+            };
+            const client = new dataplexserviceModule.v1.DataplexServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.zonePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.zonePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('zonePath', () => {
+                const result = client.zonePath("projectValue", "locationValue", "lakeValue", "zoneValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.zonePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromZoneName', () => {
+                const result = client.matchProjectFromZoneName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.zonePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromZoneName', () => {
+                const result = client.matchLocationFromZoneName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.zonePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLakeFromZoneName', () => {
+                const result = client.matchLakeFromZoneName(fakePath);
+                assert.strictEqual(result, "lakeValue");
+                assert((client.pathTemplates.zonePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchZoneFromZoneName', () => {
+                const result = client.matchZoneFromZoneName(fakePath);
+                assert.strictEqual(result, "zoneValue");
+                assert((client.pathTemplates.zonePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-
-    describe('content', async () => {
-      const fakePath = '/rendered/path/content';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        lake: 'lakeValue',
-        content: 'contentValue',
-      };
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.contentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.contentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('contentPath', () => {
-        const result = client.contentPath(
-          'projectValue',
-          'locationValue',
-          'lakeValue',
-          'contentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.contentPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromContentName', () => {
-        const result = client.matchProjectFromContentName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.contentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromContentName', () => {
-        const result = client.matchLocationFromContentName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.contentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLakeFromContentName', () => {
-        const result = client.matchLakeFromContentName(fakePath);
-        assert.strictEqual(result, 'lakeValue');
-        assert(
-          (client.pathTemplates.contentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchContentFromContentName', () => {
-        const result = client.matchContentFromContentName(fakePath);
-        assert.strictEqual(result, 'contentValue');
-        assert(
-          (client.pathTemplates.contentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('dataAttribute', async () => {
-      const fakePath = '/rendered/path/dataAttribute';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        dataTaxonomy: 'dataTaxonomyValue',
-        data_attribute_id: 'dataAttributeIdValue',
-      };
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.dataAttributePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.dataAttributePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('dataAttributePath', () => {
-        const result = client.dataAttributePath(
-          'projectValue',
-          'locationValue',
-          'dataTaxonomyValue',
-          'dataAttributeIdValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.dataAttributePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromDataAttributeName', () => {
-        const result = client.matchProjectFromDataAttributeName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.dataAttributePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromDataAttributeName', () => {
-        const result = client.matchLocationFromDataAttributeName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.dataAttributePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataTaxonomyFromDataAttributeName', () => {
-        const result = client.matchDataTaxonomyFromDataAttributeName(fakePath);
-        assert.strictEqual(result, 'dataTaxonomyValue');
-        assert(
-          (client.pathTemplates.dataAttributePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataAttributeIdFromDataAttributeName', () => {
-        const result =
-          client.matchDataAttributeIdFromDataAttributeName(fakePath);
-        assert.strictEqual(result, 'dataAttributeIdValue');
-        assert(
-          (client.pathTemplates.dataAttributePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('dataAttributeBinding', async () => {
-      const fakePath = '/rendered/path/dataAttributeBinding';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_attribute_binding_id: 'dataAttributeBindingIdValue',
-      };
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.dataAttributeBindingPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.dataAttributeBindingPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('dataAttributeBindingPath', () => {
-        const result = client.dataAttributeBindingPath(
-          'projectValue',
-          'locationValue',
-          'dataAttributeBindingIdValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.dataAttributeBindingPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromDataAttributeBindingName', () => {
-        const result =
-          client.matchProjectFromDataAttributeBindingName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.dataAttributeBindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromDataAttributeBindingName', () => {
-        const result =
-          client.matchLocationFromDataAttributeBindingName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.dataAttributeBindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataAttributeBindingIdFromDataAttributeBindingName', () => {
-        const result =
-          client.matchDataAttributeBindingIdFromDataAttributeBindingName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataAttributeBindingIdValue');
-        assert(
-          (
-            client.pathTemplates.dataAttributeBindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('dataScan', async () => {
-      const fakePath = '/rendered/path/dataScan';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        dataScan: 'dataScanValue',
-      };
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.dataScanPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.dataScanPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('dataScanPath', () => {
-        const result = client.dataScanPath(
-          'projectValue',
-          'locationValue',
-          'dataScanValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.dataScanPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromDataScanName', () => {
-        const result = client.matchProjectFromDataScanName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.dataScanPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromDataScanName', () => {
-        const result = client.matchLocationFromDataScanName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.dataScanPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataScanFromDataScanName', () => {
-        const result = client.matchDataScanFromDataScanName(fakePath);
-        assert.strictEqual(result, 'dataScanValue');
-        assert(
-          (client.pathTemplates.dataScanPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('dataScanJob', async () => {
-      const fakePath = '/rendered/path/dataScanJob';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        dataScan: 'dataScanValue',
-        job: 'jobValue',
-      };
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.dataScanJobPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.dataScanJobPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('dataScanJobPath', () => {
-        const result = client.dataScanJobPath(
-          'projectValue',
-          'locationValue',
-          'dataScanValue',
-          'jobValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.dataScanJobPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromDataScanJobName', () => {
-        const result = client.matchProjectFromDataScanJobName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.dataScanJobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromDataScanJobName', () => {
-        const result = client.matchLocationFromDataScanJobName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.dataScanJobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataScanFromDataScanJobName', () => {
-        const result = client.matchDataScanFromDataScanJobName(fakePath);
-        assert.strictEqual(result, 'dataScanValue');
-        assert(
-          (client.pathTemplates.dataScanJobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchJobFromDataScanJobName', () => {
-        const result = client.matchJobFromDataScanJobName(fakePath);
-        assert.strictEqual(result, 'jobValue');
-        assert(
-          (client.pathTemplates.dataScanJobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('dataTaxonomy', async () => {
-      const fakePath = '/rendered/path/dataTaxonomy';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_taxonomy_id: 'dataTaxonomyIdValue',
-      };
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.dataTaxonomyPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.dataTaxonomyPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('dataTaxonomyPath', () => {
-        const result = client.dataTaxonomyPath(
-          'projectValue',
-          'locationValue',
-          'dataTaxonomyIdValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.dataTaxonomyPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromDataTaxonomyName', () => {
-        const result = client.matchProjectFromDataTaxonomyName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.dataTaxonomyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromDataTaxonomyName', () => {
-        const result = client.matchLocationFromDataTaxonomyName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.dataTaxonomyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataTaxonomyIdFromDataTaxonomyName', () => {
-        const result = client.matchDataTaxonomyIdFromDataTaxonomyName(fakePath);
-        assert.strictEqual(result, 'dataTaxonomyIdValue');
-        assert(
-          (client.pathTemplates.dataTaxonomyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('encryptionConfig', async () => {
-      const fakePath = '/rendered/path/encryptionConfig';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-        encryption_config: 'encryptionConfigValue',
-      };
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.encryptionConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.encryptionConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('encryptionConfigPath', () => {
-        const result = client.encryptionConfigPath(
-          'organizationValue',
-          'locationValue',
-          'encryptionConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.encryptionConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromEncryptionConfigName', () => {
-        const result =
-          client.matchOrganizationFromEncryptionConfigName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (client.pathTemplates.encryptionConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromEncryptionConfigName', () => {
-        const result = client.matchLocationFromEncryptionConfigName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.encryptionConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEncryptionConfigFromEncryptionConfigName', () => {
-        const result =
-          client.matchEncryptionConfigFromEncryptionConfigName(fakePath);
-        assert.strictEqual(result, 'encryptionConfigValue');
-        assert(
-          (client.pathTemplates.encryptionConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('entity', async () => {
-      const fakePath = '/rendered/path/entity';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        lake: 'lakeValue',
-        zone: 'zoneValue',
-        entity: 'entityValue',
-      };
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.entityPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.entityPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('entityPath', () => {
-        const result = client.entityPath(
-          'projectValue',
-          'locationValue',
-          'lakeValue',
-          'zoneValue',
-          'entityValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.entityPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromEntityName', () => {
-        const result = client.matchProjectFromEntityName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.entityPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromEntityName', () => {
-        const result = client.matchLocationFromEntityName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.entityPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLakeFromEntityName', () => {
-        const result = client.matchLakeFromEntityName(fakePath);
-        assert.strictEqual(result, 'lakeValue');
-        assert(
-          (client.pathTemplates.entityPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchZoneFromEntityName', () => {
-        const result = client.matchZoneFromEntityName(fakePath);
-        assert.strictEqual(result, 'zoneValue');
-        assert(
-          (client.pathTemplates.entityPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEntityFromEntityName', () => {
-        const result = client.matchEntityFromEntityName(fakePath);
-        assert.strictEqual(result, 'entityValue');
-        assert(
-          (client.pathTemplates.entityPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('entry', async () => {
-      const fakePath = '/rendered/path/entry';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        entry_group: 'entryGroupValue',
-        entry: 'entryValue',
-      };
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.entryPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.entryPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('entryPath', () => {
-        const result = client.entryPath(
-          'projectValue',
-          'locationValue',
-          'entryGroupValue',
-          'entryValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.entryPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromEntryName', () => {
-        const result = client.matchProjectFromEntryName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.entryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromEntryName', () => {
-        const result = client.matchLocationFromEntryName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.entryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEntryGroupFromEntryName', () => {
-        const result = client.matchEntryGroupFromEntryName(fakePath);
-        assert.strictEqual(result, 'entryGroupValue');
-        assert(
-          (client.pathTemplates.entryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEntryFromEntryName', () => {
-        const result = client.matchEntryFromEntryName(fakePath);
-        assert.strictEqual(result, 'entryValue');
-        assert(
-          (client.pathTemplates.entryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('entryGroup', async () => {
-      const fakePath = '/rendered/path/entryGroup';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        entry_group: 'entryGroupValue',
-      };
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.entryGroupPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.entryGroupPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('entryGroupPath', () => {
-        const result = client.entryGroupPath(
-          'projectValue',
-          'locationValue',
-          'entryGroupValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.entryGroupPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromEntryGroupName', () => {
-        const result = client.matchProjectFromEntryGroupName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.entryGroupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromEntryGroupName', () => {
-        const result = client.matchLocationFromEntryGroupName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.entryGroupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEntryGroupFromEntryGroupName', () => {
-        const result = client.matchEntryGroupFromEntryGroupName(fakePath);
-        assert.strictEqual(result, 'entryGroupValue');
-        assert(
-          (client.pathTemplates.entryGroupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('entryType', async () => {
-      const fakePath = '/rendered/path/entryType';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        entry_type: 'entryTypeValue',
-      };
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.entryTypePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.entryTypePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('entryTypePath', () => {
-        const result = client.entryTypePath(
-          'projectValue',
-          'locationValue',
-          'entryTypeValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.entryTypePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromEntryTypeName', () => {
-        const result = client.matchProjectFromEntryTypeName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.entryTypePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromEntryTypeName', () => {
-        const result = client.matchLocationFromEntryTypeName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.entryTypePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEntryTypeFromEntryTypeName', () => {
-        const result = client.matchEntryTypeFromEntryTypeName(fakePath);
-        assert.strictEqual(result, 'entryTypeValue');
-        assert(
-          (client.pathTemplates.entryTypePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('environment', async () => {
-      const fakePath = '/rendered/path/environment';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        lake: 'lakeValue',
-        environment: 'environmentValue',
-      };
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.environmentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.environmentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('environmentPath', () => {
-        const result = client.environmentPath(
-          'projectValue',
-          'locationValue',
-          'lakeValue',
-          'environmentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.environmentPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromEnvironmentName', () => {
-        const result = client.matchProjectFromEnvironmentName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.environmentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromEnvironmentName', () => {
-        const result = client.matchLocationFromEnvironmentName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.environmentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLakeFromEnvironmentName', () => {
-        const result = client.matchLakeFromEnvironmentName(fakePath);
-        assert.strictEqual(result, 'lakeValue');
-        assert(
-          (client.pathTemplates.environmentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEnvironmentFromEnvironmentName', () => {
-        const result = client.matchEnvironmentFromEnvironmentName(fakePath);
-        assert.strictEqual(result, 'environmentValue');
-        assert(
-          (client.pathTemplates.environmentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('job', async () => {
-      const fakePath = '/rendered/path/job';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        lake: 'lakeValue',
-        task: 'taskValue',
-        job: 'jobValue',
-      };
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.jobPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.jobPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('jobPath', () => {
-        const result = client.jobPath(
-          'projectValue',
-          'locationValue',
-          'lakeValue',
-          'taskValue',
-          'jobValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.jobPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromJobName', () => {
-        const result = client.matchProjectFromJobName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.jobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromJobName', () => {
-        const result = client.matchLocationFromJobName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.jobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLakeFromJobName', () => {
-        const result = client.matchLakeFromJobName(fakePath);
-        assert.strictEqual(result, 'lakeValue');
-        assert(
-          (client.pathTemplates.jobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTaskFromJobName', () => {
-        const result = client.matchTaskFromJobName(fakePath);
-        assert.strictEqual(result, 'taskValue');
-        assert(
-          (client.pathTemplates.jobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchJobFromJobName', () => {
-        const result = client.matchJobFromJobName(fakePath);
-        assert.strictEqual(result, 'jobValue');
-        assert(
-          (client.pathTemplates.jobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('lake', async () => {
-      const fakePath = '/rendered/path/lake';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        lake: 'lakeValue',
-      };
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.lakePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.lakePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('lakePath', () => {
-        const result = client.lakePath(
-          'projectValue',
-          'locationValue',
-          'lakeValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.lakePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromLakeName', () => {
-        const result = client.matchProjectFromLakeName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.lakePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromLakeName', () => {
-        const result = client.matchLocationFromLakeName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.lakePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLakeFromLakeName', () => {
-        const result = client.matchLakeFromLakeName(fakePath);
-        assert.strictEqual(result, 'lakeValue');
-        assert(
-          (client.pathTemplates.lakePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('location', async () => {
-      const fakePath = '/rendered/path/location';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('metadataJob', async () => {
-      const fakePath = '/rendered/path/metadataJob';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        metadataJob: 'metadataJobValue',
-      };
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.metadataJobPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.metadataJobPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('metadataJobPath', () => {
-        const result = client.metadataJobPath(
-          'projectValue',
-          'locationValue',
-          'metadataJobValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.metadataJobPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromMetadataJobName', () => {
-        const result = client.matchProjectFromMetadataJobName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.metadataJobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromMetadataJobName', () => {
-        const result = client.matchLocationFromMetadataJobName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.metadataJobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchMetadataJobFromMetadataJobName', () => {
-        const result = client.matchMetadataJobFromMetadataJobName(fakePath);
-        assert.strictEqual(result, 'metadataJobValue');
-        assert(
-          (client.pathTemplates.metadataJobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('partition', async () => {
-      const fakePath = '/rendered/path/partition';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        lake: 'lakeValue',
-        zone: 'zoneValue',
-        entity: 'entityValue',
-        partition: 'partitionValue',
-      };
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.partitionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.partitionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('partitionPath', () => {
-        const result = client.partitionPath(
-          'projectValue',
-          'locationValue',
-          'lakeValue',
-          'zoneValue',
-          'entityValue',
-          'partitionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.partitionPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromPartitionName', () => {
-        const result = client.matchProjectFromPartitionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.partitionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromPartitionName', () => {
-        const result = client.matchLocationFromPartitionName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.partitionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLakeFromPartitionName', () => {
-        const result = client.matchLakeFromPartitionName(fakePath);
-        assert.strictEqual(result, 'lakeValue');
-        assert(
-          (client.pathTemplates.partitionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchZoneFromPartitionName', () => {
-        const result = client.matchZoneFromPartitionName(fakePath);
-        assert.strictEqual(result, 'zoneValue');
-        assert(
-          (client.pathTemplates.partitionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEntityFromPartitionName', () => {
-        const result = client.matchEntityFromPartitionName(fakePath);
-        assert.strictEqual(result, 'entityValue');
-        assert(
-          (client.pathTemplates.partitionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchPartitionFromPartitionName', () => {
-        const result = client.matchPartitionFromPartitionName(fakePath);
-        assert.strictEqual(result, 'partitionValue');
-        assert(
-          (client.pathTemplates.partitionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationLakeAction', async () => {
-      const fakePath = '/rendered/path/projectLocationLakeAction';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        lake: 'lakeValue',
-        action: 'actionValue',
-      };
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationLakeActionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationLakeActionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectLocationLakeActionPath', () => {
-        const result = client.projectLocationLakeActionPath(
-          'projectValue',
-          'locationValue',
-          'lakeValue',
-          'actionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationLakeActionPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationLakeActionName', () => {
-        const result =
-          client.matchProjectFromProjectLocationLakeActionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationLakeActionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationLakeActionName', () => {
-        const result =
-          client.matchLocationFromProjectLocationLakeActionName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationLakeActionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLakeFromProjectLocationLakeActionName', () => {
-        const result =
-          client.matchLakeFromProjectLocationLakeActionName(fakePath);
-        assert.strictEqual(result, 'lakeValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationLakeActionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchActionFromProjectLocationLakeActionName', () => {
-        const result =
-          client.matchActionFromProjectLocationLakeActionName(fakePath);
-        assert.strictEqual(result, 'actionValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationLakeActionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationLakeZoneAction', async () => {
-      const fakePath = '/rendered/path/projectLocationLakeZoneAction';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        lake: 'lakeValue',
-        zone: 'zoneValue',
-        action: 'actionValue',
-      };
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationLakeZoneActionPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationLakeZoneActionPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationLakeZoneActionPath', () => {
-        const result = client.projectLocationLakeZoneActionPath(
-          'projectValue',
-          'locationValue',
-          'lakeValue',
-          'zoneValue',
-          'actionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationLakeZoneActionPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationLakeZoneActionName', () => {
-        const result =
-          client.matchProjectFromProjectLocationLakeZoneActionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationLakeZoneActionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationLakeZoneActionName', () => {
-        const result =
-          client.matchLocationFromProjectLocationLakeZoneActionName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationLakeZoneActionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLakeFromProjectLocationLakeZoneActionName', () => {
-        const result =
-          client.matchLakeFromProjectLocationLakeZoneActionName(fakePath);
-        assert.strictEqual(result, 'lakeValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationLakeZoneActionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchZoneFromProjectLocationLakeZoneActionName', () => {
-        const result =
-          client.matchZoneFromProjectLocationLakeZoneActionName(fakePath);
-        assert.strictEqual(result, 'zoneValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationLakeZoneActionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchActionFromProjectLocationLakeZoneActionName', () => {
-        const result =
-          client.matchActionFromProjectLocationLakeZoneActionName(fakePath);
-        assert.strictEqual(result, 'actionValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationLakeZoneActionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationLakeZoneAssetAction', async () => {
-      const fakePath = '/rendered/path/projectLocationLakeZoneAssetAction';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        lake: 'lakeValue',
-        zone: 'zoneValue',
-        asset: 'assetValue',
-        action: 'actionValue',
-      };
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationLakeZoneAssetActionPath', () => {
-        const result = client.projectLocationLakeZoneAssetActionPath(
-          'projectValue',
-          'locationValue',
-          'lakeValue',
-          'zoneValue',
-          'assetValue',
-          'actionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationLakeZoneAssetActionName', () => {
-        const result =
-          client.matchProjectFromProjectLocationLakeZoneAssetActionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationLakeZoneAssetActionName', () => {
-        const result =
-          client.matchLocationFromProjectLocationLakeZoneAssetActionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLakeFromProjectLocationLakeZoneAssetActionName', () => {
-        const result =
-          client.matchLakeFromProjectLocationLakeZoneAssetActionName(fakePath);
-        assert.strictEqual(result, 'lakeValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchZoneFromProjectLocationLakeZoneAssetActionName', () => {
-        const result =
-          client.matchZoneFromProjectLocationLakeZoneAssetActionName(fakePath);
-        assert.strictEqual(result, 'zoneValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAssetFromProjectLocationLakeZoneAssetActionName', () => {
-        const result =
-          client.matchAssetFromProjectLocationLakeZoneAssetActionName(fakePath);
-        assert.strictEqual(result, 'assetValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchActionFromProjectLocationLakeZoneAssetActionName', () => {
-        const result =
-          client.matchActionFromProjectLocationLakeZoneAssetActionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'actionValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('session', async () => {
-      const fakePath = '/rendered/path/session';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        lake: 'lakeValue',
-        environment: 'environmentValue',
-        session: 'sessionValue',
-      };
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.sessionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.sessionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('sessionPath', () => {
-        const result = client.sessionPath(
-          'projectValue',
-          'locationValue',
-          'lakeValue',
-          'environmentValue',
-          'sessionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.sessionPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromSessionName', () => {
-        const result = client.matchProjectFromSessionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.sessionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromSessionName', () => {
-        const result = client.matchLocationFromSessionName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.sessionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLakeFromSessionName', () => {
-        const result = client.matchLakeFromSessionName(fakePath);
-        assert.strictEqual(result, 'lakeValue');
-        assert(
-          (client.pathTemplates.sessionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEnvironmentFromSessionName', () => {
-        const result = client.matchEnvironmentFromSessionName(fakePath);
-        assert.strictEqual(result, 'environmentValue');
-        assert(
-          (client.pathTemplates.sessionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSessionFromSessionName', () => {
-        const result = client.matchSessionFromSessionName(fakePath);
-        assert.strictEqual(result, 'sessionValue');
-        assert(
-          (client.pathTemplates.sessionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('task', async () => {
-      const fakePath = '/rendered/path/task';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        lake: 'lakeValue',
-        task: 'taskValue',
-      };
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.taskPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.taskPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('taskPath', () => {
-        const result = client.taskPath(
-          'projectValue',
-          'locationValue',
-          'lakeValue',
-          'taskValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.taskPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromTaskName', () => {
-        const result = client.matchProjectFromTaskName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.taskPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromTaskName', () => {
-        const result = client.matchLocationFromTaskName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.taskPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLakeFromTaskName', () => {
-        const result = client.matchLakeFromTaskName(fakePath);
-        assert.strictEqual(result, 'lakeValue');
-        assert(
-          (client.pathTemplates.taskPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTaskFromTaskName', () => {
-        const result = client.matchTaskFromTaskName(fakePath);
-        assert.strictEqual(result, 'taskValue');
-        assert(
-          (client.pathTemplates.taskPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('zone', async () => {
-      const fakePath = '/rendered/path/zone';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        lake: 'lakeValue',
-        zone: 'zoneValue',
-      };
-      const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.zonePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.zonePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('zonePath', () => {
-        const result = client.zonePath(
-          'projectValue',
-          'locationValue',
-          'lakeValue',
-          'zoneValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.zonePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromZoneName', () => {
-        const result = client.matchProjectFromZoneName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.zonePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromZoneName', () => {
-        const result = client.matchLocationFromZoneName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.zonePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLakeFromZoneName', () => {
-        const result = client.matchLakeFromZoneName(fakePath);
-        assert.strictEqual(result, 'lakeValue');
-        assert(
-          (client.pathTemplates.zonePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchZoneFromZoneName', () => {
-        const result = client.matchZoneFromZoneName(fakePath);
-        assert.strictEqual(result, 'zoneValue');
-        assert(
-          (client.pathTemplates.zonePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

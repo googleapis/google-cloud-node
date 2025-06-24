@@ -19,9 +19,7 @@
 import {ContactCenterInsightsClient} from '@google-cloud/contact-center-insights';
 
 // check that the client class type name can be used
-function doStuffWithContactCenterInsightsClient(
-  client: ContactCenterInsightsClient
-) {
+function doStuffWithContactCenterInsightsClient(client: ContactCenterInsightsClient) {
   client.close();
 }
 

@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AcceleratorTypesClient, AddressesClient, AutoscalersClient, BackendBucketsClient, BackendServicesClient, DisksClient, DiskTypesClient, ExternalVpnGatewaysClient, FirewallPoliciesClient, FirewallsClient, ForwardingRulesClient, GlobalAddressesClient, GlobalForwardingRulesClient, GlobalNetworkEndpointGroupsClient, GlobalOperationsClient, GlobalOrganizationOperationsClient, GlobalPublicDelegatedPrefixesClient, HealthChecksClient, ImageFamilyViewsClient, ImagesClient, InstanceGroupManagerResizeRequestsClient, InstanceGroupManagersClient, InstanceGroupsClient, InstancesClient, InstanceSettingsServiceClient, InstanceTemplatesClient, InstantSnapshotsClient, InterconnectAttachmentsClient, InterconnectLocationsClient, InterconnectRemoteLocationsClient, InterconnectsClient, LicenseCodesClient, LicensesClient, MachineImagesClient, MachineTypesClient, NetworkAttachmentsClient, NetworkEdgeSecurityServicesClient, NetworkEndpointGroupsClient, NetworkFirewallPoliciesClient, NetworkProfilesClient, NetworksClient, NodeGroupsClient, NodeTemplatesClient, NodeTypesClient, PacketMirroringsClient, ProjectsClient, PublicAdvertisedPrefixesClient, PublicDelegatedPrefixesClient, RegionAutoscalersClient, RegionBackendServicesClient, RegionCommitmentsClient, RegionDisksClient, RegionDiskTypesClient, RegionHealthChecksClient, RegionHealthCheckServicesClient, RegionInstanceGroupManagersClient, RegionInstanceGroupsClient, RegionInstancesClient, RegionInstanceTemplatesClient, RegionInstantSnapshotsClient, RegionNetworkEndpointGroupsClient, RegionNetworkFirewallPoliciesClient, RegionNotificationEndpointsClient, RegionOperationsClient, RegionsClient, RegionSecurityPoliciesClient, RegionSslCertificatesClient, RegionSslPoliciesClient, RegionTargetHttpProxiesClient, RegionTargetHttpsProxiesClient, RegionTargetTcpProxiesClient, RegionUrlMapsClient, RegionZonesClient, ReservationBlocksClient, ReservationsClient, ResourcePoliciesClient, RoutersClient, RoutesClient, SecurityPoliciesClient, ServiceAttachmentsClient, SnapshotsClient, SnapshotSettingsServiceClient, SslCertificatesClient, SslPoliciesClient, StoragePoolsClient, StoragePoolTypesClient, SubnetworksClient, TargetGrpcProxiesClient, TargetHttpProxiesClient, TargetHttpsProxiesClient, TargetInstancesClient, TargetPoolsClient, TargetSslProxiesClient, TargetTcpProxiesClient, TargetVpnGatewaysClient, UrlMapsClient, VpnGatewaysClient, VpnTunnelsClient, ZoneOperationsClient, ZonesClient} from '@google-cloud/compute';
+import {AcceleratorTypesClient, AddressesClient, AutoscalersClient, BackendBucketsClient, BackendServicesClient, DisksClient, DiskTypesClient, ExternalVpnGatewaysClient, FirewallPoliciesClient, FirewallsClient, ForwardingRulesClient, GlobalAddressesClient, GlobalForwardingRulesClient, GlobalNetworkEndpointGroupsClient, GlobalOperationsClient, GlobalOrganizationOperationsClient, GlobalPublicDelegatedPrefixesClient, HealthChecksClient, ImageFamilyViewsClient, ImagesClient, InstanceGroupManagerResizeRequestsClient, InstanceGroupManagersClient, InstanceGroupsClient, InstancesClient, InstanceSettingsServiceClient, InstanceTemplatesClient, InstantSnapshotsClient, InterconnectAttachmentGroupsClient, InterconnectAttachmentsClient, InterconnectGroupsClient, InterconnectLocationsClient, InterconnectRemoteLocationsClient, InterconnectsClient, LicenseCodesClient, LicensesClient, MachineImagesClient, MachineTypesClient, NetworkAttachmentsClient, NetworkEdgeSecurityServicesClient, NetworkEndpointGroupsClient, NetworkFirewallPoliciesClient, NetworkProfilesClient, NetworksClient, NodeGroupsClient, NodeTemplatesClient, NodeTypesClient, PacketMirroringsClient, ProjectsClient, PublicAdvertisedPrefixesClient, PublicDelegatedPrefixesClient, RegionAutoscalersClient, RegionBackendServicesClient, RegionCommitmentsClient, RegionDisksClient, RegionDiskTypesClient, RegionHealthChecksClient, RegionHealthCheckServicesClient, RegionInstanceGroupManagersClient, RegionInstanceGroupsClient, RegionInstancesClient, RegionInstanceTemplatesClient, RegionInstantSnapshotsClient, RegionNetworkEndpointGroupsClient, RegionNetworkFirewallPoliciesClient, RegionNotificationEndpointsClient, RegionOperationsClient, RegionsClient, RegionSecurityPoliciesClient, RegionSslCertificatesClient, RegionSslPoliciesClient, RegionTargetHttpProxiesClient, RegionTargetHttpsProxiesClient, RegionTargetTcpProxiesClient, RegionUrlMapsClient, RegionZonesClient, ReservationBlocksClient, ReservationsClient, ReservationSubBlocksClient, ResourcePoliciesClient, RoutersClient, RoutesClient, SecurityPoliciesClient, ServiceAttachmentsClient, SnapshotsClient, SnapshotSettingsServiceClient, SslCertificatesClient, SslPoliciesClient, StoragePoolsClient, StoragePoolTypesClient, SubnetworksClient, TargetGrpcProxiesClient, TargetHttpProxiesClient, TargetHttpsProxiesClient, TargetInstancesClient, TargetPoolsClient, TargetSslProxiesClient, TargetTcpProxiesClient, TargetVpnGatewaysClient, UrlMapsClient, VpnGatewaysClient, VpnTunnelsClient, ZoneOperationsClient, ZonesClient} from '@google-cloud/compute';
 
 // check that the client class type name can be used
 function doStuffWithAcceleratorTypesClient(client: AcceleratorTypesClient) {
@@ -100,7 +100,13 @@ function doStuffWithInstanceTemplatesClient(client: InstanceTemplatesClient) {
 function doStuffWithInstantSnapshotsClient(client: InstantSnapshotsClient) {
   client.close();
 }
+function doStuffWithInterconnectAttachmentGroupsClient(client: InterconnectAttachmentGroupsClient) {
+  client.close();
+}
 function doStuffWithInterconnectAttachmentsClient(client: InterconnectAttachmentsClient) {
+  client.close();
+}
+function doStuffWithInterconnectGroupsClient(client: InterconnectGroupsClient) {
   client.close();
 }
 function doStuffWithInterconnectLocationsClient(client: InterconnectLocationsClient) {
@@ -242,6 +248,9 @@ function doStuffWithReservationBlocksClient(client: ReservationBlocksClient) {
   client.close();
 }
 function doStuffWithReservationsClient(client: ReservationsClient) {
+  client.close();
+}
+function doStuffWithReservationSubBlocksClient(client: ReservationSubBlocksClient) {
   client.close();
 }
 function doStuffWithResourcePoliciesClient(client: ResourcePoliciesClient) {
@@ -403,8 +412,14 @@ function main() {
   const instantSnapshotsClient = new InstantSnapshotsClient();
   doStuffWithInstantSnapshotsClient(instantSnapshotsClient);
   // check that the client instance can be created
+  const interconnectAttachmentGroupsClient = new InterconnectAttachmentGroupsClient();
+  doStuffWithInterconnectAttachmentGroupsClient(interconnectAttachmentGroupsClient);
+  // check that the client instance can be created
   const interconnectAttachmentsClient = new InterconnectAttachmentsClient();
   doStuffWithInterconnectAttachmentsClient(interconnectAttachmentsClient);
+  // check that the client instance can be created
+  const interconnectGroupsClient = new InterconnectGroupsClient();
+  doStuffWithInterconnectGroupsClient(interconnectGroupsClient);
   // check that the client instance can be created
   const interconnectLocationsClient = new InterconnectLocationsClient();
   doStuffWithInterconnectLocationsClient(interconnectLocationsClient);
@@ -546,6 +561,9 @@ function main() {
   // check that the client instance can be created
   const reservationsClient = new ReservationsClient();
   doStuffWithReservationsClient(reservationsClient);
+  // check that the client instance can be created
+  const reservationSubBlocksClient = new ReservationSubBlocksClient();
+  doStuffWithReservationSubBlocksClient(reservationSubBlocksClient);
   // check that the client instance can be created
   const resourcePoliciesClient = new ResourcePoliciesClient();
   doStuffWithResourcePoliciesClient(resourcePoliciesClient);
