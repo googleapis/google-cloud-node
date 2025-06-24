@@ -798,7 +798,7 @@ export namespace google {
                 interface IImage {
 
                     /** Image content */
-                    content?: (Uint8Array|string|null);
+                    content?: (Uint8Array|Buffer|string|null);
 
                     /** Image source */
                     source?: (google.cloud.vision.v1.IImageSource|null);
@@ -814,7 +814,7 @@ export namespace google {
                     constructor(properties?: google.cloud.vision.v1.IImage);
 
                     /** Image content. */
-                    public content: (Uint8Array|string);
+                    public content: (Uint8Array|Buffer|string);
 
                     /** Image source. */
                     public source?: (google.cloud.vision.v1.IImageSource|null);
@@ -4523,7 +4523,7 @@ export namespace google {
                     gcsSource?: (google.cloud.vision.v1.IGcsSource|null);
 
                     /** InputConfig content */
-                    content?: (Uint8Array|string|null);
+                    content?: (Uint8Array|Buffer|string|null);
 
                     /** InputConfig mimeType */
                     mimeType?: (string|null);
@@ -4542,7 +4542,7 @@ export namespace google {
                     public gcsSource?: (google.cloud.vision.v1.IGcsSource|null);
 
                     /** InputConfig content. */
-                    public content: (Uint8Array|string);
+                    public content: (Uint8Array|Buffer|string);
 
                     /** InputConfig mimeType. */
                     public mimeType: string;
@@ -11577,7 +11577,7 @@ export namespace google {
                 interface IImage {
 
                     /** Image content */
-                    content?: (Uint8Array|string|null);
+                    content?: (Uint8Array|Buffer|string|null);
 
                     /** Image source */
                     source?: (google.cloud.vision.v1p1beta1.IImageSource|null);
@@ -11593,7 +11593,7 @@ export namespace google {
                     constructor(properties?: google.cloud.vision.v1p1beta1.IImage);
 
                     /** Image content. */
-                    public content: (Uint8Array|string);
+                    public content: (Uint8Array|Buffer|string);
 
                     /** Image source. */
                     public source?: (google.cloud.vision.v1p1beta1.IImageSource|null);
@@ -16293,7 +16293,7 @@ export namespace google {
                 interface IImage {
 
                     /** Image content */
-                    content?: (Uint8Array|string|null);
+                    content?: (Uint8Array|Buffer|string|null);
 
                     /** Image source */
                     source?: (google.cloud.vision.v1p2beta1.IImageSource|null);
@@ -16309,7 +16309,7 @@ export namespace google {
                     constructor(properties?: google.cloud.vision.v1p2beta1.IImage);
 
                     /** Image content. */
-                    public content: (Uint8Array|string);
+                    public content: (Uint8Array|Buffer|string);
 
                     /** Image source. */
                     public source?: (google.cloud.vision.v1p2beta1.IImageSource|null);
@@ -22150,7 +22150,7 @@ export namespace google {
                 interface IImage {
 
                     /** Image content */
-                    content?: (Uint8Array|string|null);
+                    content?: (Uint8Array|Buffer|string|null);
 
                     /** Image source */
                     source?: (google.cloud.vision.v1p3beta1.IImageSource|null);
@@ -22166,7 +22166,7 @@ export namespace google {
                     constructor(properties?: google.cloud.vision.v1p3beta1.IImage);
 
                     /** Image content. */
-                    public content: (Uint8Array|string);
+                    public content: (Uint8Array|Buffer|string);
 
                     /** Image source. */
                     public source?: (google.cloud.vision.v1p3beta1.IImageSource|null);
@@ -32609,7 +32609,7 @@ export namespace google {
                 interface IImage {
 
                     /** Image content */
-                    content?: (Uint8Array|string|null);
+                    content?: (Uint8Array|Buffer|string|null);
 
                     /** Image source */
                     source?: (google.cloud.vision.v1p4beta1.IImageSource|null);
@@ -32625,7 +32625,7 @@ export namespace google {
                     constructor(properties?: google.cloud.vision.v1p4beta1.IImage);
 
                     /** Image content. */
-                    public content: (Uint8Array|string);
+                    public content: (Uint8Array|Buffer|string);
 
                     /** Image source. */
                     public source?: (google.cloud.vision.v1p4beta1.IImageSource|null);
@@ -36306,7 +36306,7 @@ export namespace google {
                     gcsSource?: (google.cloud.vision.v1p4beta1.IGcsSource|null);
 
                     /** InputConfig content */
-                    content?: (Uint8Array|string|null);
+                    content?: (Uint8Array|Buffer|string|null);
 
                     /** InputConfig mimeType */
                     mimeType?: (string|null);
@@ -36325,7 +36325,7 @@ export namespace google {
                     public gcsSource?: (google.cloud.vision.v1p4beta1.IGcsSource|null);
 
                     /** InputConfig content. */
-                    public content: (Uint8Array|string);
+                    public content: (Uint8Array|Buffer|string);
 
                     /** InputConfig mimeType. */
                     public mimeType: string;
@@ -43426,6 +43426,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -43466,6 +43469,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -47684,6 +47690,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -47935,7 +47944,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -47966,7 +47975,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -49105,7 +49114,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -49121,7 +49130,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.
@@ -50272,7 +50281,7 @@ export namespace google {
         interface IBytesValue {
 
             /** BytesValue value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents a BytesValue. */
@@ -50285,7 +50294,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IBytesValue);
 
             /** BytesValue value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new BytesValue instance using the specified properties.
