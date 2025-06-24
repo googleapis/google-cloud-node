@@ -22,7 +22,7 @@ import type {Callback, CallOptions, Descriptors, ClientOptions, LROperation, Pag
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -225,7 +225,7 @@ export class DisksClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const disksStubMethods =
-        ['addResourcePolicies', 'aggregatedList', 'bulkInsert', 'createSnapshot', 'delete', 'get', 'getIamPolicy', 'insert', 'list', 'removeResourcePolicies', 'resize', 'setIamPolicy', 'setLabels', 'startAsyncReplication', 'stopAsyncReplication', 'stopGroupAsyncReplication', 'testIamPermissions', 'update'];
+        ['addResourcePolicies', 'aggregatedList', 'bulkInsert', 'bulkSetLabels', 'createSnapshot', 'delete', 'get', 'getIamPolicy', 'insert', 'list', 'removeResourcePolicies', 'resize', 'setIamPolicy', 'setLabels', 'startAsyncReplication', 'stopAsyncReplication', 'stopGroupAsyncReplication', 'testIamPermissions', 'update'];
     for (const methodName of disksStubMethods) {
       const callPromise = this.disksStub.then(
         stub => (...args: Array<{}>) => {
@@ -429,6 +429,12 @@ export class DisksClient {
           operation,
           rawResponse
         ];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -528,6 +534,119 @@ export class DisksClient {
           operation,
           rawResponse
         ];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Sets the labels on many disks at once. To learn more about labels, read the Labeling Resources documentation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.compute.v1.BulkZoneSetLabelsRequest} request.bulkZoneSetLabelsRequestResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.resource
+ *   Name or id of the resource for this request.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/disks.bulk_set_labels.js</caption>
+ * region_tag:compute_v1_generated_Disks_BulkSetLabels_async
+ */
+  bulkSetLabels(
+      request?: protos.google.cloud.compute.v1.IBulkSetLabelsDiskRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
+  bulkSetLabels(
+      request: protos.google.cloud.compute.v1.IBulkSetLabelsDiskRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IBulkSetLabelsDiskRequest|null|undefined,
+          {}|null|undefined>): void;
+  bulkSetLabels(
+      request: protos.google.cloud.compute.v1.IBulkSetLabelsDiskRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IBulkSetLabelsDiskRequest|null|undefined,
+          {}|null|undefined>): void;
+  bulkSetLabels(
+      request?: protos.google.cloud.compute.v1.IBulkSetLabelsDiskRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IBulkSetLabelsDiskRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IBulkSetLabelsDiskRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('bulkSetLabels request %j', request);
+    const wrappedCallback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IBulkSetLabelsDiskRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('bulkSetLabels response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
+    return this.innerApiCalls.bulkSetLabels(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -632,6 +751,12 @@ export class DisksClient {
           operation,
           rawResponse
         ];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -732,6 +857,12 @@ export class DisksClient {
           operation,
           rawResponse
         ];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -826,6 +957,12 @@ export class DisksClient {
       ]) => {
         this._log.info('get response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -922,6 +1059,12 @@ export class DisksClient {
       ]) => {
         this._log.info('getIamPolicy response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1023,6 +1166,12 @@ export class DisksClient {
           operation,
           rawResponse
         ];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1125,6 +1274,12 @@ export class DisksClient {
           operation,
           rawResponse
         ];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1227,6 +1382,12 @@ export class DisksClient {
           operation,
           rawResponse
         ];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1323,6 +1484,12 @@ export class DisksClient {
       ]) => {
         this._log.info('setIamPolicy response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1425,6 +1592,12 @@ export class DisksClient {
           operation,
           rawResponse
         ];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1527,6 +1700,12 @@ export class DisksClient {
           operation,
           rawResponse
         ];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1627,6 +1806,12 @@ export class DisksClient {
           operation,
           rawResponse
         ];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1726,6 +1911,12 @@ export class DisksClient {
           operation,
           rawResponse
         ];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1822,6 +2013,12 @@ export class DisksClient {
       ]) => {
         this._log.info('testIamPermissions response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1927,6 +2124,12 @@ export class DisksClient {
           operation,
           rawResponse
         ];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 

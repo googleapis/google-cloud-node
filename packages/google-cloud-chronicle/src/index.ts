@@ -29,21 +29,7 @@ type ReferenceListServiceClient = v1.ReferenceListServiceClient;
 const RuleServiceClient = v1.RuleServiceClient;
 type RuleServiceClient = v1.RuleServiceClient;
 
-export {
-  v1,
-  DataAccessControlServiceClient,
-  EntityServiceClient,
-  InstanceServiceClient,
-  ReferenceListServiceClient,
-  RuleServiceClient,
-};
-export default {
-  v1,
-  DataAccessControlServiceClient,
-  EntityServiceClient,
-  InstanceServiceClient,
-  ReferenceListServiceClient,
-  RuleServiceClient,
-};
+export {v1, DataAccessControlServiceClient, EntityServiceClient, InstanceServiceClient, ReferenceListServiceClient, RuleServiceClient};
+export default {v1, DataAccessControlServiceClient, EntityServiceClient, InstanceServiceClient, ReferenceListServiceClient, RuleServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

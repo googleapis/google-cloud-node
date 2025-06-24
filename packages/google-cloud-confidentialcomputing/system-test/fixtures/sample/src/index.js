@@ -16,12 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const confidentialcomputing = require('@google-cloud/confidentialcomputing');
 
 function main() {
-  const confidentialComputingClient =
-    new confidentialcomputing.ConfidentialComputingClient();
+  const confidentialComputingClient = new confidentialcomputing.ConfidentialComputingClient();
 }
 
 main();

@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -110,41 +101,20 @@ export class RuleServiceClient {
    *     const client = new RuleServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof RuleServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'chronicle.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -170,7 +140,7 @@ export class RuleServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -184,7 +154,10 @@ export class RuleServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -241,83 +214,45 @@ export class RuleServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listRules: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'rules'
-      ),
-      listRuleRevisions: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'rules'
-      ),
-      listRetrohunts: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'retrohunts'
-      ),
-      listRuleDeployments: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'ruleDeployments'
-      ),
+      listRules:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'rules'),
+      listRuleRevisions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'rules'),
+      listRetrohunts:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'retrohunts'),
+      listRuleDeployments:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'ruleDeployments')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1/{name=projects/*/locations/*/instances/*/operations/*}:cancel',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1/{name=projects/*/locations/*/instances/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/locations/*/instances/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/locations/*/instances/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/instances/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/instances/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/instances/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*/instances/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createRetrohuntResponse = protoFilesRoot.lookup(
-      '.google.cloud.chronicle.v1.Retrohunt'
-    ) as gax.protobuf.Type;
+      '.google.cloud.chronicle.v1.Retrohunt') as gax.protobuf.Type;
     const createRetrohuntMetadata = protoFilesRoot.lookup(
-      '.google.cloud.chronicle.v1.RetrohuntMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.chronicle.v1.RetrohuntMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createRetrohunt: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createRetrohuntResponse.decode.bind(createRetrohuntResponse),
-        createRetrohuntMetadata.decode.bind(createRetrohuntMetadata)
-      ),
+        createRetrohuntMetadata.decode.bind(createRetrohuntMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.chronicle.v1.RuleService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.chronicle.v1.RuleService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -348,46 +283,28 @@ export class RuleServiceClient {
     // Put together the "service stub" for
     // google.cloud.chronicle.v1.RuleService.
     this.ruleServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.chronicle.v1.RuleService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.chronicle.v1.RuleService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.chronicle.v1.RuleService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const ruleServiceStubMethods = [
-      'createRule',
-      'getRule',
-      'listRules',
-      'updateRule',
-      'deleteRule',
-      'listRuleRevisions',
-      'createRetrohunt',
-      'getRetrohunt',
-      'listRetrohunts',
-      'getRuleDeployment',
-      'listRuleDeployments',
-      'updateRuleDeployment',
-    ];
+    const ruleServiceStubMethods =
+        ['createRule', 'getRule', 'listRules', 'updateRule', 'deleteRule', 'listRuleRevisions', 'createRetrohunt', 'getRetrohunt', 'listRetrohunts', 'getRuleDeployment', 'listRuleDeployments', 'updateRuleDeployment'];
     for (const methodName of ruleServiceStubMethods) {
       const callPromise = this.ruleServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -412,14 +329,8 @@ export class RuleServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'chronicle.googleapis.com';
   }
@@ -430,14 +341,8 @@ export class RuleServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'chronicle.googleapis.com';
   }
@@ -468,7 +373,9 @@ export class RuleServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -477,9 +384,8 @@ export class RuleServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -490,1132 +396,911 @@ export class RuleServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Creates a new Rule.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource where this rule will be created.
-   *   Format: `projects/{project}/locations/{location}/instances/{instance}`
-   * @param {google.cloud.chronicle.v1.Rule} request.rule
-   *   Required. The rule to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.Rule|Rule}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rule_service.create_rule.js</caption>
-   * region_tag:chronicle_v1_generated_RuleService_CreateRule_async
-   */
+/**
+ * Creates a new Rule.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where this rule will be created.
+ *   Format: `projects/{project}/locations/{location}/instances/{instance}`
+ * @param {google.cloud.chronicle.v1.Rule} request.rule
+ *   Required. The rule to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.Rule|Rule}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rule_service.create_rule.js</caption>
+ * region_tag:chronicle_v1_generated_RuleService_CreateRule_async
+ */
   createRule(
-    request?: protos.google.cloud.chronicle.v1.ICreateRuleRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IRule,
-      protos.google.cloud.chronicle.v1.ICreateRuleRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.chronicle.v1.ICreateRuleRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IRule,
+        protos.google.cloud.chronicle.v1.ICreateRuleRequest|undefined, {}|undefined
+      ]>;
   createRule(
-    request: protos.google.cloud.chronicle.v1.ICreateRuleRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.chronicle.v1.IRule,
-      protos.google.cloud.chronicle.v1.ICreateRuleRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createRule(
-    request: protos.google.cloud.chronicle.v1.ICreateRuleRequest,
-    callback: Callback<
-      protos.google.cloud.chronicle.v1.IRule,
-      protos.google.cloud.chronicle.v1.ICreateRuleRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createRule(
-    request?: protos.google.cloud.chronicle.v1.ICreateRuleRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.chronicle.v1.ICreateRuleRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.chronicle.v1.IRule,
-          | protos.google.cloud.chronicle.v1.ICreateRuleRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.chronicle.v1.IRule,
-      protos.google.cloud.chronicle.v1.ICreateRuleRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IRule,
-      protos.google.cloud.chronicle.v1.ICreateRuleRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.chronicle.v1.ICreateRuleRequest|null|undefined,
+          {}|null|undefined>): void;
+  createRule(
+      request: protos.google.cloud.chronicle.v1.ICreateRuleRequest,
+      callback: Callback<
+          protos.google.cloud.chronicle.v1.IRule,
+          protos.google.cloud.chronicle.v1.ICreateRuleRequest|null|undefined,
+          {}|null|undefined>): void;
+  createRule(
+      request?: protos.google.cloud.chronicle.v1.ICreateRuleRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.chronicle.v1.IRule,
+          protos.google.cloud.chronicle.v1.ICreateRuleRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.chronicle.v1.IRule,
+          protos.google.cloud.chronicle.v1.ICreateRuleRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IRule,
+        protos.google.cloud.chronicle.v1.ICreateRuleRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createRule request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.chronicle.v1.IRule,
-          | protos.google.cloud.chronicle.v1.ICreateRuleRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.chronicle.v1.IRule,
+        protos.google.cloud.chronicle.v1.ICreateRuleRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createRule response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createRule(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.chronicle.v1.IRule,
-          protos.google.cloud.chronicle.v1.ICreateRuleRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createRule response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createRule(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.chronicle.v1.IRule,
+        protos.google.cloud.chronicle.v1.ICreateRuleRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createRule response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a Rule.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the rule to retrieve.
-   *   Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}/rules/{rule}`
-   * @param {google.cloud.chronicle.v1.RuleView} request.view
-   *   The view field indicates the scope of fields to populate for the Rule being
-   *   returned. If unspecified, defaults to FULL.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.Rule|Rule}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rule_service.get_rule.js</caption>
-   * region_tag:chronicle_v1_generated_RuleService_GetRule_async
-   */
+/**
+ * Gets a Rule.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the rule to retrieve.
+ *   Format:
+ *   `projects/{project}/locations/{location}/instances/{instance}/rules/{rule}`
+ * @param {google.cloud.chronicle.v1.RuleView} request.view
+ *   The view field indicates the scope of fields to populate for the Rule being
+ *   returned. If unspecified, defaults to FULL.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.Rule|Rule}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rule_service.get_rule.js</caption>
+ * region_tag:chronicle_v1_generated_RuleService_GetRule_async
+ */
   getRule(
-    request?: protos.google.cloud.chronicle.v1.IGetRuleRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IRule,
-      protos.google.cloud.chronicle.v1.IGetRuleRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.chronicle.v1.IGetRuleRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IRule,
+        protos.google.cloud.chronicle.v1.IGetRuleRequest|undefined, {}|undefined
+      ]>;
   getRule(
-    request: protos.google.cloud.chronicle.v1.IGetRuleRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.chronicle.v1.IRule,
-      protos.google.cloud.chronicle.v1.IGetRuleRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRule(
-    request: protos.google.cloud.chronicle.v1.IGetRuleRequest,
-    callback: Callback<
-      protos.google.cloud.chronicle.v1.IRule,
-      protos.google.cloud.chronicle.v1.IGetRuleRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRule(
-    request?: protos.google.cloud.chronicle.v1.IGetRuleRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.chronicle.v1.IGetRuleRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.chronicle.v1.IRule,
-          protos.google.cloud.chronicle.v1.IGetRuleRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.chronicle.v1.IRule,
-      protos.google.cloud.chronicle.v1.IGetRuleRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IRule,
-      protos.google.cloud.chronicle.v1.IGetRuleRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.chronicle.v1.IGetRuleRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRule(
+      request: protos.google.cloud.chronicle.v1.IGetRuleRequest,
+      callback: Callback<
+          protos.google.cloud.chronicle.v1.IRule,
+          protos.google.cloud.chronicle.v1.IGetRuleRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRule(
+      request?: protos.google.cloud.chronicle.v1.IGetRuleRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.chronicle.v1.IRule,
+          protos.google.cloud.chronicle.v1.IGetRuleRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.chronicle.v1.IRule,
+          protos.google.cloud.chronicle.v1.IGetRuleRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IRule,
+        protos.google.cloud.chronicle.v1.IGetRuleRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getRule request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.chronicle.v1.IRule,
-          protos.google.cloud.chronicle.v1.IGetRuleRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.chronicle.v1.IRule,
+        protos.google.cloud.chronicle.v1.IGetRuleRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getRule response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getRule(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.chronicle.v1.IRule,
-          protos.google.cloud.chronicle.v1.IGetRuleRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getRule response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getRule(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.chronicle.v1.IRule,
+        protos.google.cloud.chronicle.v1.IGetRuleRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getRule response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a Rule.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.chronicle.v1.Rule} request.rule
-   *   Required. The rule to update.
-   *
-   *   The rule's `name` field is used to identify the rule to update.
-   *   Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}/rules/{rule}`
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of fields to update. If not included, all fields with a non-empty
-   *   value will be overwritten.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.Rule|Rule}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rule_service.update_rule.js</caption>
-   * region_tag:chronicle_v1_generated_RuleService_UpdateRule_async
-   */
+/**
+ * Updates a Rule.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.chronicle.v1.Rule} request.rule
+ *   Required. The rule to update.
+ *
+ *   The rule's `name` field is used to identify the rule to update.
+ *   Format:
+ *   `projects/{project}/locations/{location}/instances/{instance}/rules/{rule}`
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The list of fields to update. If not included, all fields with a non-empty
+ *   value will be overwritten.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.Rule|Rule}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rule_service.update_rule.js</caption>
+ * region_tag:chronicle_v1_generated_RuleService_UpdateRule_async
+ */
   updateRule(
-    request?: protos.google.cloud.chronicle.v1.IUpdateRuleRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IRule,
-      protos.google.cloud.chronicle.v1.IUpdateRuleRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.chronicle.v1.IUpdateRuleRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IRule,
+        protos.google.cloud.chronicle.v1.IUpdateRuleRequest|undefined, {}|undefined
+      ]>;
   updateRule(
-    request: protos.google.cloud.chronicle.v1.IUpdateRuleRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.chronicle.v1.IRule,
-      protos.google.cloud.chronicle.v1.IUpdateRuleRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateRule(
-    request: protos.google.cloud.chronicle.v1.IUpdateRuleRequest,
-    callback: Callback<
-      protos.google.cloud.chronicle.v1.IRule,
-      protos.google.cloud.chronicle.v1.IUpdateRuleRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateRule(
-    request?: protos.google.cloud.chronicle.v1.IUpdateRuleRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.chronicle.v1.IUpdateRuleRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.chronicle.v1.IRule,
-          | protos.google.cloud.chronicle.v1.IUpdateRuleRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.chronicle.v1.IRule,
-      protos.google.cloud.chronicle.v1.IUpdateRuleRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IRule,
-      protos.google.cloud.chronicle.v1.IUpdateRuleRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.chronicle.v1.IUpdateRuleRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateRule(
+      request: protos.google.cloud.chronicle.v1.IUpdateRuleRequest,
+      callback: Callback<
+          protos.google.cloud.chronicle.v1.IRule,
+          protos.google.cloud.chronicle.v1.IUpdateRuleRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateRule(
+      request?: protos.google.cloud.chronicle.v1.IUpdateRuleRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.chronicle.v1.IRule,
+          protos.google.cloud.chronicle.v1.IUpdateRuleRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.chronicle.v1.IRule,
+          protos.google.cloud.chronicle.v1.IUpdateRuleRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IRule,
+        protos.google.cloud.chronicle.v1.IUpdateRuleRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'rule.name': request.rule!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'rule.name': request.rule!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateRule request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.chronicle.v1.IRule,
-          | protos.google.cloud.chronicle.v1.IUpdateRuleRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.chronicle.v1.IRule,
+        protos.google.cloud.chronicle.v1.IUpdateRuleRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateRule response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateRule(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.chronicle.v1.IRule,
-          protos.google.cloud.chronicle.v1.IUpdateRuleRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateRule response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateRule(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.chronicle.v1.IRule,
+        protos.google.cloud.chronicle.v1.IUpdateRuleRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateRule response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a Rule.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the rule to delete. A rule revision timestamp cannot
-   *   be specified as part of the name, as deleting specific revisions is not
-   *   supported.
-   *   Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}/rules/{rule}`
-   * @param {boolean} [request.force]
-   *   Optional. If set to true, any retrohunts and any detections associated with
-   *   the rule will also be deleted. If set to false, the call will only succeed
-   *   if the rule has no associated retrohunts, including completed retrohunts,
-   *   and no associated detections. Regardless of this field's value, the rule
-   *   deployment associated with this rule will also be deleted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rule_service.delete_rule.js</caption>
-   * region_tag:chronicle_v1_generated_RuleService_DeleteRule_async
-   */
+/**
+ * Deletes a Rule.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the rule to delete. A rule revision timestamp cannot
+ *   be specified as part of the name, as deleting specific revisions is not
+ *   supported.
+ *   Format:
+ *   `projects/{project}/locations/{location}/instances/{instance}/rules/{rule}`
+ * @param {boolean} [request.force]
+ *   Optional. If set to true, any retrohunts and any detections associated with
+ *   the rule will also be deleted. If set to false, the call will only succeed
+ *   if the rule has no associated retrohunts, including completed retrohunts,
+ *   and no associated detections. Regardless of this field's value, the rule
+ *   deployment associated with this rule will also be deleted.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rule_service.delete_rule.js</caption>
+ * region_tag:chronicle_v1_generated_RuleService_DeleteRule_async
+ */
   deleteRule(
-    request?: protos.google.cloud.chronicle.v1.IDeleteRuleRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.chronicle.v1.IDeleteRuleRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.chronicle.v1.IDeleteRuleRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.chronicle.v1.IDeleteRuleRequest|undefined, {}|undefined
+      ]>;
   deleteRule(
-    request: protos.google.cloud.chronicle.v1.IDeleteRuleRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.chronicle.v1.IDeleteRuleRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteRule(
-    request: protos.google.cloud.chronicle.v1.IDeleteRuleRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.chronicle.v1.IDeleteRuleRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteRule(
-    request?: protos.google.cloud.chronicle.v1.IDeleteRuleRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.chronicle.v1.IDeleteRuleRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.chronicle.v1.IDeleteRuleRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.chronicle.v1.IDeleteRuleRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.chronicle.v1.IDeleteRuleRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.chronicle.v1.IDeleteRuleRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteRule(
+      request: protos.google.cloud.chronicle.v1.IDeleteRuleRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.chronicle.v1.IDeleteRuleRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteRule(
+      request?: protos.google.cloud.chronicle.v1.IDeleteRuleRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.chronicle.v1.IDeleteRuleRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.chronicle.v1.IDeleteRuleRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.chronicle.v1.IDeleteRuleRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteRule request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.chronicle.v1.IDeleteRuleRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.chronicle.v1.IDeleteRuleRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteRule response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteRule(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.chronicle.v1.IDeleteRuleRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteRule response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteRule(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.chronicle.v1.IDeleteRuleRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteRule response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Get a Retrohunt.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the retrohunt to retrieve.
-   *   Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}/rules/{rule}/retrohunts/{retrohunt}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.Retrohunt|Retrohunt}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rule_service.get_retrohunt.js</caption>
-   * region_tag:chronicle_v1_generated_RuleService_GetRetrohunt_async
-   */
+/**
+ * Get a Retrohunt.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the retrohunt to retrieve.
+ *   Format:
+ *   `projects/{project}/locations/{location}/instances/{instance}/rules/{rule}/retrohunts/{retrohunt}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.Retrohunt|Retrohunt}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rule_service.get_retrohunt.js</caption>
+ * region_tag:chronicle_v1_generated_RuleService_GetRetrohunt_async
+ */
   getRetrohunt(
-    request?: protos.google.cloud.chronicle.v1.IGetRetrohuntRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IRetrohunt,
-      protos.google.cloud.chronicle.v1.IGetRetrohuntRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.chronicle.v1.IGetRetrohuntRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IRetrohunt,
+        protos.google.cloud.chronicle.v1.IGetRetrohuntRequest|undefined, {}|undefined
+      ]>;
   getRetrohunt(
-    request: protos.google.cloud.chronicle.v1.IGetRetrohuntRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.chronicle.v1.IRetrohunt,
-      protos.google.cloud.chronicle.v1.IGetRetrohuntRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRetrohunt(
-    request: protos.google.cloud.chronicle.v1.IGetRetrohuntRequest,
-    callback: Callback<
-      protos.google.cloud.chronicle.v1.IRetrohunt,
-      protos.google.cloud.chronicle.v1.IGetRetrohuntRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRetrohunt(
-    request?: protos.google.cloud.chronicle.v1.IGetRetrohuntRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.chronicle.v1.IGetRetrohuntRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.chronicle.v1.IRetrohunt,
-          | protos.google.cloud.chronicle.v1.IGetRetrohuntRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.chronicle.v1.IRetrohunt,
-      protos.google.cloud.chronicle.v1.IGetRetrohuntRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IRetrohunt,
-      protos.google.cloud.chronicle.v1.IGetRetrohuntRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.chronicle.v1.IGetRetrohuntRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRetrohunt(
+      request: protos.google.cloud.chronicle.v1.IGetRetrohuntRequest,
+      callback: Callback<
+          protos.google.cloud.chronicle.v1.IRetrohunt,
+          protos.google.cloud.chronicle.v1.IGetRetrohuntRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRetrohunt(
+      request?: protos.google.cloud.chronicle.v1.IGetRetrohuntRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.chronicle.v1.IRetrohunt,
+          protos.google.cloud.chronicle.v1.IGetRetrohuntRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.chronicle.v1.IRetrohunt,
+          protos.google.cloud.chronicle.v1.IGetRetrohuntRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IRetrohunt,
+        protos.google.cloud.chronicle.v1.IGetRetrohuntRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getRetrohunt request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.chronicle.v1.IRetrohunt,
-          | protos.google.cloud.chronicle.v1.IGetRetrohuntRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.chronicle.v1.IRetrohunt,
+        protos.google.cloud.chronicle.v1.IGetRetrohuntRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getRetrohunt response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getRetrohunt(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.chronicle.v1.IRetrohunt,
-          protos.google.cloud.chronicle.v1.IGetRetrohuntRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getRetrohunt response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getRetrohunt(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.chronicle.v1.IRetrohunt,
+        protos.google.cloud.chronicle.v1.IGetRetrohuntRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getRetrohunt response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a RuleDeployment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the rule deployment to retrieve.
-   *   Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}/rules/{rule}/deployment`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.RuleDeployment|RuleDeployment}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rule_service.get_rule_deployment.js</caption>
-   * region_tag:chronicle_v1_generated_RuleService_GetRuleDeployment_async
-   */
+/**
+ * Gets a RuleDeployment.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the rule deployment to retrieve.
+ *   Format:
+ *   `projects/{project}/locations/{location}/instances/{instance}/rules/{rule}/deployment`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.RuleDeployment|RuleDeployment}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rule_service.get_rule_deployment.js</caption>
+ * region_tag:chronicle_v1_generated_RuleService_GetRuleDeployment_async
+ */
   getRuleDeployment(
-    request?: protos.google.cloud.chronicle.v1.IGetRuleDeploymentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IRuleDeployment,
-      protos.google.cloud.chronicle.v1.IGetRuleDeploymentRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.chronicle.v1.IGetRuleDeploymentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IRuleDeployment,
+        protos.google.cloud.chronicle.v1.IGetRuleDeploymentRequest|undefined, {}|undefined
+      ]>;
   getRuleDeployment(
-    request: protos.google.cloud.chronicle.v1.IGetRuleDeploymentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.chronicle.v1.IRuleDeployment,
-      | protos.google.cloud.chronicle.v1.IGetRuleDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRuleDeployment(
-    request: protos.google.cloud.chronicle.v1.IGetRuleDeploymentRequest,
-    callback: Callback<
-      protos.google.cloud.chronicle.v1.IRuleDeployment,
-      | protos.google.cloud.chronicle.v1.IGetRuleDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRuleDeployment(
-    request?: protos.google.cloud.chronicle.v1.IGetRuleDeploymentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.chronicle.v1.IGetRuleDeploymentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.chronicle.v1.IRuleDeployment,
-          | protos.google.cloud.chronicle.v1.IGetRuleDeploymentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.chronicle.v1.IRuleDeployment,
-      | protos.google.cloud.chronicle.v1.IGetRuleDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IRuleDeployment,
-      protos.google.cloud.chronicle.v1.IGetRuleDeploymentRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.chronicle.v1.IGetRuleDeploymentRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRuleDeployment(
+      request: protos.google.cloud.chronicle.v1.IGetRuleDeploymentRequest,
+      callback: Callback<
+          protos.google.cloud.chronicle.v1.IRuleDeployment,
+          protos.google.cloud.chronicle.v1.IGetRuleDeploymentRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRuleDeployment(
+      request?: protos.google.cloud.chronicle.v1.IGetRuleDeploymentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.chronicle.v1.IRuleDeployment,
+          protos.google.cloud.chronicle.v1.IGetRuleDeploymentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.chronicle.v1.IRuleDeployment,
+          protos.google.cloud.chronicle.v1.IGetRuleDeploymentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IRuleDeployment,
+        protos.google.cloud.chronicle.v1.IGetRuleDeploymentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getRuleDeployment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.chronicle.v1.IRuleDeployment,
-          | protos.google.cloud.chronicle.v1.IGetRuleDeploymentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.chronicle.v1.IRuleDeployment,
+        protos.google.cloud.chronicle.v1.IGetRuleDeploymentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getRuleDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getRuleDeployment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.chronicle.v1.IRuleDeployment,
-          (
-            | protos.google.cloud.chronicle.v1.IGetRuleDeploymentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getRuleDeployment response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getRuleDeployment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.chronicle.v1.IRuleDeployment,
+        protos.google.cloud.chronicle.v1.IGetRuleDeploymentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getRuleDeployment response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a RuleDeployment.
-   * Failures are not necessarily atomic. If there is a request to update
-   * multiple fields, and any update to a single field fails, an error will be
-   * returned, but other fields may remain successfully updated.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.chronicle.v1.RuleDeployment} request.ruleDeployment
-   *   Required. The rule deployment to update.
-   *
-   *   The rule deployment's `name` field is used to identify the rule deployment
-   *   to update. Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}/rules/{rule}/deployment`
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to update.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.RuleDeployment|RuleDeployment}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rule_service.update_rule_deployment.js</caption>
-   * region_tag:chronicle_v1_generated_RuleService_UpdateRuleDeployment_async
-   */
+/**
+ * Updates a RuleDeployment.
+ * Failures are not necessarily atomic. If there is a request to update
+ * multiple fields, and any update to a single field fails, an error will be
+ * returned, but other fields may remain successfully updated.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.chronicle.v1.RuleDeployment} request.ruleDeployment
+ *   Required. The rule deployment to update.
+ *
+ *   The rule deployment's `name` field is used to identify the rule deployment
+ *   to update. Format:
+ *   `projects/{project}/locations/{location}/instances/{instance}/rules/{rule}/deployment`
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. The list of fields to update.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.RuleDeployment|RuleDeployment}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rule_service.update_rule_deployment.js</caption>
+ * region_tag:chronicle_v1_generated_RuleService_UpdateRuleDeployment_async
+ */
   updateRuleDeployment(
-    request?: protos.google.cloud.chronicle.v1.IUpdateRuleDeploymentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IRuleDeployment,
-      protos.google.cloud.chronicle.v1.IUpdateRuleDeploymentRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.chronicle.v1.IUpdateRuleDeploymentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IRuleDeployment,
+        protos.google.cloud.chronicle.v1.IUpdateRuleDeploymentRequest|undefined, {}|undefined
+      ]>;
   updateRuleDeployment(
-    request: protos.google.cloud.chronicle.v1.IUpdateRuleDeploymentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.chronicle.v1.IRuleDeployment,
-      | protos.google.cloud.chronicle.v1.IUpdateRuleDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateRuleDeployment(
-    request: protos.google.cloud.chronicle.v1.IUpdateRuleDeploymentRequest,
-    callback: Callback<
-      protos.google.cloud.chronicle.v1.IRuleDeployment,
-      | protos.google.cloud.chronicle.v1.IUpdateRuleDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateRuleDeployment(
-    request?: protos.google.cloud.chronicle.v1.IUpdateRuleDeploymentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.chronicle.v1.IUpdateRuleDeploymentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.chronicle.v1.IRuleDeployment,
-          | protos.google.cloud.chronicle.v1.IUpdateRuleDeploymentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.chronicle.v1.IRuleDeployment,
-      | protos.google.cloud.chronicle.v1.IUpdateRuleDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IRuleDeployment,
-      protos.google.cloud.chronicle.v1.IUpdateRuleDeploymentRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.chronicle.v1.IUpdateRuleDeploymentRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateRuleDeployment(
+      request: protos.google.cloud.chronicle.v1.IUpdateRuleDeploymentRequest,
+      callback: Callback<
+          protos.google.cloud.chronicle.v1.IRuleDeployment,
+          protos.google.cloud.chronicle.v1.IUpdateRuleDeploymentRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateRuleDeployment(
+      request?: protos.google.cloud.chronicle.v1.IUpdateRuleDeploymentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.chronicle.v1.IRuleDeployment,
+          protos.google.cloud.chronicle.v1.IUpdateRuleDeploymentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.chronicle.v1.IRuleDeployment,
+          protos.google.cloud.chronicle.v1.IUpdateRuleDeploymentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IRuleDeployment,
+        protos.google.cloud.chronicle.v1.IUpdateRuleDeploymentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'rule_deployment.name': request.ruleDeployment!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'rule_deployment.name': request.ruleDeployment!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateRuleDeployment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.chronicle.v1.IRuleDeployment,
-          | protos.google.cloud.chronicle.v1.IUpdateRuleDeploymentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.chronicle.v1.IRuleDeployment,
+        protos.google.cloud.chronicle.v1.IUpdateRuleDeploymentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateRuleDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateRuleDeployment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.chronicle.v1.IRuleDeployment,
-          (
-            | protos.google.cloud.chronicle.v1.IUpdateRuleDeploymentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateRuleDeployment response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateRuleDeployment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.chronicle.v1.IRuleDeployment,
+        protos.google.cloud.chronicle.v1.IUpdateRuleDeploymentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateRuleDeployment response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Create a Retrohunt.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of retrohunt, which is a rule.
-   *   Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}/rules/{rule}`
-   * @param {google.cloud.chronicle.v1.Retrohunt} request.retrohunt
-   *   Required. The retrohunt to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rule_service.create_retrohunt.js</caption>
-   * region_tag:chronicle_v1_generated_RuleService_CreateRetrohunt_async
-   */
+/**
+ * Create a Retrohunt.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of retrohunt, which is a rule.
+ *   Format:
+ *   `projects/{project}/locations/{location}/instances/{instance}/rules/{rule}`
+ * @param {google.cloud.chronicle.v1.Retrohunt} request.retrohunt
+ *   Required. The retrohunt to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rule_service.create_retrohunt.js</caption>
+ * region_tag:chronicle_v1_generated_RuleService_CreateRetrohunt_async
+ */
   createRetrohunt(
-    request?: protos.google.cloud.chronicle.v1.ICreateRetrohuntRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.chronicle.v1.IRetrohunt,
-        protos.google.cloud.chronicle.v1.IRetrohuntMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.chronicle.v1.ICreateRetrohuntRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.chronicle.v1.IRetrohunt, protos.google.cloud.chronicle.v1.IRetrohuntMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createRetrohunt(
-    request: protos.google.cloud.chronicle.v1.ICreateRetrohuntRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.chronicle.v1.IRetrohunt,
-        protos.google.cloud.chronicle.v1.IRetrohuntMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.chronicle.v1.ICreateRetrohuntRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.chronicle.v1.IRetrohunt, protos.google.cloud.chronicle.v1.IRetrohuntMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createRetrohunt(
-    request: protos.google.cloud.chronicle.v1.ICreateRetrohuntRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.chronicle.v1.IRetrohunt,
-        protos.google.cloud.chronicle.v1.IRetrohuntMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.chronicle.v1.ICreateRetrohuntRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.chronicle.v1.IRetrohunt, protos.google.cloud.chronicle.v1.IRetrohuntMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createRetrohunt(
-    request?: protos.google.cloud.chronicle.v1.ICreateRetrohuntRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.chronicle.v1.IRetrohunt,
-            protos.google.cloud.chronicle.v1.IRetrohuntMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.chronicle.v1.IRetrohunt,
-        protos.google.cloud.chronicle.v1.IRetrohuntMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.chronicle.v1.IRetrohunt,
-        protos.google.cloud.chronicle.v1.IRetrohuntMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.chronicle.v1.ICreateRetrohuntRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.chronicle.v1.IRetrohunt, protos.google.cloud.chronicle.v1.IRetrohuntMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.chronicle.v1.IRetrohunt, protos.google.cloud.chronicle.v1.IRetrohuntMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.chronicle.v1.IRetrohunt, protos.google.cloud.chronicle.v1.IRetrohuntMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.chronicle.v1.IRetrohunt,
-            protos.google.cloud.chronicle.v1.IRetrohuntMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.chronicle.v1.IRetrohunt, protos.google.cloud.chronicle.v1.IRetrohuntMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createRetrohunt response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createRetrohunt request %j', request);
-    return this.innerApiCalls
-      .createRetrohunt(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.chronicle.v1.IRetrohunt,
-            protos.google.cloud.chronicle.v1.IRetrohuntMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createRetrohunt response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createRetrohunt(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.chronicle.v1.IRetrohunt, protos.google.cloud.chronicle.v1.IRetrohuntMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createRetrohunt response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createRetrohunt()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rule_service.create_retrohunt.js</caption>
-   * region_tag:chronicle_v1_generated_RuleService_CreateRetrohunt_async
-   */
-  async checkCreateRetrohuntProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.chronicle.v1.Retrohunt,
-      protos.google.cloud.chronicle.v1.RetrohuntMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createRetrohunt()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rule_service.create_retrohunt.js</caption>
+ * region_tag:chronicle_v1_generated_RuleService_CreateRetrohunt_async
+ */
+  async checkCreateRetrohuntProgress(name: string): Promise<LROperation<protos.google.cloud.chronicle.v1.Retrohunt, protos.google.cloud.chronicle.v1.RetrohuntMetadata>>{
     this._log.info('createRetrohunt long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createRetrohunt,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.chronicle.v1.Retrohunt,
-      protos.google.cloud.chronicle.v1.RetrohuntMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createRetrohunt, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.chronicle.v1.Retrohunt, protos.google.cloud.chronicle.v1.RetrohuntMetadata>;
   }
-  /**
-   * Lists Rules.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of rules.
-   *   Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}`
-   * @param {number} request.pageSize
-   *   The maximum number of rules to return. The service may return fewer than
-   *   this value. If unspecified, at most 100 rules will be returned. The
-   *   maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListRules` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListRules`
-   *   must match the call that provided the page token.
-   * @param {google.cloud.chronicle.v1.RuleView} request.view
-   *   view indicates the scope of fields to populate for the Rule being returned.
-   *   If unspecified, defaults to BASIC.
-   * @param {string} request.filter
-   *   Only the following filters are allowed:
-   *   "reference_lists:{reference_list_name}"
-   *   "data_tables:{data_table_name}"
-   *   "display_name:{display_name}"
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.chronicle.v1.Rule|Rule}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listRulesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Rules.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of rules.
+ *   Format:
+ *   `projects/{project}/locations/{location}/instances/{instance}`
+ * @param {number} request.pageSize
+ *   The maximum number of rules to return. The service may return fewer than
+ *   this value. If unspecified, at most 100 rules will be returned. The
+ *   maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListRules` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListRules`
+ *   must match the call that provided the page token.
+ * @param {google.cloud.chronicle.v1.RuleView} request.view
+ *   view indicates the scope of fields to populate for the Rule being returned.
+ *   If unspecified, defaults to BASIC.
+ * @param {string} request.filter
+ *   Only the following filters are allowed:
+ *   "reference_lists:{reference_list_name}"
+ *   "data_tables:{data_table_name}"
+ *   "display_name:{display_name}"
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.chronicle.v1.Rule|Rule}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listRulesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRules(
-    request?: protos.google.cloud.chronicle.v1.IListRulesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IRule[],
-      protos.google.cloud.chronicle.v1.IListRulesRequest | null,
-      protos.google.cloud.chronicle.v1.IListRulesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.chronicle.v1.IListRulesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IRule[],
+        protos.google.cloud.chronicle.v1.IListRulesRequest|null,
+        protos.google.cloud.chronicle.v1.IListRulesResponse
+      ]>;
   listRules(
-    request: protos.google.cloud.chronicle.v1.IListRulesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.chronicle.v1.IListRulesRequest,
-      protos.google.cloud.chronicle.v1.IListRulesResponse | null | undefined,
-      protos.google.cloud.chronicle.v1.IRule
-    >
-  ): void;
-  listRules(
-    request: protos.google.cloud.chronicle.v1.IListRulesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.chronicle.v1.IListRulesRequest,
-      protos.google.cloud.chronicle.v1.IListRulesResponse | null | undefined,
-      protos.google.cloud.chronicle.v1.IRule
-    >
-  ): void;
-  listRules(
-    request?: protos.google.cloud.chronicle.v1.IListRulesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.chronicle.v1.IListRulesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.chronicle.v1.IListRulesRequest,
-          | protos.google.cloud.chronicle.v1.IListRulesResponse
-          | null
-          | undefined,
-          protos.google.cloud.chronicle.v1.IRule
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.chronicle.v1.IListRulesRequest,
-      protos.google.cloud.chronicle.v1.IListRulesResponse | null | undefined,
-      protos.google.cloud.chronicle.v1.IRule
-    >
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IRule[],
-      protos.google.cloud.chronicle.v1.IListRulesRequest | null,
-      protos.google.cloud.chronicle.v1.IListRulesResponse,
-    ]
-  > | void {
+          protos.google.cloud.chronicle.v1.IListRulesResponse|null|undefined,
+          protos.google.cloud.chronicle.v1.IRule>): void;
+  listRules(
+      request: protos.google.cloud.chronicle.v1.IListRulesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.chronicle.v1.IListRulesRequest,
+          protos.google.cloud.chronicle.v1.IListRulesResponse|null|undefined,
+          protos.google.cloud.chronicle.v1.IRule>): void;
+  listRules(
+      request?: protos.google.cloud.chronicle.v1.IListRulesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.chronicle.v1.IListRulesRequest,
+          protos.google.cloud.chronicle.v1.IListRulesResponse|null|undefined,
+          protos.google.cloud.chronicle.v1.IRule>,
+      callback?: PaginationCallback<
+          protos.google.cloud.chronicle.v1.IListRulesRequest,
+          protos.google.cloud.chronicle.v1.IListRulesResponse|null|undefined,
+          protos.google.cloud.chronicle.v1.IRule>):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IRule[],
+        protos.google.cloud.chronicle.v1.IListRulesRequest|null,
+        protos.google.cloud.chronicle.v1.IListRulesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.chronicle.v1.IListRulesRequest,
-          | protos.google.cloud.chronicle.v1.IListRulesResponse
-          | null
-          | undefined,
-          protos.google.cloud.chronicle.v1.IRule
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.chronicle.v1.IListRulesRequest,
+      protos.google.cloud.chronicle.v1.IListRulesResponse|null|undefined,
+      protos.google.cloud.chronicle.v1.IRule>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listRules values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1624,72 +1309,69 @@ export class RuleServiceClient {
     this._log.info('listRules request %j', request);
     return this.innerApiCalls
       .listRules(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.chronicle.v1.IRule[],
-          protos.google.cloud.chronicle.v1.IListRulesRequest | null,
-          protos.google.cloud.chronicle.v1.IListRulesResponse,
-        ]) => {
-          this._log.info('listRules values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.chronicle.v1.IRule[],
+        protos.google.cloud.chronicle.v1.IListRulesRequest|null,
+        protos.google.cloud.chronicle.v1.IListRulesResponse
+      ]) => {
+        this._log.info('listRules values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listRules`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of rules.
-   *   Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}`
-   * @param {number} request.pageSize
-   *   The maximum number of rules to return. The service may return fewer than
-   *   this value. If unspecified, at most 100 rules will be returned. The
-   *   maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListRules` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListRules`
-   *   must match the call that provided the page token.
-   * @param {google.cloud.chronicle.v1.RuleView} request.view
-   *   view indicates the scope of fields to populate for the Rule being returned.
-   *   If unspecified, defaults to BASIC.
-   * @param {string} request.filter
-   *   Only the following filters are allowed:
-   *   "reference_lists:{reference_list_name}"
-   *   "data_tables:{data_table_name}"
-   *   "display_name:{display_name}"
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.chronicle.v1.Rule|Rule} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listRulesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listRules`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of rules.
+ *   Format:
+ *   `projects/{project}/locations/{location}/instances/{instance}`
+ * @param {number} request.pageSize
+ *   The maximum number of rules to return. The service may return fewer than
+ *   this value. If unspecified, at most 100 rules will be returned. The
+ *   maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListRules` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListRules`
+ *   must match the call that provided the page token.
+ * @param {google.cloud.chronicle.v1.RuleView} request.view
+ *   view indicates the scope of fields to populate for the Rule being returned.
+ *   If unspecified, defaults to BASIC.
+ * @param {string} request.filter
+ *   Only the following filters are allowed:
+ *   "reference_lists:{reference_list_name}"
+ *   "data_tables:{data_table_name}"
+ *   "display_name:{display_name}"
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.chronicle.v1.Rule|Rule} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listRulesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRulesStream(
-    request?: protos.google.cloud.chronicle.v1.IListRulesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.chronicle.v1.IListRulesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRules stream %j', request);
     return this.descriptors.page.listRules.createStream(
       this.innerApiCalls.listRules as GaxCall,
@@ -1698,63 +1380,62 @@ export class RuleServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listRules`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of rules.
-   *   Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}`
-   * @param {number} request.pageSize
-   *   The maximum number of rules to return. The service may return fewer than
-   *   this value. If unspecified, at most 100 rules will be returned. The
-   *   maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListRules` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListRules`
-   *   must match the call that provided the page token.
-   * @param {google.cloud.chronicle.v1.RuleView} request.view
-   *   view indicates the scope of fields to populate for the Rule being returned.
-   *   If unspecified, defaults to BASIC.
-   * @param {string} request.filter
-   *   Only the following filters are allowed:
-   *   "reference_lists:{reference_list_name}"
-   *   "data_tables:{data_table_name}"
-   *   "display_name:{display_name}"
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.chronicle.v1.Rule|Rule}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rule_service.list_rules.js</caption>
-   * region_tag:chronicle_v1_generated_RuleService_ListRules_async
-   */
+/**
+ * Equivalent to `listRules`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of rules.
+ *   Format:
+ *   `projects/{project}/locations/{location}/instances/{instance}`
+ * @param {number} request.pageSize
+ *   The maximum number of rules to return. The service may return fewer than
+ *   this value. If unspecified, at most 100 rules will be returned. The
+ *   maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListRules` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListRules`
+ *   must match the call that provided the page token.
+ * @param {google.cloud.chronicle.v1.RuleView} request.view
+ *   view indicates the scope of fields to populate for the Rule being returned.
+ *   If unspecified, defaults to BASIC.
+ * @param {string} request.filter
+ *   Only the following filters are allowed:
+ *   "reference_lists:{reference_list_name}"
+ *   "data_tables:{data_table_name}"
+ *   "display_name:{display_name}"
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.chronicle.v1.Rule|Rule}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rule_service.list_rules.js</caption>
+ * region_tag:chronicle_v1_generated_RuleService_ListRules_async
+ */
   listRulesAsync(
-    request?: protos.google.cloud.chronicle.v1.IListRulesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.chronicle.v1.IRule> {
+      request?: protos.google.cloud.chronicle.v1.IListRulesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.chronicle.v1.IRule>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRules iterate %j', request);
     return this.descriptors.page.listRules.asyncIterate(
       this.innerApiCalls['listRules'] as GaxCall,
@@ -1762,124 +1443,99 @@ export class RuleServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.chronicle.v1.IRule>;
   }
-  /**
-   * Lists all revisions of the rule.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the rule to list revisions for.
-   *   Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}/rules/{rule}`
-   * @param {number} request.pageSize
-   *   The maximum number of revisions to return per page. The service may return
-   *   fewer than this value. If unspecified, at most 100 revisions will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} request.pageToken
-   *   The page token, received from a previous `ListRuleRevisions` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListRuleRevisions`
-   *   must match the call that provided the page token.
-   * @param {google.cloud.chronicle.v1.RuleView} request.view
-   *   The view field indicates the scope of fields to populate for the revision
-   *   being returned. If unspecified, defaults to BASIC.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.chronicle.v1.Rule|Rule}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listRuleRevisionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all revisions of the rule.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the rule to list revisions for.
+ *   Format:
+ *   `projects/{project}/locations/{location}/instances/{instance}/rules/{rule}`
+ * @param {number} request.pageSize
+ *   The maximum number of revisions to return per page. The service may return
+ *   fewer than this value. If unspecified, at most 100 revisions will be
+ *   returned. The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} request.pageToken
+ *   The page token, received from a previous `ListRuleRevisions` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListRuleRevisions`
+ *   must match the call that provided the page token.
+ * @param {google.cloud.chronicle.v1.RuleView} request.view
+ *   The view field indicates the scope of fields to populate for the revision
+ *   being returned. If unspecified, defaults to BASIC.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.chronicle.v1.Rule|Rule}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listRuleRevisionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRuleRevisions(
-    request?: protos.google.cloud.chronicle.v1.IListRuleRevisionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IRule[],
-      protos.google.cloud.chronicle.v1.IListRuleRevisionsRequest | null,
-      protos.google.cloud.chronicle.v1.IListRuleRevisionsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.chronicle.v1.IListRuleRevisionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IRule[],
+        protos.google.cloud.chronicle.v1.IListRuleRevisionsRequest|null,
+        protos.google.cloud.chronicle.v1.IListRuleRevisionsResponse
+      ]>;
   listRuleRevisions(
-    request: protos.google.cloud.chronicle.v1.IListRuleRevisionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.chronicle.v1.IListRuleRevisionsRequest,
-      | protos.google.cloud.chronicle.v1.IListRuleRevisionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.chronicle.v1.IRule
-    >
-  ): void;
-  listRuleRevisions(
-    request: protos.google.cloud.chronicle.v1.IListRuleRevisionsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.chronicle.v1.IListRuleRevisionsRequest,
-      | protos.google.cloud.chronicle.v1.IListRuleRevisionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.chronicle.v1.IRule
-    >
-  ): void;
-  listRuleRevisions(
-    request?: protos.google.cloud.chronicle.v1.IListRuleRevisionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.chronicle.v1.IListRuleRevisionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.chronicle.v1.IListRuleRevisionsRequest,
-          | protos.google.cloud.chronicle.v1.IListRuleRevisionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.chronicle.v1.IRule
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.chronicle.v1.IListRuleRevisionsRequest,
-      | protos.google.cloud.chronicle.v1.IListRuleRevisionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.chronicle.v1.IRule
-    >
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IRule[],
-      protos.google.cloud.chronicle.v1.IListRuleRevisionsRequest | null,
-      protos.google.cloud.chronicle.v1.IListRuleRevisionsResponse,
-    ]
-  > | void {
+          protos.google.cloud.chronicle.v1.IListRuleRevisionsResponse|null|undefined,
+          protos.google.cloud.chronicle.v1.IRule>): void;
+  listRuleRevisions(
+      request: protos.google.cloud.chronicle.v1.IListRuleRevisionsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.chronicle.v1.IListRuleRevisionsRequest,
+          protos.google.cloud.chronicle.v1.IListRuleRevisionsResponse|null|undefined,
+          protos.google.cloud.chronicle.v1.IRule>): void;
+  listRuleRevisions(
+      request?: protos.google.cloud.chronicle.v1.IListRuleRevisionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.chronicle.v1.IListRuleRevisionsRequest,
+          protos.google.cloud.chronicle.v1.IListRuleRevisionsResponse|null|undefined,
+          protos.google.cloud.chronicle.v1.IRule>,
+      callback?: PaginationCallback<
+          protos.google.cloud.chronicle.v1.IListRuleRevisionsRequest,
+          protos.google.cloud.chronicle.v1.IListRuleRevisionsResponse|null|undefined,
+          protos.google.cloud.chronicle.v1.IRule>):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IRule[],
+        protos.google.cloud.chronicle.v1.IListRuleRevisionsRequest|null,
+        protos.google.cloud.chronicle.v1.IListRuleRevisionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.chronicle.v1.IListRuleRevisionsRequest,
-          | protos.google.cloud.chronicle.v1.IListRuleRevisionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.chronicle.v1.IRule
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.chronicle.v1.IListRuleRevisionsRequest,
+      protos.google.cloud.chronicle.v1.IListRuleRevisionsResponse|null|undefined,
+      protos.google.cloud.chronicle.v1.IRule>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listRuleRevisions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1888,68 +1544,65 @@ export class RuleServiceClient {
     this._log.info('listRuleRevisions request %j', request);
     return this.innerApiCalls
       .listRuleRevisions(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.chronicle.v1.IRule[],
-          protos.google.cloud.chronicle.v1.IListRuleRevisionsRequest | null,
-          protos.google.cloud.chronicle.v1.IListRuleRevisionsResponse,
-        ]) => {
-          this._log.info('listRuleRevisions values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.chronicle.v1.IRule[],
+        protos.google.cloud.chronicle.v1.IListRuleRevisionsRequest|null,
+        protos.google.cloud.chronicle.v1.IListRuleRevisionsResponse
+      ]) => {
+        this._log.info('listRuleRevisions values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listRuleRevisions`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the rule to list revisions for.
-   *   Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}/rules/{rule}`
-   * @param {number} request.pageSize
-   *   The maximum number of revisions to return per page. The service may return
-   *   fewer than this value. If unspecified, at most 100 revisions will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} request.pageToken
-   *   The page token, received from a previous `ListRuleRevisions` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListRuleRevisions`
-   *   must match the call that provided the page token.
-   * @param {google.cloud.chronicle.v1.RuleView} request.view
-   *   The view field indicates the scope of fields to populate for the revision
-   *   being returned. If unspecified, defaults to BASIC.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.chronicle.v1.Rule|Rule} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listRuleRevisionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listRuleRevisions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the rule to list revisions for.
+ *   Format:
+ *   `projects/{project}/locations/{location}/instances/{instance}/rules/{rule}`
+ * @param {number} request.pageSize
+ *   The maximum number of revisions to return per page. The service may return
+ *   fewer than this value. If unspecified, at most 100 revisions will be
+ *   returned. The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} request.pageToken
+ *   The page token, received from a previous `ListRuleRevisions` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListRuleRevisions`
+ *   must match the call that provided the page token.
+ * @param {google.cloud.chronicle.v1.RuleView} request.view
+ *   The view field indicates the scope of fields to populate for the revision
+ *   being returned. If unspecified, defaults to BASIC.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.chronicle.v1.Rule|Rule} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listRuleRevisionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRuleRevisionsStream(
-    request?: protos.google.cloud.chronicle.v1.IListRuleRevisionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.chronicle.v1.IListRuleRevisionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     const defaultCallSettings = this._defaults['listRuleRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRuleRevisions stream %j', request);
     return this.descriptors.page.listRuleRevisions.createStream(
       this.innerApiCalls.listRuleRevisions as GaxCall,
@@ -1958,59 +1611,58 @@ export class RuleServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listRuleRevisions`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the rule to list revisions for.
-   *   Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}/rules/{rule}`
-   * @param {number} request.pageSize
-   *   The maximum number of revisions to return per page. The service may return
-   *   fewer than this value. If unspecified, at most 100 revisions will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} request.pageToken
-   *   The page token, received from a previous `ListRuleRevisions` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListRuleRevisions`
-   *   must match the call that provided the page token.
-   * @param {google.cloud.chronicle.v1.RuleView} request.view
-   *   The view field indicates the scope of fields to populate for the revision
-   *   being returned. If unspecified, defaults to BASIC.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.chronicle.v1.Rule|Rule}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rule_service.list_rule_revisions.js</caption>
-   * region_tag:chronicle_v1_generated_RuleService_ListRuleRevisions_async
-   */
+/**
+ * Equivalent to `listRuleRevisions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the rule to list revisions for.
+ *   Format:
+ *   `projects/{project}/locations/{location}/instances/{instance}/rules/{rule}`
+ * @param {number} request.pageSize
+ *   The maximum number of revisions to return per page. The service may return
+ *   fewer than this value. If unspecified, at most 100 revisions will be
+ *   returned. The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} request.pageToken
+ *   The page token, received from a previous `ListRuleRevisions` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListRuleRevisions`
+ *   must match the call that provided the page token.
+ * @param {google.cloud.chronicle.v1.RuleView} request.view
+ *   The view field indicates the scope of fields to populate for the revision
+ *   being returned. If unspecified, defaults to BASIC.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.chronicle.v1.Rule|Rule}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rule_service.list_rule_revisions.js</caption>
+ * region_tag:chronicle_v1_generated_RuleService_ListRuleRevisions_async
+ */
   listRuleRevisionsAsync(
-    request?: protos.google.cloud.chronicle.v1.IListRuleRevisionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.chronicle.v1.IRule> {
+      request?: protos.google.cloud.chronicle.v1.IListRuleRevisionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.chronicle.v1.IRule>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     const defaultCallSettings = this._defaults['listRuleRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRuleRevisions iterate %j', request);
     return this.descriptors.page.listRuleRevisions.asyncIterate(
       this.innerApiCalls['listRuleRevisions'] as GaxCall,
@@ -2018,125 +1670,100 @@ export class RuleServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.chronicle.v1.IRule>;
   }
-  /**
-   * List Retrohunts.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The rule that the retrohunts belong to.
-   *   Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}/rules/{rule}`
-   * @param {number} request.pageSize
-   *   The maximum number of retrohunt to return. The service may return fewer
-   *   than this value. If unspecified, at most 100 retrohunts will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListRetrohunts` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListRetrohunts` must
-   *   match the call that provided the page token.
-   * @param {string} request.filter
-   *   A filter that can be used to retrieve specific rule deployments.
-   *   The following fields are filterable:
-   *   state
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.chronicle.v1.Retrohunt|Retrohunt}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listRetrohuntsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * List Retrohunts.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The rule that the retrohunts belong to.
+ *   Format:
+ *   `projects/{project}/locations/{location}/instances/{instance}/rules/{rule}`
+ * @param {number} request.pageSize
+ *   The maximum number of retrohunt to return. The service may return fewer
+ *   than this value. If unspecified, at most 100 retrohunts will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListRetrohunts` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListRetrohunts` must
+ *   match the call that provided the page token.
+ * @param {string} request.filter
+ *   A filter that can be used to retrieve specific rule deployments.
+ *   The following fields are filterable:
+ *   state
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.chronicle.v1.Retrohunt|Retrohunt}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listRetrohuntsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRetrohunts(
-    request?: protos.google.cloud.chronicle.v1.IListRetrohuntsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IRetrohunt[],
-      protos.google.cloud.chronicle.v1.IListRetrohuntsRequest | null,
-      protos.google.cloud.chronicle.v1.IListRetrohuntsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.chronicle.v1.IListRetrohuntsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IRetrohunt[],
+        protos.google.cloud.chronicle.v1.IListRetrohuntsRequest|null,
+        protos.google.cloud.chronicle.v1.IListRetrohuntsResponse
+      ]>;
   listRetrohunts(
-    request: protos.google.cloud.chronicle.v1.IListRetrohuntsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.chronicle.v1.IListRetrohuntsRequest,
-      | protos.google.cloud.chronicle.v1.IListRetrohuntsResponse
-      | null
-      | undefined,
-      protos.google.cloud.chronicle.v1.IRetrohunt
-    >
-  ): void;
-  listRetrohunts(
-    request: protos.google.cloud.chronicle.v1.IListRetrohuntsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.chronicle.v1.IListRetrohuntsRequest,
-      | protos.google.cloud.chronicle.v1.IListRetrohuntsResponse
-      | null
-      | undefined,
-      protos.google.cloud.chronicle.v1.IRetrohunt
-    >
-  ): void;
-  listRetrohunts(
-    request?: protos.google.cloud.chronicle.v1.IListRetrohuntsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.chronicle.v1.IListRetrohuntsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.chronicle.v1.IListRetrohuntsRequest,
-          | protos.google.cloud.chronicle.v1.IListRetrohuntsResponse
-          | null
-          | undefined,
-          protos.google.cloud.chronicle.v1.IRetrohunt
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.chronicle.v1.IListRetrohuntsRequest,
-      | protos.google.cloud.chronicle.v1.IListRetrohuntsResponse
-      | null
-      | undefined,
-      protos.google.cloud.chronicle.v1.IRetrohunt
-    >
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IRetrohunt[],
-      protos.google.cloud.chronicle.v1.IListRetrohuntsRequest | null,
-      protos.google.cloud.chronicle.v1.IListRetrohuntsResponse,
-    ]
-  > | void {
+          protos.google.cloud.chronicle.v1.IListRetrohuntsResponse|null|undefined,
+          protos.google.cloud.chronicle.v1.IRetrohunt>): void;
+  listRetrohunts(
+      request: protos.google.cloud.chronicle.v1.IListRetrohuntsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.chronicle.v1.IListRetrohuntsRequest,
+          protos.google.cloud.chronicle.v1.IListRetrohuntsResponse|null|undefined,
+          protos.google.cloud.chronicle.v1.IRetrohunt>): void;
+  listRetrohunts(
+      request?: protos.google.cloud.chronicle.v1.IListRetrohuntsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.chronicle.v1.IListRetrohuntsRequest,
+          protos.google.cloud.chronicle.v1.IListRetrohuntsResponse|null|undefined,
+          protos.google.cloud.chronicle.v1.IRetrohunt>,
+      callback?: PaginationCallback<
+          protos.google.cloud.chronicle.v1.IListRetrohuntsRequest,
+          protos.google.cloud.chronicle.v1.IListRetrohuntsResponse|null|undefined,
+          protos.google.cloud.chronicle.v1.IRetrohunt>):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IRetrohunt[],
+        protos.google.cloud.chronicle.v1.IListRetrohuntsRequest|null,
+        protos.google.cloud.chronicle.v1.IListRetrohuntsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.chronicle.v1.IListRetrohuntsRequest,
-          | protos.google.cloud.chronicle.v1.IListRetrohuntsResponse
-          | null
-          | undefined,
-          protos.google.cloud.chronicle.v1.IRetrohunt
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.chronicle.v1.IListRetrohuntsRequest,
+      protos.google.cloud.chronicle.v1.IListRetrohuntsResponse|null|undefined,
+      protos.google.cloud.chronicle.v1.IRetrohunt>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listRetrohunts values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2145,69 +1772,66 @@ export class RuleServiceClient {
     this._log.info('listRetrohunts request %j', request);
     return this.innerApiCalls
       .listRetrohunts(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.chronicle.v1.IRetrohunt[],
-          protos.google.cloud.chronicle.v1.IListRetrohuntsRequest | null,
-          protos.google.cloud.chronicle.v1.IListRetrohuntsResponse,
-        ]) => {
-          this._log.info('listRetrohunts values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.chronicle.v1.IRetrohunt[],
+        protos.google.cloud.chronicle.v1.IListRetrohuntsRequest|null,
+        protos.google.cloud.chronicle.v1.IListRetrohuntsResponse
+      ]) => {
+        this._log.info('listRetrohunts values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listRetrohunts`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The rule that the retrohunts belong to.
-   *   Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}/rules/{rule}`
-   * @param {number} request.pageSize
-   *   The maximum number of retrohunt to return. The service may return fewer
-   *   than this value. If unspecified, at most 100 retrohunts will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListRetrohunts` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListRetrohunts` must
-   *   match the call that provided the page token.
-   * @param {string} request.filter
-   *   A filter that can be used to retrieve specific rule deployments.
-   *   The following fields are filterable:
-   *   state
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.chronicle.v1.Retrohunt|Retrohunt} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listRetrohuntsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listRetrohunts`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The rule that the retrohunts belong to.
+ *   Format:
+ *   `projects/{project}/locations/{location}/instances/{instance}/rules/{rule}`
+ * @param {number} request.pageSize
+ *   The maximum number of retrohunt to return. The service may return fewer
+ *   than this value. If unspecified, at most 100 retrohunts will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListRetrohunts` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListRetrohunts` must
+ *   match the call that provided the page token.
+ * @param {string} request.filter
+ *   A filter that can be used to retrieve specific rule deployments.
+ *   The following fields are filterable:
+ *   state
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.chronicle.v1.Retrohunt|Retrohunt} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listRetrohuntsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRetrohuntsStream(
-    request?: protos.google.cloud.chronicle.v1.IListRetrohuntsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.chronicle.v1.IListRetrohuntsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRetrohunts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRetrohunts stream %j', request);
     return this.descriptors.page.listRetrohunts.createStream(
       this.innerApiCalls.listRetrohunts as GaxCall,
@@ -2216,60 +1840,59 @@ export class RuleServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listRetrohunts`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The rule that the retrohunts belong to.
-   *   Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}/rules/{rule}`
-   * @param {number} request.pageSize
-   *   The maximum number of retrohunt to return. The service may return fewer
-   *   than this value. If unspecified, at most 100 retrohunts will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListRetrohunts` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListRetrohunts` must
-   *   match the call that provided the page token.
-   * @param {string} request.filter
-   *   A filter that can be used to retrieve specific rule deployments.
-   *   The following fields are filterable:
-   *   state
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.chronicle.v1.Retrohunt|Retrohunt}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rule_service.list_retrohunts.js</caption>
-   * region_tag:chronicle_v1_generated_RuleService_ListRetrohunts_async
-   */
+/**
+ * Equivalent to `listRetrohunts`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The rule that the retrohunts belong to.
+ *   Format:
+ *   `projects/{project}/locations/{location}/instances/{instance}/rules/{rule}`
+ * @param {number} request.pageSize
+ *   The maximum number of retrohunt to return. The service may return fewer
+ *   than this value. If unspecified, at most 100 retrohunts will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListRetrohunts` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListRetrohunts` must
+ *   match the call that provided the page token.
+ * @param {string} request.filter
+ *   A filter that can be used to retrieve specific rule deployments.
+ *   The following fields are filterable:
+ *   state
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.chronicle.v1.Retrohunt|Retrohunt}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rule_service.list_retrohunts.js</caption>
+ * region_tag:chronicle_v1_generated_RuleService_ListRetrohunts_async
+ */
   listRetrohuntsAsync(
-    request?: protos.google.cloud.chronicle.v1.IListRetrohuntsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.chronicle.v1.IRetrohunt> {
+      request?: protos.google.cloud.chronicle.v1.IListRetrohuntsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.chronicle.v1.IRetrohunt>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRetrohunts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRetrohunts iterate %j', request);
     return this.descriptors.page.listRetrohunts.asyncIterate(
       this.innerApiCalls['listRetrohunts'] as GaxCall,
@@ -2277,126 +1900,101 @@ export class RuleServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.chronicle.v1.IRetrohunt>;
   }
-  /**
-   * Lists RuleDeployments across all Rules.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The collection of all parents which own all rule deployments. The
-   *   "-" wildcard token must be used as the rule identifier in the resource
-   *   path. Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}/rules/-`
-   * @param {number} request.pageSize
-   *   The maximum number of rule deployments to return. The service may return
-   *   fewer than this value. If unspecified, at most 100 rule deployments will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListRuleDeployments` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListRuleDeployments`
-   *   must match the call that provided the page token.
-   * @param {string} request.filter
-   *   A filter that can be used to retrieve specific rule deployments.
-   *   The following fields are filterable:
-   *   archived, name
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.chronicle.v1.RuleDeployment|RuleDeployment}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listRuleDeploymentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists RuleDeployments across all Rules.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The collection of all parents which own all rule deployments. The
+ *   "-" wildcard token must be used as the rule identifier in the resource
+ *   path. Format:
+ *   `projects/{project}/locations/{location}/instances/{instance}/rules/-`
+ * @param {number} request.pageSize
+ *   The maximum number of rule deployments to return. The service may return
+ *   fewer than this value. If unspecified, at most 100 rule deployments will be
+ *   returned. The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListRuleDeployments` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListRuleDeployments`
+ *   must match the call that provided the page token.
+ * @param {string} request.filter
+ *   A filter that can be used to retrieve specific rule deployments.
+ *   The following fields are filterable:
+ *   archived, name
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.chronicle.v1.RuleDeployment|RuleDeployment}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listRuleDeploymentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRuleDeployments(
-    request?: protos.google.cloud.chronicle.v1.IListRuleDeploymentsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IRuleDeployment[],
-      protos.google.cloud.chronicle.v1.IListRuleDeploymentsRequest | null,
-      protos.google.cloud.chronicle.v1.IListRuleDeploymentsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.chronicle.v1.IListRuleDeploymentsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IRuleDeployment[],
+        protos.google.cloud.chronicle.v1.IListRuleDeploymentsRequest|null,
+        protos.google.cloud.chronicle.v1.IListRuleDeploymentsResponse
+      ]>;
   listRuleDeployments(
-    request: protos.google.cloud.chronicle.v1.IListRuleDeploymentsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.chronicle.v1.IListRuleDeploymentsRequest,
-      | protos.google.cloud.chronicle.v1.IListRuleDeploymentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.chronicle.v1.IRuleDeployment
-    >
-  ): void;
-  listRuleDeployments(
-    request: protos.google.cloud.chronicle.v1.IListRuleDeploymentsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.chronicle.v1.IListRuleDeploymentsRequest,
-      | protos.google.cloud.chronicle.v1.IListRuleDeploymentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.chronicle.v1.IRuleDeployment
-    >
-  ): void;
-  listRuleDeployments(
-    request?: protos.google.cloud.chronicle.v1.IListRuleDeploymentsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.chronicle.v1.IListRuleDeploymentsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.chronicle.v1.IListRuleDeploymentsRequest,
-          | protos.google.cloud.chronicle.v1.IListRuleDeploymentsResponse
-          | null
-          | undefined,
-          protos.google.cloud.chronicle.v1.IRuleDeployment
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.chronicle.v1.IListRuleDeploymentsRequest,
-      | protos.google.cloud.chronicle.v1.IListRuleDeploymentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.chronicle.v1.IRuleDeployment
-    >
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IRuleDeployment[],
-      protos.google.cloud.chronicle.v1.IListRuleDeploymentsRequest | null,
-      protos.google.cloud.chronicle.v1.IListRuleDeploymentsResponse,
-    ]
-  > | void {
+          protos.google.cloud.chronicle.v1.IListRuleDeploymentsResponse|null|undefined,
+          protos.google.cloud.chronicle.v1.IRuleDeployment>): void;
+  listRuleDeployments(
+      request: protos.google.cloud.chronicle.v1.IListRuleDeploymentsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.chronicle.v1.IListRuleDeploymentsRequest,
+          protos.google.cloud.chronicle.v1.IListRuleDeploymentsResponse|null|undefined,
+          protos.google.cloud.chronicle.v1.IRuleDeployment>): void;
+  listRuleDeployments(
+      request?: protos.google.cloud.chronicle.v1.IListRuleDeploymentsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.chronicle.v1.IListRuleDeploymentsRequest,
+          protos.google.cloud.chronicle.v1.IListRuleDeploymentsResponse|null|undefined,
+          protos.google.cloud.chronicle.v1.IRuleDeployment>,
+      callback?: PaginationCallback<
+          protos.google.cloud.chronicle.v1.IListRuleDeploymentsRequest,
+          protos.google.cloud.chronicle.v1.IListRuleDeploymentsResponse|null|undefined,
+          protos.google.cloud.chronicle.v1.IRuleDeployment>):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IRuleDeployment[],
+        protos.google.cloud.chronicle.v1.IListRuleDeploymentsRequest|null,
+        protos.google.cloud.chronicle.v1.IListRuleDeploymentsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.chronicle.v1.IListRuleDeploymentsRequest,
-          | protos.google.cloud.chronicle.v1.IListRuleDeploymentsResponse
-          | null
-          | undefined,
-          protos.google.cloud.chronicle.v1.IRuleDeployment
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.chronicle.v1.IListRuleDeploymentsRequest,
+      protos.google.cloud.chronicle.v1.IListRuleDeploymentsResponse|null|undefined,
+      protos.google.cloud.chronicle.v1.IRuleDeployment>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listRuleDeployments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2405,70 +2003,67 @@ export class RuleServiceClient {
     this._log.info('listRuleDeployments request %j', request);
     return this.innerApiCalls
       .listRuleDeployments(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.chronicle.v1.IRuleDeployment[],
-          protos.google.cloud.chronicle.v1.IListRuleDeploymentsRequest | null,
-          protos.google.cloud.chronicle.v1.IListRuleDeploymentsResponse,
-        ]) => {
-          this._log.info('listRuleDeployments values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.chronicle.v1.IRuleDeployment[],
+        protos.google.cloud.chronicle.v1.IListRuleDeploymentsRequest|null,
+        protos.google.cloud.chronicle.v1.IListRuleDeploymentsResponse
+      ]) => {
+        this._log.info('listRuleDeployments values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listRuleDeployments`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The collection of all parents which own all rule deployments. The
-   *   "-" wildcard token must be used as the rule identifier in the resource
-   *   path. Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}/rules/-`
-   * @param {number} request.pageSize
-   *   The maximum number of rule deployments to return. The service may return
-   *   fewer than this value. If unspecified, at most 100 rule deployments will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListRuleDeployments` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListRuleDeployments`
-   *   must match the call that provided the page token.
-   * @param {string} request.filter
-   *   A filter that can be used to retrieve specific rule deployments.
-   *   The following fields are filterable:
-   *   archived, name
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.chronicle.v1.RuleDeployment|RuleDeployment} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listRuleDeploymentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listRuleDeployments`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The collection of all parents which own all rule deployments. The
+ *   "-" wildcard token must be used as the rule identifier in the resource
+ *   path. Format:
+ *   `projects/{project}/locations/{location}/instances/{instance}/rules/-`
+ * @param {number} request.pageSize
+ *   The maximum number of rule deployments to return. The service may return
+ *   fewer than this value. If unspecified, at most 100 rule deployments will be
+ *   returned. The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListRuleDeployments` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListRuleDeployments`
+ *   must match the call that provided the page token.
+ * @param {string} request.filter
+ *   A filter that can be used to retrieve specific rule deployments.
+ *   The following fields are filterable:
+ *   archived, name
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.chronicle.v1.RuleDeployment|RuleDeployment} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listRuleDeploymentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRuleDeploymentsStream(
-    request?: protos.google.cloud.chronicle.v1.IListRuleDeploymentsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.chronicle.v1.IListRuleDeploymentsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRuleDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRuleDeployments stream %j', request);
     return this.descriptors.page.listRuleDeployments.createStream(
       this.innerApiCalls.listRuleDeployments as GaxCall,
@@ -2477,61 +2072,60 @@ export class RuleServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listRuleDeployments`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The collection of all parents which own all rule deployments. The
-   *   "-" wildcard token must be used as the rule identifier in the resource
-   *   path. Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}/rules/-`
-   * @param {number} request.pageSize
-   *   The maximum number of rule deployments to return. The service may return
-   *   fewer than this value. If unspecified, at most 100 rule deployments will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListRuleDeployments` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListRuleDeployments`
-   *   must match the call that provided the page token.
-   * @param {string} request.filter
-   *   A filter that can be used to retrieve specific rule deployments.
-   *   The following fields are filterable:
-   *   archived, name
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.chronicle.v1.RuleDeployment|RuleDeployment}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rule_service.list_rule_deployments.js</caption>
-   * region_tag:chronicle_v1_generated_RuleService_ListRuleDeployments_async
-   */
+/**
+ * Equivalent to `listRuleDeployments`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The collection of all parents which own all rule deployments. The
+ *   "-" wildcard token must be used as the rule identifier in the resource
+ *   path. Format:
+ *   `projects/{project}/locations/{location}/instances/{instance}/rules/-`
+ * @param {number} request.pageSize
+ *   The maximum number of rule deployments to return. The service may return
+ *   fewer than this value. If unspecified, at most 100 rule deployments will be
+ *   returned. The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListRuleDeployments` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListRuleDeployments`
+ *   must match the call that provided the page token.
+ * @param {string} request.filter
+ *   A filter that can be used to retrieve specific rule deployments.
+ *   The following fields are filterable:
+ *   archived, name
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.chronicle.v1.RuleDeployment|RuleDeployment}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rule_service.list_rule_deployments.js</caption>
+ * region_tag:chronicle_v1_generated_RuleService_ListRuleDeployments_async
+ */
   listRuleDeploymentsAsync(
-    request?: protos.google.cloud.chronicle.v1.IListRuleDeploymentsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.chronicle.v1.IRuleDeployment> {
+      request?: protos.google.cloud.chronicle.v1.IListRuleDeploymentsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.chronicle.v1.IRuleDeployment>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRuleDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRuleDeployments iterate %j', request);
     return this.descriptors.page.listRuleDeployments.asyncIterate(
       this.innerApiCalls['listRuleDeployments'] as GaxCall,
@@ -2539,7 +2133,7 @@ export class RuleServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.chronicle.v1.IRuleDeployment>;
   }
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -2584,20 +2178,20 @@ export class RuleServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -2634,13 +2228,13 @@ export class RuleServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -2674,7 +2268,7 @@ export class RuleServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -2689,20 +2283,20 @@ export class RuleServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -2746,20 +2340,20 @@ export class RuleServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -2776,12 +2370,7 @@ export class RuleServiceClient {
    * @param {string} data_access_label
    * @returns {string} Resource name string.
    */
-  dataAccessLabelPath(
-    project: string,
-    location: string,
-    instance: string,
-    dataAccessLabel: string
-  ) {
+  dataAccessLabelPath(project:string,location:string,instance:string,dataAccessLabel:string) {
     return this.pathTemplates.dataAccessLabelPathTemplate.render({
       project: project,
       location: location,
@@ -2798,9 +2387,7 @@ export class RuleServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAccessLabelName(dataAccessLabelName: string) {
-    return this.pathTemplates.dataAccessLabelPathTemplate.match(
-      dataAccessLabelName
-    ).project;
+    return this.pathTemplates.dataAccessLabelPathTemplate.match(dataAccessLabelName).project;
   }
 
   /**
@@ -2811,9 +2398,7 @@ export class RuleServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAccessLabelName(dataAccessLabelName: string) {
-    return this.pathTemplates.dataAccessLabelPathTemplate.match(
-      dataAccessLabelName
-    ).location;
+    return this.pathTemplates.dataAccessLabelPathTemplate.match(dataAccessLabelName).location;
   }
 
   /**
@@ -2824,9 +2409,7 @@ export class RuleServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromDataAccessLabelName(dataAccessLabelName: string) {
-    return this.pathTemplates.dataAccessLabelPathTemplate.match(
-      dataAccessLabelName
-    ).instance;
+    return this.pathTemplates.dataAccessLabelPathTemplate.match(dataAccessLabelName).instance;
   }
 
   /**
@@ -2837,9 +2420,7 @@ export class RuleServiceClient {
    * @returns {string} A string representing the data_access_label.
    */
   matchDataAccessLabelFromDataAccessLabelName(dataAccessLabelName: string) {
-    return this.pathTemplates.dataAccessLabelPathTemplate.match(
-      dataAccessLabelName
-    ).data_access_label;
+    return this.pathTemplates.dataAccessLabelPathTemplate.match(dataAccessLabelName).data_access_label;
   }
 
   /**
@@ -2851,12 +2432,7 @@ export class RuleServiceClient {
    * @param {string} data_access_scope
    * @returns {string} Resource name string.
    */
-  dataAccessScopePath(
-    project: string,
-    location: string,
-    instance: string,
-    dataAccessScope: string
-  ) {
+  dataAccessScopePath(project:string,location:string,instance:string,dataAccessScope:string) {
     return this.pathTemplates.dataAccessScopePathTemplate.render({
       project: project,
       location: location,
@@ -2873,9 +2449,7 @@ export class RuleServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAccessScopeName(dataAccessScopeName: string) {
-    return this.pathTemplates.dataAccessScopePathTemplate.match(
-      dataAccessScopeName
-    ).project;
+    return this.pathTemplates.dataAccessScopePathTemplate.match(dataAccessScopeName).project;
   }
 
   /**
@@ -2886,9 +2460,7 @@ export class RuleServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAccessScopeName(dataAccessScopeName: string) {
-    return this.pathTemplates.dataAccessScopePathTemplate.match(
-      dataAccessScopeName
-    ).location;
+    return this.pathTemplates.dataAccessScopePathTemplate.match(dataAccessScopeName).location;
   }
 
   /**
@@ -2899,9 +2471,7 @@ export class RuleServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromDataAccessScopeName(dataAccessScopeName: string) {
-    return this.pathTemplates.dataAccessScopePathTemplate.match(
-      dataAccessScopeName
-    ).instance;
+    return this.pathTemplates.dataAccessScopePathTemplate.match(dataAccessScopeName).instance;
   }
 
   /**
@@ -2912,9 +2482,7 @@ export class RuleServiceClient {
    * @returns {string} A string representing the data_access_scope.
    */
   matchDataAccessScopeFromDataAccessScopeName(dataAccessScopeName: string) {
-    return this.pathTemplates.dataAccessScopePathTemplate.match(
-      dataAccessScopeName
-    ).data_access_scope;
+    return this.pathTemplates.dataAccessScopePathTemplate.match(dataAccessScopeName).data_access_scope;
   }
 
   /**
@@ -2925,7 +2493,7 @@ export class RuleServiceClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  instancePath(project: string, location: string, instance: string) {
+  instancePath(project:string,location:string,instance:string) {
     return this.pathTemplates.instancePathTemplate.render({
       project: project,
       location: location,
@@ -2973,7 +2541,7 @@ export class RuleServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -3008,7 +2576,7 @@ export class RuleServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -3034,12 +2602,7 @@ export class RuleServiceClient {
    * @param {string} reference_list
    * @returns {string} Resource name string.
    */
-  referenceListPath(
-    project: string,
-    location: string,
-    instance: string,
-    referenceList: string
-  ) {
+  referenceListPath(project:string,location:string,instance:string,referenceList:string) {
     return this.pathTemplates.referenceListPathTemplate.render({
       project: project,
       location: location,
@@ -3056,8 +2619,7 @@ export class RuleServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromReferenceListName(referenceListName: string) {
-    return this.pathTemplates.referenceListPathTemplate.match(referenceListName)
-      .project;
+    return this.pathTemplates.referenceListPathTemplate.match(referenceListName).project;
   }
 
   /**
@@ -3068,8 +2630,7 @@ export class RuleServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromReferenceListName(referenceListName: string) {
-    return this.pathTemplates.referenceListPathTemplate.match(referenceListName)
-      .location;
+    return this.pathTemplates.referenceListPathTemplate.match(referenceListName).location;
   }
 
   /**
@@ -3080,8 +2641,7 @@ export class RuleServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromReferenceListName(referenceListName: string) {
-    return this.pathTemplates.referenceListPathTemplate.match(referenceListName)
-      .instance;
+    return this.pathTemplates.referenceListPathTemplate.match(referenceListName).instance;
   }
 
   /**
@@ -3092,8 +2652,7 @@ export class RuleServiceClient {
    * @returns {string} A string representing the reference_list.
    */
   matchReferenceListFromReferenceListName(referenceListName: string) {
-    return this.pathTemplates.referenceListPathTemplate.match(referenceListName)
-      .reference_list;
+    return this.pathTemplates.referenceListPathTemplate.match(referenceListName).reference_list;
   }
 
   /**
@@ -3106,13 +2665,7 @@ export class RuleServiceClient {
    * @param {string} retrohunt
    * @returns {string} Resource name string.
    */
-  retrohuntPath(
-    project: string,
-    location: string,
-    instance: string,
-    rule: string,
-    retrohunt: string
-  ) {
+  retrohuntPath(project:string,location:string,instance:string,rule:string,retrohunt:string) {
     return this.pathTemplates.retrohuntPathTemplate.render({
       project: project,
       location: location,
@@ -3130,8 +2683,7 @@ export class RuleServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRetrohuntName(retrohuntName: string) {
-    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName)
-      .project;
+    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName).project;
   }
 
   /**
@@ -3142,8 +2694,7 @@ export class RuleServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromRetrohuntName(retrohuntName: string) {
-    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName)
-      .location;
+    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName).location;
   }
 
   /**
@@ -3154,8 +2705,7 @@ export class RuleServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromRetrohuntName(retrohuntName: string) {
-    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName)
-      .instance;
+    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName).instance;
   }
 
   /**
@@ -3177,8 +2727,7 @@ export class RuleServiceClient {
    * @returns {string} A string representing the retrohunt.
    */
   matchRetrohuntFromRetrohuntName(retrohuntName: string) {
-    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName)
-      .retrohunt;
+    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName).retrohunt;
   }
 
   /**
@@ -3190,7 +2739,7 @@ export class RuleServiceClient {
    * @param {string} rule
    * @returns {string} Resource name string.
    */
-  rulePath(project: string, location: string, instance: string, rule: string) {
+  rulePath(project:string,location:string,instance:string,rule:string) {
     return this.pathTemplates.rulePathTemplate.render({
       project: project,
       location: location,
@@ -3252,12 +2801,7 @@ export class RuleServiceClient {
    * @param {string} rule
    * @returns {string} Resource name string.
    */
-  ruleDeploymentPath(
-    project: string,
-    location: string,
-    instance: string,
-    rule: string
-  ) {
+  ruleDeploymentPath(project:string,location:string,instance:string,rule:string) {
     return this.pathTemplates.ruleDeploymentPathTemplate.render({
       project: project,
       location: location,
@@ -3274,9 +2818,7 @@ export class RuleServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRuleDeploymentName(ruleDeploymentName: string) {
-    return this.pathTemplates.ruleDeploymentPathTemplate.match(
-      ruleDeploymentName
-    ).project;
+    return this.pathTemplates.ruleDeploymentPathTemplate.match(ruleDeploymentName).project;
   }
 
   /**
@@ -3287,9 +2829,7 @@ export class RuleServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromRuleDeploymentName(ruleDeploymentName: string) {
-    return this.pathTemplates.ruleDeploymentPathTemplate.match(
-      ruleDeploymentName
-    ).location;
+    return this.pathTemplates.ruleDeploymentPathTemplate.match(ruleDeploymentName).location;
   }
 
   /**
@@ -3300,9 +2840,7 @@ export class RuleServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromRuleDeploymentName(ruleDeploymentName: string) {
-    return this.pathTemplates.ruleDeploymentPathTemplate.match(
-      ruleDeploymentName
-    ).instance;
+    return this.pathTemplates.ruleDeploymentPathTemplate.match(ruleDeploymentName).instance;
   }
 
   /**
@@ -3313,9 +2851,7 @@ export class RuleServiceClient {
    * @returns {string} A string representing the rule.
    */
   matchRuleFromRuleDeploymentName(ruleDeploymentName: string) {
-    return this.pathTemplates.ruleDeploymentPathTemplate.match(
-      ruleDeploymentName
-    ).rule;
+    return this.pathTemplates.ruleDeploymentPathTemplate.match(ruleDeploymentName).rule;
   }
 
   /**
@@ -3327,12 +2863,7 @@ export class RuleServiceClient {
    * @param {string} watchlist
    * @returns {string} Resource name string.
    */
-  watchlistPath(
-    project: string,
-    location: string,
-    instance: string,
-    watchlist: string
-  ) {
+  watchlistPath(project:string,location:string,instance:string,watchlist:string) {
     return this.pathTemplates.watchlistPathTemplate.render({
       project: project,
       location: location,
@@ -3349,8 +2880,7 @@ export class RuleServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromWatchlistName(watchlistName: string) {
-    return this.pathTemplates.watchlistPathTemplate.match(watchlistName)
-      .project;
+    return this.pathTemplates.watchlistPathTemplate.match(watchlistName).project;
   }
 
   /**
@@ -3361,8 +2891,7 @@ export class RuleServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromWatchlistName(watchlistName: string) {
-    return this.pathTemplates.watchlistPathTemplate.match(watchlistName)
-      .location;
+    return this.pathTemplates.watchlistPathTemplate.match(watchlistName).location;
   }
 
   /**
@@ -3373,8 +2902,7 @@ export class RuleServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromWatchlistName(watchlistName: string) {
-    return this.pathTemplates.watchlistPathTemplate.match(watchlistName)
-      .instance;
+    return this.pathTemplates.watchlistPathTemplate.match(watchlistName).instance;
   }
 
   /**
@@ -3385,8 +2913,7 @@ export class RuleServiceClient {
    * @returns {string} A string representing the watchlist.
    */
   matchWatchlistFromWatchlistName(watchlistName: string) {
-    return this.pathTemplates.watchlistPathTemplate.match(watchlistName)
-      .watchlist;
+    return this.pathTemplates.watchlistPathTemplate.match(watchlistName).watchlist;
   }
 
   /**

@@ -48,7 +48,9 @@ function main() {
   const instanceSettingsServiceClient = new compute.InstanceSettingsServiceClient();
   const instanceTemplatesClient = new compute.InstanceTemplatesClient();
   const instantSnapshotsClient = new compute.InstantSnapshotsClient();
+  const interconnectAttachmentGroupsClient = new compute.InterconnectAttachmentGroupsClient();
   const interconnectAttachmentsClient = new compute.InterconnectAttachmentsClient();
+  const interconnectGroupsClient = new compute.InterconnectGroupsClient();
   const interconnectLocationsClient = new compute.InterconnectLocationsClient();
   const interconnectRemoteLocationsClient = new compute.InterconnectRemoteLocationsClient();
   const interconnectsClient = new compute.InterconnectsClient();
@@ -96,6 +98,7 @@ function main() {
   const regionZonesClient = new compute.RegionZonesClient();
   const reservationBlocksClient = new compute.ReservationBlocksClient();
   const reservationsClient = new compute.ReservationsClient();
+  const reservationSubBlocksClient = new compute.ReservationSubBlocksClient();
   const resourcePoliciesClient = new compute.ResourcePoliciesClient();
   const routersClient = new compute.RoutersClient();
   const routesClient = new compute.RoutesClient();
