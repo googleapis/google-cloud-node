@@ -29,3003 +29,2352 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.PolicyTagManagerClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'datacatalog.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          policytagmanagerModule.v1.PolicyTagManagerClient.servicePath;
-        assert.strictEqual(servicePath, 'datacatalog.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          policytagmanagerModule.v1.PolicyTagManagerClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'datacatalog.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'datacatalog.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'datacatalog.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new policytagmanagerModule.v1.PolicyTagManagerClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'datacatalog.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'datacatalog.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'datacatalog.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new policytagmanagerModule.v1.PolicyTagManagerClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = policytagmanagerModule.v1.PolicyTagManagerClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = policytagmanagerModule.v1.PolicyTagManagerClient.servicePath;
+                assert.strictEqual(servicePath, 'datacatalog.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
 
-    it('should create a client with no option', () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.policyTagManagerStub, undefined);
-      await client.initialize();
-      assert(client.policyTagManagerStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.policyTagManagerStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.policyTagManagerStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('createTaxonomy', () => {
-    it('invokes createTaxonomy without error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.CreateTaxonomyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.CreateTaxonomyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.Taxonomy()
-      );
-      client.innerApiCalls.createTaxonomy = stubSimpleCall(expectedResponse);
-      const [response] = await client.createTaxonomy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createTaxonomy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createTaxonomy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createTaxonomy without error using callback', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.CreateTaxonomyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.CreateTaxonomyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.Taxonomy()
-      );
-      client.innerApiCalls.createTaxonomy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createTaxonomy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.ITaxonomy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createTaxonomy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createTaxonomy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createTaxonomy with error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.CreateTaxonomyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.CreateTaxonomyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createTaxonomy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createTaxonomy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createTaxonomy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createTaxonomy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createTaxonomy with closed client', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.CreateTaxonomyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.CreateTaxonomyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createTaxonomy(request), expectedError);
-    });
-  });
-
-  describe('deleteTaxonomy', () => {
-    it('invokes deleteTaxonomy without error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.DeleteTaxonomyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.DeleteTaxonomyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteTaxonomy = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteTaxonomy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteTaxonomy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteTaxonomy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteTaxonomy without error using callback', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.DeleteTaxonomyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.DeleteTaxonomyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteTaxonomy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteTaxonomy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteTaxonomy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteTaxonomy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteTaxonomy with error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.DeleteTaxonomyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.DeleteTaxonomyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteTaxonomy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteTaxonomy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteTaxonomy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteTaxonomy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteTaxonomy with closed client', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.DeleteTaxonomyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.DeleteTaxonomyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteTaxonomy(request), expectedError);
-    });
-  });
-
-  describe('updateTaxonomy', () => {
-    it('invokes updateTaxonomy without error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UpdateTaxonomyRequest()
-      );
-      request.taxonomy ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UpdateTaxonomyRequest',
-        ['taxonomy', 'name']
-      );
-      request.taxonomy.name = defaultValue1;
-      const expectedHeaderRequestParams = `taxonomy.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.Taxonomy()
-      );
-      client.innerApiCalls.updateTaxonomy = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateTaxonomy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateTaxonomy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateTaxonomy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateTaxonomy without error using callback', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UpdateTaxonomyRequest()
-      );
-      request.taxonomy ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UpdateTaxonomyRequest',
-        ['taxonomy', 'name']
-      );
-      request.taxonomy.name = defaultValue1;
-      const expectedHeaderRequestParams = `taxonomy.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.Taxonomy()
-      );
-      client.innerApiCalls.updateTaxonomy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateTaxonomy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.ITaxonomy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateTaxonomy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateTaxonomy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateTaxonomy with error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UpdateTaxonomyRequest()
-      );
-      request.taxonomy ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UpdateTaxonomyRequest',
-        ['taxonomy', 'name']
-      );
-      request.taxonomy.name = defaultValue1;
-      const expectedHeaderRequestParams = `taxonomy.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateTaxonomy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateTaxonomy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateTaxonomy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateTaxonomy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateTaxonomy with closed client', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UpdateTaxonomyRequest()
-      );
-      request.taxonomy ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UpdateTaxonomyRequest',
-        ['taxonomy', 'name']
-      );
-      request.taxonomy.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateTaxonomy(request), expectedError);
-    });
-  });
-
-  describe('getTaxonomy', () => {
-    it('invokes getTaxonomy without error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.GetTaxonomyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.GetTaxonomyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.Taxonomy()
-      );
-      client.innerApiCalls.getTaxonomy = stubSimpleCall(expectedResponse);
-      const [response] = await client.getTaxonomy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getTaxonomy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getTaxonomy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getTaxonomy without error using callback', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.GetTaxonomyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.GetTaxonomyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.Taxonomy()
-      );
-      client.innerApiCalls.getTaxonomy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getTaxonomy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.ITaxonomy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getTaxonomy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getTaxonomy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getTaxonomy with error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.GetTaxonomyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.GetTaxonomyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getTaxonomy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getTaxonomy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getTaxonomy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getTaxonomy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getTaxonomy with closed client', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.GetTaxonomyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.GetTaxonomyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getTaxonomy(request), expectedError);
-    });
-  });
-
-  describe('createPolicyTag', () => {
-    it('invokes createPolicyTag without error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.CreatePolicyTagRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.CreatePolicyTagRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.PolicyTag()
-      );
-      client.innerApiCalls.createPolicyTag = stubSimpleCall(expectedResponse);
-      const [response] = await client.createPolicyTag(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createPolicyTag as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createPolicyTag as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createPolicyTag without error using callback', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.CreatePolicyTagRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.CreatePolicyTagRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.PolicyTag()
-      );
-      client.innerApiCalls.createPolicyTag =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createPolicyTag(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.IPolicyTag | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createPolicyTag as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createPolicyTag as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createPolicyTag with error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.CreatePolicyTagRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.CreatePolicyTagRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createPolicyTag = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createPolicyTag(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createPolicyTag as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createPolicyTag as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createPolicyTag with closed client', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.CreatePolicyTagRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.CreatePolicyTagRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createPolicyTag(request), expectedError);
-    });
-  });
-
-  describe('deletePolicyTag', () => {
-    it('invokes deletePolicyTag without error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.DeletePolicyTagRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.DeletePolicyTagRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deletePolicyTag = stubSimpleCall(expectedResponse);
-      const [response] = await client.deletePolicyTag(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deletePolicyTag as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePolicyTag as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deletePolicyTag without error using callback', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.DeletePolicyTagRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.DeletePolicyTagRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deletePolicyTag =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deletePolicyTag(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deletePolicyTag as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePolicyTag as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deletePolicyTag with error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.DeletePolicyTagRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.DeletePolicyTagRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deletePolicyTag = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deletePolicyTag(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deletePolicyTag as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePolicyTag as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deletePolicyTag with closed client', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.DeletePolicyTagRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.DeletePolicyTagRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deletePolicyTag(request), expectedError);
-    });
-  });
-
-  describe('updatePolicyTag', () => {
-    it('invokes updatePolicyTag without error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UpdatePolicyTagRequest()
-      );
-      request.policyTag ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UpdatePolicyTagRequest',
-        ['policyTag', 'name']
-      );
-      request.policyTag.name = defaultValue1;
-      const expectedHeaderRequestParams = `policy_tag.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.PolicyTag()
-      );
-      client.innerApiCalls.updatePolicyTag = stubSimpleCall(expectedResponse);
-      const [response] = await client.updatePolicyTag(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updatePolicyTag as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updatePolicyTag as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updatePolicyTag without error using callback', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UpdatePolicyTagRequest()
-      );
-      request.policyTag ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UpdatePolicyTagRequest',
-        ['policyTag', 'name']
-      );
-      request.policyTag.name = defaultValue1;
-      const expectedHeaderRequestParams = `policy_tag.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.PolicyTag()
-      );
-      client.innerApiCalls.updatePolicyTag =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updatePolicyTag(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.IPolicyTag | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updatePolicyTag as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updatePolicyTag as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updatePolicyTag with error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UpdatePolicyTagRequest()
-      );
-      request.policyTag ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UpdatePolicyTagRequest',
-        ['policyTag', 'name']
-      );
-      request.policyTag.name = defaultValue1;
-      const expectedHeaderRequestParams = `policy_tag.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updatePolicyTag = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updatePolicyTag(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updatePolicyTag as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updatePolicyTag as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updatePolicyTag with closed client', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UpdatePolicyTagRequest()
-      );
-      request.policyTag ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UpdatePolicyTagRequest',
-        ['policyTag', 'name']
-      );
-      request.policyTag.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updatePolicyTag(request), expectedError);
-    });
-  });
-
-  describe('getPolicyTag', () => {
-    it('invokes getPolicyTag without error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.GetPolicyTagRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.GetPolicyTagRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.PolicyTag()
-      );
-      client.innerApiCalls.getPolicyTag = stubSimpleCall(expectedResponse);
-      const [response] = await client.getPolicyTag(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getPolicyTag as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPolicyTag as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPolicyTag without error using callback', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.GetPolicyTagRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.GetPolicyTagRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.PolicyTag()
-      );
-      client.innerApiCalls.getPolicyTag =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getPolicyTag(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.IPolicyTag | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getPolicyTag as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPolicyTag as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPolicyTag with error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.GetPolicyTagRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.GetPolicyTagRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getPolicyTag = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getPolicyTag(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getPolicyTag as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPolicyTag as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPolicyTag with closed client', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.GetPolicyTagRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.GetPolicyTagRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getPolicyTag(request), expectedError);
-    });
-  });
-
-  describe('getIamPolicy', () => {
-    it('invokes getIamPolicy without error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.GetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
-      );
-      client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
-      const [response] = await client.getIamPolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getIamPolicy without error using callback', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.GetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
-      );
-      client.innerApiCalls.getIamPolicy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getIamPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.iam.v1.IPolicy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getIamPolicy with error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.GetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getIamPolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getIamPolicy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getIamPolicy with closed client', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.GetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getIamPolicy(request), expectedError);
-    });
-  });
-
-  describe('setIamPolicy', () => {
-    it('invokes setIamPolicy without error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.SetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
-      );
-      client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
-      const [response] = await client.setIamPolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setIamPolicy without error using callback', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.SetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
-      );
-      client.innerApiCalls.setIamPolicy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setIamPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.iam.v1.IPolicy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setIamPolicy with error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.SetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.setIamPolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.setIamPolicy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setIamPolicy with closed client', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.SetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.setIamPolicy(request), expectedError);
-    });
-  });
-
-  describe('testIamPermissions', () => {
-    it('invokes testIamPermissions without error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.TestIamPermissionsRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsResponse()
-      );
-      client.innerApiCalls.testIamPermissions =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.testIamPermissions(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes testIamPermissions without error using callback', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.TestIamPermissionsRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsResponse()
-      );
-      client.innerApiCalls.testIamPermissions =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.testIamPermissions(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.iam.v1.ITestIamPermissionsResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes testIamPermissions with error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.TestIamPermissionsRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.testIamPermissions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.testIamPermissions(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes testIamPermissions with closed client', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.TestIamPermissionsRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.testIamPermissions(request), expectedError);
-    });
-  });
-
-  describe('listTaxonomies', () => {
-    it('invokes listTaxonomies without error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListTaxonomiesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListTaxonomiesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.Taxonomy()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.Taxonomy()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.Taxonomy()
-        ),
-      ];
-      client.innerApiCalls.listTaxonomies = stubSimpleCall(expectedResponse);
-      const [response] = await client.listTaxonomies(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listTaxonomies as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listTaxonomies as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listTaxonomies without error using callback', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListTaxonomiesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListTaxonomiesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.Taxonomy()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.Taxonomy()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.Taxonomy()
-        ),
-      ];
-      client.innerApiCalls.listTaxonomies =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listTaxonomies(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.ITaxonomy[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listTaxonomies as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listTaxonomies as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listTaxonomies with error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListTaxonomiesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListTaxonomiesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listTaxonomies = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listTaxonomies(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listTaxonomies as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listTaxonomies as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listTaxonomiesStream without error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListTaxonomiesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListTaxonomiesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.Taxonomy()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.Taxonomy()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.Taxonomy()
-        ),
-      ];
-      client.descriptors.page.listTaxonomies.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listTaxonomiesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datacatalog.v1.Taxonomy[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.datacatalog.v1.Taxonomy) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listTaxonomies.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listTaxonomies, request)
-      );
-      assert(
-        (client.descriptors.page.listTaxonomies.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listTaxonomiesStream with error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListTaxonomiesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListTaxonomiesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listTaxonomies.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listTaxonomiesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datacatalog.v1.Taxonomy[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.datacatalog.v1.Taxonomy) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listTaxonomies.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listTaxonomies, request)
-      );
-      assert(
-        (client.descriptors.page.listTaxonomies.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listTaxonomies without error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListTaxonomiesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListTaxonomiesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.Taxonomy()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.Taxonomy()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.Taxonomy()
-        ),
-      ];
-      client.descriptors.page.listTaxonomies.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.datacatalog.v1.ITaxonomy[] = [];
-      const iterable = client.listTaxonomiesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listTaxonomies.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listTaxonomies.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listTaxonomies with error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListTaxonomiesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListTaxonomiesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listTaxonomies.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listTaxonomiesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.datacatalog.v1.ITaxonomy[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = policytagmanagerModule.v1.PolicyTagManagerClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'datacatalog.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listTaxonomies.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listTaxonomies.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listPolicyTags', () => {
-    it('invokes listPolicyTags without error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListPolicyTagsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListPolicyTagsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.PolicyTag()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.PolicyTag()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.PolicyTag()
-        ),
-      ];
-      client.innerApiCalls.listPolicyTags = stubSimpleCall(expectedResponse);
-      const [response] = await client.listPolicyTags(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listPolicyTags as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPolicyTags as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPolicyTags without error using callback', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListPolicyTagsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListPolicyTagsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.PolicyTag()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.PolicyTag()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.PolicyTag()
-        ),
-      ];
-      client.innerApiCalls.listPolicyTags =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listPolicyTags(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.IPolicyTag[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listPolicyTags as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPolicyTags as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPolicyTags with error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListPolicyTagsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListPolicyTagsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listPolicyTags = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listPolicyTags(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listPolicyTags as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPolicyTags as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPolicyTagsStream without error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListPolicyTagsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListPolicyTagsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.PolicyTag()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.PolicyTag()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.PolicyTag()
-        ),
-      ];
-      client.descriptors.page.listPolicyTags.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listPolicyTagsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datacatalog.v1.PolicyTag[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.datacatalog.v1.PolicyTag) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'datacatalog.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listPolicyTags.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listPolicyTags, request)
-      );
-      assert(
-        (client.descriptors.page.listPolicyTags.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listPolicyTagsStream with error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListPolicyTagsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListPolicyTagsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listPolicyTags.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listPolicyTagsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datacatalog.v1.PolicyTag[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.datacatalog.v1.PolicyTag) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'datacatalog.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listPolicyTags.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listPolicyTags, request)
-      );
-      assert(
-        (client.descriptors.page.listPolicyTags.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listPolicyTags without error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListPolicyTagsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListPolicyTagsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.PolicyTag()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.PolicyTag()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.PolicyTag()
-        ),
-      ];
-      client.descriptors.page.listPolicyTags.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.datacatalog.v1.IPolicyTag[] = [];
-      const iterable = client.listPolicyTagsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listPolicyTags.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listPolicyTags.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new policytagmanagerModule.v1.PolicyTagManagerClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'datacatalog.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with listPolicyTags with error', async () => {
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListPolicyTagsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListPolicyTagsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listPolicyTags.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listPolicyTagsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.datacatalog.v1.IPolicyTag[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new policytagmanagerModule.v1.PolicyTagManagerClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'datacatalog.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listPolicyTags.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listPolicyTags.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new policytagmanagerModule.v1.PolicyTagManagerClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-  describe('Path templates', () => {
-    describe('entry', async () => {
-      const fakePath = '/rendered/path/entry';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        entry_group: 'entryGroupValue',
-        entry: 'entryValue',
-      };
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.entryPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.entryPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('has port', () => {
+            const port = policytagmanagerModule.v1.PolicyTagManagerClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
 
-      it('entryPath', () => {
-        const result = client.entryPath(
-          'projectValue',
-          'locationValue',
-          'entryGroupValue',
-          'entryValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.entryPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('should create a client with no option', () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient();
+            assert(client);
+        });
 
-      it('matchProjectFromEntryName', () => {
-        const result = client.matchProjectFromEntryName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.entryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('should create a client with gRPC fallback', () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+                fallback: true,
+            });
+            assert(client);
+        });
 
-      it('matchLocationFromEntryName', () => {
-        const result = client.matchLocationFromEntryName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.entryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.policyTagManagerStub, undefined);
+            await client.initialize();
+            assert(client.policyTagManagerStub);
+        });
 
-      it('matchEntryGroupFromEntryName', () => {
-        const result = client.matchEntryGroupFromEntryName(fakePath);
-        assert.strictEqual(result, 'entryGroupValue');
-        assert(
-          (client.pathTemplates.entryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has close method for the initialized client', done => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.policyTagManagerStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
 
-      it('matchEntryFromEntryName', () => {
-        const result = client.matchEntryFromEntryName(fakePath);
-        assert.strictEqual(result, 'entryValue');
-        assert(
-          (client.pathTemplates.entryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has close method for the non-initialized client', done => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.policyTagManagerStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    describe('entryGroup', async () => {
-      const fakePath = '/rendered/path/entryGroup';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        entry_group: 'entryGroupValue',
-      };
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.entryGroupPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.entryGroupPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('createTaxonomy', () => {
+        it('invokes createTaxonomy without error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.CreateTaxonomyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.CreateTaxonomyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.Taxonomy()
+            );
+            client.innerApiCalls.createTaxonomy = stubSimpleCall(expectedResponse);
+            const [response] = await client.createTaxonomy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createTaxonomy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createTaxonomy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('entryGroupPath', () => {
-        const result = client.entryGroupPath(
-          'projectValue',
-          'locationValue',
-          'entryGroupValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.entryGroupPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes createTaxonomy without error using callback', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.CreateTaxonomyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.CreateTaxonomyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.Taxonomy()
+            );
+            client.innerApiCalls.createTaxonomy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createTaxonomy(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datacatalog.v1.ITaxonomy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createTaxonomy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createTaxonomy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromEntryGroupName', () => {
-        const result = client.matchProjectFromEntryGroupName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.entryGroupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes createTaxonomy with error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.CreateTaxonomyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.CreateTaxonomyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createTaxonomy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createTaxonomy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createTaxonomy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createTaxonomy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromEntryGroupName', () => {
-        const result = client.matchLocationFromEntryGroupName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.entryGroupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEntryGroupFromEntryGroupName', () => {
-        const result = client.matchEntryGroupFromEntryGroupName(fakePath);
-        assert.strictEqual(result, 'entryGroupValue');
-        assert(
-          (client.pathTemplates.entryGroupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes createTaxonomy with closed client', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.CreateTaxonomyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.CreateTaxonomyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createTaxonomy(request), expectedError);
+        });
     });
 
-    describe('location', async () => {
-      const fakePath = '/rendered/path/location';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('deleteTaxonomy', () => {
+        it('invokes deleteTaxonomy without error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.DeleteTaxonomyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.DeleteTaxonomyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteTaxonomy = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteTaxonomy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteTaxonomy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteTaxonomy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes deleteTaxonomy without error using callback', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.DeleteTaxonomyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.DeleteTaxonomyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteTaxonomy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteTaxonomy(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteTaxonomy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteTaxonomy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes deleteTaxonomy with error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.DeleteTaxonomyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.DeleteTaxonomyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteTaxonomy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteTaxonomy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteTaxonomy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteTaxonomy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes deleteTaxonomy with closed client', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.DeleteTaxonomyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.DeleteTaxonomyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteTaxonomy(request), expectedError);
+        });
     });
 
-    describe('policyTag', async () => {
-      const fakePath = '/rendered/path/policyTag';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        taxonomy: 'taxonomyValue',
-        policy_tag: 'policyTagValue',
-      };
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.policyTagPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.policyTagPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('updateTaxonomy', () => {
+        it('invokes updateTaxonomy without error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.UpdateTaxonomyRequest()
+            );
+            request.taxonomy ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.UpdateTaxonomyRequest', ['taxonomy', 'name']);
+            request.taxonomy.name = defaultValue1;
+            const expectedHeaderRequestParams = `taxonomy.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.Taxonomy()
+            );
+            client.innerApiCalls.updateTaxonomy = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateTaxonomy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateTaxonomy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateTaxonomy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('policyTagPath', () => {
-        const result = client.policyTagPath(
-          'projectValue',
-          'locationValue',
-          'taxonomyValue',
-          'policyTagValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.policyTagPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes updateTaxonomy without error using callback', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.UpdateTaxonomyRequest()
+            );
+            request.taxonomy ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.UpdateTaxonomyRequest', ['taxonomy', 'name']);
+            request.taxonomy.name = defaultValue1;
+            const expectedHeaderRequestParams = `taxonomy.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.Taxonomy()
+            );
+            client.innerApiCalls.updateTaxonomy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateTaxonomy(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datacatalog.v1.ITaxonomy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateTaxonomy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateTaxonomy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromPolicyTagName', () => {
-        const result = client.matchProjectFromPolicyTagName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.policyTagPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes updateTaxonomy with error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.UpdateTaxonomyRequest()
+            );
+            request.taxonomy ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.UpdateTaxonomyRequest', ['taxonomy', 'name']);
+            request.taxonomy.name = defaultValue1;
+            const expectedHeaderRequestParams = `taxonomy.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateTaxonomy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateTaxonomy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateTaxonomy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateTaxonomy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromPolicyTagName', () => {
-        const result = client.matchLocationFromPolicyTagName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.policyTagPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTaxonomyFromPolicyTagName', () => {
-        const result = client.matchTaxonomyFromPolicyTagName(fakePath);
-        assert.strictEqual(result, 'taxonomyValue');
-        assert(
-          (client.pathTemplates.policyTagPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchPolicyTagFromPolicyTagName', () => {
-        const result = client.matchPolicyTagFromPolicyTagName(fakePath);
-        assert.strictEqual(result, 'policyTagValue');
-        assert(
-          (client.pathTemplates.policyTagPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes updateTaxonomy with closed client', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.UpdateTaxonomyRequest()
+            );
+            request.taxonomy ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.UpdateTaxonomyRequest', ['taxonomy', 'name']);
+            request.taxonomy.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateTaxonomy(request), expectedError);
+        });
     });
 
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('getTaxonomy', () => {
+        it('invokes getTaxonomy without error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.GetTaxonomyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.GetTaxonomyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.Taxonomy()
+            );
+            client.innerApiCalls.getTaxonomy = stubSimpleCall(expectedResponse);
+            const [response] = await client.getTaxonomy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getTaxonomy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getTaxonomy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes getTaxonomy without error using callback', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.GetTaxonomyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.GetTaxonomyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.Taxonomy()
+            );
+            client.innerApiCalls.getTaxonomy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getTaxonomy(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datacatalog.v1.ITaxonomy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getTaxonomy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getTaxonomy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getTaxonomy with error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.GetTaxonomyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.GetTaxonomyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getTaxonomy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getTaxonomy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getTaxonomy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getTaxonomy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getTaxonomy with closed client', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.GetTaxonomyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.GetTaxonomyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getTaxonomy(request), expectedError);
+        });
     });
 
-    describe('tag', async () => {
-      const fakePath = '/rendered/path/tag';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        entry_group: 'entryGroupValue',
-        entry: 'entryValue',
-        tag: 'tagValue',
-      };
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.tagPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.tagPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('createPolicyTag', () => {
+        it('invokes createPolicyTag without error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.CreatePolicyTagRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.CreatePolicyTagRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.PolicyTag()
+            );
+            client.innerApiCalls.createPolicyTag = stubSimpleCall(expectedResponse);
+            const [response] = await client.createPolicyTag(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createPolicyTag as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPolicyTag as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('tagPath', () => {
-        const result = client.tagPath(
-          'projectValue',
-          'locationValue',
-          'entryGroupValue',
-          'entryValue',
-          'tagValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.tagPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes createPolicyTag without error using callback', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.CreatePolicyTagRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.CreatePolicyTagRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.PolicyTag()
+            );
+            client.innerApiCalls.createPolicyTag = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createPolicyTag(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datacatalog.v1.IPolicyTag|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createPolicyTag as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPolicyTag as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromTagName', () => {
-        const result = client.matchProjectFromTagName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.tagPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes createPolicyTag with error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.CreatePolicyTagRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.CreatePolicyTagRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createPolicyTag = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createPolicyTag(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createPolicyTag as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPolicyTag as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromTagName', () => {
-        const result = client.matchLocationFromTagName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.tagPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEntryGroupFromTagName', () => {
-        const result = client.matchEntryGroupFromTagName(fakePath);
-        assert.strictEqual(result, 'entryGroupValue');
-        assert(
-          (client.pathTemplates.tagPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEntryFromTagName', () => {
-        const result = client.matchEntryFromTagName(fakePath);
-        assert.strictEqual(result, 'entryValue');
-        assert(
-          (client.pathTemplates.tagPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTagFromTagName', () => {
-        const result = client.matchTagFromTagName(fakePath);
-        assert.strictEqual(result, 'tagValue');
-        assert(
-          (client.pathTemplates.tagPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes createPolicyTag with closed client', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.CreatePolicyTagRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.CreatePolicyTagRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createPolicyTag(request), expectedError);
+        });
     });
 
-    describe('tagTemplate', async () => {
-      const fakePath = '/rendered/path/tagTemplate';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        tag_template: 'tagTemplateValue',
-      };
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.tagTemplatePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.tagTemplatePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('deletePolicyTag', () => {
+        it('invokes deletePolicyTag without error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.DeletePolicyTagRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.DeletePolicyTagRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deletePolicyTag = stubSimpleCall(expectedResponse);
+            const [response] = await client.deletePolicyTag(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deletePolicyTag as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePolicyTag as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('tagTemplatePath', () => {
-        const result = client.tagTemplatePath(
-          'projectValue',
-          'locationValue',
-          'tagTemplateValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.tagTemplatePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes deletePolicyTag without error using callback', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.DeletePolicyTagRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.DeletePolicyTagRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deletePolicyTag = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deletePolicyTag(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deletePolicyTag as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePolicyTag as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromTagTemplateName', () => {
-        const result = client.matchProjectFromTagTemplateName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.tagTemplatePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes deletePolicyTag with error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.DeletePolicyTagRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.DeletePolicyTagRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deletePolicyTag = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deletePolicyTag(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deletePolicyTag as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePolicyTag as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromTagTemplateName', () => {
-        const result = client.matchLocationFromTagTemplateName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.tagTemplatePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTagTemplateFromTagTemplateName', () => {
-        const result = client.matchTagTemplateFromTagTemplateName(fakePath);
-        assert.strictEqual(result, 'tagTemplateValue');
-        assert(
-          (client.pathTemplates.tagTemplatePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes deletePolicyTag with closed client', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.DeletePolicyTagRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.DeletePolicyTagRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deletePolicyTag(request), expectedError);
+        });
     });
 
-    describe('tagTemplateField', async () => {
-      const fakePath = '/rendered/path/tagTemplateField';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        tag_template: 'tagTemplateValue',
-        field: 'fieldValue',
-      };
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.tagTemplateFieldPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.tagTemplateFieldPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('updatePolicyTag', () => {
+        it('invokes updatePolicyTag without error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.UpdatePolicyTagRequest()
+            );
+            request.policyTag ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.UpdatePolicyTagRequest', ['policyTag', 'name']);
+            request.policyTag.name = defaultValue1;
+            const expectedHeaderRequestParams = `policy_tag.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.PolicyTag()
+            );
+            client.innerApiCalls.updatePolicyTag = stubSimpleCall(expectedResponse);
+            const [response] = await client.updatePolicyTag(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updatePolicyTag as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePolicyTag as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('tagTemplateFieldPath', () => {
-        const result = client.tagTemplateFieldPath(
-          'projectValue',
-          'locationValue',
-          'tagTemplateValue',
-          'fieldValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.tagTemplateFieldPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes updatePolicyTag without error using callback', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.UpdatePolicyTagRequest()
+            );
+            request.policyTag ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.UpdatePolicyTagRequest', ['policyTag', 'name']);
+            request.policyTag.name = defaultValue1;
+            const expectedHeaderRequestParams = `policy_tag.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.PolicyTag()
+            );
+            client.innerApiCalls.updatePolicyTag = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updatePolicyTag(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datacatalog.v1.IPolicyTag|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updatePolicyTag as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePolicyTag as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromTagTemplateFieldName', () => {
-        const result = client.matchProjectFromTagTemplateFieldName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.tagTemplateFieldPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes updatePolicyTag with error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.UpdatePolicyTagRequest()
+            );
+            request.policyTag ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.UpdatePolicyTagRequest', ['policyTag', 'name']);
+            request.policyTag.name = defaultValue1;
+            const expectedHeaderRequestParams = `policy_tag.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updatePolicyTag = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updatePolicyTag(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updatePolicyTag as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePolicyTag as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromTagTemplateFieldName', () => {
-        const result = client.matchLocationFromTagTemplateFieldName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.tagTemplateFieldPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTagTemplateFromTagTemplateFieldName', () => {
-        const result =
-          client.matchTagTemplateFromTagTemplateFieldName(fakePath);
-        assert.strictEqual(result, 'tagTemplateValue');
-        assert(
-          (client.pathTemplates.tagTemplateFieldPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchFieldFromTagTemplateFieldName', () => {
-        const result = client.matchFieldFromTagTemplateFieldName(fakePath);
-        assert.strictEqual(result, 'fieldValue');
-        assert(
-          (client.pathTemplates.tagTemplateFieldPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes updatePolicyTag with closed client', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.UpdatePolicyTagRequest()
+            );
+            request.policyTag ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.UpdatePolicyTagRequest', ['policyTag', 'name']);
+            request.policyTag.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updatePolicyTag(request), expectedError);
+        });
     });
 
-    describe('taxonomy', async () => {
-      const fakePath = '/rendered/path/taxonomy';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        taxonomy: 'taxonomyValue',
-      };
-      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.taxonomyPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.taxonomyPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('getPolicyTag', () => {
+        it('invokes getPolicyTag without error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.GetPolicyTagRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.GetPolicyTagRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.PolicyTag()
+            );
+            client.innerApiCalls.getPolicyTag = stubSimpleCall(expectedResponse);
+            const [response] = await client.getPolicyTag(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPolicyTag as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPolicyTag as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('taxonomyPath', () => {
-        const result = client.taxonomyPath(
-          'projectValue',
-          'locationValue',
-          'taxonomyValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.taxonomyPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes getPolicyTag without error using callback', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.GetPolicyTagRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.GetPolicyTagRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.PolicyTag()
+            );
+            client.innerApiCalls.getPolicyTag = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getPolicyTag(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datacatalog.v1.IPolicyTag|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPolicyTag as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPolicyTag as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromTaxonomyName', () => {
-        const result = client.matchProjectFromTaxonomyName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.taxonomyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getPolicyTag with error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.GetPolicyTagRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.GetPolicyTagRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getPolicyTag = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getPolicyTag(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getPolicyTag as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPolicyTag as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromTaxonomyName', () => {
-        const result = client.matchLocationFromTaxonomyName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.taxonomyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTaxonomyFromTaxonomyName', () => {
-        const result = client.matchTaxonomyFromTaxonomyName(fakePath);
-        assert.strictEqual(result, 'taxonomyValue');
-        assert(
-          (client.pathTemplates.taxonomyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getPolicyTag with closed client', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.GetPolicyTagRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.GetPolicyTagRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getPolicyTag(request), expectedError);
+        });
     });
-  });
+
+    describe('getIamPolicy', () => {
+        it('invokes getIamPolicy without error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.GetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.Policy()
+            );
+            client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
+            const [response] = await client.getIamPolicy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIamPolicy without error using callback', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.GetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.Policy()
+            );
+            client.innerApiCalls.getIamPolicy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getIamPolicy(
+                    request,
+                    (err?: Error|null, result?: protos.google.iam.v1.IPolicy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIamPolicy with error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.GetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getIamPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIamPolicy with closed client', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.GetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getIamPolicy(request), expectedError);
+        });
+    });
+
+    describe('setIamPolicy', () => {
+        it('invokes setIamPolicy without error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.SetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.Policy()
+            );
+            client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
+            const [response] = await client.setIamPolicy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setIamPolicy without error using callback', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.SetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.Policy()
+            );
+            client.innerApiCalls.setIamPolicy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setIamPolicy(
+                    request,
+                    (err?: Error|null, result?: protos.google.iam.v1.IPolicy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setIamPolicy with error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.SetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.setIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setIamPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setIamPolicy with closed client', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.SetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.setIamPolicy(request), expectedError);
+        });
+    });
+
+    describe('testIamPermissions', () => {
+        it('invokes testIamPermissions without error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsResponse()
+            );
+            client.innerApiCalls.testIamPermissions = stubSimpleCall(expectedResponse);
+            const [response] = await client.testIamPermissions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes testIamPermissions without error using callback', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsResponse()
+            );
+            client.innerApiCalls.testIamPermissions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.testIamPermissions(
+                    request,
+                    (err?: Error|null, result?: protos.google.iam.v1.ITestIamPermissionsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes testIamPermissions with error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.testIamPermissions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.testIamPermissions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes testIamPermissions with closed client', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.testIamPermissions(request), expectedError);
+        });
+    });
+
+    describe('listTaxonomies', () => {
+        it('invokes listTaxonomies without error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.ListTaxonomiesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.ListTaxonomiesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datacatalog.v1.Taxonomy()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.v1.Taxonomy()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.v1.Taxonomy()),
+            ];
+            client.innerApiCalls.listTaxonomies = stubSimpleCall(expectedResponse);
+            const [response] = await client.listTaxonomies(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listTaxonomies as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listTaxonomies as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listTaxonomies without error using callback', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.ListTaxonomiesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.ListTaxonomiesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datacatalog.v1.Taxonomy()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.v1.Taxonomy()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.v1.Taxonomy()),
+            ];
+            client.innerApiCalls.listTaxonomies = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listTaxonomies(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datacatalog.v1.ITaxonomy[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listTaxonomies as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listTaxonomies as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listTaxonomies with error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.ListTaxonomiesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.ListTaxonomiesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listTaxonomies = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listTaxonomies(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listTaxonomies as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listTaxonomies as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listTaxonomiesStream without error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.ListTaxonomiesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.ListTaxonomiesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datacatalog.v1.Taxonomy()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.v1.Taxonomy()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.v1.Taxonomy()),
+            ];
+            client.descriptors.page.listTaxonomies.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listTaxonomiesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.datacatalog.v1.Taxonomy[] = [];
+                stream.on('data', (response: protos.google.cloud.datacatalog.v1.Taxonomy) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listTaxonomies.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listTaxonomies, request));
+            assert(
+                (client.descriptors.page.listTaxonomies.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listTaxonomiesStream with error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.ListTaxonomiesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.ListTaxonomiesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listTaxonomies.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listTaxonomiesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.datacatalog.v1.Taxonomy[] = [];
+                stream.on('data', (response: protos.google.cloud.datacatalog.v1.Taxonomy) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listTaxonomies.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listTaxonomies, request));
+            assert(
+                (client.descriptors.page.listTaxonomies.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listTaxonomies without error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.ListTaxonomiesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.ListTaxonomiesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datacatalog.v1.Taxonomy()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.v1.Taxonomy()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.v1.Taxonomy()),
+            ];
+            client.descriptors.page.listTaxonomies.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.datacatalog.v1.ITaxonomy[] = [];
+            const iterable = client.listTaxonomiesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listTaxonomies.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listTaxonomies.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listTaxonomies with error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.ListTaxonomiesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.ListTaxonomiesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listTaxonomies.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listTaxonomiesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.datacatalog.v1.ITaxonomy[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listTaxonomies.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listTaxonomies.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listPolicyTags', () => {
+        it('invokes listPolicyTags without error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.ListPolicyTagsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.ListPolicyTagsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datacatalog.v1.PolicyTag()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.v1.PolicyTag()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.v1.PolicyTag()),
+            ];
+            client.innerApiCalls.listPolicyTags = stubSimpleCall(expectedResponse);
+            const [response] = await client.listPolicyTags(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPolicyTags as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPolicyTags as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPolicyTags without error using callback', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.ListPolicyTagsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.ListPolicyTagsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datacatalog.v1.PolicyTag()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.v1.PolicyTag()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.v1.PolicyTag()),
+            ];
+            client.innerApiCalls.listPolicyTags = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listPolicyTags(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datacatalog.v1.IPolicyTag[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPolicyTags as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPolicyTags as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPolicyTags with error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.ListPolicyTagsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.ListPolicyTagsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listPolicyTags = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listPolicyTags(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listPolicyTags as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPolicyTags as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPolicyTagsStream without error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.ListPolicyTagsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.ListPolicyTagsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datacatalog.v1.PolicyTag()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.v1.PolicyTag()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.v1.PolicyTag()),
+            ];
+            client.descriptors.page.listPolicyTags.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listPolicyTagsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.datacatalog.v1.PolicyTag[] = [];
+                stream.on('data', (response: protos.google.cloud.datacatalog.v1.PolicyTag) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listPolicyTags.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPolicyTags, request));
+            assert(
+                (client.descriptors.page.listPolicyTags.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listPolicyTagsStream with error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.ListPolicyTagsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.ListPolicyTagsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPolicyTags.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listPolicyTagsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.datacatalog.v1.PolicyTag[] = [];
+                stream.on('data', (response: protos.google.cloud.datacatalog.v1.PolicyTag) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listPolicyTags.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPolicyTags, request));
+            assert(
+                (client.descriptors.page.listPolicyTags.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listPolicyTags without error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.ListPolicyTagsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.ListPolicyTagsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datacatalog.v1.PolicyTag()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.v1.PolicyTag()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.v1.PolicyTag()),
+            ];
+            client.descriptors.page.listPolicyTags.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.datacatalog.v1.IPolicyTag[] = [];
+            const iterable = client.listPolicyTagsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPolicyTags.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPolicyTags.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listPolicyTags with error', async () => {
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.v1.ListPolicyTagsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.v1.ListPolicyTagsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPolicyTags.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listPolicyTagsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.datacatalog.v1.IPolicyTag[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPolicyTags.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPolicyTags.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('Path templates', () => {
+
+        describe('entry', async () => {
+            const fakePath = "/rendered/path/entry";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                entry_group: "entryGroupValue",
+                entry: "entryValue",
+            };
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.entryPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.entryPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('entryPath', () => {
+                const result = client.entryPath("projectValue", "locationValue", "entryGroupValue", "entryValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.entryPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromEntryName', () => {
+                const result = client.matchProjectFromEntryName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.entryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromEntryName', () => {
+                const result = client.matchLocationFromEntryName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.entryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEntryGroupFromEntryName', () => {
+                const result = client.matchEntryGroupFromEntryName(fakePath);
+                assert.strictEqual(result, "entryGroupValue");
+                assert((client.pathTemplates.entryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEntryFromEntryName', () => {
+                const result = client.matchEntryFromEntryName(fakePath);
+                assert.strictEqual(result, "entryValue");
+                assert((client.pathTemplates.entryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('entryGroup', async () => {
+            const fakePath = "/rendered/path/entryGroup";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                entry_group: "entryGroupValue",
+            };
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.entryGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.entryGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('entryGroupPath', () => {
+                const result = client.entryGroupPath("projectValue", "locationValue", "entryGroupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.entryGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromEntryGroupName', () => {
+                const result = client.matchProjectFromEntryGroupName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.entryGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromEntryGroupName', () => {
+                const result = client.matchLocationFromEntryGroupName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.entryGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEntryGroupFromEntryGroupName', () => {
+                const result = client.matchEntryGroupFromEntryGroupName(fakePath);
+                assert.strictEqual(result, "entryGroupValue");
+                assert((client.pathTemplates.entryGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('policyTag', async () => {
+            const fakePath = "/rendered/path/policyTag";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                taxonomy: "taxonomyValue",
+                policy_tag: "policyTagValue",
+            };
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.policyTagPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.policyTagPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('policyTagPath', () => {
+                const result = client.policyTagPath("projectValue", "locationValue", "taxonomyValue", "policyTagValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.policyTagPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromPolicyTagName', () => {
+                const result = client.matchProjectFromPolicyTagName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.policyTagPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromPolicyTagName', () => {
+                const result = client.matchLocationFromPolicyTagName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.policyTagPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTaxonomyFromPolicyTagName', () => {
+                const result = client.matchTaxonomyFromPolicyTagName(fakePath);
+                assert.strictEqual(result, "taxonomyValue");
+                assert((client.pathTemplates.policyTagPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPolicyTagFromPolicyTagName', () => {
+                const result = client.matchPolicyTagFromPolicyTagName(fakePath);
+                assert.strictEqual(result, "policyTagValue");
+                assert((client.pathTemplates.policyTagPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('tag', async () => {
+            const fakePath = "/rendered/path/tag";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                entry_group: "entryGroupValue",
+                entry: "entryValue",
+                tag: "tagValue",
+            };
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.tagPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.tagPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('tagPath', () => {
+                const result = client.tagPath("projectValue", "locationValue", "entryGroupValue", "entryValue", "tagValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.tagPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromTagName', () => {
+                const result = client.matchProjectFromTagName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.tagPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromTagName', () => {
+                const result = client.matchLocationFromTagName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.tagPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEntryGroupFromTagName', () => {
+                const result = client.matchEntryGroupFromTagName(fakePath);
+                assert.strictEqual(result, "entryGroupValue");
+                assert((client.pathTemplates.tagPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEntryFromTagName', () => {
+                const result = client.matchEntryFromTagName(fakePath);
+                assert.strictEqual(result, "entryValue");
+                assert((client.pathTemplates.tagPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTagFromTagName', () => {
+                const result = client.matchTagFromTagName(fakePath);
+                assert.strictEqual(result, "tagValue");
+                assert((client.pathTemplates.tagPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('tagTemplate', async () => {
+            const fakePath = "/rendered/path/tagTemplate";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                tag_template: "tagTemplateValue",
+            };
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.tagTemplatePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.tagTemplatePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('tagTemplatePath', () => {
+                const result = client.tagTemplatePath("projectValue", "locationValue", "tagTemplateValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.tagTemplatePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromTagTemplateName', () => {
+                const result = client.matchProjectFromTagTemplateName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.tagTemplatePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromTagTemplateName', () => {
+                const result = client.matchLocationFromTagTemplateName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.tagTemplatePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTagTemplateFromTagTemplateName', () => {
+                const result = client.matchTagTemplateFromTagTemplateName(fakePath);
+                assert.strictEqual(result, "tagTemplateValue");
+                assert((client.pathTemplates.tagTemplatePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('tagTemplateField', async () => {
+            const fakePath = "/rendered/path/tagTemplateField";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                tag_template: "tagTemplateValue",
+                field: "fieldValue",
+            };
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.tagTemplateFieldPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.tagTemplateFieldPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('tagTemplateFieldPath', () => {
+                const result = client.tagTemplateFieldPath("projectValue", "locationValue", "tagTemplateValue", "fieldValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.tagTemplateFieldPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromTagTemplateFieldName', () => {
+                const result = client.matchProjectFromTagTemplateFieldName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.tagTemplateFieldPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromTagTemplateFieldName', () => {
+                const result = client.matchLocationFromTagTemplateFieldName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.tagTemplateFieldPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTagTemplateFromTagTemplateFieldName', () => {
+                const result = client.matchTagTemplateFromTagTemplateFieldName(fakePath);
+                assert.strictEqual(result, "tagTemplateValue");
+                assert((client.pathTemplates.tagTemplateFieldPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFieldFromTagTemplateFieldName', () => {
+                const result = client.matchFieldFromTagTemplateFieldName(fakePath);
+                assert.strictEqual(result, "fieldValue");
+                assert((client.pathTemplates.tagTemplateFieldPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('taxonomy', async () => {
+            const fakePath = "/rendered/path/taxonomy";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                taxonomy: "taxonomyValue",
+            };
+            const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.taxonomyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.taxonomyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('taxonomyPath', () => {
+                const result = client.taxonomyPath("projectValue", "locationValue", "taxonomyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.taxonomyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromTaxonomyName', () => {
+                const result = client.matchProjectFromTaxonomyName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.taxonomyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromTaxonomyName', () => {
+                const result = client.matchLocationFromTaxonomyName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.taxonomyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTaxonomyFromTaxonomyName', () => {
+                const result = client.matchTaxonomyFromTaxonomyName(fakePath);
+                assert.strictEqual(result, "taxonomyValue");
+                assert((client.pathTemplates.taxonomyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+    });
 });

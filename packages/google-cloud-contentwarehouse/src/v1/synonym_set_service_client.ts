@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -107,41 +100,20 @@ export class SynonymSetServiceClient {
    *     const client = new SynonymSetServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof SynonymSetServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'contentwarehouse.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -167,7 +139,7 @@ export class SynonymSetServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -181,7 +153,10 @@ export class SynonymSetServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -211,10 +186,9 @@ export class SynonymSetServiceClient {
       projectLocationDocumentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/documents/{document}'
       ),
-      projectLocationDocumentsReferenceIdPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/documents/referenceId/{reference_id}'
-        ),
+      projectLocationDocumentsReferenceIdPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/documents/referenceId/{reference_id}'
+      ),
       ruleSetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ruleSets/{rule_set}'
       ),
@@ -227,20 +201,14 @@ export class SynonymSetServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listSynonymSets: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'synonymSets'
-      ),
+      listSynonymSets:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'synonymSets')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.contentwarehouse.v1.SynonymSetService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.contentwarehouse.v1.SynonymSetService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -271,42 +239,32 @@ export class SynonymSetServiceClient {
     // Put together the "service stub" for
     // google.cloud.contentwarehouse.v1.SynonymSetService.
     this.synonymSetServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.contentwarehouse.v1.SynonymSetService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.contentwarehouse.v1
-            .SynonymSetService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.contentwarehouse.v1.SynonymSetService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.contentwarehouse.v1.SynonymSetService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const synonymSetServiceStubMethods = [
-      'createSynonymSet',
-      'getSynonymSet',
-      'updateSynonymSet',
-      'deleteSynonymSet',
-      'listSynonymSets',
-    ];
+    const synonymSetServiceStubMethods =
+        ['createSynonymSet', 'getSynonymSet', 'updateSynonymSet', 'deleteSynonymSet', 'listSynonymSets'];
     for (const methodName of synonymSetServiceStubMethods) {
       const callPromise = this.synonymSetServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -326,14 +284,8 @@ export class SynonymSetServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'contentwarehouse.googleapis.com';
   }
@@ -344,14 +296,8 @@ export class SynonymSetServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'contentwarehouse.googleapis.com';
   }
@@ -382,7 +328,9 @@ export class SynonymSetServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -391,9 +339,8 @@ export class SynonymSetServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -404,641 +351,490 @@ export class SynonymSetServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Creates a SynonymSet for a single context.
-   * Throws an ALREADY_EXISTS exception if a synonymset already exists
-   * for the context.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent name.
-   *   Format: projects/{project_number}/locations/{location}.
-   * @param {google.cloud.contentwarehouse.v1.SynonymSet} request.synonymSet
-   *   Required. The synonymSet to be created for a context
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.contentwarehouse.v1.SynonymSet|SynonymSet}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/synonym_set_service.create_synonym_set.js</caption>
-   * region_tag:contentwarehouse_v1_generated_SynonymSetService_CreateSynonymSet_async
-   */
+/**
+ * Creates a SynonymSet for a single context.
+ * Throws an ALREADY_EXISTS exception if a synonymset already exists
+ * for the context.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent name.
+ *   Format: projects/{project_number}/locations/{location}.
+ * @param {google.cloud.contentwarehouse.v1.SynonymSet} request.synonymSet
+ *   Required. The synonymSet to be created for a context
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.contentwarehouse.v1.SynonymSet|SynonymSet}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/synonym_set_service.create_synonym_set.js</caption>
+ * region_tag:contentwarehouse_v1_generated_SynonymSetService_CreateSynonymSet_async
+ */
   createSynonymSet(
-    request?: protos.google.cloud.contentwarehouse.v1.ICreateSynonymSetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.contentwarehouse.v1.ISynonymSet,
-      (
-        | protos.google.cloud.contentwarehouse.v1.ICreateSynonymSetRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.contentwarehouse.v1.ICreateSynonymSetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.contentwarehouse.v1.ISynonymSet,
+        protos.google.cloud.contentwarehouse.v1.ICreateSynonymSetRequest|undefined, {}|undefined
+      ]>;
   createSynonymSet(
-    request: protos.google.cloud.contentwarehouse.v1.ICreateSynonymSetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.contentwarehouse.v1.ISynonymSet,
-      | protos.google.cloud.contentwarehouse.v1.ICreateSynonymSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createSynonymSet(
-    request: protos.google.cloud.contentwarehouse.v1.ICreateSynonymSetRequest,
-    callback: Callback<
-      protos.google.cloud.contentwarehouse.v1.ISynonymSet,
-      | protos.google.cloud.contentwarehouse.v1.ICreateSynonymSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createSynonymSet(
-    request?: protos.google.cloud.contentwarehouse.v1.ICreateSynonymSetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.contentwarehouse.v1.ICreateSynonymSetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.contentwarehouse.v1.ISynonymSet,
-          | protos.google.cloud.contentwarehouse.v1.ICreateSynonymSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.contentwarehouse.v1.ISynonymSet,
-      | protos.google.cloud.contentwarehouse.v1.ICreateSynonymSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.contentwarehouse.v1.ISynonymSet,
-      (
-        | protos.google.cloud.contentwarehouse.v1.ICreateSynonymSetRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.contentwarehouse.v1.ICreateSynonymSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  createSynonymSet(
+      request: protos.google.cloud.contentwarehouse.v1.ICreateSynonymSetRequest,
+      callback: Callback<
+          protos.google.cloud.contentwarehouse.v1.ISynonymSet,
+          protos.google.cloud.contentwarehouse.v1.ICreateSynonymSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  createSynonymSet(
+      request?: protos.google.cloud.contentwarehouse.v1.ICreateSynonymSetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.contentwarehouse.v1.ISynonymSet,
+          protos.google.cloud.contentwarehouse.v1.ICreateSynonymSetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.contentwarehouse.v1.ISynonymSet,
+          protos.google.cloud.contentwarehouse.v1.ICreateSynonymSetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.contentwarehouse.v1.ISynonymSet,
+        protos.google.cloud.contentwarehouse.v1.ICreateSynonymSetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createSynonymSet request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.contentwarehouse.v1.ISynonymSet,
-          | protos.google.cloud.contentwarehouse.v1.ICreateSynonymSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.contentwarehouse.v1.ISynonymSet,
+        protos.google.cloud.contentwarehouse.v1.ICreateSynonymSetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createSynonymSet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createSynonymSet(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.contentwarehouse.v1.ISynonymSet,
-          (
-            | protos.google.cloud.contentwarehouse.v1.ICreateSynonymSetRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createSynonymSet response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createSynonymSet(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.contentwarehouse.v1.ISynonymSet,
+        protos.google.cloud.contentwarehouse.v1.ICreateSynonymSetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createSynonymSet response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a SynonymSet for a particular context.
-   * Throws a NOT_FOUND exception if the Synonymset
-   * does not exist
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the synonymSet to retrieve
-   *   Format:
-   *   projects/{project_number}/locations/{location}/synonymSets/{context}.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.contentwarehouse.v1.SynonymSet|SynonymSet}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/synonym_set_service.get_synonym_set.js</caption>
-   * region_tag:contentwarehouse_v1_generated_SynonymSetService_GetSynonymSet_async
-   */
+/**
+ * Gets a SynonymSet for a particular context.
+ * Throws a NOT_FOUND exception if the Synonymset
+ * does not exist
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the synonymSet to retrieve
+ *   Format:
+ *   projects/{project_number}/locations/{location}/synonymSets/{context}.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.contentwarehouse.v1.SynonymSet|SynonymSet}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/synonym_set_service.get_synonym_set.js</caption>
+ * region_tag:contentwarehouse_v1_generated_SynonymSetService_GetSynonymSet_async
+ */
   getSynonymSet(
-    request?: protos.google.cloud.contentwarehouse.v1.IGetSynonymSetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.contentwarehouse.v1.ISynonymSet,
-      protos.google.cloud.contentwarehouse.v1.IGetSynonymSetRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.contentwarehouse.v1.IGetSynonymSetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.contentwarehouse.v1.ISynonymSet,
+        protos.google.cloud.contentwarehouse.v1.IGetSynonymSetRequest|undefined, {}|undefined
+      ]>;
   getSynonymSet(
-    request: protos.google.cloud.contentwarehouse.v1.IGetSynonymSetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.contentwarehouse.v1.ISynonymSet,
-      | protos.google.cloud.contentwarehouse.v1.IGetSynonymSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSynonymSet(
-    request: protos.google.cloud.contentwarehouse.v1.IGetSynonymSetRequest,
-    callback: Callback<
-      protos.google.cloud.contentwarehouse.v1.ISynonymSet,
-      | protos.google.cloud.contentwarehouse.v1.IGetSynonymSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSynonymSet(
-    request?: protos.google.cloud.contentwarehouse.v1.IGetSynonymSetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.contentwarehouse.v1.IGetSynonymSetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.contentwarehouse.v1.ISynonymSet,
-          | protos.google.cloud.contentwarehouse.v1.IGetSynonymSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.contentwarehouse.v1.ISynonymSet,
-      | protos.google.cloud.contentwarehouse.v1.IGetSynonymSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.contentwarehouse.v1.ISynonymSet,
-      protos.google.cloud.contentwarehouse.v1.IGetSynonymSetRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.contentwarehouse.v1.IGetSynonymSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSynonymSet(
+      request: protos.google.cloud.contentwarehouse.v1.IGetSynonymSetRequest,
+      callback: Callback<
+          protos.google.cloud.contentwarehouse.v1.ISynonymSet,
+          protos.google.cloud.contentwarehouse.v1.IGetSynonymSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSynonymSet(
+      request?: protos.google.cloud.contentwarehouse.v1.IGetSynonymSetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.contentwarehouse.v1.ISynonymSet,
+          protos.google.cloud.contentwarehouse.v1.IGetSynonymSetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.contentwarehouse.v1.ISynonymSet,
+          protos.google.cloud.contentwarehouse.v1.IGetSynonymSetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.contentwarehouse.v1.ISynonymSet,
+        protos.google.cloud.contentwarehouse.v1.IGetSynonymSetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getSynonymSet request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.contentwarehouse.v1.ISynonymSet,
-          | protos.google.cloud.contentwarehouse.v1.IGetSynonymSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.contentwarehouse.v1.ISynonymSet,
+        protos.google.cloud.contentwarehouse.v1.IGetSynonymSetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSynonymSet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getSynonymSet(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.contentwarehouse.v1.ISynonymSet,
-          (
-            | protos.google.cloud.contentwarehouse.v1.IGetSynonymSetRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getSynonymSet response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getSynonymSet(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.contentwarehouse.v1.ISynonymSet,
+        protos.google.cloud.contentwarehouse.v1.IGetSynonymSetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getSynonymSet response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Remove the existing SynonymSet for the context and replaces it
-   * with a new one.
-   * Throws a NOT_FOUND exception if the SynonymSet is not found.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the synonymSet to update
-   *   Format:
-   *   projects/{project_number}/locations/{location}/synonymSets/{context}.
-   * @param {google.cloud.contentwarehouse.v1.SynonymSet} request.synonymSet
-   *   Required. The synonymSet to be updated for the customer
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.contentwarehouse.v1.SynonymSet|SynonymSet}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/synonym_set_service.update_synonym_set.js</caption>
-   * region_tag:contentwarehouse_v1_generated_SynonymSetService_UpdateSynonymSet_async
-   */
+/**
+ * Remove the existing SynonymSet for the context and replaces it
+ * with a new one.
+ * Throws a NOT_FOUND exception if the SynonymSet is not found.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the synonymSet to update
+ *   Format:
+ *   projects/{project_number}/locations/{location}/synonymSets/{context}.
+ * @param {google.cloud.contentwarehouse.v1.SynonymSet} request.synonymSet
+ *   Required. The synonymSet to be updated for the customer
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.contentwarehouse.v1.SynonymSet|SynonymSet}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/synonym_set_service.update_synonym_set.js</caption>
+ * region_tag:contentwarehouse_v1_generated_SynonymSetService_UpdateSynonymSet_async
+ */
   updateSynonymSet(
-    request?: protos.google.cloud.contentwarehouse.v1.IUpdateSynonymSetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.contentwarehouse.v1.ISynonymSet,
-      (
-        | protos.google.cloud.contentwarehouse.v1.IUpdateSynonymSetRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.contentwarehouse.v1.IUpdateSynonymSetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.contentwarehouse.v1.ISynonymSet,
+        protos.google.cloud.contentwarehouse.v1.IUpdateSynonymSetRequest|undefined, {}|undefined
+      ]>;
   updateSynonymSet(
-    request: protos.google.cloud.contentwarehouse.v1.IUpdateSynonymSetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.contentwarehouse.v1.ISynonymSet,
-      | protos.google.cloud.contentwarehouse.v1.IUpdateSynonymSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateSynonymSet(
-    request: protos.google.cloud.contentwarehouse.v1.IUpdateSynonymSetRequest,
-    callback: Callback<
-      protos.google.cloud.contentwarehouse.v1.ISynonymSet,
-      | protos.google.cloud.contentwarehouse.v1.IUpdateSynonymSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateSynonymSet(
-    request?: protos.google.cloud.contentwarehouse.v1.IUpdateSynonymSetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.contentwarehouse.v1.IUpdateSynonymSetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.contentwarehouse.v1.ISynonymSet,
-          | protos.google.cloud.contentwarehouse.v1.IUpdateSynonymSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.contentwarehouse.v1.ISynonymSet,
-      | protos.google.cloud.contentwarehouse.v1.IUpdateSynonymSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.contentwarehouse.v1.ISynonymSet,
-      (
-        | protos.google.cloud.contentwarehouse.v1.IUpdateSynonymSetRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.contentwarehouse.v1.IUpdateSynonymSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateSynonymSet(
+      request: protos.google.cloud.contentwarehouse.v1.IUpdateSynonymSetRequest,
+      callback: Callback<
+          protos.google.cloud.contentwarehouse.v1.ISynonymSet,
+          protos.google.cloud.contentwarehouse.v1.IUpdateSynonymSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateSynonymSet(
+      request?: protos.google.cloud.contentwarehouse.v1.IUpdateSynonymSetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.contentwarehouse.v1.ISynonymSet,
+          protos.google.cloud.contentwarehouse.v1.IUpdateSynonymSetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.contentwarehouse.v1.ISynonymSet,
+          protos.google.cloud.contentwarehouse.v1.IUpdateSynonymSetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.contentwarehouse.v1.ISynonymSet,
+        protos.google.cloud.contentwarehouse.v1.IUpdateSynonymSetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateSynonymSet request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.contentwarehouse.v1.ISynonymSet,
-          | protos.google.cloud.contentwarehouse.v1.IUpdateSynonymSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.contentwarehouse.v1.ISynonymSet,
+        protos.google.cloud.contentwarehouse.v1.IUpdateSynonymSetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateSynonymSet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateSynonymSet(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.contentwarehouse.v1.ISynonymSet,
-          (
-            | protos.google.cloud.contentwarehouse.v1.IUpdateSynonymSetRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateSynonymSet response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateSynonymSet(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.contentwarehouse.v1.ISynonymSet,
+        protos.google.cloud.contentwarehouse.v1.IUpdateSynonymSetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateSynonymSet response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a SynonymSet for a given context.
-   * Throws a NOT_FOUND exception if the SynonymSet is not found.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the synonymSet to delete
-   *   Format:
-   *   projects/{project_number}/locations/{location}/synonymSets/{context}.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/synonym_set_service.delete_synonym_set.js</caption>
-   * region_tag:contentwarehouse_v1_generated_SynonymSetService_DeleteSynonymSet_async
-   */
+/**
+ * Deletes a SynonymSet for a given context.
+ * Throws a NOT_FOUND exception if the SynonymSet is not found.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the synonymSet to delete
+ *   Format:
+ *   projects/{project_number}/locations/{location}/synonymSets/{context}.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/synonym_set_service.delete_synonym_set.js</caption>
+ * region_tag:contentwarehouse_v1_generated_SynonymSetService_DeleteSynonymSet_async
+ */
   deleteSynonymSet(
-    request?: protos.google.cloud.contentwarehouse.v1.IDeleteSynonymSetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.contentwarehouse.v1.IDeleteSynonymSetRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.contentwarehouse.v1.IDeleteSynonymSetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.contentwarehouse.v1.IDeleteSynonymSetRequest|undefined, {}|undefined
+      ]>;
   deleteSynonymSet(
-    request: protos.google.cloud.contentwarehouse.v1.IDeleteSynonymSetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.contentwarehouse.v1.IDeleteSynonymSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteSynonymSet(
-    request: protos.google.cloud.contentwarehouse.v1.IDeleteSynonymSetRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.contentwarehouse.v1.IDeleteSynonymSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteSynonymSet(
-    request?: protos.google.cloud.contentwarehouse.v1.IDeleteSynonymSetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.contentwarehouse.v1.IDeleteSynonymSetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.contentwarehouse.v1.IDeleteSynonymSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.contentwarehouse.v1.IDeleteSynonymSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.contentwarehouse.v1.IDeleteSynonymSetRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.contentwarehouse.v1.IDeleteSynonymSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteSynonymSet(
+      request: protos.google.cloud.contentwarehouse.v1.IDeleteSynonymSetRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.contentwarehouse.v1.IDeleteSynonymSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteSynonymSet(
+      request?: protos.google.cloud.contentwarehouse.v1.IDeleteSynonymSetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.contentwarehouse.v1.IDeleteSynonymSetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.contentwarehouse.v1.IDeleteSynonymSetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.contentwarehouse.v1.IDeleteSynonymSetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteSynonymSet request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.contentwarehouse.v1.IDeleteSynonymSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.contentwarehouse.v1.IDeleteSynonymSetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteSynonymSet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteSynonymSet(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.contentwarehouse.v1.IDeleteSynonymSetRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteSynonymSet response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteSynonymSet(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.contentwarehouse.v1.IDeleteSynonymSetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteSynonymSet response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Returns all SynonymSets (for all contexts) for the specified location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent name.
-   *   Format: projects/{project_number}/locations/{location}.
-   * @param {number} request.pageSize
-   *   The maximum number of synonymSets to return. The service may return
-   *   fewer than this value.
-   *   If unspecified, at most 50 rule sets will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListSynonymSets` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListSynonymSets`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.contentwarehouse.v1.SynonymSet|SynonymSet}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listSynonymSetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Returns all SynonymSets (for all contexts) for the specified location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent name.
+ *   Format: projects/{project_number}/locations/{location}.
+ * @param {number} request.pageSize
+ *   The maximum number of synonymSets to return. The service may return
+ *   fewer than this value.
+ *   If unspecified, at most 50 rule sets will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListSynonymSets` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListSynonymSets`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.contentwarehouse.v1.SynonymSet|SynonymSet}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listSynonymSetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listSynonymSets(
-    request?: protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.contentwarehouse.v1.ISynonymSet[],
-      protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest | null,
-      protos.google.cloud.contentwarehouse.v1.IListSynonymSetsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.contentwarehouse.v1.ISynonymSet[],
+        protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest|null,
+        protos.google.cloud.contentwarehouse.v1.IListSynonymSetsResponse
+      ]>;
   listSynonymSets(
-    request: protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest,
-      | protos.google.cloud.contentwarehouse.v1.IListSynonymSetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.contentwarehouse.v1.ISynonymSet
-    >
-  ): void;
-  listSynonymSets(
-    request: protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest,
-      | protos.google.cloud.contentwarehouse.v1.IListSynonymSetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.contentwarehouse.v1.ISynonymSet
-    >
-  ): void;
-  listSynonymSets(
-    request?: protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest,
-          | protos.google.cloud.contentwarehouse.v1.IListSynonymSetsResponse
-          | null
-          | undefined,
-          protos.google.cloud.contentwarehouse.v1.ISynonymSet
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest,
-      | protos.google.cloud.contentwarehouse.v1.IListSynonymSetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.contentwarehouse.v1.ISynonymSet
-    >
-  ): Promise<
-    [
-      protos.google.cloud.contentwarehouse.v1.ISynonymSet[],
-      protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest | null,
-      protos.google.cloud.contentwarehouse.v1.IListSynonymSetsResponse,
-    ]
-  > | void {
+          protos.google.cloud.contentwarehouse.v1.IListSynonymSetsResponse|null|undefined,
+          protos.google.cloud.contentwarehouse.v1.ISynonymSet>): void;
+  listSynonymSets(
+      request: protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest,
+          protos.google.cloud.contentwarehouse.v1.IListSynonymSetsResponse|null|undefined,
+          protos.google.cloud.contentwarehouse.v1.ISynonymSet>): void;
+  listSynonymSets(
+      request?: protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest,
+          protos.google.cloud.contentwarehouse.v1.IListSynonymSetsResponse|null|undefined,
+          protos.google.cloud.contentwarehouse.v1.ISynonymSet>,
+      callback?: PaginationCallback<
+          protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest,
+          protos.google.cloud.contentwarehouse.v1.IListSynonymSetsResponse|null|undefined,
+          protos.google.cloud.contentwarehouse.v1.ISynonymSet>):
+      Promise<[
+        protos.google.cloud.contentwarehouse.v1.ISynonymSet[],
+        protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest|null,
+        protos.google.cloud.contentwarehouse.v1.IListSynonymSetsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest,
-          | protos.google.cloud.contentwarehouse.v1.IListSynonymSetsResponse
-          | null
-          | undefined,
-          protos.google.cloud.contentwarehouse.v1.ISynonymSet
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest,
+      protos.google.cloud.contentwarehouse.v1.IListSynonymSetsResponse|null|undefined,
+      protos.google.cloud.contentwarehouse.v1.ISynonymSet>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listSynonymSets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1047,64 +843,61 @@ export class SynonymSetServiceClient {
     this._log.info('listSynonymSets request %j', request);
     return this.innerApiCalls
       .listSynonymSets(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.contentwarehouse.v1.ISynonymSet[],
-          protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest | null,
-          protos.google.cloud.contentwarehouse.v1.IListSynonymSetsResponse,
-        ]) => {
-          this._log.info('listSynonymSets values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.contentwarehouse.v1.ISynonymSet[],
+        protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest|null,
+        protos.google.cloud.contentwarehouse.v1.IListSynonymSetsResponse
+      ]) => {
+        this._log.info('listSynonymSets values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listSynonymSets`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent name.
-   *   Format: projects/{project_number}/locations/{location}.
-   * @param {number} request.pageSize
-   *   The maximum number of synonymSets to return. The service may return
-   *   fewer than this value.
-   *   If unspecified, at most 50 rule sets will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListSynonymSets` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListSynonymSets`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.contentwarehouse.v1.SynonymSet|SynonymSet} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listSynonymSetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listSynonymSets`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent name.
+ *   Format: projects/{project_number}/locations/{location}.
+ * @param {number} request.pageSize
+ *   The maximum number of synonymSets to return. The service may return
+ *   fewer than this value.
+ *   If unspecified, at most 50 rule sets will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListSynonymSets` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListSynonymSets`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.contentwarehouse.v1.SynonymSet|SynonymSet} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listSynonymSetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listSynonymSetsStream(
-    request?: protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listSynonymSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listSynonymSets stream %j', request);
     return this.descriptors.page.listSynonymSets.createStream(
       this.innerApiCalls.listSynonymSets as GaxCall,
@@ -1113,55 +906,54 @@ export class SynonymSetServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listSynonymSets`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent name.
-   *   Format: projects/{project_number}/locations/{location}.
-   * @param {number} request.pageSize
-   *   The maximum number of synonymSets to return. The service may return
-   *   fewer than this value.
-   *   If unspecified, at most 50 rule sets will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListSynonymSets` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListSynonymSets`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.contentwarehouse.v1.SynonymSet|SynonymSet}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/synonym_set_service.list_synonym_sets.js</caption>
-   * region_tag:contentwarehouse_v1_generated_SynonymSetService_ListSynonymSets_async
-   */
+/**
+ * Equivalent to `listSynonymSets`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent name.
+ *   Format: projects/{project_number}/locations/{location}.
+ * @param {number} request.pageSize
+ *   The maximum number of synonymSets to return. The service may return
+ *   fewer than this value.
+ *   If unspecified, at most 50 rule sets will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListSynonymSets` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListSynonymSets`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.contentwarehouse.v1.SynonymSet|SynonymSet}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/synonym_set_service.list_synonym_sets.js</caption>
+ * region_tag:contentwarehouse_v1_generated_SynonymSetService_ListSynonymSets_async
+ */
   listSynonymSetsAsync(
-    request?: protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.contentwarehouse.v1.ISynonymSet> {
+      request?: protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.contentwarehouse.v1.ISynonymSet>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listSynonymSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listSynonymSets iterate %j', request);
     return this.descriptors.page.listSynonymSets.asyncIterate(
       this.innerApiCalls['listSynonymSets'] as GaxCall,
@@ -1182,12 +974,7 @@ export class SynonymSetServiceClient {
    * @param {string} document_link
    * @returns {string} Resource name string.
    */
-  documentLinkPath(
-    project: string,
-    location: string,
-    document: string,
-    documentLink: string
-  ) {
+  documentLinkPath(project:string,location:string,document:string,documentLink:string) {
     return this.pathTemplates.documentLinkPathTemplate.render({
       project: project,
       location: location,
@@ -1204,8 +991,7 @@ export class SynonymSetServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDocumentLinkName(documentLinkName: string) {
-    return this.pathTemplates.documentLinkPathTemplate.match(documentLinkName)
-      .project;
+    return this.pathTemplates.documentLinkPathTemplate.match(documentLinkName).project;
   }
 
   /**
@@ -1216,8 +1002,7 @@ export class SynonymSetServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDocumentLinkName(documentLinkName: string) {
-    return this.pathTemplates.documentLinkPathTemplate.match(documentLinkName)
-      .location;
+    return this.pathTemplates.documentLinkPathTemplate.match(documentLinkName).location;
   }
 
   /**
@@ -1228,8 +1013,7 @@ export class SynonymSetServiceClient {
    * @returns {string} A string representing the document.
    */
   matchDocumentFromDocumentLinkName(documentLinkName: string) {
-    return this.pathTemplates.documentLinkPathTemplate.match(documentLinkName)
-      .document;
+    return this.pathTemplates.documentLinkPathTemplate.match(documentLinkName).document;
   }
 
   /**
@@ -1240,8 +1024,7 @@ export class SynonymSetServiceClient {
    * @returns {string} A string representing the document_link.
    */
   matchDocumentLinkFromDocumentLinkName(documentLinkName: string) {
-    return this.pathTemplates.documentLinkPathTemplate.match(documentLinkName)
-      .document_link;
+    return this.pathTemplates.documentLinkPathTemplate.match(documentLinkName).document_link;
   }
 
   /**
@@ -1252,11 +1035,7 @@ export class SynonymSetServiceClient {
    * @param {string} document_schema
    * @returns {string} Resource name string.
    */
-  documentSchemaPath(
-    project: string,
-    location: string,
-    documentSchema: string
-  ) {
+  documentSchemaPath(project:string,location:string,documentSchema:string) {
     return this.pathTemplates.documentSchemaPathTemplate.render({
       project: project,
       location: location,
@@ -1272,9 +1051,7 @@ export class SynonymSetServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDocumentSchemaName(documentSchemaName: string) {
-    return this.pathTemplates.documentSchemaPathTemplate.match(
-      documentSchemaName
-    ).project;
+    return this.pathTemplates.documentSchemaPathTemplate.match(documentSchemaName).project;
   }
 
   /**
@@ -1285,9 +1062,7 @@ export class SynonymSetServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDocumentSchemaName(documentSchemaName: string) {
-    return this.pathTemplates.documentSchemaPathTemplate.match(
-      documentSchemaName
-    ).location;
+    return this.pathTemplates.documentSchemaPathTemplate.match(documentSchemaName).location;
   }
 
   /**
@@ -1298,9 +1073,7 @@ export class SynonymSetServiceClient {
    * @returns {string} A string representing the document_schema.
    */
   matchDocumentSchemaFromDocumentSchemaName(documentSchemaName: string) {
-    return this.pathTemplates.documentSchemaPathTemplate.match(
-      documentSchemaName
-    ).document_schema;
+    return this.pathTemplates.documentSchemaPathTemplate.match(documentSchemaName).document_schema;
   }
 
   /**
@@ -1311,11 +1084,7 @@ export class SynonymSetServiceClient {
    * @param {string} document
    * @returns {string} Resource name string.
    */
-  projectLocationDocumentPath(
-    project: string,
-    location: string,
-    document: string
-  ) {
+  projectLocationDocumentPath(project:string,location:string,document:string) {
     return this.pathTemplates.projectLocationDocumentPathTemplate.render({
       project: project,
       location: location,
@@ -1330,12 +1099,8 @@ export class SynonymSetServiceClient {
    *   A fully-qualified path representing project_location_document resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDocumentName(
-    projectLocationDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationDocumentPathTemplate.match(
-      projectLocationDocumentName
-    ).project;
+  matchProjectFromProjectLocationDocumentName(projectLocationDocumentName: string) {
+    return this.pathTemplates.projectLocationDocumentPathTemplate.match(projectLocationDocumentName).project;
   }
 
   /**
@@ -1345,12 +1110,8 @@ export class SynonymSetServiceClient {
    *   A fully-qualified path representing project_location_document resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDocumentName(
-    projectLocationDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationDocumentPathTemplate.match(
-      projectLocationDocumentName
-    ).location;
+  matchLocationFromProjectLocationDocumentName(projectLocationDocumentName: string) {
+    return this.pathTemplates.projectLocationDocumentPathTemplate.match(projectLocationDocumentName).location;
   }
 
   /**
@@ -1360,12 +1121,8 @@ export class SynonymSetServiceClient {
    *   A fully-qualified path representing project_location_document resource.
    * @returns {string} A string representing the document.
    */
-  matchDocumentFromProjectLocationDocumentName(
-    projectLocationDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationDocumentPathTemplate.match(
-      projectLocationDocumentName
-    ).document;
+  matchDocumentFromProjectLocationDocumentName(projectLocationDocumentName: string) {
+    return this.pathTemplates.projectLocationDocumentPathTemplate.match(projectLocationDocumentName).document;
   }
 
   /**
@@ -1376,18 +1133,12 @@ export class SynonymSetServiceClient {
    * @param {string} reference_id
    * @returns {string} Resource name string.
    */
-  projectLocationDocumentsReferenceIdPath(
-    project: string,
-    location: string,
-    referenceId: string
-  ) {
-    return this.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        reference_id: referenceId,
-      }
-    );
+  projectLocationDocumentsReferenceIdPath(project:string,location:string,referenceId:string) {
+    return this.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.render({
+      project: project,
+      location: location,
+      reference_id: referenceId,
+    });
   }
 
   /**
@@ -1397,12 +1148,8 @@ export class SynonymSetServiceClient {
    *   A fully-qualified path representing project_location_documents_reference_id resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDocumentsReferenceIdName(
-    projectLocationDocumentsReferenceIdName: string
-  ) {
-    return this.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match(
-      projectLocationDocumentsReferenceIdName
-    ).project;
+  matchProjectFromProjectLocationDocumentsReferenceIdName(projectLocationDocumentsReferenceIdName: string) {
+    return this.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match(projectLocationDocumentsReferenceIdName).project;
   }
 
   /**
@@ -1412,12 +1159,8 @@ export class SynonymSetServiceClient {
    *   A fully-qualified path representing project_location_documents_reference_id resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDocumentsReferenceIdName(
-    projectLocationDocumentsReferenceIdName: string
-  ) {
-    return this.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match(
-      projectLocationDocumentsReferenceIdName
-    ).location;
+  matchLocationFromProjectLocationDocumentsReferenceIdName(projectLocationDocumentsReferenceIdName: string) {
+    return this.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match(projectLocationDocumentsReferenceIdName).location;
   }
 
   /**
@@ -1427,12 +1170,8 @@ export class SynonymSetServiceClient {
    *   A fully-qualified path representing project_location_documents_reference_id resource.
    * @returns {string} A string representing the reference_id.
    */
-  matchReferenceIdFromProjectLocationDocumentsReferenceIdName(
-    projectLocationDocumentsReferenceIdName: string
-  ) {
-    return this.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match(
-      projectLocationDocumentsReferenceIdName
-    ).reference_id;
+  matchReferenceIdFromProjectLocationDocumentsReferenceIdName(projectLocationDocumentsReferenceIdName: string) {
+    return this.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match(projectLocationDocumentsReferenceIdName).reference_id;
   }
 
   /**
@@ -1443,7 +1182,7 @@ export class SynonymSetServiceClient {
    * @param {string} rule_set
    * @returns {string} Resource name string.
    */
-  ruleSetPath(project: string, location: string, ruleSet: string) {
+  ruleSetPath(project:string,location:string,ruleSet:string) {
     return this.pathTemplates.ruleSetPathTemplate.render({
       project: project,
       location: location,
@@ -1492,7 +1231,7 @@ export class SynonymSetServiceClient {
    * @param {string} context
    * @returns {string} Resource name string.
    */
-  synonymSetPath(project: string, location: string, context: string) {
+  synonymSetPath(project:string,location:string,context:string) {
     return this.pathTemplates.synonymSetPathTemplate.render({
       project: project,
       location: location,
@@ -1508,8 +1247,7 @@ export class SynonymSetServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSynonymSetName(synonymSetName: string) {
-    return this.pathTemplates.synonymSetPathTemplate.match(synonymSetName)
-      .project;
+    return this.pathTemplates.synonymSetPathTemplate.match(synonymSetName).project;
   }
 
   /**
@@ -1520,8 +1258,7 @@ export class SynonymSetServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSynonymSetName(synonymSetName: string) {
-    return this.pathTemplates.synonymSetPathTemplate.match(synonymSetName)
-      .location;
+    return this.pathTemplates.synonymSetPathTemplate.match(synonymSetName).location;
   }
 
   /**
@@ -1532,8 +1269,7 @@ export class SynonymSetServiceClient {
    * @returns {string} A string representing the context.
    */
   matchContextFromSynonymSetName(synonymSetName: string) {
-    return this.pathTemplates.synonymSetPathTemplate.match(synonymSetName)
-      .context;
+    return this.pathTemplates.synonymSetPathTemplate.match(synonymSetName).context;
   }
 
   /**

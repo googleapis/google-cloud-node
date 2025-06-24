@@ -16,14 +16,14 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const datacatalog = require('@google-cloud/datacatalog');
 
 function main() {
   const dataCatalogClient = new datacatalog.DataCatalogClient();
   const policyTagManagerClient = new datacatalog.PolicyTagManagerClient();
-  const policyTagManagerSerializationClient =
-    new datacatalog.PolicyTagManagerSerializationClient();
+  const policyTagManagerSerializationClient = new datacatalog.PolicyTagManagerSerializationClient();
 }
 
 main();
