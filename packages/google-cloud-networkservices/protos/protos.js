@@ -1767,6 +1767,171 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.DepService|listAuthzExtensions}.
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @typedef ListAuthzExtensionsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkservices.v1.ListAuthzExtensionsResponse} [response] ListAuthzExtensionsResponse
+                         */
+    
+                        /**
+                         * Calls ListAuthzExtensions.
+                         * @function listAuthzExtensions
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IListAuthzExtensionsRequest} request ListAuthzExtensionsRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.DepService.ListAuthzExtensionsCallback} callback Node-style callback called with the error, if any, and ListAuthzExtensionsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DepService.prototype.listAuthzExtensions = function listAuthzExtensions(request, callback) {
+                            return this.rpcCall(listAuthzExtensions, $root.google.cloud.networkservices.v1.ListAuthzExtensionsRequest, $root.google.cloud.networkservices.v1.ListAuthzExtensionsResponse, request, callback);
+                        }, "name", { value: "ListAuthzExtensions" });
+    
+                        /**
+                         * Calls ListAuthzExtensions.
+                         * @function listAuthzExtensions
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IListAuthzExtensionsRequest} request ListAuthzExtensionsRequest message or plain object
+                         * @returns {Promise<google.cloud.networkservices.v1.ListAuthzExtensionsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.DepService|getAuthzExtension}.
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @typedef GetAuthzExtensionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkservices.v1.AuthzExtension} [response] AuthzExtension
+                         */
+    
+                        /**
+                         * Calls GetAuthzExtension.
+                         * @function getAuthzExtension
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IGetAuthzExtensionRequest} request GetAuthzExtensionRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.DepService.GetAuthzExtensionCallback} callback Node-style callback called with the error, if any, and AuthzExtension
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DepService.prototype.getAuthzExtension = function getAuthzExtension(request, callback) {
+                            return this.rpcCall(getAuthzExtension, $root.google.cloud.networkservices.v1.GetAuthzExtensionRequest, $root.google.cloud.networkservices.v1.AuthzExtension, request, callback);
+                        }, "name", { value: "GetAuthzExtension" });
+    
+                        /**
+                         * Calls GetAuthzExtension.
+                         * @function getAuthzExtension
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IGetAuthzExtensionRequest} request GetAuthzExtensionRequest message or plain object
+                         * @returns {Promise<google.cloud.networkservices.v1.AuthzExtension>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.DepService|createAuthzExtension}.
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @typedef CreateAuthzExtensionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateAuthzExtension.
+                         * @function createAuthzExtension
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.ICreateAuthzExtensionRequest} request CreateAuthzExtensionRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.DepService.CreateAuthzExtensionCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DepService.prototype.createAuthzExtension = function createAuthzExtension(request, callback) {
+                            return this.rpcCall(createAuthzExtension, $root.google.cloud.networkservices.v1.CreateAuthzExtensionRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateAuthzExtension" });
+    
+                        /**
+                         * Calls CreateAuthzExtension.
+                         * @function createAuthzExtension
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.ICreateAuthzExtensionRequest} request CreateAuthzExtensionRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.DepService|updateAuthzExtension}.
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @typedef UpdateAuthzExtensionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateAuthzExtension.
+                         * @function updateAuthzExtension
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IUpdateAuthzExtensionRequest} request UpdateAuthzExtensionRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.DepService.UpdateAuthzExtensionCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DepService.prototype.updateAuthzExtension = function updateAuthzExtension(request, callback) {
+                            return this.rpcCall(updateAuthzExtension, $root.google.cloud.networkservices.v1.UpdateAuthzExtensionRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateAuthzExtension" });
+    
+                        /**
+                         * Calls UpdateAuthzExtension.
+                         * @function updateAuthzExtension
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IUpdateAuthzExtensionRequest} request UpdateAuthzExtensionRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.DepService|deleteAuthzExtension}.
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @typedef DeleteAuthzExtensionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteAuthzExtension.
+                         * @function deleteAuthzExtension
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IDeleteAuthzExtensionRequest} request DeleteAuthzExtensionRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.DepService.DeleteAuthzExtensionCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DepService.prototype.deleteAuthzExtension = function deleteAuthzExtension(request, callback) {
+                            return this.rpcCall(deleteAuthzExtension, $root.google.cloud.networkservices.v1.DeleteAuthzExtensionRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteAuthzExtension" });
+    
+                        /**
+                         * Calls DeleteAuthzExtension.
+                         * @function deleteAuthzExtension
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IDeleteAuthzExtensionRequest} request DeleteAuthzExtensionRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
                         return DepService;
                     })();
     
@@ -1807,6 +1972,20 @@
                         values[valuesById[0] = "LOAD_BALANCING_SCHEME_UNSPECIFIED"] = 0;
                         values[valuesById[1] = "INTERNAL_MANAGED"] = 1;
                         values[valuesById[2] = "EXTERNAL_MANAGED"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * WireFormat enum.
+                     * @name google.cloud.networkservices.v1.WireFormat
+                     * @enum {number}
+                     * @property {number} WIRE_FORMAT_UNSPECIFIED=0 WIRE_FORMAT_UNSPECIFIED value
+                     * @property {number} EXT_PROC_GRPC=1 EXT_PROC_GRPC value
+                     */
+                    v1.WireFormat = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "WIRE_FORMAT_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "EXT_PROC_GRPC"] = 1;
                         return values;
                     })();
     
@@ -2304,6 +2483,7 @@
                              * @property {google.protobuf.IDuration|null} [timeout] Extension timeout
                              * @property {boolean|null} [failOpen] Extension failOpen
                              * @property {Array.<string>|null} [forwardHeaders] Extension forwardHeaders
+                             * @property {google.protobuf.IStruct|null} [metadata] Extension metadata
                              */
     
                             /**
@@ -2380,6 +2560,14 @@
                             Extension.prototype.forwardHeaders = $util.emptyArray;
     
                             /**
+                             * Extension metadata.
+                             * @member {google.protobuf.IStruct|null|undefined} metadata
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.Extension
+                             * @instance
+                             */
+                            Extension.prototype.metadata = null;
+    
+                            /**
                              * Creates a new Extension instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.networkservices.v1.ExtensionChain.Extension
@@ -2422,6 +2610,8 @@
                                 if (message.forwardHeaders != null && message.forwardHeaders.length)
                                     for (var i = 0; i < message.forwardHeaders.length; ++i)
                                         writer.uint32(/* id 7, wireType 2 =*/58).string(message.forwardHeaders[i]);
+                                if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
+                                    $root.google.protobuf.Struct.encode(message.metadata, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                                 return writer;
                             };
     
@@ -2493,6 +2683,10 @@
                                             if (!(message.forwardHeaders && message.forwardHeaders.length))
                                                 message.forwardHeaders = [];
                                             message.forwardHeaders.push(reader.string());
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.metadata = $root.google.protobuf.Struct.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -2571,6 +2765,11 @@
                                         if (!$util.isString(message.forwardHeaders[i]))
                                             return "forwardHeaders: string[] expected";
                                 }
+                                if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                                    var error = $root.google.protobuf.Struct.verify(message.metadata);
+                                    if (error)
+                                        return "metadata." + error;
+                                }
                                 return null;
                             };
     
@@ -2647,6 +2846,11 @@
                                     for (var i = 0; i < object.forwardHeaders.length; ++i)
                                         message.forwardHeaders[i] = String(object.forwardHeaders[i]);
                                 }
+                                if (object.metadata != null) {
+                                    if (typeof object.metadata !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.ExtensionChain.Extension.metadata: object expected");
+                                    message.metadata = $root.google.protobuf.Struct.fromObject(object.metadata);
+                                }
                                 return message;
                             };
     
@@ -2673,6 +2877,7 @@
                                     object.service = "";
                                     object.timeout = null;
                                     object.failOpen = false;
+                                    object.metadata = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -2694,6 +2899,8 @@
                                     for (var j = 0; j < message.forwardHeaders.length; ++j)
                                         object.forwardHeaders[j] = message.forwardHeaders[j];
                                 }
+                                if (message.metadata != null && message.hasOwnProperty("metadata"))
+                                    object.metadata = $root.google.protobuf.Struct.toObject(message.metadata, options);
                                 return object;
                             };
     
@@ -6865,6 +7072,2168 @@
                         return DeleteLbRouteExtensionRequest;
                     })();
     
+                    v1.AuthzExtension = (function() {
+    
+                        /**
+                         * Properties of an AuthzExtension.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IAuthzExtension
+                         * @property {string|null} [name] AuthzExtension name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] AuthzExtension createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] AuthzExtension updateTime
+                         * @property {string|null} [description] AuthzExtension description
+                         * @property {Object.<string,string>|null} [labels] AuthzExtension labels
+                         * @property {google.cloud.networkservices.v1.LoadBalancingScheme|null} [loadBalancingScheme] AuthzExtension loadBalancingScheme
+                         * @property {string|null} [authority] AuthzExtension authority
+                         * @property {string|null} [service] AuthzExtension service
+                         * @property {google.protobuf.IDuration|null} [timeout] AuthzExtension timeout
+                         * @property {boolean|null} [failOpen] AuthzExtension failOpen
+                         * @property {google.protobuf.IStruct|null} [metadata] AuthzExtension metadata
+                         * @property {Array.<string>|null} [forwardHeaders] AuthzExtension forwardHeaders
+                         * @property {google.cloud.networkservices.v1.WireFormat|null} [wireFormat] AuthzExtension wireFormat
+                         */
+    
+                        /**
+                         * Constructs a new AuthzExtension.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents an AuthzExtension.
+                         * @implements IAuthzExtension
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IAuthzExtension=} [properties] Properties to set
+                         */
+                        function AuthzExtension(properties) {
+                            this.labels = {};
+                            this.forwardHeaders = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AuthzExtension name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkservices.v1.AuthzExtension
+                         * @instance
+                         */
+                        AuthzExtension.prototype.name = "";
+    
+                        /**
+                         * AuthzExtension createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.networkservices.v1.AuthzExtension
+                         * @instance
+                         */
+                        AuthzExtension.prototype.createTime = null;
+    
+                        /**
+                         * AuthzExtension updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.networkservices.v1.AuthzExtension
+                         * @instance
+                         */
+                        AuthzExtension.prototype.updateTime = null;
+    
+                        /**
+                         * AuthzExtension description.
+                         * @member {string} description
+                         * @memberof google.cloud.networkservices.v1.AuthzExtension
+                         * @instance
+                         */
+                        AuthzExtension.prototype.description = "";
+    
+                        /**
+                         * AuthzExtension labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.networkservices.v1.AuthzExtension
+                         * @instance
+                         */
+                        AuthzExtension.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * AuthzExtension loadBalancingScheme.
+                         * @member {google.cloud.networkservices.v1.LoadBalancingScheme} loadBalancingScheme
+                         * @memberof google.cloud.networkservices.v1.AuthzExtension
+                         * @instance
+                         */
+                        AuthzExtension.prototype.loadBalancingScheme = 0;
+    
+                        /**
+                         * AuthzExtension authority.
+                         * @member {string} authority
+                         * @memberof google.cloud.networkservices.v1.AuthzExtension
+                         * @instance
+                         */
+                        AuthzExtension.prototype.authority = "";
+    
+                        /**
+                         * AuthzExtension service.
+                         * @member {string} service
+                         * @memberof google.cloud.networkservices.v1.AuthzExtension
+                         * @instance
+                         */
+                        AuthzExtension.prototype.service = "";
+    
+                        /**
+                         * AuthzExtension timeout.
+                         * @member {google.protobuf.IDuration|null|undefined} timeout
+                         * @memberof google.cloud.networkservices.v1.AuthzExtension
+                         * @instance
+                         */
+                        AuthzExtension.prototype.timeout = null;
+    
+                        /**
+                         * AuthzExtension failOpen.
+                         * @member {boolean} failOpen
+                         * @memberof google.cloud.networkservices.v1.AuthzExtension
+                         * @instance
+                         */
+                        AuthzExtension.prototype.failOpen = false;
+    
+                        /**
+                         * AuthzExtension metadata.
+                         * @member {google.protobuf.IStruct|null|undefined} metadata
+                         * @memberof google.cloud.networkservices.v1.AuthzExtension
+                         * @instance
+                         */
+                        AuthzExtension.prototype.metadata = null;
+    
+                        /**
+                         * AuthzExtension forwardHeaders.
+                         * @member {Array.<string>} forwardHeaders
+                         * @memberof google.cloud.networkservices.v1.AuthzExtension
+                         * @instance
+                         */
+                        AuthzExtension.prototype.forwardHeaders = $util.emptyArray;
+    
+                        /**
+                         * AuthzExtension wireFormat.
+                         * @member {google.cloud.networkservices.v1.WireFormat} wireFormat
+                         * @memberof google.cloud.networkservices.v1.AuthzExtension
+                         * @instance
+                         */
+                        AuthzExtension.prototype.wireFormat = 0;
+    
+                        /**
+                         * Creates a new AuthzExtension instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.AuthzExtension
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IAuthzExtension=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.AuthzExtension} AuthzExtension instance
+                         */
+                        AuthzExtension.create = function create(properties) {
+                            return new AuthzExtension(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AuthzExtension message. Does not implicitly {@link google.cloud.networkservices.v1.AuthzExtension.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.AuthzExtension
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IAuthzExtension} message AuthzExtension message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AuthzExtension.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.description);
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.loadBalancingScheme != null && Object.hasOwnProperty.call(message, "loadBalancingScheme"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.loadBalancingScheme);
+                            if (message.authority != null && Object.hasOwnProperty.call(message, "authority"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.authority);
+                            if (message.service != null && Object.hasOwnProperty.call(message, "service"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.service);
+                            if (message.timeout != null && Object.hasOwnProperty.call(message, "timeout"))
+                                $root.google.protobuf.Duration.encode(message.timeout, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.failOpen != null && Object.hasOwnProperty.call(message, "failOpen"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.failOpen);
+                            if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
+                                $root.google.protobuf.Struct.encode(message.metadata, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.forwardHeaders != null && message.forwardHeaders.length)
+                                for (var i = 0; i < message.forwardHeaders.length; ++i)
+                                    writer.uint32(/* id 12, wireType 2 =*/98).string(message.forwardHeaders[i]);
+                            if (message.wireFormat != null && Object.hasOwnProperty.call(message, "wireFormat"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.wireFormat);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AuthzExtension message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.AuthzExtension.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.AuthzExtension
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IAuthzExtension} message AuthzExtension message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AuthzExtension.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AuthzExtension message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.AuthzExtension
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.AuthzExtension} AuthzExtension
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AuthzExtension.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.AuthzExtension(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 6: {
+                                        message.loadBalancingScheme = reader.int32();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.authority = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.service = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.timeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.failOpen = reader.bool();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.metadata = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        if (!(message.forwardHeaders && message.forwardHeaders.length))
+                                            message.forwardHeaders = [];
+                                        message.forwardHeaders.push(reader.string());
+                                        break;
+                                    }
+                                case 14: {
+                                        message.wireFormat = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AuthzExtension message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.AuthzExtension
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.AuthzExtension} AuthzExtension
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AuthzExtension.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AuthzExtension message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.AuthzExtension
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AuthzExtension.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.loadBalancingScheme != null && message.hasOwnProperty("loadBalancingScheme"))
+                                switch (message.loadBalancingScheme) {
+                                default:
+                                    return "loadBalancingScheme: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.authority != null && message.hasOwnProperty("authority"))
+                                if (!$util.isString(message.authority))
+                                    return "authority: string expected";
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                if (!$util.isString(message.service))
+                                    return "service: string expected";
+                            if (message.timeout != null && message.hasOwnProperty("timeout")) {
+                                var error = $root.google.protobuf.Duration.verify(message.timeout);
+                                if (error)
+                                    return "timeout." + error;
+                            }
+                            if (message.failOpen != null && message.hasOwnProperty("failOpen"))
+                                if (typeof message.failOpen !== "boolean")
+                                    return "failOpen: boolean expected";
+                            if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                                var error = $root.google.protobuf.Struct.verify(message.metadata);
+                                if (error)
+                                    return "metadata." + error;
+                            }
+                            if (message.forwardHeaders != null && message.hasOwnProperty("forwardHeaders")) {
+                                if (!Array.isArray(message.forwardHeaders))
+                                    return "forwardHeaders: array expected";
+                                for (var i = 0; i < message.forwardHeaders.length; ++i)
+                                    if (!$util.isString(message.forwardHeaders[i]))
+                                        return "forwardHeaders: string[] expected";
+                            }
+                            if (message.wireFormat != null && message.hasOwnProperty("wireFormat"))
+                                switch (message.wireFormat) {
+                                default:
+                                    return "wireFormat: enum value expected";
+                                case 0:
+                                case 1:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AuthzExtension message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.AuthzExtension
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.AuthzExtension} AuthzExtension
+                         */
+                        AuthzExtension.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.AuthzExtension)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.AuthzExtension();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.AuthzExtension.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.AuthzExtension.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.AuthzExtension.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            switch (object.loadBalancingScheme) {
+                            default:
+                                if (typeof object.loadBalancingScheme === "number") {
+                                    message.loadBalancingScheme = object.loadBalancingScheme;
+                                    break;
+                                }
+                                break;
+                            case "LOAD_BALANCING_SCHEME_UNSPECIFIED":
+                            case 0:
+                                message.loadBalancingScheme = 0;
+                                break;
+                            case "INTERNAL_MANAGED":
+                            case 1:
+                                message.loadBalancingScheme = 1;
+                                break;
+                            case "EXTERNAL_MANAGED":
+                            case 2:
+                                message.loadBalancingScheme = 2;
+                                break;
+                            }
+                            if (object.authority != null)
+                                message.authority = String(object.authority);
+                            if (object.service != null)
+                                message.service = String(object.service);
+                            if (object.timeout != null) {
+                                if (typeof object.timeout !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.AuthzExtension.timeout: object expected");
+                                message.timeout = $root.google.protobuf.Duration.fromObject(object.timeout);
+                            }
+                            if (object.failOpen != null)
+                                message.failOpen = Boolean(object.failOpen);
+                            if (object.metadata != null) {
+                                if (typeof object.metadata !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.AuthzExtension.metadata: object expected");
+                                message.metadata = $root.google.protobuf.Struct.fromObject(object.metadata);
+                            }
+                            if (object.forwardHeaders) {
+                                if (!Array.isArray(object.forwardHeaders))
+                                    throw TypeError(".google.cloud.networkservices.v1.AuthzExtension.forwardHeaders: array expected");
+                                message.forwardHeaders = [];
+                                for (var i = 0; i < object.forwardHeaders.length; ++i)
+                                    message.forwardHeaders[i] = String(object.forwardHeaders[i]);
+                            }
+                            switch (object.wireFormat) {
+                            default:
+                                if (typeof object.wireFormat === "number") {
+                                    message.wireFormat = object.wireFormat;
+                                    break;
+                                }
+                                break;
+                            case "WIRE_FORMAT_UNSPECIFIED":
+                            case 0:
+                                message.wireFormat = 0;
+                                break;
+                            case "EXT_PROC_GRPC":
+                            case 1:
+                                message.wireFormat = 1;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AuthzExtension message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.AuthzExtension
+                         * @static
+                         * @param {google.cloud.networkservices.v1.AuthzExtension} message AuthzExtension
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AuthzExtension.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.forwardHeaders = [];
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.description = "";
+                                object.loadBalancingScheme = options.enums === String ? "LOAD_BALANCING_SCHEME_UNSPECIFIED" : 0;
+                                object.authority = "";
+                                object.service = "";
+                                object.timeout = null;
+                                object.failOpen = false;
+                                object.metadata = null;
+                                object.wireFormat = options.enums === String ? "WIRE_FORMAT_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.loadBalancingScheme != null && message.hasOwnProperty("loadBalancingScheme"))
+                                object.loadBalancingScheme = options.enums === String ? $root.google.cloud.networkservices.v1.LoadBalancingScheme[message.loadBalancingScheme] === undefined ? message.loadBalancingScheme : $root.google.cloud.networkservices.v1.LoadBalancingScheme[message.loadBalancingScheme] : message.loadBalancingScheme;
+                            if (message.authority != null && message.hasOwnProperty("authority"))
+                                object.authority = message.authority;
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                object.service = message.service;
+                            if (message.timeout != null && message.hasOwnProperty("timeout"))
+                                object.timeout = $root.google.protobuf.Duration.toObject(message.timeout, options);
+                            if (message.failOpen != null && message.hasOwnProperty("failOpen"))
+                                object.failOpen = message.failOpen;
+                            if (message.metadata != null && message.hasOwnProperty("metadata"))
+                                object.metadata = $root.google.protobuf.Struct.toObject(message.metadata, options);
+                            if (message.forwardHeaders && message.forwardHeaders.length) {
+                                object.forwardHeaders = [];
+                                for (var j = 0; j < message.forwardHeaders.length; ++j)
+                                    object.forwardHeaders[j] = message.forwardHeaders[j];
+                            }
+                            if (message.wireFormat != null && message.hasOwnProperty("wireFormat"))
+                                object.wireFormat = options.enums === String ? $root.google.cloud.networkservices.v1.WireFormat[message.wireFormat] === undefined ? message.wireFormat : $root.google.cloud.networkservices.v1.WireFormat[message.wireFormat] : message.wireFormat;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AuthzExtension to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.AuthzExtension
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AuthzExtension.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AuthzExtension
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.AuthzExtension
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AuthzExtension.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.AuthzExtension";
+                        };
+    
+                        return AuthzExtension;
+                    })();
+    
+                    v1.ListAuthzExtensionsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListAuthzExtensionsRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IListAuthzExtensionsRequest
+                         * @property {string|null} [parent] ListAuthzExtensionsRequest parent
+                         * @property {number|null} [pageSize] ListAuthzExtensionsRequest pageSize
+                         * @property {string|null} [pageToken] ListAuthzExtensionsRequest pageToken
+                         * @property {string|null} [filter] ListAuthzExtensionsRequest filter
+                         * @property {string|null} [orderBy] ListAuthzExtensionsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListAuthzExtensionsRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a ListAuthzExtensionsRequest.
+                         * @implements IListAuthzExtensionsRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IListAuthzExtensionsRequest=} [properties] Properties to set
+                         */
+                        function ListAuthzExtensionsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAuthzExtensionsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkservices.v1.ListAuthzExtensionsRequest
+                         * @instance
+                         */
+                        ListAuthzExtensionsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListAuthzExtensionsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networkservices.v1.ListAuthzExtensionsRequest
+                         * @instance
+                         */
+                        ListAuthzExtensionsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListAuthzExtensionsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networkservices.v1.ListAuthzExtensionsRequest
+                         * @instance
+                         */
+                        ListAuthzExtensionsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListAuthzExtensionsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.networkservices.v1.ListAuthzExtensionsRequest
+                         * @instance
+                         */
+                        ListAuthzExtensionsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListAuthzExtensionsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.networkservices.v1.ListAuthzExtensionsRequest
+                         * @instance
+                         */
+                        ListAuthzExtensionsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListAuthzExtensionsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.ListAuthzExtensionsRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListAuthzExtensionsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.ListAuthzExtensionsRequest} ListAuthzExtensionsRequest instance
+                         */
+                        ListAuthzExtensionsRequest.create = function create(properties) {
+                            return new ListAuthzExtensionsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAuthzExtensionsRequest message. Does not implicitly {@link google.cloud.networkservices.v1.ListAuthzExtensionsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.ListAuthzExtensionsRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListAuthzExtensionsRequest} message ListAuthzExtensionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAuthzExtensionsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAuthzExtensionsRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListAuthzExtensionsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListAuthzExtensionsRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListAuthzExtensionsRequest} message ListAuthzExtensionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAuthzExtensionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAuthzExtensionsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.ListAuthzExtensionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.ListAuthzExtensionsRequest} ListAuthzExtensionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAuthzExtensionsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListAuthzExtensionsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAuthzExtensionsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListAuthzExtensionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.ListAuthzExtensionsRequest} ListAuthzExtensionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAuthzExtensionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAuthzExtensionsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.ListAuthzExtensionsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAuthzExtensionsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAuthzExtensionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.ListAuthzExtensionsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.ListAuthzExtensionsRequest} ListAuthzExtensionsRequest
+                         */
+                        ListAuthzExtensionsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.ListAuthzExtensionsRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.ListAuthzExtensionsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAuthzExtensionsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.ListAuthzExtensionsRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ListAuthzExtensionsRequest} message ListAuthzExtensionsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAuthzExtensionsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAuthzExtensionsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.ListAuthzExtensionsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAuthzExtensionsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAuthzExtensionsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.ListAuthzExtensionsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAuthzExtensionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.ListAuthzExtensionsRequest";
+                        };
+    
+                        return ListAuthzExtensionsRequest;
+                    })();
+    
+                    v1.ListAuthzExtensionsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListAuthzExtensionsResponse.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IListAuthzExtensionsResponse
+                         * @property {Array.<google.cloud.networkservices.v1.IAuthzExtension>|null} [authzExtensions] ListAuthzExtensionsResponse authzExtensions
+                         * @property {string|null} [nextPageToken] ListAuthzExtensionsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListAuthzExtensionsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListAuthzExtensionsResponse.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a ListAuthzExtensionsResponse.
+                         * @implements IListAuthzExtensionsResponse
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IListAuthzExtensionsResponse=} [properties] Properties to set
+                         */
+                        function ListAuthzExtensionsResponse(properties) {
+                            this.authzExtensions = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAuthzExtensionsResponse authzExtensions.
+                         * @member {Array.<google.cloud.networkservices.v1.IAuthzExtension>} authzExtensions
+                         * @memberof google.cloud.networkservices.v1.ListAuthzExtensionsResponse
+                         * @instance
+                         */
+                        ListAuthzExtensionsResponse.prototype.authzExtensions = $util.emptyArray;
+    
+                        /**
+                         * ListAuthzExtensionsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networkservices.v1.ListAuthzExtensionsResponse
+                         * @instance
+                         */
+                        ListAuthzExtensionsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListAuthzExtensionsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkservices.v1.ListAuthzExtensionsResponse
+                         * @instance
+                         */
+                        ListAuthzExtensionsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListAuthzExtensionsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.ListAuthzExtensionsResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListAuthzExtensionsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.ListAuthzExtensionsResponse} ListAuthzExtensionsResponse instance
+                         */
+                        ListAuthzExtensionsResponse.create = function create(properties) {
+                            return new ListAuthzExtensionsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAuthzExtensionsResponse message. Does not implicitly {@link google.cloud.networkservices.v1.ListAuthzExtensionsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.ListAuthzExtensionsResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListAuthzExtensionsResponse} message ListAuthzExtensionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAuthzExtensionsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.authzExtensions != null && message.authzExtensions.length)
+                                for (var i = 0; i < message.authzExtensions.length; ++i)
+                                    $root.google.cloud.networkservices.v1.AuthzExtension.encode(message.authzExtensions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAuthzExtensionsResponse message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListAuthzExtensionsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListAuthzExtensionsResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListAuthzExtensionsResponse} message ListAuthzExtensionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAuthzExtensionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAuthzExtensionsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.ListAuthzExtensionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.ListAuthzExtensionsResponse} ListAuthzExtensionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAuthzExtensionsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListAuthzExtensionsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.authzExtensions && message.authzExtensions.length))
+                                            message.authzExtensions = [];
+                                        message.authzExtensions.push($root.google.cloud.networkservices.v1.AuthzExtension.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAuthzExtensionsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListAuthzExtensionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.ListAuthzExtensionsResponse} ListAuthzExtensionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAuthzExtensionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAuthzExtensionsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.ListAuthzExtensionsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAuthzExtensionsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.authzExtensions != null && message.hasOwnProperty("authzExtensions")) {
+                                if (!Array.isArray(message.authzExtensions))
+                                    return "authzExtensions: array expected";
+                                for (var i = 0; i < message.authzExtensions.length; ++i) {
+                                    var error = $root.google.cloud.networkservices.v1.AuthzExtension.verify(message.authzExtensions[i]);
+                                    if (error)
+                                        return "authzExtensions." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAuthzExtensionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.ListAuthzExtensionsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.ListAuthzExtensionsResponse} ListAuthzExtensionsResponse
+                         */
+                        ListAuthzExtensionsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.ListAuthzExtensionsResponse)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.ListAuthzExtensionsResponse();
+                            if (object.authzExtensions) {
+                                if (!Array.isArray(object.authzExtensions))
+                                    throw TypeError(".google.cloud.networkservices.v1.ListAuthzExtensionsResponse.authzExtensions: array expected");
+                                message.authzExtensions = [];
+                                for (var i = 0; i < object.authzExtensions.length; ++i) {
+                                    if (typeof object.authzExtensions[i] !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.ListAuthzExtensionsResponse.authzExtensions: object expected");
+                                    message.authzExtensions[i] = $root.google.cloud.networkservices.v1.AuthzExtension.fromObject(object.authzExtensions[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkservices.v1.ListAuthzExtensionsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAuthzExtensionsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.ListAuthzExtensionsResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ListAuthzExtensionsResponse} message ListAuthzExtensionsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAuthzExtensionsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.authzExtensions = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.authzExtensions && message.authzExtensions.length) {
+                                object.authzExtensions = [];
+                                for (var j = 0; j < message.authzExtensions.length; ++j)
+                                    object.authzExtensions[j] = $root.google.cloud.networkservices.v1.AuthzExtension.toObject(message.authzExtensions[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAuthzExtensionsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.ListAuthzExtensionsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAuthzExtensionsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAuthzExtensionsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.ListAuthzExtensionsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAuthzExtensionsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.ListAuthzExtensionsResponse";
+                        };
+    
+                        return ListAuthzExtensionsResponse;
+                    })();
+    
+                    v1.GetAuthzExtensionRequest = (function() {
+    
+                        /**
+                         * Properties of a GetAuthzExtensionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IGetAuthzExtensionRequest
+                         * @property {string|null} [name] GetAuthzExtensionRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetAuthzExtensionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a GetAuthzExtensionRequest.
+                         * @implements IGetAuthzExtensionRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IGetAuthzExtensionRequest=} [properties] Properties to set
+                         */
+                        function GetAuthzExtensionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetAuthzExtensionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkservices.v1.GetAuthzExtensionRequest
+                         * @instance
+                         */
+                        GetAuthzExtensionRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetAuthzExtensionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.GetAuthzExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGetAuthzExtensionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.GetAuthzExtensionRequest} GetAuthzExtensionRequest instance
+                         */
+                        GetAuthzExtensionRequest.create = function create(properties) {
+                            return new GetAuthzExtensionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetAuthzExtensionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.GetAuthzExtensionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.GetAuthzExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGetAuthzExtensionRequest} message GetAuthzExtensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetAuthzExtensionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetAuthzExtensionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.GetAuthzExtensionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.GetAuthzExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGetAuthzExtensionRequest} message GetAuthzExtensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetAuthzExtensionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetAuthzExtensionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.GetAuthzExtensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.GetAuthzExtensionRequest} GetAuthzExtensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetAuthzExtensionRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GetAuthzExtensionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetAuthzExtensionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.GetAuthzExtensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.GetAuthzExtensionRequest} GetAuthzExtensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetAuthzExtensionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetAuthzExtensionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.GetAuthzExtensionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetAuthzExtensionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetAuthzExtensionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.GetAuthzExtensionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.GetAuthzExtensionRequest} GetAuthzExtensionRequest
+                         */
+                        GetAuthzExtensionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.GetAuthzExtensionRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.GetAuthzExtensionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetAuthzExtensionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.GetAuthzExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.GetAuthzExtensionRequest} message GetAuthzExtensionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetAuthzExtensionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetAuthzExtensionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.GetAuthzExtensionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetAuthzExtensionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetAuthzExtensionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.GetAuthzExtensionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetAuthzExtensionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.GetAuthzExtensionRequest";
+                        };
+    
+                        return GetAuthzExtensionRequest;
+                    })();
+    
+                    v1.CreateAuthzExtensionRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateAuthzExtensionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface ICreateAuthzExtensionRequest
+                         * @property {string|null} [parent] CreateAuthzExtensionRequest parent
+                         * @property {string|null} [authzExtensionId] CreateAuthzExtensionRequest authzExtensionId
+                         * @property {google.cloud.networkservices.v1.IAuthzExtension|null} [authzExtension] CreateAuthzExtensionRequest authzExtension
+                         * @property {string|null} [requestId] CreateAuthzExtensionRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new CreateAuthzExtensionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a CreateAuthzExtensionRequest.
+                         * @implements ICreateAuthzExtensionRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.ICreateAuthzExtensionRequest=} [properties] Properties to set
+                         */
+                        function CreateAuthzExtensionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateAuthzExtensionRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkservices.v1.CreateAuthzExtensionRequest
+                         * @instance
+                         */
+                        CreateAuthzExtensionRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateAuthzExtensionRequest authzExtensionId.
+                         * @member {string} authzExtensionId
+                         * @memberof google.cloud.networkservices.v1.CreateAuthzExtensionRequest
+                         * @instance
+                         */
+                        CreateAuthzExtensionRequest.prototype.authzExtensionId = "";
+    
+                        /**
+                         * CreateAuthzExtensionRequest authzExtension.
+                         * @member {google.cloud.networkservices.v1.IAuthzExtension|null|undefined} authzExtension
+                         * @memberof google.cloud.networkservices.v1.CreateAuthzExtensionRequest
+                         * @instance
+                         */
+                        CreateAuthzExtensionRequest.prototype.authzExtension = null;
+    
+                        /**
+                         * CreateAuthzExtensionRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networkservices.v1.CreateAuthzExtensionRequest
+                         * @instance
+                         */
+                        CreateAuthzExtensionRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new CreateAuthzExtensionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.CreateAuthzExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ICreateAuthzExtensionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.CreateAuthzExtensionRequest} CreateAuthzExtensionRequest instance
+                         */
+                        CreateAuthzExtensionRequest.create = function create(properties) {
+                            return new CreateAuthzExtensionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateAuthzExtensionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.CreateAuthzExtensionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.CreateAuthzExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ICreateAuthzExtensionRequest} message CreateAuthzExtensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateAuthzExtensionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.authzExtensionId != null && Object.hasOwnProperty.call(message, "authzExtensionId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.authzExtensionId);
+                            if (message.authzExtension != null && Object.hasOwnProperty.call(message, "authzExtension"))
+                                $root.google.cloud.networkservices.v1.AuthzExtension.encode(message.authzExtension, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateAuthzExtensionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.CreateAuthzExtensionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.CreateAuthzExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ICreateAuthzExtensionRequest} message CreateAuthzExtensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateAuthzExtensionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateAuthzExtensionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.CreateAuthzExtensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.CreateAuthzExtensionRequest} CreateAuthzExtensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateAuthzExtensionRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.CreateAuthzExtensionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.authzExtensionId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.authzExtension = $root.google.cloud.networkservices.v1.AuthzExtension.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateAuthzExtensionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.CreateAuthzExtensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.CreateAuthzExtensionRequest} CreateAuthzExtensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateAuthzExtensionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateAuthzExtensionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.CreateAuthzExtensionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateAuthzExtensionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.authzExtensionId != null && message.hasOwnProperty("authzExtensionId"))
+                                if (!$util.isString(message.authzExtensionId))
+                                    return "authzExtensionId: string expected";
+                            if (message.authzExtension != null && message.hasOwnProperty("authzExtension")) {
+                                var error = $root.google.cloud.networkservices.v1.AuthzExtension.verify(message.authzExtension);
+                                if (error)
+                                    return "authzExtension." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateAuthzExtensionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.CreateAuthzExtensionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.CreateAuthzExtensionRequest} CreateAuthzExtensionRequest
+                         */
+                        CreateAuthzExtensionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.CreateAuthzExtensionRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.CreateAuthzExtensionRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.authzExtensionId != null)
+                                message.authzExtensionId = String(object.authzExtensionId);
+                            if (object.authzExtension != null) {
+                                if (typeof object.authzExtension !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.CreateAuthzExtensionRequest.authzExtension: object expected");
+                                message.authzExtension = $root.google.cloud.networkservices.v1.AuthzExtension.fromObject(object.authzExtension);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateAuthzExtensionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.CreateAuthzExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.CreateAuthzExtensionRequest} message CreateAuthzExtensionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateAuthzExtensionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.authzExtensionId = "";
+                                object.authzExtension = null;
+                                object.requestId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.authzExtensionId != null && message.hasOwnProperty("authzExtensionId"))
+                                object.authzExtensionId = message.authzExtensionId;
+                            if (message.authzExtension != null && message.hasOwnProperty("authzExtension"))
+                                object.authzExtension = $root.google.cloud.networkservices.v1.AuthzExtension.toObject(message.authzExtension, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateAuthzExtensionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.CreateAuthzExtensionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateAuthzExtensionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateAuthzExtensionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.CreateAuthzExtensionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateAuthzExtensionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.CreateAuthzExtensionRequest";
+                        };
+    
+                        return CreateAuthzExtensionRequest;
+                    })();
+    
+                    v1.UpdateAuthzExtensionRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateAuthzExtensionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IUpdateAuthzExtensionRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateAuthzExtensionRequest updateMask
+                         * @property {google.cloud.networkservices.v1.IAuthzExtension|null} [authzExtension] UpdateAuthzExtensionRequest authzExtension
+                         * @property {string|null} [requestId] UpdateAuthzExtensionRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new UpdateAuthzExtensionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents an UpdateAuthzExtensionRequest.
+                         * @implements IUpdateAuthzExtensionRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IUpdateAuthzExtensionRequest=} [properties] Properties to set
+                         */
+                        function UpdateAuthzExtensionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateAuthzExtensionRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.networkservices.v1.UpdateAuthzExtensionRequest
+                         * @instance
+                         */
+                        UpdateAuthzExtensionRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateAuthzExtensionRequest authzExtension.
+                         * @member {google.cloud.networkservices.v1.IAuthzExtension|null|undefined} authzExtension
+                         * @memberof google.cloud.networkservices.v1.UpdateAuthzExtensionRequest
+                         * @instance
+                         */
+                        UpdateAuthzExtensionRequest.prototype.authzExtension = null;
+    
+                        /**
+                         * UpdateAuthzExtensionRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networkservices.v1.UpdateAuthzExtensionRequest
+                         * @instance
+                         */
+                        UpdateAuthzExtensionRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new UpdateAuthzExtensionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.UpdateAuthzExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IUpdateAuthzExtensionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.UpdateAuthzExtensionRequest} UpdateAuthzExtensionRequest instance
+                         */
+                        UpdateAuthzExtensionRequest.create = function create(properties) {
+                            return new UpdateAuthzExtensionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateAuthzExtensionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.UpdateAuthzExtensionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.UpdateAuthzExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IUpdateAuthzExtensionRequest} message UpdateAuthzExtensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateAuthzExtensionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.authzExtension != null && Object.hasOwnProperty.call(message, "authzExtension"))
+                                $root.google.cloud.networkservices.v1.AuthzExtension.encode(message.authzExtension, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateAuthzExtensionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.UpdateAuthzExtensionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.UpdateAuthzExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IUpdateAuthzExtensionRequest} message UpdateAuthzExtensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateAuthzExtensionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateAuthzExtensionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.UpdateAuthzExtensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.UpdateAuthzExtensionRequest} UpdateAuthzExtensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateAuthzExtensionRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.UpdateAuthzExtensionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.authzExtension = $root.google.cloud.networkservices.v1.AuthzExtension.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateAuthzExtensionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.UpdateAuthzExtensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.UpdateAuthzExtensionRequest} UpdateAuthzExtensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateAuthzExtensionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateAuthzExtensionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.UpdateAuthzExtensionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateAuthzExtensionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.authzExtension != null && message.hasOwnProperty("authzExtension")) {
+                                var error = $root.google.cloud.networkservices.v1.AuthzExtension.verify(message.authzExtension);
+                                if (error)
+                                    return "authzExtension." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateAuthzExtensionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.UpdateAuthzExtensionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.UpdateAuthzExtensionRequest} UpdateAuthzExtensionRequest
+                         */
+                        UpdateAuthzExtensionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.UpdateAuthzExtensionRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.UpdateAuthzExtensionRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.UpdateAuthzExtensionRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.authzExtension != null) {
+                                if (typeof object.authzExtension !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.UpdateAuthzExtensionRequest.authzExtension: object expected");
+                                message.authzExtension = $root.google.cloud.networkservices.v1.AuthzExtension.fromObject(object.authzExtension);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateAuthzExtensionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.UpdateAuthzExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.UpdateAuthzExtensionRequest} message UpdateAuthzExtensionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateAuthzExtensionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.authzExtension = null;
+                                object.requestId = "";
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.authzExtension != null && message.hasOwnProperty("authzExtension"))
+                                object.authzExtension = $root.google.cloud.networkservices.v1.AuthzExtension.toObject(message.authzExtension, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateAuthzExtensionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.UpdateAuthzExtensionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateAuthzExtensionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateAuthzExtensionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.UpdateAuthzExtensionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateAuthzExtensionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.UpdateAuthzExtensionRequest";
+                        };
+    
+                        return UpdateAuthzExtensionRequest;
+                    })();
+    
+                    v1.DeleteAuthzExtensionRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteAuthzExtensionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IDeleteAuthzExtensionRequest
+                         * @property {string|null} [name] DeleteAuthzExtensionRequest name
+                         * @property {string|null} [requestId] DeleteAuthzExtensionRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new DeleteAuthzExtensionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a DeleteAuthzExtensionRequest.
+                         * @implements IDeleteAuthzExtensionRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IDeleteAuthzExtensionRequest=} [properties] Properties to set
+                         */
+                        function DeleteAuthzExtensionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteAuthzExtensionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkservices.v1.DeleteAuthzExtensionRequest
+                         * @instance
+                         */
+                        DeleteAuthzExtensionRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteAuthzExtensionRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networkservices.v1.DeleteAuthzExtensionRequest
+                         * @instance
+                         */
+                        DeleteAuthzExtensionRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new DeleteAuthzExtensionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.DeleteAuthzExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IDeleteAuthzExtensionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.DeleteAuthzExtensionRequest} DeleteAuthzExtensionRequest instance
+                         */
+                        DeleteAuthzExtensionRequest.create = function create(properties) {
+                            return new DeleteAuthzExtensionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteAuthzExtensionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.DeleteAuthzExtensionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.DeleteAuthzExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IDeleteAuthzExtensionRequest} message DeleteAuthzExtensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteAuthzExtensionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteAuthzExtensionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.DeleteAuthzExtensionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.DeleteAuthzExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IDeleteAuthzExtensionRequest} message DeleteAuthzExtensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteAuthzExtensionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteAuthzExtensionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.DeleteAuthzExtensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.DeleteAuthzExtensionRequest} DeleteAuthzExtensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteAuthzExtensionRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.DeleteAuthzExtensionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteAuthzExtensionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.DeleteAuthzExtensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.DeleteAuthzExtensionRequest} DeleteAuthzExtensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteAuthzExtensionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteAuthzExtensionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.DeleteAuthzExtensionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteAuthzExtensionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteAuthzExtensionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.DeleteAuthzExtensionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.DeleteAuthzExtensionRequest} DeleteAuthzExtensionRequest
+                         */
+                        DeleteAuthzExtensionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.DeleteAuthzExtensionRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.DeleteAuthzExtensionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteAuthzExtensionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.DeleteAuthzExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.DeleteAuthzExtensionRequest} message DeleteAuthzExtensionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteAuthzExtensionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteAuthzExtensionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.DeleteAuthzExtensionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteAuthzExtensionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteAuthzExtensionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.DeleteAuthzExtensionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteAuthzExtensionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.DeleteAuthzExtensionRequest";
+                        };
+    
+                        return DeleteAuthzExtensionRequest;
+                    })();
+    
                     v1.EndpointPolicy = (function() {
     
                         /**
@@ -8866,6 +11235,4708 @@
                         };
     
                         return DeleteEndpointPolicyRequest;
+                    })();
+    
+                    /**
+                     * WasmPluginView enum.
+                     * @name google.cloud.networkservices.v1.WasmPluginView
+                     * @enum {number}
+                     * @property {number} WASM_PLUGIN_VIEW_UNSPECIFIED=0 WASM_PLUGIN_VIEW_UNSPECIFIED value
+                     * @property {number} WASM_PLUGIN_VIEW_BASIC=1 WASM_PLUGIN_VIEW_BASIC value
+                     * @property {number} WASM_PLUGIN_VIEW_FULL=2 WASM_PLUGIN_VIEW_FULL value
+                     */
+                    v1.WasmPluginView = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "WASM_PLUGIN_VIEW_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "WASM_PLUGIN_VIEW_BASIC"] = 1;
+                        values[valuesById[2] = "WASM_PLUGIN_VIEW_FULL"] = 2;
+                        return values;
+                    })();
+    
+                    v1.WasmPlugin = (function() {
+    
+                        /**
+                         * Properties of a WasmPlugin.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IWasmPlugin
+                         * @property {string|null} [name] WasmPlugin name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] WasmPlugin createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] WasmPlugin updateTime
+                         * @property {string|null} [description] WasmPlugin description
+                         * @property {Object.<string,string>|null} [labels] WasmPlugin labels
+                         * @property {string|null} [mainVersionId] WasmPlugin mainVersionId
+                         * @property {google.cloud.networkservices.v1.WasmPlugin.ILogConfig|null} [logConfig] WasmPlugin logConfig
+                         * @property {Object.<string,google.cloud.networkservices.v1.WasmPlugin.IVersionDetails>|null} [versions] WasmPlugin versions
+                         * @property {Array.<google.cloud.networkservices.v1.WasmPlugin.IUsedBy>|null} [usedBy] WasmPlugin usedBy
+                         */
+    
+                        /**
+                         * Constructs a new WasmPlugin.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a WasmPlugin.
+                         * @implements IWasmPlugin
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IWasmPlugin=} [properties] Properties to set
+                         */
+                        function WasmPlugin(properties) {
+                            this.labels = {};
+                            this.versions = {};
+                            this.usedBy = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * WasmPlugin name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkservices.v1.WasmPlugin
+                         * @instance
+                         */
+                        WasmPlugin.prototype.name = "";
+    
+                        /**
+                         * WasmPlugin createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.networkservices.v1.WasmPlugin
+                         * @instance
+                         */
+                        WasmPlugin.prototype.createTime = null;
+    
+                        /**
+                         * WasmPlugin updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.networkservices.v1.WasmPlugin
+                         * @instance
+                         */
+                        WasmPlugin.prototype.updateTime = null;
+    
+                        /**
+                         * WasmPlugin description.
+                         * @member {string} description
+                         * @memberof google.cloud.networkservices.v1.WasmPlugin
+                         * @instance
+                         */
+                        WasmPlugin.prototype.description = "";
+    
+                        /**
+                         * WasmPlugin labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.networkservices.v1.WasmPlugin
+                         * @instance
+                         */
+                        WasmPlugin.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * WasmPlugin mainVersionId.
+                         * @member {string} mainVersionId
+                         * @memberof google.cloud.networkservices.v1.WasmPlugin
+                         * @instance
+                         */
+                        WasmPlugin.prototype.mainVersionId = "";
+    
+                        /**
+                         * WasmPlugin logConfig.
+                         * @member {google.cloud.networkservices.v1.WasmPlugin.ILogConfig|null|undefined} logConfig
+                         * @memberof google.cloud.networkservices.v1.WasmPlugin
+                         * @instance
+                         */
+                        WasmPlugin.prototype.logConfig = null;
+    
+                        /**
+                         * WasmPlugin versions.
+                         * @member {Object.<string,google.cloud.networkservices.v1.WasmPlugin.IVersionDetails>} versions
+                         * @memberof google.cloud.networkservices.v1.WasmPlugin
+                         * @instance
+                         */
+                        WasmPlugin.prototype.versions = $util.emptyObject;
+    
+                        /**
+                         * WasmPlugin usedBy.
+                         * @member {Array.<google.cloud.networkservices.v1.WasmPlugin.IUsedBy>} usedBy
+                         * @memberof google.cloud.networkservices.v1.WasmPlugin
+                         * @instance
+                         */
+                        WasmPlugin.prototype.usedBy = $util.emptyArray;
+    
+                        /**
+                         * Creates a new WasmPlugin instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.WasmPlugin
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IWasmPlugin=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.WasmPlugin} WasmPlugin instance
+                         */
+                        WasmPlugin.create = function create(properties) {
+                            return new WasmPlugin(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified WasmPlugin message. Does not implicitly {@link google.cloud.networkservices.v1.WasmPlugin.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.WasmPlugin
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IWasmPlugin} message WasmPlugin message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WasmPlugin.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.description);
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.mainVersionId != null && Object.hasOwnProperty.call(message, "mainVersionId"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.mainVersionId);
+                            if (message.logConfig != null && Object.hasOwnProperty.call(message, "logConfig"))
+                                $root.google.cloud.networkservices.v1.WasmPlugin.LogConfig.encode(message.logConfig, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.versions != null && Object.hasOwnProperty.call(message, "versions"))
+                                for (var keys = Object.keys(message.versions), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 10, wireType 2 =*/82).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.networkservices.v1.WasmPlugin.VersionDetails.encode(message.versions[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
+                            if (message.usedBy != null && message.usedBy.length)
+                                for (var i = 0; i < message.usedBy.length; ++i)
+                                    $root.google.cloud.networkservices.v1.WasmPlugin.UsedBy.encode(message.usedBy[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified WasmPlugin message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.WasmPlugin.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.WasmPlugin
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IWasmPlugin} message WasmPlugin message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WasmPlugin.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a WasmPlugin message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.WasmPlugin
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.WasmPlugin} WasmPlugin
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WasmPlugin.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.WasmPlugin(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 6: {
+                                        message.mainVersionId = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.logConfig = $root.google.cloud.networkservices.v1.WasmPlugin.LogConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        if (message.versions === $util.emptyObject)
+                                            message.versions = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = null;
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = $root.google.cloud.networkservices.v1.WasmPlugin.VersionDetails.decode(reader, reader.uint32());
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.versions[key] = value;
+                                        break;
+                                    }
+                                case 11: {
+                                        if (!(message.usedBy && message.usedBy.length))
+                                            message.usedBy = [];
+                                        message.usedBy.push($root.google.cloud.networkservices.v1.WasmPlugin.UsedBy.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a WasmPlugin message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.WasmPlugin
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.WasmPlugin} WasmPlugin
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WasmPlugin.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a WasmPlugin message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.WasmPlugin
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        WasmPlugin.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.mainVersionId != null && message.hasOwnProperty("mainVersionId"))
+                                if (!$util.isString(message.mainVersionId))
+                                    return "mainVersionId: string expected";
+                            if (message.logConfig != null && message.hasOwnProperty("logConfig")) {
+                                var error = $root.google.cloud.networkservices.v1.WasmPlugin.LogConfig.verify(message.logConfig);
+                                if (error)
+                                    return "logConfig." + error;
+                            }
+                            if (message.versions != null && message.hasOwnProperty("versions")) {
+                                if (!$util.isObject(message.versions))
+                                    return "versions: object expected";
+                                var key = Object.keys(message.versions);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.networkservices.v1.WasmPlugin.VersionDetails.verify(message.versions[key[i]]);
+                                    if (error)
+                                        return "versions." + error;
+                                }
+                            }
+                            if (message.usedBy != null && message.hasOwnProperty("usedBy")) {
+                                if (!Array.isArray(message.usedBy))
+                                    return "usedBy: array expected";
+                                for (var i = 0; i < message.usedBy.length; ++i) {
+                                    var error = $root.google.cloud.networkservices.v1.WasmPlugin.UsedBy.verify(message.usedBy[i]);
+                                    if (error)
+                                        return "usedBy." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a WasmPlugin message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.WasmPlugin
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.WasmPlugin} WasmPlugin
+                         */
+                        WasmPlugin.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.WasmPlugin)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.WasmPlugin();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.WasmPlugin.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.WasmPlugin.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.WasmPlugin.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.mainVersionId != null)
+                                message.mainVersionId = String(object.mainVersionId);
+                            if (object.logConfig != null) {
+                                if (typeof object.logConfig !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.WasmPlugin.logConfig: object expected");
+                                message.logConfig = $root.google.cloud.networkservices.v1.WasmPlugin.LogConfig.fromObject(object.logConfig);
+                            }
+                            if (object.versions) {
+                                if (typeof object.versions !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.WasmPlugin.versions: object expected");
+                                message.versions = {};
+                                for (var keys = Object.keys(object.versions), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.versions[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.WasmPlugin.versions: object expected");
+                                    message.versions[keys[i]] = $root.google.cloud.networkservices.v1.WasmPlugin.VersionDetails.fromObject(object.versions[keys[i]]);
+                                }
+                            }
+                            if (object.usedBy) {
+                                if (!Array.isArray(object.usedBy))
+                                    throw TypeError(".google.cloud.networkservices.v1.WasmPlugin.usedBy: array expected");
+                                message.usedBy = [];
+                                for (var i = 0; i < object.usedBy.length; ++i) {
+                                    if (typeof object.usedBy[i] !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.WasmPlugin.usedBy: object expected");
+                                    message.usedBy[i] = $root.google.cloud.networkservices.v1.WasmPlugin.UsedBy.fromObject(object.usedBy[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a WasmPlugin message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.WasmPlugin
+                         * @static
+                         * @param {google.cloud.networkservices.v1.WasmPlugin} message WasmPlugin
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        WasmPlugin.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.usedBy = [];
+                            if (options.objects || options.defaults) {
+                                object.labels = {};
+                                object.versions = {};
+                            }
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.description = "";
+                                object.mainVersionId = "";
+                                object.logConfig = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.mainVersionId != null && message.hasOwnProperty("mainVersionId"))
+                                object.mainVersionId = message.mainVersionId;
+                            if (message.logConfig != null && message.hasOwnProperty("logConfig"))
+                                object.logConfig = $root.google.cloud.networkservices.v1.WasmPlugin.LogConfig.toObject(message.logConfig, options);
+                            if (message.versions && (keys2 = Object.keys(message.versions)).length) {
+                                object.versions = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.versions[keys2[j]] = $root.google.cloud.networkservices.v1.WasmPlugin.VersionDetails.toObject(message.versions[keys2[j]], options);
+                            }
+                            if (message.usedBy && message.usedBy.length) {
+                                object.usedBy = [];
+                                for (var j = 0; j < message.usedBy.length; ++j)
+                                    object.usedBy[j] = $root.google.cloud.networkservices.v1.WasmPlugin.UsedBy.toObject(message.usedBy[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this WasmPlugin to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.WasmPlugin
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        WasmPlugin.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for WasmPlugin
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.WasmPlugin
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        WasmPlugin.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.WasmPlugin";
+                        };
+    
+                        WasmPlugin.VersionDetails = (function() {
+    
+                            /**
+                             * Properties of a VersionDetails.
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin
+                             * @interface IVersionDetails
+                             * @property {Uint8Array|null} [pluginConfigData] VersionDetails pluginConfigData
+                             * @property {string|null} [pluginConfigUri] VersionDetails pluginConfigUri
+                             * @property {google.protobuf.ITimestamp|null} [createTime] VersionDetails createTime
+                             * @property {google.protobuf.ITimestamp|null} [updateTime] VersionDetails updateTime
+                             * @property {string|null} [description] VersionDetails description
+                             * @property {Object.<string,string>|null} [labels] VersionDetails labels
+                             * @property {string|null} [imageUri] VersionDetails imageUri
+                             * @property {string|null} [imageDigest] VersionDetails imageDigest
+                             * @property {string|null} [pluginConfigDigest] VersionDetails pluginConfigDigest
+                             */
+    
+                            /**
+                             * Constructs a new VersionDetails.
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin
+                             * @classdesc Represents a VersionDetails.
+                             * @implements IVersionDetails
+                             * @constructor
+                             * @param {google.cloud.networkservices.v1.WasmPlugin.IVersionDetails=} [properties] Properties to set
+                             */
+                            function VersionDetails(properties) {
+                                this.labels = {};
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * VersionDetails pluginConfigData.
+                             * @member {Uint8Array|null|undefined} pluginConfigData
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.VersionDetails
+                             * @instance
+                             */
+                            VersionDetails.prototype.pluginConfigData = null;
+    
+                            /**
+                             * VersionDetails pluginConfigUri.
+                             * @member {string|null|undefined} pluginConfigUri
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.VersionDetails
+                             * @instance
+                             */
+                            VersionDetails.prototype.pluginConfigUri = null;
+    
+                            /**
+                             * VersionDetails createTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.VersionDetails
+                             * @instance
+                             */
+                            VersionDetails.prototype.createTime = null;
+    
+                            /**
+                             * VersionDetails updateTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.VersionDetails
+                             * @instance
+                             */
+                            VersionDetails.prototype.updateTime = null;
+    
+                            /**
+                             * VersionDetails description.
+                             * @member {string} description
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.VersionDetails
+                             * @instance
+                             */
+                            VersionDetails.prototype.description = "";
+    
+                            /**
+                             * VersionDetails labels.
+                             * @member {Object.<string,string>} labels
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.VersionDetails
+                             * @instance
+                             */
+                            VersionDetails.prototype.labels = $util.emptyObject;
+    
+                            /**
+                             * VersionDetails imageUri.
+                             * @member {string} imageUri
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.VersionDetails
+                             * @instance
+                             */
+                            VersionDetails.prototype.imageUri = "";
+    
+                            /**
+                             * VersionDetails imageDigest.
+                             * @member {string} imageDigest
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.VersionDetails
+                             * @instance
+                             */
+                            VersionDetails.prototype.imageDigest = "";
+    
+                            /**
+                             * VersionDetails pluginConfigDigest.
+                             * @member {string} pluginConfigDigest
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.VersionDetails
+                             * @instance
+                             */
+                            VersionDetails.prototype.pluginConfigDigest = "";
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * VersionDetails pluginConfigSource.
+                             * @member {"pluginConfigData"|"pluginConfigUri"|undefined} pluginConfigSource
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.VersionDetails
+                             * @instance
+                             */
+                            Object.defineProperty(VersionDetails.prototype, "pluginConfigSource", {
+                                get: $util.oneOfGetter($oneOfFields = ["pluginConfigData", "pluginConfigUri"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new VersionDetails instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.VersionDetails
+                             * @static
+                             * @param {google.cloud.networkservices.v1.WasmPlugin.IVersionDetails=} [properties] Properties to set
+                             * @returns {google.cloud.networkservices.v1.WasmPlugin.VersionDetails} VersionDetails instance
+                             */
+                            VersionDetails.create = function create(properties) {
+                                return new VersionDetails(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified VersionDetails message. Does not implicitly {@link google.cloud.networkservices.v1.WasmPlugin.VersionDetails.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.VersionDetails
+                             * @static
+                             * @param {google.cloud.networkservices.v1.WasmPlugin.IVersionDetails} message VersionDetails message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            VersionDetails.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                                if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                    for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                        writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                                if (message.imageUri != null && Object.hasOwnProperty.call(message, "imageUri"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.imageUri);
+                                if (message.imageDigest != null && Object.hasOwnProperty.call(message, "imageDigest"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.imageDigest);
+                                if (message.pluginConfigData != null && Object.hasOwnProperty.call(message, "pluginConfigData"))
+                                    writer.uint32(/* id 9, wireType 2 =*/74).bytes(message.pluginConfigData);
+                                if (message.pluginConfigUri != null && Object.hasOwnProperty.call(message, "pluginConfigUri"))
+                                    writer.uint32(/* id 10, wireType 2 =*/82).string(message.pluginConfigUri);
+                                if (message.pluginConfigDigest != null && Object.hasOwnProperty.call(message, "pluginConfigDigest"))
+                                    writer.uint32(/* id 11, wireType 2 =*/90).string(message.pluginConfigDigest);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified VersionDetails message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.WasmPlugin.VersionDetails.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.VersionDetails
+                             * @static
+                             * @param {google.cloud.networkservices.v1.WasmPlugin.IVersionDetails} message VersionDetails message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            VersionDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a VersionDetails message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.VersionDetails
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkservices.v1.WasmPlugin.VersionDetails} VersionDetails
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            VersionDetails.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.WasmPlugin.VersionDetails(), key, value;
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 9: {
+                                            message.pluginConfigData = reader.bytes();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.pluginConfigUri = reader.string();
+                                            break;
+                                        }
+                                    case 1: {
+                                            message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.description = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            if (message.labels === $util.emptyObject)
+                                                message.labels = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = "";
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = reader.string();
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.labels[key] = value;
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.imageUri = reader.string();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.imageDigest = reader.string();
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.pluginConfigDigest = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a VersionDetails message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.VersionDetails
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkservices.v1.WasmPlugin.VersionDetails} VersionDetails
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            VersionDetails.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a VersionDetails message.
+                             * @function verify
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.VersionDetails
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            VersionDetails.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.pluginConfigData != null && message.hasOwnProperty("pluginConfigData")) {
+                                    properties.pluginConfigSource = 1;
+                                    if (!(message.pluginConfigData && typeof message.pluginConfigData.length === "number" || $util.isString(message.pluginConfigData)))
+                                        return "pluginConfigData: buffer expected";
+                                }
+                                if (message.pluginConfigUri != null && message.hasOwnProperty("pluginConfigUri")) {
+                                    if (properties.pluginConfigSource === 1)
+                                        return "pluginConfigSource: multiple values";
+                                    properties.pluginConfigSource = 1;
+                                    if (!$util.isString(message.pluginConfigUri))
+                                        return "pluginConfigUri: string expected";
+                                }
+                                if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                    if (error)
+                                        return "createTime." + error;
+                                }
+                                if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                    if (error)
+                                        return "updateTime." + error;
+                                }
+                                if (message.description != null && message.hasOwnProperty("description"))
+                                    if (!$util.isString(message.description))
+                                        return "description: string expected";
+                                if (message.labels != null && message.hasOwnProperty("labels")) {
+                                    if (!$util.isObject(message.labels))
+                                        return "labels: object expected";
+                                    var key = Object.keys(message.labels);
+                                    for (var i = 0; i < key.length; ++i)
+                                        if (!$util.isString(message.labels[key[i]]))
+                                            return "labels: string{k:string} expected";
+                                }
+                                if (message.imageUri != null && message.hasOwnProperty("imageUri"))
+                                    if (!$util.isString(message.imageUri))
+                                        return "imageUri: string expected";
+                                if (message.imageDigest != null && message.hasOwnProperty("imageDigest"))
+                                    if (!$util.isString(message.imageDigest))
+                                        return "imageDigest: string expected";
+                                if (message.pluginConfigDigest != null && message.hasOwnProperty("pluginConfigDigest"))
+                                    if (!$util.isString(message.pluginConfigDigest))
+                                        return "pluginConfigDigest: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a VersionDetails message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.VersionDetails
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkservices.v1.WasmPlugin.VersionDetails} VersionDetails
+                             */
+                            VersionDetails.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkservices.v1.WasmPlugin.VersionDetails)
+                                    return object;
+                                var message = new $root.google.cloud.networkservices.v1.WasmPlugin.VersionDetails();
+                                if (object.pluginConfigData != null)
+                                    if (typeof object.pluginConfigData === "string")
+                                        $util.base64.decode(object.pluginConfigData, message.pluginConfigData = $util.newBuffer($util.base64.length(object.pluginConfigData)), 0);
+                                    else if (object.pluginConfigData.length >= 0)
+                                        message.pluginConfigData = object.pluginConfigData;
+                                if (object.pluginConfigUri != null)
+                                    message.pluginConfigUri = String(object.pluginConfigUri);
+                                if (object.createTime != null) {
+                                    if (typeof object.createTime !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.WasmPlugin.VersionDetails.createTime: object expected");
+                                    message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                                }
+                                if (object.updateTime != null) {
+                                    if (typeof object.updateTime !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.WasmPlugin.VersionDetails.updateTime: object expected");
+                                    message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                                }
+                                if (object.description != null)
+                                    message.description = String(object.description);
+                                if (object.labels) {
+                                    if (typeof object.labels !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.WasmPlugin.VersionDetails.labels: object expected");
+                                    message.labels = {};
+                                    for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                        message.labels[keys[i]] = String(object.labels[keys[i]]);
+                                }
+                                if (object.imageUri != null)
+                                    message.imageUri = String(object.imageUri);
+                                if (object.imageDigest != null)
+                                    message.imageDigest = String(object.imageDigest);
+                                if (object.pluginConfigDigest != null)
+                                    message.pluginConfigDigest = String(object.pluginConfigDigest);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a VersionDetails message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.VersionDetails
+                             * @static
+                             * @param {google.cloud.networkservices.v1.WasmPlugin.VersionDetails} message VersionDetails
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            VersionDetails.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.objects || options.defaults)
+                                    object.labels = {};
+                                if (options.defaults) {
+                                    object.createTime = null;
+                                    object.updateTime = null;
+                                    object.description = "";
+                                    object.imageUri = "";
+                                    object.imageDigest = "";
+                                    object.pluginConfigDigest = "";
+                                }
+                                if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                    object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                                if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                    object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                                if (message.description != null && message.hasOwnProperty("description"))
+                                    object.description = message.description;
+                                var keys2;
+                                if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                    object.labels = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.labels[keys2[j]] = message.labels[keys2[j]];
+                                }
+                                if (message.imageUri != null && message.hasOwnProperty("imageUri"))
+                                    object.imageUri = message.imageUri;
+                                if (message.imageDigest != null && message.hasOwnProperty("imageDigest"))
+                                    object.imageDigest = message.imageDigest;
+                                if (message.pluginConfigData != null && message.hasOwnProperty("pluginConfigData")) {
+                                    object.pluginConfigData = options.bytes === String ? $util.base64.encode(message.pluginConfigData, 0, message.pluginConfigData.length) : options.bytes === Array ? Array.prototype.slice.call(message.pluginConfigData) : message.pluginConfigData;
+                                    if (options.oneofs)
+                                        object.pluginConfigSource = "pluginConfigData";
+                                }
+                                if (message.pluginConfigUri != null && message.hasOwnProperty("pluginConfigUri")) {
+                                    object.pluginConfigUri = message.pluginConfigUri;
+                                    if (options.oneofs)
+                                        object.pluginConfigSource = "pluginConfigUri";
+                                }
+                                if (message.pluginConfigDigest != null && message.hasOwnProperty("pluginConfigDigest"))
+                                    object.pluginConfigDigest = message.pluginConfigDigest;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this VersionDetails to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.VersionDetails
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            VersionDetails.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for VersionDetails
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.VersionDetails
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            VersionDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkservices.v1.WasmPlugin.VersionDetails";
+                            };
+    
+                            return VersionDetails;
+                        })();
+    
+                        WasmPlugin.LogConfig = (function() {
+    
+                            /**
+                             * Properties of a LogConfig.
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin
+                             * @interface ILogConfig
+                             * @property {boolean|null} [enable] LogConfig enable
+                             * @property {number|null} [sampleRate] LogConfig sampleRate
+                             * @property {google.cloud.networkservices.v1.WasmPlugin.LogConfig.LogLevel|null} [minLogLevel] LogConfig minLogLevel
+                             */
+    
+                            /**
+                             * Constructs a new LogConfig.
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin
+                             * @classdesc Represents a LogConfig.
+                             * @implements ILogConfig
+                             * @constructor
+                             * @param {google.cloud.networkservices.v1.WasmPlugin.ILogConfig=} [properties] Properties to set
+                             */
+                            function LogConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * LogConfig enable.
+                             * @member {boolean} enable
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.LogConfig
+                             * @instance
+                             */
+                            LogConfig.prototype.enable = false;
+    
+                            /**
+                             * LogConfig sampleRate.
+                             * @member {number} sampleRate
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.LogConfig
+                             * @instance
+                             */
+                            LogConfig.prototype.sampleRate = 0;
+    
+                            /**
+                             * LogConfig minLogLevel.
+                             * @member {google.cloud.networkservices.v1.WasmPlugin.LogConfig.LogLevel} minLogLevel
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.LogConfig
+                             * @instance
+                             */
+                            LogConfig.prototype.minLogLevel = 0;
+    
+                            /**
+                             * Creates a new LogConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.LogConfig
+                             * @static
+                             * @param {google.cloud.networkservices.v1.WasmPlugin.ILogConfig=} [properties] Properties to set
+                             * @returns {google.cloud.networkservices.v1.WasmPlugin.LogConfig} LogConfig instance
+                             */
+                            LogConfig.create = function create(properties) {
+                                return new LogConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified LogConfig message. Does not implicitly {@link google.cloud.networkservices.v1.WasmPlugin.LogConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.LogConfig
+                             * @static
+                             * @param {google.cloud.networkservices.v1.WasmPlugin.ILogConfig} message LogConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LogConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.enable != null && Object.hasOwnProperty.call(message, "enable"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enable);
+                                if (message.sampleRate != null && Object.hasOwnProperty.call(message, "sampleRate"))
+                                    writer.uint32(/* id 2, wireType 5 =*/21).float(message.sampleRate);
+                                if (message.minLogLevel != null && Object.hasOwnProperty.call(message, "minLogLevel"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.minLogLevel);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified LogConfig message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.WasmPlugin.LogConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.LogConfig
+                             * @static
+                             * @param {google.cloud.networkservices.v1.WasmPlugin.ILogConfig} message LogConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LogConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a LogConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.LogConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkservices.v1.WasmPlugin.LogConfig} LogConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LogConfig.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.WasmPlugin.LogConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.enable = reader.bool();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.sampleRate = reader.float();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.minLogLevel = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a LogConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.LogConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkservices.v1.WasmPlugin.LogConfig} LogConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LogConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a LogConfig message.
+                             * @function verify
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.LogConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            LogConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.enable != null && message.hasOwnProperty("enable"))
+                                    if (typeof message.enable !== "boolean")
+                                        return "enable: boolean expected";
+                                if (message.sampleRate != null && message.hasOwnProperty("sampleRate"))
+                                    if (typeof message.sampleRate !== "number")
+                                        return "sampleRate: number expected";
+                                if (message.minLogLevel != null && message.hasOwnProperty("minLogLevel"))
+                                    switch (message.minLogLevel) {
+                                    default:
+                                        return "minLogLevel: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                    case 6:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a LogConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.LogConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkservices.v1.WasmPlugin.LogConfig} LogConfig
+                             */
+                            LogConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkservices.v1.WasmPlugin.LogConfig)
+                                    return object;
+                                var message = new $root.google.cloud.networkservices.v1.WasmPlugin.LogConfig();
+                                if (object.enable != null)
+                                    message.enable = Boolean(object.enable);
+                                if (object.sampleRate != null)
+                                    message.sampleRate = Number(object.sampleRate);
+                                switch (object.minLogLevel) {
+                                default:
+                                    if (typeof object.minLogLevel === "number") {
+                                        message.minLogLevel = object.minLogLevel;
+                                        break;
+                                    }
+                                    break;
+                                case "LOG_LEVEL_UNSPECIFIED":
+                                case 0:
+                                    message.minLogLevel = 0;
+                                    break;
+                                case "TRACE":
+                                case 1:
+                                    message.minLogLevel = 1;
+                                    break;
+                                case "DEBUG":
+                                case 2:
+                                    message.minLogLevel = 2;
+                                    break;
+                                case "INFO":
+                                case 3:
+                                    message.minLogLevel = 3;
+                                    break;
+                                case "WARN":
+                                case 4:
+                                    message.minLogLevel = 4;
+                                    break;
+                                case "ERROR":
+                                case 5:
+                                    message.minLogLevel = 5;
+                                    break;
+                                case "CRITICAL":
+                                case 6:
+                                    message.minLogLevel = 6;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a LogConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.LogConfig
+                             * @static
+                             * @param {google.cloud.networkservices.v1.WasmPlugin.LogConfig} message LogConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            LogConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.enable = false;
+                                    object.sampleRate = 0;
+                                    object.minLogLevel = options.enums === String ? "LOG_LEVEL_UNSPECIFIED" : 0;
+                                }
+                                if (message.enable != null && message.hasOwnProperty("enable"))
+                                    object.enable = message.enable;
+                                if (message.sampleRate != null && message.hasOwnProperty("sampleRate"))
+                                    object.sampleRate = options.json && !isFinite(message.sampleRate) ? String(message.sampleRate) : message.sampleRate;
+                                if (message.minLogLevel != null && message.hasOwnProperty("minLogLevel"))
+                                    object.minLogLevel = options.enums === String ? $root.google.cloud.networkservices.v1.WasmPlugin.LogConfig.LogLevel[message.minLogLevel] === undefined ? message.minLogLevel : $root.google.cloud.networkservices.v1.WasmPlugin.LogConfig.LogLevel[message.minLogLevel] : message.minLogLevel;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this LogConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.LogConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            LogConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for LogConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.LogConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            LogConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkservices.v1.WasmPlugin.LogConfig";
+                            };
+    
+                            /**
+                             * LogLevel enum.
+                             * @name google.cloud.networkservices.v1.WasmPlugin.LogConfig.LogLevel
+                             * @enum {number}
+                             * @property {number} LOG_LEVEL_UNSPECIFIED=0 LOG_LEVEL_UNSPECIFIED value
+                             * @property {number} TRACE=1 TRACE value
+                             * @property {number} DEBUG=2 DEBUG value
+                             * @property {number} INFO=3 INFO value
+                             * @property {number} WARN=4 WARN value
+                             * @property {number} ERROR=5 ERROR value
+                             * @property {number} CRITICAL=6 CRITICAL value
+                             */
+                            LogConfig.LogLevel = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "LOG_LEVEL_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "TRACE"] = 1;
+                                values[valuesById[2] = "DEBUG"] = 2;
+                                values[valuesById[3] = "INFO"] = 3;
+                                values[valuesById[4] = "WARN"] = 4;
+                                values[valuesById[5] = "ERROR"] = 5;
+                                values[valuesById[6] = "CRITICAL"] = 6;
+                                return values;
+                            })();
+    
+                            return LogConfig;
+                        })();
+    
+                        WasmPlugin.UsedBy = (function() {
+    
+                            /**
+                             * Properties of a UsedBy.
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin
+                             * @interface IUsedBy
+                             * @property {string|null} [name] UsedBy name
+                             */
+    
+                            /**
+                             * Constructs a new UsedBy.
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin
+                             * @classdesc Represents a UsedBy.
+                             * @implements IUsedBy
+                             * @constructor
+                             * @param {google.cloud.networkservices.v1.WasmPlugin.IUsedBy=} [properties] Properties to set
+                             */
+                            function UsedBy(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UsedBy name.
+                             * @member {string} name
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.UsedBy
+                             * @instance
+                             */
+                            UsedBy.prototype.name = "";
+    
+                            /**
+                             * Creates a new UsedBy instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.UsedBy
+                             * @static
+                             * @param {google.cloud.networkservices.v1.WasmPlugin.IUsedBy=} [properties] Properties to set
+                             * @returns {google.cloud.networkservices.v1.WasmPlugin.UsedBy} UsedBy instance
+                             */
+                            UsedBy.create = function create(properties) {
+                                return new UsedBy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UsedBy message. Does not implicitly {@link google.cloud.networkservices.v1.WasmPlugin.UsedBy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.UsedBy
+                             * @static
+                             * @param {google.cloud.networkservices.v1.WasmPlugin.IUsedBy} message UsedBy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UsedBy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UsedBy message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.WasmPlugin.UsedBy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.UsedBy
+                             * @static
+                             * @param {google.cloud.networkservices.v1.WasmPlugin.IUsedBy} message UsedBy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UsedBy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a UsedBy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.UsedBy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkservices.v1.WasmPlugin.UsedBy} UsedBy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UsedBy.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.WasmPlugin.UsedBy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a UsedBy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.UsedBy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkservices.v1.WasmPlugin.UsedBy} UsedBy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UsedBy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a UsedBy message.
+                             * @function verify
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.UsedBy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UsedBy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a UsedBy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.UsedBy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkservices.v1.WasmPlugin.UsedBy} UsedBy
+                             */
+                            UsedBy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkservices.v1.WasmPlugin.UsedBy)
+                                    return object;
+                                var message = new $root.google.cloud.networkservices.v1.WasmPlugin.UsedBy();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a UsedBy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.UsedBy
+                             * @static
+                             * @param {google.cloud.networkservices.v1.WasmPlugin.UsedBy} message UsedBy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UsedBy.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UsedBy to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.UsedBy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UsedBy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UsedBy
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkservices.v1.WasmPlugin.UsedBy
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UsedBy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkservices.v1.WasmPlugin.UsedBy";
+                            };
+    
+                            return UsedBy;
+                        })();
+    
+                        return WasmPlugin;
+                    })();
+    
+                    v1.WasmPluginVersion = (function() {
+    
+                        /**
+                         * Properties of a WasmPluginVersion.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IWasmPluginVersion
+                         * @property {Uint8Array|null} [pluginConfigData] WasmPluginVersion pluginConfigData
+                         * @property {string|null} [pluginConfigUri] WasmPluginVersion pluginConfigUri
+                         * @property {string|null} [name] WasmPluginVersion name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] WasmPluginVersion createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] WasmPluginVersion updateTime
+                         * @property {string|null} [description] WasmPluginVersion description
+                         * @property {Object.<string,string>|null} [labels] WasmPluginVersion labels
+                         * @property {string|null} [imageUri] WasmPluginVersion imageUri
+                         * @property {string|null} [imageDigest] WasmPluginVersion imageDigest
+                         * @property {string|null} [pluginConfigDigest] WasmPluginVersion pluginConfigDigest
+                         */
+    
+                        /**
+                         * Constructs a new WasmPluginVersion.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a WasmPluginVersion.
+                         * @implements IWasmPluginVersion
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IWasmPluginVersion=} [properties] Properties to set
+                         */
+                        function WasmPluginVersion(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * WasmPluginVersion pluginConfigData.
+                         * @member {Uint8Array|null|undefined} pluginConfigData
+                         * @memberof google.cloud.networkservices.v1.WasmPluginVersion
+                         * @instance
+                         */
+                        WasmPluginVersion.prototype.pluginConfigData = null;
+    
+                        /**
+                         * WasmPluginVersion pluginConfigUri.
+                         * @member {string|null|undefined} pluginConfigUri
+                         * @memberof google.cloud.networkservices.v1.WasmPluginVersion
+                         * @instance
+                         */
+                        WasmPluginVersion.prototype.pluginConfigUri = null;
+    
+                        /**
+                         * WasmPluginVersion name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkservices.v1.WasmPluginVersion
+                         * @instance
+                         */
+                        WasmPluginVersion.prototype.name = "";
+    
+                        /**
+                         * WasmPluginVersion createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.networkservices.v1.WasmPluginVersion
+                         * @instance
+                         */
+                        WasmPluginVersion.prototype.createTime = null;
+    
+                        /**
+                         * WasmPluginVersion updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.networkservices.v1.WasmPluginVersion
+                         * @instance
+                         */
+                        WasmPluginVersion.prototype.updateTime = null;
+    
+                        /**
+                         * WasmPluginVersion description.
+                         * @member {string} description
+                         * @memberof google.cloud.networkservices.v1.WasmPluginVersion
+                         * @instance
+                         */
+                        WasmPluginVersion.prototype.description = "";
+    
+                        /**
+                         * WasmPluginVersion labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.networkservices.v1.WasmPluginVersion
+                         * @instance
+                         */
+                        WasmPluginVersion.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * WasmPluginVersion imageUri.
+                         * @member {string} imageUri
+                         * @memberof google.cloud.networkservices.v1.WasmPluginVersion
+                         * @instance
+                         */
+                        WasmPluginVersion.prototype.imageUri = "";
+    
+                        /**
+                         * WasmPluginVersion imageDigest.
+                         * @member {string} imageDigest
+                         * @memberof google.cloud.networkservices.v1.WasmPluginVersion
+                         * @instance
+                         */
+                        WasmPluginVersion.prototype.imageDigest = "";
+    
+                        /**
+                         * WasmPluginVersion pluginConfigDigest.
+                         * @member {string} pluginConfigDigest
+                         * @memberof google.cloud.networkservices.v1.WasmPluginVersion
+                         * @instance
+                         */
+                        WasmPluginVersion.prototype.pluginConfigDigest = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * WasmPluginVersion pluginConfigSource.
+                         * @member {"pluginConfigData"|"pluginConfigUri"|undefined} pluginConfigSource
+                         * @memberof google.cloud.networkservices.v1.WasmPluginVersion
+                         * @instance
+                         */
+                        Object.defineProperty(WasmPluginVersion.prototype, "pluginConfigSource", {
+                            get: $util.oneOfGetter($oneOfFields = ["pluginConfigData", "pluginConfigUri"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new WasmPluginVersion instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.WasmPluginVersion
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IWasmPluginVersion=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.WasmPluginVersion} WasmPluginVersion instance
+                         */
+                        WasmPluginVersion.create = function create(properties) {
+                            return new WasmPluginVersion(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified WasmPluginVersion message. Does not implicitly {@link google.cloud.networkservices.v1.WasmPluginVersion.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.WasmPluginVersion
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IWasmPluginVersion} message WasmPluginVersion message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WasmPluginVersion.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.description);
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.imageUri != null && Object.hasOwnProperty.call(message, "imageUri"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.imageUri);
+                            if (message.imageDigest != null && Object.hasOwnProperty.call(message, "imageDigest"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.imageDigest);
+                            if (message.pluginConfigData != null && Object.hasOwnProperty.call(message, "pluginConfigData"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).bytes(message.pluginConfigData);
+                            if (message.pluginConfigUri != null && Object.hasOwnProperty.call(message, "pluginConfigUri"))
+                                writer.uint32(/* id 13, wireType 2 =*/106).string(message.pluginConfigUri);
+                            if (message.pluginConfigDigest != null && Object.hasOwnProperty.call(message, "pluginConfigDigest"))
+                                writer.uint32(/* id 14, wireType 2 =*/114).string(message.pluginConfigDigest);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified WasmPluginVersion message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.WasmPluginVersion.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.WasmPluginVersion
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IWasmPluginVersion} message WasmPluginVersion message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WasmPluginVersion.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a WasmPluginVersion message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.WasmPluginVersion
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.WasmPluginVersion} WasmPluginVersion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WasmPluginVersion.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.WasmPluginVersion(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 12: {
+                                        message.pluginConfigData = reader.bytes();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.pluginConfigUri = reader.string();
+                                        break;
+                                    }
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 8: {
+                                        message.imageUri = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.imageDigest = reader.string();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.pluginConfigDigest = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a WasmPluginVersion message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.WasmPluginVersion
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.WasmPluginVersion} WasmPluginVersion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WasmPluginVersion.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a WasmPluginVersion message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.WasmPluginVersion
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        WasmPluginVersion.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.pluginConfigData != null && message.hasOwnProperty("pluginConfigData")) {
+                                properties.pluginConfigSource = 1;
+                                if (!(message.pluginConfigData && typeof message.pluginConfigData.length === "number" || $util.isString(message.pluginConfigData)))
+                                    return "pluginConfigData: buffer expected";
+                            }
+                            if (message.pluginConfigUri != null && message.hasOwnProperty("pluginConfigUri")) {
+                                if (properties.pluginConfigSource === 1)
+                                    return "pluginConfigSource: multiple values";
+                                properties.pluginConfigSource = 1;
+                                if (!$util.isString(message.pluginConfigUri))
+                                    return "pluginConfigUri: string expected";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.imageUri != null && message.hasOwnProperty("imageUri"))
+                                if (!$util.isString(message.imageUri))
+                                    return "imageUri: string expected";
+                            if (message.imageDigest != null && message.hasOwnProperty("imageDigest"))
+                                if (!$util.isString(message.imageDigest))
+                                    return "imageDigest: string expected";
+                            if (message.pluginConfigDigest != null && message.hasOwnProperty("pluginConfigDigest"))
+                                if (!$util.isString(message.pluginConfigDigest))
+                                    return "pluginConfigDigest: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a WasmPluginVersion message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.WasmPluginVersion
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.WasmPluginVersion} WasmPluginVersion
+                         */
+                        WasmPluginVersion.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.WasmPluginVersion)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.WasmPluginVersion();
+                            if (object.pluginConfigData != null)
+                                if (typeof object.pluginConfigData === "string")
+                                    $util.base64.decode(object.pluginConfigData, message.pluginConfigData = $util.newBuffer($util.base64.length(object.pluginConfigData)), 0);
+                                else if (object.pluginConfigData.length >= 0)
+                                    message.pluginConfigData = object.pluginConfigData;
+                            if (object.pluginConfigUri != null)
+                                message.pluginConfigUri = String(object.pluginConfigUri);
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.WasmPluginVersion.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.WasmPluginVersion.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.WasmPluginVersion.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.imageUri != null)
+                                message.imageUri = String(object.imageUri);
+                            if (object.imageDigest != null)
+                                message.imageDigest = String(object.imageDigest);
+                            if (object.pluginConfigDigest != null)
+                                message.pluginConfigDigest = String(object.pluginConfigDigest);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a WasmPluginVersion message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.WasmPluginVersion
+                         * @static
+                         * @param {google.cloud.networkservices.v1.WasmPluginVersion} message WasmPluginVersion
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        WasmPluginVersion.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.description = "";
+                                object.imageUri = "";
+                                object.imageDigest = "";
+                                object.pluginConfigDigest = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.imageUri != null && message.hasOwnProperty("imageUri"))
+                                object.imageUri = message.imageUri;
+                            if (message.imageDigest != null && message.hasOwnProperty("imageDigest"))
+                                object.imageDigest = message.imageDigest;
+                            if (message.pluginConfigData != null && message.hasOwnProperty("pluginConfigData")) {
+                                object.pluginConfigData = options.bytes === String ? $util.base64.encode(message.pluginConfigData, 0, message.pluginConfigData.length) : options.bytes === Array ? Array.prototype.slice.call(message.pluginConfigData) : message.pluginConfigData;
+                                if (options.oneofs)
+                                    object.pluginConfigSource = "pluginConfigData";
+                            }
+                            if (message.pluginConfigUri != null && message.hasOwnProperty("pluginConfigUri")) {
+                                object.pluginConfigUri = message.pluginConfigUri;
+                                if (options.oneofs)
+                                    object.pluginConfigSource = "pluginConfigUri";
+                            }
+                            if (message.pluginConfigDigest != null && message.hasOwnProperty("pluginConfigDigest"))
+                                object.pluginConfigDigest = message.pluginConfigDigest;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this WasmPluginVersion to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.WasmPluginVersion
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        WasmPluginVersion.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for WasmPluginVersion
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.WasmPluginVersion
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        WasmPluginVersion.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.WasmPluginVersion";
+                        };
+    
+                        return WasmPluginVersion;
+                    })();
+    
+                    v1.ListWasmPluginsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListWasmPluginsRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IListWasmPluginsRequest
+                         * @property {string|null} [parent] ListWasmPluginsRequest parent
+                         * @property {number|null} [pageSize] ListWasmPluginsRequest pageSize
+                         * @property {string|null} [pageToken] ListWasmPluginsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListWasmPluginsRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a ListWasmPluginsRequest.
+                         * @implements IListWasmPluginsRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IListWasmPluginsRequest=} [properties] Properties to set
+                         */
+                        function ListWasmPluginsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListWasmPluginsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginsRequest
+                         * @instance
+                         */
+                        ListWasmPluginsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListWasmPluginsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginsRequest
+                         * @instance
+                         */
+                        ListWasmPluginsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListWasmPluginsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginsRequest
+                         * @instance
+                         */
+                        ListWasmPluginsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListWasmPluginsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginsRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListWasmPluginsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.ListWasmPluginsRequest} ListWasmPluginsRequest instance
+                         */
+                        ListWasmPluginsRequest.create = function create(properties) {
+                            return new ListWasmPluginsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListWasmPluginsRequest message. Does not implicitly {@link google.cloud.networkservices.v1.ListWasmPluginsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginsRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListWasmPluginsRequest} message ListWasmPluginsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWasmPluginsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListWasmPluginsRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListWasmPluginsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginsRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListWasmPluginsRequest} message ListWasmPluginsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWasmPluginsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListWasmPluginsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.ListWasmPluginsRequest} ListWasmPluginsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWasmPluginsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListWasmPluginsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListWasmPluginsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.ListWasmPluginsRequest} ListWasmPluginsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWasmPluginsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListWasmPluginsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListWasmPluginsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListWasmPluginsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.ListWasmPluginsRequest} ListWasmPluginsRequest
+                         */
+                        ListWasmPluginsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.ListWasmPluginsRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.ListWasmPluginsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListWasmPluginsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginsRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ListWasmPluginsRequest} message ListWasmPluginsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListWasmPluginsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListWasmPluginsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListWasmPluginsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListWasmPluginsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListWasmPluginsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.ListWasmPluginsRequest";
+                        };
+    
+                        return ListWasmPluginsRequest;
+                    })();
+    
+                    v1.ListWasmPluginsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListWasmPluginsResponse.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IListWasmPluginsResponse
+                         * @property {Array.<google.cloud.networkservices.v1.IWasmPlugin>|null} [wasmPlugins] ListWasmPluginsResponse wasmPlugins
+                         * @property {string|null} [nextPageToken] ListWasmPluginsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListWasmPluginsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListWasmPluginsResponse.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a ListWasmPluginsResponse.
+                         * @implements IListWasmPluginsResponse
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IListWasmPluginsResponse=} [properties] Properties to set
+                         */
+                        function ListWasmPluginsResponse(properties) {
+                            this.wasmPlugins = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListWasmPluginsResponse wasmPlugins.
+                         * @member {Array.<google.cloud.networkservices.v1.IWasmPlugin>} wasmPlugins
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginsResponse
+                         * @instance
+                         */
+                        ListWasmPluginsResponse.prototype.wasmPlugins = $util.emptyArray;
+    
+                        /**
+                         * ListWasmPluginsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginsResponse
+                         * @instance
+                         */
+                        ListWasmPluginsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListWasmPluginsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginsResponse
+                         * @instance
+                         */
+                        ListWasmPluginsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListWasmPluginsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginsResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListWasmPluginsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.ListWasmPluginsResponse} ListWasmPluginsResponse instance
+                         */
+                        ListWasmPluginsResponse.create = function create(properties) {
+                            return new ListWasmPluginsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListWasmPluginsResponse message. Does not implicitly {@link google.cloud.networkservices.v1.ListWasmPluginsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginsResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListWasmPluginsResponse} message ListWasmPluginsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWasmPluginsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.wasmPlugins != null && message.wasmPlugins.length)
+                                for (var i = 0; i < message.wasmPlugins.length; ++i)
+                                    $root.google.cloud.networkservices.v1.WasmPlugin.encode(message.wasmPlugins[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListWasmPluginsResponse message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListWasmPluginsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginsResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListWasmPluginsResponse} message ListWasmPluginsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWasmPluginsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListWasmPluginsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.ListWasmPluginsResponse} ListWasmPluginsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWasmPluginsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListWasmPluginsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.wasmPlugins && message.wasmPlugins.length))
+                                            message.wasmPlugins = [];
+                                        message.wasmPlugins.push($root.google.cloud.networkservices.v1.WasmPlugin.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListWasmPluginsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.ListWasmPluginsResponse} ListWasmPluginsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWasmPluginsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListWasmPluginsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListWasmPluginsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.wasmPlugins != null && message.hasOwnProperty("wasmPlugins")) {
+                                if (!Array.isArray(message.wasmPlugins))
+                                    return "wasmPlugins: array expected";
+                                for (var i = 0; i < message.wasmPlugins.length; ++i) {
+                                    var error = $root.google.cloud.networkservices.v1.WasmPlugin.verify(message.wasmPlugins[i]);
+                                    if (error)
+                                        return "wasmPlugins." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListWasmPluginsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.ListWasmPluginsResponse} ListWasmPluginsResponse
+                         */
+                        ListWasmPluginsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.ListWasmPluginsResponse)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.ListWasmPluginsResponse();
+                            if (object.wasmPlugins) {
+                                if (!Array.isArray(object.wasmPlugins))
+                                    throw TypeError(".google.cloud.networkservices.v1.ListWasmPluginsResponse.wasmPlugins: array expected");
+                                message.wasmPlugins = [];
+                                for (var i = 0; i < object.wasmPlugins.length; ++i) {
+                                    if (typeof object.wasmPlugins[i] !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.ListWasmPluginsResponse.wasmPlugins: object expected");
+                                    message.wasmPlugins[i] = $root.google.cloud.networkservices.v1.WasmPlugin.fromObject(object.wasmPlugins[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkservices.v1.ListWasmPluginsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListWasmPluginsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginsResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ListWasmPluginsResponse} message ListWasmPluginsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListWasmPluginsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.wasmPlugins = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.wasmPlugins && message.wasmPlugins.length) {
+                                object.wasmPlugins = [];
+                                for (var j = 0; j < message.wasmPlugins.length; ++j)
+                                    object.wasmPlugins[j] = $root.google.cloud.networkservices.v1.WasmPlugin.toObject(message.wasmPlugins[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListWasmPluginsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListWasmPluginsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListWasmPluginsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListWasmPluginsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.ListWasmPluginsResponse";
+                        };
+    
+                        return ListWasmPluginsResponse;
+                    })();
+    
+                    v1.GetWasmPluginRequest = (function() {
+    
+                        /**
+                         * Properties of a GetWasmPluginRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IGetWasmPluginRequest
+                         * @property {string|null} [name] GetWasmPluginRequest name
+                         * @property {google.cloud.networkservices.v1.WasmPluginView|null} [view] GetWasmPluginRequest view
+                         */
+    
+                        /**
+                         * Constructs a new GetWasmPluginRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a GetWasmPluginRequest.
+                         * @implements IGetWasmPluginRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IGetWasmPluginRequest=} [properties] Properties to set
+                         */
+                        function GetWasmPluginRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetWasmPluginRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkservices.v1.GetWasmPluginRequest
+                         * @instance
+                         */
+                        GetWasmPluginRequest.prototype.name = "";
+    
+                        /**
+                         * GetWasmPluginRequest view.
+                         * @member {google.cloud.networkservices.v1.WasmPluginView} view
+                         * @memberof google.cloud.networkservices.v1.GetWasmPluginRequest
+                         * @instance
+                         */
+                        GetWasmPluginRequest.prototype.view = 0;
+    
+                        /**
+                         * Creates a new GetWasmPluginRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.GetWasmPluginRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGetWasmPluginRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.GetWasmPluginRequest} GetWasmPluginRequest instance
+                         */
+                        GetWasmPluginRequest.create = function create(properties) {
+                            return new GetWasmPluginRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetWasmPluginRequest message. Does not implicitly {@link google.cloud.networkservices.v1.GetWasmPluginRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.GetWasmPluginRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGetWasmPluginRequest} message GetWasmPluginRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetWasmPluginRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.view != null && Object.hasOwnProperty.call(message, "view"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.view);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetWasmPluginRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.GetWasmPluginRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.GetWasmPluginRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGetWasmPluginRequest} message GetWasmPluginRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetWasmPluginRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetWasmPluginRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.GetWasmPluginRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.GetWasmPluginRequest} GetWasmPluginRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetWasmPluginRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GetWasmPluginRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.view = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetWasmPluginRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.GetWasmPluginRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.GetWasmPluginRequest} GetWasmPluginRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetWasmPluginRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetWasmPluginRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.GetWasmPluginRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetWasmPluginRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                switch (message.view) {
+                                default:
+                                    return "view: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetWasmPluginRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.GetWasmPluginRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.GetWasmPluginRequest} GetWasmPluginRequest
+                         */
+                        GetWasmPluginRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.GetWasmPluginRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.GetWasmPluginRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            switch (object.view) {
+                            default:
+                                if (typeof object.view === "number") {
+                                    message.view = object.view;
+                                    break;
+                                }
+                                break;
+                            case "WASM_PLUGIN_VIEW_UNSPECIFIED":
+                            case 0:
+                                message.view = 0;
+                                break;
+                            case "WASM_PLUGIN_VIEW_BASIC":
+                            case 1:
+                                message.view = 1;
+                                break;
+                            case "WASM_PLUGIN_VIEW_FULL":
+                            case 2:
+                                message.view = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetWasmPluginRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.GetWasmPluginRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.GetWasmPluginRequest} message GetWasmPluginRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetWasmPluginRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.view = options.enums === String ? "WASM_PLUGIN_VIEW_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                object.view = options.enums === String ? $root.google.cloud.networkservices.v1.WasmPluginView[message.view] === undefined ? message.view : $root.google.cloud.networkservices.v1.WasmPluginView[message.view] : message.view;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetWasmPluginRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.GetWasmPluginRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetWasmPluginRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetWasmPluginRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.GetWasmPluginRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetWasmPluginRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.GetWasmPluginRequest";
+                        };
+    
+                        return GetWasmPluginRequest;
+                    })();
+    
+                    v1.CreateWasmPluginRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateWasmPluginRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface ICreateWasmPluginRequest
+                         * @property {string|null} [parent] CreateWasmPluginRequest parent
+                         * @property {string|null} [wasmPluginId] CreateWasmPluginRequest wasmPluginId
+                         * @property {google.cloud.networkservices.v1.IWasmPlugin|null} [wasmPlugin] CreateWasmPluginRequest wasmPlugin
+                         */
+    
+                        /**
+                         * Constructs a new CreateWasmPluginRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a CreateWasmPluginRequest.
+                         * @implements ICreateWasmPluginRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.ICreateWasmPluginRequest=} [properties] Properties to set
+                         */
+                        function CreateWasmPluginRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateWasmPluginRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkservices.v1.CreateWasmPluginRequest
+                         * @instance
+                         */
+                        CreateWasmPluginRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateWasmPluginRequest wasmPluginId.
+                         * @member {string} wasmPluginId
+                         * @memberof google.cloud.networkservices.v1.CreateWasmPluginRequest
+                         * @instance
+                         */
+                        CreateWasmPluginRequest.prototype.wasmPluginId = "";
+    
+                        /**
+                         * CreateWasmPluginRequest wasmPlugin.
+                         * @member {google.cloud.networkservices.v1.IWasmPlugin|null|undefined} wasmPlugin
+                         * @memberof google.cloud.networkservices.v1.CreateWasmPluginRequest
+                         * @instance
+                         */
+                        CreateWasmPluginRequest.prototype.wasmPlugin = null;
+    
+                        /**
+                         * Creates a new CreateWasmPluginRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.CreateWasmPluginRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ICreateWasmPluginRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.CreateWasmPluginRequest} CreateWasmPluginRequest instance
+                         */
+                        CreateWasmPluginRequest.create = function create(properties) {
+                            return new CreateWasmPluginRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateWasmPluginRequest message. Does not implicitly {@link google.cloud.networkservices.v1.CreateWasmPluginRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.CreateWasmPluginRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ICreateWasmPluginRequest} message CreateWasmPluginRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateWasmPluginRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.wasmPluginId != null && Object.hasOwnProperty.call(message, "wasmPluginId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.wasmPluginId);
+                            if (message.wasmPlugin != null && Object.hasOwnProperty.call(message, "wasmPlugin"))
+                                $root.google.cloud.networkservices.v1.WasmPlugin.encode(message.wasmPlugin, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateWasmPluginRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.CreateWasmPluginRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.CreateWasmPluginRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ICreateWasmPluginRequest} message CreateWasmPluginRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateWasmPluginRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateWasmPluginRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.CreateWasmPluginRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.CreateWasmPluginRequest} CreateWasmPluginRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateWasmPluginRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.CreateWasmPluginRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.wasmPluginId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.wasmPlugin = $root.google.cloud.networkservices.v1.WasmPlugin.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateWasmPluginRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.CreateWasmPluginRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.CreateWasmPluginRequest} CreateWasmPluginRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateWasmPluginRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateWasmPluginRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.CreateWasmPluginRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateWasmPluginRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.wasmPluginId != null && message.hasOwnProperty("wasmPluginId"))
+                                if (!$util.isString(message.wasmPluginId))
+                                    return "wasmPluginId: string expected";
+                            if (message.wasmPlugin != null && message.hasOwnProperty("wasmPlugin")) {
+                                var error = $root.google.cloud.networkservices.v1.WasmPlugin.verify(message.wasmPlugin);
+                                if (error)
+                                    return "wasmPlugin." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateWasmPluginRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.CreateWasmPluginRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.CreateWasmPluginRequest} CreateWasmPluginRequest
+                         */
+                        CreateWasmPluginRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.CreateWasmPluginRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.CreateWasmPluginRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.wasmPluginId != null)
+                                message.wasmPluginId = String(object.wasmPluginId);
+                            if (object.wasmPlugin != null) {
+                                if (typeof object.wasmPlugin !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.CreateWasmPluginRequest.wasmPlugin: object expected");
+                                message.wasmPlugin = $root.google.cloud.networkservices.v1.WasmPlugin.fromObject(object.wasmPlugin);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateWasmPluginRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.CreateWasmPluginRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.CreateWasmPluginRequest} message CreateWasmPluginRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateWasmPluginRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.wasmPluginId = "";
+                                object.wasmPlugin = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.wasmPluginId != null && message.hasOwnProperty("wasmPluginId"))
+                                object.wasmPluginId = message.wasmPluginId;
+                            if (message.wasmPlugin != null && message.hasOwnProperty("wasmPlugin"))
+                                object.wasmPlugin = $root.google.cloud.networkservices.v1.WasmPlugin.toObject(message.wasmPlugin, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateWasmPluginRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.CreateWasmPluginRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateWasmPluginRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateWasmPluginRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.CreateWasmPluginRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateWasmPluginRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.CreateWasmPluginRequest";
+                        };
+    
+                        return CreateWasmPluginRequest;
+                    })();
+    
+                    v1.UpdateWasmPluginRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateWasmPluginRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IUpdateWasmPluginRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateWasmPluginRequest updateMask
+                         * @property {google.cloud.networkservices.v1.IWasmPlugin|null} [wasmPlugin] UpdateWasmPluginRequest wasmPlugin
+                         */
+    
+                        /**
+                         * Constructs a new UpdateWasmPluginRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents an UpdateWasmPluginRequest.
+                         * @implements IUpdateWasmPluginRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IUpdateWasmPluginRequest=} [properties] Properties to set
+                         */
+                        function UpdateWasmPluginRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateWasmPluginRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.networkservices.v1.UpdateWasmPluginRequest
+                         * @instance
+                         */
+                        UpdateWasmPluginRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateWasmPluginRequest wasmPlugin.
+                         * @member {google.cloud.networkservices.v1.IWasmPlugin|null|undefined} wasmPlugin
+                         * @memberof google.cloud.networkservices.v1.UpdateWasmPluginRequest
+                         * @instance
+                         */
+                        UpdateWasmPluginRequest.prototype.wasmPlugin = null;
+    
+                        /**
+                         * Creates a new UpdateWasmPluginRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.UpdateWasmPluginRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IUpdateWasmPluginRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.UpdateWasmPluginRequest} UpdateWasmPluginRequest instance
+                         */
+                        UpdateWasmPluginRequest.create = function create(properties) {
+                            return new UpdateWasmPluginRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateWasmPluginRequest message. Does not implicitly {@link google.cloud.networkservices.v1.UpdateWasmPluginRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.UpdateWasmPluginRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IUpdateWasmPluginRequest} message UpdateWasmPluginRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateWasmPluginRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.wasmPlugin != null && Object.hasOwnProperty.call(message, "wasmPlugin"))
+                                $root.google.cloud.networkservices.v1.WasmPlugin.encode(message.wasmPlugin, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateWasmPluginRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.UpdateWasmPluginRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.UpdateWasmPluginRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IUpdateWasmPluginRequest} message UpdateWasmPluginRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateWasmPluginRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateWasmPluginRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.UpdateWasmPluginRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.UpdateWasmPluginRequest} UpdateWasmPluginRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateWasmPluginRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.UpdateWasmPluginRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.wasmPlugin = $root.google.cloud.networkservices.v1.WasmPlugin.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateWasmPluginRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.UpdateWasmPluginRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.UpdateWasmPluginRequest} UpdateWasmPluginRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateWasmPluginRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateWasmPluginRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.UpdateWasmPluginRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateWasmPluginRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.wasmPlugin != null && message.hasOwnProperty("wasmPlugin")) {
+                                var error = $root.google.cloud.networkservices.v1.WasmPlugin.verify(message.wasmPlugin);
+                                if (error)
+                                    return "wasmPlugin." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateWasmPluginRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.UpdateWasmPluginRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.UpdateWasmPluginRequest} UpdateWasmPluginRequest
+                         */
+                        UpdateWasmPluginRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.UpdateWasmPluginRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.UpdateWasmPluginRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.UpdateWasmPluginRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.wasmPlugin != null) {
+                                if (typeof object.wasmPlugin !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.UpdateWasmPluginRequest.wasmPlugin: object expected");
+                                message.wasmPlugin = $root.google.cloud.networkservices.v1.WasmPlugin.fromObject(object.wasmPlugin);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateWasmPluginRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.UpdateWasmPluginRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.UpdateWasmPluginRequest} message UpdateWasmPluginRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateWasmPluginRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.wasmPlugin = null;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.wasmPlugin != null && message.hasOwnProperty("wasmPlugin"))
+                                object.wasmPlugin = $root.google.cloud.networkservices.v1.WasmPlugin.toObject(message.wasmPlugin, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateWasmPluginRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.UpdateWasmPluginRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateWasmPluginRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateWasmPluginRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.UpdateWasmPluginRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateWasmPluginRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.UpdateWasmPluginRequest";
+                        };
+    
+                        return UpdateWasmPluginRequest;
+                    })();
+    
+                    v1.DeleteWasmPluginRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteWasmPluginRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IDeleteWasmPluginRequest
+                         * @property {string|null} [name] DeleteWasmPluginRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteWasmPluginRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a DeleteWasmPluginRequest.
+                         * @implements IDeleteWasmPluginRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IDeleteWasmPluginRequest=} [properties] Properties to set
+                         */
+                        function DeleteWasmPluginRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteWasmPluginRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkservices.v1.DeleteWasmPluginRequest
+                         * @instance
+                         */
+                        DeleteWasmPluginRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteWasmPluginRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.DeleteWasmPluginRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IDeleteWasmPluginRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.DeleteWasmPluginRequest} DeleteWasmPluginRequest instance
+                         */
+                        DeleteWasmPluginRequest.create = function create(properties) {
+                            return new DeleteWasmPluginRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteWasmPluginRequest message. Does not implicitly {@link google.cloud.networkservices.v1.DeleteWasmPluginRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.DeleteWasmPluginRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IDeleteWasmPluginRequest} message DeleteWasmPluginRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteWasmPluginRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteWasmPluginRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.DeleteWasmPluginRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.DeleteWasmPluginRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IDeleteWasmPluginRequest} message DeleteWasmPluginRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteWasmPluginRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteWasmPluginRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.DeleteWasmPluginRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.DeleteWasmPluginRequest} DeleteWasmPluginRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteWasmPluginRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.DeleteWasmPluginRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteWasmPluginRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.DeleteWasmPluginRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.DeleteWasmPluginRequest} DeleteWasmPluginRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteWasmPluginRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteWasmPluginRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.DeleteWasmPluginRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteWasmPluginRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteWasmPluginRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.DeleteWasmPluginRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.DeleteWasmPluginRequest} DeleteWasmPluginRequest
+                         */
+                        DeleteWasmPluginRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.DeleteWasmPluginRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.DeleteWasmPluginRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteWasmPluginRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.DeleteWasmPluginRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.DeleteWasmPluginRequest} message DeleteWasmPluginRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteWasmPluginRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteWasmPluginRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.DeleteWasmPluginRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteWasmPluginRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteWasmPluginRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.DeleteWasmPluginRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteWasmPluginRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.DeleteWasmPluginRequest";
+                        };
+    
+                        return DeleteWasmPluginRequest;
+                    })();
+    
+                    v1.ListWasmPluginVersionsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListWasmPluginVersionsRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IListWasmPluginVersionsRequest
+                         * @property {string|null} [parent] ListWasmPluginVersionsRequest parent
+                         * @property {number|null} [pageSize] ListWasmPluginVersionsRequest pageSize
+                         * @property {string|null} [pageToken] ListWasmPluginVersionsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListWasmPluginVersionsRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a ListWasmPluginVersionsRequest.
+                         * @implements IListWasmPluginVersionsRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IListWasmPluginVersionsRequest=} [properties] Properties to set
+                         */
+                        function ListWasmPluginVersionsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListWasmPluginVersionsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginVersionsRequest
+                         * @instance
+                         */
+                        ListWasmPluginVersionsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListWasmPluginVersionsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginVersionsRequest
+                         * @instance
+                         */
+                        ListWasmPluginVersionsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListWasmPluginVersionsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginVersionsRequest
+                         * @instance
+                         */
+                        ListWasmPluginVersionsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListWasmPluginVersionsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginVersionsRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListWasmPluginVersionsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.ListWasmPluginVersionsRequest} ListWasmPluginVersionsRequest instance
+                         */
+                        ListWasmPluginVersionsRequest.create = function create(properties) {
+                            return new ListWasmPluginVersionsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListWasmPluginVersionsRequest message. Does not implicitly {@link google.cloud.networkservices.v1.ListWasmPluginVersionsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginVersionsRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListWasmPluginVersionsRequest} message ListWasmPluginVersionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWasmPluginVersionsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListWasmPluginVersionsRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListWasmPluginVersionsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginVersionsRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListWasmPluginVersionsRequest} message ListWasmPluginVersionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWasmPluginVersionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListWasmPluginVersionsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginVersionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.ListWasmPluginVersionsRequest} ListWasmPluginVersionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWasmPluginVersionsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListWasmPluginVersionsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListWasmPluginVersionsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginVersionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.ListWasmPluginVersionsRequest} ListWasmPluginVersionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWasmPluginVersionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListWasmPluginVersionsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginVersionsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListWasmPluginVersionsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListWasmPluginVersionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginVersionsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.ListWasmPluginVersionsRequest} ListWasmPluginVersionsRequest
+                         */
+                        ListWasmPluginVersionsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.ListWasmPluginVersionsRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.ListWasmPluginVersionsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListWasmPluginVersionsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginVersionsRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ListWasmPluginVersionsRequest} message ListWasmPluginVersionsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListWasmPluginVersionsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListWasmPluginVersionsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginVersionsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListWasmPluginVersionsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListWasmPluginVersionsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginVersionsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListWasmPluginVersionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.ListWasmPluginVersionsRequest";
+                        };
+    
+                        return ListWasmPluginVersionsRequest;
+                    })();
+    
+                    v1.ListWasmPluginVersionsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListWasmPluginVersionsResponse.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IListWasmPluginVersionsResponse
+                         * @property {Array.<google.cloud.networkservices.v1.IWasmPluginVersion>|null} [wasmPluginVersions] ListWasmPluginVersionsResponse wasmPluginVersions
+                         * @property {string|null} [nextPageToken] ListWasmPluginVersionsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListWasmPluginVersionsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListWasmPluginVersionsResponse.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a ListWasmPluginVersionsResponse.
+                         * @implements IListWasmPluginVersionsResponse
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IListWasmPluginVersionsResponse=} [properties] Properties to set
+                         */
+                        function ListWasmPluginVersionsResponse(properties) {
+                            this.wasmPluginVersions = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListWasmPluginVersionsResponse wasmPluginVersions.
+                         * @member {Array.<google.cloud.networkservices.v1.IWasmPluginVersion>} wasmPluginVersions
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginVersionsResponse
+                         * @instance
+                         */
+                        ListWasmPluginVersionsResponse.prototype.wasmPluginVersions = $util.emptyArray;
+    
+                        /**
+                         * ListWasmPluginVersionsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginVersionsResponse
+                         * @instance
+                         */
+                        ListWasmPluginVersionsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListWasmPluginVersionsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginVersionsResponse
+                         * @instance
+                         */
+                        ListWasmPluginVersionsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListWasmPluginVersionsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginVersionsResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListWasmPluginVersionsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.ListWasmPluginVersionsResponse} ListWasmPluginVersionsResponse instance
+                         */
+                        ListWasmPluginVersionsResponse.create = function create(properties) {
+                            return new ListWasmPluginVersionsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListWasmPluginVersionsResponse message. Does not implicitly {@link google.cloud.networkservices.v1.ListWasmPluginVersionsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginVersionsResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListWasmPluginVersionsResponse} message ListWasmPluginVersionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWasmPluginVersionsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.wasmPluginVersions != null && message.wasmPluginVersions.length)
+                                for (var i = 0; i < message.wasmPluginVersions.length; ++i)
+                                    $root.google.cloud.networkservices.v1.WasmPluginVersion.encode(message.wasmPluginVersions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListWasmPluginVersionsResponse message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListWasmPluginVersionsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginVersionsResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListWasmPluginVersionsResponse} message ListWasmPluginVersionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWasmPluginVersionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListWasmPluginVersionsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginVersionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.ListWasmPluginVersionsResponse} ListWasmPluginVersionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWasmPluginVersionsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListWasmPluginVersionsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.wasmPluginVersions && message.wasmPluginVersions.length))
+                                            message.wasmPluginVersions = [];
+                                        message.wasmPluginVersions.push($root.google.cloud.networkservices.v1.WasmPluginVersion.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListWasmPluginVersionsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginVersionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.ListWasmPluginVersionsResponse} ListWasmPluginVersionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWasmPluginVersionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListWasmPluginVersionsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginVersionsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListWasmPluginVersionsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.wasmPluginVersions != null && message.hasOwnProperty("wasmPluginVersions")) {
+                                if (!Array.isArray(message.wasmPluginVersions))
+                                    return "wasmPluginVersions: array expected";
+                                for (var i = 0; i < message.wasmPluginVersions.length; ++i) {
+                                    var error = $root.google.cloud.networkservices.v1.WasmPluginVersion.verify(message.wasmPluginVersions[i]);
+                                    if (error)
+                                        return "wasmPluginVersions." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListWasmPluginVersionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginVersionsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.ListWasmPluginVersionsResponse} ListWasmPluginVersionsResponse
+                         */
+                        ListWasmPluginVersionsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.ListWasmPluginVersionsResponse)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.ListWasmPluginVersionsResponse();
+                            if (object.wasmPluginVersions) {
+                                if (!Array.isArray(object.wasmPluginVersions))
+                                    throw TypeError(".google.cloud.networkservices.v1.ListWasmPluginVersionsResponse.wasmPluginVersions: array expected");
+                                message.wasmPluginVersions = [];
+                                for (var i = 0; i < object.wasmPluginVersions.length; ++i) {
+                                    if (typeof object.wasmPluginVersions[i] !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.ListWasmPluginVersionsResponse.wasmPluginVersions: object expected");
+                                    message.wasmPluginVersions[i] = $root.google.cloud.networkservices.v1.WasmPluginVersion.fromObject(object.wasmPluginVersions[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkservices.v1.ListWasmPluginVersionsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListWasmPluginVersionsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginVersionsResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ListWasmPluginVersionsResponse} message ListWasmPluginVersionsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListWasmPluginVersionsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.wasmPluginVersions = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.wasmPluginVersions && message.wasmPluginVersions.length) {
+                                object.wasmPluginVersions = [];
+                                for (var j = 0; j < message.wasmPluginVersions.length; ++j)
+                                    object.wasmPluginVersions[j] = $root.google.cloud.networkservices.v1.WasmPluginVersion.toObject(message.wasmPluginVersions[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListWasmPluginVersionsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginVersionsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListWasmPluginVersionsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListWasmPluginVersionsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.ListWasmPluginVersionsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListWasmPluginVersionsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.ListWasmPluginVersionsResponse";
+                        };
+    
+                        return ListWasmPluginVersionsResponse;
+                    })();
+    
+                    v1.GetWasmPluginVersionRequest = (function() {
+    
+                        /**
+                         * Properties of a GetWasmPluginVersionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IGetWasmPluginVersionRequest
+                         * @property {string|null} [name] GetWasmPluginVersionRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetWasmPluginVersionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a GetWasmPluginVersionRequest.
+                         * @implements IGetWasmPluginVersionRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IGetWasmPluginVersionRequest=} [properties] Properties to set
+                         */
+                        function GetWasmPluginVersionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetWasmPluginVersionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkservices.v1.GetWasmPluginVersionRequest
+                         * @instance
+                         */
+                        GetWasmPluginVersionRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetWasmPluginVersionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.GetWasmPluginVersionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGetWasmPluginVersionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.GetWasmPluginVersionRequest} GetWasmPluginVersionRequest instance
+                         */
+                        GetWasmPluginVersionRequest.create = function create(properties) {
+                            return new GetWasmPluginVersionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetWasmPluginVersionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.GetWasmPluginVersionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.GetWasmPluginVersionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGetWasmPluginVersionRequest} message GetWasmPluginVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetWasmPluginVersionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetWasmPluginVersionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.GetWasmPluginVersionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.GetWasmPluginVersionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGetWasmPluginVersionRequest} message GetWasmPluginVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetWasmPluginVersionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetWasmPluginVersionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.GetWasmPluginVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.GetWasmPluginVersionRequest} GetWasmPluginVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetWasmPluginVersionRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GetWasmPluginVersionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetWasmPluginVersionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.GetWasmPluginVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.GetWasmPluginVersionRequest} GetWasmPluginVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetWasmPluginVersionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetWasmPluginVersionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.GetWasmPluginVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetWasmPluginVersionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetWasmPluginVersionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.GetWasmPluginVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.GetWasmPluginVersionRequest} GetWasmPluginVersionRequest
+                         */
+                        GetWasmPluginVersionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.GetWasmPluginVersionRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.GetWasmPluginVersionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetWasmPluginVersionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.GetWasmPluginVersionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.GetWasmPluginVersionRequest} message GetWasmPluginVersionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetWasmPluginVersionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetWasmPluginVersionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.GetWasmPluginVersionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetWasmPluginVersionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetWasmPluginVersionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.GetWasmPluginVersionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetWasmPluginVersionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.GetWasmPluginVersionRequest";
+                        };
+    
+                        return GetWasmPluginVersionRequest;
+                    })();
+    
+                    v1.CreateWasmPluginVersionRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateWasmPluginVersionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface ICreateWasmPluginVersionRequest
+                         * @property {string|null} [parent] CreateWasmPluginVersionRequest parent
+                         * @property {string|null} [wasmPluginVersionId] CreateWasmPluginVersionRequest wasmPluginVersionId
+                         * @property {google.cloud.networkservices.v1.IWasmPluginVersion|null} [wasmPluginVersion] CreateWasmPluginVersionRequest wasmPluginVersion
+                         */
+    
+                        /**
+                         * Constructs a new CreateWasmPluginVersionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a CreateWasmPluginVersionRequest.
+                         * @implements ICreateWasmPluginVersionRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.ICreateWasmPluginVersionRequest=} [properties] Properties to set
+                         */
+                        function CreateWasmPluginVersionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateWasmPluginVersionRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkservices.v1.CreateWasmPluginVersionRequest
+                         * @instance
+                         */
+                        CreateWasmPluginVersionRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateWasmPluginVersionRequest wasmPluginVersionId.
+                         * @member {string} wasmPluginVersionId
+                         * @memberof google.cloud.networkservices.v1.CreateWasmPluginVersionRequest
+                         * @instance
+                         */
+                        CreateWasmPluginVersionRequest.prototype.wasmPluginVersionId = "";
+    
+                        /**
+                         * CreateWasmPluginVersionRequest wasmPluginVersion.
+                         * @member {google.cloud.networkservices.v1.IWasmPluginVersion|null|undefined} wasmPluginVersion
+                         * @memberof google.cloud.networkservices.v1.CreateWasmPluginVersionRequest
+                         * @instance
+                         */
+                        CreateWasmPluginVersionRequest.prototype.wasmPluginVersion = null;
+    
+                        /**
+                         * Creates a new CreateWasmPluginVersionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.CreateWasmPluginVersionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ICreateWasmPluginVersionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.CreateWasmPluginVersionRequest} CreateWasmPluginVersionRequest instance
+                         */
+                        CreateWasmPluginVersionRequest.create = function create(properties) {
+                            return new CreateWasmPluginVersionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateWasmPluginVersionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.CreateWasmPluginVersionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.CreateWasmPluginVersionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ICreateWasmPluginVersionRequest} message CreateWasmPluginVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateWasmPluginVersionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.wasmPluginVersionId != null && Object.hasOwnProperty.call(message, "wasmPluginVersionId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.wasmPluginVersionId);
+                            if (message.wasmPluginVersion != null && Object.hasOwnProperty.call(message, "wasmPluginVersion"))
+                                $root.google.cloud.networkservices.v1.WasmPluginVersion.encode(message.wasmPluginVersion, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateWasmPluginVersionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.CreateWasmPluginVersionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.CreateWasmPluginVersionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ICreateWasmPluginVersionRequest} message CreateWasmPluginVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateWasmPluginVersionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateWasmPluginVersionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.CreateWasmPluginVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.CreateWasmPluginVersionRequest} CreateWasmPluginVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateWasmPluginVersionRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.CreateWasmPluginVersionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.wasmPluginVersionId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.wasmPluginVersion = $root.google.cloud.networkservices.v1.WasmPluginVersion.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateWasmPluginVersionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.CreateWasmPluginVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.CreateWasmPluginVersionRequest} CreateWasmPluginVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateWasmPluginVersionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateWasmPluginVersionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.CreateWasmPluginVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateWasmPluginVersionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.wasmPluginVersionId != null && message.hasOwnProperty("wasmPluginVersionId"))
+                                if (!$util.isString(message.wasmPluginVersionId))
+                                    return "wasmPluginVersionId: string expected";
+                            if (message.wasmPluginVersion != null && message.hasOwnProperty("wasmPluginVersion")) {
+                                var error = $root.google.cloud.networkservices.v1.WasmPluginVersion.verify(message.wasmPluginVersion);
+                                if (error)
+                                    return "wasmPluginVersion." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateWasmPluginVersionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.CreateWasmPluginVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.CreateWasmPluginVersionRequest} CreateWasmPluginVersionRequest
+                         */
+                        CreateWasmPluginVersionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.CreateWasmPluginVersionRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.CreateWasmPluginVersionRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.wasmPluginVersionId != null)
+                                message.wasmPluginVersionId = String(object.wasmPluginVersionId);
+                            if (object.wasmPluginVersion != null) {
+                                if (typeof object.wasmPluginVersion !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.CreateWasmPluginVersionRequest.wasmPluginVersion: object expected");
+                                message.wasmPluginVersion = $root.google.cloud.networkservices.v1.WasmPluginVersion.fromObject(object.wasmPluginVersion);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateWasmPluginVersionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.CreateWasmPluginVersionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.CreateWasmPluginVersionRequest} message CreateWasmPluginVersionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateWasmPluginVersionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.wasmPluginVersionId = "";
+                                object.wasmPluginVersion = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.wasmPluginVersionId != null && message.hasOwnProperty("wasmPluginVersionId"))
+                                object.wasmPluginVersionId = message.wasmPluginVersionId;
+                            if (message.wasmPluginVersion != null && message.hasOwnProperty("wasmPluginVersion"))
+                                object.wasmPluginVersion = $root.google.cloud.networkservices.v1.WasmPluginVersion.toObject(message.wasmPluginVersion, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateWasmPluginVersionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.CreateWasmPluginVersionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateWasmPluginVersionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateWasmPluginVersionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.CreateWasmPluginVersionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateWasmPluginVersionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.CreateWasmPluginVersionRequest";
+                        };
+    
+                        return CreateWasmPluginVersionRequest;
+                    })();
+    
+                    v1.DeleteWasmPluginVersionRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteWasmPluginVersionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IDeleteWasmPluginVersionRequest
+                         * @property {string|null} [name] DeleteWasmPluginVersionRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteWasmPluginVersionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a DeleteWasmPluginVersionRequest.
+                         * @implements IDeleteWasmPluginVersionRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IDeleteWasmPluginVersionRequest=} [properties] Properties to set
+                         */
+                        function DeleteWasmPluginVersionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteWasmPluginVersionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest
+                         * @instance
+                         */
+                        DeleteWasmPluginVersionRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteWasmPluginVersionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IDeleteWasmPluginVersionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest} DeleteWasmPluginVersionRequest instance
+                         */
+                        DeleteWasmPluginVersionRequest.create = function create(properties) {
+                            return new DeleteWasmPluginVersionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteWasmPluginVersionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IDeleteWasmPluginVersionRequest} message DeleteWasmPluginVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteWasmPluginVersionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteWasmPluginVersionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IDeleteWasmPluginVersionRequest} message DeleteWasmPluginVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteWasmPluginVersionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteWasmPluginVersionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest} DeleteWasmPluginVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteWasmPluginVersionRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteWasmPluginVersionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest} DeleteWasmPluginVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteWasmPluginVersionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteWasmPluginVersionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteWasmPluginVersionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteWasmPluginVersionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest} DeleteWasmPluginVersionRequest
+                         */
+                        DeleteWasmPluginVersionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteWasmPluginVersionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest} message DeleteWasmPluginVersionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteWasmPluginVersionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteWasmPluginVersionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteWasmPluginVersionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteWasmPluginVersionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteWasmPluginVersionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest";
+                        };
+    
+                        return DeleteWasmPluginVersionRequest;
                     })();
     
                     v1.Gateway = (function() {
@@ -25855,6 +32926,303 @@
                          * @memberof google.cloud.networkservices.v1.NetworkServices
                          * @instance
                          * @param {google.cloud.networkservices.v1.IDeleteEndpointPolicyRequest} request DeleteEndpointPolicyRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|listWasmPluginVersions}.
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @typedef ListWasmPluginVersionsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkservices.v1.ListWasmPluginVersionsResponse} [response] ListWasmPluginVersionsResponse
+                         */
+    
+                        /**
+                         * Calls ListWasmPluginVersions.
+                         * @function listWasmPluginVersions
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IListWasmPluginVersionsRequest} request ListWasmPluginVersionsRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.NetworkServices.ListWasmPluginVersionsCallback} callback Node-style callback called with the error, if any, and ListWasmPluginVersionsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkServices.prototype.listWasmPluginVersions = function listWasmPluginVersions(request, callback) {
+                            return this.rpcCall(listWasmPluginVersions, $root.google.cloud.networkservices.v1.ListWasmPluginVersionsRequest, $root.google.cloud.networkservices.v1.ListWasmPluginVersionsResponse, request, callback);
+                        }, "name", { value: "ListWasmPluginVersions" });
+    
+                        /**
+                         * Calls ListWasmPluginVersions.
+                         * @function listWasmPluginVersions
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IListWasmPluginVersionsRequest} request ListWasmPluginVersionsRequest message or plain object
+                         * @returns {Promise<google.cloud.networkservices.v1.ListWasmPluginVersionsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|getWasmPluginVersion}.
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @typedef GetWasmPluginVersionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkservices.v1.WasmPluginVersion} [response] WasmPluginVersion
+                         */
+    
+                        /**
+                         * Calls GetWasmPluginVersion.
+                         * @function getWasmPluginVersion
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IGetWasmPluginVersionRequest} request GetWasmPluginVersionRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.NetworkServices.GetWasmPluginVersionCallback} callback Node-style callback called with the error, if any, and WasmPluginVersion
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkServices.prototype.getWasmPluginVersion = function getWasmPluginVersion(request, callback) {
+                            return this.rpcCall(getWasmPluginVersion, $root.google.cloud.networkservices.v1.GetWasmPluginVersionRequest, $root.google.cloud.networkservices.v1.WasmPluginVersion, request, callback);
+                        }, "name", { value: "GetWasmPluginVersion" });
+    
+                        /**
+                         * Calls GetWasmPluginVersion.
+                         * @function getWasmPluginVersion
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IGetWasmPluginVersionRequest} request GetWasmPluginVersionRequest message or plain object
+                         * @returns {Promise<google.cloud.networkservices.v1.WasmPluginVersion>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|createWasmPluginVersion}.
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @typedef CreateWasmPluginVersionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateWasmPluginVersion.
+                         * @function createWasmPluginVersion
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.ICreateWasmPluginVersionRequest} request CreateWasmPluginVersionRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.NetworkServices.CreateWasmPluginVersionCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkServices.prototype.createWasmPluginVersion = function createWasmPluginVersion(request, callback) {
+                            return this.rpcCall(createWasmPluginVersion, $root.google.cloud.networkservices.v1.CreateWasmPluginVersionRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateWasmPluginVersion" });
+    
+                        /**
+                         * Calls CreateWasmPluginVersion.
+                         * @function createWasmPluginVersion
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.ICreateWasmPluginVersionRequest} request CreateWasmPluginVersionRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|deleteWasmPluginVersion}.
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @typedef DeleteWasmPluginVersionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteWasmPluginVersion.
+                         * @function deleteWasmPluginVersion
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IDeleteWasmPluginVersionRequest} request DeleteWasmPluginVersionRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.NetworkServices.DeleteWasmPluginVersionCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkServices.prototype.deleteWasmPluginVersion = function deleteWasmPluginVersion(request, callback) {
+                            return this.rpcCall(deleteWasmPluginVersion, $root.google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteWasmPluginVersion" });
+    
+                        /**
+                         * Calls DeleteWasmPluginVersion.
+                         * @function deleteWasmPluginVersion
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IDeleteWasmPluginVersionRequest} request DeleteWasmPluginVersionRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|listWasmPlugins}.
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @typedef ListWasmPluginsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkservices.v1.ListWasmPluginsResponse} [response] ListWasmPluginsResponse
+                         */
+    
+                        /**
+                         * Calls ListWasmPlugins.
+                         * @function listWasmPlugins
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IListWasmPluginsRequest} request ListWasmPluginsRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.NetworkServices.ListWasmPluginsCallback} callback Node-style callback called with the error, if any, and ListWasmPluginsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkServices.prototype.listWasmPlugins = function listWasmPlugins(request, callback) {
+                            return this.rpcCall(listWasmPlugins, $root.google.cloud.networkservices.v1.ListWasmPluginsRequest, $root.google.cloud.networkservices.v1.ListWasmPluginsResponse, request, callback);
+                        }, "name", { value: "ListWasmPlugins" });
+    
+                        /**
+                         * Calls ListWasmPlugins.
+                         * @function listWasmPlugins
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IListWasmPluginsRequest} request ListWasmPluginsRequest message or plain object
+                         * @returns {Promise<google.cloud.networkservices.v1.ListWasmPluginsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|getWasmPlugin}.
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @typedef GetWasmPluginCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkservices.v1.WasmPlugin} [response] WasmPlugin
+                         */
+    
+                        /**
+                         * Calls GetWasmPlugin.
+                         * @function getWasmPlugin
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IGetWasmPluginRequest} request GetWasmPluginRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.NetworkServices.GetWasmPluginCallback} callback Node-style callback called with the error, if any, and WasmPlugin
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkServices.prototype.getWasmPlugin = function getWasmPlugin(request, callback) {
+                            return this.rpcCall(getWasmPlugin, $root.google.cloud.networkservices.v1.GetWasmPluginRequest, $root.google.cloud.networkservices.v1.WasmPlugin, request, callback);
+                        }, "name", { value: "GetWasmPlugin" });
+    
+                        /**
+                         * Calls GetWasmPlugin.
+                         * @function getWasmPlugin
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IGetWasmPluginRequest} request GetWasmPluginRequest message or plain object
+                         * @returns {Promise<google.cloud.networkservices.v1.WasmPlugin>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|createWasmPlugin}.
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @typedef CreateWasmPluginCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateWasmPlugin.
+                         * @function createWasmPlugin
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.ICreateWasmPluginRequest} request CreateWasmPluginRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.NetworkServices.CreateWasmPluginCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkServices.prototype.createWasmPlugin = function createWasmPlugin(request, callback) {
+                            return this.rpcCall(createWasmPlugin, $root.google.cloud.networkservices.v1.CreateWasmPluginRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateWasmPlugin" });
+    
+                        /**
+                         * Calls CreateWasmPlugin.
+                         * @function createWasmPlugin
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.ICreateWasmPluginRequest} request CreateWasmPluginRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|updateWasmPlugin}.
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @typedef UpdateWasmPluginCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateWasmPlugin.
+                         * @function updateWasmPlugin
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IUpdateWasmPluginRequest} request UpdateWasmPluginRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.NetworkServices.UpdateWasmPluginCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkServices.prototype.updateWasmPlugin = function updateWasmPlugin(request, callback) {
+                            return this.rpcCall(updateWasmPlugin, $root.google.cloud.networkservices.v1.UpdateWasmPluginRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateWasmPlugin" });
+    
+                        /**
+                         * Calls UpdateWasmPlugin.
+                         * @function updateWasmPlugin
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IUpdateWasmPluginRequest} request UpdateWasmPluginRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|deleteWasmPlugin}.
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @typedef DeleteWasmPluginCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteWasmPlugin.
+                         * @function deleteWasmPlugin
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IDeleteWasmPluginRequest} request DeleteWasmPluginRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.NetworkServices.DeleteWasmPluginCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkServices.prototype.deleteWasmPlugin = function deleteWasmPlugin(request, callback) {
+                            return this.rpcCall(deleteWasmPlugin, $root.google.cloud.networkservices.v1.DeleteWasmPluginRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteWasmPlugin" });
+    
+                        /**
+                         * Calls DeleteWasmPlugin.
+                         * @function deleteWasmPlugin
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IDeleteWasmPluginRequest} request DeleteWasmPluginRequest message or plain object
                          * @returns {Promise<google.longrunning.Operation>} Promise
                          * @variation 2
                          */
