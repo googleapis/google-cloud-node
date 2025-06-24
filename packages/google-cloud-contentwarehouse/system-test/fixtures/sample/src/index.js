@@ -16,19 +16,17 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const contentwarehouse = require('@google-cloud/contentwarehouse');
 
 function main() {
-  const documentLinkServiceClient =
-    new contentwarehouse.DocumentLinkServiceClient();
-  const documentSchemaServiceClient =
-    new contentwarehouse.DocumentSchemaServiceClient();
+  const documentLinkServiceClient = new contentwarehouse.DocumentLinkServiceClient();
+  const documentSchemaServiceClient = new contentwarehouse.DocumentSchemaServiceClient();
   const documentServiceClient = new contentwarehouse.DocumentServiceClient();
   const pipelineServiceClient = new contentwarehouse.PipelineServiceClient();
   const ruleSetServiceClient = new contentwarehouse.RuleSetServiceClient();
-  const synonymSetServiceClient =
-    new contentwarehouse.SynonymSetServiceClient();
+  const synonymSetServiceClient = new contentwarehouse.SynonymSetServiceClient();
 }
 
 main();

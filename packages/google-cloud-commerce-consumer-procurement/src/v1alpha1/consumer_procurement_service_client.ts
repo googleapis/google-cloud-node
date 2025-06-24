@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -119,43 +110,20 @@ export class ConsumerProcurementServiceClient {
    *     const client = new ConsumerProcurementServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof ConsumerProcurementServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof ConsumerProcurementServiceClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
-    this._servicePath =
-      'cloudcommerceconsumerprocurement.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    this._servicePath = 'cloudcommerceconsumerprocurement.' + this._universeDomain;
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -181,7 +149,7 @@ export class ConsumerProcurementServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -195,7 +163,10 @@ export class ConsumerProcurementServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -228,60 +199,40 @@ export class ConsumerProcurementServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listOrders: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'orders'
-      ),
+      listOrders:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'orders')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1alpha1/{name=billingAccounts/*/orders/*/operations/*}',
-          additional_bindings: [
-            {
-              get: '/v1alpha1/{name=billingAccounts/*/orders/*/orderAttributions/*/operations/*}',
-            },
-          ],
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v1alpha1/{name=billingAccounts/*/orders/*/operations/*}',additional_bindings: [{get: '/v1alpha1/{name=billingAccounts/*/orders/*/orderAttributions/*/operations/*}',}],
+      }];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const placeOrderResponse = protoFilesRoot.lookup(
-      '.google.cloud.commerce.consumer.procurement.v1alpha1.Order'
-    ) as gax.protobuf.Type;
+      '.google.cloud.commerce.consumer.procurement.v1alpha1.Order') as gax.protobuf.Type;
     const placeOrderMetadata = protoFilesRoot.lookup(
-      '.google.cloud.commerce.consumer.procurement.v1alpha1.PlaceOrderMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.commerce.consumer.procurement.v1alpha1.PlaceOrderMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       placeOrder: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         placeOrderResponse.decode.bind(placeOrderResponse),
-        placeOrderMetadata.decode.bind(placeOrderMetadata)
-      ),
+        placeOrderMetadata.decode.bind(placeOrderMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.commerce.consumer.procurement.v1alpha1.ConsumerProcurementService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.commerce.consumer.procurement.v1alpha1.ConsumerProcurementService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -312,38 +263,28 @@ export class ConsumerProcurementServiceClient {
     // Put together the "service stub" for
     // google.cloud.commerce.consumer.procurement.v1alpha1.ConsumerProcurementService.
     this.consumerProcurementServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.commerce.consumer.procurement.v1alpha1.ConsumerProcurementService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.commerce.consumer.procurement
-            .v1alpha1.ConsumerProcurementService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.commerce.consumer.procurement.v1alpha1.ConsumerProcurementService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.commerce.consumer.procurement.v1alpha1.ConsumerProcurementService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const consumerProcurementServiceStubMethods = [
-      'placeOrder',
-      'getOrder',
-      'listOrders',
-    ];
+    const consumerProcurementServiceStubMethods =
+        ['placeOrder', 'getOrder', 'listOrders'];
     for (const methodName of consumerProcurementServiceStubMethods) {
       const callPromise = this.consumerProcurementServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -368,14 +309,8 @@ export class ConsumerProcurementServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'cloudcommerceconsumerprocurement.googleapis.com';
   }
@@ -386,14 +321,8 @@ export class ConsumerProcurementServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'cloudcommerceconsumerprocurement.googleapis.com';
   }
@@ -424,7 +353,9 @@ export class ConsumerProcurementServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -433,9 +364,8 @@ export class ConsumerProcurementServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -446,455 +376,335 @@ export class ConsumerProcurementServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Returns the requested
-   * {@link protos.google.cloud.commerce.consumer.procurement.v1alpha1.Order|Order}
-   * resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the order to retrieve.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.commerce.consumer.procurement.v1alpha1.Order|Order}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/consumer_procurement_service.get_order.js</caption>
-   * region_tag:cloudcommerceconsumerprocurement_v1alpha1_generated_ConsumerProcurementService_GetOrder_async
-   */
+/**
+ * Returns the requested
+ * {@link protos.google.cloud.commerce.consumer.procurement.v1alpha1.Order|Order}
+ * resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the order to retrieve.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.commerce.consumer.procurement.v1alpha1.Order|Order}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/consumer_procurement_service.get_order.js</caption>
+ * region_tag:cloudcommerceconsumerprocurement_v1alpha1_generated_ConsumerProcurementService_GetOrder_async
+ */
   getOrder(
-    request?: protos.google.cloud.commerce.consumer.procurement.v1alpha1.IGetOrderRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder,
-      (
-        | protos.google.cloud.commerce.consumer.procurement.v1alpha1.IGetOrderRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.commerce.consumer.procurement.v1alpha1.IGetOrderRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder,
+        protos.google.cloud.commerce.consumer.procurement.v1alpha1.IGetOrderRequest|undefined, {}|undefined
+      ]>;
   getOrder(
-    request: protos.google.cloud.commerce.consumer.procurement.v1alpha1.IGetOrderRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder,
-      | protos.google.cloud.commerce.consumer.procurement.v1alpha1.IGetOrderRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getOrder(
-    request: protos.google.cloud.commerce.consumer.procurement.v1alpha1.IGetOrderRequest,
-    callback: Callback<
-      protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder,
-      | protos.google.cloud.commerce.consumer.procurement.v1alpha1.IGetOrderRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getOrder(
-    request?: protos.google.cloud.commerce.consumer.procurement.v1alpha1.IGetOrderRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.commerce.consumer.procurement.v1alpha1.IGetOrderRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder,
-          | protos.google.cloud.commerce.consumer.procurement.v1alpha1.IGetOrderRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder,
-      | protos.google.cloud.commerce.consumer.procurement.v1alpha1.IGetOrderRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder,
-      (
-        | protos.google.cloud.commerce.consumer.procurement.v1alpha1.IGetOrderRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IGetOrderRequest|null|undefined,
+          {}|null|undefined>): void;
+  getOrder(
+      request: protos.google.cloud.commerce.consumer.procurement.v1alpha1.IGetOrderRequest,
+      callback: Callback<
+          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder,
+          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IGetOrderRequest|null|undefined,
+          {}|null|undefined>): void;
+  getOrder(
+      request?: protos.google.cloud.commerce.consumer.procurement.v1alpha1.IGetOrderRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder,
+          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IGetOrderRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder,
+          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IGetOrderRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder,
+        protos.google.cloud.commerce.consumer.procurement.v1alpha1.IGetOrderRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getOrder request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder,
-          | protos.google.cloud.commerce.consumer.procurement.v1alpha1.IGetOrderRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder,
+        protos.google.cloud.commerce.consumer.procurement.v1alpha1.IGetOrderRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getOrder response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getOrder(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder,
-          (
-            | protos.google.cloud.commerce.consumer.procurement.v1alpha1.IGetOrderRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getOrder response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getOrder(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder,
+        protos.google.cloud.commerce.consumer.procurement.v1alpha1.IGetOrderRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getOrder response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Creates a new
-   * {@link protos.google.cloud.commerce.consumer.procurement.v1alpha1.Order|Order}.
-   *
-   * This API only supports GCP spend-based committed use
-   * discounts specified by GCP documentation.
-   *
-   * The returned long-running operation is in-progress until the backend
-   * completes the creation of the resource. Once completed, the order is
-   * in
-   * {@link protos.google.cloud.commerce.consumer.procurement.v1alpha1.OrderState.ORDER_STATE_ACTIVE|OrderState.ORDER_STATE_ACTIVE}.
-   * In case of failure, the order resource will be removed.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the parent resource.
-   *   This field has the form  `billingAccounts/{billing-account-id}`.
-   * @param {string} request.displayName
-   *   Required. The user-specified name of the order being placed.
-   * @param {number[]} [request.lineItemInfo]
-   *   Optional. Places order for offer. Required when an offer-based order is
-   *   being placed.
-   * @param {string} [request.requestId]
-   *   Optional. A unique identifier for this request.
-   *   The server will ignore subsequent requests that provide a duplicate request
-   *   ID for at least 120 minutes after the first request.
-   *
-   *   The request ID must be a valid
-   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/consumer_procurement_service.place_order.js</caption>
-   * region_tag:cloudcommerceconsumerprocurement_v1alpha1_generated_ConsumerProcurementService_PlaceOrder_async
-   */
+/**
+ * Creates a new
+ * {@link protos.google.cloud.commerce.consumer.procurement.v1alpha1.Order|Order}.
+ *
+ * This API only supports GCP spend-based committed use
+ * discounts specified by GCP documentation.
+ *
+ * The returned long-running operation is in-progress until the backend
+ * completes the creation of the resource. Once completed, the order is
+ * in
+ * {@link protos.google.cloud.commerce.consumer.procurement.v1alpha1.OrderState.ORDER_STATE_ACTIVE|OrderState.ORDER_STATE_ACTIVE}.
+ * In case of failure, the order resource will be removed.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the parent resource.
+ *   This field has the form  `billingAccounts/{billing-account-id}`.
+ * @param {string} request.displayName
+ *   Required. The user-specified name of the order being placed.
+ * @param {number[]} [request.lineItemInfo]
+ *   Optional. Places order for offer. Required when an offer-based order is
+ *   being placed.
+ * @param {string} [request.requestId]
+ *   Optional. A unique identifier for this request.
+ *   The server will ignore subsequent requests that provide a duplicate request
+ *   ID for at least 120 minutes after the first request.
+ *
+ *   The request ID must be a valid
+ *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/consumer_procurement_service.place_order.js</caption>
+ * region_tag:cloudcommerceconsumerprocurement_v1alpha1_generated_ConsumerProcurementService_PlaceOrder_async
+ */
   placeOrder(
-    request?: protos.google.cloud.commerce.consumer.procurement.v1alpha1.IPlaceOrderRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder,
-        protos.google.cloud.commerce.consumer.procurement.v1alpha1.IPlaceOrderMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.commerce.consumer.procurement.v1alpha1.IPlaceOrderRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder, protos.google.cloud.commerce.consumer.procurement.v1alpha1.IPlaceOrderMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   placeOrder(
-    request: protos.google.cloud.commerce.consumer.procurement.v1alpha1.IPlaceOrderRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder,
-        protos.google.cloud.commerce.consumer.procurement.v1alpha1.IPlaceOrderMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.commerce.consumer.procurement.v1alpha1.IPlaceOrderRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder, protos.google.cloud.commerce.consumer.procurement.v1alpha1.IPlaceOrderMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   placeOrder(
-    request: protos.google.cloud.commerce.consumer.procurement.v1alpha1.IPlaceOrderRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder,
-        protos.google.cloud.commerce.consumer.procurement.v1alpha1.IPlaceOrderMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.commerce.consumer.procurement.v1alpha1.IPlaceOrderRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder, protos.google.cloud.commerce.consumer.procurement.v1alpha1.IPlaceOrderMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   placeOrder(
-    request?: protos.google.cloud.commerce.consumer.procurement.v1alpha1.IPlaceOrderRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder,
-            protos.google.cloud.commerce.consumer.procurement.v1alpha1.IPlaceOrderMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder,
-        protos.google.cloud.commerce.consumer.procurement.v1alpha1.IPlaceOrderMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder,
-        protos.google.cloud.commerce.consumer.procurement.v1alpha1.IPlaceOrderMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.commerce.consumer.procurement.v1alpha1.IPlaceOrderRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder, protos.google.cloud.commerce.consumer.procurement.v1alpha1.IPlaceOrderMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder, protos.google.cloud.commerce.consumer.procurement.v1alpha1.IPlaceOrderMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder, protos.google.cloud.commerce.consumer.procurement.v1alpha1.IPlaceOrderMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder,
-            protos.google.cloud.commerce.consumer.procurement.v1alpha1.IPlaceOrderMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder, protos.google.cloud.commerce.consumer.procurement.v1alpha1.IPlaceOrderMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('placeOrder response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('placeOrder request %j', request);
-    return this.innerApiCalls
-      .placeOrder(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder,
-            protos.google.cloud.commerce.consumer.procurement.v1alpha1.IPlaceOrderMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('placeOrder response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.placeOrder(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder, protos.google.cloud.commerce.consumer.procurement.v1alpha1.IPlaceOrderMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('placeOrder response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `placeOrder()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/consumer_procurement_service.place_order.js</caption>
-   * region_tag:cloudcommerceconsumerprocurement_v1alpha1_generated_ConsumerProcurementService_PlaceOrder_async
-   */
-  async checkPlaceOrderProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.commerce.consumer.procurement.v1alpha1.Order,
-      protos.google.cloud.commerce.consumer.procurement.v1alpha1.PlaceOrderMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `placeOrder()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/consumer_procurement_service.place_order.js</caption>
+ * region_tag:cloudcommerceconsumerprocurement_v1alpha1_generated_ConsumerProcurementService_PlaceOrder_async
+ */
+  async checkPlaceOrderProgress(name: string): Promise<LROperation<protos.google.cloud.commerce.consumer.procurement.v1alpha1.Order, protos.google.cloud.commerce.consumer.procurement.v1alpha1.PlaceOrderMetadata>>{
     this._log.info('placeOrder long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.placeOrder,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.commerce.consumer.procurement.v1alpha1.Order,
-      protos.google.cloud.commerce.consumer.procurement.v1alpha1.PlaceOrderMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.placeOrder, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.commerce.consumer.procurement.v1alpha1.Order, protos.google.cloud.commerce.consumer.procurement.v1alpha1.PlaceOrderMetadata>;
   }
-  /**
-   * Lists {@link protos.google.cloud.commerce.consumer.procurement.v1alpha1.Order|Order}
-   * resources that the user has access to, within the scope of the parent
-   * resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource to query for orders.
-   *   This field has the form `billingAccounts/{billing-account-id}`.
-   * @param {number} request.pageSize
-   *   The maximum number of entries requested.
-   *   The default page size is 25 and the maximum page size is 200.
-   * @param {string} request.pageToken
-   *   The token for fetching the next page.
-   * @param {string} request.filter
-   *   Filter that you can use to limit the list request.
-   *
-   *   A query string that can match a selected set of attributes
-   *   with string values. For example, `display_name=abc`.
-   *   Supported query attributes are
-   *
-   *   * `display_name`
-   *
-   *   If the query contains special characters other than letters,
-   *   underscore, or digits, the phrase must be quoted with double quotes. For
-   *   example, `display_name="foo:bar"`, where the display name needs to be
-   *   quoted because it contains special character colon.
-   *
-   *   Queries can be combined with `OR`, and `NOT` to form more complex queries.
-   *   You can also group them to force a desired evaluation order.
-   *   For example, `display_name=abc OR display_name=def`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.commerce.consumer.procurement.v1alpha1.Order|Order}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listOrdersAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists {@link protos.google.cloud.commerce.consumer.procurement.v1alpha1.Order|Order}
+ * resources that the user has access to, within the scope of the parent
+ * resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource to query for orders.
+ *   This field has the form `billingAccounts/{billing-account-id}`.
+ * @param {number} request.pageSize
+ *   The maximum number of entries requested.
+ *   The default page size is 25 and the maximum page size is 200.
+ * @param {string} request.pageToken
+ *   The token for fetching the next page.
+ * @param {string} request.filter
+ *   Filter that you can use to limit the list request.
+ *
+ *   A query string that can match a selected set of attributes
+ *   with string values. For example, `display_name=abc`.
+ *   Supported query attributes are
+ *
+ *   * `display_name`
+ *
+ *   If the query contains special characters other than letters,
+ *   underscore, or digits, the phrase must be quoted with double quotes. For
+ *   example, `display_name="foo:bar"`, where the display name needs to be
+ *   quoted because it contains special character colon.
+ *
+ *   Queries can be combined with `OR`, and `NOT` to form more complex queries.
+ *   You can also group them to force a desired evaluation order.
+ *   For example, `display_name=abc OR display_name=def`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.commerce.consumer.procurement.v1alpha1.Order|Order}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listOrdersAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listOrders(
-    request?: protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder[],
-      protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest | null,
-      protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersResponse,
-    ]
-  >;
+      request?: protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder[],
+        protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest|null,
+        protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersResponse
+      ]>;
   listOrders(
-    request: protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest,
-      | protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersResponse
-      | null
-      | undefined,
-      protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder
-    >
-  ): void;
-  listOrders(
-    request: protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest,
-      | protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersResponse
-      | null
-      | undefined,
-      protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder
-    >
-  ): void;
-  listOrders(
-    request?: protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest,
-          | protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersResponse
-          | null
-          | undefined,
-          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest,
-      | protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersResponse
-      | null
-      | undefined,
-      protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder
-    >
-  ): Promise<
-    [
-      protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder[],
-      protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest | null,
-      protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersResponse,
-    ]
-  > | void {
+          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersResponse|null|undefined,
+          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder>): void;
+  listOrders(
+      request: protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest,
+          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersResponse|null|undefined,
+          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder>): void;
+  listOrders(
+      request?: protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest,
+          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersResponse|null|undefined,
+          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder>,
+      callback?: PaginationCallback<
+          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest,
+          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersResponse|null|undefined,
+          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder>):
+      Promise<[
+        protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder[],
+        protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest|null,
+        protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest,
-          | protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersResponse
-          | null
-          | undefined,
-          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest,
+      protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersResponse|null|undefined,
+      protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listOrders values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -903,75 +713,72 @@ export class ConsumerProcurementServiceClient {
     this._log.info('listOrders request %j', request);
     return this.innerApiCalls
       .listOrders(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder[],
-          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest | null,
-          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersResponse,
-        ]) => {
-          this._log.info('listOrders values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder[],
+        protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest|null,
+        protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersResponse
+      ]) => {
+        this._log.info('listOrders values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listOrders`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource to query for orders.
-   *   This field has the form `billingAccounts/{billing-account-id}`.
-   * @param {number} request.pageSize
-   *   The maximum number of entries requested.
-   *   The default page size is 25 and the maximum page size is 200.
-   * @param {string} request.pageToken
-   *   The token for fetching the next page.
-   * @param {string} request.filter
-   *   Filter that you can use to limit the list request.
-   *
-   *   A query string that can match a selected set of attributes
-   *   with string values. For example, `display_name=abc`.
-   *   Supported query attributes are
-   *
-   *   * `display_name`
-   *
-   *   If the query contains special characters other than letters,
-   *   underscore, or digits, the phrase must be quoted with double quotes. For
-   *   example, `display_name="foo:bar"`, where the display name needs to be
-   *   quoted because it contains special character colon.
-   *
-   *   Queries can be combined with `OR`, and `NOT` to form more complex queries.
-   *   You can also group them to force a desired evaluation order.
-   *   For example, `display_name=abc OR display_name=def`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.commerce.consumer.procurement.v1alpha1.Order|Order} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listOrdersAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listOrders`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource to query for orders.
+ *   This field has the form `billingAccounts/{billing-account-id}`.
+ * @param {number} request.pageSize
+ *   The maximum number of entries requested.
+ *   The default page size is 25 and the maximum page size is 200.
+ * @param {string} request.pageToken
+ *   The token for fetching the next page.
+ * @param {string} request.filter
+ *   Filter that you can use to limit the list request.
+ *
+ *   A query string that can match a selected set of attributes
+ *   with string values. For example, `display_name=abc`.
+ *   Supported query attributes are
+ *
+ *   * `display_name`
+ *
+ *   If the query contains special characters other than letters,
+ *   underscore, or digits, the phrase must be quoted with double quotes. For
+ *   example, `display_name="foo:bar"`, where the display name needs to be
+ *   quoted because it contains special character colon.
+ *
+ *   Queries can be combined with `OR`, and `NOT` to form more complex queries.
+ *   You can also group them to force a desired evaluation order.
+ *   For example, `display_name=abc OR display_name=def`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.commerce.consumer.procurement.v1alpha1.Order|Order} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listOrdersAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listOrdersStream(
-    request?: protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listOrders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listOrders stream %j', request);
     return this.descriptors.page.listOrders.createStream(
       this.innerApiCalls.listOrders as GaxCall,
@@ -980,66 +787,65 @@ export class ConsumerProcurementServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listOrders`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource to query for orders.
-   *   This field has the form `billingAccounts/{billing-account-id}`.
-   * @param {number} request.pageSize
-   *   The maximum number of entries requested.
-   *   The default page size is 25 and the maximum page size is 200.
-   * @param {string} request.pageToken
-   *   The token for fetching the next page.
-   * @param {string} request.filter
-   *   Filter that you can use to limit the list request.
-   *
-   *   A query string that can match a selected set of attributes
-   *   with string values. For example, `display_name=abc`.
-   *   Supported query attributes are
-   *
-   *   * `display_name`
-   *
-   *   If the query contains special characters other than letters,
-   *   underscore, or digits, the phrase must be quoted with double quotes. For
-   *   example, `display_name="foo:bar"`, where the display name needs to be
-   *   quoted because it contains special character colon.
-   *
-   *   Queries can be combined with `OR`, and `NOT` to form more complex queries.
-   *   You can also group them to force a desired evaluation order.
-   *   For example, `display_name=abc OR display_name=def`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.commerce.consumer.procurement.v1alpha1.Order|Order}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/consumer_procurement_service.list_orders.js</caption>
-   * region_tag:cloudcommerceconsumerprocurement_v1alpha1_generated_ConsumerProcurementService_ListOrders_async
-   */
+/**
+ * Equivalent to `listOrders`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource to query for orders.
+ *   This field has the form `billingAccounts/{billing-account-id}`.
+ * @param {number} request.pageSize
+ *   The maximum number of entries requested.
+ *   The default page size is 25 and the maximum page size is 200.
+ * @param {string} request.pageToken
+ *   The token for fetching the next page.
+ * @param {string} request.filter
+ *   Filter that you can use to limit the list request.
+ *
+ *   A query string that can match a selected set of attributes
+ *   with string values. For example, `display_name=abc`.
+ *   Supported query attributes are
+ *
+ *   * `display_name`
+ *
+ *   If the query contains special characters other than letters,
+ *   underscore, or digits, the phrase must be quoted with double quotes. For
+ *   example, `display_name="foo:bar"`, where the display name needs to be
+ *   quoted because it contains special character colon.
+ *
+ *   Queries can be combined with `OR`, and `NOT` to form more complex queries.
+ *   You can also group them to force a desired evaluation order.
+ *   For example, `display_name=abc OR display_name=def`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.commerce.consumer.procurement.v1alpha1.Order|Order}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/consumer_procurement_service.list_orders.js</caption>
+ * region_tag:cloudcommerceconsumerprocurement_v1alpha1_generated_ConsumerProcurementService_ListOrders_async
+ */
   listOrdersAsync(
-    request?: protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder> {
+      request?: protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listOrders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listOrders iterate %j', request);
     return this.descriptors.page.listOrders.asyncIterate(
       this.innerApiCalls['listOrders'] as GaxCall,
@@ -1047,7 +853,7 @@ export class ConsumerProcurementServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder>;
   }
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1092,20 +898,20 @@ export class ConsumerProcurementServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1142,13 +948,13 @@ export class ConsumerProcurementServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1182,7 +988,7 @@ export class ConsumerProcurementServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1197,20 +1003,20 @@ export class ConsumerProcurementServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1254,20 +1060,20 @@ export class ConsumerProcurementServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1281,7 +1087,7 @@ export class ConsumerProcurementServiceClient {
    * @param {string} billing_account
    * @returns {string} Resource name string.
    */
-  billingAccountPath(billingAccount: string) {
+  billingAccountPath(billingAccount:string) {
     return this.pathTemplates.billingAccountPathTemplate.render({
       billing_account: billingAccount,
     });
@@ -1295,9 +1101,7 @@ export class ConsumerProcurementServiceClient {
    * @returns {string} A string representing the billing_account.
    */
   matchBillingAccountFromBillingAccountName(billingAccountName: string) {
-    return this.pathTemplates.billingAccountPathTemplate.match(
-      billingAccountName
-    ).billing_account;
+    return this.pathTemplates.billingAccountPathTemplate.match(billingAccountName).billing_account;
   }
 
   /**
@@ -1307,7 +1111,7 @@ export class ConsumerProcurementServiceClient {
    * @param {string} order
    * @returns {string} Resource name string.
    */
-  orderPath(billingAccount: string, order: string) {
+  orderPath(billingAccount:string,order:string) {
     return this.pathTemplates.orderPathTemplate.render({
       billing_account: billingAccount,
       order: order,
@@ -1322,8 +1126,7 @@ export class ConsumerProcurementServiceClient {
    * @returns {string} A string representing the billing_account.
    */
   matchBillingAccountFromOrderName(orderName: string) {
-    return this.pathTemplates.orderPathTemplate.match(orderName)
-      .billing_account;
+    return this.pathTemplates.orderPathTemplate.match(orderName).billing_account;
   }
 
   /**

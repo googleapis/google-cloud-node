@@ -19,9 +19,7 @@
 import {ConfidentialComputingClient} from '@google-cloud/confidentialcomputing';
 
 // check that the client class type name can be used
-function doStuffWithConfidentialComputingClient(
-  client: ConfidentialComputingClient
-) {
+function doStuffWithConfidentialComputingClient(client: ConfidentialComputingClient) {
   client.close();
 }
 

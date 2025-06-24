@@ -63,6 +63,7 @@
   * [Disks.add_resource_policies](#disks.add_resource_policies)
   * [Disks.aggregated_list](#disks.aggregated_list)
   * [Disks.bulk_insert](#disks.bulk_insert)
+  * [Disks.bulk_set_labels](#disks.bulk_set_labels)
   * [Disks.create_snapshot](#disks.create_snapshot)
   * [Disks.delete](#disks.delete)
   * [Disks.get](#disks.get)
@@ -274,6 +275,15 @@
   * [Instant_snapshots.set_iam_policy](#instant_snapshots.set_iam_policy)
   * [Instant_snapshots.set_labels](#instant_snapshots.set_labels)
   * [Instant_snapshots.test_iam_permissions](#instant_snapshots.test_iam_permissions)
+  * [Interconnect_attachment_groups.delete](#interconnect_attachment_groups.delete)
+  * [Interconnect_attachment_groups.get](#interconnect_attachment_groups.get)
+  * [Interconnect_attachment_groups.get_iam_policy](#interconnect_attachment_groups.get_iam_policy)
+  * [Interconnect_attachment_groups.get_operational_status](#interconnect_attachment_groups.get_operational_status)
+  * [Interconnect_attachment_groups.insert](#interconnect_attachment_groups.insert)
+  * [Interconnect_attachment_groups.list](#interconnect_attachment_groups.list)
+  * [Interconnect_attachment_groups.patch](#interconnect_attachment_groups.patch)
+  * [Interconnect_attachment_groups.set_iam_policy](#interconnect_attachment_groups.set_iam_policy)
+  * [Interconnect_attachment_groups.test_iam_permissions](#interconnect_attachment_groups.test_iam_permissions)
   * [Interconnect_attachments.aggregated_list](#interconnect_attachments.aggregated_list)
   * [Interconnect_attachments.delete](#interconnect_attachments.delete)
   * [Interconnect_attachments.get](#interconnect_attachments.get)
@@ -281,6 +291,16 @@
   * [Interconnect_attachments.list](#interconnect_attachments.list)
   * [Interconnect_attachments.patch](#interconnect_attachments.patch)
   * [Interconnect_attachments.set_labels](#interconnect_attachments.set_labels)
+  * [Interconnect_groups.create_members](#interconnect_groups.create_members)
+  * [Interconnect_groups.delete](#interconnect_groups.delete)
+  * [Interconnect_groups.get](#interconnect_groups.get)
+  * [Interconnect_groups.get_iam_policy](#interconnect_groups.get_iam_policy)
+  * [Interconnect_groups.get_operational_status](#interconnect_groups.get_operational_status)
+  * [Interconnect_groups.insert](#interconnect_groups.insert)
+  * [Interconnect_groups.list](#interconnect_groups.list)
+  * [Interconnect_groups.patch](#interconnect_groups.patch)
+  * [Interconnect_groups.set_iam_policy](#interconnect_groups.set_iam_policy)
+  * [Interconnect_groups.test_iam_permissions](#interconnect_groups.test_iam_permissions)
   * [Interconnect_locations.get](#interconnect_locations.get)
   * [Interconnect_locations.list](#interconnect_locations.list)
   * [Interconnect_remote_locations.get](#interconnect_remote_locations.get)
@@ -302,6 +322,7 @@
   * [Licenses.list](#licenses.list)
   * [Licenses.set_iam_policy](#licenses.set_iam_policy)
   * [Licenses.test_iam_permissions](#licenses.test_iam_permissions)
+  * [Licenses.update](#licenses.update)
   * [Machine_images.delete](#machine_images.delete)
   * [Machine_images.get](#machine_images.get)
   * [Machine_images.get_iam_policy](#machine_images.get_iam_policy)
@@ -606,6 +627,8 @@
   * [Reservation_blocks.get](#reservation_blocks.get)
   * [Reservation_blocks.list](#reservation_blocks.list)
   * [Reservation_blocks.perform_maintenance](#reservation_blocks.perform_maintenance)
+  * [Reservation_sub_blocks.get](#reservation_sub_blocks.get)
+  * [Reservation_sub_blocks.list](#reservation_sub_blocks.list)
   * [Reservations.aggregated_list](#reservations.aggregated_list)
   * [Reservations.delete](#reservations.delete)
   * [Reservations.get](#reservations.get)
@@ -1526,6 +1549,8 @@
   * [Reservation_blocks.get](#reservation_blocks.get)
   * [Reservation_blocks.list](#reservation_blocks.list)
   * [Reservation_blocks.perform_maintenance](#reservation_blocks.perform_maintenance)
+  * [Reservation_sub_blocks.get](#reservation_sub_blocks.get)
+  * [Reservation_sub_blocks.list](#reservation_sub_blocks.list)
   * [Reservations.aggregated_list](#reservations.aggregated_list)
   * [Reservations.delete](#reservations.delete)
   * [Reservations.get](#reservations.get)
@@ -2631,6 +2656,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/disks.bulk_insert.js`
+
+
+-----
+
+
+
+
+### Disks.bulk_set_labels
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/disks.bulk_set_labels.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/disks.bulk_set_labels.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/disks.bulk_set_labels.js`
 
 
 -----
@@ -6225,6 +6267,159 @@ __Usage:__
 
 
 
+### Interconnect_attachment_groups.delete
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/interconnect_attachment_groups.delete.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/interconnect_attachment_groups.delete.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/interconnect_attachment_groups.delete.js`
+
+
+-----
+
+
+
+
+### Interconnect_attachment_groups.get
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/interconnect_attachment_groups.get.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/interconnect_attachment_groups.get.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/interconnect_attachment_groups.get.js`
+
+
+-----
+
+
+
+
+### Interconnect_attachment_groups.get_iam_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/interconnect_attachment_groups.get_iam_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/interconnect_attachment_groups.get_iam_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/interconnect_attachment_groups.get_iam_policy.js`
+
+
+-----
+
+
+
+
+### Interconnect_attachment_groups.get_operational_status
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/interconnect_attachment_groups.get_operational_status.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/interconnect_attachment_groups.get_operational_status.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/interconnect_attachment_groups.get_operational_status.js`
+
+
+-----
+
+
+
+
+### Interconnect_attachment_groups.insert
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/interconnect_attachment_groups.insert.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/interconnect_attachment_groups.insert.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/interconnect_attachment_groups.insert.js`
+
+
+-----
+
+
+
+
+### Interconnect_attachment_groups.list
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/interconnect_attachment_groups.list.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/interconnect_attachment_groups.list.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/interconnect_attachment_groups.list.js`
+
+
+-----
+
+
+
+
+### Interconnect_attachment_groups.patch
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/interconnect_attachment_groups.patch.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/interconnect_attachment_groups.patch.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/interconnect_attachment_groups.patch.js`
+
+
+-----
+
+
+
+
+### Interconnect_attachment_groups.set_iam_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/interconnect_attachment_groups.set_iam_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/interconnect_attachment_groups.set_iam_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/interconnect_attachment_groups.set_iam_policy.js`
+
+
+-----
+
+
+
+
+### Interconnect_attachment_groups.test_iam_permissions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/interconnect_attachment_groups.test_iam_permissions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/interconnect_attachment_groups.test_iam_permissions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/interconnect_attachment_groups.test_iam_permissions.js`
+
+
+-----
+
+
+
+
 ### Interconnect_attachments.aggregated_list
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/interconnect_attachments.aggregated_list.js).
@@ -6337,6 +6532,176 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/interconnect_attachments.set_labels.js`
+
+
+-----
+
+
+
+
+### Interconnect_groups.create_members
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/interconnect_groups.create_members.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/interconnect_groups.create_members.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/interconnect_groups.create_members.js`
+
+
+-----
+
+
+
+
+### Interconnect_groups.delete
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/interconnect_groups.delete.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/interconnect_groups.delete.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/interconnect_groups.delete.js`
+
+
+-----
+
+
+
+
+### Interconnect_groups.get
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/interconnect_groups.get.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/interconnect_groups.get.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/interconnect_groups.get.js`
+
+
+-----
+
+
+
+
+### Interconnect_groups.get_iam_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/interconnect_groups.get_iam_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/interconnect_groups.get_iam_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/interconnect_groups.get_iam_policy.js`
+
+
+-----
+
+
+
+
+### Interconnect_groups.get_operational_status
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/interconnect_groups.get_operational_status.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/interconnect_groups.get_operational_status.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/interconnect_groups.get_operational_status.js`
+
+
+-----
+
+
+
+
+### Interconnect_groups.insert
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/interconnect_groups.insert.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/interconnect_groups.insert.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/interconnect_groups.insert.js`
+
+
+-----
+
+
+
+
+### Interconnect_groups.list
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/interconnect_groups.list.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/interconnect_groups.list.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/interconnect_groups.list.js`
+
+
+-----
+
+
+
+
+### Interconnect_groups.patch
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/interconnect_groups.patch.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/interconnect_groups.patch.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/interconnect_groups.patch.js`
+
+
+-----
+
+
+
+
+### Interconnect_groups.set_iam_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/interconnect_groups.set_iam_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/interconnect_groups.set_iam_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/interconnect_groups.set_iam_policy.js`
+
+
+-----
+
+
+
+
+### Interconnect_groups.test_iam_permissions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/interconnect_groups.test_iam_permissions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/interconnect_groups.test_iam_permissions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/interconnect_groups.test_iam_permissions.js`
 
 
 -----
@@ -6694,6 +7059,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/licenses.test_iam_permissions.js`
+
+
+-----
+
+
+
+
+### Licenses.update
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/licenses.update.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/licenses.update.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/licenses.update.js`
 
 
 -----
@@ -11862,6 +12244,40 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/reservation_blocks.perform_maintenance.js`
+
+
+-----
+
+
+
+
+### Reservation_sub_blocks.get
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/reservation_sub_blocks.get.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/reservation_sub_blocks.get.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/reservation_sub_blocks.get.js`
+
+
+-----
+
+
+
+
+### Reservation_sub_blocks.list
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/reservation_sub_blocks.list.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/reservation_sub_blocks.list.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/reservation_sub_blocks.list.js`
 
 
 -----
@@ -27502,6 +27918,40 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1beta/reservation_blocks.perform_maintenance.js`
+
+
+-----
+
+
+
+
+### Reservation_sub_blocks.get
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/reservation_sub_blocks.get.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1beta/reservation_sub_blocks.get.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1beta/reservation_sub_blocks.get.js`
+
+
+-----
+
+
+
+
+### Reservation_sub_blocks.list
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/reservation_sub_blocks.list.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1beta/reservation_sub_blocks.list.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1beta/reservation_sub_blocks.list.js`
 
 
 -----

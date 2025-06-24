@@ -29,1583 +29,1197 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.RuleSetServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'contentwarehouse.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          rulesetserviceModule.v1.RuleSetServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'contentwarehouse.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          rulesetserviceModule.v1.RuleSetServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'contentwarehouse.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'contentwarehouse.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'contentwarehouse.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new rulesetserviceModule.v1.RuleSetServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'contentwarehouse.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'contentwarehouse.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'contentwarehouse.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new rulesetserviceModule.v1.RuleSetServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = rulesetserviceModule.v1.RuleSetServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = rulesetserviceModule.v1.RuleSetServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'contentwarehouse.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
 
-    it('should create a client with no option', () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.ruleSetServiceStub, undefined);
-      await client.initialize();
-      assert(client.ruleSetServiceStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.ruleSetServiceStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.ruleSetServiceStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('createRuleSet', () => {
-    it('invokes createRuleSet without error', async () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.CreateRuleSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.CreateRuleSetRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.RuleSet()
-      );
-      client.innerApiCalls.createRuleSet = stubSimpleCall(expectedResponse);
-      const [response] = await client.createRuleSet(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createRuleSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createRuleSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createRuleSet without error using callback', async () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.CreateRuleSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.CreateRuleSetRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.RuleSet()
-      );
-      client.innerApiCalls.createRuleSet =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createRuleSet(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.contentwarehouse.v1.IRuleSet | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createRuleSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createRuleSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createRuleSet with error', async () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.CreateRuleSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.CreateRuleSetRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createRuleSet = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createRuleSet(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createRuleSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createRuleSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createRuleSet with closed client', async () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.CreateRuleSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.CreateRuleSetRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createRuleSet(request), expectedError);
-    });
-  });
-
-  describe('getRuleSet', () => {
-    it('invokes getRuleSet without error', async () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.GetRuleSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.GetRuleSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.RuleSet()
-      );
-      client.innerApiCalls.getRuleSet = stubSimpleCall(expectedResponse);
-      const [response] = await client.getRuleSet(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getRuleSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getRuleSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getRuleSet without error using callback', async () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.GetRuleSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.GetRuleSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.RuleSet()
-      );
-      client.innerApiCalls.getRuleSet =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getRuleSet(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.contentwarehouse.v1.IRuleSet | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getRuleSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getRuleSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getRuleSet with error', async () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.GetRuleSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.GetRuleSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getRuleSet = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getRuleSet(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getRuleSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getRuleSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getRuleSet with closed client', async () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.GetRuleSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.GetRuleSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getRuleSet(request), expectedError);
-    });
-  });
-
-  describe('updateRuleSet', () => {
-    it('invokes updateRuleSet without error', async () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.UpdateRuleSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.UpdateRuleSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.RuleSet()
-      );
-      client.innerApiCalls.updateRuleSet = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateRuleSet(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateRuleSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateRuleSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateRuleSet without error using callback', async () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.UpdateRuleSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.UpdateRuleSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.RuleSet()
-      );
-      client.innerApiCalls.updateRuleSet =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateRuleSet(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.contentwarehouse.v1.IRuleSet | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateRuleSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateRuleSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateRuleSet with error', async () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.UpdateRuleSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.UpdateRuleSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateRuleSet = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateRuleSet(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateRuleSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateRuleSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateRuleSet with closed client', async () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.UpdateRuleSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.UpdateRuleSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateRuleSet(request), expectedError);
-    });
-  });
-
-  describe('deleteRuleSet', () => {
-    it('invokes deleteRuleSet without error', async () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.DeleteRuleSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.DeleteRuleSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteRuleSet = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteRuleSet(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteRuleSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteRuleSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteRuleSet without error using callback', async () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.DeleteRuleSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.DeleteRuleSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteRuleSet =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteRuleSet(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteRuleSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteRuleSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteRuleSet with error', async () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.DeleteRuleSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.DeleteRuleSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteRuleSet = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteRuleSet(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteRuleSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteRuleSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteRuleSet with closed client', async () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.DeleteRuleSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.DeleteRuleSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteRuleSet(request), expectedError);
-    });
-  });
-
-  describe('listRuleSets', () => {
-    it('invokes listRuleSets without error', async () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.ListRuleSetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.ListRuleSetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.contentwarehouse.v1.RuleSet()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.contentwarehouse.v1.RuleSet()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.contentwarehouse.v1.RuleSet()
-        ),
-      ];
-      client.innerApiCalls.listRuleSets = stubSimpleCall(expectedResponse);
-      const [response] = await client.listRuleSets(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listRuleSets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listRuleSets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listRuleSets without error using callback', async () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.ListRuleSetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.ListRuleSetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.contentwarehouse.v1.RuleSet()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.contentwarehouse.v1.RuleSet()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.contentwarehouse.v1.RuleSet()
-        ),
-      ];
-      client.innerApiCalls.listRuleSets =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listRuleSets(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.contentwarehouse.v1.IRuleSet[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listRuleSets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listRuleSets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listRuleSets with error', async () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.ListRuleSetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.ListRuleSetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listRuleSets = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listRuleSets(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listRuleSets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listRuleSets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listRuleSetsStream without error', async () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.ListRuleSetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.ListRuleSetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.contentwarehouse.v1.RuleSet()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.contentwarehouse.v1.RuleSet()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.contentwarehouse.v1.RuleSet()
-        ),
-      ];
-      client.descriptors.page.listRuleSets.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listRuleSetsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.contentwarehouse.v1.RuleSet[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.contentwarehouse.v1.RuleSet) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listRuleSets.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listRuleSets, request)
-      );
-      assert(
-        (client.descriptors.page.listRuleSets.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listRuleSetsStream with error', async () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.ListRuleSetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.ListRuleSetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listRuleSets.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listRuleSetsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.contentwarehouse.v1.RuleSet[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.contentwarehouse.v1.RuleSet) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listRuleSets.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listRuleSets, request)
-      );
-      assert(
-        (client.descriptors.page.listRuleSets.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listRuleSets without error', async () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.ListRuleSetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.ListRuleSetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.contentwarehouse.v1.RuleSet()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.contentwarehouse.v1.RuleSet()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.contentwarehouse.v1.RuleSet()
-        ),
-      ];
-      client.descriptors.page.listRuleSets.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.contentwarehouse.v1.IRuleSet[] = [];
-      const iterable = client.listRuleSetsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listRuleSets.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listRuleSets.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listRuleSets with error', async () => {
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.ListRuleSetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.ListRuleSetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listRuleSets.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listRuleSetsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.contentwarehouse.v1.IRuleSet[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = rulesetserviceModule.v1.RuleSetServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'contentwarehouse.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listRuleSets.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listRuleSets.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'contentwarehouse.example.com');
+        });
 
-  describe('Path templates', () => {
-    describe('documentLink', async () => {
-      const fakePath = '/rendered/path/documentLink';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        document: 'documentValue',
-        document_link: 'documentLinkValue',
-      };
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.documentLinkPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.documentLinkPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'contentwarehouse.example.com');
+        });
 
-      it('documentLinkPath', () => {
-        const result = client.documentLinkPath(
-          'projectValue',
-          'locationValue',
-          'documentValue',
-          'documentLinkValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.documentLinkPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new rulesetserviceModule.v1.RuleSetServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'contentwarehouse.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-      it('matchProjectFromDocumentLinkName', () => {
-        const result = client.matchProjectFromDocumentLinkName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.documentLinkPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new rulesetserviceModule.v1.RuleSetServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'contentwarehouse.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
+        }
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new rulesetserviceModule.v1.RuleSetServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-      it('matchLocationFromDocumentLinkName', () => {
-        const result = client.matchLocationFromDocumentLinkName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.documentLinkPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has port', () => {
+            const port = rulesetserviceModule.v1.RuleSetServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
 
-      it('matchDocumentFromDocumentLinkName', () => {
-        const result = client.matchDocumentFromDocumentLinkName(fakePath);
-        assert.strictEqual(result, 'documentValue');
-        assert(
-          (client.pathTemplates.documentLinkPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('should create a client with no option', () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient();
+            assert(client);
+        });
 
-      it('matchDocumentLinkFromDocumentLinkName', () => {
-        const result = client.matchDocumentLinkFromDocumentLinkName(fakePath);
-        assert.strictEqual(result, 'documentLinkValue');
-        assert(
-          (client.pathTemplates.documentLinkPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+        it('should create a client with gRPC fallback', () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
 
-    describe('documentSchema', async () => {
-      const fakePath = '/rendered/path/documentSchema';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        document_schema: 'documentSchemaValue',
-      };
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.documentSchemaPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.documentSchemaPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.ruleSetServiceStub, undefined);
+            await client.initialize();
+            assert(client.ruleSetServiceStub);
+        });
 
-      it('documentSchemaPath', () => {
-        const result = client.documentSchemaPath(
-          'projectValue',
-          'locationValue',
-          'documentSchemaValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.documentSchemaPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('has close method for the initialized client', done => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.ruleSetServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
 
-      it('matchProjectFromDocumentSchemaName', () => {
-        const result = client.matchProjectFromDocumentSchemaName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.documentSchemaPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has close method for the non-initialized client', done => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.ruleSetServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
 
-      it('matchLocationFromDocumentSchemaName', () => {
-        const result = client.matchLocationFromDocumentSchemaName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.documentSchemaPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
 
-      it('matchDocumentSchemaFromDocumentSchemaName', () => {
-        const result =
-          client.matchDocumentSchemaFromDocumentSchemaName(fakePath);
-        assert.strictEqual(result, 'documentSchemaValue');
-        assert(
-          (client.pathTemplates.documentSchemaPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    describe('projectLocationDocument', async () => {
-      const fakePath = '/rendered/path/projectLocationDocument';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        document: 'documentValue',
-      };
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationDocumentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationDocumentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('createRuleSet', () => {
+        it('invokes createRuleSet without error', async () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.CreateRuleSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.CreateRuleSetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.RuleSet()
+            );
+            client.innerApiCalls.createRuleSet = stubSimpleCall(expectedResponse);
+            const [response] = await client.createRuleSet(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createRuleSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createRuleSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('projectLocationDocumentPath', () => {
-        const result = client.projectLocationDocumentPath(
-          'projectValue',
-          'locationValue',
-          'documentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationDocumentPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes createRuleSet without error using callback', async () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.CreateRuleSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.CreateRuleSetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.RuleSet()
+            );
+            client.innerApiCalls.createRuleSet = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createRuleSet(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.contentwarehouse.v1.IRuleSet|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createRuleSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createRuleSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromProjectLocationDocumentName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDocumentName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDocumentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes createRuleSet with error', async () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.CreateRuleSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.CreateRuleSetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createRuleSet = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createRuleSet(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createRuleSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createRuleSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromProjectLocationDocumentName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDocumentName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDocumentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDocumentFromProjectLocationDocumentName', () => {
-        const result =
-          client.matchDocumentFromProjectLocationDocumentName(fakePath);
-        assert.strictEqual(result, 'documentValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDocumentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes createRuleSet with closed client', async () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.CreateRuleSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.CreateRuleSetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createRuleSet(request), expectedError);
+        });
     });
 
-    describe('projectLocationDocumentsReferenceId', async () => {
-      const fakePath = '/rendered/path/projectLocationDocumentsReferenceId';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        reference_id: 'referenceIdValue',
-      };
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
+    describe('getRuleSet', () => {
+        it('invokes getRuleSet without error', async () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.GetRuleSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.GetRuleSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.RuleSet()
+            );
+            client.innerApiCalls.getRuleSet = stubSimpleCall(expectedResponse);
+            const [response] = await client.getRuleSet(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getRuleSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRuleSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('projectLocationDocumentsReferenceIdPath', () => {
-        const result = client.projectLocationDocumentsReferenceIdPath(
-          'projectValue',
-          'locationValue',
-          'referenceIdValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes getRuleSet without error using callback', async () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.GetRuleSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.GetRuleSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.RuleSet()
+            );
+            client.innerApiCalls.getRuleSet = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getRuleSet(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.contentwarehouse.v1.IRuleSet|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getRuleSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRuleSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromProjectLocationDocumentsReferenceIdName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDocumentsReferenceIdName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getRuleSet with error', async () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.GetRuleSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.GetRuleSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getRuleSet = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getRuleSet(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getRuleSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRuleSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromProjectLocationDocumentsReferenceIdName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDocumentsReferenceIdName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchReferenceIdFromProjectLocationDocumentsReferenceIdName', () => {
-        const result =
-          client.matchReferenceIdFromProjectLocationDocumentsReferenceIdName(
-            fakePath
-          );
-        assert.strictEqual(result, 'referenceIdValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getRuleSet with closed client', async () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.GetRuleSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.GetRuleSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getRuleSet(request), expectedError);
+        });
     });
 
-    describe('ruleSet', async () => {
-      const fakePath = '/rendered/path/ruleSet';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        rule_set: 'ruleSetValue',
-      };
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.ruleSetPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.ruleSetPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('updateRuleSet', () => {
+        it('invokes updateRuleSet without error', async () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.UpdateRuleSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.UpdateRuleSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.RuleSet()
+            );
+            client.innerApiCalls.updateRuleSet = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateRuleSet(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateRuleSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRuleSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('ruleSetPath', () => {
-        const result = client.ruleSetPath(
-          'projectValue',
-          'locationValue',
-          'ruleSetValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.ruleSetPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes updateRuleSet without error using callback', async () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.UpdateRuleSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.UpdateRuleSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.RuleSet()
+            );
+            client.innerApiCalls.updateRuleSet = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateRuleSet(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.contentwarehouse.v1.IRuleSet|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateRuleSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRuleSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromRuleSetName', () => {
-        const result = client.matchProjectFromRuleSetName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.ruleSetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes updateRuleSet with error', async () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.UpdateRuleSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.UpdateRuleSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateRuleSet = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateRuleSet(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateRuleSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRuleSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromRuleSetName', () => {
-        const result = client.matchLocationFromRuleSetName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.ruleSetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRuleSetFromRuleSetName', () => {
-        const result = client.matchRuleSetFromRuleSetName(fakePath);
-        assert.strictEqual(result, 'ruleSetValue');
-        assert(
-          (client.pathTemplates.ruleSetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes updateRuleSet with closed client', async () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.UpdateRuleSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.UpdateRuleSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateRuleSet(request), expectedError);
+        });
     });
 
-    describe('synonymSet', async () => {
-      const fakePath = '/rendered/path/synonymSet';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        context: 'contextValue',
-      };
-      const client = new rulesetserviceModule.v1.RuleSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.synonymSetPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.synonymSetPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('deleteRuleSet', () => {
+        it('invokes deleteRuleSet without error', async () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.DeleteRuleSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.DeleteRuleSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteRuleSet = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteRuleSet(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteRuleSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteRuleSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('synonymSetPath', () => {
-        const result = client.synonymSetPath(
-          'projectValue',
-          'locationValue',
-          'contextValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.synonymSetPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes deleteRuleSet without error using callback', async () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.DeleteRuleSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.DeleteRuleSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteRuleSet = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteRuleSet(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteRuleSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteRuleSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromSynonymSetName', () => {
-        const result = client.matchProjectFromSynonymSetName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.synonymSetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes deleteRuleSet with error', async () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.DeleteRuleSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.DeleteRuleSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteRuleSet = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteRuleSet(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteRuleSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteRuleSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromSynonymSetName', () => {
-        const result = client.matchLocationFromSynonymSetName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.synonymSetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchContextFromSynonymSetName', () => {
-        const result = client.matchContextFromSynonymSetName(fakePath);
-        assert.strictEqual(result, 'contextValue');
-        assert(
-          (client.pathTemplates.synonymSetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes deleteRuleSet with closed client', async () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.DeleteRuleSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.DeleteRuleSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteRuleSet(request), expectedError);
+        });
     });
-  });
+
+    describe('listRuleSets', () => {
+        it('invokes listRuleSets without error', async () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.ListRuleSetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.ListRuleSetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.contentwarehouse.v1.RuleSet()),
+              generateSampleMessage(new protos.google.cloud.contentwarehouse.v1.RuleSet()),
+              generateSampleMessage(new protos.google.cloud.contentwarehouse.v1.RuleSet()),
+            ];
+            client.innerApiCalls.listRuleSets = stubSimpleCall(expectedResponse);
+            const [response] = await client.listRuleSets(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listRuleSets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRuleSets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listRuleSets without error using callback', async () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.ListRuleSetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.ListRuleSetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.contentwarehouse.v1.RuleSet()),
+              generateSampleMessage(new protos.google.cloud.contentwarehouse.v1.RuleSet()),
+              generateSampleMessage(new protos.google.cloud.contentwarehouse.v1.RuleSet()),
+            ];
+            client.innerApiCalls.listRuleSets = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listRuleSets(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.contentwarehouse.v1.IRuleSet[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listRuleSets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRuleSets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listRuleSets with error', async () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.ListRuleSetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.ListRuleSetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listRuleSets = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listRuleSets(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listRuleSets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRuleSets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listRuleSetsStream without error', async () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.ListRuleSetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.ListRuleSetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.contentwarehouse.v1.RuleSet()),
+              generateSampleMessage(new protos.google.cloud.contentwarehouse.v1.RuleSet()),
+              generateSampleMessage(new protos.google.cloud.contentwarehouse.v1.RuleSet()),
+            ];
+            client.descriptors.page.listRuleSets.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listRuleSetsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.contentwarehouse.v1.RuleSet[] = [];
+                stream.on('data', (response: protos.google.cloud.contentwarehouse.v1.RuleSet) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listRuleSets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listRuleSets, request));
+            assert(
+                (client.descriptors.page.listRuleSets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listRuleSetsStream with error', async () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.ListRuleSetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.ListRuleSetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listRuleSets.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listRuleSetsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.contentwarehouse.v1.RuleSet[] = [];
+                stream.on('data', (response: protos.google.cloud.contentwarehouse.v1.RuleSet) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listRuleSets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listRuleSets, request));
+            assert(
+                (client.descriptors.page.listRuleSets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listRuleSets without error', async () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.ListRuleSetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.ListRuleSetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.contentwarehouse.v1.RuleSet()),
+              generateSampleMessage(new protos.google.cloud.contentwarehouse.v1.RuleSet()),
+              generateSampleMessage(new protos.google.cloud.contentwarehouse.v1.RuleSet()),
+            ];
+            client.descriptors.page.listRuleSets.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.contentwarehouse.v1.IRuleSet[] = [];
+            const iterable = client.listRuleSetsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listRuleSets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listRuleSets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listRuleSets with error', async () => {
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.ListRuleSetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.ListRuleSetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listRuleSets.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listRuleSetsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.contentwarehouse.v1.IRuleSet[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listRuleSets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listRuleSets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('Path templates', () => {
+
+        describe('documentLink', async () => {
+            const fakePath = "/rendered/path/documentLink";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                document: "documentValue",
+                document_link: "documentLinkValue",
+            };
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.documentLinkPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.documentLinkPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('documentLinkPath', () => {
+                const result = client.documentLinkPath("projectValue", "locationValue", "documentValue", "documentLinkValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.documentLinkPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDocumentLinkName', () => {
+                const result = client.matchProjectFromDocumentLinkName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.documentLinkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDocumentLinkName', () => {
+                const result = client.matchLocationFromDocumentLinkName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.documentLinkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDocumentFromDocumentLinkName', () => {
+                const result = client.matchDocumentFromDocumentLinkName(fakePath);
+                assert.strictEqual(result, "documentValue");
+                assert((client.pathTemplates.documentLinkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDocumentLinkFromDocumentLinkName', () => {
+                const result = client.matchDocumentLinkFromDocumentLinkName(fakePath);
+                assert.strictEqual(result, "documentLinkValue");
+                assert((client.pathTemplates.documentLinkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('documentSchema', async () => {
+            const fakePath = "/rendered/path/documentSchema";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                document_schema: "documentSchemaValue",
+            };
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.documentSchemaPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.documentSchemaPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('documentSchemaPath', () => {
+                const result = client.documentSchemaPath("projectValue", "locationValue", "documentSchemaValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.documentSchemaPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDocumentSchemaName', () => {
+                const result = client.matchProjectFromDocumentSchemaName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.documentSchemaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDocumentSchemaName', () => {
+                const result = client.matchLocationFromDocumentSchemaName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.documentSchemaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDocumentSchemaFromDocumentSchemaName', () => {
+                const result = client.matchDocumentSchemaFromDocumentSchemaName(fakePath);
+                assert.strictEqual(result, "documentSchemaValue");
+                assert((client.pathTemplates.documentSchemaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDocument', async () => {
+            const fakePath = "/rendered/path/projectLocationDocument";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                document: "documentValue",
+            };
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDocumentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDocumentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDocumentPath', () => {
+                const result = client.projectLocationDocumentPath("projectValue", "locationValue", "documentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDocumentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDocumentName', () => {
+                const result = client.matchProjectFromProjectLocationDocumentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDocumentName', () => {
+                const result = client.matchLocationFromProjectLocationDocumentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDocumentFromProjectLocationDocumentName', () => {
+                const result = client.matchDocumentFromProjectLocationDocumentName(fakePath);
+                assert.strictEqual(result, "documentValue");
+                assert((client.pathTemplates.projectLocationDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDocumentsReferenceId', async () => {
+            const fakePath = "/rendered/path/projectLocationDocumentsReferenceId";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                reference_id: "referenceIdValue",
+            };
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDocumentsReferenceIdPath', () => {
+                const result = client.projectLocationDocumentsReferenceIdPath("projectValue", "locationValue", "referenceIdValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDocumentsReferenceIdName', () => {
+                const result = client.matchProjectFromProjectLocationDocumentsReferenceIdName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDocumentsReferenceIdName', () => {
+                const result = client.matchLocationFromProjectLocationDocumentsReferenceIdName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchReferenceIdFromProjectLocationDocumentsReferenceIdName', () => {
+                const result = client.matchReferenceIdFromProjectLocationDocumentsReferenceIdName(fakePath);
+                assert.strictEqual(result, "referenceIdValue");
+                assert((client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('ruleSet', async () => {
+            const fakePath = "/rendered/path/ruleSet";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                rule_set: "ruleSetValue",
+            };
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.ruleSetPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.ruleSetPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('ruleSetPath', () => {
+                const result = client.ruleSetPath("projectValue", "locationValue", "ruleSetValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.ruleSetPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromRuleSetName', () => {
+                const result = client.matchProjectFromRuleSetName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.ruleSetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromRuleSetName', () => {
+                const result = client.matchLocationFromRuleSetName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.ruleSetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRuleSetFromRuleSetName', () => {
+                const result = client.matchRuleSetFromRuleSetName(fakePath);
+                assert.strictEqual(result, "ruleSetValue");
+                assert((client.pathTemplates.ruleSetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('synonymSet', async () => {
+            const fakePath = "/rendered/path/synonymSet";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                context: "contextValue",
+            };
+            const client = new rulesetserviceModule.v1.RuleSetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.synonymSetPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.synonymSetPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('synonymSetPath', () => {
+                const result = client.synonymSetPath("projectValue", "locationValue", "contextValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.synonymSetPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSynonymSetName', () => {
+                const result = client.matchProjectFromSynonymSetName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.synonymSetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSynonymSetName', () => {
+                const result = client.matchLocationFromSynonymSetName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.synonymSetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchContextFromSynonymSetName', () => {
+                const result = client.matchContextFromSynonymSetName(fakePath);
+                assert.strictEqual(result, "contextValue");
+                assert((client.pathTemplates.synonymSetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+    });
 });

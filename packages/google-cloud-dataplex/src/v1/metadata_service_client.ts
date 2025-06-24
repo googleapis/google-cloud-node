@@ -18,21 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -113,41 +103,20 @@ export class MetadataServiceClient {
    *     const client = new MetadataServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof MetadataServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'dataplex.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -173,7 +142,7 @@ export class MetadataServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -189,9 +158,13 @@ export class MetadataServiceClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -269,14 +242,12 @@ export class MetadataServiceClient {
       projectLocationLakeActionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/actions/{action}'
       ),
-      projectLocationLakeZoneActionPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/actions/{action}'
-        ),
-      projectLocationLakeZoneAssetActionPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/assets/{asset}/actions/{action}'
-        ),
+      projectLocationLakeZoneActionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/actions/{action}'
+      ),
+      projectLocationLakeZoneAssetActionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/assets/{asset}/actions/{action}'
+      ),
       sessionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/environments/{environment}/sessions/{session}'
       ),
@@ -292,291 +263,40 @@ export class MetadataServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listEntities: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'entities'
-      ),
-      listPartitions: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'partitions'
-      ),
+      listEntities:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'entities'),
+      listPartitions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'partitions')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          get: '/v1/{resource=projects/*/locations/*/lakes/*}:getIamPolicy',
-          additional_bindings: [
-            {
-              get: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/dataScans/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/entryTypes/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/entryGroups/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/governanceRules/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/glossaries/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:getIamPolicy',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/v1/{resource=projects/*/locations/*/lakes/*}:setIamPolicy',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataScans/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/glossaries/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:setIamPolicy',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/v1/{resource=projects/*/locations/*/lakes/*}:testIamPermissions',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataScans/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/glossaries/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:testIamPermissions',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{name=organizations/*/locations/*/operations/*}:cancel',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1/{name=projects/*/locations/*/operations/*}',
-          additional_bindings: [
-            {delete: '/v1/{name=organizations/*/locations/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/locations/*/operations/*}',
-          additional_bindings: [
-            {get: '/v1/{name=organizations/*/locations/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/locations/*}/operations',
-          additional_bindings: [
-            {get: '/v1/{name=organizations/*/locations/*/operations/*}'},
-          ],
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/*/lakes/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataScans/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/entryTypes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/entryGroups/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/governanceRules/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/glossaries/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:getIamPolicy',},{get: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:getIamPolicy',}],
+      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/lakes/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataScans/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:setIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/lakes/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataScans/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:testIamPermissions',body: '*',}],
+      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',additional_bindings: [{post: '/v1/{name=organizations/*/locations/*/operations/*}:cancel',body: '*',}],
+      },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{delete: '/v1/{name=organizations/*/locations/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*/operations/*}',}],
+      }];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
 
-    this.descriptors.longrunning = {};
+    this.descriptors.longrunning = {
+    };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.dataplex.v1.MetadataService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.dataplex.v1.MetadataService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -607,45 +327,32 @@ export class MetadataServiceClient {
     // Put together the "service stub" for
     // google.cloud.dataplex.v1.MetadataService.
     this.metadataServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.dataplex.v1.MetadataService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.dataplex.v1.MetadataService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.dataplex.v1.MetadataService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const metadataServiceStubMethods = [
-      'createEntity',
-      'updateEntity',
-      'deleteEntity',
-      'getEntity',
-      'listEntities',
-      'createPartition',
-      'deletePartition',
-      'getPartition',
-      'listPartitions',
-    ];
+    const metadataServiceStubMethods =
+        ['createEntity', 'updateEntity', 'deleteEntity', 'getEntity', 'listEntities', 'createPartition', 'deletePartition', 'getPartition', 'listPartitions'];
     for (const methodName of metadataServiceStubMethods) {
       const callPromise = this.metadataServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -665,14 +372,8 @@ export class MetadataServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'dataplex.googleapis.com';
   }
@@ -683,14 +384,8 @@ export class MetadataServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'dataplex.googleapis.com';
   }
@@ -721,7 +416,9 @@ export class MetadataServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -730,9 +427,8 @@ export class MetadataServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -743,949 +439,796 @@ export class MetadataServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Create a metadata entity.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the parent zone:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
-   * @param {google.cloud.dataplex.v1.Entity} request.entity
-   *   Required. Entity resource.
-   * @param {boolean} [request.validateOnly]
-   *   Optional. Only validate the request, but do not perform mutations.
-   *   The default is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Entity|Entity}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/metadata_service.create_entity.js</caption>
-   * region_tag:dataplex_v1_generated_MetadataService_CreateEntity_async
-   */
+/**
+ * Create a metadata entity.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the parent zone:
+ *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
+ * @param {google.cloud.dataplex.v1.Entity} request.entity
+ *   Required. Entity resource.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. Only validate the request, but do not perform mutations.
+ *   The default is false.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Entity|Entity}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/metadata_service.create_entity.js</caption>
+ * region_tag:dataplex_v1_generated_MetadataService_CreateEntity_async
+ */
   createEntity(
-    request?: protos.google.cloud.dataplex.v1.ICreateEntityRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.ICreateEntityRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.ICreateEntityRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntity,
+        protos.google.cloud.dataplex.v1.ICreateEntityRequest|undefined, {}|undefined
+      ]>;
   createEntity(
-    request: protos.google.cloud.dataplex.v1.ICreateEntityRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.ICreateEntityRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createEntity(
-    request: protos.google.cloud.dataplex.v1.ICreateEntityRequest,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.ICreateEntityRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createEntity(
-    request?: protos.google.cloud.dataplex.v1.ICreateEntityRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataplex.v1.ICreateEntityRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataplex.v1.IEntity,
-          | protos.google.cloud.dataplex.v1.ICreateEntityRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.ICreateEntityRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.ICreateEntityRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataplex.v1.ICreateEntityRequest|null|undefined,
+          {}|null|undefined>): void;
+  createEntity(
+      request: protos.google.cloud.dataplex.v1.ICreateEntityRequest,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IEntity,
+          protos.google.cloud.dataplex.v1.ICreateEntityRequest|null|undefined,
+          {}|null|undefined>): void;
+  createEntity(
+      request?: protos.google.cloud.dataplex.v1.ICreateEntityRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataplex.v1.IEntity,
+          protos.google.cloud.dataplex.v1.ICreateEntityRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataplex.v1.IEntity,
+          protos.google.cloud.dataplex.v1.ICreateEntityRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntity,
+        protos.google.cloud.dataplex.v1.ICreateEntityRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createEntity request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataplex.v1.IEntity,
-          | protos.google.cloud.dataplex.v1.ICreateEntityRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataplex.v1.IEntity,
+        protos.google.cloud.dataplex.v1.ICreateEntityRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createEntity response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createEntity(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataplex.v1.IEntity,
-          protos.google.cloud.dataplex.v1.ICreateEntityRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createEntity response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createEntity(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataplex.v1.IEntity,
+        protos.google.cloud.dataplex.v1.ICreateEntityRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createEntity response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Update a metadata entity. Only supports full resource update.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.dataplex.v1.Entity} request.entity
-   *   Required. Update description.
-   * @param {boolean} [request.validateOnly]
-   *   Optional. Only validate the request, but do not perform mutations.
-   *   The default is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Entity|Entity}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/metadata_service.update_entity.js</caption>
-   * region_tag:dataplex_v1_generated_MetadataService_UpdateEntity_async
-   */
+/**
+ * Update a metadata entity. Only supports full resource update.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.dataplex.v1.Entity} request.entity
+ *   Required. Update description.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. Only validate the request, but do not perform mutations.
+ *   The default is false.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Entity|Entity}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/metadata_service.update_entity.js</caption>
+ * region_tag:dataplex_v1_generated_MetadataService_UpdateEntity_async
+ */
   updateEntity(
-    request?: protos.google.cloud.dataplex.v1.IUpdateEntityRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.IUpdateEntityRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.IUpdateEntityRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntity,
+        protos.google.cloud.dataplex.v1.IUpdateEntityRequest|undefined, {}|undefined
+      ]>;
   updateEntity(
-    request: protos.google.cloud.dataplex.v1.IUpdateEntityRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.IUpdateEntityRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateEntity(
-    request: protos.google.cloud.dataplex.v1.IUpdateEntityRequest,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.IUpdateEntityRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateEntity(
-    request?: protos.google.cloud.dataplex.v1.IUpdateEntityRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataplex.v1.IUpdateEntityRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataplex.v1.IEntity,
-          | protos.google.cloud.dataplex.v1.IUpdateEntityRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.IUpdateEntityRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.IUpdateEntityRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataplex.v1.IUpdateEntityRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateEntity(
+      request: protos.google.cloud.dataplex.v1.IUpdateEntityRequest,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IEntity,
+          protos.google.cloud.dataplex.v1.IUpdateEntityRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateEntity(
+      request?: protos.google.cloud.dataplex.v1.IUpdateEntityRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataplex.v1.IEntity,
+          protos.google.cloud.dataplex.v1.IUpdateEntityRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataplex.v1.IEntity,
+          protos.google.cloud.dataplex.v1.IUpdateEntityRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntity,
+        protos.google.cloud.dataplex.v1.IUpdateEntityRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'entity.name': request.entity!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'entity.name': request.entity!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateEntity request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataplex.v1.IEntity,
-          | protos.google.cloud.dataplex.v1.IUpdateEntityRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataplex.v1.IEntity,
+        protos.google.cloud.dataplex.v1.IUpdateEntityRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateEntity response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateEntity(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataplex.v1.IEntity,
-          protos.google.cloud.dataplex.v1.IUpdateEntityRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateEntity response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateEntity(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataplex.v1.IEntity,
+        protos.google.cloud.dataplex.v1.IUpdateEntityRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateEntity response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Delete a metadata entity.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the entity:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
-   * @param {string} request.etag
-   *   Required. The etag associated with the entity, which can be retrieved with
-   *   a {@link protos.|GetEntity} request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/metadata_service.delete_entity.js</caption>
-   * region_tag:dataplex_v1_generated_MetadataService_DeleteEntity_async
-   */
+/**
+ * Delete a metadata entity.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the entity:
+ *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
+ * @param {string} request.etag
+ *   Required. The etag associated with the entity, which can be retrieved with
+ *   a {@link protos.|GetEntity} request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/metadata_service.delete_entity.js</caption>
+ * region_tag:dataplex_v1_generated_MetadataService_DeleteEntity_async
+ */
   deleteEntity(
-    request?: protos.google.cloud.dataplex.v1.IDeleteEntityRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataplex.v1.IDeleteEntityRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.IDeleteEntityRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IDeleteEntityRequest|undefined, {}|undefined
+      ]>;
   deleteEntity(
-    request: protos.google.cloud.dataplex.v1.IDeleteEntityRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataplex.v1.IDeleteEntityRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteEntity(
-    request: protos.google.cloud.dataplex.v1.IDeleteEntityRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataplex.v1.IDeleteEntityRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteEntity(
-    request?: protos.google.cloud.dataplex.v1.IDeleteEntityRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataplex.v1.IDeleteEntityRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.dataplex.v1.IDeleteEntityRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataplex.v1.IDeleteEntityRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataplex.v1.IDeleteEntityRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataplex.v1.IDeleteEntityRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteEntity(
+      request: protos.google.cloud.dataplex.v1.IDeleteEntityRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataplex.v1.IDeleteEntityRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteEntity(
+      request?: protos.google.cloud.dataplex.v1.IDeleteEntityRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataplex.v1.IDeleteEntityRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataplex.v1.IDeleteEntityRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IDeleteEntityRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteEntity request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.dataplex.v1.IDeleteEntityRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IDeleteEntityRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteEntity response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteEntity(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.dataplex.v1.IDeleteEntityRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteEntity response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteEntity(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IDeleteEntityRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteEntity response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Get a metadata entity.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the entity:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}.`
-   * @param {google.cloud.dataplex.v1.GetEntityRequest.EntityView} [request.view]
-   *   Optional. Used to select the subset of entity information to return.
-   *   Defaults to `BASIC`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Entity|Entity}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/metadata_service.get_entity.js</caption>
-   * region_tag:dataplex_v1_generated_MetadataService_GetEntity_async
-   */
+/**
+ * Get a metadata entity.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the entity:
+ *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}.`
+ * @param {google.cloud.dataplex.v1.GetEntityRequest.EntityView} [request.view]
+ *   Optional. Used to select the subset of entity information to return.
+ *   Defaults to `BASIC`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Entity|Entity}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/metadata_service.get_entity.js</caption>
+ * region_tag:dataplex_v1_generated_MetadataService_GetEntity_async
+ */
   getEntity(
-    request?: protos.google.cloud.dataplex.v1.IGetEntityRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.IGetEntityRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.IGetEntityRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntity,
+        protos.google.cloud.dataplex.v1.IGetEntityRequest|undefined, {}|undefined
+      ]>;
   getEntity(
-    request: protos.google.cloud.dataplex.v1.IGetEntityRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.IGetEntityRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEntity(
-    request: protos.google.cloud.dataplex.v1.IGetEntityRequest,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.IGetEntityRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEntity(
-    request?: protos.google.cloud.dataplex.v1.IGetEntityRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataplex.v1.IGetEntityRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataplex.v1.IEntity,
-          protos.google.cloud.dataplex.v1.IGetEntityRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.IGetEntityRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.IGetEntityRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataplex.v1.IGetEntityRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEntity(
+      request: protos.google.cloud.dataplex.v1.IGetEntityRequest,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IEntity,
+          protos.google.cloud.dataplex.v1.IGetEntityRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEntity(
+      request?: protos.google.cloud.dataplex.v1.IGetEntityRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataplex.v1.IEntity,
+          protos.google.cloud.dataplex.v1.IGetEntityRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataplex.v1.IEntity,
+          protos.google.cloud.dataplex.v1.IGetEntityRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntity,
+        protos.google.cloud.dataplex.v1.IGetEntityRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getEntity request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataplex.v1.IEntity,
-          protos.google.cloud.dataplex.v1.IGetEntityRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataplex.v1.IEntity,
+        protos.google.cloud.dataplex.v1.IGetEntityRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getEntity response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getEntity(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataplex.v1.IEntity,
-          protos.google.cloud.dataplex.v1.IGetEntityRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getEntity response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getEntity(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataplex.v1.IEntity,
+        protos.google.cloud.dataplex.v1.IGetEntityRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getEntity response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Create a metadata partition.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the parent zone:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
-   * @param {google.cloud.dataplex.v1.Partition} request.partition
-   *   Required. Partition resource.
-   * @param {boolean} [request.validateOnly]
-   *   Optional. Only validate the request, but do not perform mutations.
-   *   The default is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Partition|Partition}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/metadata_service.create_partition.js</caption>
-   * region_tag:dataplex_v1_generated_MetadataService_CreatePartition_async
-   */
+/**
+ * Create a metadata partition.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the parent zone:
+ *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
+ * @param {google.cloud.dataplex.v1.Partition} request.partition
+ *   Required. Partition resource.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. Only validate the request, but do not perform mutations.
+ *   The default is false.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Partition|Partition}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/metadata_service.create_partition.js</caption>
+ * region_tag:dataplex_v1_generated_MetadataService_CreatePartition_async
+ */
   createPartition(
-    request?: protos.google.cloud.dataplex.v1.ICreatePartitionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IPartition,
-      protos.google.cloud.dataplex.v1.ICreatePartitionRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.ICreatePartitionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IPartition,
+        protos.google.cloud.dataplex.v1.ICreatePartitionRequest|undefined, {}|undefined
+      ]>;
   createPartition(
-    request: protos.google.cloud.dataplex.v1.ICreatePartitionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IPartition,
-      | protos.google.cloud.dataplex.v1.ICreatePartitionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createPartition(
-    request: protos.google.cloud.dataplex.v1.ICreatePartitionRequest,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IPartition,
-      | protos.google.cloud.dataplex.v1.ICreatePartitionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createPartition(
-    request?: protos.google.cloud.dataplex.v1.ICreatePartitionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataplex.v1.ICreatePartitionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataplex.v1.IPartition,
-          | protos.google.cloud.dataplex.v1.ICreatePartitionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataplex.v1.IPartition,
-      | protos.google.cloud.dataplex.v1.ICreatePartitionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IPartition,
-      protos.google.cloud.dataplex.v1.ICreatePartitionRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataplex.v1.ICreatePartitionRequest|null|undefined,
+          {}|null|undefined>): void;
+  createPartition(
+      request: protos.google.cloud.dataplex.v1.ICreatePartitionRequest,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IPartition,
+          protos.google.cloud.dataplex.v1.ICreatePartitionRequest|null|undefined,
+          {}|null|undefined>): void;
+  createPartition(
+      request?: protos.google.cloud.dataplex.v1.ICreatePartitionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataplex.v1.IPartition,
+          protos.google.cloud.dataplex.v1.ICreatePartitionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataplex.v1.IPartition,
+          protos.google.cloud.dataplex.v1.ICreatePartitionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IPartition,
+        protos.google.cloud.dataplex.v1.ICreatePartitionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createPartition request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataplex.v1.IPartition,
-          | protos.google.cloud.dataplex.v1.ICreatePartitionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataplex.v1.IPartition,
+        protos.google.cloud.dataplex.v1.ICreatePartitionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createPartition response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createPartition(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataplex.v1.IPartition,
-          protos.google.cloud.dataplex.v1.ICreatePartitionRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createPartition response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createPartition(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataplex.v1.IPartition,
+        protos.google.cloud.dataplex.v1.ICreatePartitionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createPartition response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Delete a metadata partition.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the partition.
-   *   format:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}/partitions/{partition_value_path}`.
-   *   The {partition_value_path} segment consists of an ordered sequence of
-   *   partition values separated by "/". All values must be provided.
-   * @param {string} [request.etag]
-   *   Optional. The etag associated with the partition.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/metadata_service.delete_partition.js</caption>
-   * region_tag:dataplex_v1_generated_MetadataService_DeletePartition_async
-   */
+/**
+ * Delete a metadata partition.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the partition.
+ *   format:
+ *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}/partitions/{partition_value_path}`.
+ *   The {partition_value_path} segment consists of an ordered sequence of
+ *   partition values separated by "/". All values must be provided.
+ * @param {string} [request.etag]
+ *   Optional. The etag associated with the partition.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/metadata_service.delete_partition.js</caption>
+ * region_tag:dataplex_v1_generated_MetadataService_DeletePartition_async
+ */
   deletePartition(
-    request?: protos.google.cloud.dataplex.v1.IDeletePartitionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataplex.v1.IDeletePartitionRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.IDeletePartitionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IDeletePartitionRequest|undefined, {}|undefined
+      ]>;
   deletePartition(
-    request: protos.google.cloud.dataplex.v1.IDeletePartitionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dataplex.v1.IDeletePartitionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deletePartition(
-    request: protos.google.cloud.dataplex.v1.IDeletePartitionRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dataplex.v1.IDeletePartitionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deletePartition(
-    request?: protos.google.cloud.dataplex.v1.IDeletePartitionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataplex.v1.IDeletePartitionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.dataplex.v1.IDeletePartitionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dataplex.v1.IDeletePartitionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataplex.v1.IDeletePartitionRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataplex.v1.IDeletePartitionRequest|null|undefined,
+          {}|null|undefined>): void;
+  deletePartition(
+      request: protos.google.cloud.dataplex.v1.IDeletePartitionRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataplex.v1.IDeletePartitionRequest|null|undefined,
+          {}|null|undefined>): void;
+  deletePartition(
+      request?: protos.google.cloud.dataplex.v1.IDeletePartitionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataplex.v1.IDeletePartitionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataplex.v1.IDeletePartitionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IDeletePartitionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deletePartition request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.dataplex.v1.IDeletePartitionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IDeletePartitionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deletePartition response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deletePartition(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.dataplex.v1.IDeletePartitionRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deletePartition response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deletePartition(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IDeletePartitionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deletePartition response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Get a metadata partition of an entity.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the partition:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}/partitions/{partition_value_path}`.
-   *   The {partition_value_path} segment consists of an ordered sequence of
-   *   partition values separated by "/". All values must be provided.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Partition|Partition}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/metadata_service.get_partition.js</caption>
-   * region_tag:dataplex_v1_generated_MetadataService_GetPartition_async
-   */
+/**
+ * Get a metadata partition of an entity.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the partition:
+ *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}/partitions/{partition_value_path}`.
+ *   The {partition_value_path} segment consists of an ordered sequence of
+ *   partition values separated by "/". All values must be provided.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Partition|Partition}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/metadata_service.get_partition.js</caption>
+ * region_tag:dataplex_v1_generated_MetadataService_GetPartition_async
+ */
   getPartition(
-    request?: protos.google.cloud.dataplex.v1.IGetPartitionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IPartition,
-      protos.google.cloud.dataplex.v1.IGetPartitionRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.IGetPartitionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IPartition,
+        protos.google.cloud.dataplex.v1.IGetPartitionRequest|undefined, {}|undefined
+      ]>;
   getPartition(
-    request: protos.google.cloud.dataplex.v1.IGetPartitionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IPartition,
-      protos.google.cloud.dataplex.v1.IGetPartitionRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPartition(
-    request: protos.google.cloud.dataplex.v1.IGetPartitionRequest,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IPartition,
-      protos.google.cloud.dataplex.v1.IGetPartitionRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPartition(
-    request?: protos.google.cloud.dataplex.v1.IGetPartitionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataplex.v1.IGetPartitionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataplex.v1.IPartition,
-          | protos.google.cloud.dataplex.v1.IGetPartitionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataplex.v1.IPartition,
-      protos.google.cloud.dataplex.v1.IGetPartitionRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IPartition,
-      protos.google.cloud.dataplex.v1.IGetPartitionRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataplex.v1.IGetPartitionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPartition(
+      request: protos.google.cloud.dataplex.v1.IGetPartitionRequest,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IPartition,
+          protos.google.cloud.dataplex.v1.IGetPartitionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPartition(
+      request?: protos.google.cloud.dataplex.v1.IGetPartitionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataplex.v1.IPartition,
+          protos.google.cloud.dataplex.v1.IGetPartitionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataplex.v1.IPartition,
+          protos.google.cloud.dataplex.v1.IGetPartitionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IPartition,
+        protos.google.cloud.dataplex.v1.IGetPartitionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getPartition request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataplex.v1.IPartition,
-          | protos.google.cloud.dataplex.v1.IGetPartitionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataplex.v1.IPartition,
+        protos.google.cloud.dataplex.v1.IGetPartitionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getPartition response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getPartition(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataplex.v1.IPartition,
-          protos.google.cloud.dataplex.v1.IGetPartitionRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getPartition response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getPartition(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataplex.v1.IPartition,
+        protos.google.cloud.dataplex.v1.IGetPartitionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getPartition response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * List metadata entities in a zone.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the parent zone:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
-   * @param {google.cloud.dataplex.v1.ListEntitiesRequest.EntityView} request.view
-   *   Required. Specify the entity view to make a partial list request.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of entities to return. The service may return
-   *   fewer than this value. If unspecified, 100 entities will be returned by
-   *   default. The maximum value is 500; larger values will will be truncated to
-   *   500.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListEntities` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
-   *   provided to `ListEntities` must match the call that provided the
-   *   page token.
-   * @param {string} [request.filter]
-   *   Optional. The following filter parameters can be added to the URL to limit
-   *   the entities returned by the API:
-   *
-   *   - Entity ID: ?filter="id=entityID"
-   *   - Asset ID: ?filter="asset=assetID"
-   *   - Data path ?filter="data_path=gs://my-bucket"
-   *   - Is HIVE compatible: ?filter="hive_compatible=true"
-   *   - Is BigQuery compatible: ?filter="bigquery_compatible=true"
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.Entity|Entity}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listEntitiesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * List metadata entities in a zone.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the parent zone:
+ *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
+ * @param {google.cloud.dataplex.v1.ListEntitiesRequest.EntityView} request.view
+ *   Required. Specify the entity view to make a partial list request.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of entities to return. The service may return
+ *   fewer than this value. If unspecified, 100 entities will be returned by
+ *   default. The maximum value is 500; larger values will will be truncated to
+ *   500.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListEntities` call. Provide
+ *   this to retrieve the subsequent page. When paginating, all other parameters
+ *   provided to `ListEntities` must match the call that provided the
+ *   page token.
+ * @param {string} [request.filter]
+ *   Optional. The following filter parameters can be added to the URL to limit
+ *   the entities returned by the API:
+ *
+ *   - Entity ID: ?filter="id=entityID"
+ *   - Asset ID: ?filter="asset=assetID"
+ *   - Data path ?filter="data_path=gs://my-bucket"
+ *   - Is HIVE compatible: ?filter="hive_compatible=true"
+ *   - Is BigQuery compatible: ?filter="bigquery_compatible=true"
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.Entity|Entity}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listEntitiesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listEntities(
-    request?: protos.google.cloud.dataplex.v1.IListEntitiesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IEntity[],
-      protos.google.cloud.dataplex.v1.IListEntitiesRequest | null,
-      protos.google.cloud.dataplex.v1.IListEntitiesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.IListEntitiesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntity[],
+        protos.google.cloud.dataplex.v1.IListEntitiesRequest|null,
+        protos.google.cloud.dataplex.v1.IListEntitiesResponse
+      ]>;
   listEntities(
-    request: protos.google.cloud.dataplex.v1.IListEntitiesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListEntitiesRequest,
-      protos.google.cloud.dataplex.v1.IListEntitiesResponse | null | undefined,
-      protos.google.cloud.dataplex.v1.IEntity
-    >
-  ): void;
-  listEntities(
-    request: protos.google.cloud.dataplex.v1.IListEntitiesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListEntitiesRequest,
-      protos.google.cloud.dataplex.v1.IListEntitiesResponse | null | undefined,
-      protos.google.cloud.dataplex.v1.IEntity
-    >
-  ): void;
-  listEntities(
-    request?: protos.google.cloud.dataplex.v1.IListEntitiesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.dataplex.v1.IListEntitiesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.dataplex.v1.IListEntitiesRequest,
-          | protos.google.cloud.dataplex.v1.IListEntitiesResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataplex.v1.IEntity
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListEntitiesRequest,
-      protos.google.cloud.dataplex.v1.IListEntitiesResponse | null | undefined,
-      protos.google.cloud.dataplex.v1.IEntity
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IEntity[],
-      protos.google.cloud.dataplex.v1.IListEntitiesRequest | null,
-      protos.google.cloud.dataplex.v1.IListEntitiesResponse,
-    ]
-  > | void {
+          protos.google.cloud.dataplex.v1.IListEntitiesResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IEntity>): void;
+  listEntities(
+      request: protos.google.cloud.dataplex.v1.IListEntitiesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListEntitiesRequest,
+          protos.google.cloud.dataplex.v1.IListEntitiesResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IEntity>): void;
+  listEntities(
+      request?: protos.google.cloud.dataplex.v1.IListEntitiesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListEntitiesRequest,
+          protos.google.cloud.dataplex.v1.IListEntitiesResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IEntity>,
+      callback?: PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListEntitiesRequest,
+          protos.google.cloud.dataplex.v1.IListEntitiesResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IEntity>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntity[],
+        protos.google.cloud.dataplex.v1.IListEntitiesRequest|null,
+        protos.google.cloud.dataplex.v1.IListEntitiesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListEntitiesRequest,
-          | protos.google.cloud.dataplex.v1.IListEntitiesResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataplex.v1.IEntity
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListEntitiesRequest,
+      protos.google.cloud.dataplex.v1.IListEntitiesResponse|null|undefined,
+      protos.google.cloud.dataplex.v1.IEntity>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listEntities values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1694,74 +1237,71 @@ export class MetadataServiceClient {
     this._log.info('listEntities request %j', request);
     return this.innerApiCalls
       .listEntities(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.dataplex.v1.IEntity[],
-          protos.google.cloud.dataplex.v1.IListEntitiesRequest | null,
-          protos.google.cloud.dataplex.v1.IListEntitiesResponse,
-        ]) => {
-          this._log.info('listEntities values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.dataplex.v1.IEntity[],
+        protos.google.cloud.dataplex.v1.IListEntitiesRequest|null,
+        protos.google.cloud.dataplex.v1.IListEntitiesResponse
+      ]) => {
+        this._log.info('listEntities values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listEntities`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the parent zone:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
-   * @param {google.cloud.dataplex.v1.ListEntitiesRequest.EntityView} request.view
-   *   Required. Specify the entity view to make a partial list request.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of entities to return. The service may return
-   *   fewer than this value. If unspecified, 100 entities will be returned by
-   *   default. The maximum value is 500; larger values will will be truncated to
-   *   500.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListEntities` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
-   *   provided to `ListEntities` must match the call that provided the
-   *   page token.
-   * @param {string} [request.filter]
-   *   Optional. The following filter parameters can be added to the URL to limit
-   *   the entities returned by the API:
-   *
-   *   - Entity ID: ?filter="id=entityID"
-   *   - Asset ID: ?filter="asset=assetID"
-   *   - Data path ?filter="data_path=gs://my-bucket"
-   *   - Is HIVE compatible: ?filter="hive_compatible=true"
-   *   - Is BigQuery compatible: ?filter="bigquery_compatible=true"
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.Entity|Entity} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listEntitiesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listEntities`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the parent zone:
+ *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
+ * @param {google.cloud.dataplex.v1.ListEntitiesRequest.EntityView} request.view
+ *   Required. Specify the entity view to make a partial list request.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of entities to return. The service may return
+ *   fewer than this value. If unspecified, 100 entities will be returned by
+ *   default. The maximum value is 500; larger values will will be truncated to
+ *   500.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListEntities` call. Provide
+ *   this to retrieve the subsequent page. When paginating, all other parameters
+ *   provided to `ListEntities` must match the call that provided the
+ *   page token.
+ * @param {string} [request.filter]
+ *   Optional. The following filter parameters can be added to the URL to limit
+ *   the entities returned by the API:
+ *
+ *   - Entity ID: ?filter="id=entityID"
+ *   - Asset ID: ?filter="asset=assetID"
+ *   - Data path ?filter="data_path=gs://my-bucket"
+ *   - Is HIVE compatible: ?filter="hive_compatible=true"
+ *   - Is BigQuery compatible: ?filter="bigquery_compatible=true"
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.Entity|Entity} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listEntitiesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listEntitiesStream(
-    request?: protos.google.cloud.dataplex.v1.IListEntitiesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.dataplex.v1.IListEntitiesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listEntities'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listEntities stream %j', request);
     return this.descriptors.page.listEntities.createStream(
       this.innerApiCalls.listEntities as GaxCall,
@@ -1770,65 +1310,64 @@ export class MetadataServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listEntities`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the parent zone:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
-   * @param {google.cloud.dataplex.v1.ListEntitiesRequest.EntityView} request.view
-   *   Required. Specify the entity view to make a partial list request.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of entities to return. The service may return
-   *   fewer than this value. If unspecified, 100 entities will be returned by
-   *   default. The maximum value is 500; larger values will will be truncated to
-   *   500.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListEntities` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
-   *   provided to `ListEntities` must match the call that provided the
-   *   page token.
-   * @param {string} [request.filter]
-   *   Optional. The following filter parameters can be added to the URL to limit
-   *   the entities returned by the API:
-   *
-   *   - Entity ID: ?filter="id=entityID"
-   *   - Asset ID: ?filter="asset=assetID"
-   *   - Data path ?filter="data_path=gs://my-bucket"
-   *   - Is HIVE compatible: ?filter="hive_compatible=true"
-   *   - Is BigQuery compatible: ?filter="bigquery_compatible=true"
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.dataplex.v1.Entity|Entity}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/metadata_service.list_entities.js</caption>
-   * region_tag:dataplex_v1_generated_MetadataService_ListEntities_async
-   */
+/**
+ * Equivalent to `listEntities`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the parent zone:
+ *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
+ * @param {google.cloud.dataplex.v1.ListEntitiesRequest.EntityView} request.view
+ *   Required. Specify the entity view to make a partial list request.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of entities to return. The service may return
+ *   fewer than this value. If unspecified, 100 entities will be returned by
+ *   default. The maximum value is 500; larger values will will be truncated to
+ *   500.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListEntities` call. Provide
+ *   this to retrieve the subsequent page. When paginating, all other parameters
+ *   provided to `ListEntities` must match the call that provided the
+ *   page token.
+ * @param {string} [request.filter]
+ *   Optional. The following filter parameters can be added to the URL to limit
+ *   the entities returned by the API:
+ *
+ *   - Entity ID: ?filter="id=entityID"
+ *   - Asset ID: ?filter="asset=assetID"
+ *   - Data path ?filter="data_path=gs://my-bucket"
+ *   - Is HIVE compatible: ?filter="hive_compatible=true"
+ *   - Is BigQuery compatible: ?filter="bigquery_compatible=true"
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.dataplex.v1.Entity|Entity}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/metadata_service.list_entities.js</caption>
+ * region_tag:dataplex_v1_generated_MetadataService_ListEntities_async
+ */
   listEntitiesAsync(
-    request?: protos.google.cloud.dataplex.v1.IListEntitiesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dataplex.v1.IEntity> {
+      request?: protos.google.cloud.dataplex.v1.IListEntitiesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.dataplex.v1.IEntity>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listEntities'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listEntities iterate %j', request);
     return this.descriptors.page.listEntities.asyncIterate(
       this.innerApiCalls['listEntities'] as GaxCall,
@@ -1836,139 +1375,114 @@ export class MetadataServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IEntity>;
   }
-  /**
-   * List metadata partitions of an entity.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the parent entity:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of partitions to return. The service may return
-   *   fewer than this value. If unspecified, 100 partitions will be returned by
-   *   default. The maximum page size is 500; larger values will will be truncated
-   *   to 500.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListPartitions` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `ListPartitions` must match the call that provided
-   *   the page token.
-   * @param {string} [request.filter]
-   *   Optional. Filter the partitions returned to the caller using a key value
-   *   pair expression. Supported operators and syntax:
-   *
-   *   - logic operators: AND, OR
-   *   - comparison operators: <, >, >=, <= ,=, !=
-   *   - LIKE operators:
-   *     - The right hand of a LIKE operator supports "." and
-   *       "*" for wildcard searches, for example "value1 LIKE ".*oo.*"
-   *   - parenthetical grouping: ( )
-   *
-   *   Sample filter expression: `?filter="key1 < value1 OR key2 > value2"
-   *
-   *   **Notes:**
-   *
-   *   - Keys to the left of operators are case insensitive.
-   *   - Partition results are sorted first by creation time, then by
-   *     lexicographic order.
-   *   - Up to 20 key value filter pairs are allowed, but due to performance
-   *     considerations, only the first 10 will be used as a filter.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.Partition|Partition}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listPartitionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * List metadata partitions of an entity.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the parent entity:
+ *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of partitions to return. The service may return
+ *   fewer than this value. If unspecified, 100 partitions will be returned by
+ *   default. The maximum page size is 500; larger values will will be truncated
+ *   to 500.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListPartitions` call.
+ *   Provide this to retrieve the subsequent page. When paginating, all other
+ *   parameters provided to `ListPartitions` must match the call that provided
+ *   the page token.
+ * @param {string} [request.filter]
+ *   Optional. Filter the partitions returned to the caller using a key value
+ *   pair expression. Supported operators and syntax:
+ *
+ *   - logic operators: AND, OR
+ *   - comparison operators: <, >, >=, <= ,=, !=
+ *   - LIKE operators:
+ *     - The right hand of a LIKE operator supports "." and
+ *       "*" for wildcard searches, for example "value1 LIKE ".*oo.*"
+ *   - parenthetical grouping: ( )
+ *
+ *   Sample filter expression: `?filter="key1 < value1 OR key2 > value2"
+ *
+ *   **Notes:**
+ *
+ *   - Keys to the left of operators are case insensitive.
+ *   - Partition results are sorted first by creation time, then by
+ *     lexicographic order.
+ *   - Up to 20 key value filter pairs are allowed, but due to performance
+ *     considerations, only the first 10 will be used as a filter.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.Partition|Partition}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listPartitionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPartitions(
-    request?: protos.google.cloud.dataplex.v1.IListPartitionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IPartition[],
-      protos.google.cloud.dataplex.v1.IListPartitionsRequest | null,
-      protos.google.cloud.dataplex.v1.IListPartitionsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.IListPartitionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IPartition[],
+        protos.google.cloud.dataplex.v1.IListPartitionsRequest|null,
+        protos.google.cloud.dataplex.v1.IListPartitionsResponse
+      ]>;
   listPartitions(
-    request: protos.google.cloud.dataplex.v1.IListPartitionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListPartitionsRequest,
-      | protos.google.cloud.dataplex.v1.IListPartitionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataplex.v1.IPartition
-    >
-  ): void;
-  listPartitions(
-    request: protos.google.cloud.dataplex.v1.IListPartitionsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListPartitionsRequest,
-      | protos.google.cloud.dataplex.v1.IListPartitionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataplex.v1.IPartition
-    >
-  ): void;
-  listPartitions(
-    request?: protos.google.cloud.dataplex.v1.IListPartitionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.dataplex.v1.IListPartitionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.dataplex.v1.IListPartitionsRequest,
-          | protos.google.cloud.dataplex.v1.IListPartitionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataplex.v1.IPartition
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListPartitionsRequest,
-      | protos.google.cloud.dataplex.v1.IListPartitionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataplex.v1.IPartition
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IPartition[],
-      protos.google.cloud.dataplex.v1.IListPartitionsRequest | null,
-      protos.google.cloud.dataplex.v1.IListPartitionsResponse,
-    ]
-  > | void {
+          protos.google.cloud.dataplex.v1.IListPartitionsResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IPartition>): void;
+  listPartitions(
+      request: protos.google.cloud.dataplex.v1.IListPartitionsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListPartitionsRequest,
+          protos.google.cloud.dataplex.v1.IListPartitionsResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IPartition>): void;
+  listPartitions(
+      request?: protos.google.cloud.dataplex.v1.IListPartitionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListPartitionsRequest,
+          protos.google.cloud.dataplex.v1.IListPartitionsResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IPartition>,
+      callback?: PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListPartitionsRequest,
+          protos.google.cloud.dataplex.v1.IListPartitionsResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IPartition>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IPartition[],
+        protos.google.cloud.dataplex.v1.IListPartitionsRequest|null,
+        protos.google.cloud.dataplex.v1.IListPartitionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListPartitionsRequest,
-          | protos.google.cloud.dataplex.v1.IListPartitionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataplex.v1.IPartition
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListPartitionsRequest,
+      protos.google.cloud.dataplex.v1.IListPartitionsResponse|null|undefined,
+      protos.google.cloud.dataplex.v1.IPartition>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listPartitions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1977,83 +1491,80 @@ export class MetadataServiceClient {
     this._log.info('listPartitions request %j', request);
     return this.innerApiCalls
       .listPartitions(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.dataplex.v1.IPartition[],
-          protos.google.cloud.dataplex.v1.IListPartitionsRequest | null,
-          protos.google.cloud.dataplex.v1.IListPartitionsResponse,
-        ]) => {
-          this._log.info('listPartitions values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.dataplex.v1.IPartition[],
+        protos.google.cloud.dataplex.v1.IListPartitionsRequest|null,
+        protos.google.cloud.dataplex.v1.IListPartitionsResponse
+      ]) => {
+        this._log.info('listPartitions values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listPartitions`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the parent entity:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of partitions to return. The service may return
-   *   fewer than this value. If unspecified, 100 partitions will be returned by
-   *   default. The maximum page size is 500; larger values will will be truncated
-   *   to 500.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListPartitions` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `ListPartitions` must match the call that provided
-   *   the page token.
-   * @param {string} [request.filter]
-   *   Optional. Filter the partitions returned to the caller using a key value
-   *   pair expression. Supported operators and syntax:
-   *
-   *   - logic operators: AND, OR
-   *   - comparison operators: <, >, >=, <= ,=, !=
-   *   - LIKE operators:
-   *     - The right hand of a LIKE operator supports "." and
-   *       "*" for wildcard searches, for example "value1 LIKE ".*oo.*"
-   *   - parenthetical grouping: ( )
-   *
-   *   Sample filter expression: `?filter="key1 < value1 OR key2 > value2"
-   *
-   *   **Notes:**
-   *
-   *   - Keys to the left of operators are case insensitive.
-   *   - Partition results are sorted first by creation time, then by
-   *     lexicographic order.
-   *   - Up to 20 key value filter pairs are allowed, but due to performance
-   *     considerations, only the first 10 will be used as a filter.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.Partition|Partition} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listPartitionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listPartitions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the parent entity:
+ *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of partitions to return. The service may return
+ *   fewer than this value. If unspecified, 100 partitions will be returned by
+ *   default. The maximum page size is 500; larger values will will be truncated
+ *   to 500.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListPartitions` call.
+ *   Provide this to retrieve the subsequent page. When paginating, all other
+ *   parameters provided to `ListPartitions` must match the call that provided
+ *   the page token.
+ * @param {string} [request.filter]
+ *   Optional. Filter the partitions returned to the caller using a key value
+ *   pair expression. Supported operators and syntax:
+ *
+ *   - logic operators: AND, OR
+ *   - comparison operators: <, >, >=, <= ,=, !=
+ *   - LIKE operators:
+ *     - The right hand of a LIKE operator supports "." and
+ *       "*" for wildcard searches, for example "value1 LIKE ".*oo.*"
+ *   - parenthetical grouping: ( )
+ *
+ *   Sample filter expression: `?filter="key1 < value1 OR key2 > value2"
+ *
+ *   **Notes:**
+ *
+ *   - Keys to the left of operators are case insensitive.
+ *   - Partition results are sorted first by creation time, then by
+ *     lexicographic order.
+ *   - Up to 20 key value filter pairs are allowed, but due to performance
+ *     considerations, only the first 10 will be used as a filter.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.Partition|Partition} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listPartitionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPartitionsStream(
-    request?: protos.google.cloud.dataplex.v1.IListPartitionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.dataplex.v1.IListPartitionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listPartitions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listPartitions stream %j', request);
     return this.descriptors.page.listPartitions.createStream(
       this.innerApiCalls.listPartitions as GaxCall,
@@ -2062,74 +1573,73 @@ export class MetadataServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listPartitions`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the parent entity:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of partitions to return. The service may return
-   *   fewer than this value. If unspecified, 100 partitions will be returned by
-   *   default. The maximum page size is 500; larger values will will be truncated
-   *   to 500.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListPartitions` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `ListPartitions` must match the call that provided
-   *   the page token.
-   * @param {string} [request.filter]
-   *   Optional. Filter the partitions returned to the caller using a key value
-   *   pair expression. Supported operators and syntax:
-   *
-   *   - logic operators: AND, OR
-   *   - comparison operators: <, >, >=, <= ,=, !=
-   *   - LIKE operators:
-   *     - The right hand of a LIKE operator supports "." and
-   *       "*" for wildcard searches, for example "value1 LIKE ".*oo.*"
-   *   - parenthetical grouping: ( )
-   *
-   *   Sample filter expression: `?filter="key1 < value1 OR key2 > value2"
-   *
-   *   **Notes:**
-   *
-   *   - Keys to the left of operators are case insensitive.
-   *   - Partition results are sorted first by creation time, then by
-   *     lexicographic order.
-   *   - Up to 20 key value filter pairs are allowed, but due to performance
-   *     considerations, only the first 10 will be used as a filter.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.dataplex.v1.Partition|Partition}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/metadata_service.list_partitions.js</caption>
-   * region_tag:dataplex_v1_generated_MetadataService_ListPartitions_async
-   */
+/**
+ * Equivalent to `listPartitions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the parent entity:
+ *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of partitions to return. The service may return
+ *   fewer than this value. If unspecified, 100 partitions will be returned by
+ *   default. The maximum page size is 500; larger values will will be truncated
+ *   to 500.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListPartitions` call.
+ *   Provide this to retrieve the subsequent page. When paginating, all other
+ *   parameters provided to `ListPartitions` must match the call that provided
+ *   the page token.
+ * @param {string} [request.filter]
+ *   Optional. Filter the partitions returned to the caller using a key value
+ *   pair expression. Supported operators and syntax:
+ *
+ *   - logic operators: AND, OR
+ *   - comparison operators: <, >, >=, <= ,=, !=
+ *   - LIKE operators:
+ *     - The right hand of a LIKE operator supports "." and
+ *       "*" for wildcard searches, for example "value1 LIKE ".*oo.*"
+ *   - parenthetical grouping: ( )
+ *
+ *   Sample filter expression: `?filter="key1 < value1 OR key2 > value2"
+ *
+ *   **Notes:**
+ *
+ *   - Keys to the left of operators are case insensitive.
+ *   - Partition results are sorted first by creation time, then by
+ *     lexicographic order.
+ *   - Up to 20 key value filter pairs are allowed, but due to performance
+ *     considerations, only the first 10 will be used as a filter.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.dataplex.v1.Partition|Partition}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/metadata_service.list_partitions.js</caption>
+ * region_tag:dataplex_v1_generated_MetadataService_ListPartitions_async
+ */
   listPartitionsAsync(
-    request?: protos.google.cloud.dataplex.v1.IListPartitionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dataplex.v1.IPartition> {
+      request?: protos.google.cloud.dataplex.v1.IListPartitionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.dataplex.v1.IPartition>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listPartitions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listPartitions iterate %j', request);
     return this.descriptors.page.listPartitions.asyncIterate(
       this.innerApiCalls['listPartitions'] as GaxCall,
@@ -2137,7 +1647,7 @@ export class MetadataServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IPartition>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -2177,7 +1687,7 @@ export class MetadataServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -2215,7 +1725,7 @@ export class MetadataServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -2260,20 +1770,20 @@ export class MetadataServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -2310,13 +1820,13 @@ export class MetadataServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -2350,7 +1860,7 @@ export class MetadataServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -2365,20 +1875,20 @@ export class MetadataServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -2422,20 +1932,20 @@ export class MetadataServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -2451,7 +1961,7 @@ export class MetadataServiceClient {
    * @param {string} aspect_type
    * @returns {string} Resource name string.
    */
-  aspectTypePath(project: string, location: string, aspectType: string) {
+  aspectTypePath(project:string,location:string,aspectType:string) {
     return this.pathTemplates.aspectTypePathTemplate.render({
       project: project,
       location: location,
@@ -2467,8 +1977,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAspectTypeName(aspectTypeName: string) {
-    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName)
-      .project;
+    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName).project;
   }
 
   /**
@@ -2479,8 +1988,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAspectTypeName(aspectTypeName: string) {
-    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName)
-      .location;
+    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName).location;
   }
 
   /**
@@ -2491,8 +1999,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the aspect_type.
    */
   matchAspectTypeFromAspectTypeName(aspectTypeName: string) {
-    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName)
-      .aspect_type;
+    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName).aspect_type;
   }
 
   /**
@@ -2505,13 +2012,7 @@ export class MetadataServiceClient {
    * @param {string} asset
    * @returns {string} Resource name string.
    */
-  assetPath(
-    project: string,
-    location: string,
-    lake: string,
-    zone: string,
-    asset: string
-  ) {
+  assetPath(project:string,location:string,lake:string,zone:string,asset:string) {
     return this.pathTemplates.assetPathTemplate.render({
       project: project,
       location: location,
@@ -2585,12 +2086,7 @@ export class MetadataServiceClient {
    * @param {string} content
    * @returns {string} Resource name string.
    */
-  contentPath(
-    project: string,
-    location: string,
-    lake: string,
-    content: string
-  ) {
+  contentPath(project:string,location:string,lake:string,content:string) {
     return this.pathTemplates.contentPathTemplate.render({
       project: project,
       location: location,
@@ -2652,12 +2148,7 @@ export class MetadataServiceClient {
    * @param {string} data_attribute_id
    * @returns {string} Resource name string.
    */
-  dataAttributePath(
-    project: string,
-    location: string,
-    dataTaxonomy: string,
-    dataAttributeId: string
-  ) {
+  dataAttributePath(project:string,location:string,dataTaxonomy:string,dataAttributeId:string) {
     return this.pathTemplates.dataAttributePathTemplate.render({
       project: project,
       location: location,
@@ -2674,8 +2165,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAttributeName(dataAttributeName: string) {
-    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
-      .project;
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName).project;
   }
 
   /**
@@ -2686,8 +2176,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAttributeName(dataAttributeName: string) {
-    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
-      .location;
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName).location;
   }
 
   /**
@@ -2698,8 +2187,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the dataTaxonomy.
    */
   matchDataTaxonomyFromDataAttributeName(dataAttributeName: string) {
-    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
-      .dataTaxonomy;
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName).dataTaxonomy;
   }
 
   /**
@@ -2710,8 +2198,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the data_attribute_id.
    */
   matchDataAttributeIdFromDataAttributeName(dataAttributeName: string) {
-    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
-      .data_attribute_id;
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName).data_attribute_id;
   }
 
   /**
@@ -2722,11 +2209,7 @@ export class MetadataServiceClient {
    * @param {string} data_attribute_binding_id
    * @returns {string} Resource name string.
    */
-  dataAttributeBindingPath(
-    project: string,
-    location: string,
-    dataAttributeBindingId: string
-  ) {
+  dataAttributeBindingPath(project:string,location:string,dataAttributeBindingId:string) {
     return this.pathTemplates.dataAttributeBindingPathTemplate.render({
       project: project,
       location: location,
@@ -2742,9 +2225,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAttributeBindingName(dataAttributeBindingName: string) {
-    return this.pathTemplates.dataAttributeBindingPathTemplate.match(
-      dataAttributeBindingName
-    ).project;
+    return this.pathTemplates.dataAttributeBindingPathTemplate.match(dataAttributeBindingName).project;
   }
 
   /**
@@ -2755,9 +2236,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAttributeBindingName(dataAttributeBindingName: string) {
-    return this.pathTemplates.dataAttributeBindingPathTemplate.match(
-      dataAttributeBindingName
-    ).location;
+    return this.pathTemplates.dataAttributeBindingPathTemplate.match(dataAttributeBindingName).location;
   }
 
   /**
@@ -2767,12 +2246,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing DataAttributeBinding resource.
    * @returns {string} A string representing the data_attribute_binding_id.
    */
-  matchDataAttributeBindingIdFromDataAttributeBindingName(
-    dataAttributeBindingName: string
-  ) {
-    return this.pathTemplates.dataAttributeBindingPathTemplate.match(
-      dataAttributeBindingName
-    ).data_attribute_binding_id;
+  matchDataAttributeBindingIdFromDataAttributeBindingName(dataAttributeBindingName: string) {
+    return this.pathTemplates.dataAttributeBindingPathTemplate.match(dataAttributeBindingName).data_attribute_binding_id;
   }
 
   /**
@@ -2783,7 +2258,7 @@ export class MetadataServiceClient {
    * @param {string} dataScan
    * @returns {string} Resource name string.
    */
-  dataScanPath(project: string, location: string, dataScan: string) {
+  dataScanPath(project:string,location:string,dataScan:string) {
     return this.pathTemplates.dataScanPathTemplate.render({
       project: project,
       location: location,
@@ -2833,12 +2308,7 @@ export class MetadataServiceClient {
    * @param {string} job
    * @returns {string} Resource name string.
    */
-  dataScanJobPath(
-    project: string,
-    location: string,
-    dataScan: string,
-    job: string
-  ) {
+  dataScanJobPath(project:string,location:string,dataScan:string,job:string) {
     return this.pathTemplates.dataScanJobPathTemplate.render({
       project: project,
       location: location,
@@ -2855,8 +2325,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataScanJobName(dataScanJobName: string) {
-    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
-      .project;
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName).project;
   }
 
   /**
@@ -2867,8 +2336,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataScanJobName(dataScanJobName: string) {
-    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
-      .location;
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName).location;
   }
 
   /**
@@ -2879,8 +2347,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the dataScan.
    */
   matchDataScanFromDataScanJobName(dataScanJobName: string) {
-    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
-      .dataScan;
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName).dataScan;
   }
 
   /**
@@ -2891,8 +2358,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the job.
    */
   matchJobFromDataScanJobName(dataScanJobName: string) {
-    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
-      .job;
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName).job;
   }
 
   /**
@@ -2903,7 +2369,7 @@ export class MetadataServiceClient {
    * @param {string} data_taxonomy_id
    * @returns {string} Resource name string.
    */
-  dataTaxonomyPath(project: string, location: string, dataTaxonomyId: string) {
+  dataTaxonomyPath(project:string,location:string,dataTaxonomyId:string) {
     return this.pathTemplates.dataTaxonomyPathTemplate.render({
       project: project,
       location: location,
@@ -2919,8 +2385,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataTaxonomyName(dataTaxonomyName: string) {
-    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName)
-      .project;
+    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName).project;
   }
 
   /**
@@ -2931,8 +2396,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataTaxonomyName(dataTaxonomyName: string) {
-    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName)
-      .location;
+    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName).location;
   }
 
   /**
@@ -2943,8 +2407,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the data_taxonomy_id.
    */
   matchDataTaxonomyIdFromDataTaxonomyName(dataTaxonomyName: string) {
-    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName)
-      .data_taxonomy_id;
+    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName).data_taxonomy_id;
   }
 
   /**
@@ -2955,11 +2418,7 @@ export class MetadataServiceClient {
    * @param {string} encryption_config
    * @returns {string} Resource name string.
    */
-  encryptionConfigPath(
-    organization: string,
-    location: string,
-    encryptionConfig: string
-  ) {
+  encryptionConfigPath(organization:string,location:string,encryptionConfig:string) {
     return this.pathTemplates.encryptionConfigPathTemplate.render({
       organization: organization,
       location: location,
@@ -2975,9 +2434,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromEncryptionConfigName(encryptionConfigName: string) {
-    return this.pathTemplates.encryptionConfigPathTemplate.match(
-      encryptionConfigName
-    ).organization;
+    return this.pathTemplates.encryptionConfigPathTemplate.match(encryptionConfigName).organization;
   }
 
   /**
@@ -2988,9 +2445,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEncryptionConfigName(encryptionConfigName: string) {
-    return this.pathTemplates.encryptionConfigPathTemplate.match(
-      encryptionConfigName
-    ).location;
+    return this.pathTemplates.encryptionConfigPathTemplate.match(encryptionConfigName).location;
   }
 
   /**
@@ -3001,9 +2456,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the encryption_config.
    */
   matchEncryptionConfigFromEncryptionConfigName(encryptionConfigName: string) {
-    return this.pathTemplates.encryptionConfigPathTemplate.match(
-      encryptionConfigName
-    ).encryption_config;
+    return this.pathTemplates.encryptionConfigPathTemplate.match(encryptionConfigName).encryption_config;
   }
 
   /**
@@ -3016,13 +2469,7 @@ export class MetadataServiceClient {
    * @param {string} entity
    * @returns {string} Resource name string.
    */
-  entityPath(
-    project: string,
-    location: string,
-    lake: string,
-    zone: string,
-    entity: string
-  ) {
+  entityPath(project:string,location:string,lake:string,zone:string,entity:string) {
     return this.pathTemplates.entityPathTemplate.render({
       project: project,
       location: location,
@@ -3096,12 +2543,7 @@ export class MetadataServiceClient {
    * @param {string} entry
    * @returns {string} Resource name string.
    */
-  entryPath(
-    project: string,
-    location: string,
-    entryGroup: string,
-    entry: string
-  ) {
+  entryPath(project:string,location:string,entryGroup:string,entry:string) {
     return this.pathTemplates.entryPathTemplate.render({
       project: project,
       location: location,
@@ -3162,7 +2604,7 @@ export class MetadataServiceClient {
    * @param {string} entry_group
    * @returns {string} Resource name string.
    */
-  entryGroupPath(project: string, location: string, entryGroup: string) {
+  entryGroupPath(project:string,location:string,entryGroup:string) {
     return this.pathTemplates.entryGroupPathTemplate.render({
       project: project,
       location: location,
@@ -3178,8 +2620,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEntryGroupName(entryGroupName: string) {
-    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName)
-      .project;
+    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName).project;
   }
 
   /**
@@ -3190,8 +2631,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEntryGroupName(entryGroupName: string) {
-    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName)
-      .location;
+    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName).location;
   }
 
   /**
@@ -3202,8 +2642,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the entry_group.
    */
   matchEntryGroupFromEntryGroupName(entryGroupName: string) {
-    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName)
-      .entry_group;
+    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName).entry_group;
   }
 
   /**
@@ -3214,7 +2653,7 @@ export class MetadataServiceClient {
    * @param {string} entry_type
    * @returns {string} Resource name string.
    */
-  entryTypePath(project: string, location: string, entryType: string) {
+  entryTypePath(project:string,location:string,entryType:string) {
     return this.pathTemplates.entryTypePathTemplate.render({
       project: project,
       location: location,
@@ -3230,8 +2669,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEntryTypeName(entryTypeName: string) {
-    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName)
-      .project;
+    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName).project;
   }
 
   /**
@@ -3242,8 +2680,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEntryTypeName(entryTypeName: string) {
-    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName)
-      .location;
+    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName).location;
   }
 
   /**
@@ -3254,8 +2691,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the entry_type.
    */
   matchEntryTypeFromEntryTypeName(entryTypeName: string) {
-    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName)
-      .entry_type;
+    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName).entry_type;
   }
 
   /**
@@ -3267,12 +2703,7 @@ export class MetadataServiceClient {
    * @param {string} environment
    * @returns {string} Resource name string.
    */
-  environmentPath(
-    project: string,
-    location: string,
-    lake: string,
-    environment: string
-  ) {
+  environmentPath(project:string,location:string,lake:string,environment:string) {
     return this.pathTemplates.environmentPathTemplate.render({
       project: project,
       location: location,
@@ -3289,8 +2720,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .project;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName).project;
   }
 
   /**
@@ -3301,8 +2731,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .location;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName).location;
   }
 
   /**
@@ -3313,8 +2742,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the lake.
    */
   matchLakeFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .lake;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName).lake;
   }
 
   /**
@@ -3325,8 +2753,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the environment.
    */
   matchEnvironmentFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .environment;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName).environment;
   }
 
   /**
@@ -3339,13 +2766,7 @@ export class MetadataServiceClient {
    * @param {string} job
    * @returns {string} Resource name string.
    */
-  jobPath(
-    project: string,
-    location: string,
-    lake: string,
-    task: string,
-    job: string
-  ) {
+  jobPath(project:string,location:string,lake:string,task:string,job:string) {
     return this.pathTemplates.jobPathTemplate.render({
       project: project,
       location: location,
@@ -3418,7 +2839,7 @@ export class MetadataServiceClient {
    * @param {string} lake
    * @returns {string} Resource name string.
    */
-  lakePath(project: string, location: string, lake: string) {
+  lakePath(project:string,location:string,lake:string) {
     return this.pathTemplates.lakePathTemplate.render({
       project: project,
       location: location,
@@ -3467,7 +2888,7 @@ export class MetadataServiceClient {
    * @param {string} metadataJob
    * @returns {string} Resource name string.
    */
-  metadataJobPath(project: string, location: string, metadataJob: string) {
+  metadataJobPath(project:string,location:string,metadataJob:string) {
     return this.pathTemplates.metadataJobPathTemplate.render({
       project: project,
       location: location,
@@ -3483,8 +2904,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMetadataJobName(metadataJobName: string) {
-    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName)
-      .project;
+    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName).project;
   }
 
   /**
@@ -3495,8 +2915,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMetadataJobName(metadataJobName: string) {
-    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName)
-      .location;
+    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName).location;
   }
 
   /**
@@ -3507,8 +2926,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the metadataJob.
    */
   matchMetadataJobFromMetadataJobName(metadataJobName: string) {
-    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName)
-      .metadataJob;
+    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName).metadataJob;
   }
 
   /**
@@ -3522,14 +2940,7 @@ export class MetadataServiceClient {
    * @param {string} partition
    * @returns {string} Resource name string.
    */
-  partitionPath(
-    project: string,
-    location: string,
-    lake: string,
-    zone: string,
-    entity: string,
-    partition: string
-  ) {
+  partitionPath(project:string,location:string,lake:string,zone:string,entity:string,partition:string) {
     return this.pathTemplates.partitionPathTemplate.render({
       project: project,
       location: location,
@@ -3548,8 +2959,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPartitionName(partitionName: string) {
-    return this.pathTemplates.partitionPathTemplate.match(partitionName)
-      .project;
+    return this.pathTemplates.partitionPathTemplate.match(partitionName).project;
   }
 
   /**
@@ -3560,8 +2970,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPartitionName(partitionName: string) {
-    return this.pathTemplates.partitionPathTemplate.match(partitionName)
-      .location;
+    return this.pathTemplates.partitionPathTemplate.match(partitionName).location;
   }
 
   /**
@@ -3605,8 +3014,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the partition.
    */
   matchPartitionFromPartitionName(partitionName: string) {
-    return this.pathTemplates.partitionPathTemplate.match(partitionName)
-      .partition;
+    return this.pathTemplates.partitionPathTemplate.match(partitionName).partition;
   }
 
   /**
@@ -3618,12 +3026,7 @@ export class MetadataServiceClient {
    * @param {string} action
    * @returns {string} Resource name string.
    */
-  projectLocationLakeActionPath(
-    project: string,
-    location: string,
-    lake: string,
-    action: string
-  ) {
+  projectLocationLakeActionPath(project:string,location:string,lake:string,action:string) {
     return this.pathTemplates.projectLocationLakeActionPathTemplate.render({
       project: project,
       location: location,
@@ -3639,12 +3042,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_lake_action resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationLakeActionName(
-    projectLocationLakeActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(
-      projectLocationLakeActionName
-    ).project;
+  matchProjectFromProjectLocationLakeActionName(projectLocationLakeActionName: string) {
+    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(projectLocationLakeActionName).project;
   }
 
   /**
@@ -3654,12 +3053,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_lake_action resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationLakeActionName(
-    projectLocationLakeActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(
-      projectLocationLakeActionName
-    ).location;
+  matchLocationFromProjectLocationLakeActionName(projectLocationLakeActionName: string) {
+    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(projectLocationLakeActionName).location;
   }
 
   /**
@@ -3669,12 +3064,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_lake_action resource.
    * @returns {string} A string representing the lake.
    */
-  matchLakeFromProjectLocationLakeActionName(
-    projectLocationLakeActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(
-      projectLocationLakeActionName
-    ).lake;
+  matchLakeFromProjectLocationLakeActionName(projectLocationLakeActionName: string) {
+    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(projectLocationLakeActionName).lake;
   }
 
   /**
@@ -3684,12 +3075,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_lake_action resource.
    * @returns {string} A string representing the action.
    */
-  matchActionFromProjectLocationLakeActionName(
-    projectLocationLakeActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(
-      projectLocationLakeActionName
-    ).action;
+  matchActionFromProjectLocationLakeActionName(projectLocationLakeActionName: string) {
+    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(projectLocationLakeActionName).action;
   }
 
   /**
@@ -3702,13 +3089,7 @@ export class MetadataServiceClient {
    * @param {string} action
    * @returns {string} Resource name string.
    */
-  projectLocationLakeZoneActionPath(
-    project: string,
-    location: string,
-    lake: string,
-    zone: string,
-    action: string
-  ) {
+  projectLocationLakeZoneActionPath(project:string,location:string,lake:string,zone:string,action:string) {
     return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.render({
       project: project,
       location: location,
@@ -3725,12 +3106,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationLakeZoneActionName(
-    projectLocationLakeZoneActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
-      projectLocationLakeZoneActionName
-    ).project;
+  matchProjectFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).project;
   }
 
   /**
@@ -3740,12 +3117,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationLakeZoneActionName(
-    projectLocationLakeZoneActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
-      projectLocationLakeZoneActionName
-    ).location;
+  matchLocationFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).location;
   }
 
   /**
@@ -3755,12 +3128,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the lake.
    */
-  matchLakeFromProjectLocationLakeZoneActionName(
-    projectLocationLakeZoneActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
-      projectLocationLakeZoneActionName
-    ).lake;
+  matchLakeFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).lake;
   }
 
   /**
@@ -3770,12 +3139,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the zone.
    */
-  matchZoneFromProjectLocationLakeZoneActionName(
-    projectLocationLakeZoneActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
-      projectLocationLakeZoneActionName
-    ).zone;
+  matchZoneFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).zone;
   }
 
   /**
@@ -3785,12 +3150,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the action.
    */
-  matchActionFromProjectLocationLakeZoneActionName(
-    projectLocationLakeZoneActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
-      projectLocationLakeZoneActionName
-    ).action;
+  matchActionFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).action;
   }
 
   /**
@@ -3804,24 +3165,15 @@ export class MetadataServiceClient {
    * @param {string} action
    * @returns {string} Resource name string.
    */
-  projectLocationLakeZoneAssetActionPath(
-    project: string,
-    location: string,
-    lake: string,
-    zone: string,
-    asset: string,
-    action: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        lake: lake,
-        zone: zone,
-        asset: asset,
-        action: action,
-      }
-    );
+  projectLocationLakeZoneAssetActionPath(project:string,location:string,lake:string,zone:string,asset:string,action:string) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.render({
+      project: project,
+      location: location,
+      lake: lake,
+      zone: zone,
+      asset: asset,
+      action: action,
+    });
   }
 
   /**
@@ -3831,12 +3183,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationLakeZoneAssetActionName(
-    projectLocationLakeZoneAssetActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
-      projectLocationLakeZoneAssetActionName
-    ).project;
+  matchProjectFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).project;
   }
 
   /**
@@ -3846,12 +3194,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationLakeZoneAssetActionName(
-    projectLocationLakeZoneAssetActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
-      projectLocationLakeZoneAssetActionName
-    ).location;
+  matchLocationFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).location;
   }
 
   /**
@@ -3861,12 +3205,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the lake.
    */
-  matchLakeFromProjectLocationLakeZoneAssetActionName(
-    projectLocationLakeZoneAssetActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
-      projectLocationLakeZoneAssetActionName
-    ).lake;
+  matchLakeFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).lake;
   }
 
   /**
@@ -3876,12 +3216,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the zone.
    */
-  matchZoneFromProjectLocationLakeZoneAssetActionName(
-    projectLocationLakeZoneAssetActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
-      projectLocationLakeZoneAssetActionName
-    ).zone;
+  matchZoneFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).zone;
   }
 
   /**
@@ -3891,12 +3227,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the asset.
    */
-  matchAssetFromProjectLocationLakeZoneAssetActionName(
-    projectLocationLakeZoneAssetActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
-      projectLocationLakeZoneAssetActionName
-    ).asset;
+  matchAssetFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).asset;
   }
 
   /**
@@ -3906,12 +3238,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the action.
    */
-  matchActionFromProjectLocationLakeZoneAssetActionName(
-    projectLocationLakeZoneAssetActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
-      projectLocationLakeZoneAssetActionName
-    ).action;
+  matchActionFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).action;
   }
 
   /**
@@ -3924,13 +3252,7 @@ export class MetadataServiceClient {
    * @param {string} session
    * @returns {string} Resource name string.
    */
-  sessionPath(
-    project: string,
-    location: string,
-    lake: string,
-    environment: string,
-    session: string
-  ) {
+  sessionPath(project:string,location:string,lake:string,environment:string,session:string) {
     return this.pathTemplates.sessionPathTemplate.render({
       project: project,
       location: location,
@@ -3981,8 +3303,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the environment.
    */
   matchEnvironmentFromSessionName(sessionName: string) {
-    return this.pathTemplates.sessionPathTemplate.match(sessionName)
-      .environment;
+    return this.pathTemplates.sessionPathTemplate.match(sessionName).environment;
   }
 
   /**
@@ -4005,7 +3326,7 @@ export class MetadataServiceClient {
    * @param {string} task
    * @returns {string} Resource name string.
    */
-  taskPath(project: string, location: string, lake: string, task: string) {
+  taskPath(project:string,location:string,lake:string,task:string) {
     return this.pathTemplates.taskPathTemplate.render({
       project: project,
       location: location,
@@ -4067,7 +3388,7 @@ export class MetadataServiceClient {
    * @param {string} zone
    * @returns {string} Resource name string.
    */
-  zonePath(project: string, location: string, lake: string, zone: string) {
+  zonePath(project:string,location:string,lake:string,zone:string) {
     return this.pathTemplates.zonePathTemplate.render({
       project: project,
       location: location,
@@ -4132,9 +3453,7 @@ export class MetadataServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }
