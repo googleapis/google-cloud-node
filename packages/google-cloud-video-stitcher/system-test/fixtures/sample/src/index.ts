@@ -19,9 +19,7 @@
 import {VideoStitcherServiceClient} from '@google-cloud/video-stitcher';
 
 // check that the client class type name can be used
-function doStuffWithVideoStitcherServiceClient(
-  client: VideoStitcherServiceClient
-) {
+function doStuffWithVideoStitcherServiceClient(client: VideoStitcherServiceClient) {
   client.close();
 }
 

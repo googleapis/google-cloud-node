@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -110,41 +103,20 @@ export class ImageAnnotatorClient {
    *     const client = new ImageAnnotatorClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ImageAnnotatorClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'vision.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -170,7 +142,7 @@ export class ImageAnnotatorClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -184,7 +156,10 @@ export class ImageAnnotatorClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -216,47 +191,35 @@ export class ImageAnnotatorClient {
       ),
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const asyncBatchAnnotateFilesResponse = protoFilesRoot.lookup(
-      '.google.cloud.vision.v1p3beta1.AsyncBatchAnnotateFilesResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.vision.v1p3beta1.AsyncBatchAnnotateFilesResponse') as gax.protobuf.Type;
     const asyncBatchAnnotateFilesMetadata = protoFilesRoot.lookup(
-      '.google.cloud.vision.v1p3beta1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.vision.v1p3beta1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       asyncBatchAnnotateFiles: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        asyncBatchAnnotateFilesResponse.decode.bind(
-          asyncBatchAnnotateFilesResponse
-        ),
-        asyncBatchAnnotateFilesMetadata.decode.bind(
-          asyncBatchAnnotateFilesMetadata
-        )
-      ),
+        asyncBatchAnnotateFilesResponse.decode.bind(asyncBatchAnnotateFilesResponse),
+        asyncBatchAnnotateFilesMetadata.decode.bind(asyncBatchAnnotateFilesMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.vision.v1p3beta1.ImageAnnotator',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.vision.v1p3beta1.ImageAnnotator', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -287,38 +250,32 @@ export class ImageAnnotatorClient {
     // Put together the "service stub" for
     // google.cloud.vision.v1p3beta1.ImageAnnotator.
     this.imageAnnotatorStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.vision.v1p3beta1.ImageAnnotator'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.vision.v1p3beta1.ImageAnnotator') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.vision.v1p3beta1.ImageAnnotator,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const imageAnnotatorStubMethods = [
-      'batchAnnotateImages',
-      'asyncBatchAnnotateFiles',
-    ];
+    const imageAnnotatorStubMethods =
+        ['batchAnnotateImages', 'asyncBatchAnnotateFiles'];
     for (const methodName of imageAnnotatorStubMethods) {
       const callPromise = this.imageAnnotatorStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.longrunning[methodName] || undefined;
+      const descriptor =
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -338,14 +295,8 @@ export class ImageAnnotatorClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'vision.googleapis.com';
   }
@@ -356,14 +307,8 @@ export class ImageAnnotatorClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'vision.googleapis.com';
   }
@@ -396,7 +341,7 @@ export class ImageAnnotatorClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/cloud-vision',
+      'https://www.googleapis.com/auth/cloud-vision'
     ];
   }
 
@@ -406,9 +351,8 @@ export class ImageAnnotatorClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -419,299 +363,202 @@ export class ImageAnnotatorClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Run image detection and annotation for a batch of images.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number[]} request.requests
-   *   Individual image annotation requests for this batch.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.vision.v1p3beta1.BatchAnnotateImagesResponse|BatchAnnotateImagesResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1p3beta1/image_annotator.batch_annotate_images.js</caption>
-   * region_tag:vision_v1p3beta1_generated_ImageAnnotator_BatchAnnotateImages_async
-   */
+/**
+ * Run image detection and annotation for a batch of images.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number[]} request.requests
+ *   Individual image annotation requests for this batch.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.vision.v1p3beta1.BatchAnnotateImagesResponse|BatchAnnotateImagesResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1p3beta1/image_annotator.batch_annotate_images.js</caption>
+ * region_tag:vision_v1p3beta1_generated_ImageAnnotator_BatchAnnotateImages_async
+ */
   batchAnnotateImages(
-    request?: protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesResponse,
-      (
-        | protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesResponse,
+        protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest|undefined, {}|undefined
+      ]>;
   batchAnnotateImages(
-    request: protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesResponse,
-      | protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchAnnotateImages(
-    request: protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest,
-    callback: Callback<
-      protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesResponse,
-      | protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchAnnotateImages(
-    request?: protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesResponse,
-          | protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesResponse,
-      | protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesResponse,
-      (
-        | protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchAnnotateImages(
+      request: protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest,
+      callback: Callback<
+          protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesResponse,
+          protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchAnnotateImages(
+      request?: protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesResponse,
+          protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesResponse,
+          protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesResponse,
+        protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('batchAnnotateImages request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesResponse,
-          | protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesResponse,
+        protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('batchAnnotateImages response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .batchAnnotateImages(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesResponse,
-          (
-            | protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('batchAnnotateImages response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.batchAnnotateImages(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesResponse,
+        protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchAnnotateImages response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Run asynchronous image detection and annotation for a list of generic
-   * files, such as PDF files, which may contain multiple pages and multiple
-   * images per page. Progress and results can be retrieved through the
-   * `google.longrunning.Operations` interface.
-   * `Operation.metadata` contains `OperationMetadata` (metadata).
-   * `Operation.response` contains `AsyncBatchAnnotateFilesResponse` (results).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number[]} request.requests
-   *   Required. Individual async file annotation requests for this batch.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1p3beta1/image_annotator.async_batch_annotate_files.js</caption>
-   * region_tag:vision_v1p3beta1_generated_ImageAnnotator_AsyncBatchAnnotateFiles_async
-   */
+/**
+ * Run asynchronous image detection and annotation for a list of generic
+ * files, such as PDF files, which may contain multiple pages and multiple
+ * images per page. Progress and results can be retrieved through the
+ * `google.longrunning.Operations` interface.
+ * `Operation.metadata` contains `OperationMetadata` (metadata).
+ * `Operation.response` contains `AsyncBatchAnnotateFilesResponse` (results).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number[]} request.requests
+ *   Required. Individual async file annotation requests for this batch.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1p3beta1/image_annotator.async_batch_annotate_files.js</caption>
+ * region_tag:vision_v1p3beta1_generated_ImageAnnotator_AsyncBatchAnnotateFiles_async
+ */
   asyncBatchAnnotateFiles(
-    request?: protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesResponse,
-        protos.google.cloud.vision.v1p3beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesResponse, protos.google.cloud.vision.v1p3beta1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   asyncBatchAnnotateFiles(
-    request: protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesResponse,
-        protos.google.cloud.vision.v1p3beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesResponse, protos.google.cloud.vision.v1p3beta1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   asyncBatchAnnotateFiles(
-    request: protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesResponse,
-        protos.google.cloud.vision.v1p3beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesResponse, protos.google.cloud.vision.v1p3beta1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   asyncBatchAnnotateFiles(
-    request?: protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesResponse,
-            protos.google.cloud.vision.v1p3beta1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesResponse,
-        protos.google.cloud.vision.v1p3beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesResponse,
-        protos.google.cloud.vision.v1p3beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesResponse, protos.google.cloud.vision.v1p3beta1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesResponse, protos.google.cloud.vision.v1p3beta1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesResponse, protos.google.cloud.vision.v1p3beta1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesResponse,
-            protos.google.cloud.vision.v1p3beta1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesResponse, protos.google.cloud.vision.v1p3beta1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('asyncBatchAnnotateFiles response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('asyncBatchAnnotateFiles request %j', request);
-    return this.innerApiCalls
-      .asyncBatchAnnotateFiles(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesResponse,
-            protos.google.cloud.vision.v1p3beta1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('asyncBatchAnnotateFiles response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.asyncBatchAnnotateFiles(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesResponse, protos.google.cloud.vision.v1p3beta1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('asyncBatchAnnotateFiles response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `asyncBatchAnnotateFiles()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1p3beta1/image_annotator.async_batch_annotate_files.js</caption>
-   * region_tag:vision_v1p3beta1_generated_ImageAnnotator_AsyncBatchAnnotateFiles_async
-   */
-  async checkAsyncBatchAnnotateFilesProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.vision.v1p3beta1.AsyncBatchAnnotateFilesResponse,
-      protos.google.cloud.vision.v1p3beta1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `asyncBatchAnnotateFiles()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1p3beta1/image_annotator.async_batch_annotate_files.js</caption>
+ * region_tag:vision_v1p3beta1_generated_ImageAnnotator_AsyncBatchAnnotateFiles_async
+ */
+  async checkAsyncBatchAnnotateFilesProgress(name: string): Promise<LROperation<protos.google.cloud.vision.v1p3beta1.AsyncBatchAnnotateFilesResponse, protos.google.cloud.vision.v1p3beta1.OperationMetadata>>{
     this._log.info('asyncBatchAnnotateFiles long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.asyncBatchAnnotateFiles,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.vision.v1p3beta1.AsyncBatchAnnotateFilesResponse,
-      protos.google.cloud.vision.v1p3beta1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.asyncBatchAnnotateFiles, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.vision.v1p3beta1.AsyncBatchAnnotateFilesResponse, protos.google.cloud.vision.v1p3beta1.OperationMetadata>;
   }
   // --------------------
   // -- Path templates --
@@ -725,7 +572,7 @@ export class ImageAnnotatorClient {
    * @param {string} product
    * @returns {string} Resource name string.
    */
-  productPath(project: string, location: string, product: string) {
+  productPath(project:string,location:string,product:string) {
     return this.pathTemplates.productPathTemplate.render({
       project: project,
       location: location,
@@ -774,7 +621,7 @@ export class ImageAnnotatorClient {
    * @param {string} product_set
    * @returns {string} Resource name string.
    */
-  productSetPath(project: string, location: string, productSet: string) {
+  productSetPath(project:string,location:string,productSet:string) {
     return this.pathTemplates.productSetPathTemplate.render({
       project: project,
       location: location,
@@ -790,8 +637,7 @@ export class ImageAnnotatorClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProductSetName(productSetName: string) {
-    return this.pathTemplates.productSetPathTemplate.match(productSetName)
-      .project;
+    return this.pathTemplates.productSetPathTemplate.match(productSetName).project;
   }
 
   /**
@@ -802,8 +648,7 @@ export class ImageAnnotatorClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProductSetName(productSetName: string) {
-    return this.pathTemplates.productSetPathTemplate.match(productSetName)
-      .location;
+    return this.pathTemplates.productSetPathTemplate.match(productSetName).location;
   }
 
   /**
@@ -814,8 +659,7 @@ export class ImageAnnotatorClient {
    * @returns {string} A string representing the product_set.
    */
   matchProductSetFromProductSetName(productSetName: string) {
-    return this.pathTemplates.productSetPathTemplate.match(productSetName)
-      .product_set;
+    return this.pathTemplates.productSetPathTemplate.match(productSetName).product_set;
   }
 
   /**
@@ -827,12 +671,7 @@ export class ImageAnnotatorClient {
    * @param {string} reference_image
    * @returns {string} Resource name string.
    */
-  referenceImagePath(
-    project: string,
-    location: string,
-    product: string,
-    referenceImage: string
-  ) {
+  referenceImagePath(project:string,location:string,product:string,referenceImage:string) {
     return this.pathTemplates.referenceImagePathTemplate.render({
       project: project,
       location: location,
@@ -849,9 +688,7 @@ export class ImageAnnotatorClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromReferenceImageName(referenceImageName: string) {
-    return this.pathTemplates.referenceImagePathTemplate.match(
-      referenceImageName
-    ).project;
+    return this.pathTemplates.referenceImagePathTemplate.match(referenceImageName).project;
   }
 
   /**
@@ -862,9 +699,7 @@ export class ImageAnnotatorClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromReferenceImageName(referenceImageName: string) {
-    return this.pathTemplates.referenceImagePathTemplate.match(
-      referenceImageName
-    ).location;
+    return this.pathTemplates.referenceImagePathTemplate.match(referenceImageName).location;
   }
 
   /**
@@ -875,9 +710,7 @@ export class ImageAnnotatorClient {
    * @returns {string} A string representing the product.
    */
   matchProductFromReferenceImageName(referenceImageName: string) {
-    return this.pathTemplates.referenceImagePathTemplate.match(
-      referenceImageName
-    ).product;
+    return this.pathTemplates.referenceImagePathTemplate.match(referenceImageName).product;
   }
 
   /**
@@ -888,9 +721,7 @@ export class ImageAnnotatorClient {
    * @returns {string} A string representing the reference_image.
    */
   matchReferenceImageFromReferenceImageName(referenceImageName: string) {
-    return this.pathTemplates.referenceImagePathTemplate.match(
-      referenceImageName
-    ).reference_image;
+    return this.pathTemplates.referenceImagePathTemplate.match(referenceImageName).reference_image;
   }
 
   /**
@@ -910,7 +741,6 @@ export class ImageAnnotatorClient {
     }
     return Promise.resolve();
   }
-}
-import {FeaturesMethod} from '../helpers';
+}import {FeaturesMethod} from '../helpers';
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ImageAnnotatorClient extends FeaturesMethod {}
