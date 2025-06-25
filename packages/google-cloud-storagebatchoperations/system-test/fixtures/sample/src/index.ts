@@ -19,9 +19,7 @@
 import {StorageBatchOperationsClient} from '@google-cloud/storagebatchoperations';
 
 // check that the client class type name can be used
-function doStuffWithStorageBatchOperationsClient(
-  client: StorageBatchOperationsClient
-) {
+function doStuffWithStorageBatchOperationsClient(client: StorageBatchOperationsClient) {
   client.close();
 }
 

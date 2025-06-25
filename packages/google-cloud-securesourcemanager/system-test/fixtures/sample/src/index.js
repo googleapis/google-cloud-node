@@ -16,12 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const securesourcemanager = require('@google-cloud/securesourcemanager');
 
 function main() {
-  const secureSourceManagerClient =
-    new securesourcemanager.SecureSourceManagerClient();
+  const secureSourceManagerClient = new securesourcemanager.SecureSourceManagerClient();
 }
 
 main();

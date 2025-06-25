@@ -29,4473 +29,3556 @@ import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.CloudBuildClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'cloudbuild.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath = cloudbuildModule.v1.CloudBuildClient.servicePath;
-        assert.strictEqual(servicePath, 'cloudbuild.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint = cloudbuildModule.v1.CloudBuildClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'cloudbuild.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'cloudbuild.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'cloudbuild.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new cloudbuildModule.v1.CloudBuildClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'cloudbuild.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'cloudbuild.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new cloudbuildModule.v1.CloudBuildClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'cloudbuild.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new cloudbuildModule.v1.CloudBuildClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = cloudbuildModule.v1.CloudBuildClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.cloudBuildStub, undefined);
-      await client.initialize();
-      assert(client.cloudBuildStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.cloudBuildStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.cloudBuildStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getBuild', () => {
-    it('invokes getBuild without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
-      );
-      // path template: projects/*/locations/{location=*}/builds/*
-      request.name = 'projects/value/locations/value/builds/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.Build()
-      );
-      client.innerApiCalls.getBuild = stubSimpleCall(expectedResponse);
-      const [response] = await client.getBuild(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBuild as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBuild as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBuild without error using callback', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
-      );
-      // path template: projects/*/locations/{location=*}/builds/*
-      request.name = 'projects/value/locations/value/builds/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.Build()
-      );
-      client.innerApiCalls.getBuild =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getBuild(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.devtools.cloudbuild.v1.IBuild | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBuild as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBuild as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBuild with error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
-      );
-      // path template: projects/*/locations/{location=*}/builds/*
-      request.name = 'projects/value/locations/value/builds/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getBuild = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getBuild(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getBuild as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBuild as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBuild with closed client', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
-      );
-      // path template: projects/*/locations/{location=*}/builds/*
-      request.name = 'projects/value/locations/value/builds/value';
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getBuild(request), expectedError);
-    });
-  });
-
-  describe('cancelBuild', () => {
-    it('invokes cancelBuild without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
-      );
-      // path template: projects/*/locations/{location=*}/builds/*
-      request.name = 'projects/value/locations/value/builds/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.Build()
-      );
-      client.innerApiCalls.cancelBuild = stubSimpleCall(expectedResponse);
-      const [response] = await client.cancelBuild(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.cancelBuild as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.cancelBuild as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes cancelBuild without error using callback', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
-      );
-      // path template: projects/*/locations/{location=*}/builds/*
-      request.name = 'projects/value/locations/value/builds/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.Build()
-      );
-      client.innerApiCalls.cancelBuild =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.cancelBuild(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.devtools.cloudbuild.v1.IBuild | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.cancelBuild as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.cancelBuild as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes cancelBuild with error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
-      );
-      // path template: projects/*/locations/{location=*}/builds/*
-      request.name = 'projects/value/locations/value/builds/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.cancelBuild = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.cancelBuild(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.cancelBuild as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.cancelBuild as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes cancelBuild with closed client', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
-      );
-      // path template: projects/*/locations/{location=*}/builds/*
-      request.name = 'projects/value/locations/value/builds/value';
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.cancelBuild(request), expectedError);
-    });
-  });
-
-  describe('createBuildTrigger', () => {
-    it('invokes createBuildTrigger without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.BuildTrigger()
-      );
-      client.innerApiCalls.createBuildTrigger =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.createBuildTrigger(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createBuildTrigger as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBuildTrigger as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBuildTrigger without error using callback', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.BuildTrigger()
-      );
-      client.innerApiCalls.createBuildTrigger =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createBuildTrigger(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.devtools.cloudbuild.v1.IBuildTrigger | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createBuildTrigger as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBuildTrigger as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBuildTrigger with error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createBuildTrigger = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createBuildTrigger(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createBuildTrigger as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBuildTrigger as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBuildTrigger with closed client', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createBuildTrigger(request), expectedError);
-    });
-  });
-
-  describe('getBuildTrigger', () => {
-    it('invokes getBuildTrigger without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
-      );
-      // path template: projects/*/locations/{location=*}/triggers/*
-      request.name = 'projects/value/locations/value/triggers/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.BuildTrigger()
-      );
-      client.innerApiCalls.getBuildTrigger = stubSimpleCall(expectedResponse);
-      const [response] = await client.getBuildTrigger(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBuildTrigger as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBuildTrigger as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBuildTrigger without error using callback', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
-      );
-      // path template: projects/*/locations/{location=*}/triggers/*
-      request.name = 'projects/value/locations/value/triggers/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.BuildTrigger()
-      );
-      client.innerApiCalls.getBuildTrigger =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getBuildTrigger(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.devtools.cloudbuild.v1.IBuildTrigger | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBuildTrigger as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBuildTrigger as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBuildTrigger with error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
-      );
-      // path template: projects/*/locations/{location=*}/triggers/*
-      request.name = 'projects/value/locations/value/triggers/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getBuildTrigger = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getBuildTrigger(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getBuildTrigger as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBuildTrigger as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBuildTrigger with closed client', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
-      );
-      // path template: projects/*/locations/{location=*}/triggers/*
-      request.name = 'projects/value/locations/value/triggers/value';
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getBuildTrigger(request), expectedError);
-    });
-  });
-
-  describe('deleteBuildTrigger', () => {
-    it('invokes deleteBuildTrigger without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
-      );
-      // path template: projects/*/locations/{location=*}/triggers/*
-      request.name = 'projects/value/locations/value/triggers/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteBuildTrigger =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteBuildTrigger(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteBuildTrigger as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBuildTrigger as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteBuildTrigger without error using callback', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
-      );
-      // path template: projects/*/locations/{location=*}/triggers/*
-      request.name = 'projects/value/locations/value/triggers/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteBuildTrigger =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteBuildTrigger(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteBuildTrigger as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBuildTrigger as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteBuildTrigger with error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
-      );
-      // path template: projects/*/locations/{location=*}/triggers/*
-      request.name = 'projects/value/locations/value/triggers/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteBuildTrigger = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteBuildTrigger(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteBuildTrigger as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBuildTrigger as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteBuildTrigger with closed client', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
-      );
-      // path template: projects/*/locations/{location=*}/triggers/*
-      request.name = 'projects/value/locations/value/triggers/value';
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteBuildTrigger(request), expectedError);
-    });
-  });
-
-  describe('updateBuildTrigger', () => {
-    it('invokes updateBuildTrigger without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
-      );
-      request.trigger = {};
-      // path template: projects/*/locations/{location=*}/triggers/*
-      request.trigger.resourceName =
-        'projects/value/locations/value/triggers/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.BuildTrigger()
-      );
-      client.innerApiCalls.updateBuildTrigger =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateBuildTrigger(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateBuildTrigger as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateBuildTrigger as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateBuildTrigger without error using callback', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
-      );
-      request.trigger = {};
-      // path template: projects/*/locations/{location=*}/triggers/*
-      request.trigger.resourceName =
-        'projects/value/locations/value/triggers/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.BuildTrigger()
-      );
-      client.innerApiCalls.updateBuildTrigger =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateBuildTrigger(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.devtools.cloudbuild.v1.IBuildTrigger | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateBuildTrigger as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateBuildTrigger as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateBuildTrigger with error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
-      );
-      request.trigger = {};
-      // path template: projects/*/locations/{location=*}/triggers/*
-      request.trigger.resourceName =
-        'projects/value/locations/value/triggers/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateBuildTrigger = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateBuildTrigger(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateBuildTrigger as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateBuildTrigger as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateBuildTrigger with closed client', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
-      );
-      request.trigger = {};
-      // path template: projects/*/locations/{location=*}/triggers/*
-      request.trigger.resourceName =
-        'projects/value/locations/value/triggers/value';
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateBuildTrigger(request), expectedError);
-    });
-  });
-
-  describe('receiveTriggerWebhook', () => {
-    it('invokes receiveTriggerWebhook without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest',
-        ['trigger']
-      );
-      request.trigger = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest',
-        ['name']
-      );
-      request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&trigger=${defaultValue2 ?? ''}&name=${defaultValue3 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse()
-      );
-      client.innerApiCalls.receiveTriggerWebhook =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.receiveTriggerWebhook(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.receiveTriggerWebhook as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.receiveTriggerWebhook as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes receiveTriggerWebhook without error using callback', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest',
-        ['trigger']
-      );
-      request.trigger = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest',
-        ['name']
-      );
-      request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&trigger=${defaultValue2 ?? ''}&name=${defaultValue3 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse()
-      );
-      client.innerApiCalls.receiveTriggerWebhook =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.receiveTriggerWebhook(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.receiveTriggerWebhook as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.receiveTriggerWebhook as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes receiveTriggerWebhook with error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest',
-        ['trigger']
-      );
-      request.trigger = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest',
-        ['name']
-      );
-      request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&trigger=${defaultValue2 ?? ''}&name=${defaultValue3 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.receiveTriggerWebhook = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.receiveTriggerWebhook(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.receiveTriggerWebhook as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.receiveTriggerWebhook as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes receiveTriggerWebhook with closed client', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest',
-        ['trigger']
-      );
-      request.trigger = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest',
-        ['name']
-      );
-      request.name = defaultValue3;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.receiveTriggerWebhook(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getWorkerPool', () => {
-    it('invokes getWorkerPool without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
-      );
-      // path template: projects/*/locations/{location=*}/workerPools/*
-      request.name = 'projects/value/locations/value/workerPools/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.WorkerPool()
-      );
-      client.innerApiCalls.getWorkerPool = stubSimpleCall(expectedResponse);
-      const [response] = await client.getWorkerPool(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getWorkerPool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getWorkerPool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getWorkerPool without error using callback', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
-      );
-      // path template: projects/*/locations/{location=*}/workerPools/*
-      request.name = 'projects/value/locations/value/workerPools/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.WorkerPool()
-      );
-      client.innerApiCalls.getWorkerPool =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getWorkerPool(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.devtools.cloudbuild.v1.IWorkerPool | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getWorkerPool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getWorkerPool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getWorkerPool with error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
-      );
-      // path template: projects/*/locations/{location=*}/workerPools/*
-      request.name = 'projects/value/locations/value/workerPools/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getWorkerPool = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getWorkerPool(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getWorkerPool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getWorkerPool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getWorkerPool with closed client', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
-      );
-      // path template: projects/*/locations/{location=*}/workerPools/*
-      request.name = 'projects/value/locations/value/workerPools/value';
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getWorkerPool(request), expectedError);
-    });
-  });
-
-  describe('createBuild', () => {
-    it('invokes createBuild without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.CreateBuildRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createBuild = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createBuild(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createBuild as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBuild as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBuild without error using callback', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.CreateBuildRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createBuild =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createBuild(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.devtools.cloudbuild.v1.IBuild,
-              protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.devtools.cloudbuild.v1.IBuild,
-        protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createBuild as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBuild as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBuild with call error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.CreateBuildRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createBuild = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createBuild(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createBuild as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBuild as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBuild with LRO error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.CreateBuildRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createBuild = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createBuild(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createBuild as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBuild as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateBuildProgress without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateBuildProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateBuildProgress with error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkCreateBuildProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('retryBuild', () => {
-    it('invokes retryBuild without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
-      );
-      // path template: projects/*/locations/{location=*}/builds/*
-      request.name = 'projects/value/locations/value/builds/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.retryBuild = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.retryBuild(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.retryBuild as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.retryBuild as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes retryBuild without error using callback', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
-      );
-      // path template: projects/*/locations/{location=*}/builds/*
-      request.name = 'projects/value/locations/value/builds/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.retryBuild =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.retryBuild(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.devtools.cloudbuild.v1.IBuild,
-              protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.devtools.cloudbuild.v1.IBuild,
-        protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.retryBuild as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.retryBuild as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes retryBuild with call error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
-      );
-      // path template: projects/*/locations/{location=*}/builds/*
-      request.name = 'projects/value/locations/value/builds/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.retryBuild = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.retryBuild(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.retryBuild as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.retryBuild as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes retryBuild with LRO error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
-      );
-      // path template: projects/*/locations/{location=*}/builds/*
-      request.name = 'projects/value/locations/value/builds/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.retryBuild = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.retryBuild(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.retryBuild as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.retryBuild as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkRetryBuildProgress without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkRetryBuildProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkRetryBuildProgress with error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkRetryBuildProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('approveBuild', () => {
-    it('invokes approveBuild without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ApproveBuildRequest()
-      );
-      // path template: projects/*/locations/{location=*}/builds/*
-      request.name = 'projects/value/locations/value/builds/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.approveBuild = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.approveBuild(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.approveBuild as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.approveBuild as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes approveBuild without error using callback', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ApproveBuildRequest()
-      );
-      // path template: projects/*/locations/{location=*}/builds/*
-      request.name = 'projects/value/locations/value/builds/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.approveBuild =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.approveBuild(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.devtools.cloudbuild.v1.IBuild,
-              protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.devtools.cloudbuild.v1.IBuild,
-        protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.approveBuild as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.approveBuild as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes approveBuild with call error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ApproveBuildRequest()
-      );
-      // path template: projects/*/locations/{location=*}/builds/*
-      request.name = 'projects/value/locations/value/builds/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.approveBuild = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.approveBuild(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.approveBuild as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.approveBuild as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes approveBuild with LRO error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ApproveBuildRequest()
-      );
-      // path template: projects/*/locations/{location=*}/builds/*
-      request.name = 'projects/value/locations/value/builds/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.approveBuild = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.approveBuild(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.approveBuild as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.approveBuild as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkApproveBuildProgress without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkApproveBuildProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkApproveBuildProgress with error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkApproveBuildProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('runBuildTrigger', () => {
-    it('invokes runBuildTrigger without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
-      );
-      // path template: projects/*/locations/{location=*}/triggers/*
-      request.name = 'projects/value/locations/value/triggers/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.runBuildTrigger =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.runBuildTrigger(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.runBuildTrigger as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.runBuildTrigger as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes runBuildTrigger without error using callback', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
-      );
-      // path template: projects/*/locations/{location=*}/triggers/*
-      request.name = 'projects/value/locations/value/triggers/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.runBuildTrigger =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.runBuildTrigger(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.devtools.cloudbuild.v1.IBuild,
-              protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.devtools.cloudbuild.v1.IBuild,
-        protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.runBuildTrigger as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.runBuildTrigger as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes runBuildTrigger with call error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
-      );
-      // path template: projects/*/locations/{location=*}/triggers/*
-      request.name = 'projects/value/locations/value/triggers/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.runBuildTrigger = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.runBuildTrigger(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.runBuildTrigger as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.runBuildTrigger as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes runBuildTrigger with LRO error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
-      );
-      // path template: projects/*/locations/{location=*}/triggers/*
-      request.name = 'projects/value/locations/value/triggers/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.runBuildTrigger = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.runBuildTrigger(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.runBuildTrigger as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.runBuildTrigger as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkRunBuildTriggerProgress without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkRunBuildTriggerProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkRunBuildTriggerProgress with error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkRunBuildTriggerProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createWorkerPool', () => {
-    it('invokes createWorkerPool without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createWorkerPool =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createWorkerPool(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createWorkerPool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createWorkerPool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createWorkerPool without error using callback', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createWorkerPool =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createWorkerPool(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.devtools.cloudbuild.v1.IWorkerPool,
-              protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.devtools.cloudbuild.v1.IWorkerPool,
-        protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createWorkerPool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createWorkerPool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createWorkerPool with call error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createWorkerPool = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createWorkerPool(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createWorkerPool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createWorkerPool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createWorkerPool with LRO error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createWorkerPool = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createWorkerPool(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createWorkerPool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createWorkerPool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateWorkerPoolProgress without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateWorkerPoolProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateWorkerPoolProgress with error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateWorkerPoolProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteWorkerPool', () => {
-    it('invokes deleteWorkerPool without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
-      );
-      // path template: projects/*/locations/{location=*}/workerPools/*
-      request.name = 'projects/value/locations/value/workerPools/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteWorkerPool =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteWorkerPool(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteWorkerPool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteWorkerPool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteWorkerPool without error using callback', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
-      );
-      // path template: projects/*/locations/{location=*}/workerPools/*
-      request.name = 'projects/value/locations/value/workerPools/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteWorkerPool =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteWorkerPool(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteWorkerPool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteWorkerPool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteWorkerPool with call error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
-      );
-      // path template: projects/*/locations/{location=*}/workerPools/*
-      request.name = 'projects/value/locations/value/workerPools/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteWorkerPool = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteWorkerPool(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteWorkerPool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteWorkerPool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteWorkerPool with LRO error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
-      );
-      // path template: projects/*/locations/{location=*}/workerPools/*
-      request.name = 'projects/value/locations/value/workerPools/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteWorkerPool = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteWorkerPool(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteWorkerPool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteWorkerPool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteWorkerPoolProgress without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteWorkerPoolProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteWorkerPoolProgress with error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteWorkerPoolProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateWorkerPool', () => {
-    it('invokes updateWorkerPool without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
-      );
-      request.workerPool = {};
-      // path template: projects/*/locations/{location=*}/workerPools/*
-      request.workerPool.name =
-        'projects/value/locations/value/workerPools/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateWorkerPool =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateWorkerPool(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateWorkerPool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateWorkerPool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateWorkerPool without error using callback', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
-      );
-      request.workerPool = {};
-      // path template: projects/*/locations/{location=*}/workerPools/*
-      request.workerPool.name =
-        'projects/value/locations/value/workerPools/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateWorkerPool =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateWorkerPool(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.devtools.cloudbuild.v1.IWorkerPool,
-              protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.devtools.cloudbuild.v1.IWorkerPool,
-        protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateWorkerPool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateWorkerPool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateWorkerPool with call error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
-      );
-      request.workerPool = {};
-      // path template: projects/*/locations/{location=*}/workerPools/*
-      request.workerPool.name =
-        'projects/value/locations/value/workerPools/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateWorkerPool = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateWorkerPool(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateWorkerPool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateWorkerPool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateWorkerPool with LRO error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
-      );
-      request.workerPool = {};
-      // path template: projects/*/locations/{location=*}/workerPools/*
-      request.workerPool.name =
-        'projects/value/locations/value/workerPools/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateWorkerPool = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateWorkerPool(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateWorkerPool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateWorkerPool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateWorkerPoolProgress without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateWorkerPoolProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateWorkerPoolProgress with error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateWorkerPoolProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listBuilds', () => {
-    it('invokes listBuilds without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
-        generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
-        generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
-      ];
-      client.innerApiCalls.listBuilds = stubSimpleCall(expectedResponse);
-      const [response] = await client.listBuilds(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listBuilds as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBuilds as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBuilds without error using callback', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
-        generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
-        generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
-      ];
-      client.innerApiCalls.listBuilds =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listBuilds(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.devtools.cloudbuild.v1.IBuild[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listBuilds as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBuilds as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBuilds with error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listBuilds = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listBuilds(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listBuilds as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBuilds as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBuildsStream without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
-        generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
-        generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
-      ];
-      client.descriptors.page.listBuilds.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listBuildsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.devtools.cloudbuild.v1.Build[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.devtools.cloudbuild.v1.Build) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listBuilds.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listBuilds, request)
-      );
-      assert(
-        (client.descriptors.page.listBuilds.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listBuildsStream with error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.descriptors.page.listBuilds.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listBuildsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.devtools.cloudbuild.v1.Build[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.devtools.cloudbuild.v1.Build) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listBuilds.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listBuilds, request)
-      );
-      assert(
-        (client.descriptors.page.listBuilds.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listBuilds without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
-        generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
-        generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
-      ];
-      client.descriptors.page.listBuilds.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.devtools.cloudbuild.v1.IBuild[] = [];
-      const iterable = client.listBuildsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listBuilds.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listBuilds.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listBuilds with error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.descriptors.page.listBuilds.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listBuildsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.devtools.cloudbuild.v1.IBuild[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = cloudbuildModule.v1.CloudBuildClient.servicePath;
+                assert.strictEqual(servicePath, 'cloudbuild.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = cloudbuildModule.v1.CloudBuildClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'cloudbuild.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listBuilds.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listBuilds.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listBuildTriggers', () => {
-    it('invokes listBuildTriggers without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v1.BuildTrigger()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v1.BuildTrigger()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v1.BuildTrigger()
-        ),
-      ];
-      client.innerApiCalls.listBuildTriggers = stubSimpleCall(expectedResponse);
-      const [response] = await client.listBuildTriggers(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listBuildTriggers as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBuildTriggers as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBuildTriggers without error using callback', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v1.BuildTrigger()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v1.BuildTrigger()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v1.BuildTrigger()
-        ),
-      ];
-      client.innerApiCalls.listBuildTriggers =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listBuildTriggers(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.devtools.cloudbuild.v1.IBuildTrigger[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listBuildTriggers as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBuildTriggers as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBuildTriggers with error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listBuildTriggers = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listBuildTriggers(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listBuildTriggers as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBuildTriggers as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBuildTriggersStream without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v1.BuildTrigger()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v1.BuildTrigger()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v1.BuildTrigger()
-        ),
-      ];
-      client.descriptors.page.listBuildTriggers.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listBuildTriggersStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.devtools.cloudbuild.v1.BuildTrigger[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.devtools.cloudbuild.v1.BuildTrigger) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'cloudbuild.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listBuildTriggers.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listBuildTriggers, request)
-      );
-      assert(
-        (client.descriptors.page.listBuildTriggers.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listBuildTriggersStream with error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.descriptors.page.listBuildTriggers.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listBuildTriggersStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.devtools.cloudbuild.v1.BuildTrigger[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.devtools.cloudbuild.v1.BuildTrigger) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'cloudbuild.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listBuildTriggers.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listBuildTriggers, request)
-      );
-      assert(
-        (client.descriptors.page.listBuildTriggers.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listBuildTriggers without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v1.BuildTrigger()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v1.BuildTrigger()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v1.BuildTrigger()
-        ),
-      ];
-      client.descriptors.page.listBuildTriggers.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.devtools.cloudbuild.v1.IBuildTrigger[] =
-        [];
-      const iterable = client.listBuildTriggersAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listBuildTriggers.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listBuildTriggers.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new cloudbuildModule.v1.CloudBuildClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'cloudbuild.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with listBuildTriggers with error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.descriptors.page.listBuildTriggers.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listBuildTriggersAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.devtools.cloudbuild.v1.IBuildTrigger[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new cloudbuildModule.v1.CloudBuildClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'cloudbuild.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listBuildTriggers.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listBuildTriggers.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new cloudbuildModule.v1.CloudBuildClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-  describe('listWorkerPools', () => {
-    it('invokes listWorkerPools without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v1.WorkerPool()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v1.WorkerPool()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v1.WorkerPool()
-        ),
-      ];
-      client.innerApiCalls.listWorkerPools = stubSimpleCall(expectedResponse);
-      const [response] = await client.listWorkerPools(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listWorkerPools as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listWorkerPools as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('has port', () => {
+            const port = cloudbuildModule.v1.CloudBuildClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.cloudBuildStub, undefined);
+            await client.initialize();
+            assert(client.cloudBuildStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.cloudBuildStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.cloudBuildStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    it('invokes listWorkerPools without error using callback', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v1.WorkerPool()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v1.WorkerPool()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v1.WorkerPool()
-        ),
-      ];
-      client.innerApiCalls.listWorkerPools =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listWorkerPools(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.devtools.cloudbuild.v1.IWorkerPool[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('getBuild', () => {
+        it('invokes getBuild without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
+            );
+            // path template: projects/*/locations/{location=*}/builds/*
+            request.name = 'projects/value/locations/value/builds/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.Build()
+            );
+            client.innerApiCalls.getBuild = stubSimpleCall(expectedResponse);
+            const [response] = await client.getBuild(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBuild as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBuild as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBuild without error using callback', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
+            );
+            // path template: projects/*/locations/{location=*}/builds/*
+            request.name = 'projects/value/locations/value/builds/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.Build()
+            );
+            client.innerApiCalls.getBuild = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getBuild(
+                    request,
+                    (err?: Error|null, result?: protos.google.devtools.cloudbuild.v1.IBuild|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBuild as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBuild as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBuild with error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
+            );
+            // path template: projects/*/locations/{location=*}/builds/*
+            request.name = 'projects/value/locations/value/builds/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getBuild = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getBuild(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getBuild as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBuild as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBuild with closed client', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
+            );
+            // path template: projects/*/locations/{location=*}/builds/*
+            request.name = 'projects/value/locations/value/builds/value';
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getBuild(request), expectedError);
+        });
+    });
+
+    describe('cancelBuild', () => {
+        it('invokes cancelBuild without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
+            );
+            // path template: projects/*/locations/{location=*}/builds/*
+            request.name = 'projects/value/locations/value/builds/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.Build()
+            );
+            client.innerApiCalls.cancelBuild = stubSimpleCall(expectedResponse);
+            const [response] = await client.cancelBuild(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.cancelBuild as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.cancelBuild as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes cancelBuild without error using callback', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
+            );
+            // path template: projects/*/locations/{location=*}/builds/*
+            request.name = 'projects/value/locations/value/builds/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.Build()
+            );
+            client.innerApiCalls.cancelBuild = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.cancelBuild(
+                    request,
+                    (err?: Error|null, result?: protos.google.devtools.cloudbuild.v1.IBuild|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.cancelBuild as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.cancelBuild as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes cancelBuild with error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
+            );
+            // path template: projects/*/locations/{location=*}/builds/*
+            request.name = 'projects/value/locations/value/builds/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.cancelBuild = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.cancelBuild(request), expectedError);
+            const actualRequest = (client.innerApiCalls.cancelBuild as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.cancelBuild as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes cancelBuild with closed client', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
+            );
+            // path template: projects/*/locations/{location=*}/builds/*
+            request.name = 'projects/value/locations/value/builds/value';
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.cancelBuild(request), expectedError);
+        });
+    });
+
+    describe('createBuildTrigger', () => {
+        it('invokes createBuildTrigger without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.BuildTrigger()
+            );
+            client.innerApiCalls.createBuildTrigger = stubSimpleCall(expectedResponse);
+            const [response] = await client.createBuildTrigger(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createBuildTrigger as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBuildTrigger as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBuildTrigger without error using callback', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.BuildTrigger()
+            );
+            client.innerApiCalls.createBuildTrigger = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createBuildTrigger(
+                    request,
+                    (err?: Error|null, result?: protos.google.devtools.cloudbuild.v1.IBuildTrigger|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createBuildTrigger as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBuildTrigger as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBuildTrigger with error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createBuildTrigger = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createBuildTrigger(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createBuildTrigger as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBuildTrigger as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBuildTrigger with closed client', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createBuildTrigger(request), expectedError);
+        });
+    });
+
+    describe('getBuildTrigger', () => {
+        it('invokes getBuildTrigger without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
+            );
+            // path template: projects/*/locations/{location=*}/triggers/*
+            request.name = 'projects/value/locations/value/triggers/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.BuildTrigger()
+            );
+            client.innerApiCalls.getBuildTrigger = stubSimpleCall(expectedResponse);
+            const [response] = await client.getBuildTrigger(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBuildTrigger as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBuildTrigger as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBuildTrigger without error using callback', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
+            );
+            // path template: projects/*/locations/{location=*}/triggers/*
+            request.name = 'projects/value/locations/value/triggers/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.BuildTrigger()
+            );
+            client.innerApiCalls.getBuildTrigger = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getBuildTrigger(
+                    request,
+                    (err?: Error|null, result?: protos.google.devtools.cloudbuild.v1.IBuildTrigger|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBuildTrigger as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBuildTrigger as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBuildTrigger with error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
+            );
+            // path template: projects/*/locations/{location=*}/triggers/*
+            request.name = 'projects/value/locations/value/triggers/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getBuildTrigger = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getBuildTrigger(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getBuildTrigger as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBuildTrigger as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBuildTrigger with closed client', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
+            );
+            // path template: projects/*/locations/{location=*}/triggers/*
+            request.name = 'projects/value/locations/value/triggers/value';
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getBuildTrigger(request), expectedError);
+        });
+    });
+
+    describe('deleteBuildTrigger', () => {
+        it('invokes deleteBuildTrigger without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
+            );
+            // path template: projects/*/locations/{location=*}/triggers/*
+            request.name = 'projects/value/locations/value/triggers/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteBuildTrigger = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteBuildTrigger(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteBuildTrigger as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBuildTrigger as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBuildTrigger without error using callback', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
+            );
+            // path template: projects/*/locations/{location=*}/triggers/*
+            request.name = 'projects/value/locations/value/triggers/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteBuildTrigger = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteBuildTrigger(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteBuildTrigger as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBuildTrigger as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBuildTrigger with error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
+            );
+            // path template: projects/*/locations/{location=*}/triggers/*
+            request.name = 'projects/value/locations/value/triggers/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteBuildTrigger = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteBuildTrigger(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteBuildTrigger as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBuildTrigger as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBuildTrigger with closed client', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
+            );
+            // path template: projects/*/locations/{location=*}/triggers/*
+            request.name = 'projects/value/locations/value/triggers/value';
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteBuildTrigger(request), expectedError);
+        });
+    });
+
+    describe('updateBuildTrigger', () => {
+        it('invokes updateBuildTrigger without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
+            );
+            request.trigger = {};
+            // path template: projects/*/locations/{location=*}/triggers/*
+            request.trigger.resourceName = 'projects/value/locations/value/triggers/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.BuildTrigger()
+            );
+            client.innerApiCalls.updateBuildTrigger = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateBuildTrigger(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateBuildTrigger as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBuildTrigger as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateBuildTrigger without error using callback', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
+            );
+            request.trigger = {};
+            // path template: projects/*/locations/{location=*}/triggers/*
+            request.trigger.resourceName = 'projects/value/locations/value/triggers/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.BuildTrigger()
+            );
+            client.innerApiCalls.updateBuildTrigger = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateBuildTrigger(
+                    request,
+                    (err?: Error|null, result?: protos.google.devtools.cloudbuild.v1.IBuildTrigger|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateBuildTrigger as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBuildTrigger as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateBuildTrigger with error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
+            );
+            request.trigger = {};
+            // path template: projects/*/locations/{location=*}/triggers/*
+            request.trigger.resourceName = 'projects/value/locations/value/triggers/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateBuildTrigger = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateBuildTrigger(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateBuildTrigger as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBuildTrigger as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateBuildTrigger with closed client', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
+            );
+            request.trigger = {};
+            // path template: projects/*/locations/{location=*}/triggers/*
+            request.trigger.resourceName = 'projects/value/locations/value/triggers/value';
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateBuildTrigger(request), expectedError);
+        });
+    });
+
+    describe('receiveTriggerWebhook', () => {
+        it('invokes receiveTriggerWebhook without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest', ['projectId']);
+            request.projectId = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest', ['trigger']);
+            request.trigger = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest', ['name']);
+            request.name = defaultValue3;
+            const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? '' }&trigger=${defaultValue2 ?? '' }&name=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse()
+            );
+            client.innerApiCalls.receiveTriggerWebhook = stubSimpleCall(expectedResponse);
+            const [response] = await client.receiveTriggerWebhook(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.receiveTriggerWebhook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.receiveTriggerWebhook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes receiveTriggerWebhook without error using callback', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest', ['projectId']);
+            request.projectId = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest', ['trigger']);
+            request.trigger = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest', ['name']);
+            request.name = defaultValue3;
+            const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? '' }&trigger=${defaultValue2 ?? '' }&name=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse()
+            );
+            client.innerApiCalls.receiveTriggerWebhook = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.receiveTriggerWebhook(
+                    request,
+                    (err?: Error|null, result?: protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.receiveTriggerWebhook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.receiveTriggerWebhook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes receiveTriggerWebhook with error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest', ['projectId']);
+            request.projectId = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest', ['trigger']);
+            request.trigger = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest', ['name']);
+            request.name = defaultValue3;
+            const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? '' }&trigger=${defaultValue2 ?? '' }&name=${defaultValue3 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.receiveTriggerWebhook = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.receiveTriggerWebhook(request), expectedError);
+            const actualRequest = (client.innerApiCalls.receiveTriggerWebhook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.receiveTriggerWebhook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes receiveTriggerWebhook with closed client', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest', ['projectId']);
+            request.projectId = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest', ['trigger']);
+            request.trigger = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest', ['name']);
+            request.name = defaultValue3;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.receiveTriggerWebhook(request), expectedError);
+        });
+    });
+
+    describe('getWorkerPool', () => {
+        it('invokes getWorkerPool without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
+            );
+            // path template: projects/*/locations/{location=*}/workerPools/*
+            request.name = 'projects/value/locations/value/workerPools/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.WorkerPool()
+            );
+            client.innerApiCalls.getWorkerPool = stubSimpleCall(expectedResponse);
+            const [response] = await client.getWorkerPool(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getWorkerPool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getWorkerPool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getWorkerPool without error using callback', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
+            );
+            // path template: projects/*/locations/{location=*}/workerPools/*
+            request.name = 'projects/value/locations/value/workerPools/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.WorkerPool()
+            );
+            client.innerApiCalls.getWorkerPool = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getWorkerPool(
+                    request,
+                    (err?: Error|null, result?: protos.google.devtools.cloudbuild.v1.IWorkerPool|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getWorkerPool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getWorkerPool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getWorkerPool with error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
+            );
+            // path template: projects/*/locations/{location=*}/workerPools/*
+            request.name = 'projects/value/locations/value/workerPools/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getWorkerPool = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getWorkerPool(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getWorkerPool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getWorkerPool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getWorkerPool with closed client', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
+            );
+            // path template: projects/*/locations/{location=*}/workerPools/*
+            request.name = 'projects/value/locations/value/workerPools/value';
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getWorkerPool(request), expectedError);
+        });
+    });
+
+    describe('createBuild', () => {
+        it('invokes createBuild without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.CreateBuildRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createBuild = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createBuild(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createBuild as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBuild as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBuild without error using callback', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.CreateBuildRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createBuild = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createBuild(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.devtools.cloudbuild.v1.IBuild, protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.devtools.cloudbuild.v1.IBuild, protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createBuild as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBuild as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBuild with call error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.CreateBuildRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createBuild = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createBuild(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createBuild as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBuild as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBuild with LRO error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.CreateBuildRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createBuild = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createBuild(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createBuild as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBuild as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateBuildProgress without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateBuildProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateBuildProgress with error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateBuildProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('retryBuild', () => {
+        it('invokes retryBuild without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
+            );
+            // path template: projects/*/locations/{location=*}/builds/*
+            request.name = 'projects/value/locations/value/builds/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.retryBuild = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.retryBuild(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.retryBuild as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.retryBuild as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes retryBuild without error using callback', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
+            );
+            // path template: projects/*/locations/{location=*}/builds/*
+            request.name = 'projects/value/locations/value/builds/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.retryBuild = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.retryBuild(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.devtools.cloudbuild.v1.IBuild, protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.devtools.cloudbuild.v1.IBuild, protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.retryBuild as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.retryBuild as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes retryBuild with call error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
+            );
+            // path template: projects/*/locations/{location=*}/builds/*
+            request.name = 'projects/value/locations/value/builds/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.retryBuild = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.retryBuild(request), expectedError);
+            const actualRequest = (client.innerApiCalls.retryBuild as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.retryBuild as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes retryBuild with LRO error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
+            );
+            // path template: projects/*/locations/{location=*}/builds/*
+            request.name = 'projects/value/locations/value/builds/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.retryBuild = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.retryBuild(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.retryBuild as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.retryBuild as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkRetryBuildProgress without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkRetryBuildProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkRetryBuildProgress with error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkRetryBuildProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('approveBuild', () => {
+        it('invokes approveBuild without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ApproveBuildRequest()
+            );
+            // path template: projects/*/locations/{location=*}/builds/*
+            request.name = 'projects/value/locations/value/builds/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.approveBuild = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.approveBuild(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.approveBuild as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.approveBuild as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes approveBuild without error using callback', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ApproveBuildRequest()
+            );
+            // path template: projects/*/locations/{location=*}/builds/*
+            request.name = 'projects/value/locations/value/builds/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.approveBuild = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.approveBuild(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.devtools.cloudbuild.v1.IBuild, protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.devtools.cloudbuild.v1.IBuild, protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.approveBuild as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.approveBuild as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes approveBuild with call error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ApproveBuildRequest()
+            );
+            // path template: projects/*/locations/{location=*}/builds/*
+            request.name = 'projects/value/locations/value/builds/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.approveBuild = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.approveBuild(request), expectedError);
+            const actualRequest = (client.innerApiCalls.approveBuild as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.approveBuild as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes approveBuild with LRO error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ApproveBuildRequest()
+            );
+            // path template: projects/*/locations/{location=*}/builds/*
+            request.name = 'projects/value/locations/value/builds/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.approveBuild = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.approveBuild(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.approveBuild as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.approveBuild as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkApproveBuildProgress without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkApproveBuildProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkApproveBuildProgress with error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkApproveBuildProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('runBuildTrigger', () => {
+        it('invokes runBuildTrigger without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
+            );
+            // path template: projects/*/locations/{location=*}/triggers/*
+            request.name = 'projects/value/locations/value/triggers/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.runBuildTrigger = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.runBuildTrigger(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.runBuildTrigger as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.runBuildTrigger as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes runBuildTrigger without error using callback', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
+            );
+            // path template: projects/*/locations/{location=*}/triggers/*
+            request.name = 'projects/value/locations/value/triggers/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.runBuildTrigger = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.runBuildTrigger(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.devtools.cloudbuild.v1.IBuild, protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.devtools.cloudbuild.v1.IBuild, protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.runBuildTrigger as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.runBuildTrigger as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes runBuildTrigger with call error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
+            );
+            // path template: projects/*/locations/{location=*}/triggers/*
+            request.name = 'projects/value/locations/value/triggers/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.runBuildTrigger = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.runBuildTrigger(request), expectedError);
+            const actualRequest = (client.innerApiCalls.runBuildTrigger as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.runBuildTrigger as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes runBuildTrigger with LRO error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
+            );
+            // path template: projects/*/locations/{location=*}/triggers/*
+            request.name = 'projects/value/locations/value/triggers/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.runBuildTrigger = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.runBuildTrigger(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.runBuildTrigger as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.runBuildTrigger as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkRunBuildTriggerProgress without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkRunBuildTriggerProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkRunBuildTriggerProgress with error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkRunBuildTriggerProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createWorkerPool', () => {
+        it('invokes createWorkerPool without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createWorkerPool = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createWorkerPool(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createWorkerPool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createWorkerPool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createWorkerPool without error using callback', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createWorkerPool = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createWorkerPool(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.devtools.cloudbuild.v1.IWorkerPool, protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.devtools.cloudbuild.v1.IWorkerPool, protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createWorkerPool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createWorkerPool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createWorkerPool with call error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createWorkerPool = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createWorkerPool(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createWorkerPool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createWorkerPool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createWorkerPool with LRO error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createWorkerPool = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createWorkerPool(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createWorkerPool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createWorkerPool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateWorkerPoolProgress without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateWorkerPoolProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateWorkerPoolProgress with error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateWorkerPoolProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteWorkerPool', () => {
+        it('invokes deleteWorkerPool without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
+            );
+            // path template: projects/*/locations/{location=*}/workerPools/*
+            request.name = 'projects/value/locations/value/workerPools/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteWorkerPool = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteWorkerPool(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteWorkerPool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteWorkerPool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteWorkerPool without error using callback', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
+            );
+            // path template: projects/*/locations/{location=*}/workerPools/*
+            request.name = 'projects/value/locations/value/workerPools/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteWorkerPool = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteWorkerPool(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteWorkerPool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteWorkerPool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteWorkerPool with call error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
+            );
+            // path template: projects/*/locations/{location=*}/workerPools/*
+            request.name = 'projects/value/locations/value/workerPools/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteWorkerPool = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteWorkerPool(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteWorkerPool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteWorkerPool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteWorkerPool with LRO error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
+            );
+            // path template: projects/*/locations/{location=*}/workerPools/*
+            request.name = 'projects/value/locations/value/workerPools/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteWorkerPool = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteWorkerPool(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteWorkerPool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteWorkerPool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteWorkerPoolProgress without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteWorkerPoolProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteWorkerPoolProgress with error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteWorkerPoolProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateWorkerPool', () => {
+        it('invokes updateWorkerPool without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
+            );
+            request.workerPool = {};
+            // path template: projects/*/locations/{location=*}/workerPools/*
+            request.workerPool.name = 'projects/value/locations/value/workerPools/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateWorkerPool = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateWorkerPool(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateWorkerPool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateWorkerPool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateWorkerPool without error using callback', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
+            );
+            request.workerPool = {};
+            // path template: projects/*/locations/{location=*}/workerPools/*
+            request.workerPool.name = 'projects/value/locations/value/workerPools/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateWorkerPool = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateWorkerPool(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.devtools.cloudbuild.v1.IWorkerPool, protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.devtools.cloudbuild.v1.IWorkerPool, protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateWorkerPool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateWorkerPool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateWorkerPool with call error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
+            );
+            request.workerPool = {};
+            // path template: projects/*/locations/{location=*}/workerPools/*
+            request.workerPool.name = 'projects/value/locations/value/workerPools/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateWorkerPool = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateWorkerPool(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateWorkerPool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateWorkerPool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateWorkerPool with LRO error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
+            );
+            request.workerPool = {};
+            // path template: projects/*/locations/{location=*}/workerPools/*
+            request.workerPool.name = 'projects/value/locations/value/workerPools/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateWorkerPool = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateWorkerPool(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateWorkerPool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateWorkerPool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateWorkerPoolProgress without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateWorkerPoolProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateWorkerPoolProgress with error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateWorkerPoolProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listBuilds', () => {
+        it('invokes listBuilds without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';const expectedResponse = [
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
+            ];
+            client.innerApiCalls.listBuilds = stubSimpleCall(expectedResponse);
+            const [response] = await client.listBuilds(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBuilds as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBuilds as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listBuilds without error using callback', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';const expectedResponse = [
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
+            ];
+            client.innerApiCalls.listBuilds = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listBuilds(
+                    request,
+                    (err?: Error|null, result?: protos.google.devtools.cloudbuild.v1.IBuild[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBuilds as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBuilds as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listBuilds with error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listBuilds = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listBuilds(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listBuilds as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBuilds as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listBuildsStream without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
+            ];
+            client.descriptors.page.listBuilds.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listBuildsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.devtools.cloudbuild.v1.Build[] = [];
+                stream.on('data', (response: protos.google.devtools.cloudbuild.v1.Build) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listBuilds.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBuilds, request));
+            assert(
+                (client.descriptors.page.listBuilds.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listBuildsStream with error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBuilds.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listBuildsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.devtools.cloudbuild.v1.Build[] = [];
+                stream.on('data', (response: protos.google.devtools.cloudbuild.v1.Build) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listBuilds.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBuilds, request));
+            assert(
+                (client.descriptors.page.listBuilds.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listBuilds without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
+            ];
+            client.descriptors.page.listBuilds.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.devtools.cloudbuild.v1.IBuild[] = [];
+            const iterable = client.listBuildsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listWorkerPools as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listWorkerPools as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listWorkerPools with error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listWorkerPools = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listWorkerPools(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listWorkerPools as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listWorkerPools as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listWorkerPoolsStream without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v1.WorkerPool()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v1.WorkerPool()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v1.WorkerPool()
-        ),
-      ];
-      client.descriptors.page.listWorkerPools.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listWorkerPoolsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.devtools.cloudbuild.v1.WorkerPool[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.devtools.cloudbuild.v1.WorkerPool) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBuilds.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBuilds.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listBuilds with error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBuilds.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listBuildsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.devtools.cloudbuild.v1.IBuild[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBuilds.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBuilds.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listWorkerPools.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listWorkerPools, request)
-      );
-      assert(
-        (client.descriptors.page.listWorkerPools.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listWorkerPoolsStream with error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.descriptors.page.listWorkerPools.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listWorkerPoolsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.devtools.cloudbuild.v1.WorkerPool[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.devtools.cloudbuild.v1.WorkerPool) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listBuildTriggers', () => {
+        it('invokes listBuildTriggers without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';const expectedResponse = [
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.BuildTrigger()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.BuildTrigger()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.BuildTrigger()),
+            ];
+            client.innerApiCalls.listBuildTriggers = stubSimpleCall(expectedResponse);
+            const [response] = await client.listBuildTriggers(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBuildTriggers as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBuildTriggers as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listBuildTriggers without error using callback', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';const expectedResponse = [
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.BuildTrigger()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.BuildTrigger()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.BuildTrigger()),
+            ];
+            client.innerApiCalls.listBuildTriggers = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listBuildTriggers(
+                    request,
+                    (err?: Error|null, result?: protos.google.devtools.cloudbuild.v1.IBuildTrigger[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBuildTriggers as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBuildTriggers as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listWorkerPools.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listWorkerPools, request)
-      );
-      assert(
-        (client.descriptors.page.listWorkerPools.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+
+        it('invokes listBuildTriggers with error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listBuildTriggers = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listBuildTriggers(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listBuildTriggers as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBuildTriggers as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listBuildTriggersStream without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.BuildTrigger()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.BuildTrigger()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.BuildTrigger()),
+            ];
+            client.descriptors.page.listBuildTriggers.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listBuildTriggersStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.devtools.cloudbuild.v1.BuildTrigger[] = [];
+                stream.on('data', (response: protos.google.devtools.cloudbuild.v1.BuildTrigger) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listBuildTriggers.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBuildTriggers, request));
+            assert(
+                (client.descriptors.page.listBuildTriggers.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listBuildTriggersStream with error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBuildTriggers.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listBuildTriggersStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.devtools.cloudbuild.v1.BuildTrigger[] = [];
+                stream.on('data', (response: protos.google.devtools.cloudbuild.v1.BuildTrigger) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listBuildTriggers.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBuildTriggers, request));
+            assert(
+                (client.descriptors.page.listBuildTriggers.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listBuildTriggers without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.BuildTrigger()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.BuildTrigger()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.BuildTrigger()),
+            ];
+            client.descriptors.page.listBuildTriggers.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.devtools.cloudbuild.v1.IBuildTrigger[] = [];
+            const iterable = client.listBuildTriggersAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBuildTriggers.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBuildTriggers.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listBuildTriggers with error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBuildTriggers.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listBuildTriggersAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.devtools.cloudbuild.v1.IBuildTrigger[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBuildTriggers.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBuildTriggers.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('uses async iteration with listWorkerPools without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v1.WorkerPool()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v1.WorkerPool()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v1.WorkerPool()
-        ),
-      ];
-      client.descriptors.page.listWorkerPools.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.devtools.cloudbuild.v1.IWorkerPool[] = [];
-      const iterable = client.listWorkerPoolsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listWorkerPools.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listWorkerPools.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+    describe('listWorkerPools', () => {
+        it('invokes listWorkerPools without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';const expectedResponse = [
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.WorkerPool()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.WorkerPool()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.WorkerPool()),
+            ];
+            client.innerApiCalls.listWorkerPools = stubSimpleCall(expectedResponse);
+            const [response] = await client.listWorkerPools(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listWorkerPools as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listWorkerPools as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listWorkerPools without error using callback', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';const expectedResponse = [
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.WorkerPool()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.WorkerPool()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.WorkerPool()),
+            ];
+            client.innerApiCalls.listWorkerPools = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listWorkerPools(
+                    request,
+                    (err?: Error|null, result?: protos.google.devtools.cloudbuild.v1.IWorkerPool[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listWorkerPools as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listWorkerPools as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listWorkerPools with error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listWorkerPools = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listWorkerPools(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listWorkerPools as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listWorkerPools as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listWorkerPoolsStream without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.WorkerPool()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.WorkerPool()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.WorkerPool()),
+            ];
+            client.descriptors.page.listWorkerPools.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listWorkerPoolsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.devtools.cloudbuild.v1.WorkerPool[] = [];
+                stream.on('data', (response: protos.google.devtools.cloudbuild.v1.WorkerPool) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listWorkerPools.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listWorkerPools, request));
+            assert(
+                (client.descriptors.page.listWorkerPools.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listWorkerPoolsStream with error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.descriptors.page.listWorkerPools.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listWorkerPoolsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.devtools.cloudbuild.v1.WorkerPool[] = [];
+                stream.on('data', (response: protos.google.devtools.cloudbuild.v1.WorkerPool) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listWorkerPools.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listWorkerPools, request));
+            assert(
+                (client.descriptors.page.listWorkerPools.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listWorkerPools without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.WorkerPool()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.WorkerPool()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v1.WorkerPool()),
+            ];
+            client.descriptors.page.listWorkerPools.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.devtools.cloudbuild.v1.IWorkerPool[] = [];
+            const iterable = client.listWorkerPoolsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listWorkerPools.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listWorkerPools.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listWorkerPools with error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.descriptors.page.listWorkerPools.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listWorkerPoolsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.devtools.cloudbuild.v1.IWorkerPool[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listWorkerPools.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listWorkerPools.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('uses async iteration with listWorkerPools with error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.descriptors.page.listWorkerPools.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listWorkerPoolsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.devtools.cloudbuild.v1.IWorkerPool[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listWorkerPools.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listWorkerPools.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+    describe('Path templates', () => {
+
+        describe('cryptoKey', async () => {
+            const fakePath = "/rendered/path/cryptoKey";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                keyring: "keyringValue",
+                key: "keyValue",
+            };
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.cryptoKeyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.cryptoKeyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('cryptoKeyPath', () => {
+                const result = client.cryptoKeyPath("projectValue", "locationValue", "keyringValue", "keyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.cryptoKeyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromCryptoKeyName', () => {
+                const result = client.matchProjectFromCryptoKeyName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromCryptoKeyName', () => {
+                const result = client.matchLocationFromCryptoKeyName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchKeyringFromCryptoKeyName', () => {
+                const result = client.matchKeyringFromCryptoKeyName(fakePath);
+                assert.strictEqual(result, "keyringValue");
+                assert((client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchKeyFromCryptoKeyName', () => {
+                const result = client.matchKeyFromCryptoKeyName(fakePath);
+                assert.strictEqual(result, "keyValue");
+                assert((client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('network', async () => {
+            const fakePath = "/rendered/path/network";
+            const expectedParameters = {
+                project: "projectValue",
+                network: "networkValue",
+            };
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.networkPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.networkPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('networkPath', () => {
+                const result = client.networkPath("projectValue", "networkValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.networkPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromNetworkName', () => {
+                const result = client.matchProjectFromNetworkName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.networkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchNetworkFromNetworkName', () => {
+                const result = client.matchNetworkFromNetworkName(fakePath);
+                assert.strictEqual(result, "networkValue");
+                assert((client.pathTemplates.networkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectBuilds', async () => {
+            const fakePath = "/rendered/path/projectBuilds";
+            const expectedParameters = {
+                project: "projectValue",
+                build: "buildValue",
+            };
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectBuildsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectBuildsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectBuildsPath', () => {
+                const result = client.projectBuildsPath("projectValue", "buildValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectBuildsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectBuildsName', () => {
+                const result = client.matchProjectFromProjectBuildsName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectBuildsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBuildFromProjectBuildsName', () => {
+                const result = client.matchBuildFromProjectBuildsName(fakePath);
+                assert.strictEqual(result, "buildValue");
+                assert((client.pathTemplates.projectBuildsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectConfig', async () => {
+            const fakePath = "/rendered/path/projectConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                config: "configValue",
+            };
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectConfigPath', () => {
+                const result = client.projectConfigPath("projectValue", "configValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectConfigName', () => {
+                const result = client.matchProjectFromProjectConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConfigFromProjectConfigName', () => {
+                const result = client.matchConfigFromProjectConfigName(fakePath);
+                assert.strictEqual(result, "configValue");
+                assert((client.pathTemplates.projectConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationBuilds', async () => {
+            const fakePath = "/rendered/path/projectLocationBuilds";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                build: "buildValue",
+            };
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationBuildsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationBuildsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationBuildsPath', () => {
+                const result = client.projectLocationBuildsPath("projectValue", "locationValue", "buildValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationBuildsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationBuildsName', () => {
+                const result = client.matchProjectFromProjectLocationBuildsName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationBuildsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationBuildsName', () => {
+                const result = client.matchLocationFromProjectLocationBuildsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationBuildsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBuildFromProjectLocationBuildsName', () => {
+                const result = client.matchBuildFromProjectLocationBuildsName(fakePath);
+                assert.strictEqual(result, "buildValue");
+                assert((client.pathTemplates.projectLocationBuildsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationConfig', async () => {
+            const fakePath = "/rendered/path/projectLocationConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                config: "configValue",
+            };
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationConfigPath', () => {
+                const result = client.projectLocationConfigPath("projectValue", "locationValue", "configValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationConfigName', () => {
+                const result = client.matchProjectFromProjectLocationConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationConfigName', () => {
+                const result = client.matchLocationFromProjectLocationConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConfigFromProjectLocationConfigName', () => {
+                const result = client.matchConfigFromProjectLocationConfigName(fakePath);
+                assert.strictEqual(result, "configValue");
+                assert((client.pathTemplates.projectLocationConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationTriggers', async () => {
+            const fakePath = "/rendered/path/projectLocationTriggers";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                trigger: "triggerValue",
+            };
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationTriggersPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationTriggersPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationTriggersPath', () => {
+                const result = client.projectLocationTriggersPath("projectValue", "locationValue", "triggerValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationTriggersPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationTriggersName', () => {
+                const result = client.matchProjectFromProjectLocationTriggersName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationTriggersPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationTriggersName', () => {
+                const result = client.matchLocationFromProjectLocationTriggersName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationTriggersPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTriggerFromProjectLocationTriggersName', () => {
+                const result = client.matchTriggerFromProjectLocationTriggersName(fakePath);
+                assert.strictEqual(result, "triggerValue");
+                assert((client.pathTemplates.projectLocationTriggersPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectTriggers', async () => {
+            const fakePath = "/rendered/path/projectTriggers";
+            const expectedParameters = {
+                project: "projectValue",
+                trigger: "triggerValue",
+            };
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectTriggersPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectTriggersPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectTriggersPath', () => {
+                const result = client.projectTriggersPath("projectValue", "triggerValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectTriggersPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectTriggersName', () => {
+                const result = client.matchProjectFromProjectTriggersName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectTriggersPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTriggerFromProjectTriggersName', () => {
+                const result = client.matchTriggerFromProjectTriggersName(fakePath);
+                assert.strictEqual(result, "triggerValue");
+                assert((client.pathTemplates.projectTriggersPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('repository', async () => {
+            const fakePath = "/rendered/path/repository";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                connection: "connectionValue",
+                repository: "repositoryValue",
+            };
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.repositoryPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.repositoryPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('repositoryPath', () => {
+                const result = client.repositoryPath("projectValue", "locationValue", "connectionValue", "repositoryValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.repositoryPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromRepositoryName', () => {
+                const result = client.matchProjectFromRepositoryName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.repositoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromRepositoryName', () => {
+                const result = client.matchLocationFromRepositoryName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.repositoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConnectionFromRepositoryName', () => {
+                const result = client.matchConnectionFromRepositoryName(fakePath);
+                assert.strictEqual(result, "connectionValue");
+                assert((client.pathTemplates.repositoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRepositoryFromRepositoryName', () => {
+                const result = client.matchRepositoryFromRepositoryName(fakePath);
+                assert.strictEqual(result, "repositoryValue");
+                assert((client.pathTemplates.repositoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('secretVersion', async () => {
+            const fakePath = "/rendered/path/secretVersion";
+            const expectedParameters = {
+                project: "projectValue",
+                secret: "secretValue",
+                version: "versionValue",
+            };
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.secretVersionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.secretVersionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('secretVersionPath', () => {
+                const result = client.secretVersionPath("projectValue", "secretValue", "versionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.secretVersionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSecretVersionName', () => {
+                const result = client.matchProjectFromSecretVersionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.secretVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSecretFromSecretVersionName', () => {
+                const result = client.matchSecretFromSecretVersionName(fakePath);
+                assert.strictEqual(result, "secretValue");
+                assert((client.pathTemplates.secretVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchVersionFromSecretVersionName', () => {
+                const result = client.matchVersionFromSecretVersionName(fakePath);
+                assert.strictEqual(result, "versionValue");
+                assert((client.pathTemplates.secretVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('serviceAccount', async () => {
+            const fakePath = "/rendered/path/serviceAccount";
+            const expectedParameters = {
+                project: "projectValue",
+                service_account: "serviceAccountValue",
+            };
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.serviceAccountPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.serviceAccountPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('serviceAccountPath', () => {
+                const result = client.serviceAccountPath("projectValue", "serviceAccountValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.serviceAccountPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromServiceAccountName', () => {
+                const result = client.matchProjectFromServiceAccountName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.serviceAccountPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceAccountFromServiceAccountName', () => {
+                const result = client.matchServiceAccountFromServiceAccountName(fakePath);
+                assert.strictEqual(result, "serviceAccountValue");
+                assert((client.pathTemplates.serviceAccountPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('subscription', async () => {
+            const fakePath = "/rendered/path/subscription";
+            const expectedParameters = {
+                project: "projectValue",
+                subscription: "subscriptionValue",
+            };
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.subscriptionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.subscriptionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('subscriptionPath', () => {
+                const result = client.subscriptionPath("projectValue", "subscriptionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.subscriptionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSubscriptionName', () => {
+                const result = client.matchProjectFromSubscriptionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.subscriptionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSubscriptionFromSubscriptionName', () => {
+                const result = client.matchSubscriptionFromSubscriptionName(fakePath);
+                assert.strictEqual(result, "subscriptionValue");
+                assert((client.pathTemplates.subscriptionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('topic', async () => {
+            const fakePath = "/rendered/path/topic";
+            const expectedParameters = {
+                project: "projectValue",
+                topic: "topicValue",
+            };
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.topicPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.topicPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('topicPath', () => {
+                const result = client.topicPath("projectValue", "topicValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.topicPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromTopicName', () => {
+                const result = client.matchProjectFromTopicName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.topicPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTopicFromTopicName', () => {
+                const result = client.matchTopicFromTopicName(fakePath);
+                assert.strictEqual(result, "topicValue");
+                assert((client.pathTemplates.topicPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('workerPool', async () => {
+            const fakePath = "/rendered/path/workerPool";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                worker_pool: "workerPoolValue",
+            };
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.workerPoolPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.workerPoolPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('workerPoolPath', () => {
+                const result = client.workerPoolPath("projectValue", "locationValue", "workerPoolValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.workerPoolPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromWorkerPoolName', () => {
+                const result = client.matchProjectFromWorkerPoolName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.workerPoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromWorkerPoolName', () => {
+                const result = client.matchLocationFromWorkerPoolName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.workerPoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchWorkerPoolFromWorkerPoolName', () => {
+                const result = client.matchWorkerPoolFromWorkerPoolName(fakePath);
+                assert.strictEqual(result, "workerPoolValue");
+                assert((client.pathTemplates.workerPoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-  });
-
-  describe('Path templates', () => {
-    describe('cryptoKey', async () => {
-      const fakePath = '/rendered/path/cryptoKey';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        keyring: 'keyringValue',
-        key: 'keyValue',
-      };
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.cryptoKeyPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.cryptoKeyPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('cryptoKeyPath', () => {
-        const result = client.cryptoKeyPath(
-          'projectValue',
-          'locationValue',
-          'keyringValue',
-          'keyValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.cryptoKeyPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromCryptoKeyName', () => {
-        const result = client.matchProjectFromCryptoKeyName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromCryptoKeyName', () => {
-        const result = client.matchLocationFromCryptoKeyName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchKeyringFromCryptoKeyName', () => {
-        const result = client.matchKeyringFromCryptoKeyName(fakePath);
-        assert.strictEqual(result, 'keyringValue');
-        assert(
-          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchKeyFromCryptoKeyName', () => {
-        const result = client.matchKeyFromCryptoKeyName(fakePath);
-        assert.strictEqual(result, 'keyValue');
-        assert(
-          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('location', async () => {
-      const fakePath = '/rendered/path/location';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('network', async () => {
-      const fakePath = '/rendered/path/network';
-      const expectedParameters = {
-        project: 'projectValue',
-        network: 'networkValue',
-      };
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.networkPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.networkPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('networkPath', () => {
-        const result = client.networkPath('projectValue', 'networkValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.networkPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromNetworkName', () => {
-        const result = client.matchProjectFromNetworkName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.networkPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchNetworkFromNetworkName', () => {
-        const result = client.matchNetworkFromNetworkName(fakePath);
-        assert.strictEqual(result, 'networkValue');
-        assert(
-          (client.pathTemplates.networkPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectBuild', async () => {
-      const fakePath = '/rendered/path/projectBuild';
-      const expectedParameters = {
-        project: 'projectValue',
-        build: 'buildValue',
-      };
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectBuildPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectBuildPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectBuildPath', () => {
-        const result = client.projectBuildPath('projectValue', 'buildValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectBuildPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectBuildName', () => {
-        const result = client.matchProjectFromProjectBuildName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectBuildPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchBuildFromProjectBuildName', () => {
-        const result = client.matchBuildFromProjectBuildName(fakePath);
-        assert.strictEqual(result, 'buildValue');
-        assert(
-          (client.pathTemplates.projectBuildPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectConfig', async () => {
-      const fakePath = '/rendered/path/projectConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        config: 'configValue',
-      };
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectConfigPath', () => {
-        const result = client.projectConfigPath('projectValue', 'configValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectConfigPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectConfigName', () => {
-        const result = client.matchProjectFromProjectConfigName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchConfigFromProjectConfigName', () => {
-        const result = client.matchConfigFromProjectConfigName(fakePath);
-        assert.strictEqual(result, 'configValue');
-        assert(
-          (client.pathTemplates.projectConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationBuild', async () => {
-      const fakePath = '/rendered/path/projectLocationBuild';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        build: 'buildValue',
-      };
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationBuildPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationBuildPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectLocationBuildPath', () => {
-        const result = client.projectLocationBuildPath(
-          'projectValue',
-          'locationValue',
-          'buildValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationBuildPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationBuildName', () => {
-        const result =
-          client.matchProjectFromProjectLocationBuildName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationBuildPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationBuildName', () => {
-        const result =
-          client.matchLocationFromProjectLocationBuildName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationBuildPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchBuildFromProjectLocationBuildName', () => {
-        const result = client.matchBuildFromProjectLocationBuildName(fakePath);
-        assert.strictEqual(result, 'buildValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationBuildPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationConfig', async () => {
-      const fakePath = '/rendered/path/projectLocationConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        config: 'configValue',
-      };
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectLocationConfigPath', () => {
-        const result = client.projectLocationConfigPath(
-          'projectValue',
-          'locationValue',
-          'configValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationConfigName', () => {
-        const result =
-          client.matchProjectFromProjectLocationConfigName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationConfigName', () => {
-        const result =
-          client.matchLocationFromProjectLocationConfigName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchConfigFromProjectLocationConfigName', () => {
-        const result =
-          client.matchConfigFromProjectLocationConfigName(fakePath);
-        assert.strictEqual(result, 'configValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationTrigger', async () => {
-      const fakePath = '/rendered/path/projectLocationTrigger';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        trigger: 'triggerValue',
-      };
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationTriggerPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationTriggerPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectLocationTriggerPath', () => {
-        const result = client.projectLocationTriggerPath(
-          'projectValue',
-          'locationValue',
-          'triggerValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationTriggerPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationTriggerName', () => {
-        const result =
-          client.matchProjectFromProjectLocationTriggerName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationTriggerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationTriggerName', () => {
-        const result =
-          client.matchLocationFromProjectLocationTriggerName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationTriggerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTriggerFromProjectLocationTriggerName', () => {
-        const result =
-          client.matchTriggerFromProjectLocationTriggerName(fakePath);
-        assert.strictEqual(result, 'triggerValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationTriggerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectTrigger', async () => {
-      const fakePath = '/rendered/path/projectTrigger';
-      const expectedParameters = {
-        project: 'projectValue',
-        trigger: 'triggerValue',
-      };
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectTriggerPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectTriggerPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectTriggerPath', () => {
-        const result = client.projectTriggerPath(
-          'projectValue',
-          'triggerValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectTriggerPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectTriggerName', () => {
-        const result = client.matchProjectFromProjectTriggerName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectTriggerPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTriggerFromProjectTriggerName', () => {
-        const result = client.matchTriggerFromProjectTriggerName(fakePath);
-        assert.strictEqual(result, 'triggerValue');
-        assert(
-          (client.pathTemplates.projectTriggerPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('repository', async () => {
-      const fakePath = '/rendered/path/repository';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        connection: 'connectionValue',
-        repository: 'repositoryValue',
-      };
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.repositoryPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.repositoryPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('repositoryPath', () => {
-        const result = client.repositoryPath(
-          'projectValue',
-          'locationValue',
-          'connectionValue',
-          'repositoryValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.repositoryPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromRepositoryName', () => {
-        const result = client.matchProjectFromRepositoryName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.repositoryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromRepositoryName', () => {
-        const result = client.matchLocationFromRepositoryName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.repositoryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchConnectionFromRepositoryName', () => {
-        const result = client.matchConnectionFromRepositoryName(fakePath);
-        assert.strictEqual(result, 'connectionValue');
-        assert(
-          (client.pathTemplates.repositoryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRepositoryFromRepositoryName', () => {
-        const result = client.matchRepositoryFromRepositoryName(fakePath);
-        assert.strictEqual(result, 'repositoryValue');
-        assert(
-          (client.pathTemplates.repositoryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('secretVersion', async () => {
-      const fakePath = '/rendered/path/secretVersion';
-      const expectedParameters = {
-        project: 'projectValue',
-        secret: 'secretValue',
-        version: 'versionValue',
-      };
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.secretVersionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.secretVersionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('secretVersionPath', () => {
-        const result = client.secretVersionPath(
-          'projectValue',
-          'secretValue',
-          'versionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.secretVersionPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromSecretVersionName', () => {
-        const result = client.matchProjectFromSecretVersionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.secretVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSecretFromSecretVersionName', () => {
-        const result = client.matchSecretFromSecretVersionName(fakePath);
-        assert.strictEqual(result, 'secretValue');
-        assert(
-          (client.pathTemplates.secretVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchVersionFromSecretVersionName', () => {
-        const result = client.matchVersionFromSecretVersionName(fakePath);
-        assert.strictEqual(result, 'versionValue');
-        assert(
-          (client.pathTemplates.secretVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('serviceAccount', async () => {
-      const fakePath = '/rendered/path/serviceAccount';
-      const expectedParameters = {
-        project: 'projectValue',
-        service_account: 'serviceAccountValue',
-      };
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.serviceAccountPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.serviceAccountPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('serviceAccountPath', () => {
-        const result = client.serviceAccountPath(
-          'projectValue',
-          'serviceAccountValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.serviceAccountPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromServiceAccountName', () => {
-        const result = client.matchProjectFromServiceAccountName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.serviceAccountPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServiceAccountFromServiceAccountName', () => {
-        const result =
-          client.matchServiceAccountFromServiceAccountName(fakePath);
-        assert.strictEqual(result, 'serviceAccountValue');
-        assert(
-          (client.pathTemplates.serviceAccountPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('subscription', async () => {
-      const fakePath = '/rendered/path/subscription';
-      const expectedParameters = {
-        project: 'projectValue',
-        subscription: 'subscriptionValue',
-      };
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.subscriptionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.subscriptionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('subscriptionPath', () => {
-        const result = client.subscriptionPath(
-          'projectValue',
-          'subscriptionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.subscriptionPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromSubscriptionName', () => {
-        const result = client.matchProjectFromSubscriptionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.subscriptionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSubscriptionFromSubscriptionName', () => {
-        const result = client.matchSubscriptionFromSubscriptionName(fakePath);
-        assert.strictEqual(result, 'subscriptionValue');
-        assert(
-          (client.pathTemplates.subscriptionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('topic', async () => {
-      const fakePath = '/rendered/path/topic';
-      const expectedParameters = {
-        project: 'projectValue',
-        topic: 'topicValue',
-      };
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.topicPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.topicPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('topicPath', () => {
-        const result = client.topicPath('projectValue', 'topicValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.topicPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromTopicName', () => {
-        const result = client.matchProjectFromTopicName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.topicPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTopicFromTopicName', () => {
-        const result = client.matchTopicFromTopicName(fakePath);
-        assert.strictEqual(result, 'topicValue');
-        assert(
-          (client.pathTemplates.topicPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('workerPool', async () => {
-      const fakePath = '/rendered/path/workerPool';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        worker_pool: 'workerPoolValue',
-      };
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.workerPoolPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.workerPoolPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('workerPoolPath', () => {
-        const result = client.workerPoolPath(
-          'projectValue',
-          'locationValue',
-          'workerPoolValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.workerPoolPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromWorkerPoolName', () => {
-        const result = client.matchProjectFromWorkerPoolName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.workerPoolPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromWorkerPoolName', () => {
-        const result = client.matchLocationFromWorkerPoolName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.workerPoolPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchWorkerPoolFromWorkerPoolName', () => {
-        const result = client.matchWorkerPoolFromWorkerPoolName(fakePath);
-        assert.strictEqual(result, 'workerPoolValue');
-        assert(
-          (client.pathTemplates.workerPoolPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

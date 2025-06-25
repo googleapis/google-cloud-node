@@ -2374,6 +2374,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     });
 
     describe('Path templates', () => {
+
         describe('glossary', async () => {
             const fakePath = "/rendered/path/glossary";
             const expectedParameters = {

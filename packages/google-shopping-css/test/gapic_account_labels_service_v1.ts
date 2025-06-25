@@ -29,1273 +29,991 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.AccountLabelsServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'css.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          accountlabelsserviceModule.v1.AccountLabelsServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'css.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          accountlabelsserviceModule.v1.AccountLabelsServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'css.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          universeDomain: 'example.com',
-        });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'css.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          universe_domain: 'example.com',
-        });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'css.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new accountlabelsserviceModule.v1.AccountLabelsServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'css.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'css.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-              universeDomain: 'configured.example.com',
+        it('has universeDomain', () => {
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
+        });
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = accountlabelsserviceModule.v1.AccountLabelsServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'css.googleapis.com');
+                assert(stub.called);
+                stub.restore();
             });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'css.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
-        });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port =
-        accountlabelsserviceModule.v1.AccountLabelsServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          fallback: true,
-        });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.accountLabelsServiceStub, undefined);
-      await client.initialize();
-      assert(client.accountLabelsServiceStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.accountLabelsServiceStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.accountLabelsServiceStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('createAccountLabel', () => {
-    it('invokes createAccountLabel without error', async () => {
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.CreateAccountLabelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.CreateAccountLabelRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.css.v1.AccountLabel()
-      );
-      client.innerApiCalls.createAccountLabel =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.createAccountLabel(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createAccountLabel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAccountLabel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAccountLabel without error using callback', async () => {
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.CreateAccountLabelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.CreateAccountLabelRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.css.v1.AccountLabel()
-      );
-      client.innerApiCalls.createAccountLabel =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createAccountLabel(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.shopping.css.v1.IAccountLabel | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createAccountLabel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAccountLabel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAccountLabel with error', async () => {
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.CreateAccountLabelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.CreateAccountLabelRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createAccountLabel = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createAccountLabel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createAccountLabel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAccountLabel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAccountLabel with closed client', async () => {
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.CreateAccountLabelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.CreateAccountLabelRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createAccountLabel(request), expectedError);
-    });
-  });
-
-  describe('updateAccountLabel', () => {
-    it('invokes updateAccountLabel without error', async () => {
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.UpdateAccountLabelRequest()
-      );
-      request.accountLabel ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.UpdateAccountLabelRequest',
-        ['accountLabel', 'name']
-      );
-      request.accountLabel.name = defaultValue1;
-      const expectedHeaderRequestParams = `account_label.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.css.v1.AccountLabel()
-      );
-      client.innerApiCalls.updateAccountLabel =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateAccountLabel(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateAccountLabel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAccountLabel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAccountLabel without error using callback', async () => {
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.UpdateAccountLabelRequest()
-      );
-      request.accountLabel ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.UpdateAccountLabelRequest',
-        ['accountLabel', 'name']
-      );
-      request.accountLabel.name = defaultValue1;
-      const expectedHeaderRequestParams = `account_label.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.css.v1.AccountLabel()
-      );
-      client.innerApiCalls.updateAccountLabel =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateAccountLabel(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.shopping.css.v1.IAccountLabel | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateAccountLabel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAccountLabel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAccountLabel with error', async () => {
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.UpdateAccountLabelRequest()
-      );
-      request.accountLabel ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.UpdateAccountLabelRequest',
-        ['accountLabel', 'name']
-      );
-      request.accountLabel.name = defaultValue1;
-      const expectedHeaderRequestParams = `account_label.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateAccountLabel = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateAccountLabel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateAccountLabel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAccountLabel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAccountLabel with closed client', async () => {
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.UpdateAccountLabelRequest()
-      );
-      request.accountLabel ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.UpdateAccountLabelRequest',
-        ['accountLabel', 'name']
-      );
-      request.accountLabel.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateAccountLabel(request), expectedError);
-    });
-  });
-
-  describe('deleteAccountLabel', () => {
-    it('invokes deleteAccountLabel without error', async () => {
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.DeleteAccountLabelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.DeleteAccountLabelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteAccountLabel =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteAccountLabel(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteAccountLabel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAccountLabel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAccountLabel without error using callback', async () => {
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.DeleteAccountLabelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.DeleteAccountLabelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteAccountLabel =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteAccountLabel(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteAccountLabel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAccountLabel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAccountLabel with error', async () => {
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.DeleteAccountLabelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.DeleteAccountLabelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteAccountLabel = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteAccountLabel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteAccountLabel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAccountLabel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAccountLabel with closed client', async () => {
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.DeleteAccountLabelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.DeleteAccountLabelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteAccountLabel(request), expectedError);
-    });
-  });
-
-  describe('listAccountLabels', () => {
-    it('invokes listAccountLabels without error', async () => {
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.ListAccountLabelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.ListAccountLabelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
-        generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
-        generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
-      ];
-      client.innerApiCalls.listAccountLabels = stubSimpleCall(expectedResponse);
-      const [response] = await client.listAccountLabels(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAccountLabels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAccountLabels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAccountLabels without error using callback', async () => {
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.ListAccountLabelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.ListAccountLabelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
-        generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
-        generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
-      ];
-      client.innerApiCalls.listAccountLabels =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listAccountLabels(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.shopping.css.v1.IAccountLabel[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAccountLabels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAccountLabels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAccountLabels with error', async () => {
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.ListAccountLabelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.ListAccountLabelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listAccountLabels = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listAccountLabels(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listAccountLabels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAccountLabels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAccountLabelsStream without error', async () => {
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.ListAccountLabelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.ListAccountLabelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
-        generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
-        generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
-      ];
-      client.descriptors.page.listAccountLabels.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listAccountLabelsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.shopping.css.v1.AccountLabel[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.shopping.css.v1.AccountLabel) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listAccountLabels.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAccountLabels, request)
-      );
-      assert(
-        (client.descriptors.page.listAccountLabels.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listAccountLabelsStream with error', async () => {
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.ListAccountLabelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.ListAccountLabelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAccountLabels.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listAccountLabelsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.shopping.css.v1.AccountLabel[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.shopping.css.v1.AccountLabel) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listAccountLabels.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAccountLabels, request)
-      );
-      assert(
-        (client.descriptors.page.listAccountLabels.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listAccountLabels without error', async () => {
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.ListAccountLabelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.ListAccountLabelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
-        generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
-        generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
-      ];
-      client.descriptors.page.listAccountLabels.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.shopping.css.v1.IAccountLabel[] = [];
-      const iterable = client.listAccountLabelsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAccountLabels.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listAccountLabels.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listAccountLabels with error', async () => {
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.ListAccountLabelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.ListAccountLabelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAccountLabels.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listAccountLabelsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.shopping.css.v1.IAccountLabel[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = accountlabelsserviceModule.v1.AccountLabelsServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'css.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAccountLabels.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listAccountLabels.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('account', async () => {
-      const fakePath = '/rendered/path/account';
-      const expectedParameters = {
-        account: 'accountValue',
-      };
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'css.example.com');
         });
-      await client.initialize();
-      client.pathTemplates.accountPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.accountPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('accountPath', () => {
-        const result = client.accountPath('accountValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.accountPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchAccountFromAccountName', () => {
-        const result = client.matchAccountFromAccountName(fakePath);
-        assert.strictEqual(result, 'accountValue');
-        assert(
-          (client.pathTemplates.accountPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('accountLabel', async () => {
-      const fakePath = '/rendered/path/accountLabel';
-      const expectedParameters = {
-        account: 'accountValue',
-        label: 'labelValue',
-      };
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'css.example.com');
         });
-      await client.initialize();
-      client.pathTemplates.accountLabelPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.accountLabelPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('accountLabelPath', () => {
-        const result = client.accountLabelPath('accountValue', 'labelValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.accountLabelPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'css.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-      it('matchAccountFromAccountLabelName', () => {
-        const result = client.matchAccountFromAccountLabelName(fakePath);
-        assert.strictEqual(result, 'accountValue');
-        assert(
-          (client.pathTemplates.accountLabelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLabelFromAccountLabelName', () => {
-        const result = client.matchLabelFromAccountLabelName(fakePath);
-        assert.strictEqual(result, 'labelValue');
-        assert(
-          (client.pathTemplates.accountLabelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('cssProduct', async () => {
-      const fakePath = '/rendered/path/cssProduct';
-      const expectedParameters = {
-        account: 'accountValue',
-        css_product: 'cssProductValue',
-      };
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'css.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
+        }
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new accountlabelsserviceModule.v1.AccountLabelsServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
         });
-      await client.initialize();
-      client.pathTemplates.cssProductPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.cssProductPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('cssProductPath', () => {
-        const result = client.cssProductPath('accountValue', 'cssProductValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.cssProductPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchAccountFromCssProductName', () => {
-        const result = client.matchAccountFromCssProductName(fakePath);
-        assert.strictEqual(result, 'accountValue');
-        assert(
-          (client.pathTemplates.cssProductPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCssProductFromCssProductName', () => {
-        const result = client.matchCssProductFromCssProductName(fakePath);
-        assert.strictEqual(result, 'cssProductValue');
-        assert(
-          (client.pathTemplates.cssProductPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('cssProductInput', async () => {
-      const fakePath = '/rendered/path/cssProductInput';
-      const expectedParameters = {
-        account: 'accountValue',
-        css_product_input: 'cssProductInputValue',
-      };
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('has port', () => {
+            const port = accountlabelsserviceModule.v1.AccountLabelsServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
         });
-      await client.initialize();
-      client.pathTemplates.cssProductInputPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.cssProductInputPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('cssProductInputPath', () => {
-        const result = client.cssProductInputPath(
-          'accountValue',
-          'cssProductInputValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.cssProductInputPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchAccountFromCssProductInputName', () => {
-        const result = client.matchAccountFromCssProductInputName(fakePath);
-        assert.strictEqual(result, 'accountValue');
-        assert(
-          (client.pathTemplates.cssProductInputPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCssProductInputFromCssProductInputName', () => {
-        const result =
-          client.matchCssProductInputFromCssProductInputName(fakePath);
-        assert.strictEqual(result, 'cssProductInputValue');
-        assert(
-          (client.pathTemplates.cssProductInputPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('quotaGroup', async () => {
-      const fakePath = '/rendered/path/quotaGroup';
-      const expectedParameters = {
-        account: 'accountValue',
-        quota_group: 'quotaGroupValue',
-      };
-      const client =
-        new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('should create a client with no option', () => {
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient();
+            assert(client);
         });
-      await client.initialize();
-      client.pathTemplates.quotaGroupPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.quotaGroupPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('quotaGroupPath', () => {
-        const result = client.quotaGroupPath('accountValue', 'quotaGroupValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.quotaGroupPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('should create a client with gRPC fallback', () => {
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
 
-      it('matchAccountFromQuotaGroupName', () => {
-        const result = client.matchAccountFromQuotaGroupName(fakePath);
-        assert.strictEqual(result, 'accountValue');
-        assert(
-          (client.pathTemplates.quotaGroupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.accountLabelsServiceStub, undefined);
+            await client.initialize();
+            assert(client.accountLabelsServiceStub);
+        });
 
-      it('matchQuotaGroupFromQuotaGroupName', () => {
-        const result = client.matchQuotaGroupFromQuotaGroupName(fakePath);
-        assert.strictEqual(result, 'quotaGroupValue');
-        assert(
-          (client.pathTemplates.quotaGroupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has close method for the initialized client', done => {
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.accountLabelsServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.accountLabelsServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
-  });
+
+    describe('createAccountLabel', () => {
+        it('invokes createAccountLabel without error', async () => {
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.CreateAccountLabelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.CreateAccountLabelRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.shopping.css.v1.AccountLabel()
+            );
+            client.innerApiCalls.createAccountLabel = stubSimpleCall(expectedResponse);
+            const [response] = await client.createAccountLabel(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createAccountLabel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAccountLabel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAccountLabel without error using callback', async () => {
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.CreateAccountLabelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.CreateAccountLabelRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.shopping.css.v1.AccountLabel()
+            );
+            client.innerApiCalls.createAccountLabel = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createAccountLabel(
+                    request,
+                    (err?: Error|null, result?: protos.google.shopping.css.v1.IAccountLabel|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createAccountLabel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAccountLabel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAccountLabel with error', async () => {
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.CreateAccountLabelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.CreateAccountLabelRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createAccountLabel = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createAccountLabel(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createAccountLabel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAccountLabel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAccountLabel with closed client', async () => {
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.CreateAccountLabelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.CreateAccountLabelRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createAccountLabel(request), expectedError);
+        });
+    });
+
+    describe('updateAccountLabel', () => {
+        it('invokes updateAccountLabel without error', async () => {
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.UpdateAccountLabelRequest()
+            );
+            request.accountLabel ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.UpdateAccountLabelRequest', ['accountLabel', 'name']);
+            request.accountLabel.name = defaultValue1;
+            const expectedHeaderRequestParams = `account_label.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.shopping.css.v1.AccountLabel()
+            );
+            client.innerApiCalls.updateAccountLabel = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateAccountLabel(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAccountLabel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAccountLabel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAccountLabel without error using callback', async () => {
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.UpdateAccountLabelRequest()
+            );
+            request.accountLabel ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.UpdateAccountLabelRequest', ['accountLabel', 'name']);
+            request.accountLabel.name = defaultValue1;
+            const expectedHeaderRequestParams = `account_label.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.shopping.css.v1.AccountLabel()
+            );
+            client.innerApiCalls.updateAccountLabel = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateAccountLabel(
+                    request,
+                    (err?: Error|null, result?: protos.google.shopping.css.v1.IAccountLabel|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAccountLabel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAccountLabel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAccountLabel with error', async () => {
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.UpdateAccountLabelRequest()
+            );
+            request.accountLabel ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.UpdateAccountLabelRequest', ['accountLabel', 'name']);
+            request.accountLabel.name = defaultValue1;
+            const expectedHeaderRequestParams = `account_label.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAccountLabel = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateAccountLabel(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAccountLabel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAccountLabel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAccountLabel with closed client', async () => {
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.UpdateAccountLabelRequest()
+            );
+            request.accountLabel ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.UpdateAccountLabelRequest', ['accountLabel', 'name']);
+            request.accountLabel.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateAccountLabel(request), expectedError);
+        });
+    });
+
+    describe('deleteAccountLabel', () => {
+        it('invokes deleteAccountLabel without error', async () => {
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.DeleteAccountLabelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.DeleteAccountLabelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteAccountLabel = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteAccountLabel(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteAccountLabel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAccountLabel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAccountLabel without error using callback', async () => {
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.DeleteAccountLabelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.DeleteAccountLabelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteAccountLabel = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteAccountLabel(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteAccountLabel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAccountLabel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAccountLabel with error', async () => {
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.DeleteAccountLabelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.DeleteAccountLabelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteAccountLabel = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteAccountLabel(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteAccountLabel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAccountLabel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAccountLabel with closed client', async () => {
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.DeleteAccountLabelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.DeleteAccountLabelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteAccountLabel(request), expectedError);
+        });
+    });
+
+    describe('listAccountLabels', () => {
+        it('invokes listAccountLabels without error', async () => {
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.ListAccountLabelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.ListAccountLabelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
+              generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
+              generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
+            ];
+            client.innerApiCalls.listAccountLabels = stubSimpleCall(expectedResponse);
+            const [response] = await client.listAccountLabels(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAccountLabels as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAccountLabels as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAccountLabels without error using callback', async () => {
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.ListAccountLabelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.ListAccountLabelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
+              generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
+              generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
+            ];
+            client.innerApiCalls.listAccountLabels = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listAccountLabels(
+                    request,
+                    (err?: Error|null, result?: protos.google.shopping.css.v1.IAccountLabel[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAccountLabels as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAccountLabels as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAccountLabels with error', async () => {
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.ListAccountLabelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.ListAccountLabelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listAccountLabels = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listAccountLabels(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listAccountLabels as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAccountLabels as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAccountLabelsStream without error', async () => {
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.ListAccountLabelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.ListAccountLabelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
+              generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
+              generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
+            ];
+            client.descriptors.page.listAccountLabels.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listAccountLabelsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.shopping.css.v1.AccountLabel[] = [];
+                stream.on('data', (response: protos.google.shopping.css.v1.AccountLabel) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listAccountLabels.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAccountLabels, request));
+            assert(
+                (client.descriptors.page.listAccountLabels.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listAccountLabelsStream with error', async () => {
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.ListAccountLabelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.ListAccountLabelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAccountLabels.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listAccountLabelsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.shopping.css.v1.AccountLabel[] = [];
+                stream.on('data', (response: protos.google.shopping.css.v1.AccountLabel) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listAccountLabels.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAccountLabels, request));
+            assert(
+                (client.descriptors.page.listAccountLabels.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listAccountLabels without error', async () => {
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.ListAccountLabelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.ListAccountLabelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
+              generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
+              generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
+            ];
+            client.descriptors.page.listAccountLabels.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.shopping.css.v1.IAccountLabel[] = [];
+            const iterable = client.listAccountLabelsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAccountLabels.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAccountLabels.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listAccountLabels with error', async () => {
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.ListAccountLabelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.ListAccountLabelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAccountLabels.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listAccountLabelsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.shopping.css.v1.IAccountLabel[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAccountLabels.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAccountLabels.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('Path templates', () => {
+
+        describe('account', async () => {
+            const fakePath = "/rendered/path/account";
+            const expectedParameters = {
+                account: "accountValue",
+            };
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.accountPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.accountPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('accountPath', () => {
+                const result = client.accountPath("accountValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.accountPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccountFromAccountName', () => {
+                const result = client.matchAccountFromAccountName(fakePath);
+                assert.strictEqual(result, "accountValue");
+                assert((client.pathTemplates.accountPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('accountLabel', async () => {
+            const fakePath = "/rendered/path/accountLabel";
+            const expectedParameters = {
+                account: "accountValue",
+                label: "labelValue",
+            };
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.accountLabelPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.accountLabelPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('accountLabelPath', () => {
+                const result = client.accountLabelPath("accountValue", "labelValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.accountLabelPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccountFromAccountLabelName', () => {
+                const result = client.matchAccountFromAccountLabelName(fakePath);
+                assert.strictEqual(result, "accountValue");
+                assert((client.pathTemplates.accountLabelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLabelFromAccountLabelName', () => {
+                const result = client.matchLabelFromAccountLabelName(fakePath);
+                assert.strictEqual(result, "labelValue");
+                assert((client.pathTemplates.accountLabelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('cssProduct', async () => {
+            const fakePath = "/rendered/path/cssProduct";
+            const expectedParameters = {
+                account: "accountValue",
+                css_product: "cssProductValue",
+            };
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.cssProductPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.cssProductPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('cssProductPath', () => {
+                const result = client.cssProductPath("accountValue", "cssProductValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.cssProductPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccountFromCssProductName', () => {
+                const result = client.matchAccountFromCssProductName(fakePath);
+                assert.strictEqual(result, "accountValue");
+                assert((client.pathTemplates.cssProductPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCssProductFromCssProductName', () => {
+                const result = client.matchCssProductFromCssProductName(fakePath);
+                assert.strictEqual(result, "cssProductValue");
+                assert((client.pathTemplates.cssProductPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('cssProductInput', async () => {
+            const fakePath = "/rendered/path/cssProductInput";
+            const expectedParameters = {
+                account: "accountValue",
+                css_product_input: "cssProductInputValue",
+            };
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.cssProductInputPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.cssProductInputPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('cssProductInputPath', () => {
+                const result = client.cssProductInputPath("accountValue", "cssProductInputValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.cssProductInputPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccountFromCssProductInputName', () => {
+                const result = client.matchAccountFromCssProductInputName(fakePath);
+                assert.strictEqual(result, "accountValue");
+                assert((client.pathTemplates.cssProductInputPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCssProductInputFromCssProductInputName', () => {
+                const result = client.matchCssProductInputFromCssProductInputName(fakePath);
+                assert.strictEqual(result, "cssProductInputValue");
+                assert((client.pathTemplates.cssProductInputPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('quotaGroup', async () => {
+            const fakePath = "/rendered/path/quotaGroup";
+            const expectedParameters = {
+                account: "accountValue",
+                quota_group: "quotaGroupValue",
+            };
+            const client = new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.quotaGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.quotaGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('quotaGroupPath', () => {
+                const result = client.quotaGroupPath("accountValue", "quotaGroupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.quotaGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccountFromQuotaGroupName', () => {
+                const result = client.matchAccountFromQuotaGroupName(fakePath);
+                assert.strictEqual(result, "accountValue");
+                assert((client.pathTemplates.quotaGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchQuotaGroupFromQuotaGroupName', () => {
+                const result = client.matchQuotaGroupFromQuotaGroupName(fakePath);
+                assert.strictEqual(result, "quotaGroupValue");
+                assert((client.pathTemplates.quotaGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+    });
 });

@@ -25,4387 +25,3424 @@ import * as repositorymanagerModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {
-  protobuf,
-  LROperation,
-  operationsProtos,
-  IamProtos,
-  LocationProtos,
-} from 'google-gax';
+import {protobuf, LROperation, operationsProtos, IamProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v2.RepositoryManagerClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'cloudbuild.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          repositorymanagerModule.v2.RepositoryManagerClient.servicePath;
-        assert.strictEqual(servicePath, 'cloudbuild.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          repositorymanagerModule.v2.RepositoryManagerClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'cloudbuild.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'cloudbuild.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'cloudbuild.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new repositorymanagerModule.v2.RepositoryManagerClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'cloudbuild.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'cloudbuild.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new repositorymanagerModule.v2.RepositoryManagerClient(
-            {universeDomain: 'configured.example.com'}
-          );
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'cloudbuild.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new repositorymanagerModule.v2.RepositoryManagerClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = repositorymanagerModule.v2.RepositoryManagerClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.repositoryManagerStub, undefined);
-      await client.initialize();
-      assert(client.repositoryManagerStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.repositoryManagerStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.repositoryManagerStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getConnection', () => {
-    it('invokes getConnection without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.GetConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.GetConnectionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.Connection()
-      );
-      client.innerApiCalls.getConnection = stubSimpleCall(expectedResponse);
-      const [response] = await client.getConnection(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getConnection without error using callback', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.GetConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.GetConnectionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.Connection()
-      );
-      client.innerApiCalls.getConnection =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getConnection(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.devtools.cloudbuild.v2.IConnection | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getConnection with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.GetConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.GetConnectionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getConnection = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getConnection(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getConnection with closed client', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.GetConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.GetConnectionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getConnection(request), expectedError);
-    });
-  });
-
-  describe('getRepository', () => {
-    it('invokes getRepository without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.GetRepositoryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.GetRepositoryRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.Repository()
-      );
-      client.innerApiCalls.getRepository = stubSimpleCall(expectedResponse);
-      const [response] = await client.getRepository(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getRepository as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getRepository as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getRepository without error using callback', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.GetRepositoryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.GetRepositoryRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.Repository()
-      );
-      client.innerApiCalls.getRepository =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getRepository(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.devtools.cloudbuild.v2.IRepository | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getRepository as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getRepository as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getRepository with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.GetRepositoryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.GetRepositoryRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getRepository = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getRepository(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getRepository as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getRepository as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getRepository with closed client', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.GetRepositoryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.GetRepositoryRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getRepository(request), expectedError);
-    });
-  });
-
-  describe('fetchReadWriteToken', () => {
-    it('invokes fetchReadWriteToken without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.FetchReadWriteTokenRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.FetchReadWriteTokenRequest',
-        ['repository']
-      );
-      request.repository = defaultValue1;
-      const expectedHeaderRequestParams = `repository=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.FetchReadWriteTokenResponse()
-      );
-      client.innerApiCalls.fetchReadWriteToken =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.fetchReadWriteToken(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.fetchReadWriteToken as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchReadWriteToken as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes fetchReadWriteToken without error using callback', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.FetchReadWriteTokenRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.FetchReadWriteTokenRequest',
-        ['repository']
-      );
-      request.repository = defaultValue1;
-      const expectedHeaderRequestParams = `repository=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.FetchReadWriteTokenResponse()
-      );
-      client.innerApiCalls.fetchReadWriteToken =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.fetchReadWriteToken(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.fetchReadWriteToken as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchReadWriteToken as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes fetchReadWriteToken with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.FetchReadWriteTokenRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.FetchReadWriteTokenRequest',
-        ['repository']
-      );
-      request.repository = defaultValue1;
-      const expectedHeaderRequestParams = `repository=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.fetchReadWriteToken = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.fetchReadWriteToken(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.fetchReadWriteToken as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchReadWriteToken as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes fetchReadWriteToken with closed client', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.FetchReadWriteTokenRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.FetchReadWriteTokenRequest',
-        ['repository']
-      );
-      request.repository = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.fetchReadWriteToken(request), expectedError);
-    });
-  });
-
-  describe('fetchReadToken', () => {
-    it('invokes fetchReadToken without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.FetchReadTokenRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.FetchReadTokenRequest',
-        ['repository']
-      );
-      request.repository = defaultValue1;
-      const expectedHeaderRequestParams = `repository=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.FetchReadTokenResponse()
-      );
-      client.innerApiCalls.fetchReadToken = stubSimpleCall(expectedResponse);
-      const [response] = await client.fetchReadToken(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.fetchReadToken as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchReadToken as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes fetchReadToken without error using callback', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.FetchReadTokenRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.FetchReadTokenRequest',
-        ['repository']
-      );
-      request.repository = defaultValue1;
-      const expectedHeaderRequestParams = `repository=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.FetchReadTokenResponse()
-      );
-      client.innerApiCalls.fetchReadToken =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.fetchReadToken(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.devtools.cloudbuild.v2.IFetchReadTokenResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.fetchReadToken as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchReadToken as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes fetchReadToken with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.FetchReadTokenRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.FetchReadTokenRequest',
-        ['repository']
-      );
-      request.repository = defaultValue1;
-      const expectedHeaderRequestParams = `repository=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.fetchReadToken = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.fetchReadToken(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.fetchReadToken as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchReadToken as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes fetchReadToken with closed client', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.FetchReadTokenRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.FetchReadTokenRequest',
-        ['repository']
-      );
-      request.repository = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.fetchReadToken(request), expectedError);
-    });
-  });
-
-  describe('fetchGitRefs', () => {
-    it('invokes fetchGitRefs without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.FetchGitRefsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.FetchGitRefsRequest',
-        ['repository']
-      );
-      request.repository = defaultValue1;
-      const expectedHeaderRequestParams = `repository=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.FetchGitRefsResponse()
-      );
-      client.innerApiCalls.fetchGitRefs = stubSimpleCall(expectedResponse);
-      const [response] = await client.fetchGitRefs(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.fetchGitRefs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchGitRefs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes fetchGitRefs without error using callback', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.FetchGitRefsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.FetchGitRefsRequest',
-        ['repository']
-      );
-      request.repository = defaultValue1;
-      const expectedHeaderRequestParams = `repository=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.FetchGitRefsResponse()
-      );
-      client.innerApiCalls.fetchGitRefs =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.fetchGitRefs(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.fetchGitRefs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchGitRefs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes fetchGitRefs with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.FetchGitRefsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.FetchGitRefsRequest',
-        ['repository']
-      );
-      request.repository = defaultValue1;
-      const expectedHeaderRequestParams = `repository=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.fetchGitRefs = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.fetchGitRefs(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.fetchGitRefs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchGitRefs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes fetchGitRefs with closed client', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.FetchGitRefsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.FetchGitRefsRequest',
-        ['repository']
-      );
-      request.repository = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.fetchGitRefs(request), expectedError);
-    });
-  });
-
-  describe('createConnection', () => {
-    it('invokes createConnection without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.CreateConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.CreateConnectionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createConnection =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createConnection(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createConnection without error using callback', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.CreateConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.CreateConnectionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createConnection =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createConnection(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.devtools.cloudbuild.v2.IConnection,
-              protos.google.devtools.cloudbuild.v2.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.devtools.cloudbuild.v2.IConnection,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createConnection with call error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.CreateConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.CreateConnectionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createConnection = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createConnection(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createConnection with LRO error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.CreateConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.CreateConnectionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createConnection = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createConnection(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateConnectionProgress without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateConnectionProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateConnectionProgress with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateConnectionProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateConnection', () => {
-    it('invokes updateConnection without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.UpdateConnectionRequest()
-      );
-      request.connection ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.UpdateConnectionRequest',
-        ['connection', 'name']
-      );
-      request.connection.name = defaultValue1;
-      const expectedHeaderRequestParams = `connection.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateConnection =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateConnection(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateConnection without error using callback', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.UpdateConnectionRequest()
-      );
-      request.connection ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.UpdateConnectionRequest',
-        ['connection', 'name']
-      );
-      request.connection.name = defaultValue1;
-      const expectedHeaderRequestParams = `connection.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateConnection =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateConnection(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.devtools.cloudbuild.v2.IConnection,
-              protos.google.devtools.cloudbuild.v2.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.devtools.cloudbuild.v2.IConnection,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateConnection with call error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.UpdateConnectionRequest()
-      );
-      request.connection ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.UpdateConnectionRequest',
-        ['connection', 'name']
-      );
-      request.connection.name = defaultValue1;
-      const expectedHeaderRequestParams = `connection.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateConnection = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateConnection(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateConnection with LRO error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.UpdateConnectionRequest()
-      );
-      request.connection ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.UpdateConnectionRequest',
-        ['connection', 'name']
-      );
-      request.connection.name = defaultValue1;
-      const expectedHeaderRequestParams = `connection.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateConnection = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateConnection(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateConnectionProgress without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateConnectionProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateConnectionProgress with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateConnectionProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteConnection', () => {
-    it('invokes deleteConnection without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.DeleteConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.DeleteConnectionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteConnection =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteConnection(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteConnection without error using callback', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.DeleteConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.DeleteConnectionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteConnection =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteConnection(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.devtools.cloudbuild.v2.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteConnection with call error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.DeleteConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.DeleteConnectionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteConnection = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteConnection(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteConnection with LRO error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.DeleteConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.DeleteConnectionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteConnection = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteConnection(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteConnectionProgress without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteConnectionProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteConnectionProgress with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteConnectionProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createRepository', () => {
-    it('invokes createRepository without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.CreateRepositoryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.CreateRepositoryRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createRepository =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createRepository(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createRepository as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createRepository as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createRepository without error using callback', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.CreateRepositoryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.CreateRepositoryRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createRepository =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createRepository(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.devtools.cloudbuild.v2.IRepository,
-              protos.google.devtools.cloudbuild.v2.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.devtools.cloudbuild.v2.IRepository,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createRepository as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createRepository as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createRepository with call error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.CreateRepositoryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.CreateRepositoryRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createRepository = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createRepository(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createRepository as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createRepository as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createRepository with LRO error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.CreateRepositoryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.CreateRepositoryRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createRepository = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createRepository(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createRepository as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createRepository as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateRepositoryProgress without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateRepositoryProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateRepositoryProgress with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateRepositoryProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('batchCreateRepositories', () => {
-    it('invokes batchCreateRepositories without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.BatchCreateRepositoriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.BatchCreateRepositoriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.batchCreateRepositories =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.batchCreateRepositories(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.batchCreateRepositories as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchCreateRepositories as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchCreateRepositories without error using callback', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.BatchCreateRepositoriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.BatchCreateRepositoriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.batchCreateRepositories =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.batchCreateRepositories(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesResponse,
-              protos.google.devtools.cloudbuild.v2.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesResponse,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.batchCreateRepositories as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchCreateRepositories as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchCreateRepositories with call error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.BatchCreateRepositoriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.BatchCreateRepositoriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.batchCreateRepositories = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.batchCreateRepositories(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.batchCreateRepositories as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchCreateRepositories as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchCreateRepositories with LRO error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.BatchCreateRepositoriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.BatchCreateRepositoriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.batchCreateRepositories = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.batchCreateRepositories(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.batchCreateRepositories as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchCreateRepositories as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkBatchCreateRepositoriesProgress without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation =
-        await client.checkBatchCreateRepositoriesProgress(
-          expectedResponse.name
-        );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkBatchCreateRepositoriesProgress with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkBatchCreateRepositoriesProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteRepository', () => {
-    it('invokes deleteRepository without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.DeleteRepositoryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.DeleteRepositoryRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteRepository =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteRepository(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteRepository as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteRepository as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteRepository without error using callback', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.DeleteRepositoryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.DeleteRepositoryRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteRepository =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteRepository(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.devtools.cloudbuild.v2.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteRepository as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteRepository as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteRepository with call error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.DeleteRepositoryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.DeleteRepositoryRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteRepository = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteRepository(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteRepository as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteRepository as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteRepository with LRO error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.DeleteRepositoryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.DeleteRepositoryRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteRepository = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteRepository(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteRepository as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteRepository as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteRepositoryProgress without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteRepositoryProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteRepositoryProgress with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteRepositoryProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listConnections', () => {
-    it('invokes listConnections without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.ListConnectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.ListConnectionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Connection()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Connection()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Connection()
-        ),
-      ];
-      client.innerApiCalls.listConnections = stubSimpleCall(expectedResponse);
-      const [response] = await client.listConnections(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listConnections as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listConnections as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listConnections without error using callback', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.ListConnectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.ListConnectionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Connection()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Connection()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Connection()
-        ),
-      ];
-      client.innerApiCalls.listConnections =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listConnections(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.devtools.cloudbuild.v2.IConnection[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listConnections as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listConnections as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listConnections with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.ListConnectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.ListConnectionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listConnections = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listConnections(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listConnections as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listConnections as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listConnectionsStream without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.ListConnectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.ListConnectionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Connection()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Connection()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Connection()
-        ),
-      ];
-      client.descriptors.page.listConnections.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listConnectionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.devtools.cloudbuild.v2.Connection[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.devtools.cloudbuild.v2.Connection) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listConnections.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listConnections, request)
-      );
-      assert(
-        (client.descriptors.page.listConnections.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listConnectionsStream with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.ListConnectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.ListConnectionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listConnections.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listConnectionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.devtools.cloudbuild.v2.Connection[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.devtools.cloudbuild.v2.Connection) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listConnections.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listConnections, request)
-      );
-      assert(
-        (client.descriptors.page.listConnections.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listConnections without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.ListConnectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.ListConnectionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Connection()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Connection()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Connection()
-        ),
-      ];
-      client.descriptors.page.listConnections.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.devtools.cloudbuild.v2.IConnection[] = [];
-      const iterable = client.listConnectionsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listConnections.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listConnections.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listConnections with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.ListConnectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.ListConnectionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listConnections.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listConnectionsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.devtools.cloudbuild.v2.IConnection[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = repositorymanagerModule.v2.RepositoryManagerClient.servicePath;
+                assert.strictEqual(servicePath, 'cloudbuild.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = repositorymanagerModule.v2.RepositoryManagerClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'cloudbuild.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listConnections.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listConnections.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listRepositories', () => {
-    it('invokes listRepositories without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.ListRepositoriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.ListRepositoriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Repository()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Repository()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Repository()
-        ),
-      ];
-      client.innerApiCalls.listRepositories = stubSimpleCall(expectedResponse);
-      const [response] = await client.listRepositories(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listRepositories as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listRepositories as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listRepositories without error using callback', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.ListRepositoriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.ListRepositoriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Repository()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Repository()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Repository()
-        ),
-      ];
-      client.innerApiCalls.listRepositories =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listRepositories(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.devtools.cloudbuild.v2.IRepository[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listRepositories as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listRepositories as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listRepositories with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.ListRepositoriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.ListRepositoriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listRepositories = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listRepositories(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listRepositories as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listRepositories as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listRepositoriesStream without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.ListRepositoriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.ListRepositoriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Repository()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Repository()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Repository()
-        ),
-      ];
-      client.descriptors.page.listRepositories.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listRepositoriesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.devtools.cloudbuild.v2.Repository[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.devtools.cloudbuild.v2.Repository) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'cloudbuild.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listRepositories.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listRepositories, request)
-      );
-      assert(
-        (client.descriptors.page.listRepositories.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listRepositoriesStream with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.ListRepositoriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.ListRepositoriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listRepositories.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listRepositoriesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.devtools.cloudbuild.v2.Repository[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.devtools.cloudbuild.v2.Repository) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'cloudbuild.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listRepositories.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listRepositories, request)
-      );
-      assert(
-        (client.descriptors.page.listRepositories.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listRepositories without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.ListRepositoriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.ListRepositoriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Repository()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Repository()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Repository()
-        ),
-      ];
-      client.descriptors.page.listRepositories.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.devtools.cloudbuild.v2.IRepository[] = [];
-      const iterable = client.listRepositoriesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listRepositories.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listRepositories.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new repositorymanagerModule.v2.RepositoryManagerClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'cloudbuild.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with listRepositories with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.ListRepositoriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.ListRepositoriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listRepositories.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listRepositoriesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.devtools.cloudbuild.v2.IRepository[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new repositorymanagerModule.v2.RepositoryManagerClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'cloudbuild.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listRepositories.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listRepositories.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('fetchLinkableRepositories', () => {
-    it('invokes fetchLinkableRepositories without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest',
-        ['connection']
-      );
-      request.connection = defaultValue1;
-      const expectedHeaderRequestParams = `connection=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Repository()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Repository()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Repository()
-        ),
-      ];
-      client.innerApiCalls.fetchLinkableRepositories =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.fetchLinkableRepositories(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.fetchLinkableRepositories as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchLinkableRepositories as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes fetchLinkableRepositories without error using callback', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest',
-        ['connection']
-      );
-      request.connection = defaultValue1;
-      const expectedHeaderRequestParams = `connection=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Repository()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Repository()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Repository()
-        ),
-      ];
-      client.innerApiCalls.fetchLinkableRepositories =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.fetchLinkableRepositories(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.devtools.cloudbuild.v2.IRepository[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.fetchLinkableRepositories as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchLinkableRepositories as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes fetchLinkableRepositories with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest',
-        ['connection']
-      );
-      request.connection = defaultValue1;
-      const expectedHeaderRequestParams = `connection=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.fetchLinkableRepositories = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.fetchLinkableRepositories(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.fetchLinkableRepositories as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchLinkableRepositories as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes fetchLinkableRepositoriesStream without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest',
-        ['connection']
-      );
-      request.connection = defaultValue1;
-      const expectedHeaderRequestParams = `connection=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Repository()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Repository()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Repository()
-        ),
-      ];
-      client.descriptors.page.fetchLinkableRepositories.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.fetchLinkableRepositoriesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.devtools.cloudbuild.v2.Repository[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.devtools.cloudbuild.v2.Repository) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new repositorymanagerModule.v2.RepositoryManagerClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('has port', () => {
+            const port = repositorymanagerModule.v2.RepositoryManagerClient.port;
+            assert(port);
+            assert(typeof port === 'number');
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.fetchLinkableRepositories
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.fetchLinkableRepositories, request)
-      );
-      assert(
-        (
-          client.descriptors.page.fetchLinkableRepositories
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('invokes fetchLinkableRepositoriesStream with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest',
-        ['connection']
-      );
-      request.connection = defaultValue1;
-      const expectedHeaderRequestParams = `connection=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.fetchLinkableRepositories.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.fetchLinkableRepositoriesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.devtools.cloudbuild.v2.Repository[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.devtools.cloudbuild.v2.Repository) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('should create a client with no option', () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient();
+            assert(client);
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+                fallback: true,
+            });
+            assert(client);
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.fetchLinkableRepositories
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.fetchLinkableRepositories, request)
-      );
-      assert(
-        (
-          client.descriptors.page.fetchLinkableRepositories
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.repositoryManagerStub, undefined);
+            await client.initialize();
+            assert(client.repositoryManagerStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.repositoryManagerStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.repositoryManagerStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    it('uses async iteration with fetchLinkableRepositories without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest',
-        ['connection']
-      );
-      request.connection = defaultValue1;
-      const expectedHeaderRequestParams = `connection=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Repository()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Repository()
-        ),
-        generateSampleMessage(
-          new protos.google.devtools.cloudbuild.v2.Repository()
-        ),
-      ];
-      client.descriptors.page.fetchLinkableRepositories.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.devtools.cloudbuild.v2.IRepository[] = [];
-      const iterable = client.fetchLinkableRepositoriesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.fetchLinkableRepositories
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.fetchLinkableRepositories
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
+    describe('getConnection', () => {
+        it('invokes getConnection without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.GetConnectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.GetConnectionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.Connection()
+            );
+            client.innerApiCalls.getConnection = stubSimpleCall(expectedResponse);
+            const [response] = await client.getConnection(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getConnection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getConnection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getConnection without error using callback', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.GetConnectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.GetConnectionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.Connection()
+            );
+            client.innerApiCalls.getConnection = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getConnection(
+                    request,
+                    (err?: Error|null, result?: protos.google.devtools.cloudbuild.v2.IConnection|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getConnection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getConnection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getConnection with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.GetConnectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.GetConnectionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getConnection = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getConnection(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getConnection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getConnection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getConnection with closed client', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.GetConnectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.GetConnectionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getConnection(request), expectedError);
+        });
     });
 
-    it('uses async iteration with fetchLinkableRepositories with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest',
-        ['connection']
-      );
-      request.connection = defaultValue1;
-      const expectedHeaderRequestParams = `connection=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.fetchLinkableRepositories.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.fetchLinkableRepositoriesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.devtools.cloudbuild.v2.IRepository[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.fetchLinkableRepositories
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.fetchLinkableRepositories
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
+    describe('getRepository', () => {
+        it('invokes getRepository without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.GetRepositoryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.GetRepositoryRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.Repository()
+            );
+            client.innerApiCalls.getRepository = stubSimpleCall(expectedResponse);
+            const [response] = await client.getRepository(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getRepository as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRepository as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRepository without error using callback', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.GetRepositoryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.GetRepositoryRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.Repository()
+            );
+            client.innerApiCalls.getRepository = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getRepository(
+                    request,
+                    (err?: Error|null, result?: protos.google.devtools.cloudbuild.v2.IRepository|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getRepository as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRepository as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRepository with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.GetRepositoryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.GetRepositoryRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getRepository = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getRepository(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getRepository as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRepository as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRepository with closed client', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.GetRepositoryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.GetRepositoryRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getRepository(request), expectedError);
+        });
     });
-  });
-  describe('getIamPolicy', () => {
-    it('invokes getIamPolicy without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.GetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy()
-      );
-      client.iamClient.getIamPolicy = stubSimpleCall(expectedResponse);
-      const response = await client.getIamPolicy(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.iamClient.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+
+    describe('fetchReadWriteToken', () => {
+        it('invokes fetchReadWriteToken without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.FetchReadWriteTokenRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.FetchReadWriteTokenRequest', ['repository']);
+            request.repository = defaultValue1;
+            const expectedHeaderRequestParams = `repository=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.FetchReadWriteTokenResponse()
+            );
+            client.innerApiCalls.fetchReadWriteToken = stubSimpleCall(expectedResponse);
+            const [response] = await client.fetchReadWriteToken(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.fetchReadWriteToken as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchReadWriteToken as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchReadWriteToken without error using callback', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.FetchReadWriteTokenRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.FetchReadWriteTokenRequest', ['repository']);
+            request.repository = defaultValue1;
+            const expectedHeaderRequestParams = `repository=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.FetchReadWriteTokenResponse()
+            );
+            client.innerApiCalls.fetchReadWriteToken = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.fetchReadWriteToken(
+                    request,
+                    (err?: Error|null, result?: protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.fetchReadWriteToken as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchReadWriteToken as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchReadWriteToken with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.FetchReadWriteTokenRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.FetchReadWriteTokenRequest', ['repository']);
+            request.repository = defaultValue1;
+            const expectedHeaderRequestParams = `repository=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.fetchReadWriteToken = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.fetchReadWriteToken(request), expectedError);
+            const actualRequest = (client.innerApiCalls.fetchReadWriteToken as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchReadWriteToken as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchReadWriteToken with closed client', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.FetchReadWriteTokenRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.FetchReadWriteTokenRequest', ['repository']);
+            request.repository = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.fetchReadWriteToken(request), expectedError);
+        });
     });
-    it('invokes getIamPolicy without error using callback', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.GetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy()
-      );
-      client.iamClient.getIamPolicy = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client
-          .getIamPolicy(
-            request,
-            expectedOptions,
-            (
-              err?: Error | null,
-              result?: IamProtos.google.iam.v1.Policy | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+
+    describe('fetchReadToken', () => {
+        it('invokes fetchReadToken without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.FetchReadTokenRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.FetchReadTokenRequest', ['repository']);
+            request.repository = defaultValue1;
+            const expectedHeaderRequestParams = `repository=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.FetchReadTokenResponse()
+            );
+            client.innerApiCalls.fetchReadToken = stubSimpleCall(expectedResponse);
+            const [response] = await client.fetchReadToken(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.fetchReadToken as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchReadToken as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchReadToken without error using callback', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.FetchReadTokenRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.FetchReadTokenRequest', ['repository']);
+            request.repository = defaultValue1;
+            const expectedHeaderRequestParams = `repository=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.FetchReadTokenResponse()
+            );
+            client.innerApiCalls.fetchReadToken = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.fetchReadToken(
+                    request,
+                    (err?: Error|null, result?: protos.google.devtools.cloudbuild.v2.IFetchReadTokenResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.fetchReadToken as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchReadToken as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchReadToken with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.FetchReadTokenRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.FetchReadTokenRequest', ['repository']);
+            request.repository = defaultValue1;
+            const expectedHeaderRequestParams = `repository=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.fetchReadToken = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.fetchReadToken(request), expectedError);
+            const actualRequest = (client.innerApiCalls.fetchReadToken as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchReadToken as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchReadToken with closed client', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.FetchReadTokenRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.FetchReadTokenRequest', ['repository']);
+            request.repository = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.fetchReadToken(request), expectedError);
+        });
+    });
+
+    describe('fetchGitRefs', () => {
+        it('invokes fetchGitRefs without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.FetchGitRefsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.FetchGitRefsRequest', ['repository']);
+            request.repository = defaultValue1;
+            const expectedHeaderRequestParams = `repository=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.FetchGitRefsResponse()
+            );
+            client.innerApiCalls.fetchGitRefs = stubSimpleCall(expectedResponse);
+            const [response] = await client.fetchGitRefs(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.fetchGitRefs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchGitRefs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchGitRefs without error using callback', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.FetchGitRefsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.FetchGitRefsRequest', ['repository']);
+            request.repository = defaultValue1;
+            const expectedHeaderRequestParams = `repository=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.FetchGitRefsResponse()
+            );
+            client.innerApiCalls.fetchGitRefs = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.fetchGitRefs(
+                    request,
+                    (err?: Error|null, result?: protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.fetchGitRefs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchGitRefs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchGitRefs with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.FetchGitRefsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.FetchGitRefsRequest', ['repository']);
+            request.repository = defaultValue1;
+            const expectedHeaderRequestParams = `repository=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.fetchGitRefs = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.fetchGitRefs(request), expectedError);
+            const actualRequest = (client.innerApiCalls.fetchGitRefs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchGitRefs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchGitRefs with closed client', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.FetchGitRefsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.FetchGitRefsRequest', ['repository']);
+            request.repository = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.fetchGitRefs(request), expectedError);
+        });
+    });
+
+    describe('createConnection', () => {
+        it('invokes createConnection without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.CreateConnectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.CreateConnectionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createConnection = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createConnection(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createConnection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createConnection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createConnection without error using callback', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.CreateConnectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.CreateConnectionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createConnection = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createConnection(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.devtools.cloudbuild.v2.IConnection, protos.google.devtools.cloudbuild.v2.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.devtools.cloudbuild.v2.IConnection, protos.google.devtools.cloudbuild.v2.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createConnection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createConnection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createConnection with call error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.CreateConnectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.CreateConnectionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createConnection = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createConnection(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createConnection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createConnection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createConnection with LRO error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.CreateConnectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.CreateConnectionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createConnection = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createConnection(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createConnection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createConnection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateConnectionProgress without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateConnectionProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateConnectionProgress with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateConnectionProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateConnection', () => {
+        it('invokes updateConnection without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.UpdateConnectionRequest()
+            );
+            request.connection ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.UpdateConnectionRequest', ['connection', 'name']);
+            request.connection.name = defaultValue1;
+            const expectedHeaderRequestParams = `connection.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateConnection = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateConnection(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateConnection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateConnection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateConnection without error using callback', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.UpdateConnectionRequest()
+            );
+            request.connection ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.UpdateConnectionRequest', ['connection', 'name']);
+            request.connection.name = defaultValue1;
+            const expectedHeaderRequestParams = `connection.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateConnection = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateConnection(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.devtools.cloudbuild.v2.IConnection, protos.google.devtools.cloudbuild.v2.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.devtools.cloudbuild.v2.IConnection, protos.google.devtools.cloudbuild.v2.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateConnection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateConnection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateConnection with call error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.UpdateConnectionRequest()
+            );
+            request.connection ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.UpdateConnectionRequest', ['connection', 'name']);
+            request.connection.name = defaultValue1;
+            const expectedHeaderRequestParams = `connection.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateConnection = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateConnection(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateConnection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateConnection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateConnection with LRO error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.UpdateConnectionRequest()
+            );
+            request.connection ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.UpdateConnectionRequest', ['connection', 'name']);
+            request.connection.name = defaultValue1;
+            const expectedHeaderRequestParams = `connection.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateConnection = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateConnection(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateConnection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateConnection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateConnectionProgress without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateConnectionProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateConnectionProgress with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateConnectionProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteConnection', () => {
+        it('invokes deleteConnection without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.DeleteConnectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.DeleteConnectionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteConnection = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteConnection(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteConnection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteConnection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteConnection without error using callback', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.DeleteConnectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.DeleteConnectionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteConnection = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteConnection(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.cloudbuild.v2.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.cloudbuild.v2.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteConnection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteConnection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteConnection with call error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.DeleteConnectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.DeleteConnectionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteConnection = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteConnection(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteConnection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteConnection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteConnection with LRO error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.DeleteConnectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.DeleteConnectionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteConnection = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteConnection(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteConnection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteConnection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteConnectionProgress without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteConnectionProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteConnectionProgress with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteConnectionProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createRepository', () => {
+        it('invokes createRepository without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.CreateRepositoryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.CreateRepositoryRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createRepository = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createRepository(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createRepository as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createRepository as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createRepository without error using callback', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.CreateRepositoryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.CreateRepositoryRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createRepository = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createRepository(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.devtools.cloudbuild.v2.IRepository, protos.google.devtools.cloudbuild.v2.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.devtools.cloudbuild.v2.IRepository, protos.google.devtools.cloudbuild.v2.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createRepository as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createRepository as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createRepository with call error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.CreateRepositoryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.CreateRepositoryRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createRepository = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createRepository(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createRepository as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createRepository as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createRepository with LRO error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.CreateRepositoryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.CreateRepositoryRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createRepository = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createRepository(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createRepository as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createRepository as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateRepositoryProgress without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateRepositoryProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateRepositoryProgress with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateRepositoryProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('batchCreateRepositories', () => {
+        it('invokes batchCreateRepositories without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.BatchCreateRepositoriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.BatchCreateRepositoriesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.batchCreateRepositories = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.batchCreateRepositories(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchCreateRepositories as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateRepositories as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreateRepositories without error using callback', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.BatchCreateRepositoriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.BatchCreateRepositoriesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.batchCreateRepositories = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchCreateRepositories(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesResponse, protos.google.devtools.cloudbuild.v2.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesResponse, protos.google.devtools.cloudbuild.v2.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchCreateRepositories as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateRepositories as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreateRepositories with call error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.BatchCreateRepositoriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.BatchCreateRepositoriesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchCreateRepositories = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.batchCreateRepositories(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchCreateRepositories as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateRepositories as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreateRepositories with LRO error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.BatchCreateRepositoriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.BatchCreateRepositoriesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchCreateRepositories = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.batchCreateRepositories(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.batchCreateRepositories as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateRepositories as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkBatchCreateRepositoriesProgress without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkBatchCreateRepositoriesProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkBatchCreateRepositoriesProgress with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkBatchCreateRepositoriesProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteRepository', () => {
+        it('invokes deleteRepository without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.DeleteRepositoryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.DeleteRepositoryRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteRepository = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteRepository(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteRepository as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteRepository as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteRepository without error using callback', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.DeleteRepositoryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.DeleteRepositoryRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteRepository = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteRepository(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.cloudbuild.v2.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.cloudbuild.v2.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteRepository as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteRepository as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteRepository with call error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.DeleteRepositoryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.DeleteRepositoryRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteRepository = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteRepository(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteRepository as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteRepository as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteRepository with LRO error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.DeleteRepositoryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.DeleteRepositoryRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteRepository = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteRepository(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteRepository as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteRepository as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteRepositoryProgress without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteRepositoryProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteRepositoryProgress with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteRepositoryProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listConnections', () => {
+        it('invokes listConnections without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.ListConnectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.ListConnectionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Connection()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Connection()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Connection()),
+            ];
+            client.innerApiCalls.listConnections = stubSimpleCall(expectedResponse);
+            const [response] = await client.listConnections(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listConnections as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listConnections as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listConnections without error using callback', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.ListConnectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.ListConnectionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Connection()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Connection()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Connection()),
+            ];
+            client.innerApiCalls.listConnections = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listConnections(
+                    request,
+                    (err?: Error|null, result?: protos.google.devtools.cloudbuild.v2.IConnection[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listConnections as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listConnections as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listConnections with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.ListConnectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.ListConnectionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listConnections = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listConnections(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listConnections as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listConnections as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listConnectionsStream without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.ListConnectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.ListConnectionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Connection()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Connection()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Connection()),
+            ];
+            client.descriptors.page.listConnections.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listConnectionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.devtools.cloudbuild.v2.Connection[] = [];
+                stream.on('data', (response: protos.google.devtools.cloudbuild.v2.Connection) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listConnections.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listConnections, request));
+            assert(
+                (client.descriptors.page.listConnections.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listConnectionsStream with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.ListConnectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.ListConnectionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listConnections.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listConnectionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.devtools.cloudbuild.v2.Connection[] = [];
+                stream.on('data', (response: protos.google.devtools.cloudbuild.v2.Connection) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listConnections.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listConnections, request));
+            assert(
+                (client.descriptors.page.listConnections.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listConnections without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.ListConnectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.ListConnectionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Connection()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Connection()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Connection()),
+            ];
+            client.descriptors.page.listConnections.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.devtools.cloudbuild.v2.IConnection[] = [];
+            const iterable = client.listConnectionsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.iamClient.getIamPolicy as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listConnections.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listConnections.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listConnections with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.ListConnectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.ListConnectionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listConnections.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listConnectionsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.devtools.cloudbuild.v2.IConnection[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listConnections.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listConnections.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes getIamPolicy with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.GetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.iamClient.getIamPolicy = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(
-        client.getIamPolicy(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.iamClient.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('setIamPolicy', () => {
-    it('invokes setIamPolicy without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.SetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy()
-      );
-      client.iamClient.setIamPolicy = stubSimpleCall(expectedResponse);
-      const response = await client.setIamPolicy(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.iamClient.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes setIamPolicy without error using callback', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.SetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy()
-      );
-      client.iamClient.setIamPolicy = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client
-          .setIamPolicy(
-            request,
-            expectedOptions,
-            (
-              err?: Error | null,
-              result?: IamProtos.google.iam.v1.Policy | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+
+    describe('listRepositories', () => {
+        it('invokes listRepositories without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.ListRepositoriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.ListRepositoriesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Repository()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Repository()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Repository()),
+            ];
+            client.innerApiCalls.listRepositories = stubSimpleCall(expectedResponse);
+            const [response] = await client.listRepositories(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listRepositories as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRepositories as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listRepositories without error using callback', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.ListRepositoriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.ListRepositoriesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Repository()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Repository()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Repository()),
+            ];
+            client.innerApiCalls.listRepositories = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listRepositories(
+                    request,
+                    (err?: Error|null, result?: protos.google.devtools.cloudbuild.v2.IRepository[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listRepositories as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRepositories as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listRepositories with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.ListRepositoriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.ListRepositoriesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listRepositories = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listRepositories(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listRepositories as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRepositories as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listRepositoriesStream without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.ListRepositoriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.ListRepositoriesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Repository()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Repository()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Repository()),
+            ];
+            client.descriptors.page.listRepositories.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listRepositoriesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.devtools.cloudbuild.v2.Repository[] = [];
+                stream.on('data', (response: protos.google.devtools.cloudbuild.v2.Repository) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listRepositories.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listRepositories, request));
+            assert(
+                (client.descriptors.page.listRepositories.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listRepositoriesStream with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.ListRepositoriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.ListRepositoriesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listRepositories.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listRepositoriesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.devtools.cloudbuild.v2.Repository[] = [];
+                stream.on('data', (response: protos.google.devtools.cloudbuild.v2.Repository) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listRepositories.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listRepositories, request));
+            assert(
+                (client.descriptors.page.listRepositories.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listRepositories without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.ListRepositoriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.ListRepositoriesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Repository()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Repository()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Repository()),
+            ];
+            client.descriptors.page.listRepositories.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.devtools.cloudbuild.v2.IRepository[] = [];
+            const iterable = client.listRepositoriesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.iamClient.setIamPolicy as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listRepositories.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listRepositories.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listRepositories with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.ListRepositoriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.ListRepositoriesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listRepositories.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listRepositoriesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.devtools.cloudbuild.v2.IRepository[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listRepositories.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listRepositories.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes setIamPolicy with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.SetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.iamClient.setIamPolicy = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(
-        client.setIamPolicy(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.iamClient.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('testIamPermissions', () => {
-    it('invokes testIamPermissions without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsResponse()
-      );
-      client.iamClient.testIamPermissions = stubSimpleCall(expectedResponse);
-      const response = await client.testIamPermissions(
-        request,
-        expectedOptions
-      );
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.iamClient.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes testIamPermissions without error using callback', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsResponse()
-      );
-      client.iamClient.testIamPermissions = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client
-          .testIamPermissions(
-            request,
-            expectedOptions,
-            (
-              err?: Error | null,
-              result?: IamProtos.google.iam.v1.TestIamPermissionsResponse | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+
+    describe('fetchLinkableRepositories', () => {
+        it('invokes fetchLinkableRepositories without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest', ['connection']);
+            request.connection = defaultValue1;
+            const expectedHeaderRequestParams = `connection=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Repository()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Repository()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Repository()),
+            ];
+            client.innerApiCalls.fetchLinkableRepositories = stubSimpleCall(expectedResponse);
+            const [response] = await client.fetchLinkableRepositories(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.fetchLinkableRepositories as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchLinkableRepositories as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchLinkableRepositories without error using callback', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest', ['connection']);
+            request.connection = defaultValue1;
+            const expectedHeaderRequestParams = `connection=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Repository()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Repository()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Repository()),
+            ];
+            client.innerApiCalls.fetchLinkableRepositories = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.fetchLinkableRepositories(
+                    request,
+                    (err?: Error|null, result?: protos.google.devtools.cloudbuild.v2.IRepository[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.fetchLinkableRepositories as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchLinkableRepositories as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchLinkableRepositories with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest', ['connection']);
+            request.connection = defaultValue1;
+            const expectedHeaderRequestParams = `connection=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.fetchLinkableRepositories = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.fetchLinkableRepositories(request), expectedError);
+            const actualRequest = (client.innerApiCalls.fetchLinkableRepositories as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchLinkableRepositories as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchLinkableRepositoriesStream without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest', ['connection']);
+            request.connection = defaultValue1;
+            const expectedHeaderRequestParams = `connection=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Repository()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Repository()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Repository()),
+            ];
+            client.descriptors.page.fetchLinkableRepositories.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.fetchLinkableRepositoriesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.devtools.cloudbuild.v2.Repository[] = [];
+                stream.on('data', (response: protos.google.devtools.cloudbuild.v2.Repository) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.fetchLinkableRepositories.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.fetchLinkableRepositories, request));
+            assert(
+                (client.descriptors.page.fetchLinkableRepositories.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes fetchLinkableRepositoriesStream with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest', ['connection']);
+            request.connection = defaultValue1;
+            const expectedHeaderRequestParams = `connection=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.fetchLinkableRepositories.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.fetchLinkableRepositoriesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.devtools.cloudbuild.v2.Repository[] = [];
+                stream.on('data', (response: protos.google.devtools.cloudbuild.v2.Repository) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.fetchLinkableRepositories.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.fetchLinkableRepositories, request));
+            assert(
+                (client.descriptors.page.fetchLinkableRepositories.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with fetchLinkableRepositories without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest', ['connection']);
+            request.connection = defaultValue1;
+            const expectedHeaderRequestParams = `connection=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Repository()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Repository()),
+              generateSampleMessage(new protos.google.devtools.cloudbuild.v2.Repository()),
+            ];
+            client.descriptors.page.fetchLinkableRepositories.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.devtools.cloudbuild.v2.IRepository[] = [];
+            const iterable = client.fetchLinkableRepositoriesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.iamClient.testIamPermissions as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.fetchLinkableRepositories.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.fetchLinkableRepositories.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with fetchLinkableRepositories with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest', ['connection']);
+            request.connection = defaultValue1;
+            const expectedHeaderRequestParams = `connection=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.fetchLinkableRepositories.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.fetchLinkableRepositoriesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.devtools.cloudbuild.v2.IRepository[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.fetchLinkableRepositories.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.fetchLinkableRepositories.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes testIamPermissions with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.iamClient.testIamPermissions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.testIamPermissions(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.iamClient.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+    describe('getIamPolicy', () => {
+        it('invokes getIamPolicy without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.GetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.Policy()
+            );
+            client.iamClient.getIamPolicy = stubSimpleCall(expectedResponse);
+            const response = await client.getIamPolicy(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.iamClient.getIamPolicy as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes getIamPolicy without error using callback', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.GetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.Policy()
+            );
+            client.iamClient.getIamPolicy = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getIamPolicy(
+                    request,
+                    expectedOptions,
+                    (err?: Error|null, result?: IamProtos.google.iam.v1.Policy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.iamClient.getIamPolicy as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getIamPolicy with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.GetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.iamClient.getIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getIamPolicy(request, expectedOptions), expectedError);
+            assert((client.iamClient.getIamPolicy as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
-  });
-  describe('getLocation', () => {
-    it('invokes getLocation without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
-      const response = await client.getLocation(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+    describe('setIamPolicy', () => {
+        it('invokes setIamPolicy without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.SetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.Policy()
+            );
+            client.iamClient.setIamPolicy = stubSimpleCall(expectedResponse);
+            const response = await client.setIamPolicy(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.iamClient.setIamPolicy as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes setIamPolicy without error using callback', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.SetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.Policy()
+            );
+            client.iamClient.setIamPolicy = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setIamPolicy(
+                    request,
+                    expectedOptions,
+                    (err?: Error|null, result?: IamProtos.google.iam.v1.Policy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.iamClient.setIamPolicy as SinonStub)
+                .getCall(0));
+        });
+        it('invokes setIamPolicy with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.SetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.iamClient.setIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setIamPolicy(request, expectedOptions), expectedError);
+            assert((client.iamClient.setIamPolicy as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
-    it('invokes getLocation without error using callback', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLocation(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: LocationProtos.google.cloud.location.ILocation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('testIamPermissions', () => {
+        it('invokes testIamPermissions without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsResponse()
+            );
+            client.iamClient.testIamPermissions = stubSimpleCall(expectedResponse);
+            const response = await client.testIamPermissions(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.iamClient.testIamPermissions as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes testIamPermissions without error using callback', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsResponse()
+            );
+            client.iamClient.testIamPermissions = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.testIamPermissions(
+                    request,
+                    expectedOptions,
+                    (err?: Error|null, result?: IamProtos.google.iam.v1.TestIamPermissionsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.iamClient.testIamPermissions as SinonStub)
+                .getCall(0));
+        });
+        it('invokes testIamPermissions with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.iamClient.testIamPermissions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.testIamPermissions(request, expectedOptions), expectedError);
+            assert((client.iamClient.testIamPermissions as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+    });
+    describe('getLocation', () => {
+        it('invokes getLocation without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+            const response = await client.getLocation(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes getLocation without error using callback', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLocation(
+                    request,
+                    expectedOptions,
+                    (
+                        err?: Error | null,
+                        result?: LocationProtos.google.cloud.location.ILocation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getLocation with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.locationsClient.getLocation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLocation(request, expectedOptions), expectedError);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+    });
+    describe('listLocationsAsync', () => {
+        it('uses async iteration with listLocations without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+                new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedResponse = [
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+            ];
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+            const iterable = client.listLocationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+        it('uses async iteration with listLocations with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedError = new Error('expected');
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLocationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes getLocation with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.locationsClient.getLocation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getLocation(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes getOperation without error using callback', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-  });
-  describe('listLocationsAsync', () => {
-    it('uses async iteration with listLocations without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-      ];
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-      const iterable = client.listLocationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-    it('uses async iteration with listLocations with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedError = new Error('expected');
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLocationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-  });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes getOperation without error using callback', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .getOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: operationsProtos.google.longrunning.Operation | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-    it('invokes getOperation with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .cancelOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
-            }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
-    });
-    it('invokes cancelOperation with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .deleteOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
-            }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.IOperation[] = [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.IOperation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('connection', async () => {
-      const fakePath = '/rendered/path/connection';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        connection: 'connectionValue',
-      };
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.connectionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.connectionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('connectionPath', () => {
-        const result = client.connectionPath(
-          'projectValue',
-          'locationValue',
-          'connectionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.connectionPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromConnectionName', () => {
-        const result = client.matchProjectFromConnectionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.connectionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromConnectionName', () => {
-        const result = client.matchLocationFromConnectionName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.connectionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchConnectionFromConnectionName', () => {
-        const result = client.matchConnectionFromConnectionName(fakePath);
-        assert.strictEqual(result, 'connectionValue');
-        assert(
-          (client.pathTemplates.connectionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
     });
 
-    describe('location', async () => {
-      const fakePath = '/rendered/path/location';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('Path templates', () => {
 
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('connection', async () => {
+            const fakePath = "/rendered/path/connection";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                connection: "connectionValue",
+            };
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.connectionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.connectionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('connectionPath', () => {
+                const result = client.connectionPath("projectValue", "locationValue", "connectionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.connectionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromConnectionName', () => {
+                const result = client.matchProjectFromConnectionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.connectionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromConnectionName', () => {
+                const result = client.matchLocationFromConnectionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.connectionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConnectionFromConnectionName', () => {
+                const result = client.matchConnectionFromConnectionName(fakePath);
+                assert.strictEqual(result, "connectionValue");
+                assert((client.pathTemplates.connectionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('repository', async () => {
+            const fakePath = "/rendered/path/repository";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                connection: "connectionValue",
+                repository: "repositoryValue",
+            };
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.repositoryPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.repositoryPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('repositoryPath', () => {
+                const result = client.repositoryPath("projectValue", "locationValue", "connectionValue", "repositoryValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.repositoryPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromRepositoryName', () => {
+                const result = client.matchProjectFromRepositoryName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.repositoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromRepositoryName', () => {
+                const result = client.matchLocationFromRepositoryName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.repositoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConnectionFromRepositoryName', () => {
+                const result = client.matchConnectionFromRepositoryName(fakePath);
+                assert.strictEqual(result, "connectionValue");
+                assert((client.pathTemplates.repositoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRepositoryFromRepositoryName', () => {
+                const result = client.matchRepositoryFromRepositoryName(fakePath);
+                assert.strictEqual(result, "repositoryValue");
+                assert((client.pathTemplates.repositoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('secretVersion', async () => {
+            const fakePath = "/rendered/path/secretVersion";
+            const expectedParameters = {
+                project: "projectValue",
+                secret: "secretValue",
+                version: "versionValue",
+            };
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.secretVersionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.secretVersionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('secretVersionPath', () => {
+                const result = client.secretVersionPath("projectValue", "secretValue", "versionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.secretVersionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSecretVersionName', () => {
+                const result = client.matchProjectFromSecretVersionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.secretVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSecretFromSecretVersionName', () => {
+                const result = client.matchSecretFromSecretVersionName(fakePath);
+                assert.strictEqual(result, "secretValue");
+                assert((client.pathTemplates.secretVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchVersionFromSecretVersionName', () => {
+                const result = client.matchVersionFromSecretVersionName(fakePath);
+                assert.strictEqual(result, "versionValue");
+                assert((client.pathTemplates.secretVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('service', async () => {
+            const fakePath = "/rendered/path/service";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                namespace: "namespaceValue",
+                service: "serviceValue",
+            };
+            const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.servicePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.servicePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('servicePath', () => {
+                const result = client.servicePath("projectValue", "locationValue", "namespaceValue", "serviceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.servicePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromServiceName', () => {
+                const result = client.matchProjectFromServiceName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.servicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromServiceName', () => {
+                const result = client.matchLocationFromServiceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.servicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchNamespaceFromServiceName', () => {
+                const result = client.matchNamespaceFromServiceName(fakePath);
+                assert.strictEqual(result, "namespaceValue");
+                assert((client.pathTemplates.servicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceFromServiceName', () => {
+                const result = client.matchServiceFromServiceName(fakePath);
+                assert.strictEqual(result, "serviceValue");
+                assert((client.pathTemplates.servicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('repository', async () => {
-      const fakePath = '/rendered/path/repository';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        connection: 'connectionValue',
-        repository: 'repositoryValue',
-      };
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.repositoryPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.repositoryPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('repositoryPath', () => {
-        const result = client.repositoryPath(
-          'projectValue',
-          'locationValue',
-          'connectionValue',
-          'repositoryValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.repositoryPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromRepositoryName', () => {
-        const result = client.matchProjectFromRepositoryName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.repositoryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromRepositoryName', () => {
-        const result = client.matchLocationFromRepositoryName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.repositoryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchConnectionFromRepositoryName', () => {
-        const result = client.matchConnectionFromRepositoryName(fakePath);
-        assert.strictEqual(result, 'connectionValue');
-        assert(
-          (client.pathTemplates.repositoryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRepositoryFromRepositoryName', () => {
-        const result = client.matchRepositoryFromRepositoryName(fakePath);
-        assert.strictEqual(result, 'repositoryValue');
-        assert(
-          (client.pathTemplates.repositoryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('secretVersion', async () => {
-      const fakePath = '/rendered/path/secretVersion';
-      const expectedParameters = {
-        project: 'projectValue',
-        secret: 'secretValue',
-        version: 'versionValue',
-      };
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.secretVersionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.secretVersionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('secretVersionPath', () => {
-        const result = client.secretVersionPath(
-          'projectValue',
-          'secretValue',
-          'versionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.secretVersionPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromSecretVersionName', () => {
-        const result = client.matchProjectFromSecretVersionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.secretVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSecretFromSecretVersionName', () => {
-        const result = client.matchSecretFromSecretVersionName(fakePath);
-        assert.strictEqual(result, 'secretValue');
-        assert(
-          (client.pathTemplates.secretVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchVersionFromSecretVersionName', () => {
-        const result = client.matchVersionFromSecretVersionName(fakePath);
-        assert.strictEqual(result, 'versionValue');
-        assert(
-          (client.pathTemplates.secretVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('service', async () => {
-      const fakePath = '/rendered/path/service';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        namespace: 'namespaceValue',
-        service: 'serviceValue',
-      };
-      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.servicePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.servicePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('servicePath', () => {
-        const result = client.servicePath(
-          'projectValue',
-          'locationValue',
-          'namespaceValue',
-          'serviceValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.servicePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromServiceName', () => {
-        const result = client.matchProjectFromServiceName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.servicePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromServiceName', () => {
-        const result = client.matchLocationFromServiceName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.servicePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchNamespaceFromServiceName', () => {
-        const result = client.matchNamespaceFromServiceName(fakePath);
-        assert.strictEqual(result, 'namespaceValue');
-        assert(
-          (client.pathTemplates.servicePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServiceFromServiceName', () => {
-        const result = client.matchServiceFromServiceName(fakePath);
-        assert.strictEqual(result, 'serviceValue');
-        assert(
-          (client.pathTemplates.servicePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });
