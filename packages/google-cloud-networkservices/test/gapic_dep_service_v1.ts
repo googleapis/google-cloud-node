@@ -491,6 +491,114 @@ describe('v1.DepServiceClient', () => {
         });
     });
 
+    describe('getAuthzExtension', () => {
+        it('invokes getAuthzExtension without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.GetAuthzExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.GetAuthzExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.AuthzExtension()
+            );
+            client.innerApiCalls.getAuthzExtension = stubSimpleCall(expectedResponse);
+            const [response] = await client.getAuthzExtension(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAuthzExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAuthzExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAuthzExtension without error using callback', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.GetAuthzExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.GetAuthzExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.AuthzExtension()
+            );
+            client.innerApiCalls.getAuthzExtension = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getAuthzExtension(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networkservices.v1.IAuthzExtension|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAuthzExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAuthzExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAuthzExtension with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.GetAuthzExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.GetAuthzExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getAuthzExtension = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getAuthzExtension(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getAuthzExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAuthzExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAuthzExtension with closed client', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.GetAuthzExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.GetAuthzExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getAuthzExtension(request), expectedError);
+        });
+    });
+
     describe('createLbTrafficExtension', () => {
         it('invokes createLbTrafficExtension without error', async () => {
             const client = new depserviceModule.v1.DepServiceClient({
@@ -1423,6 +1531,472 @@ describe('v1.DepServiceClient', () => {
         });
     });
 
+    describe('createAuthzExtension', () => {
+        it('invokes createAuthzExtension without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.CreateAuthzExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.CreateAuthzExtensionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createAuthzExtension = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createAuthzExtension(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createAuthzExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAuthzExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAuthzExtension without error using callback', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.CreateAuthzExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.CreateAuthzExtensionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createAuthzExtension = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createAuthzExtension(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.networkservices.v1.IAuthzExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.networkservices.v1.IAuthzExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createAuthzExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAuthzExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAuthzExtension with call error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.CreateAuthzExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.CreateAuthzExtensionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createAuthzExtension = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createAuthzExtension(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createAuthzExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAuthzExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAuthzExtension with LRO error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.CreateAuthzExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.CreateAuthzExtensionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createAuthzExtension = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createAuthzExtension(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createAuthzExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAuthzExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateAuthzExtensionProgress without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateAuthzExtensionProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateAuthzExtensionProgress with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateAuthzExtensionProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateAuthzExtension', () => {
+        it('invokes updateAuthzExtension without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.UpdateAuthzExtensionRequest()
+            );
+            request.authzExtension ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.UpdateAuthzExtensionRequest', ['authzExtension', 'name']);
+            request.authzExtension.name = defaultValue1;
+            const expectedHeaderRequestParams = `authz_extension.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateAuthzExtension = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateAuthzExtension(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAuthzExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAuthzExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAuthzExtension without error using callback', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.UpdateAuthzExtensionRequest()
+            );
+            request.authzExtension ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.UpdateAuthzExtensionRequest', ['authzExtension', 'name']);
+            request.authzExtension.name = defaultValue1;
+            const expectedHeaderRequestParams = `authz_extension.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateAuthzExtension = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateAuthzExtension(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.networkservices.v1.IAuthzExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.networkservices.v1.IAuthzExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAuthzExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAuthzExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAuthzExtension with call error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.UpdateAuthzExtensionRequest()
+            );
+            request.authzExtension ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.UpdateAuthzExtensionRequest', ['authzExtension', 'name']);
+            request.authzExtension.name = defaultValue1;
+            const expectedHeaderRequestParams = `authz_extension.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAuthzExtension = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateAuthzExtension(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAuthzExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAuthzExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAuthzExtension with LRO error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.UpdateAuthzExtensionRequest()
+            );
+            request.authzExtension ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.UpdateAuthzExtensionRequest', ['authzExtension', 'name']);
+            request.authzExtension.name = defaultValue1;
+            const expectedHeaderRequestParams = `authz_extension.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAuthzExtension = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateAuthzExtension(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAuthzExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAuthzExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateAuthzExtensionProgress without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateAuthzExtensionProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateAuthzExtensionProgress with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateAuthzExtensionProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteAuthzExtension', () => {
+        it('invokes deleteAuthzExtension without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.DeleteAuthzExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.DeleteAuthzExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteAuthzExtension = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteAuthzExtension(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteAuthzExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAuthzExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAuthzExtension without error using callback', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.DeleteAuthzExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.DeleteAuthzExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteAuthzExtension = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteAuthzExtension(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteAuthzExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAuthzExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAuthzExtension with call error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.DeleteAuthzExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.DeleteAuthzExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteAuthzExtension = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteAuthzExtension(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteAuthzExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAuthzExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAuthzExtension with LRO error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.DeleteAuthzExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.DeleteAuthzExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteAuthzExtension = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteAuthzExtension(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteAuthzExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAuthzExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteAuthzExtensionProgress without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteAuthzExtensionProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteAuthzExtensionProgress with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteAuthzExtensionProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
     describe('listLbTrafficExtensions', () => {
         it('invokes listLbTrafficExtensions without error', async () => {
             const client = new depserviceModule.v1.DepServiceClient({
@@ -1906,6 +2480,251 @@ describe('v1.DepServiceClient', () => {
                     .getCall(0).args[1], request);
             assert(
                 (client.descriptors.page.listLbRouteExtensions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listAuthzExtensions', () => {
+        it('invokes listAuthzExtensions without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListAuthzExtensionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListAuthzExtensionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.AuthzExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.AuthzExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.AuthzExtension()),
+            ];
+            client.innerApiCalls.listAuthzExtensions = stubSimpleCall(expectedResponse);
+            const [response] = await client.listAuthzExtensions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAuthzExtensions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAuthzExtensions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAuthzExtensions without error using callback', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListAuthzExtensionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListAuthzExtensionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.AuthzExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.AuthzExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.AuthzExtension()),
+            ];
+            client.innerApiCalls.listAuthzExtensions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listAuthzExtensions(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networkservices.v1.IAuthzExtension[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAuthzExtensions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAuthzExtensions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAuthzExtensions with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListAuthzExtensionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListAuthzExtensionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listAuthzExtensions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listAuthzExtensions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listAuthzExtensions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAuthzExtensions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAuthzExtensionsStream without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListAuthzExtensionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListAuthzExtensionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.AuthzExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.AuthzExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.AuthzExtension()),
+            ];
+            client.descriptors.page.listAuthzExtensions.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listAuthzExtensionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networkservices.v1.AuthzExtension[] = [];
+                stream.on('data', (response: protos.google.cloud.networkservices.v1.AuthzExtension) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listAuthzExtensions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAuthzExtensions, request));
+            assert(
+                (client.descriptors.page.listAuthzExtensions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listAuthzExtensionsStream with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListAuthzExtensionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListAuthzExtensionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAuthzExtensions.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listAuthzExtensionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networkservices.v1.AuthzExtension[] = [];
+                stream.on('data', (response: protos.google.cloud.networkservices.v1.AuthzExtension) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listAuthzExtensions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAuthzExtensions, request));
+            assert(
+                (client.descriptors.page.listAuthzExtensions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listAuthzExtensions without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListAuthzExtensionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListAuthzExtensionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.AuthzExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.AuthzExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.AuthzExtension()),
+            ];
+            client.descriptors.page.listAuthzExtensions.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.networkservices.v1.IAuthzExtension[] = [];
+            const iterable = client.listAuthzExtensionsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAuthzExtensions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAuthzExtensions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listAuthzExtensions with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListAuthzExtensionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListAuthzExtensionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAuthzExtensions.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listAuthzExtensionsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.networkservices.v1.IAuthzExtension[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAuthzExtensions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAuthzExtensions.asyncIterate as SinonStub)
                     .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
                         expectedHeaderRequestParams
                     )
@@ -2612,6 +3431,52 @@ describe('v1.DepServiceClient', () => {
 
     describe('Path templates', () => {
 
+        describe('authzExtension', async () => {
+            const fakePath = "/rendered/path/authzExtension";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                authz_extension: "authzExtensionValue",
+            };
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.authzExtensionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.authzExtensionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('authzExtensionPath', () => {
+                const result = client.authzExtensionPath("projectValue", "locationValue", "authzExtensionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.authzExtensionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromAuthzExtensionName', () => {
+                const result = client.matchProjectFromAuthzExtensionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.authzExtensionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromAuthzExtensionName', () => {
+                const result = client.matchLocationFromAuthzExtensionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.authzExtensionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAuthzExtensionFromAuthzExtensionName', () => {
+                const result = client.matchAuthzExtensionFromAuthzExtensionName(fakePath);
+                assert.strictEqual(result, "authzExtensionValue");
+                assert((client.pathTemplates.authzExtensionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('endpointPolicy', async () => {
             const fakePath = "/rendered/path/endpointPolicy";
             const expectedParameters = {
@@ -3290,6 +4155,106 @@ describe('v1.DepServiceClient', () => {
                 const result = client.matchTlsRouteFromTlsRouteName(fakePath);
                 assert.strictEqual(result, "tlsRouteValue");
                 assert((client.pathTemplates.tlsRoutePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('wasmPlugin', async () => {
+            const fakePath = "/rendered/path/wasmPlugin";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                wasm_plugin: "wasmPluginValue",
+            };
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.wasmPluginPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.wasmPluginPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('wasmPluginPath', () => {
+                const result = client.wasmPluginPath("projectValue", "locationValue", "wasmPluginValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.wasmPluginPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromWasmPluginName', () => {
+                const result = client.matchProjectFromWasmPluginName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.wasmPluginPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromWasmPluginName', () => {
+                const result = client.matchLocationFromWasmPluginName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.wasmPluginPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchWasmPluginFromWasmPluginName', () => {
+                const result = client.matchWasmPluginFromWasmPluginName(fakePath);
+                assert.strictEqual(result, "wasmPluginValue");
+                assert((client.pathTemplates.wasmPluginPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('wasmPluginVersion', async () => {
+            const fakePath = "/rendered/path/wasmPluginVersion";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                wasm_plugin: "wasmPluginValue",
+                wasm_plugin_version: "wasmPluginVersionValue",
+            };
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.wasmPluginVersionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.wasmPluginVersionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('wasmPluginVersionPath', () => {
+                const result = client.wasmPluginVersionPath("projectValue", "locationValue", "wasmPluginValue", "wasmPluginVersionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.wasmPluginVersionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromWasmPluginVersionName', () => {
+                const result = client.matchProjectFromWasmPluginVersionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.wasmPluginVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromWasmPluginVersionName', () => {
+                const result = client.matchLocationFromWasmPluginVersionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.wasmPluginVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchWasmPluginFromWasmPluginVersionName', () => {
+                const result = client.matchWasmPluginFromWasmPluginVersionName(fakePath);
+                assert.strictEqual(result, "wasmPluginValue");
+                assert((client.pathTemplates.wasmPluginVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchWasmPluginVersionFromWasmPluginVersionName', () => {
+                const result = client.matchWasmPluginVersionFromWasmPluginVersionName(fakePath);
+                assert.strictEqual(result, "wasmPluginVersionValue");
+                assert((client.pathTemplates.wasmPluginVersionPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

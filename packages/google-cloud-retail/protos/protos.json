@@ -1097,6 +1097,24 @@
                         }
                       }
                     },
+                    "StringList": {
+                      "fields": {
+                        "values": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "DoubleList": {
+                      "fields": {
+                        "values": {
+                          "rule": "repeated",
+                          "type": "double",
+                          "id": 1
+                        }
+                      }
+                    },
                     "GcsSource": {
                       "fields": {
                         "inputUris": {
@@ -4506,6 +4524,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "userAttributes": {
+                          "keyType": "string",
+                          "type": "StringList",
+                          "id": 47,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -4862,6 +4888,11 @@
                               "rule": "repeated",
                               "type": "string",
                               "id": 7
+                            },
+                            "modelScores": {
+                              "keyType": "string",
+                              "type": "DoubleList",
+                              "id": 8
                             }
                           }
                         },

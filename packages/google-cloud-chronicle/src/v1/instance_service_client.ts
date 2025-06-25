@@ -18,16 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -105,41 +100,20 @@ export class InstanceServiceClient {
    *     const client = new InstanceServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof InstanceServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'chronicle.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -165,7 +139,7 @@ export class InstanceServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -179,7 +153,10 @@ export class InstanceServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -228,11 +205,8 @@ export class InstanceServiceClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.chronicle.v1.InstanceService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.chronicle.v1.InstanceService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -263,35 +237,31 @@ export class InstanceServiceClient {
     // Put together the "service stub" for
     // google.cloud.chronicle.v1.InstanceService.
     this.instanceServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.chronicle.v1.InstanceService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.chronicle.v1.InstanceService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.chronicle.v1.InstanceService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const instanceServiceStubMethods = ['getInstance'];
+    const instanceServiceStubMethods =
+        ['getInstance'];
     for (const methodName of instanceServiceStubMethods) {
       const callPromise = this.instanceServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -311,14 +281,8 @@ export class InstanceServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'chronicle.googleapis.com';
   }
@@ -329,14 +293,8 @@ export class InstanceServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'chronicle.googleapis.com';
   }
@@ -367,7 +325,9 @@ export class InstanceServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -376,9 +336,8 @@ export class InstanceServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -389,119 +348,101 @@ export class InstanceServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets a Instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the instance to retrieve.
-   *   Format:
-   *   `projects/{project_id}/locations/{location}/instances/{instance}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.Instance|Instance}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/instance_service.get_instance.js</caption>
-   * region_tag:chronicle_v1_generated_InstanceService_GetInstance_async
-   */
+/**
+ * Gets a Instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the instance to retrieve.
+ *   Format:
+ *   `projects/{project_id}/locations/{location}/instances/{instance}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.Instance|Instance}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/instance_service.get_instance.js</caption>
+ * region_tag:chronicle_v1_generated_InstanceService_GetInstance_async
+ */
   getInstance(
-    request?: protos.google.cloud.chronicle.v1.IGetInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IInstance,
-      protos.google.cloud.chronicle.v1.IGetInstanceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.chronicle.v1.IGetInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IInstance,
+        protos.google.cloud.chronicle.v1.IGetInstanceRequest|undefined, {}|undefined
+      ]>;
   getInstance(
-    request: protos.google.cloud.chronicle.v1.IGetInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.chronicle.v1.IInstance,
-      protos.google.cloud.chronicle.v1.IGetInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getInstance(
-    request: protos.google.cloud.chronicle.v1.IGetInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.chronicle.v1.IInstance,
-      protos.google.cloud.chronicle.v1.IGetInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getInstance(
-    request?: protos.google.cloud.chronicle.v1.IGetInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.chronicle.v1.IGetInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.chronicle.v1.IInstance,
-          | protos.google.cloud.chronicle.v1.IGetInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.chronicle.v1.IInstance,
-      protos.google.cloud.chronicle.v1.IGetInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IInstance,
-      protos.google.cloud.chronicle.v1.IGetInstanceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.chronicle.v1.IGetInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getInstance(
+      request: protos.google.cloud.chronicle.v1.IGetInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.chronicle.v1.IInstance,
+          protos.google.cloud.chronicle.v1.IGetInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getInstance(
+      request?: protos.google.cloud.chronicle.v1.IGetInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.chronicle.v1.IInstance,
+          protos.google.cloud.chronicle.v1.IGetInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.chronicle.v1.IInstance,
+          protos.google.cloud.chronicle.v1.IGetInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IInstance,
+        protos.google.cloud.chronicle.v1.IGetInstanceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getInstance request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.chronicle.v1.IInstance,
-          | protos.google.cloud.chronicle.v1.IGetInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.chronicle.v1.IInstance,
+        protos.google.cloud.chronicle.v1.IGetInstanceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getInstance response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getInstance(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.chronicle.v1.IInstance,
-          protos.google.cloud.chronicle.v1.IGetInstanceRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getInstance response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getInstance(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.chronicle.v1.IInstance,
+        protos.google.cloud.chronicle.v1.IGetInstanceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getInstance response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
   // --------------------
@@ -517,12 +458,7 @@ export class InstanceServiceClient {
    * @param {string} data_access_label
    * @returns {string} Resource name string.
    */
-  dataAccessLabelPath(
-    project: string,
-    location: string,
-    instance: string,
-    dataAccessLabel: string
-  ) {
+  dataAccessLabelPath(project:string,location:string,instance:string,dataAccessLabel:string) {
     return this.pathTemplates.dataAccessLabelPathTemplate.render({
       project: project,
       location: location,
@@ -539,9 +475,7 @@ export class InstanceServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAccessLabelName(dataAccessLabelName: string) {
-    return this.pathTemplates.dataAccessLabelPathTemplate.match(
-      dataAccessLabelName
-    ).project;
+    return this.pathTemplates.dataAccessLabelPathTemplate.match(dataAccessLabelName).project;
   }
 
   /**
@@ -552,9 +486,7 @@ export class InstanceServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAccessLabelName(dataAccessLabelName: string) {
-    return this.pathTemplates.dataAccessLabelPathTemplate.match(
-      dataAccessLabelName
-    ).location;
+    return this.pathTemplates.dataAccessLabelPathTemplate.match(dataAccessLabelName).location;
   }
 
   /**
@@ -565,9 +497,7 @@ export class InstanceServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromDataAccessLabelName(dataAccessLabelName: string) {
-    return this.pathTemplates.dataAccessLabelPathTemplate.match(
-      dataAccessLabelName
-    ).instance;
+    return this.pathTemplates.dataAccessLabelPathTemplate.match(dataAccessLabelName).instance;
   }
 
   /**
@@ -578,9 +508,7 @@ export class InstanceServiceClient {
    * @returns {string} A string representing the data_access_label.
    */
   matchDataAccessLabelFromDataAccessLabelName(dataAccessLabelName: string) {
-    return this.pathTemplates.dataAccessLabelPathTemplate.match(
-      dataAccessLabelName
-    ).data_access_label;
+    return this.pathTemplates.dataAccessLabelPathTemplate.match(dataAccessLabelName).data_access_label;
   }
 
   /**
@@ -592,12 +520,7 @@ export class InstanceServiceClient {
    * @param {string} data_access_scope
    * @returns {string} Resource name string.
    */
-  dataAccessScopePath(
-    project: string,
-    location: string,
-    instance: string,
-    dataAccessScope: string
-  ) {
+  dataAccessScopePath(project:string,location:string,instance:string,dataAccessScope:string) {
     return this.pathTemplates.dataAccessScopePathTemplate.render({
       project: project,
       location: location,
@@ -614,9 +537,7 @@ export class InstanceServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAccessScopeName(dataAccessScopeName: string) {
-    return this.pathTemplates.dataAccessScopePathTemplate.match(
-      dataAccessScopeName
-    ).project;
+    return this.pathTemplates.dataAccessScopePathTemplate.match(dataAccessScopeName).project;
   }
 
   /**
@@ -627,9 +548,7 @@ export class InstanceServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAccessScopeName(dataAccessScopeName: string) {
-    return this.pathTemplates.dataAccessScopePathTemplate.match(
-      dataAccessScopeName
-    ).location;
+    return this.pathTemplates.dataAccessScopePathTemplate.match(dataAccessScopeName).location;
   }
 
   /**
@@ -640,9 +559,7 @@ export class InstanceServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromDataAccessScopeName(dataAccessScopeName: string) {
-    return this.pathTemplates.dataAccessScopePathTemplate.match(
-      dataAccessScopeName
-    ).instance;
+    return this.pathTemplates.dataAccessScopePathTemplate.match(dataAccessScopeName).instance;
   }
 
   /**
@@ -653,9 +570,7 @@ export class InstanceServiceClient {
    * @returns {string} A string representing the data_access_scope.
    */
   matchDataAccessScopeFromDataAccessScopeName(dataAccessScopeName: string) {
-    return this.pathTemplates.dataAccessScopePathTemplate.match(
-      dataAccessScopeName
-    ).data_access_scope;
+    return this.pathTemplates.dataAccessScopePathTemplate.match(dataAccessScopeName).data_access_scope;
   }
 
   /**
@@ -666,7 +581,7 @@ export class InstanceServiceClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  instancePath(project: string, location: string, instance: string) {
+  instancePath(project:string,location:string,instance:string) {
     return this.pathTemplates.instancePathTemplate.render({
       project: project,
       location: location,
@@ -716,12 +631,7 @@ export class InstanceServiceClient {
    * @param {string} reference_list
    * @returns {string} Resource name string.
    */
-  referenceListPath(
-    project: string,
-    location: string,
-    instance: string,
-    referenceList: string
-  ) {
+  referenceListPath(project:string,location:string,instance:string,referenceList:string) {
     return this.pathTemplates.referenceListPathTemplate.render({
       project: project,
       location: location,
@@ -738,8 +648,7 @@ export class InstanceServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromReferenceListName(referenceListName: string) {
-    return this.pathTemplates.referenceListPathTemplate.match(referenceListName)
-      .project;
+    return this.pathTemplates.referenceListPathTemplate.match(referenceListName).project;
   }
 
   /**
@@ -750,8 +659,7 @@ export class InstanceServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromReferenceListName(referenceListName: string) {
-    return this.pathTemplates.referenceListPathTemplate.match(referenceListName)
-      .location;
+    return this.pathTemplates.referenceListPathTemplate.match(referenceListName).location;
   }
 
   /**
@@ -762,8 +670,7 @@ export class InstanceServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromReferenceListName(referenceListName: string) {
-    return this.pathTemplates.referenceListPathTemplate.match(referenceListName)
-      .instance;
+    return this.pathTemplates.referenceListPathTemplate.match(referenceListName).instance;
   }
 
   /**
@@ -774,8 +681,7 @@ export class InstanceServiceClient {
    * @returns {string} A string representing the reference_list.
    */
   matchReferenceListFromReferenceListName(referenceListName: string) {
-    return this.pathTemplates.referenceListPathTemplate.match(referenceListName)
-      .reference_list;
+    return this.pathTemplates.referenceListPathTemplate.match(referenceListName).reference_list;
   }
 
   /**
@@ -788,13 +694,7 @@ export class InstanceServiceClient {
    * @param {string} retrohunt
    * @returns {string} Resource name string.
    */
-  retrohuntPath(
-    project: string,
-    location: string,
-    instance: string,
-    rule: string,
-    retrohunt: string
-  ) {
+  retrohuntPath(project:string,location:string,instance:string,rule:string,retrohunt:string) {
     return this.pathTemplates.retrohuntPathTemplate.render({
       project: project,
       location: location,
@@ -812,8 +712,7 @@ export class InstanceServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRetrohuntName(retrohuntName: string) {
-    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName)
-      .project;
+    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName).project;
   }
 
   /**
@@ -824,8 +723,7 @@ export class InstanceServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromRetrohuntName(retrohuntName: string) {
-    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName)
-      .location;
+    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName).location;
   }
 
   /**
@@ -836,8 +734,7 @@ export class InstanceServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromRetrohuntName(retrohuntName: string) {
-    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName)
-      .instance;
+    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName).instance;
   }
 
   /**
@@ -859,8 +756,7 @@ export class InstanceServiceClient {
    * @returns {string} A string representing the retrohunt.
    */
   matchRetrohuntFromRetrohuntName(retrohuntName: string) {
-    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName)
-      .retrohunt;
+    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName).retrohunt;
   }
 
   /**
@@ -872,7 +768,7 @@ export class InstanceServiceClient {
    * @param {string} rule
    * @returns {string} Resource name string.
    */
-  rulePath(project: string, location: string, instance: string, rule: string) {
+  rulePath(project:string,location:string,instance:string,rule:string) {
     return this.pathTemplates.rulePathTemplate.render({
       project: project,
       location: location,
@@ -934,12 +830,7 @@ export class InstanceServiceClient {
    * @param {string} rule
    * @returns {string} Resource name string.
    */
-  ruleDeploymentPath(
-    project: string,
-    location: string,
-    instance: string,
-    rule: string
-  ) {
+  ruleDeploymentPath(project:string,location:string,instance:string,rule:string) {
     return this.pathTemplates.ruleDeploymentPathTemplate.render({
       project: project,
       location: location,
@@ -956,9 +847,7 @@ export class InstanceServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRuleDeploymentName(ruleDeploymentName: string) {
-    return this.pathTemplates.ruleDeploymentPathTemplate.match(
-      ruleDeploymentName
-    ).project;
+    return this.pathTemplates.ruleDeploymentPathTemplate.match(ruleDeploymentName).project;
   }
 
   /**
@@ -969,9 +858,7 @@ export class InstanceServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromRuleDeploymentName(ruleDeploymentName: string) {
-    return this.pathTemplates.ruleDeploymentPathTemplate.match(
-      ruleDeploymentName
-    ).location;
+    return this.pathTemplates.ruleDeploymentPathTemplate.match(ruleDeploymentName).location;
   }
 
   /**
@@ -982,9 +869,7 @@ export class InstanceServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromRuleDeploymentName(ruleDeploymentName: string) {
-    return this.pathTemplates.ruleDeploymentPathTemplate.match(
-      ruleDeploymentName
-    ).instance;
+    return this.pathTemplates.ruleDeploymentPathTemplate.match(ruleDeploymentName).instance;
   }
 
   /**
@@ -995,9 +880,7 @@ export class InstanceServiceClient {
    * @returns {string} A string representing the rule.
    */
   matchRuleFromRuleDeploymentName(ruleDeploymentName: string) {
-    return this.pathTemplates.ruleDeploymentPathTemplate.match(
-      ruleDeploymentName
-    ).rule;
+    return this.pathTemplates.ruleDeploymentPathTemplate.match(ruleDeploymentName).rule;
   }
 
   /**
@@ -1009,12 +892,7 @@ export class InstanceServiceClient {
    * @param {string} watchlist
    * @returns {string} Resource name string.
    */
-  watchlistPath(
-    project: string,
-    location: string,
-    instance: string,
-    watchlist: string
-  ) {
+  watchlistPath(project:string,location:string,instance:string,watchlist:string) {
     return this.pathTemplates.watchlistPathTemplate.render({
       project: project,
       location: location,
@@ -1031,8 +909,7 @@ export class InstanceServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromWatchlistName(watchlistName: string) {
-    return this.pathTemplates.watchlistPathTemplate.match(watchlistName)
-      .project;
+    return this.pathTemplates.watchlistPathTemplate.match(watchlistName).project;
   }
 
   /**
@@ -1043,8 +920,7 @@ export class InstanceServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromWatchlistName(watchlistName: string) {
-    return this.pathTemplates.watchlistPathTemplate.match(watchlistName)
-      .location;
+    return this.pathTemplates.watchlistPathTemplate.match(watchlistName).location;
   }
 
   /**
@@ -1055,8 +931,7 @@ export class InstanceServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromWatchlistName(watchlistName: string) {
-    return this.pathTemplates.watchlistPathTemplate.match(watchlistName)
-      .instance;
+    return this.pathTemplates.watchlistPathTemplate.match(watchlistName).instance;
   }
 
   /**
@@ -1067,8 +942,7 @@ export class InstanceServiceClient {
    * @returns {string} A string representing the watchlist.
    */
   matchWatchlistFromWatchlistName(watchlistName: string) {
-    return this.pathTemplates.watchlistPathTemplate.match(watchlistName)
-      .watchlist;
+    return this.pathTemplates.watchlistPathTemplate.match(watchlistName).watchlist;
   }
 
   /**

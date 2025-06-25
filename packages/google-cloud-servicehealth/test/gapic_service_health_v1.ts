@@ -29,2137 +29,1599 @@ import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.ServiceHealthClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'servicehealth.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          servicehealthModule.v1.ServiceHealthClient.servicePath;
-        assert.strictEqual(servicePath, 'servicehealth.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          servicehealthModule.v1.ServiceHealthClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'servicehealth.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'servicehealth.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'servicehealth.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new servicehealthModule.v1.ServiceHealthClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'servicehealth.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'servicehealth.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new servicehealthModule.v1.ServiceHealthClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'servicehealth.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new servicehealthModule.v1.ServiceHealthClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = servicehealthModule.v1.ServiceHealthClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = servicehealthModule.v1.ServiceHealthClient.servicePath;
+                assert.strictEqual(servicePath, 'servicehealth.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
 
-    it('should create a client with no option', () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.serviceHealthStub, undefined);
-      await client.initialize();
-      assert(client.serviceHealthStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.serviceHealthStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.serviceHealthStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getEvent', () => {
-    it('invokes getEvent without error', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.GetEventRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.GetEventRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.Event()
-      );
-      client.innerApiCalls.getEvent = stubSimpleCall(expectedResponse);
-      const [response] = await client.getEvent(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getEvent as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEvent as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEvent without error using callback', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.GetEventRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.GetEventRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.Event()
-      );
-      client.innerApiCalls.getEvent =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getEvent(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.servicehealth.v1.IEvent | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getEvent as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEvent as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEvent with error', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.GetEventRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.GetEventRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getEvent = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getEvent(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getEvent as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEvent as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEvent with closed client', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.GetEventRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.GetEventRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getEvent(request), expectedError);
-    });
-  });
-
-  describe('getOrganizationEvent', () => {
-    it('invokes getOrganizationEvent without error', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.GetOrganizationEventRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.GetOrganizationEventRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.OrganizationEvent()
-      );
-      client.innerApiCalls.getOrganizationEvent =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getOrganizationEvent(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getOrganizationEvent as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getOrganizationEvent as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getOrganizationEvent without error using callback', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.GetOrganizationEventRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.GetOrganizationEventRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.OrganizationEvent()
-      );
-      client.innerApiCalls.getOrganizationEvent =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getOrganizationEvent(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.servicehealth.v1.IOrganizationEvent | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getOrganizationEvent as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getOrganizationEvent as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getOrganizationEvent with error', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.GetOrganizationEventRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.GetOrganizationEventRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getOrganizationEvent = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getOrganizationEvent(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getOrganizationEvent as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getOrganizationEvent as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getOrganizationEvent with closed client', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.GetOrganizationEventRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.GetOrganizationEventRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getOrganizationEvent(request), expectedError);
-    });
-  });
-
-  describe('getOrganizationImpact', () => {
-    it('invokes getOrganizationImpact without error', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.GetOrganizationImpactRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.GetOrganizationImpactRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.OrganizationImpact()
-      );
-      client.innerApiCalls.getOrganizationImpact =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getOrganizationImpact(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getOrganizationImpact as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getOrganizationImpact as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getOrganizationImpact without error using callback', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.GetOrganizationImpactRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.GetOrganizationImpactRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.OrganizationImpact()
-      );
-      client.innerApiCalls.getOrganizationImpact =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getOrganizationImpact(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.servicehealth.v1.IOrganizationImpact | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getOrganizationImpact as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getOrganizationImpact as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getOrganizationImpact with error', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.GetOrganizationImpactRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.GetOrganizationImpactRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getOrganizationImpact = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getOrganizationImpact(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.getOrganizationImpact as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getOrganizationImpact as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getOrganizationImpact with closed client', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.GetOrganizationImpactRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.GetOrganizationImpactRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.getOrganizationImpact(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('listEvents', () => {
-    it('invokes listEvents without error', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.ListEventsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.ListEventsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
-        generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
-        generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
-      ];
-      client.innerApiCalls.listEvents = stubSimpleCall(expectedResponse);
-      const [response] = await client.listEvents(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listEvents as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listEvents as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listEvents without error using callback', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.ListEventsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.ListEventsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
-        generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
-        generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
-      ];
-      client.innerApiCalls.listEvents =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listEvents(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.servicehealth.v1.IEvent[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listEvents as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listEvents as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listEvents with error', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.ListEventsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.ListEventsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listEvents = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listEvents(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listEvents as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listEvents as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listEventsStream without error', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.ListEventsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.ListEventsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
-        generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
-        generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
-      ];
-      client.descriptors.page.listEvents.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listEventsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.servicehealth.v1.Event[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.servicehealth.v1.Event) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listEvents.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listEvents, request)
-      );
-      assert(
-        (client.descriptors.page.listEvents.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listEventsStream with error', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.ListEventsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.ListEventsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listEvents.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listEventsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.servicehealth.v1.Event[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.servicehealth.v1.Event) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listEvents.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listEvents, request)
-      );
-      assert(
-        (client.descriptors.page.listEvents.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listEvents without error', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.ListEventsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.ListEventsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
-        generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
-        generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
-      ];
-      client.descriptors.page.listEvents.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.servicehealth.v1.IEvent[] = [];
-      const iterable = client.listEventsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listEvents.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listEvents.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listEvents with error', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.ListEventsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.ListEventsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listEvents.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listEventsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.servicehealth.v1.IEvent[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = servicehealthModule.v1.ServiceHealthClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'servicehealth.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listEvents.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listEvents.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listOrganizationEvents', () => {
-    it('invokes listOrganizationEvents without error', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.ListOrganizationEventsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.ListOrganizationEventsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.servicehealth.v1.OrganizationEvent()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicehealth.v1.OrganizationEvent()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicehealth.v1.OrganizationEvent()
-        ),
-      ];
-      client.innerApiCalls.listOrganizationEvents =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listOrganizationEvents(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listOrganizationEvents as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listOrganizationEvents as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listOrganizationEvents without error using callback', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.ListOrganizationEventsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.ListOrganizationEventsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.servicehealth.v1.OrganizationEvent()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicehealth.v1.OrganizationEvent()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicehealth.v1.OrganizationEvent()
-        ),
-      ];
-      client.innerApiCalls.listOrganizationEvents =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listOrganizationEvents(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.servicehealth.v1.IOrganizationEvent[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listOrganizationEvents as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listOrganizationEvents as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listOrganizationEvents with error', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.ListOrganizationEventsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.ListOrganizationEventsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listOrganizationEvents = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listOrganizationEvents(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listOrganizationEvents as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listOrganizationEvents as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listOrganizationEventsStream without error', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.ListOrganizationEventsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.ListOrganizationEventsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.servicehealth.v1.OrganizationEvent()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicehealth.v1.OrganizationEvent()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicehealth.v1.OrganizationEvent()
-        ),
-      ];
-      client.descriptors.page.listOrganizationEvents.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listOrganizationEventsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.servicehealth.v1.OrganizationEvent[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.servicehealth.v1.OrganizationEvent
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'servicehealth.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listOrganizationEvents
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listOrganizationEvents, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listOrganizationEvents
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('invokes listOrganizationEventsStream with error', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.ListOrganizationEventsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.ListOrganizationEventsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listOrganizationEvents.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listOrganizationEventsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.servicehealth.v1.OrganizationEvent[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.servicehealth.v1.OrganizationEvent
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'servicehealth.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listOrganizationEvents
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listOrganizationEvents, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listOrganizationEvents
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('uses async iteration with listOrganizationEvents without error', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.ListOrganizationEventsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.ListOrganizationEventsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.servicehealth.v1.OrganizationEvent()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicehealth.v1.OrganizationEvent()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicehealth.v1.OrganizationEvent()
-        ),
-      ];
-      client.descriptors.page.listOrganizationEvents.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.servicehealth.v1.IOrganizationEvent[] =
-        [];
-      const iterable = client.listOrganizationEventsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listOrganizationEvents
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listOrganizationEvents
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new servicehealthModule.v1.ServiceHealthClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'servicehealth.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with listOrganizationEvents with error', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.ListOrganizationEventsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.ListOrganizationEventsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listOrganizationEvents.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listOrganizationEventsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.servicehealth.v1.IOrganizationEvent[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new servicehealthModule.v1.ServiceHealthClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'servicehealth.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listOrganizationEvents
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listOrganizationEvents
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new servicehealthModule.v1.ServiceHealthClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-  describe('listOrganizationImpacts', () => {
-    it('invokes listOrganizationImpacts without error', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.servicehealth.v1.OrganizationImpact()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicehealth.v1.OrganizationImpact()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicehealth.v1.OrganizationImpact()
-        ),
-      ];
-      client.innerApiCalls.listOrganizationImpacts =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listOrganizationImpacts(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listOrganizationImpacts as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listOrganizationImpacts as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('has port', () => {
+            const port = servicehealthModule.v1.ServiceHealthClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.serviceHealthStub, undefined);
+            await client.initialize();
+            assert(client.serviceHealthStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.serviceHealthStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.serviceHealthStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    it('invokes listOrganizationImpacts without error using callback', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.servicehealth.v1.OrganizationImpact()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicehealth.v1.OrganizationImpact()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicehealth.v1.OrganizationImpact()
-        ),
-      ];
-      client.innerApiCalls.listOrganizationImpacts =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listOrganizationImpacts(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.servicehealth.v1.IOrganizationImpact[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('getEvent', () => {
+        it('invokes getEvent without error', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.GetEventRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.GetEventRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.Event()
+            );
+            client.innerApiCalls.getEvent = stubSimpleCall(expectedResponse);
+            const [response] = await client.getEvent(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getEvent as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEvent as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEvent without error using callback', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.GetEventRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.GetEventRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.Event()
+            );
+            client.innerApiCalls.getEvent = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getEvent(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.servicehealth.v1.IEvent|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getEvent as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEvent as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEvent with error', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.GetEventRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.GetEventRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getEvent = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getEvent(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getEvent as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEvent as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEvent with closed client', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.GetEventRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.GetEventRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getEvent(request), expectedError);
+        });
+    });
+
+    describe('getOrganizationEvent', () => {
+        it('invokes getOrganizationEvent without error', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.GetOrganizationEventRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.GetOrganizationEventRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.OrganizationEvent()
+            );
+            client.innerApiCalls.getOrganizationEvent = stubSimpleCall(expectedResponse);
+            const [response] = await client.getOrganizationEvent(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getOrganizationEvent as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getOrganizationEvent as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getOrganizationEvent without error using callback', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.GetOrganizationEventRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.GetOrganizationEventRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.OrganizationEvent()
+            );
+            client.innerApiCalls.getOrganizationEvent = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getOrganizationEvent(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.servicehealth.v1.IOrganizationEvent|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getOrganizationEvent as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getOrganizationEvent as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getOrganizationEvent with error', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.GetOrganizationEventRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.GetOrganizationEventRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getOrganizationEvent = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getOrganizationEvent(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getOrganizationEvent as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getOrganizationEvent as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getOrganizationEvent with closed client', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.GetOrganizationEventRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.GetOrganizationEventRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getOrganizationEvent(request), expectedError);
+        });
+    });
+
+    describe('getOrganizationImpact', () => {
+        it('invokes getOrganizationImpact without error', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.GetOrganizationImpactRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.GetOrganizationImpactRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.OrganizationImpact()
+            );
+            client.innerApiCalls.getOrganizationImpact = stubSimpleCall(expectedResponse);
+            const [response] = await client.getOrganizationImpact(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getOrganizationImpact as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getOrganizationImpact as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getOrganizationImpact without error using callback', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.GetOrganizationImpactRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.GetOrganizationImpactRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.OrganizationImpact()
+            );
+            client.innerApiCalls.getOrganizationImpact = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getOrganizationImpact(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.servicehealth.v1.IOrganizationImpact|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getOrganizationImpact as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getOrganizationImpact as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getOrganizationImpact with error', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.GetOrganizationImpactRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.GetOrganizationImpactRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getOrganizationImpact = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getOrganizationImpact(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getOrganizationImpact as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getOrganizationImpact as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getOrganizationImpact with closed client', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.GetOrganizationImpactRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.GetOrganizationImpactRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getOrganizationImpact(request), expectedError);
+        });
+    });
+
+    describe('listEvents', () => {
+        it('invokes listEvents without error', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.ListEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.ListEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
+            ];
+            client.innerApiCalls.listEvents = stubSimpleCall(expectedResponse);
+            const [response] = await client.listEvents(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listEvents as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listEvents as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listEvents without error using callback', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.ListEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.ListEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
+            ];
+            client.innerApiCalls.listEvents = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listEvents(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.servicehealth.v1.IEvent[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listEvents as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listEvents as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listEvents with error', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.ListEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.ListEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listEvents = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listEvents(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listEvents as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listEvents as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listEventsStream without error', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.ListEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.ListEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
+            ];
+            client.descriptors.page.listEvents.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listEventsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.servicehealth.v1.Event[] = [];
+                stream.on('data', (response: protos.google.cloud.servicehealth.v1.Event) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listEvents.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listEvents, request));
+            assert(
+                (client.descriptors.page.listEvents.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listEventsStream with error', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.ListEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.ListEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listEvents.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listEventsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.servicehealth.v1.Event[] = [];
+                stream.on('data', (response: protos.google.cloud.servicehealth.v1.Event) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listEvents.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listEvents, request));
+            assert(
+                (client.descriptors.page.listEvents.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listEvents without error', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.ListEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.ListEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
+            ];
+            client.descriptors.page.listEvents.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.servicehealth.v1.IEvent[] = [];
+            const iterable = client.listEventsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listOrganizationImpacts as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listOrganizationImpacts as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listOrganizationImpacts with error', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listOrganizationImpacts = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listOrganizationImpacts(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listOrganizationImpacts as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listOrganizationImpacts as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listOrganizationImpactsStream without error', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.servicehealth.v1.OrganizationImpact()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicehealth.v1.OrganizationImpact()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicehealth.v1.OrganizationImpact()
-        ),
-      ];
-      client.descriptors.page.listOrganizationImpacts.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listOrganizationImpactsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.servicehealth.v1.OrganizationImpact[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.servicehealth.v1.OrganizationImpact
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listEvents.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listEvents.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listEvents with error', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.ListEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.ListEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listEvents.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listEventsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.servicehealth.v1.IEvent[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listEvents.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listEvents.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listOrganizationImpacts
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listOrganizationImpacts, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listOrganizationImpacts
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
     });
 
-    it('invokes listOrganizationImpactsStream with error', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listOrganizationImpacts.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listOrganizationImpactsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.servicehealth.v1.OrganizationImpact[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.servicehealth.v1.OrganizationImpact
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listOrganizationEvents', () => {
+        it('invokes listOrganizationEvents without error', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.ListOrganizationEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.ListOrganizationEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.OrganizationEvent()),
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.OrganizationEvent()),
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.OrganizationEvent()),
+            ];
+            client.innerApiCalls.listOrganizationEvents = stubSimpleCall(expectedResponse);
+            const [response] = await client.listOrganizationEvents(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listOrganizationEvents as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listOrganizationEvents as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listOrganizationEvents without error using callback', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.ListOrganizationEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.ListOrganizationEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.OrganizationEvent()),
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.OrganizationEvent()),
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.OrganizationEvent()),
+            ];
+            client.innerApiCalls.listOrganizationEvents = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listOrganizationEvents(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.servicehealth.v1.IOrganizationEvent[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listOrganizationEvents as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listOrganizationEvents as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listOrganizationImpacts
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listOrganizationImpacts, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listOrganizationImpacts
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('uses async iteration with listOrganizationImpacts without error', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.servicehealth.v1.OrganizationImpact()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicehealth.v1.OrganizationImpact()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicehealth.v1.OrganizationImpact()
-        ),
-      ];
-      client.descriptors.page.listOrganizationImpacts.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.servicehealth.v1.IOrganizationImpact[] =
-        [];
-      const iterable = client.listOrganizationImpactsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listOrganizationImpacts
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listOrganizationImpacts
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
+        it('invokes listOrganizationEvents with error', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.ListOrganizationEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.ListOrganizationEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listOrganizationEvents = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listOrganizationEvents(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listOrganizationEvents as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listOrganizationEvents as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listOrganizationImpacts with error', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listOrganizationImpacts.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listOrganizationImpactsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.servicehealth.v1.IOrganizationImpact[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listOrganizationImpacts
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listOrganizationImpacts
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-  describe('getLocation', () => {
-    it('invokes getLocation without error', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
-      const response = await client.getLocation(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes getLocation without error using callback', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLocation(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: LocationProtos.google.cloud.location.ILocation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('invokes listOrganizationEventsStream without error', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.ListOrganizationEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.ListOrganizationEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.OrganizationEvent()),
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.OrganizationEvent()),
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.OrganizationEvent()),
+            ];
+            client.descriptors.page.listOrganizationEvents.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listOrganizationEventsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.servicehealth.v1.OrganizationEvent[] = [];
+                stream.on('data', (response: protos.google.cloud.servicehealth.v1.OrganizationEvent) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listOrganizationEvents.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listOrganizationEvents, request));
+            assert(
+                (client.descriptors.page.listOrganizationEvents.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listOrganizationEventsStream with error', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.ListOrganizationEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.ListOrganizationEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listOrganizationEvents.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listOrganizationEventsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.servicehealth.v1.OrganizationEvent[] = [];
+                stream.on('data', (response: protos.google.cloud.servicehealth.v1.OrganizationEvent) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listOrganizationEvents.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listOrganizationEvents, request));
+            assert(
+                (client.descriptors.page.listOrganizationEvents.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listOrganizationEvents without error', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.ListOrganizationEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.ListOrganizationEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.OrganizationEvent()),
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.OrganizationEvent()),
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.OrganizationEvent()),
+            ];
+            client.descriptors.page.listOrganizationEvents.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.servicehealth.v1.IOrganizationEvent[] = [];
+            const iterable = client.listOrganizationEventsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
-    });
-    it('invokes getLocation with error', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.locationsClient.getLocation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getLocation(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('listLocationsAsync', () => {
-    it('uses async iteration with listLocations without error', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-      ];
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-      const iterable = client.listLocationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-    it('uses async iteration with listLocations with error', async () => {
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedError = new Error('expected');
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLocationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listOrganizationEvents.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listOrganizationEvents.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('Path templates', () => {
-    describe('event', async () => {
-      const fakePath = '/rendered/path/event';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        event: 'eventValue',
-      };
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.eventPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.eventPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('eventPath', () => {
-        const result = client.eventPath(
-          'projectValue',
-          'locationValue',
-          'eventValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.eventPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromEventName', () => {
-        const result = client.matchProjectFromEventName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.eventPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromEventName', () => {
-        const result = client.matchLocationFromEventName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.eventPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEventFromEventName', () => {
-        const result = client.matchEventFromEventName(fakePath);
-        assert.strictEqual(result, 'eventValue');
-        assert(
-          (client.pathTemplates.eventPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('uses async iteration with listOrganizationEvents with error', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.ListOrganizationEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.ListOrganizationEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listOrganizationEvents.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listOrganizationEventsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.servicehealth.v1.IOrganizationEvent[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listOrganizationEvents.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listOrganizationEvents.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    describe('organizationEvent', async () => {
-      const fakePath = '/rendered/path/organizationEvent';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-        event: 'eventValue',
-      };
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationEventPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationEventPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('listOrganizationImpacts', () => {
+        it('invokes listOrganizationImpacts without error', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.OrganizationImpact()),
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.OrganizationImpact()),
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.OrganizationImpact()),
+            ];
+            client.innerApiCalls.listOrganizationImpacts = stubSimpleCall(expectedResponse);
+            const [response] = await client.listOrganizationImpacts(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listOrganizationImpacts as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listOrganizationImpacts as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('organizationEventPath', () => {
-        const result = client.organizationEventPath(
-          'organizationValue',
-          'locationValue',
-          'eventValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationEventPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes listOrganizationImpacts without error using callback', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.OrganizationImpact()),
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.OrganizationImpact()),
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.OrganizationImpact()),
+            ];
+            client.innerApiCalls.listOrganizationImpacts = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listOrganizationImpacts(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.servicehealth.v1.IOrganizationImpact[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listOrganizationImpacts as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listOrganizationImpacts as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchOrganizationFromOrganizationEventName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationEventName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationEventPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes listOrganizationImpacts with error', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listOrganizationImpacts = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listOrganizationImpacts(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listOrganizationImpacts as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listOrganizationImpacts as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromOrganizationEventName', () => {
-        const result = client.matchLocationFromOrganizationEventName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.organizationEventPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes listOrganizationImpactsStream without error', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.OrganizationImpact()),
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.OrganizationImpact()),
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.OrganizationImpact()),
+            ];
+            client.descriptors.page.listOrganizationImpacts.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listOrganizationImpactsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.servicehealth.v1.OrganizationImpact[] = [];
+                stream.on('data', (response: protos.google.cloud.servicehealth.v1.OrganizationImpact) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listOrganizationImpacts.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listOrganizationImpacts, request));
+            assert(
+                (client.descriptors.page.listOrganizationImpacts.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-      it('matchEventFromOrganizationEventName', () => {
-        const result = client.matchEventFromOrganizationEventName(fakePath);
-        assert.strictEqual(result, 'eventValue');
-        assert(
-          (
-            client.pathTemplates.organizationEventPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes listOrganizationImpactsStream with error', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listOrganizationImpacts.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listOrganizationImpactsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.servicehealth.v1.OrganizationImpact[] = [];
+                stream.on('data', (response: protos.google.cloud.servicehealth.v1.OrganizationImpact) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listOrganizationImpacts.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listOrganizationImpacts, request));
+            assert(
+                (client.descriptors.page.listOrganizationImpacts.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listOrganizationImpacts without error', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.OrganizationImpact()),
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.OrganizationImpact()),
+              generateSampleMessage(new protos.google.cloud.servicehealth.v1.OrganizationImpact()),
+            ];
+            client.descriptors.page.listOrganizationImpacts.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.servicehealth.v1.IOrganizationImpact[] = [];
+            const iterable = client.listOrganizationImpactsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listOrganizationImpacts.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listOrganizationImpacts.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listOrganizationImpacts with error', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listOrganizationImpacts.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listOrganizationImpactsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.servicehealth.v1.IOrganizationImpact[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listOrganizationImpacts.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listOrganizationImpacts.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+    describe('getLocation', () => {
+        it('invokes getLocation without error', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+            const response = await client.getLocation(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes getLocation without error using callback', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLocation(
+                    request,
+                    expectedOptions,
+                    (
+                        err?: Error | null,
+                        result?: LocationProtos.google.cloud.location.ILocation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getLocation with error', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.locationsClient.getLocation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLocation(request, expectedOptions), expectedError);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+    });
+    describe('listLocationsAsync', () => {
+        it('uses async iteration with listLocations without error', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+                new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedResponse = [
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+            ];
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+            const iterable = client.listLocationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+        it('uses async iteration with listLocations with error', async () => {
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedError = new Error('expected');
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLocationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    describe('organizationImpact', async () => {
-      const fakePath = '/rendered/path/organizationImpact';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-        organization_impact: 'organizationImpactValue',
-      };
-      const client = new servicehealthModule.v1.ServiceHealthClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationImpactPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationImpactPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('Path templates', () => {
 
-      it('organizationImpactPath', () => {
-        const result = client.organizationImpactPath(
-          'organizationValue',
-          'locationValue',
-          'organizationImpactValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationImpactPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('event', async () => {
+            const fakePath = "/rendered/path/event";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                event: "eventValue",
+            };
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.eventPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.eventPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchOrganizationFromOrganizationImpactName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationImpactName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationImpactPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('eventPath', () => {
+                const result = client.eventPath("projectValue", "locationValue", "eventValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.eventPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromOrganizationImpactName', () => {
-        const result = client.matchLocationFromOrganizationImpactName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.organizationImpactPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromEventName', () => {
+                const result = client.matchProjectFromEventName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.eventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchOrganizationImpactFromOrganizationImpactName', () => {
-        const result =
-          client.matchOrganizationImpactFromOrganizationImpactName(fakePath);
-        assert.strictEqual(result, 'organizationImpactValue');
-        assert(
-          (
-            client.pathTemplates.organizationImpactPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchLocationFromEventName', () => {
+                const result = client.matchLocationFromEventName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.eventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEventFromEventName', () => {
+                const result = client.matchEventFromEventName(fakePath);
+                assert.strictEqual(result, "eventValue");
+                assert((client.pathTemplates.eventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationEvent', async () => {
+            const fakePath = "/rendered/path/organizationEvent";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                event: "eventValue",
+            };
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationEventPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationEventPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationEventPath', () => {
+                const result = client.organizationEventPath("organizationValue", "locationValue", "eventValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationEventPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationEventName', () => {
+                const result = client.matchOrganizationFromOrganizationEventName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationEventName', () => {
+                const result = client.matchLocationFromOrganizationEventName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEventFromOrganizationEventName', () => {
+                const result = client.matchEventFromOrganizationEventName(fakePath);
+                assert.strictEqual(result, "eventValue");
+                assert((client.pathTemplates.organizationEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationImpact', async () => {
+            const fakePath = "/rendered/path/organizationImpact";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                organization_impact: "organizationImpactValue",
+            };
+            const client = new servicehealthModule.v1.ServiceHealthClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationImpactPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationImpactPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationImpactPath', () => {
+                const result = client.organizationImpactPath("organizationValue", "locationValue", "organizationImpactValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationImpactPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationImpactName', () => {
+                const result = client.matchOrganizationFromOrganizationImpactName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationImpactPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationImpactName', () => {
+                const result = client.matchLocationFromOrganizationImpactName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationImpactPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchOrganizationImpactFromOrganizationImpactName', () => {
+                const result = client.matchOrganizationImpactFromOrganizationImpactName(fakePath);
+                assert.strictEqual(result, "organizationImpactValue");
+                assert((client.pathTemplates.organizationImpactPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-  });
 });

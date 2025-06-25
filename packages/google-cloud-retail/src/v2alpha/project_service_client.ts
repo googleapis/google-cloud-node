@@ -18,16 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, LocationsClient, LocationProtos} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -111,41 +102,20 @@ export class ProjectServiceClient {
    *     const client = new ProjectServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ProjectServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'retail.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -171,7 +141,7 @@ export class ProjectServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -187,9 +157,13 @@ export class ProjectServiceClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -257,60 +231,31 @@ export class ProjectServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',
-          additional_bindings: [
-            {
-              get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/places/*/operations/*}',
-            },
-            {
-              get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/operations/*}',
-            },
-            {get: '/v2alpha/{name=projects/*/locations/*/operations/*}'},
-            {get: '/v2alpha/{name=projects/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v2alpha/{name=projects/*/locations/*/catalogs/*}/operations',
-          additional_bindings: [
-            {get: '/v2alpha/{name=projects/*/locations/*}/operations'},
-            {get: '/v2alpha/{name=projects/*}/operations'},
-          ],
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',additional_bindings: [{get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/places/*/operations/*}',},{get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/operations/*}',},{get: '/v2alpha/{name=projects/*/locations/*/operations/*}',},{get: '/v2alpha/{name=projects/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v2alpha/{name=projects/*/locations/*/catalogs/*}/operations',additional_bindings: [{get: '/v2alpha/{name=projects/*/locations/*}/operations',},{get: '/v2alpha/{name=projects/*}/operations',}],
+      }];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const enrollSolutionResponse = protoFilesRoot.lookup(
-      '.google.cloud.retail.v2alpha.EnrollSolutionResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.retail.v2alpha.EnrollSolutionResponse') as gax.protobuf.Type;
     const enrollSolutionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.retail.v2alpha.EnrollSolutionMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.retail.v2alpha.EnrollSolutionMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       enrollSolution: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         enrollSolutionResponse.decode.bind(enrollSolutionResponse),
-        enrollSolutionMetadata.decode.bind(enrollSolutionMetadata)
-      ),
+        enrollSolutionMetadata.decode.bind(enrollSolutionMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.retail.v2alpha.ProjectService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.retail.v2alpha.ProjectService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -341,44 +286,32 @@ export class ProjectServiceClient {
     // Put together the "service stub" for
     // google.cloud.retail.v2alpha.ProjectService.
     this.projectServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.retail.v2alpha.ProjectService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.retail.v2alpha.ProjectService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.retail.v2alpha.ProjectService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const projectServiceStubMethods = [
-      'getProject',
-      'acceptTerms',
-      'enrollSolution',
-      'listEnrolledSolutions',
-      'getLoggingConfig',
-      'updateLoggingConfig',
-      'getAlertConfig',
-      'updateAlertConfig',
-    ];
+    const projectServiceStubMethods =
+        ['getProject', 'acceptTerms', 'enrollSolution', 'listEnrolledSolutions', 'getLoggingConfig', 'updateLoggingConfig', 'getAlertConfig', 'updateAlertConfig'];
     for (const methodName of projectServiceStubMethods) {
       const callPromise = this.projectServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.longrunning[methodName] || undefined;
+      const descriptor =
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -398,14 +331,8 @@ export class ProjectServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'retail.googleapis.com';
   }
@@ -416,14 +343,8 @@ export class ProjectServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'retail.googleapis.com';
   }
@@ -454,7 +375,9 @@ export class ProjectServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -463,9 +386,8 @@ export class ProjectServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -476,1180 +398,826 @@ export class ProjectServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets the project.
-   *
-   * Throws `NOT_FOUND` if the project wasn't initialized for the Retail API
-   * service.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Full resource name of the project. Format:
-   *   `projects/{project_number_or_id}/retailProject`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.Project|Project}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/project_service.get_project.js</caption>
-   * region_tag:retail_v2alpha_generated_ProjectService_GetProject_async
-   */
+/**
+ * Gets the project.
+ *
+ * Throws `NOT_FOUND` if the project wasn't initialized for the Retail API
+ * service.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Full resource name of the project. Format:
+ *   `projects/{project_number_or_id}/retailProject`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.Project|Project}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2alpha/project_service.get_project.js</caption>
+ * region_tag:retail_v2alpha_generated_ProjectService_GetProject_async
+ */
   getProject(
-    request?: protos.google.cloud.retail.v2alpha.IGetProjectRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IProject,
-      protos.google.cloud.retail.v2alpha.IGetProjectRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2alpha.IGetProjectRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IProject,
+        protos.google.cloud.retail.v2alpha.IGetProjectRequest|undefined, {}|undefined
+      ]>;
   getProject(
-    request: protos.google.cloud.retail.v2alpha.IGetProjectRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IProject,
-      protos.google.cloud.retail.v2alpha.IGetProjectRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getProject(
-    request: protos.google.cloud.retail.v2alpha.IGetProjectRequest,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IProject,
-      protos.google.cloud.retail.v2alpha.IGetProjectRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getProject(
-    request?: protos.google.cloud.retail.v2alpha.IGetProjectRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.retail.v2alpha.IGetProjectRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.retail.v2alpha.IProject,
-          | protos.google.cloud.retail.v2alpha.IGetProjectRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.retail.v2alpha.IProject,
-      protos.google.cloud.retail.v2alpha.IGetProjectRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IProject,
-      protos.google.cloud.retail.v2alpha.IGetProjectRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2alpha.IGetProjectRequest|null|undefined,
+          {}|null|undefined>): void;
+  getProject(
+      request: protos.google.cloud.retail.v2alpha.IGetProjectRequest,
+      callback: Callback<
+          protos.google.cloud.retail.v2alpha.IProject,
+          protos.google.cloud.retail.v2alpha.IGetProjectRequest|null|undefined,
+          {}|null|undefined>): void;
+  getProject(
+      request?: protos.google.cloud.retail.v2alpha.IGetProjectRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.retail.v2alpha.IProject,
+          protos.google.cloud.retail.v2alpha.IGetProjectRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.retail.v2alpha.IProject,
+          protos.google.cloud.retail.v2alpha.IGetProjectRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IProject,
+        protos.google.cloud.retail.v2alpha.IGetProjectRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getProject request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.retail.v2alpha.IProject,
-          | protos.google.cloud.retail.v2alpha.IGetProjectRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.retail.v2alpha.IProject,
+        protos.google.cloud.retail.v2alpha.IGetProjectRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getProject response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getProject(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.retail.v2alpha.IProject,
-          protos.google.cloud.retail.v2alpha.IGetProjectRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getProject response %j', response);
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.getProject(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.retail.v2alpha.IProject,
+        protos.google.cloud.retail.v2alpha.IGetProjectRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getProject response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
-  /**
-   * Accepts service terms for this project.
-   * By making requests to this API, you agree to the terms of service linked
-   * below.
-   * https://cloud.google.com/retail/data-use-terms
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project
-   *   Required. Full resource name of the project. Format:
-   *   `projects/{project_number_or_id}/retailProject`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.Project|Project}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/project_service.accept_terms.js</caption>
-   * region_tag:retail_v2alpha_generated_ProjectService_AcceptTerms_async
-   */
+/**
+ * Accepts service terms for this project.
+ * By making requests to this API, you agree to the terms of service linked
+ * below.
+ * https://cloud.google.com/retail/data-use-terms
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.project
+ *   Required. Full resource name of the project. Format:
+ *   `projects/{project_number_or_id}/retailProject`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.Project|Project}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2alpha/project_service.accept_terms.js</caption>
+ * region_tag:retail_v2alpha_generated_ProjectService_AcceptTerms_async
+ */
   acceptTerms(
-    request?: protos.google.cloud.retail.v2alpha.IAcceptTermsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IProject,
-      protos.google.cloud.retail.v2alpha.IAcceptTermsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2alpha.IAcceptTermsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IProject,
+        protos.google.cloud.retail.v2alpha.IAcceptTermsRequest|undefined, {}|undefined
+      ]>;
   acceptTerms(
-    request: protos.google.cloud.retail.v2alpha.IAcceptTermsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IProject,
-      protos.google.cloud.retail.v2alpha.IAcceptTermsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  acceptTerms(
-    request: protos.google.cloud.retail.v2alpha.IAcceptTermsRequest,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IProject,
-      protos.google.cloud.retail.v2alpha.IAcceptTermsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  acceptTerms(
-    request?: protos.google.cloud.retail.v2alpha.IAcceptTermsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.retail.v2alpha.IAcceptTermsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.retail.v2alpha.IProject,
-          | protos.google.cloud.retail.v2alpha.IAcceptTermsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.retail.v2alpha.IProject,
-      protos.google.cloud.retail.v2alpha.IAcceptTermsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IProject,
-      protos.google.cloud.retail.v2alpha.IAcceptTermsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2alpha.IAcceptTermsRequest|null|undefined,
+          {}|null|undefined>): void;
+  acceptTerms(
+      request: protos.google.cloud.retail.v2alpha.IAcceptTermsRequest,
+      callback: Callback<
+          protos.google.cloud.retail.v2alpha.IProject,
+          protos.google.cloud.retail.v2alpha.IAcceptTermsRequest|null|undefined,
+          {}|null|undefined>): void;
+  acceptTerms(
+      request?: protos.google.cloud.retail.v2alpha.IAcceptTermsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.retail.v2alpha.IProject,
+          protos.google.cloud.retail.v2alpha.IAcceptTermsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.retail.v2alpha.IProject,
+          protos.google.cloud.retail.v2alpha.IAcceptTermsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IProject,
+        protos.google.cloud.retail.v2alpha.IAcceptTermsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('acceptTerms request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.retail.v2alpha.IProject,
-          | protos.google.cloud.retail.v2alpha.IAcceptTermsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.retail.v2alpha.IProject,
+        protos.google.cloud.retail.v2alpha.IAcceptTermsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('acceptTerms response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .acceptTerms(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.retail.v2alpha.IProject,
-          protos.google.cloud.retail.v2alpha.IAcceptTermsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('acceptTerms response %j', response);
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.acceptTerms(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.retail.v2alpha.IProject,
+        protos.google.cloud.retail.v2alpha.IAcceptTermsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('acceptTerms response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
-  /**
-   * Lists all the retail API solutions the project has enrolled.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Full resource name of parent. Format:
-   *   `projects/{project_number_or_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.ListEnrolledSolutionsResponse|ListEnrolledSolutionsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/project_service.list_enrolled_solutions.js</caption>
-   * region_tag:retail_v2alpha_generated_ProjectService_ListEnrolledSolutions_async
-   */
+/**
+ * Lists all the retail API solutions the project has enrolled.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Full resource name of parent. Format:
+ *   `projects/{project_number_or_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.ListEnrolledSolutionsResponse|ListEnrolledSolutionsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2alpha/project_service.list_enrolled_solutions.js</caption>
+ * region_tag:retail_v2alpha_generated_ProjectService_ListEnrolledSolutions_async
+ */
   listEnrolledSolutions(
-    request?: protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsResponse,
-      (
-        | protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsResponse,
+        protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsRequest|undefined, {}|undefined
+      ]>;
   listEnrolledSolutions(
-    request: protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsResponse,
-      | protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listEnrolledSolutions(
-    request: protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsRequest,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsResponse,
-      | protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listEnrolledSolutions(
-    request?: protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsResponse,
-          | protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsResponse,
-      | protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsResponse,
-      (
-        | protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  listEnrolledSolutions(
+      request: protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsRequest,
+      callback: Callback<
+          protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsResponse,
+          protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  listEnrolledSolutions(
+      request?: protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsResponse,
+          protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsResponse,
+          protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsResponse,
+        protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('listEnrolledSolutions request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsResponse,
-          | protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsResponse,
+        protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('listEnrolledSolutions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .listEnrolledSolutions(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsResponse,
-          (
-            | protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('listEnrolledSolutions response %j', response);
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.listEnrolledSolutions(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsResponse,
+        protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('listEnrolledSolutions response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
-  /**
-   * Gets the {@link protos.google.cloud.retail.v2alpha.LoggingConfig|LoggingConfig} of the
-   * requested project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Full LoggingConfig resource name. Format:
-   *   projects/{project_number}/loggingConfig
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.LoggingConfig|LoggingConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/project_service.get_logging_config.js</caption>
-   * region_tag:retail_v2alpha_generated_ProjectService_GetLoggingConfig_async
-   */
+/**
+ * Gets the {@link protos.google.cloud.retail.v2alpha.LoggingConfig|LoggingConfig} of the
+ * requested project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Full LoggingConfig resource name. Format:
+ *   projects/{project_number}/loggingConfig
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.LoggingConfig|LoggingConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2alpha/project_service.get_logging_config.js</caption>
+ * region_tag:retail_v2alpha_generated_ProjectService_GetLoggingConfig_async
+ */
   getLoggingConfig(
-    request?: protos.google.cloud.retail.v2alpha.IGetLoggingConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.ILoggingConfig,
-      protos.google.cloud.retail.v2alpha.IGetLoggingConfigRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2alpha.IGetLoggingConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.ILoggingConfig,
+        protos.google.cloud.retail.v2alpha.IGetLoggingConfigRequest|undefined, {}|undefined
+      ]>;
   getLoggingConfig(
-    request: protos.google.cloud.retail.v2alpha.IGetLoggingConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.ILoggingConfig,
-      | protos.google.cloud.retail.v2alpha.IGetLoggingConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getLoggingConfig(
-    request: protos.google.cloud.retail.v2alpha.IGetLoggingConfigRequest,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.ILoggingConfig,
-      | protos.google.cloud.retail.v2alpha.IGetLoggingConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getLoggingConfig(
-    request?: protos.google.cloud.retail.v2alpha.IGetLoggingConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.retail.v2alpha.IGetLoggingConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.retail.v2alpha.ILoggingConfig,
-          | protos.google.cloud.retail.v2alpha.IGetLoggingConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.retail.v2alpha.ILoggingConfig,
-      | protos.google.cloud.retail.v2alpha.IGetLoggingConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.ILoggingConfig,
-      protos.google.cloud.retail.v2alpha.IGetLoggingConfigRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2alpha.IGetLoggingConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getLoggingConfig(
+      request: protos.google.cloud.retail.v2alpha.IGetLoggingConfigRequest,
+      callback: Callback<
+          protos.google.cloud.retail.v2alpha.ILoggingConfig,
+          protos.google.cloud.retail.v2alpha.IGetLoggingConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getLoggingConfig(
+      request?: protos.google.cloud.retail.v2alpha.IGetLoggingConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.retail.v2alpha.ILoggingConfig,
+          protos.google.cloud.retail.v2alpha.IGetLoggingConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.retail.v2alpha.ILoggingConfig,
+          protos.google.cloud.retail.v2alpha.IGetLoggingConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.ILoggingConfig,
+        protos.google.cloud.retail.v2alpha.IGetLoggingConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getLoggingConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.retail.v2alpha.ILoggingConfig,
-          | protos.google.cloud.retail.v2alpha.IGetLoggingConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.retail.v2alpha.ILoggingConfig,
+        protos.google.cloud.retail.v2alpha.IGetLoggingConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getLoggingConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getLoggingConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.retail.v2alpha.ILoggingConfig,
-          (
-            | protos.google.cloud.retail.v2alpha.IGetLoggingConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getLoggingConfig response %j', response);
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.getLoggingConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.retail.v2alpha.ILoggingConfig,
+        protos.google.cloud.retail.v2alpha.IGetLoggingConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getLoggingConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
-  /**
-   * Updates the {@link protos.google.cloud.retail.v2alpha.LoggingConfig|LoggingConfig} of
-   * the requested project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.retail.v2alpha.LoggingConfig} request.loggingConfig
-   *   Required. The {@link protos.google.cloud.retail.v2alpha.LoggingConfig|LoggingConfig} to
-   *   update.
-   *
-   *   If the caller does not have permission to update the
-   *   {@link protos.google.cloud.retail.v2alpha.LoggingConfig|LoggingConfig}, then a
-   *   PERMISSION_DENIED error is returned.
-   *
-   *   If the {@link protos.google.cloud.retail.v2alpha.LoggingConfig|LoggingConfig} to update
-   *   does not exist, a NOT_FOUND error is returned.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Indicates which fields in the provided
-   *   {@link protos.google.cloud.retail.v2alpha.LoggingConfig|LoggingConfig} to update. The
-   *   following are the only supported fields:
-   *
-   *   * {@link protos.google.cloud.retail.v2alpha.LoggingConfig.default_log_generation_rule|LoggingConfig.default_log_generation_rule}
-   *   * {@link protos.google.cloud.retail.v2alpha.LoggingConfig.service_log_generation_rules|LoggingConfig.service_log_generation_rules}
-   *
-   *   If not set, all supported fields are updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.LoggingConfig|LoggingConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/project_service.update_logging_config.js</caption>
-   * region_tag:retail_v2alpha_generated_ProjectService_UpdateLoggingConfig_async
-   */
+/**
+ * Updates the {@link protos.google.cloud.retail.v2alpha.LoggingConfig|LoggingConfig} of
+ * the requested project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.retail.v2alpha.LoggingConfig} request.loggingConfig
+ *   Required. The {@link protos.google.cloud.retail.v2alpha.LoggingConfig|LoggingConfig} to
+ *   update.
+ *
+ *   If the caller does not have permission to update the
+ *   {@link protos.google.cloud.retail.v2alpha.LoggingConfig|LoggingConfig}, then a
+ *   PERMISSION_DENIED error is returned.
+ *
+ *   If the {@link protos.google.cloud.retail.v2alpha.LoggingConfig|LoggingConfig} to update
+ *   does not exist, a NOT_FOUND error is returned.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Indicates which fields in the provided
+ *   {@link protos.google.cloud.retail.v2alpha.LoggingConfig|LoggingConfig} to update. The
+ *   following are the only supported fields:
+ *
+ *   * {@link protos.google.cloud.retail.v2alpha.LoggingConfig.default_log_generation_rule|LoggingConfig.default_log_generation_rule}
+ *   * {@link protos.google.cloud.retail.v2alpha.LoggingConfig.service_log_generation_rules|LoggingConfig.service_log_generation_rules}
+ *
+ *   If not set, all supported fields are updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.LoggingConfig|LoggingConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2alpha/project_service.update_logging_config.js</caption>
+ * region_tag:retail_v2alpha_generated_ProjectService_UpdateLoggingConfig_async
+ */
   updateLoggingConfig(
-    request?: protos.google.cloud.retail.v2alpha.IUpdateLoggingConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.ILoggingConfig,
-      (
-        | protos.google.cloud.retail.v2alpha.IUpdateLoggingConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2alpha.IUpdateLoggingConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.ILoggingConfig,
+        protos.google.cloud.retail.v2alpha.IUpdateLoggingConfigRequest|undefined, {}|undefined
+      ]>;
   updateLoggingConfig(
-    request: protos.google.cloud.retail.v2alpha.IUpdateLoggingConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.ILoggingConfig,
-      | protos.google.cloud.retail.v2alpha.IUpdateLoggingConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateLoggingConfig(
-    request: protos.google.cloud.retail.v2alpha.IUpdateLoggingConfigRequest,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.ILoggingConfig,
-      | protos.google.cloud.retail.v2alpha.IUpdateLoggingConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateLoggingConfig(
-    request?: protos.google.cloud.retail.v2alpha.IUpdateLoggingConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.retail.v2alpha.IUpdateLoggingConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.retail.v2alpha.ILoggingConfig,
-          | protos.google.cloud.retail.v2alpha.IUpdateLoggingConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.retail.v2alpha.ILoggingConfig,
-      | protos.google.cloud.retail.v2alpha.IUpdateLoggingConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.ILoggingConfig,
-      (
-        | protos.google.cloud.retail.v2alpha.IUpdateLoggingConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2alpha.IUpdateLoggingConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateLoggingConfig(
+      request: protos.google.cloud.retail.v2alpha.IUpdateLoggingConfigRequest,
+      callback: Callback<
+          protos.google.cloud.retail.v2alpha.ILoggingConfig,
+          protos.google.cloud.retail.v2alpha.IUpdateLoggingConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateLoggingConfig(
+      request?: protos.google.cloud.retail.v2alpha.IUpdateLoggingConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.retail.v2alpha.ILoggingConfig,
+          protos.google.cloud.retail.v2alpha.IUpdateLoggingConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.retail.v2alpha.ILoggingConfig,
+          protos.google.cloud.retail.v2alpha.IUpdateLoggingConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.ILoggingConfig,
+        protos.google.cloud.retail.v2alpha.IUpdateLoggingConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'logging_config.name': request.loggingConfig!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'logging_config.name': request.loggingConfig!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateLoggingConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.retail.v2alpha.ILoggingConfig,
-          | protos.google.cloud.retail.v2alpha.IUpdateLoggingConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.retail.v2alpha.ILoggingConfig,
+        protos.google.cloud.retail.v2alpha.IUpdateLoggingConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateLoggingConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateLoggingConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.retail.v2alpha.ILoggingConfig,
-          (
-            | protos.google.cloud.retail.v2alpha.IUpdateLoggingConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateLoggingConfig response %j', response);
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.updateLoggingConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.retail.v2alpha.ILoggingConfig,
+        protos.google.cloud.retail.v2alpha.IUpdateLoggingConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateLoggingConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
-  /**
-   * Get the {@link protos.google.cloud.retail.v2alpha.AlertConfig|AlertConfig} of the
-   * requested project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Full AlertConfig resource name. Format:
-   *   projects/{project_number}/alertConfig
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.AlertConfig|AlertConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/project_service.get_alert_config.js</caption>
-   * region_tag:retail_v2alpha_generated_ProjectService_GetAlertConfig_async
-   */
+/**
+ * Get the {@link protos.google.cloud.retail.v2alpha.AlertConfig|AlertConfig} of the
+ * requested project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Full AlertConfig resource name. Format:
+ *   projects/{project_number}/alertConfig
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.AlertConfig|AlertConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2alpha/project_service.get_alert_config.js</caption>
+ * region_tag:retail_v2alpha_generated_ProjectService_GetAlertConfig_async
+ */
   getAlertConfig(
-    request?: protos.google.cloud.retail.v2alpha.IGetAlertConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IAlertConfig,
-      protos.google.cloud.retail.v2alpha.IGetAlertConfigRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2alpha.IGetAlertConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IAlertConfig,
+        protos.google.cloud.retail.v2alpha.IGetAlertConfigRequest|undefined, {}|undefined
+      ]>;
   getAlertConfig(
-    request: protos.google.cloud.retail.v2alpha.IGetAlertConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IAlertConfig,
-      | protos.google.cloud.retail.v2alpha.IGetAlertConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAlertConfig(
-    request: protos.google.cloud.retail.v2alpha.IGetAlertConfigRequest,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IAlertConfig,
-      | protos.google.cloud.retail.v2alpha.IGetAlertConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAlertConfig(
-    request?: protos.google.cloud.retail.v2alpha.IGetAlertConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.retail.v2alpha.IGetAlertConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.retail.v2alpha.IAlertConfig,
-          | protos.google.cloud.retail.v2alpha.IGetAlertConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.retail.v2alpha.IAlertConfig,
-      | protos.google.cloud.retail.v2alpha.IGetAlertConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IAlertConfig,
-      protos.google.cloud.retail.v2alpha.IGetAlertConfigRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2alpha.IGetAlertConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAlertConfig(
+      request: protos.google.cloud.retail.v2alpha.IGetAlertConfigRequest,
+      callback: Callback<
+          protos.google.cloud.retail.v2alpha.IAlertConfig,
+          protos.google.cloud.retail.v2alpha.IGetAlertConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAlertConfig(
+      request?: protos.google.cloud.retail.v2alpha.IGetAlertConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.retail.v2alpha.IAlertConfig,
+          protos.google.cloud.retail.v2alpha.IGetAlertConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.retail.v2alpha.IAlertConfig,
+          protos.google.cloud.retail.v2alpha.IGetAlertConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IAlertConfig,
+        protos.google.cloud.retail.v2alpha.IGetAlertConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getAlertConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.retail.v2alpha.IAlertConfig,
-          | protos.google.cloud.retail.v2alpha.IGetAlertConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.retail.v2alpha.IAlertConfig,
+        protos.google.cloud.retail.v2alpha.IGetAlertConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAlertConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getAlertConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.retail.v2alpha.IAlertConfig,
-          protos.google.cloud.retail.v2alpha.IGetAlertConfigRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getAlertConfig response %j', response);
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.getAlertConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.retail.v2alpha.IAlertConfig,
+        protos.google.cloud.retail.v2alpha.IGetAlertConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getAlertConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
-  /**
-   * Update the alert config of the requested project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.retail.v2alpha.AlertConfig} request.alertConfig
-   *   Required. The {@link protos.google.cloud.retail.v2alpha.AlertConfig|AlertConfig} to
-   *   update.
-   *
-   *   If the caller does not have permission to update the
-   *   {@link protos.google.cloud.retail.v2alpha.AlertConfig|AlertConfig}, then a
-   *   PERMISSION_DENIED error is returned.
-   *
-   *   If the {@link protos.google.cloud.retail.v2alpha.AlertConfig|AlertConfig} to update
-   *   does not exist, a NOT_FOUND error is returned.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Indicates which fields in the provided
-   *   {@link protos.google.cloud.retail.v2alpha.AlertConfig|AlertConfig} to update. If not
-   *   set, all supported fields are updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.AlertConfig|AlertConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/project_service.update_alert_config.js</caption>
-   * region_tag:retail_v2alpha_generated_ProjectService_UpdateAlertConfig_async
-   */
+/**
+ * Update the alert config of the requested project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.retail.v2alpha.AlertConfig} request.alertConfig
+ *   Required. The {@link protos.google.cloud.retail.v2alpha.AlertConfig|AlertConfig} to
+ *   update.
+ *
+ *   If the caller does not have permission to update the
+ *   {@link protos.google.cloud.retail.v2alpha.AlertConfig|AlertConfig}, then a
+ *   PERMISSION_DENIED error is returned.
+ *
+ *   If the {@link protos.google.cloud.retail.v2alpha.AlertConfig|AlertConfig} to update
+ *   does not exist, a NOT_FOUND error is returned.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Indicates which fields in the provided
+ *   {@link protos.google.cloud.retail.v2alpha.AlertConfig|AlertConfig} to update. If not
+ *   set, all supported fields are updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.AlertConfig|AlertConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2alpha/project_service.update_alert_config.js</caption>
+ * region_tag:retail_v2alpha_generated_ProjectService_UpdateAlertConfig_async
+ */
   updateAlertConfig(
-    request?: protos.google.cloud.retail.v2alpha.IUpdateAlertConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IAlertConfig,
-      protos.google.cloud.retail.v2alpha.IUpdateAlertConfigRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2alpha.IUpdateAlertConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IAlertConfig,
+        protos.google.cloud.retail.v2alpha.IUpdateAlertConfigRequest|undefined, {}|undefined
+      ]>;
   updateAlertConfig(
-    request: protos.google.cloud.retail.v2alpha.IUpdateAlertConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IAlertConfig,
-      | protos.google.cloud.retail.v2alpha.IUpdateAlertConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateAlertConfig(
-    request: protos.google.cloud.retail.v2alpha.IUpdateAlertConfigRequest,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IAlertConfig,
-      | protos.google.cloud.retail.v2alpha.IUpdateAlertConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateAlertConfig(
-    request?: protos.google.cloud.retail.v2alpha.IUpdateAlertConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.retail.v2alpha.IUpdateAlertConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.retail.v2alpha.IAlertConfig,
-          | protos.google.cloud.retail.v2alpha.IUpdateAlertConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.retail.v2alpha.IAlertConfig,
-      | protos.google.cloud.retail.v2alpha.IUpdateAlertConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IAlertConfig,
-      protos.google.cloud.retail.v2alpha.IUpdateAlertConfigRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2alpha.IUpdateAlertConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateAlertConfig(
+      request: protos.google.cloud.retail.v2alpha.IUpdateAlertConfigRequest,
+      callback: Callback<
+          protos.google.cloud.retail.v2alpha.IAlertConfig,
+          protos.google.cloud.retail.v2alpha.IUpdateAlertConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateAlertConfig(
+      request?: protos.google.cloud.retail.v2alpha.IUpdateAlertConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.retail.v2alpha.IAlertConfig,
+          protos.google.cloud.retail.v2alpha.IUpdateAlertConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.retail.v2alpha.IAlertConfig,
+          protos.google.cloud.retail.v2alpha.IUpdateAlertConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IAlertConfig,
+        protos.google.cloud.retail.v2alpha.IUpdateAlertConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'alert_config.name': request.alertConfig!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'alert_config.name': request.alertConfig!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateAlertConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.retail.v2alpha.IAlertConfig,
-          | protos.google.cloud.retail.v2alpha.IUpdateAlertConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.retail.v2alpha.IAlertConfig,
+        protos.google.cloud.retail.v2alpha.IUpdateAlertConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateAlertConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateAlertConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.retail.v2alpha.IAlertConfig,
-          (
-            | protos.google.cloud.retail.v2alpha.IUpdateAlertConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateAlertConfig response %j', response);
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.updateAlertConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.retail.v2alpha.IAlertConfig,
+        protos.google.cloud.retail.v2alpha.IUpdateAlertConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateAlertConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
 
-  /**
-   * The method enrolls a solution of type [Retail
-   * Search][google.cloud.retail.v2alpha.SolutionType.SOLUTION_TYPE_SEARCH]
-   * into a project.
-   *
-   * The [Recommendations AI solution
-   * type][google.cloud.retail.v2alpha.SolutionType.SOLUTION_TYPE_RECOMMENDATION]
-   * is enrolled by default when your project enables Retail API, so you don't
-   * need to call the enrollSolution method for recommendations.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project
-   *   Required. Full resource name of parent. Format:
-   *   `projects/{project_number_or_id}`
-   * @param {google.cloud.retail.v2alpha.SolutionType} request.solution
-   *   Required. Solution to enroll.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/project_service.enroll_solution.js</caption>
-   * region_tag:retail_v2alpha_generated_ProjectService_EnrollSolution_async
-   */
+/**
+ * The method enrolls a solution of type [Retail
+ * Search][google.cloud.retail.v2alpha.SolutionType.SOLUTION_TYPE_SEARCH]
+ * into a project.
+ *
+ * The [Recommendations AI solution
+ * type][google.cloud.retail.v2alpha.SolutionType.SOLUTION_TYPE_RECOMMENDATION]
+ * is enrolled by default when your project enables Retail API, so you don't
+ * need to call the enrollSolution method for recommendations.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.project
+ *   Required. Full resource name of parent. Format:
+ *   `projects/{project_number_or_id}`
+ * @param {google.cloud.retail.v2alpha.SolutionType} request.solution
+ *   Required. Solution to enroll.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2alpha/project_service.enroll_solution.js</caption>
+ * region_tag:retail_v2alpha_generated_ProjectService_EnrollSolution_async
+ */
   enrollSolution(
-    request?: protos.google.cloud.retail.v2alpha.IEnrollSolutionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.retail.v2alpha.IEnrollSolutionResponse,
-        protos.google.cloud.retail.v2alpha.IEnrollSolutionMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2alpha.IEnrollSolutionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.retail.v2alpha.IEnrollSolutionResponse, protos.google.cloud.retail.v2alpha.IEnrollSolutionMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   enrollSolution(
-    request: protos.google.cloud.retail.v2alpha.IEnrollSolutionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2alpha.IEnrollSolutionResponse,
-        protos.google.cloud.retail.v2alpha.IEnrollSolutionMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.retail.v2alpha.IEnrollSolutionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.retail.v2alpha.IEnrollSolutionResponse, protos.google.cloud.retail.v2alpha.IEnrollSolutionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   enrollSolution(
-    request: protos.google.cloud.retail.v2alpha.IEnrollSolutionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2alpha.IEnrollSolutionResponse,
-        protos.google.cloud.retail.v2alpha.IEnrollSolutionMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.retail.v2alpha.IEnrollSolutionRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.retail.v2alpha.IEnrollSolutionResponse, protos.google.cloud.retail.v2alpha.IEnrollSolutionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   enrollSolution(
-    request?: protos.google.cloud.retail.v2alpha.IEnrollSolutionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.retail.v2alpha.IEnrollSolutionResponse,
-            protos.google.cloud.retail.v2alpha.IEnrollSolutionMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2alpha.IEnrollSolutionResponse,
-        protos.google.cloud.retail.v2alpha.IEnrollSolutionMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.retail.v2alpha.IEnrollSolutionResponse,
-        protos.google.cloud.retail.v2alpha.IEnrollSolutionMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.retail.v2alpha.IEnrollSolutionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.retail.v2alpha.IEnrollSolutionResponse, protos.google.cloud.retail.v2alpha.IEnrollSolutionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.retail.v2alpha.IEnrollSolutionResponse, protos.google.cloud.retail.v2alpha.IEnrollSolutionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.retail.v2alpha.IEnrollSolutionResponse, protos.google.cloud.retail.v2alpha.IEnrollSolutionMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.retail.v2alpha.IEnrollSolutionResponse,
-            protos.google.cloud.retail.v2alpha.IEnrollSolutionMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.retail.v2alpha.IEnrollSolutionResponse, protos.google.cloud.retail.v2alpha.IEnrollSolutionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('enrollSolution response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('enrollSolution request %j', request);
-    return this.innerApiCalls
-      .enrollSolution(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.retail.v2alpha.IEnrollSolutionResponse,
-            protos.google.cloud.retail.v2alpha.IEnrollSolutionMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('enrollSolution response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.enrollSolution(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.retail.v2alpha.IEnrollSolutionResponse, protos.google.cloud.retail.v2alpha.IEnrollSolutionMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('enrollSolution response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `enrollSolution()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/project_service.enroll_solution.js</caption>
-   * region_tag:retail_v2alpha_generated_ProjectService_EnrollSolution_async
-   */
-  async checkEnrollSolutionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.retail.v2alpha.EnrollSolutionResponse,
-      protos.google.cloud.retail.v2alpha.EnrollSolutionMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `enrollSolution()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2alpha/project_service.enroll_solution.js</caption>
+ * region_tag:retail_v2alpha_generated_ProjectService_EnrollSolution_async
+ */
+  async checkEnrollSolutionProgress(name: string): Promise<LROperation<protos.google.cloud.retail.v2alpha.EnrollSolutionResponse, protos.google.cloud.retail.v2alpha.EnrollSolutionMetadata>>{
     this._log.info('enrollSolution long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.enrollSolution,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.retail.v2alpha.EnrollSolutionResponse,
-      protos.google.cloud.retail.v2alpha.EnrollSolutionMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.enrollSolution, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.retail.v2alpha.EnrollSolutionResponse, protos.google.cloud.retail.v2alpha.EnrollSolutionMetadata>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1689,7 +1257,7 @@ export class ProjectServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1727,7 +1295,7 @@ export class ProjectServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1772,20 +1340,20 @@ export class ProjectServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1822,13 +1390,13 @@ export class ProjectServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1862,7 +1430,7 @@ export class ProjectServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1877,20 +1445,20 @@ export class ProjectServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1934,20 +1502,20 @@ export class ProjectServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1961,7 +1529,7 @@ export class ProjectServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  alertConfigPath(project: string) {
+  alertConfigPath(project:string) {
     return this.pathTemplates.alertConfigPathTemplate.render({
       project: project,
     });
@@ -1975,8 +1543,7 @@ export class ProjectServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAlertConfigName(alertConfigName: string) {
-    return this.pathTemplates.alertConfigPathTemplate.match(alertConfigName)
-      .project;
+    return this.pathTemplates.alertConfigPathTemplate.match(alertConfigName).project;
   }
 
   /**
@@ -1987,7 +1554,7 @@ export class ProjectServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  attributesConfigPath(project: string, location: string, catalog: string) {
+  attributesConfigPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.attributesConfigPathTemplate.render({
       project: project,
       location: location,
@@ -2003,9 +1570,7 @@ export class ProjectServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).project;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).project;
   }
 
   /**
@@ -2016,9 +1581,7 @@ export class ProjectServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).location;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).location;
   }
 
   /**
@@ -2029,9 +1592,7 @@ export class ProjectServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).catalog;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).catalog;
   }
 
   /**
@@ -2043,12 +1604,7 @@ export class ProjectServiceClient {
    * @param {string} branch
    * @returns {string} Resource name string.
    */
-  branchPath(
-    project: string,
-    location: string,
-    catalog: string,
-    branch: string
-  ) {
+  branchPath(project:string,location:string,catalog:string,branch:string) {
     return this.pathTemplates.branchPathTemplate.render({
       project: project,
       location: location,
@@ -2109,7 +1665,7 @@ export class ProjectServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  catalogPath(project: string, location: string, catalog: string) {
+  catalogPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.catalogPathTemplate.render({
       project: project,
       location: location,
@@ -2158,7 +1714,7 @@ export class ProjectServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  completionConfigPath(project: string, location: string, catalog: string) {
+  completionConfigPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.completionConfigPathTemplate.render({
       project: project,
       location: location,
@@ -2174,9 +1730,7 @@ export class ProjectServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).project;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).project;
   }
 
   /**
@@ -2187,9 +1741,7 @@ export class ProjectServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).location;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).location;
   }
 
   /**
@@ -2200,9 +1752,7 @@ export class ProjectServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).catalog;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).catalog;
   }
 
   /**
@@ -2214,12 +1764,7 @@ export class ProjectServiceClient {
    * @param {string} control
    * @returns {string} Resource name string.
    */
-  controlPath(
-    project: string,
-    location: string,
-    catalog: string,
-    control: string
-  ) {
+  controlPath(project:string,location:string,catalog:string,control:string) {
     return this.pathTemplates.controlPathTemplate.render({
       project: project,
       location: location,
@@ -2278,7 +1823,7 @@ export class ProjectServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  loggingConfigPath(project: string) {
+  loggingConfigPath(project:string) {
     return this.pathTemplates.loggingConfigPathTemplate.render({
       project: project,
     });
@@ -2292,8 +1837,7 @@ export class ProjectServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromLoggingConfigName(loggingConfigName: string) {
-    return this.pathTemplates.loggingConfigPathTemplate.match(loggingConfigName)
-      .project;
+    return this.pathTemplates.loggingConfigPathTemplate.match(loggingConfigName).project;
   }
 
   /**
@@ -2305,12 +1849,7 @@ export class ProjectServiceClient {
    * @param {string} merchant_center_account_link
    * @returns {string} Resource name string.
    */
-  merchantCenterAccountLinkPath(
-    project: string,
-    location: string,
-    catalog: string,
-    merchantCenterAccountLink: string
-  ) {
+  merchantCenterAccountLinkPath(project:string,location:string,catalog:string,merchantCenterAccountLink:string) {
     return this.pathTemplates.merchantCenterAccountLinkPathTemplate.render({
       project: project,
       location: location,
@@ -2326,12 +1865,8 @@ export class ProjectServiceClient {
    *   A fully-qualified path representing MerchantCenterAccountLink resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromMerchantCenterAccountLinkName(
-    merchantCenterAccountLinkName: string
-  ) {
-    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
-      merchantCenterAccountLinkName
-    ).project;
+  matchProjectFromMerchantCenterAccountLinkName(merchantCenterAccountLinkName: string) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(merchantCenterAccountLinkName).project;
   }
 
   /**
@@ -2341,12 +1876,8 @@ export class ProjectServiceClient {
    *   A fully-qualified path representing MerchantCenterAccountLink resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromMerchantCenterAccountLinkName(
-    merchantCenterAccountLinkName: string
-  ) {
-    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
-      merchantCenterAccountLinkName
-    ).location;
+  matchLocationFromMerchantCenterAccountLinkName(merchantCenterAccountLinkName: string) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(merchantCenterAccountLinkName).location;
   }
 
   /**
@@ -2356,12 +1887,8 @@ export class ProjectServiceClient {
    *   A fully-qualified path representing MerchantCenterAccountLink resource.
    * @returns {string} A string representing the catalog.
    */
-  matchCatalogFromMerchantCenterAccountLinkName(
-    merchantCenterAccountLinkName: string
-  ) {
-    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
-      merchantCenterAccountLinkName
-    ).catalog;
+  matchCatalogFromMerchantCenterAccountLinkName(merchantCenterAccountLinkName: string) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(merchantCenterAccountLinkName).catalog;
   }
 
   /**
@@ -2371,12 +1898,8 @@ export class ProjectServiceClient {
    *   A fully-qualified path representing MerchantCenterAccountLink resource.
    * @returns {string} A string representing the merchant_center_account_link.
    */
-  matchMerchantCenterAccountLinkFromMerchantCenterAccountLinkName(
-    merchantCenterAccountLinkName: string
-  ) {
-    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
-      merchantCenterAccountLinkName
-    ).merchant_center_account_link;
+  matchMerchantCenterAccountLinkFromMerchantCenterAccountLinkName(merchantCenterAccountLinkName: string) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(merchantCenterAccountLinkName).merchant_center_account_link;
   }
 
   /**
@@ -2388,7 +1911,7 @@ export class ProjectServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(project: string, location: string, catalog: string, model: string) {
+  modelPath(project:string,location:string,catalog:string,model:string) {
     return this.pathTemplates.modelPathTemplate.render({
       project: project,
       location: location,
@@ -2451,13 +1974,7 @@ export class ProjectServiceClient {
    * @param {string} product
    * @returns {string} Resource name string.
    */
-  productPath(
-    project: string,
-    location: string,
-    catalog: string,
-    branch: string,
-    product: string
-  ) {
+  productPath(project:string,location:string,catalog:string,branch:string,product:string) {
     return this.pathTemplates.productPathTemplate.render({
       project: project,
       location: location,
@@ -2528,7 +2045,7 @@ export class ProjectServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2551,7 +2068,7 @@ export class ProjectServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  retailProjectPath(project: string) {
+  retailProjectPath(project:string) {
     return this.pathTemplates.retailProjectPathTemplate.render({
       project: project,
     });
@@ -2565,8 +2082,7 @@ export class ProjectServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRetailProjectName(retailProjectName: string) {
-    return this.pathTemplates.retailProjectPathTemplate.match(retailProjectName)
-      .project;
+    return this.pathTemplates.retailProjectPathTemplate.match(retailProjectName).project;
   }
 
   /**
@@ -2578,12 +2094,7 @@ export class ProjectServiceClient {
    * @param {string} serving_config
    * @returns {string} Resource name string.
    */
-  servingConfigPath(
-    project: string,
-    location: string,
-    catalog: string,
-    servingConfig: string
-  ) {
+  servingConfigPath(project:string,location:string,catalog:string,servingConfig:string) {
     return this.pathTemplates.servingConfigPathTemplate.render({
       project: project,
       location: location,
@@ -2600,8 +2111,7 @@ export class ProjectServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .project;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).project;
   }
 
   /**
@@ -2612,8 +2122,7 @@ export class ProjectServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .location;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).location;
   }
 
   /**
@@ -2624,8 +2133,7 @@ export class ProjectServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .catalog;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).catalog;
   }
 
   /**
@@ -2636,8 +2144,7 @@ export class ProjectServiceClient {
    * @returns {string} A string representing the serving_config.
    */
   matchServingConfigFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .serving_config;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).serving_config;
   }
 
   /**
@@ -2652,9 +2159,7 @@ export class ProjectServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

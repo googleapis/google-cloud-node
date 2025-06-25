@@ -18,15 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LocationsClient, LocationProtos} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -110,42 +102,20 @@ export class GenerativeQuestionServiceClient {
    *     const client = new GenerativeQuestionServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof GenerativeQuestionServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof GenerativeQuestionServiceClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'retail.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -171,7 +141,7 @@ export class GenerativeQuestionServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -187,9 +157,13 @@ export class GenerativeQuestionServiceClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -254,48 +228,23 @@ export class GenerativeQuestionServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',
-          additional_bindings: [
-            {
-              get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/places/*/operations/*}',
-            },
-            {
-              get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/operations/*}',
-            },
-            {get: '/v2alpha/{name=projects/*/locations/*/operations/*}'},
-            {get: '/v2alpha/{name=projects/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v2alpha/{name=projects/*/locations/*/catalogs/*}/operations',
-          additional_bindings: [
-            {get: '/v2alpha/{name=projects/*/locations/*}/operations'},
-            {get: '/v2alpha/{name=projects/*}/operations'},
-          ],
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',additional_bindings: [{get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/places/*/operations/*}',},{get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/operations/*}',},{get: '/v2alpha/{name=projects/*/locations/*/operations/*}',},{get: '/v2alpha/{name=projects/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v2alpha/{name=projects/*/locations/*/catalogs/*}/operations',additional_bindings: [{get: '/v2alpha/{name=projects/*/locations/*}/operations',},{get: '/v2alpha/{name=projects/*}/operations',}],
+      }];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
 
-    this.descriptors.longrunning = {};
+    this.descriptors.longrunning = {
+    };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.retail.v2alpha.GenerativeQuestionService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.retail.v2alpha.GenerativeQuestionService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -326,42 +275,31 @@ export class GenerativeQuestionServiceClient {
     // Put together the "service stub" for
     // google.cloud.retail.v2alpha.GenerativeQuestionService.
     this.generativeQuestionServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.retail.v2alpha.GenerativeQuestionService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.retail.v2alpha
-            .GenerativeQuestionService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.retail.v2alpha.GenerativeQuestionService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.retail.v2alpha.GenerativeQuestionService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const generativeQuestionServiceStubMethods = [
-      'updateGenerativeQuestionsFeatureConfig',
-      'getGenerativeQuestionsFeatureConfig',
-      'listGenerativeQuestionConfigs',
-      'updateGenerativeQuestionConfig',
-      'batchUpdateGenerativeQuestionConfigs',
-    ];
+    const generativeQuestionServiceStubMethods =
+        ['updateGenerativeQuestionsFeatureConfig', 'getGenerativeQuestionsFeatureConfig', 'listGenerativeQuestionConfigs', 'updateGenerativeQuestionConfig', 'batchUpdateGenerativeQuestionConfigs'];
     for (const methodName of generativeQuestionServiceStubMethods) {
       const callPromise = this.generativeQuestionServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -381,14 +319,8 @@ export class GenerativeQuestionServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'retail.googleapis.com';
   }
@@ -399,14 +331,8 @@ export class GenerativeQuestionServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'retail.googleapis.com';
   }
@@ -437,7 +363,9 @@ export class GenerativeQuestionServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -446,9 +374,8 @@ export class GenerativeQuestionServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -459,771 +386,497 @@ export class GenerativeQuestionServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Manages overal generative question feature state -- enables toggling
-   * feature on and off.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.retail.v2alpha.GenerativeQuestionsFeatureConfig} request.generativeQuestionsFeatureConfig
-   *   Required. The configuration managing the feature state.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Indicates which fields in the provided
-   *   {@link protos.google.cloud.retail.v2alpha.GenerativeQuestionsFeatureConfig|GenerativeQuestionsFeatureConfig}
-   *   to update. If not set or empty, all supported fields are updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.GenerativeQuestionsFeatureConfig|GenerativeQuestionsFeatureConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/generative_question_service.update_generative_questions_feature_config.js</caption>
-   * region_tag:retail_v2alpha_generated_GenerativeQuestionService_UpdateGenerativeQuestionsFeatureConfig_async
-   */
+/**
+ * Manages overal generative question feature state -- enables toggling
+ * feature on and off.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.retail.v2alpha.GenerativeQuestionsFeatureConfig} request.generativeQuestionsFeatureConfig
+ *   Required. The configuration managing the feature state.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Indicates which fields in the provided
+ *   {@link protos.google.cloud.retail.v2alpha.GenerativeQuestionsFeatureConfig|GenerativeQuestionsFeatureConfig}
+ *   to update. If not set or empty, all supported fields are updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.GenerativeQuestionsFeatureConfig|GenerativeQuestionsFeatureConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2alpha/generative_question_service.update_generative_questions_feature_config.js</caption>
+ * region_tag:retail_v2alpha_generated_GenerativeQuestionService_UpdateGenerativeQuestionsFeatureConfig_async
+ */
   updateGenerativeQuestionsFeatureConfig(
-    request?: protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionsFeatureConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
-      (
-        | protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionsFeatureConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionsFeatureConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
+        protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionsFeatureConfigRequest|undefined, {}|undefined
+      ]>;
   updateGenerativeQuestionsFeatureConfig(
-    request: protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionsFeatureConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
-      | protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionsFeatureConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateGenerativeQuestionsFeatureConfig(
-    request: protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionsFeatureConfigRequest,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
-      | protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionsFeatureConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateGenerativeQuestionsFeatureConfig(
-    request?: protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionsFeatureConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionsFeatureConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
-          | protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionsFeatureConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
-      | protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionsFeatureConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
-      (
-        | protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionsFeatureConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionsFeatureConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateGenerativeQuestionsFeatureConfig(
+      request: protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionsFeatureConfigRequest,
+      callback: Callback<
+          protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
+          protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionsFeatureConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateGenerativeQuestionsFeatureConfig(
+      request?: protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionsFeatureConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
+          protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionsFeatureConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
+          protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionsFeatureConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
+        protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionsFeatureConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'generative_questions_feature_config.catalog':
-          request.generativeQuestionsFeatureConfig!.catalog ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'generative_questions_feature_config.catalog': request.generativeQuestionsFeatureConfig!.catalog ?? '',
     });
-    this._log.info(
-      'updateGenerativeQuestionsFeatureConfig request %j',
-      request
-    );
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
-          | protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionsFeatureConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    this._log.info('updateGenerativeQuestionsFeatureConfig request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
+        protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionsFeatureConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
-            'updateGenerativeQuestionsFeatureConfig response %j',
-            response
-          );
+          this._log.info('updateGenerativeQuestionsFeatureConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateGenerativeQuestionsFeatureConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
-          (
-            | protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionsFeatureConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'updateGenerativeQuestionsFeatureConfig response %j',
-            response
-          );
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.updateGenerativeQuestionsFeatureConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
+        protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionsFeatureConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateGenerativeQuestionsFeatureConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
-  /**
-   * Manages overal generative question feature state -- enables toggling
-   * feature on and off.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.catalog
-   *   Required. Resource name of the parent catalog.
-   *   Format: projects/{project}/locations/{location}/catalogs/{catalog}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.GenerativeQuestionsFeatureConfig|GenerativeQuestionsFeatureConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/generative_question_service.get_generative_questions_feature_config.js</caption>
-   * region_tag:retail_v2alpha_generated_GenerativeQuestionService_GetGenerativeQuestionsFeatureConfig_async
-   */
+/**
+ * Manages overal generative question feature state -- enables toggling
+ * feature on and off.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.catalog
+ *   Required. Resource name of the parent catalog.
+ *   Format: projects/{project}/locations/{location}/catalogs/{catalog}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.GenerativeQuestionsFeatureConfig|GenerativeQuestionsFeatureConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2alpha/generative_question_service.get_generative_questions_feature_config.js</caption>
+ * region_tag:retail_v2alpha_generated_GenerativeQuestionService_GetGenerativeQuestionsFeatureConfig_async
+ */
   getGenerativeQuestionsFeatureConfig(
-    request?: protos.google.cloud.retail.v2alpha.IGetGenerativeQuestionsFeatureConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
-      (
-        | protos.google.cloud.retail.v2alpha.IGetGenerativeQuestionsFeatureConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2alpha.IGetGenerativeQuestionsFeatureConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
+        protos.google.cloud.retail.v2alpha.IGetGenerativeQuestionsFeatureConfigRequest|undefined, {}|undefined
+      ]>;
   getGenerativeQuestionsFeatureConfig(
-    request: protos.google.cloud.retail.v2alpha.IGetGenerativeQuestionsFeatureConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
-      | protos.google.cloud.retail.v2alpha.IGetGenerativeQuestionsFeatureConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getGenerativeQuestionsFeatureConfig(
-    request: protos.google.cloud.retail.v2alpha.IGetGenerativeQuestionsFeatureConfigRequest,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
-      | protos.google.cloud.retail.v2alpha.IGetGenerativeQuestionsFeatureConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getGenerativeQuestionsFeatureConfig(
-    request?: protos.google.cloud.retail.v2alpha.IGetGenerativeQuestionsFeatureConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.retail.v2alpha.IGetGenerativeQuestionsFeatureConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
-          | protos.google.cloud.retail.v2alpha.IGetGenerativeQuestionsFeatureConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
-      | protos.google.cloud.retail.v2alpha.IGetGenerativeQuestionsFeatureConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
-      (
-        | protos.google.cloud.retail.v2alpha.IGetGenerativeQuestionsFeatureConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2alpha.IGetGenerativeQuestionsFeatureConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getGenerativeQuestionsFeatureConfig(
+      request: protos.google.cloud.retail.v2alpha.IGetGenerativeQuestionsFeatureConfigRequest,
+      callback: Callback<
+          protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
+          protos.google.cloud.retail.v2alpha.IGetGenerativeQuestionsFeatureConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getGenerativeQuestionsFeatureConfig(
+      request?: protos.google.cloud.retail.v2alpha.IGetGenerativeQuestionsFeatureConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
+          protos.google.cloud.retail.v2alpha.IGetGenerativeQuestionsFeatureConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
+          protos.google.cloud.retail.v2alpha.IGetGenerativeQuestionsFeatureConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
+        protos.google.cloud.retail.v2alpha.IGetGenerativeQuestionsFeatureConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        catalog: request.catalog ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'catalog': request.catalog ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getGenerativeQuestionsFeatureConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
-          | protos.google.cloud.retail.v2alpha.IGetGenerativeQuestionsFeatureConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
+        protos.google.cloud.retail.v2alpha.IGetGenerativeQuestionsFeatureConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
-            'getGenerativeQuestionsFeatureConfig response %j',
-            response
-          );
+          this._log.info('getGenerativeQuestionsFeatureConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getGenerativeQuestionsFeatureConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
-          (
-            | protos.google.cloud.retail.v2alpha.IGetGenerativeQuestionsFeatureConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'getGenerativeQuestionsFeatureConfig response %j',
-            response
-          );
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.getGenerativeQuestionsFeatureConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
+        protos.google.cloud.retail.v2alpha.IGetGenerativeQuestionsFeatureConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getGenerativeQuestionsFeatureConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
-  /**
-   * Returns all questions for a given catalog.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the parent catalog.
-   *   Format: projects/{project}/locations/{location}/catalogs/{catalog}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.ListGenerativeQuestionConfigsResponse|ListGenerativeQuestionConfigsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/generative_question_service.list_generative_question_configs.js</caption>
-   * region_tag:retail_v2alpha_generated_GenerativeQuestionService_ListGenerativeQuestionConfigs_async
-   */
+/**
+ * Returns all questions for a given catalog.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the parent catalog.
+ *   Format: projects/{project}/locations/{location}/catalogs/{catalog}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.ListGenerativeQuestionConfigsResponse|ListGenerativeQuestionConfigsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2alpha/generative_question_service.list_generative_question_configs.js</caption>
+ * region_tag:retail_v2alpha_generated_GenerativeQuestionService_ListGenerativeQuestionConfigs_async
+ */
   listGenerativeQuestionConfigs(
-    request?: protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsResponse,
-      (
-        | protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsResponse,
+        protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsRequest|undefined, {}|undefined
+      ]>;
   listGenerativeQuestionConfigs(
-    request: protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsResponse,
-      | protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listGenerativeQuestionConfigs(
-    request: protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsRequest,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsResponse,
-      | protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listGenerativeQuestionConfigs(
-    request?: protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsResponse,
-          | protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsResponse,
-      | protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsResponse,
-      (
-        | protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsRequest|null|undefined,
+          {}|null|undefined>): void;
+  listGenerativeQuestionConfigs(
+      request: protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsRequest,
+      callback: Callback<
+          protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsResponse,
+          protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsRequest|null|undefined,
+          {}|null|undefined>): void;
+  listGenerativeQuestionConfigs(
+      request?: protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsResponse,
+          protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsResponse,
+          protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsResponse,
+        protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('listGenerativeQuestionConfigs request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsResponse,
-          | protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsResponse,
+        protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('listGenerativeQuestionConfigs response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .listGenerativeQuestionConfigs(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsResponse,
-          (
-            | protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('listGenerativeQuestionConfigs response %j', response);
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.listGenerativeQuestionConfigs(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsResponse,
+        protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('listGenerativeQuestionConfigs response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
-  /**
-   * Allows management of individual questions.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.retail.v2alpha.GenerativeQuestionConfig} request.generativeQuestionConfig
-   *   Required. The question to update.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Indicates which fields in the provided
-   *   {@link protos.google.cloud.retail.v2alpha.GenerativeQuestionConfig|GenerativeQuestionConfig}
-   *   to update. The following are NOT supported:
-   *
-   *   * {@link protos.google.cloud.retail.v2alpha.GenerativeQuestionConfig.frequency|GenerativeQuestionConfig.frequency}
-   *
-   *   If not set or empty, all supported fields are updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.GenerativeQuestionConfig|GenerativeQuestionConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/generative_question_service.update_generative_question_config.js</caption>
-   * region_tag:retail_v2alpha_generated_GenerativeQuestionService_UpdateGenerativeQuestionConfig_async
-   */
+/**
+ * Allows management of individual questions.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.retail.v2alpha.GenerativeQuestionConfig} request.generativeQuestionConfig
+ *   Required. The question to update.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Indicates which fields in the provided
+ *   {@link protos.google.cloud.retail.v2alpha.GenerativeQuestionConfig|GenerativeQuestionConfig}
+ *   to update. The following are NOT supported:
+ *
+ *   * {@link protos.google.cloud.retail.v2alpha.GenerativeQuestionConfig.frequency|GenerativeQuestionConfig.frequency}
+ *
+ *   If not set or empty, all supported fields are updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.GenerativeQuestionConfig|GenerativeQuestionConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2alpha/generative_question_service.update_generative_question_config.js</caption>
+ * region_tag:retail_v2alpha_generated_GenerativeQuestionService_UpdateGenerativeQuestionConfig_async
+ */
   updateGenerativeQuestionConfig(
-    request?: protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IGenerativeQuestionConfig,
-      (
-        | protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IGenerativeQuestionConfig,
+        protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionConfigRequest|undefined, {}|undefined
+      ]>;
   updateGenerativeQuestionConfig(
-    request: protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IGenerativeQuestionConfig,
-      | protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateGenerativeQuestionConfig(
-    request: protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionConfigRequest,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IGenerativeQuestionConfig,
-      | protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateGenerativeQuestionConfig(
-    request?: protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.retail.v2alpha.IGenerativeQuestionConfig,
-          | protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.retail.v2alpha.IGenerativeQuestionConfig,
-      | protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IGenerativeQuestionConfig,
-      (
-        | protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateGenerativeQuestionConfig(
+      request: protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionConfigRequest,
+      callback: Callback<
+          protos.google.cloud.retail.v2alpha.IGenerativeQuestionConfig,
+          protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateGenerativeQuestionConfig(
+      request?: protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.retail.v2alpha.IGenerativeQuestionConfig,
+          protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.retail.v2alpha.IGenerativeQuestionConfig,
+          protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IGenerativeQuestionConfig,
+        protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'generative_question_config.catalog':
-          request.generativeQuestionConfig!.catalog ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'generative_question_config.catalog': request.generativeQuestionConfig!.catalog ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateGenerativeQuestionConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.retail.v2alpha.IGenerativeQuestionConfig,
-          | protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.retail.v2alpha.IGenerativeQuestionConfig,
+        protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
-            'updateGenerativeQuestionConfig response %j',
-            response
-          );
+          this._log.info('updateGenerativeQuestionConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateGenerativeQuestionConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.retail.v2alpha.IGenerativeQuestionConfig,
-          (
-            | protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'updateGenerativeQuestionConfig response %j',
-            response
-          );
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.updateGenerativeQuestionConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.retail.v2alpha.IGenerativeQuestionConfig,
+        protos.google.cloud.retail.v2alpha.IUpdateGenerativeQuestionConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateGenerativeQuestionConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
-  /**
-   * Allows management of multiple questions.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} [request.parent]
-   *   Optional. Resource name of the parent catalog.
-   *   Format: projects/{project}/locations/{location}/catalogs/{catalog}
-   * @param {number[]} request.requests
-   *   Required. The updates question configs.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.BatchUpdateGenerativeQuestionConfigsResponse|BatchUpdateGenerativeQuestionConfigsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/generative_question_service.batch_update_generative_question_configs.js</caption>
-   * region_tag:retail_v2alpha_generated_GenerativeQuestionService_BatchUpdateGenerativeQuestionConfigs_async
-   */
+/**
+ * Allows management of multiple questions.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} [request.parent]
+ *   Optional. Resource name of the parent catalog.
+ *   Format: projects/{project}/locations/{location}/catalogs/{catalog}
+ * @param {number[]} request.requests
+ *   Required. The updates question configs.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.BatchUpdateGenerativeQuestionConfigsResponse|BatchUpdateGenerativeQuestionConfigsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2alpha/generative_question_service.batch_update_generative_question_configs.js</caption>
+ * region_tag:retail_v2alpha_generated_GenerativeQuestionService_BatchUpdateGenerativeQuestionConfigs_async
+ */
   batchUpdateGenerativeQuestionConfigs(
-    request?: protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsResponse,
-      (
-        | protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsResponse,
+        protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsRequest|undefined, {}|undefined
+      ]>;
   batchUpdateGenerativeQuestionConfigs(
-    request: protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsResponse,
-      | protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchUpdateGenerativeQuestionConfigs(
-    request: protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsRequest,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsResponse,
-      | protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchUpdateGenerativeQuestionConfigs(
-    request?: protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsResponse,
-          | protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsResponse,
-      | protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsResponse,
-      (
-        | protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchUpdateGenerativeQuestionConfigs(
+      request: protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsRequest,
+      callback: Callback<
+          protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsResponse,
+          protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchUpdateGenerativeQuestionConfigs(
+      request?: protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsResponse,
+          protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsResponse,
+          protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsResponse,
+        protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('batchUpdateGenerativeQuestionConfigs request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsResponse,
-          | protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsResponse,
+        protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
-            'batchUpdateGenerativeQuestionConfigs response %j',
-            response
-          );
+          this._log.info('batchUpdateGenerativeQuestionConfigs response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .batchUpdateGenerativeQuestionConfigs(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsResponse,
-          (
-            | protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'batchUpdateGenerativeQuestionConfigs response %j',
-            response
-          );
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.batchUpdateGenerativeQuestionConfigs(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsResponse,
+        protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchUpdateGenerativeQuestionConfigs response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
 
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1263,7 +916,7 @@ export class GenerativeQuestionServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1301,7 +954,7 @@ export class GenerativeQuestionServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1346,20 +999,20 @@ export class GenerativeQuestionServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1396,13 +1049,13 @@ export class GenerativeQuestionServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1436,7 +1089,7 @@ export class GenerativeQuestionServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1451,20 +1104,20 @@ export class GenerativeQuestionServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1508,20 +1161,20 @@ export class GenerativeQuestionServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1535,7 +1188,7 @@ export class GenerativeQuestionServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  alertConfigPath(project: string) {
+  alertConfigPath(project:string) {
     return this.pathTemplates.alertConfigPathTemplate.render({
       project: project,
     });
@@ -1549,8 +1202,7 @@ export class GenerativeQuestionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAlertConfigName(alertConfigName: string) {
-    return this.pathTemplates.alertConfigPathTemplate.match(alertConfigName)
-      .project;
+    return this.pathTemplates.alertConfigPathTemplate.match(alertConfigName).project;
   }
 
   /**
@@ -1561,7 +1213,7 @@ export class GenerativeQuestionServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  attributesConfigPath(project: string, location: string, catalog: string) {
+  attributesConfigPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.attributesConfigPathTemplate.render({
       project: project,
       location: location,
@@ -1577,9 +1229,7 @@ export class GenerativeQuestionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).project;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).project;
   }
 
   /**
@@ -1590,9 +1240,7 @@ export class GenerativeQuestionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).location;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).location;
   }
 
   /**
@@ -1603,9 +1251,7 @@ export class GenerativeQuestionServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).catalog;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).catalog;
   }
 
   /**
@@ -1617,12 +1263,7 @@ export class GenerativeQuestionServiceClient {
    * @param {string} branch
    * @returns {string} Resource name string.
    */
-  branchPath(
-    project: string,
-    location: string,
-    catalog: string,
-    branch: string
-  ) {
+  branchPath(project:string,location:string,catalog:string,branch:string) {
     return this.pathTemplates.branchPathTemplate.render({
       project: project,
       location: location,
@@ -1683,7 +1324,7 @@ export class GenerativeQuestionServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  catalogPath(project: string, location: string, catalog: string) {
+  catalogPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.catalogPathTemplate.render({
       project: project,
       location: location,
@@ -1732,7 +1373,7 @@ export class GenerativeQuestionServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  completionConfigPath(project: string, location: string, catalog: string) {
+  completionConfigPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.completionConfigPathTemplate.render({
       project: project,
       location: location,
@@ -1748,9 +1389,7 @@ export class GenerativeQuestionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).project;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).project;
   }
 
   /**
@@ -1761,9 +1400,7 @@ export class GenerativeQuestionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).location;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).location;
   }
 
   /**
@@ -1774,9 +1411,7 @@ export class GenerativeQuestionServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).catalog;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).catalog;
   }
 
   /**
@@ -1788,12 +1423,7 @@ export class GenerativeQuestionServiceClient {
    * @param {string} control
    * @returns {string} Resource name string.
    */
-  controlPath(
-    project: string,
-    location: string,
-    catalog: string,
-    control: string
-  ) {
+  controlPath(project:string,location:string,catalog:string,control:string) {
     return this.pathTemplates.controlPathTemplate.render({
       project: project,
       location: location,
@@ -1852,7 +1482,7 @@ export class GenerativeQuestionServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  loggingConfigPath(project: string) {
+  loggingConfigPath(project:string) {
     return this.pathTemplates.loggingConfigPathTemplate.render({
       project: project,
     });
@@ -1866,8 +1496,7 @@ export class GenerativeQuestionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromLoggingConfigName(loggingConfigName: string) {
-    return this.pathTemplates.loggingConfigPathTemplate.match(loggingConfigName)
-      .project;
+    return this.pathTemplates.loggingConfigPathTemplate.match(loggingConfigName).project;
   }
 
   /**
@@ -1879,12 +1508,7 @@ export class GenerativeQuestionServiceClient {
    * @param {string} merchant_center_account_link
    * @returns {string} Resource name string.
    */
-  merchantCenterAccountLinkPath(
-    project: string,
-    location: string,
-    catalog: string,
-    merchantCenterAccountLink: string
-  ) {
+  merchantCenterAccountLinkPath(project:string,location:string,catalog:string,merchantCenterAccountLink:string) {
     return this.pathTemplates.merchantCenterAccountLinkPathTemplate.render({
       project: project,
       location: location,
@@ -1900,12 +1524,8 @@ export class GenerativeQuestionServiceClient {
    *   A fully-qualified path representing MerchantCenterAccountLink resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromMerchantCenterAccountLinkName(
-    merchantCenterAccountLinkName: string
-  ) {
-    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
-      merchantCenterAccountLinkName
-    ).project;
+  matchProjectFromMerchantCenterAccountLinkName(merchantCenterAccountLinkName: string) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(merchantCenterAccountLinkName).project;
   }
 
   /**
@@ -1915,12 +1535,8 @@ export class GenerativeQuestionServiceClient {
    *   A fully-qualified path representing MerchantCenterAccountLink resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromMerchantCenterAccountLinkName(
-    merchantCenterAccountLinkName: string
-  ) {
-    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
-      merchantCenterAccountLinkName
-    ).location;
+  matchLocationFromMerchantCenterAccountLinkName(merchantCenterAccountLinkName: string) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(merchantCenterAccountLinkName).location;
   }
 
   /**
@@ -1930,12 +1546,8 @@ export class GenerativeQuestionServiceClient {
    *   A fully-qualified path representing MerchantCenterAccountLink resource.
    * @returns {string} A string representing the catalog.
    */
-  matchCatalogFromMerchantCenterAccountLinkName(
-    merchantCenterAccountLinkName: string
-  ) {
-    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
-      merchantCenterAccountLinkName
-    ).catalog;
+  matchCatalogFromMerchantCenterAccountLinkName(merchantCenterAccountLinkName: string) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(merchantCenterAccountLinkName).catalog;
   }
 
   /**
@@ -1945,12 +1557,8 @@ export class GenerativeQuestionServiceClient {
    *   A fully-qualified path representing MerchantCenterAccountLink resource.
    * @returns {string} A string representing the merchant_center_account_link.
    */
-  matchMerchantCenterAccountLinkFromMerchantCenterAccountLinkName(
-    merchantCenterAccountLinkName: string
-  ) {
-    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
-      merchantCenterAccountLinkName
-    ).merchant_center_account_link;
+  matchMerchantCenterAccountLinkFromMerchantCenterAccountLinkName(merchantCenterAccountLinkName: string) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(merchantCenterAccountLinkName).merchant_center_account_link;
   }
 
   /**
@@ -1962,7 +1570,7 @@ export class GenerativeQuestionServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(project: string, location: string, catalog: string, model: string) {
+  modelPath(project:string,location:string,catalog:string,model:string) {
     return this.pathTemplates.modelPathTemplate.render({
       project: project,
       location: location,
@@ -2025,13 +1633,7 @@ export class GenerativeQuestionServiceClient {
    * @param {string} product
    * @returns {string} Resource name string.
    */
-  productPath(
-    project: string,
-    location: string,
-    catalog: string,
-    branch: string,
-    product: string
-  ) {
+  productPath(project:string,location:string,catalog:string,branch:string,product:string) {
     return this.pathTemplates.productPathTemplate.render({
       project: project,
       location: location,
@@ -2102,7 +1704,7 @@ export class GenerativeQuestionServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  retailProjectPath(project: string) {
+  retailProjectPath(project:string) {
     return this.pathTemplates.retailProjectPathTemplate.render({
       project: project,
     });
@@ -2116,8 +1718,7 @@ export class GenerativeQuestionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRetailProjectName(retailProjectName: string) {
-    return this.pathTemplates.retailProjectPathTemplate.match(retailProjectName)
-      .project;
+    return this.pathTemplates.retailProjectPathTemplate.match(retailProjectName).project;
   }
 
   /**
@@ -2129,12 +1730,7 @@ export class GenerativeQuestionServiceClient {
    * @param {string} serving_config
    * @returns {string} Resource name string.
    */
-  servingConfigPath(
-    project: string,
-    location: string,
-    catalog: string,
-    servingConfig: string
-  ) {
+  servingConfigPath(project:string,location:string,catalog:string,servingConfig:string) {
     return this.pathTemplates.servingConfigPathTemplate.render({
       project: project,
       location: location,
@@ -2151,8 +1747,7 @@ export class GenerativeQuestionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .project;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).project;
   }
 
   /**
@@ -2163,8 +1758,7 @@ export class GenerativeQuestionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .location;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).location;
   }
 
   /**
@@ -2175,8 +1769,7 @@ export class GenerativeQuestionServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .catalog;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).catalog;
   }
 
   /**
@@ -2187,8 +1780,7 @@ export class GenerativeQuestionServiceClient {
    * @returns {string} A string representing the serving_config.
    */
   matchServingConfigFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .serving_config;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).serving_config;
   }
 
   /**
@@ -2203,9 +1795,7 @@ export class GenerativeQuestionServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

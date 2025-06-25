@@ -29,1587 +29,1197 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.SynonymSetServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'contentwarehouse.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          synonymsetserviceModule.v1.SynonymSetServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'contentwarehouse.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          synonymsetserviceModule.v1.SynonymSetServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'contentwarehouse.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'contentwarehouse.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'contentwarehouse.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new synonymsetserviceModule.v1.SynonymSetServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'contentwarehouse.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'contentwarehouse.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new synonymsetserviceModule.v1.SynonymSetServiceClient(
-            {universeDomain: 'configured.example.com'}
-          );
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'contentwarehouse.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new synonymsetserviceModule.v1.SynonymSetServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = synonymsetserviceModule.v1.SynonymSetServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = synonymsetserviceModule.v1.SynonymSetServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'contentwarehouse.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
 
-    it('should create a client with no option', () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.synonymSetServiceStub, undefined);
-      await client.initialize();
-      assert(client.synonymSetServiceStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.synonymSetServiceStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.synonymSetServiceStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('createSynonymSet', () => {
-    it('invokes createSynonymSet without error', async () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.CreateSynonymSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.CreateSynonymSetRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.SynonymSet()
-      );
-      client.innerApiCalls.createSynonymSet = stubSimpleCall(expectedResponse);
-      const [response] = await client.createSynonymSet(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createSynonymSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSynonymSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createSynonymSet without error using callback', async () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.CreateSynonymSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.CreateSynonymSetRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.SynonymSet()
-      );
-      client.innerApiCalls.createSynonymSet =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createSynonymSet(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.contentwarehouse.v1.ISynonymSet | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createSynonymSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSynonymSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createSynonymSet with error', async () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.CreateSynonymSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.CreateSynonymSetRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createSynonymSet = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createSynonymSet(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createSynonymSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSynonymSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createSynonymSet with closed client', async () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.CreateSynonymSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.CreateSynonymSetRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createSynonymSet(request), expectedError);
-    });
-  });
-
-  describe('getSynonymSet', () => {
-    it('invokes getSynonymSet without error', async () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.GetSynonymSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.GetSynonymSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.SynonymSet()
-      );
-      client.innerApiCalls.getSynonymSet = stubSimpleCall(expectedResponse);
-      const [response] = await client.getSynonymSet(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getSynonymSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSynonymSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getSynonymSet without error using callback', async () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.GetSynonymSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.GetSynonymSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.SynonymSet()
-      );
-      client.innerApiCalls.getSynonymSet =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getSynonymSet(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.contentwarehouse.v1.ISynonymSet | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getSynonymSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSynonymSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getSynonymSet with error', async () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.GetSynonymSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.GetSynonymSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getSynonymSet = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getSynonymSet(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getSynonymSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSynonymSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getSynonymSet with closed client', async () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.GetSynonymSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.GetSynonymSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getSynonymSet(request), expectedError);
-    });
-  });
-
-  describe('updateSynonymSet', () => {
-    it('invokes updateSynonymSet without error', async () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.UpdateSynonymSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.UpdateSynonymSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.SynonymSet()
-      );
-      client.innerApiCalls.updateSynonymSet = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateSynonymSet(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateSynonymSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSynonymSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSynonymSet without error using callback', async () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.UpdateSynonymSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.UpdateSynonymSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.SynonymSet()
-      );
-      client.innerApiCalls.updateSynonymSet =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateSynonymSet(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.contentwarehouse.v1.ISynonymSet | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateSynonymSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSynonymSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSynonymSet with error', async () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.UpdateSynonymSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.UpdateSynonymSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateSynonymSet = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateSynonymSet(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateSynonymSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSynonymSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSynonymSet with closed client', async () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.UpdateSynonymSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.UpdateSynonymSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateSynonymSet(request), expectedError);
-    });
-  });
-
-  describe('deleteSynonymSet', () => {
-    it('invokes deleteSynonymSet without error', async () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.DeleteSynonymSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.DeleteSynonymSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteSynonymSet = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteSynonymSet(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteSynonymSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSynonymSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteSynonymSet without error using callback', async () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.DeleteSynonymSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.DeleteSynonymSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteSynonymSet =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteSynonymSet(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteSynonymSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSynonymSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteSynonymSet with error', async () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.DeleteSynonymSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.DeleteSynonymSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteSynonymSet = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteSynonymSet(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteSynonymSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSynonymSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteSynonymSet with closed client', async () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.DeleteSynonymSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.DeleteSynonymSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteSynonymSet(request), expectedError);
-    });
-  });
-
-  describe('listSynonymSets', () => {
-    it('invokes listSynonymSets without error', async () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.ListSynonymSetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.ListSynonymSetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.contentwarehouse.v1.SynonymSet()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.contentwarehouse.v1.SynonymSet()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.contentwarehouse.v1.SynonymSet()
-        ),
-      ];
-      client.innerApiCalls.listSynonymSets = stubSimpleCall(expectedResponse);
-      const [response] = await client.listSynonymSets(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listSynonymSets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSynonymSets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSynonymSets without error using callback', async () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.ListSynonymSetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.ListSynonymSetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.contentwarehouse.v1.SynonymSet()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.contentwarehouse.v1.SynonymSet()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.contentwarehouse.v1.SynonymSet()
-        ),
-      ];
-      client.innerApiCalls.listSynonymSets =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listSynonymSets(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.contentwarehouse.v1.ISynonymSet[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listSynonymSets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSynonymSets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSynonymSets with error', async () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.ListSynonymSetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.ListSynonymSetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listSynonymSets = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listSynonymSets(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listSynonymSets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSynonymSets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSynonymSetsStream without error', async () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.ListSynonymSetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.ListSynonymSetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.contentwarehouse.v1.SynonymSet()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.contentwarehouse.v1.SynonymSet()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.contentwarehouse.v1.SynonymSet()
-        ),
-      ];
-      client.descriptors.page.listSynonymSets.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listSynonymSetsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.contentwarehouse.v1.SynonymSet[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.contentwarehouse.v1.SynonymSet) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listSynonymSets.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listSynonymSets, request)
-      );
-      assert(
-        (client.descriptors.page.listSynonymSets.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listSynonymSetsStream with error', async () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.ListSynonymSetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.ListSynonymSetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listSynonymSets.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listSynonymSetsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.contentwarehouse.v1.SynonymSet[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.contentwarehouse.v1.SynonymSet) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listSynonymSets.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listSynonymSets, request)
-      );
-      assert(
-        (client.descriptors.page.listSynonymSets.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listSynonymSets without error', async () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.ListSynonymSetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.ListSynonymSetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.contentwarehouse.v1.SynonymSet()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.contentwarehouse.v1.SynonymSet()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.contentwarehouse.v1.SynonymSet()
-        ),
-      ];
-      client.descriptors.page.listSynonymSets.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.contentwarehouse.v1.ISynonymSet[] =
-        [];
-      const iterable = client.listSynonymSetsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listSynonymSets.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listSynonymSets.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listSynonymSets with error', async () => {
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.contentwarehouse.v1.ListSynonymSetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.contentwarehouse.v1.ListSynonymSetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listSynonymSets.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listSynonymSetsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.contentwarehouse.v1.ISynonymSet[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = synonymsetserviceModule.v1.SynonymSetServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'contentwarehouse.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listSynonymSets.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listSynonymSets.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'contentwarehouse.example.com');
+        });
 
-  describe('Path templates', () => {
-    describe('documentLink', async () => {
-      const fakePath = '/rendered/path/documentLink';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        document: 'documentValue',
-        document_link: 'documentLinkValue',
-      };
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.documentLinkPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.documentLinkPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'contentwarehouse.example.com');
+        });
 
-      it('documentLinkPath', () => {
-        const result = client.documentLinkPath(
-          'projectValue',
-          'locationValue',
-          'documentValue',
-          'documentLinkValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.documentLinkPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new synonymsetserviceModule.v1.SynonymSetServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'contentwarehouse.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-      it('matchProjectFromDocumentLinkName', () => {
-        const result = client.matchProjectFromDocumentLinkName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.documentLinkPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'contentwarehouse.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
+        }
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new synonymsetserviceModule.v1.SynonymSetServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-      it('matchLocationFromDocumentLinkName', () => {
-        const result = client.matchLocationFromDocumentLinkName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.documentLinkPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has port', () => {
+            const port = synonymsetserviceModule.v1.SynonymSetServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
 
-      it('matchDocumentFromDocumentLinkName', () => {
-        const result = client.matchDocumentFromDocumentLinkName(fakePath);
-        assert.strictEqual(result, 'documentValue');
-        assert(
-          (client.pathTemplates.documentLinkPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('should create a client with no option', () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient();
+            assert(client);
+        });
 
-      it('matchDocumentLinkFromDocumentLinkName', () => {
-        const result = client.matchDocumentLinkFromDocumentLinkName(fakePath);
-        assert.strictEqual(result, 'documentLinkValue');
-        assert(
-          (client.pathTemplates.documentLinkPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+        it('should create a client with gRPC fallback', () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
 
-    describe('documentSchema', async () => {
-      const fakePath = '/rendered/path/documentSchema';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        document_schema: 'documentSchemaValue',
-      };
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.documentSchemaPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.documentSchemaPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.synonymSetServiceStub, undefined);
+            await client.initialize();
+            assert(client.synonymSetServiceStub);
+        });
 
-      it('documentSchemaPath', () => {
-        const result = client.documentSchemaPath(
-          'projectValue',
-          'locationValue',
-          'documentSchemaValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.documentSchemaPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('has close method for the initialized client', done => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.synonymSetServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
 
-      it('matchProjectFromDocumentSchemaName', () => {
-        const result = client.matchProjectFromDocumentSchemaName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.documentSchemaPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has close method for the non-initialized client', done => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.synonymSetServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
 
-      it('matchLocationFromDocumentSchemaName', () => {
-        const result = client.matchLocationFromDocumentSchemaName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.documentSchemaPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
 
-      it('matchDocumentSchemaFromDocumentSchemaName', () => {
-        const result =
-          client.matchDocumentSchemaFromDocumentSchemaName(fakePath);
-        assert.strictEqual(result, 'documentSchemaValue');
-        assert(
-          (client.pathTemplates.documentSchemaPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    describe('projectLocationDocument', async () => {
-      const fakePath = '/rendered/path/projectLocationDocument';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        document: 'documentValue',
-      };
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationDocumentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationDocumentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('createSynonymSet', () => {
+        it('invokes createSynonymSet without error', async () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.CreateSynonymSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.CreateSynonymSetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.SynonymSet()
+            );
+            client.innerApiCalls.createSynonymSet = stubSimpleCall(expectedResponse);
+            const [response] = await client.createSynonymSet(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createSynonymSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSynonymSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('projectLocationDocumentPath', () => {
-        const result = client.projectLocationDocumentPath(
-          'projectValue',
-          'locationValue',
-          'documentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationDocumentPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes createSynonymSet without error using callback', async () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.CreateSynonymSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.CreateSynonymSetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.SynonymSet()
+            );
+            client.innerApiCalls.createSynonymSet = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createSynonymSet(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.contentwarehouse.v1.ISynonymSet|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createSynonymSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSynonymSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromProjectLocationDocumentName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDocumentName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDocumentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes createSynonymSet with error', async () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.CreateSynonymSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.CreateSynonymSetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createSynonymSet = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createSynonymSet(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createSynonymSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSynonymSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromProjectLocationDocumentName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDocumentName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDocumentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDocumentFromProjectLocationDocumentName', () => {
-        const result =
-          client.matchDocumentFromProjectLocationDocumentName(fakePath);
-        assert.strictEqual(result, 'documentValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDocumentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes createSynonymSet with closed client', async () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.CreateSynonymSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.CreateSynonymSetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createSynonymSet(request), expectedError);
+        });
     });
 
-    describe('projectLocationDocumentsReferenceId', async () => {
-      const fakePath = '/rendered/path/projectLocationDocumentsReferenceId';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        reference_id: 'referenceIdValue',
-      };
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
+    describe('getSynonymSet', () => {
+        it('invokes getSynonymSet without error', async () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.GetSynonymSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.GetSynonymSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.SynonymSet()
+            );
+            client.innerApiCalls.getSynonymSet = stubSimpleCall(expectedResponse);
+            const [response] = await client.getSynonymSet(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSynonymSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSynonymSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('projectLocationDocumentsReferenceIdPath', () => {
-        const result = client.projectLocationDocumentsReferenceIdPath(
-          'projectValue',
-          'locationValue',
-          'referenceIdValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes getSynonymSet without error using callback', async () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.GetSynonymSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.GetSynonymSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.SynonymSet()
+            );
+            client.innerApiCalls.getSynonymSet = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getSynonymSet(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.contentwarehouse.v1.ISynonymSet|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSynonymSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSynonymSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromProjectLocationDocumentsReferenceIdName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDocumentsReferenceIdName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getSynonymSet with error', async () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.GetSynonymSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.GetSynonymSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getSynonymSet = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getSynonymSet(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getSynonymSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSynonymSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromProjectLocationDocumentsReferenceIdName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDocumentsReferenceIdName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchReferenceIdFromProjectLocationDocumentsReferenceIdName', () => {
-        const result =
-          client.matchReferenceIdFromProjectLocationDocumentsReferenceIdName(
-            fakePath
-          );
-        assert.strictEqual(result, 'referenceIdValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getSynonymSet with closed client', async () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.GetSynonymSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.GetSynonymSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getSynonymSet(request), expectedError);
+        });
     });
 
-    describe('ruleSet', async () => {
-      const fakePath = '/rendered/path/ruleSet';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        rule_set: 'ruleSetValue',
-      };
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.ruleSetPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.ruleSetPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('updateSynonymSet', () => {
+        it('invokes updateSynonymSet without error', async () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.UpdateSynonymSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.UpdateSynonymSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.SynonymSet()
+            );
+            client.innerApiCalls.updateSynonymSet = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateSynonymSet(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateSynonymSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSynonymSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('ruleSetPath', () => {
-        const result = client.ruleSetPath(
-          'projectValue',
-          'locationValue',
-          'ruleSetValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.ruleSetPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes updateSynonymSet without error using callback', async () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.UpdateSynonymSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.UpdateSynonymSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.SynonymSet()
+            );
+            client.innerApiCalls.updateSynonymSet = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateSynonymSet(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.contentwarehouse.v1.ISynonymSet|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateSynonymSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSynonymSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromRuleSetName', () => {
-        const result = client.matchProjectFromRuleSetName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.ruleSetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes updateSynonymSet with error', async () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.UpdateSynonymSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.UpdateSynonymSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateSynonymSet = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateSynonymSet(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateSynonymSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSynonymSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromRuleSetName', () => {
-        const result = client.matchLocationFromRuleSetName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.ruleSetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRuleSetFromRuleSetName', () => {
-        const result = client.matchRuleSetFromRuleSetName(fakePath);
-        assert.strictEqual(result, 'ruleSetValue');
-        assert(
-          (client.pathTemplates.ruleSetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes updateSynonymSet with closed client', async () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.UpdateSynonymSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.UpdateSynonymSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateSynonymSet(request), expectedError);
+        });
     });
 
-    describe('synonymSet', async () => {
-      const fakePath = '/rendered/path/synonymSet';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        context: 'contextValue',
-      };
-      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.synonymSetPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.synonymSetPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('deleteSynonymSet', () => {
+        it('invokes deleteSynonymSet without error', async () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.DeleteSynonymSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.DeleteSynonymSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteSynonymSet = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteSynonymSet(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteSynonymSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSynonymSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('synonymSetPath', () => {
-        const result = client.synonymSetPath(
-          'projectValue',
-          'locationValue',
-          'contextValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.synonymSetPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes deleteSynonymSet without error using callback', async () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.DeleteSynonymSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.DeleteSynonymSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteSynonymSet = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteSynonymSet(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteSynonymSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSynonymSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromSynonymSetName', () => {
-        const result = client.matchProjectFromSynonymSetName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.synonymSetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes deleteSynonymSet with error', async () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.DeleteSynonymSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.DeleteSynonymSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteSynonymSet = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteSynonymSet(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteSynonymSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSynonymSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromSynonymSetName', () => {
-        const result = client.matchLocationFromSynonymSetName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.synonymSetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchContextFromSynonymSetName', () => {
-        const result = client.matchContextFromSynonymSetName(fakePath);
-        assert.strictEqual(result, 'contextValue');
-        assert(
-          (client.pathTemplates.synonymSetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes deleteSynonymSet with closed client', async () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.DeleteSynonymSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.DeleteSynonymSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteSynonymSet(request), expectedError);
+        });
     });
-  });
+
+    describe('listSynonymSets', () => {
+        it('invokes listSynonymSets without error', async () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.ListSynonymSetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.ListSynonymSetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.contentwarehouse.v1.SynonymSet()),
+              generateSampleMessage(new protos.google.cloud.contentwarehouse.v1.SynonymSet()),
+              generateSampleMessage(new protos.google.cloud.contentwarehouse.v1.SynonymSet()),
+            ];
+            client.innerApiCalls.listSynonymSets = stubSimpleCall(expectedResponse);
+            const [response] = await client.listSynonymSets(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listSynonymSets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSynonymSets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listSynonymSets without error using callback', async () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.ListSynonymSetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.ListSynonymSetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.contentwarehouse.v1.SynonymSet()),
+              generateSampleMessage(new protos.google.cloud.contentwarehouse.v1.SynonymSet()),
+              generateSampleMessage(new protos.google.cloud.contentwarehouse.v1.SynonymSet()),
+            ];
+            client.innerApiCalls.listSynonymSets = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listSynonymSets(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.contentwarehouse.v1.ISynonymSet[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listSynonymSets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSynonymSets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listSynonymSets with error', async () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.ListSynonymSetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.ListSynonymSetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listSynonymSets = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listSynonymSets(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listSynonymSets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSynonymSets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listSynonymSetsStream without error', async () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.ListSynonymSetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.ListSynonymSetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.contentwarehouse.v1.SynonymSet()),
+              generateSampleMessage(new protos.google.cloud.contentwarehouse.v1.SynonymSet()),
+              generateSampleMessage(new protos.google.cloud.contentwarehouse.v1.SynonymSet()),
+            ];
+            client.descriptors.page.listSynonymSets.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listSynonymSetsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.contentwarehouse.v1.SynonymSet[] = [];
+                stream.on('data', (response: protos.google.cloud.contentwarehouse.v1.SynonymSet) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listSynonymSets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listSynonymSets, request));
+            assert(
+                (client.descriptors.page.listSynonymSets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listSynonymSetsStream with error', async () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.ListSynonymSetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.ListSynonymSetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listSynonymSets.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listSynonymSetsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.contentwarehouse.v1.SynonymSet[] = [];
+                stream.on('data', (response: protos.google.cloud.contentwarehouse.v1.SynonymSet) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listSynonymSets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listSynonymSets, request));
+            assert(
+                (client.descriptors.page.listSynonymSets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listSynonymSets without error', async () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.ListSynonymSetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.ListSynonymSetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.contentwarehouse.v1.SynonymSet()),
+              generateSampleMessage(new protos.google.cloud.contentwarehouse.v1.SynonymSet()),
+              generateSampleMessage(new protos.google.cloud.contentwarehouse.v1.SynonymSet()),
+            ];
+            client.descriptors.page.listSynonymSets.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.contentwarehouse.v1.ISynonymSet[] = [];
+            const iterable = client.listSynonymSetsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listSynonymSets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listSynonymSets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listSynonymSets with error', async () => {
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.contentwarehouse.v1.ListSynonymSetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.contentwarehouse.v1.ListSynonymSetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listSynonymSets.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listSynonymSetsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.contentwarehouse.v1.ISynonymSet[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listSynonymSets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listSynonymSets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('Path templates', () => {
+
+        describe('documentLink', async () => {
+            const fakePath = "/rendered/path/documentLink";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                document: "documentValue",
+                document_link: "documentLinkValue",
+            };
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.documentLinkPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.documentLinkPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('documentLinkPath', () => {
+                const result = client.documentLinkPath("projectValue", "locationValue", "documentValue", "documentLinkValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.documentLinkPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDocumentLinkName', () => {
+                const result = client.matchProjectFromDocumentLinkName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.documentLinkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDocumentLinkName', () => {
+                const result = client.matchLocationFromDocumentLinkName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.documentLinkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDocumentFromDocumentLinkName', () => {
+                const result = client.matchDocumentFromDocumentLinkName(fakePath);
+                assert.strictEqual(result, "documentValue");
+                assert((client.pathTemplates.documentLinkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDocumentLinkFromDocumentLinkName', () => {
+                const result = client.matchDocumentLinkFromDocumentLinkName(fakePath);
+                assert.strictEqual(result, "documentLinkValue");
+                assert((client.pathTemplates.documentLinkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('documentSchema', async () => {
+            const fakePath = "/rendered/path/documentSchema";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                document_schema: "documentSchemaValue",
+            };
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.documentSchemaPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.documentSchemaPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('documentSchemaPath', () => {
+                const result = client.documentSchemaPath("projectValue", "locationValue", "documentSchemaValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.documentSchemaPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDocumentSchemaName', () => {
+                const result = client.matchProjectFromDocumentSchemaName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.documentSchemaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDocumentSchemaName', () => {
+                const result = client.matchLocationFromDocumentSchemaName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.documentSchemaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDocumentSchemaFromDocumentSchemaName', () => {
+                const result = client.matchDocumentSchemaFromDocumentSchemaName(fakePath);
+                assert.strictEqual(result, "documentSchemaValue");
+                assert((client.pathTemplates.documentSchemaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDocument', async () => {
+            const fakePath = "/rendered/path/projectLocationDocument";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                document: "documentValue",
+            };
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDocumentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDocumentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDocumentPath', () => {
+                const result = client.projectLocationDocumentPath("projectValue", "locationValue", "documentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDocumentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDocumentName', () => {
+                const result = client.matchProjectFromProjectLocationDocumentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDocumentName', () => {
+                const result = client.matchLocationFromProjectLocationDocumentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDocumentFromProjectLocationDocumentName', () => {
+                const result = client.matchDocumentFromProjectLocationDocumentName(fakePath);
+                assert.strictEqual(result, "documentValue");
+                assert((client.pathTemplates.projectLocationDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDocumentsReferenceId', async () => {
+            const fakePath = "/rendered/path/projectLocationDocumentsReferenceId";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                reference_id: "referenceIdValue",
+            };
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDocumentsReferenceIdPath', () => {
+                const result = client.projectLocationDocumentsReferenceIdPath("projectValue", "locationValue", "referenceIdValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDocumentsReferenceIdName', () => {
+                const result = client.matchProjectFromProjectLocationDocumentsReferenceIdName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDocumentsReferenceIdName', () => {
+                const result = client.matchLocationFromProjectLocationDocumentsReferenceIdName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchReferenceIdFromProjectLocationDocumentsReferenceIdName', () => {
+                const result = client.matchReferenceIdFromProjectLocationDocumentsReferenceIdName(fakePath);
+                assert.strictEqual(result, "referenceIdValue");
+                assert((client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('ruleSet', async () => {
+            const fakePath = "/rendered/path/ruleSet";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                rule_set: "ruleSetValue",
+            };
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.ruleSetPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.ruleSetPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('ruleSetPath', () => {
+                const result = client.ruleSetPath("projectValue", "locationValue", "ruleSetValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.ruleSetPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromRuleSetName', () => {
+                const result = client.matchProjectFromRuleSetName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.ruleSetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromRuleSetName', () => {
+                const result = client.matchLocationFromRuleSetName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.ruleSetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRuleSetFromRuleSetName', () => {
+                const result = client.matchRuleSetFromRuleSetName(fakePath);
+                assert.strictEqual(result, "ruleSetValue");
+                assert((client.pathTemplates.ruleSetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('synonymSet', async () => {
+            const fakePath = "/rendered/path/synonymSet";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                context: "contextValue",
+            };
+            const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.synonymSetPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.synonymSetPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('synonymSetPath', () => {
+                const result = client.synonymSetPath("projectValue", "locationValue", "contextValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.synonymSetPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSynonymSetName', () => {
+                const result = client.matchProjectFromSynonymSetName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.synonymSetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSynonymSetName', () => {
+                const result = client.matchLocationFromSynonymSetName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.synonymSetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchContextFromSynonymSetName', () => {
+                const result = client.matchContextFromSynonymSetName(fakePath);
+                assert.strictEqual(result, "contextValue");
+                assert((client.pathTemplates.synonymSetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+    });
 });

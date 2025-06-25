@@ -22,6 +22,7 @@ const developerconnect = require('@google-cloud/developerconnect');
 
 function main() {
   const developerConnectClient = new developerconnect.DeveloperConnectClient();
+  const insightsConfigServiceClient = new developerconnect.InsightsConfigServiceClient();
 }
 
 main();

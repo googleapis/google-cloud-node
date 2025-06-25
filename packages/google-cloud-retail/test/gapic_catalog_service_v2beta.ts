@@ -29,3288 +29,2586 @@ import {protobuf, operationsProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v2beta.CatalogServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'retail.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          catalogserviceModule.v2beta.CatalogServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'retail.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          catalogserviceModule.v2beta.CatalogServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'retail.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'retail.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'retail.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new catalogserviceModule.v2beta.CatalogServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'retail.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'retail.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'retail.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new catalogserviceModule.v2beta.CatalogServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = catalogserviceModule.v2beta.CatalogServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = catalogserviceModule.v2beta.CatalogServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'retail.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
 
-    it('should create a client with no option', () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.catalogServiceStub, undefined);
-      await client.initialize();
-      assert(client.catalogServiceStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.catalogServiceStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.catalogServiceStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('updateCatalog', () => {
-    it('invokes updateCatalog without error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.UpdateCatalogRequest()
-      );
-      request.catalog ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.UpdateCatalogRequest',
-        ['catalog', 'name']
-      );
-      request.catalog.name = defaultValue1;
-      const expectedHeaderRequestParams = `catalog.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.Catalog()
-      );
-      client.innerApiCalls.updateCatalog = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateCatalog(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateCatalog as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCatalog as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateCatalog without error using callback', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.UpdateCatalogRequest()
-      );
-      request.catalog ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.UpdateCatalogRequest',
-        ['catalog', 'name']
-      );
-      request.catalog.name = defaultValue1;
-      const expectedHeaderRequestParams = `catalog.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.Catalog()
-      );
-      client.innerApiCalls.updateCatalog =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateCatalog(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.retail.v2beta.ICatalog | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateCatalog as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCatalog as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateCatalog with error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.UpdateCatalogRequest()
-      );
-      request.catalog ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.UpdateCatalogRequest',
-        ['catalog', 'name']
-      );
-      request.catalog.name = defaultValue1;
-      const expectedHeaderRequestParams = `catalog.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateCatalog = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateCatalog(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateCatalog as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCatalog as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateCatalog with closed client', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.UpdateCatalogRequest()
-      );
-      request.catalog ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.UpdateCatalogRequest',
-        ['catalog', 'name']
-      );
-      request.catalog.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateCatalog(request), expectedError);
-    });
-  });
-
-  describe('setDefaultBranch', () => {
-    it('invokes setDefaultBranch without error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.SetDefaultBranchRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.SetDefaultBranchRequest',
-        ['catalog']
-      );
-      request.catalog = defaultValue1;
-      const expectedHeaderRequestParams = `catalog=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.setDefaultBranch = stubSimpleCall(expectedResponse);
-      const [response] = await client.setDefaultBranch(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setDefaultBranch as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setDefaultBranch as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setDefaultBranch without error using callback', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.SetDefaultBranchRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.SetDefaultBranchRequest',
-        ['catalog']
-      );
-      request.catalog = defaultValue1;
-      const expectedHeaderRequestParams = `catalog=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.setDefaultBranch =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setDefaultBranch(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setDefaultBranch as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setDefaultBranch as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setDefaultBranch with error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.SetDefaultBranchRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.SetDefaultBranchRequest',
-        ['catalog']
-      );
-      request.catalog = defaultValue1;
-      const expectedHeaderRequestParams = `catalog=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.setDefaultBranch = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.setDefaultBranch(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.setDefaultBranch as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setDefaultBranch as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setDefaultBranch with closed client', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.SetDefaultBranchRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.SetDefaultBranchRequest',
-        ['catalog']
-      );
-      request.catalog = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.setDefaultBranch(request), expectedError);
-    });
-  });
-
-  describe('getDefaultBranch', () => {
-    it('invokes getDefaultBranch without error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.GetDefaultBranchRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.GetDefaultBranchRequest',
-        ['catalog']
-      );
-      request.catalog = defaultValue1;
-      const expectedHeaderRequestParams = `catalog=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.GetDefaultBranchResponse()
-      );
-      client.innerApiCalls.getDefaultBranch = stubSimpleCall(expectedResponse);
-      const [response] = await client.getDefaultBranch(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getDefaultBranch as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getDefaultBranch as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getDefaultBranch without error using callback', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.GetDefaultBranchRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.GetDefaultBranchRequest',
-        ['catalog']
-      );
-      request.catalog = defaultValue1;
-      const expectedHeaderRequestParams = `catalog=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.GetDefaultBranchResponse()
-      );
-      client.innerApiCalls.getDefaultBranch =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getDefaultBranch(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.retail.v2beta.IGetDefaultBranchResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getDefaultBranch as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getDefaultBranch as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getDefaultBranch with error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.GetDefaultBranchRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.GetDefaultBranchRequest',
-        ['catalog']
-      );
-      request.catalog = defaultValue1;
-      const expectedHeaderRequestParams = `catalog=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getDefaultBranch = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getDefaultBranch(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getDefaultBranch as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getDefaultBranch as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getDefaultBranch with closed client', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.GetDefaultBranchRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.GetDefaultBranchRequest',
-        ['catalog']
-      );
-      request.catalog = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getDefaultBranch(request), expectedError);
-    });
-  });
-
-  describe('getCompletionConfig', () => {
-    it('invokes getCompletionConfig without error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.GetCompletionConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.GetCompletionConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.CompletionConfig()
-      );
-      client.innerApiCalls.getCompletionConfig =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getCompletionConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getCompletionConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getCompletionConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getCompletionConfig without error using callback', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.GetCompletionConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.GetCompletionConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.CompletionConfig()
-      );
-      client.innerApiCalls.getCompletionConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getCompletionConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.retail.v2beta.ICompletionConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getCompletionConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getCompletionConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getCompletionConfig with error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.GetCompletionConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.GetCompletionConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getCompletionConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getCompletionConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getCompletionConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getCompletionConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getCompletionConfig with closed client', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.GetCompletionConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.GetCompletionConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getCompletionConfig(request), expectedError);
-    });
-  });
-
-  describe('updateCompletionConfig', () => {
-    it('invokes updateCompletionConfig without error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.UpdateCompletionConfigRequest()
-      );
-      request.completionConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.UpdateCompletionConfigRequest',
-        ['completionConfig', 'name']
-      );
-      request.completionConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `completion_config.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.CompletionConfig()
-      );
-      client.innerApiCalls.updateCompletionConfig =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateCompletionConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateCompletionConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCompletionConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateCompletionConfig without error using callback', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.UpdateCompletionConfigRequest()
-      );
-      request.completionConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.UpdateCompletionConfigRequest',
-        ['completionConfig', 'name']
-      );
-      request.completionConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `completion_config.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.CompletionConfig()
-      );
-      client.innerApiCalls.updateCompletionConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateCompletionConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.retail.v2beta.ICompletionConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateCompletionConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCompletionConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateCompletionConfig with error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.UpdateCompletionConfigRequest()
-      );
-      request.completionConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.UpdateCompletionConfigRequest',
-        ['completionConfig', 'name']
-      );
-      request.completionConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `completion_config.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateCompletionConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.updateCompletionConfig(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.updateCompletionConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCompletionConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateCompletionConfig with closed client', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.UpdateCompletionConfigRequest()
-      );
-      request.completionConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.UpdateCompletionConfigRequest',
-        ['completionConfig', 'name']
-      );
-      request.completionConfig.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.updateCompletionConfig(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getAttributesConfig', () => {
-    it('invokes getAttributesConfig without error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.GetAttributesConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.GetAttributesConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.AttributesConfig()
-      );
-      client.innerApiCalls.getAttributesConfig =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getAttributesConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAttributesConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAttributesConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAttributesConfig without error using callback', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.GetAttributesConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.GetAttributesConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.AttributesConfig()
-      );
-      client.innerApiCalls.getAttributesConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getAttributesConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.retail.v2beta.IAttributesConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAttributesConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAttributesConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAttributesConfig with error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.GetAttributesConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.GetAttributesConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getAttributesConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getAttributesConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getAttributesConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAttributesConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAttributesConfig with closed client', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.GetAttributesConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.GetAttributesConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getAttributesConfig(request), expectedError);
-    });
-  });
-
-  describe('updateAttributesConfig', () => {
-    it('invokes updateAttributesConfig without error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.UpdateAttributesConfigRequest()
-      );
-      request.attributesConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.UpdateAttributesConfigRequest',
-        ['attributesConfig', 'name']
-      );
-      request.attributesConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.AttributesConfig()
-      );
-      client.innerApiCalls.updateAttributesConfig =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateAttributesConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateAttributesConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAttributesConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAttributesConfig without error using callback', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.UpdateAttributesConfigRequest()
-      );
-      request.attributesConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.UpdateAttributesConfigRequest',
-        ['attributesConfig', 'name']
-      );
-      request.attributesConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.AttributesConfig()
-      );
-      client.innerApiCalls.updateAttributesConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateAttributesConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.retail.v2beta.IAttributesConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateAttributesConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAttributesConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAttributesConfig with error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.UpdateAttributesConfigRequest()
-      );
-      request.attributesConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.UpdateAttributesConfigRequest',
-        ['attributesConfig', 'name']
-      );
-      request.attributesConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateAttributesConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.updateAttributesConfig(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.updateAttributesConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAttributesConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAttributesConfig with closed client', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.UpdateAttributesConfigRequest()
-      );
-      request.attributesConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.UpdateAttributesConfigRequest',
-        ['attributesConfig', 'name']
-      );
-      request.attributesConfig.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.updateAttributesConfig(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('addCatalogAttribute', () => {
-    it('invokes addCatalogAttribute without error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.AddCatalogAttributeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.AddCatalogAttributeRequest',
-        ['attributesConfig']
-      );
-      request.attributesConfig = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.AttributesConfig()
-      );
-      client.innerApiCalls.addCatalogAttribute =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.addCatalogAttribute(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.addCatalogAttribute as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.addCatalogAttribute as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes addCatalogAttribute without error using callback', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.AddCatalogAttributeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.AddCatalogAttributeRequest',
-        ['attributesConfig']
-      );
-      request.attributesConfig = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.AttributesConfig()
-      );
-      client.innerApiCalls.addCatalogAttribute =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.addCatalogAttribute(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.retail.v2beta.IAttributesConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.addCatalogAttribute as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.addCatalogAttribute as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes addCatalogAttribute with error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.AddCatalogAttributeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.AddCatalogAttributeRequest',
-        ['attributesConfig']
-      );
-      request.attributesConfig = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.addCatalogAttribute = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.addCatalogAttribute(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.addCatalogAttribute as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.addCatalogAttribute as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes addCatalogAttribute with closed client', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.AddCatalogAttributeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.AddCatalogAttributeRequest',
-        ['attributesConfig']
-      );
-      request.attributesConfig = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.addCatalogAttribute(request), expectedError);
-    });
-  });
-
-  describe('removeCatalogAttribute', () => {
-    it('invokes removeCatalogAttribute without error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.RemoveCatalogAttributeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.RemoveCatalogAttributeRequest',
-        ['attributesConfig']
-      );
-      request.attributesConfig = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.AttributesConfig()
-      );
-      client.innerApiCalls.removeCatalogAttribute =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.removeCatalogAttribute(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.removeCatalogAttribute as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removeCatalogAttribute as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes removeCatalogAttribute without error using callback', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.RemoveCatalogAttributeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.RemoveCatalogAttributeRequest',
-        ['attributesConfig']
-      );
-      request.attributesConfig = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.AttributesConfig()
-      );
-      client.innerApiCalls.removeCatalogAttribute =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.removeCatalogAttribute(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.retail.v2beta.IAttributesConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.removeCatalogAttribute as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removeCatalogAttribute as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes removeCatalogAttribute with error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.RemoveCatalogAttributeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.RemoveCatalogAttributeRequest',
-        ['attributesConfig']
-      );
-      request.attributesConfig = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.removeCatalogAttribute = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.removeCatalogAttribute(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.removeCatalogAttribute as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removeCatalogAttribute as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes removeCatalogAttribute with closed client', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.RemoveCatalogAttributeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.RemoveCatalogAttributeRequest',
-        ['attributesConfig']
-      );
-      request.attributesConfig = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.removeCatalogAttribute(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('batchRemoveCatalogAttributes', () => {
-    it('invokes batchRemoveCatalogAttributes without error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.BatchRemoveCatalogAttributesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.BatchRemoveCatalogAttributesRequest',
-        ['attributesConfig']
-      );
-      request.attributesConfig = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.BatchRemoveCatalogAttributesResponse()
-      );
-      client.innerApiCalls.batchRemoveCatalogAttributes =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.batchRemoveCatalogAttributes(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.batchRemoveCatalogAttributes as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchRemoveCatalogAttributes as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchRemoveCatalogAttributes without error using callback', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.BatchRemoveCatalogAttributesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.BatchRemoveCatalogAttributesRequest',
-        ['attributesConfig']
-      );
-      request.attributesConfig = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.BatchRemoveCatalogAttributesResponse()
-      );
-      client.innerApiCalls.batchRemoveCatalogAttributes =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.batchRemoveCatalogAttributes(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.retail.v2beta.IBatchRemoveCatalogAttributesResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.batchRemoveCatalogAttributes as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchRemoveCatalogAttributes as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchRemoveCatalogAttributes with error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.BatchRemoveCatalogAttributesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.BatchRemoveCatalogAttributesRequest',
-        ['attributesConfig']
-      );
-      request.attributesConfig = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.batchRemoveCatalogAttributes = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.batchRemoveCatalogAttributes(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.batchRemoveCatalogAttributes as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchRemoveCatalogAttributes as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchRemoveCatalogAttributes with closed client', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.BatchRemoveCatalogAttributesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.BatchRemoveCatalogAttributesRequest',
-        ['attributesConfig']
-      );
-      request.attributesConfig = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.batchRemoveCatalogAttributes(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('replaceCatalogAttribute', () => {
-    it('invokes replaceCatalogAttribute without error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.ReplaceCatalogAttributeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.ReplaceCatalogAttributeRequest',
-        ['attributesConfig']
-      );
-      request.attributesConfig = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.AttributesConfig()
-      );
-      client.innerApiCalls.replaceCatalogAttribute =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.replaceCatalogAttribute(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.replaceCatalogAttribute as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.replaceCatalogAttribute as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes replaceCatalogAttribute without error using callback', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.ReplaceCatalogAttributeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.ReplaceCatalogAttributeRequest',
-        ['attributesConfig']
-      );
-      request.attributesConfig = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.AttributesConfig()
-      );
-      client.innerApiCalls.replaceCatalogAttribute =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.replaceCatalogAttribute(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.retail.v2beta.IAttributesConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.replaceCatalogAttribute as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.replaceCatalogAttribute as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes replaceCatalogAttribute with error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.ReplaceCatalogAttributeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.ReplaceCatalogAttributeRequest',
-        ['attributesConfig']
-      );
-      request.attributesConfig = defaultValue1;
-      const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.replaceCatalogAttribute = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.replaceCatalogAttribute(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.replaceCatalogAttribute as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.replaceCatalogAttribute as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes replaceCatalogAttribute with closed client', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.ReplaceCatalogAttributeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.ReplaceCatalogAttributeRequest',
-        ['attributesConfig']
-      );
-      request.attributesConfig = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.replaceCatalogAttribute(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('listCatalogs', () => {
-    it('invokes listCatalogs without error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.ListCatalogsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.ListCatalogsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.retail.v2beta.Catalog()),
-        generateSampleMessage(new protos.google.cloud.retail.v2beta.Catalog()),
-        generateSampleMessage(new protos.google.cloud.retail.v2beta.Catalog()),
-      ];
-      client.innerApiCalls.listCatalogs = stubSimpleCall(expectedResponse);
-      const [response] = await client.listCatalogs(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listCatalogs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listCatalogs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listCatalogs without error using callback', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.ListCatalogsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.ListCatalogsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.retail.v2beta.Catalog()),
-        generateSampleMessage(new protos.google.cloud.retail.v2beta.Catalog()),
-        generateSampleMessage(new protos.google.cloud.retail.v2beta.Catalog()),
-      ];
-      client.innerApiCalls.listCatalogs =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listCatalogs(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.retail.v2beta.ICatalog[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listCatalogs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listCatalogs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listCatalogs with error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.ListCatalogsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.ListCatalogsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listCatalogs = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listCatalogs(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listCatalogs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listCatalogs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listCatalogsStream without error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.ListCatalogsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.ListCatalogsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.retail.v2beta.Catalog()),
-        generateSampleMessage(new protos.google.cloud.retail.v2beta.Catalog()),
-        generateSampleMessage(new protos.google.cloud.retail.v2beta.Catalog()),
-      ];
-      client.descriptors.page.listCatalogs.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listCatalogsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.retail.v2beta.Catalog[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.retail.v2beta.Catalog) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listCatalogs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listCatalogs, request)
-      );
-      assert(
-        (client.descriptors.page.listCatalogs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listCatalogsStream with error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.ListCatalogsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.ListCatalogsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listCatalogs.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listCatalogsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.retail.v2beta.Catalog[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.retail.v2beta.Catalog) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listCatalogs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listCatalogs, request)
-      );
-      assert(
-        (client.descriptors.page.listCatalogs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listCatalogs without error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.ListCatalogsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.ListCatalogsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.retail.v2beta.Catalog()),
-        generateSampleMessage(new protos.google.cloud.retail.v2beta.Catalog()),
-        generateSampleMessage(new protos.google.cloud.retail.v2beta.Catalog()),
-      ];
-      client.descriptors.page.listCatalogs.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.retail.v2beta.ICatalog[] = [];
-      const iterable = client.listCatalogsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listCatalogs.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listCatalogs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listCatalogs with error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2beta.ListCatalogsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2beta.ListCatalogsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listCatalogs.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listCatalogsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.retail.v2beta.ICatalog[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = catalogserviceModule.v2beta.CatalogServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'retail.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listCatalogs.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listCatalogs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-  describe('getLocation', () => {
-    it('invokes getLocation without error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
-      const response = await client.getLocation(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes getLocation without error using callback', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLocation(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: LocationProtos.google.cloud.location.ILocation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
-    });
-    it('invokes getLocation with error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.locationsClient.getLocation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getLocation(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('listLocationsAsync', () => {
-    it('uses async iteration with listLocations without error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-      ];
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-      const iterable = client.listLocationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-    it('uses async iteration with listLocations with error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedError = new Error('expected');
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLocationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'retail.example.com');
+        });
+
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'retail.example.com');
+        });
+
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new catalogserviceModule.v2beta.CatalogServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'retail.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new catalogserviceModule.v2beta.CatalogServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'retail.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new catalogserviceModule.v2beta.CatalogServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
+
+        it('has port', () => {
+            const port = catalogserviceModule.v2beta.CatalogServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.catalogServiceStub, undefined);
+            await client.initialize();
+            assert(client.catalogServiceStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.catalogServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.catalogServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
-  });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+
+    describe('updateCatalog', () => {
+        it('invokes updateCatalog without error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.UpdateCatalogRequest()
+            );
+            request.catalog ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.UpdateCatalogRequest', ['catalog', 'name']);
+            request.catalog.name = defaultValue1;
+            const expectedHeaderRequestParams = `catalog.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.Catalog()
+            );
+            client.innerApiCalls.updateCatalog = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateCatalog(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateCatalog as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCatalog as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCatalog without error using callback', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.UpdateCatalogRequest()
+            );
+            request.catalog ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.UpdateCatalogRequest', ['catalog', 'name']);
+            request.catalog.name = defaultValue1;
+            const expectedHeaderRequestParams = `catalog.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.Catalog()
+            );
+            client.innerApiCalls.updateCatalog = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateCatalog(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.retail.v2beta.ICatalog|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateCatalog as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCatalog as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCatalog with error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.UpdateCatalogRequest()
+            );
+            request.catalog ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.UpdateCatalogRequest', ['catalog', 'name']);
+            request.catalog.name = defaultValue1;
+            const expectedHeaderRequestParams = `catalog.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateCatalog = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateCatalog(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateCatalog as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCatalog as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCatalog with closed client', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.UpdateCatalogRequest()
+            );
+            request.catalog ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.UpdateCatalogRequest', ['catalog', 'name']);
+            request.catalog.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateCatalog(request), expectedError);
+        });
     });
-    it('invokes getOperation without error using callback', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .getOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: operationsProtos.google.longrunning.Operation | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+
+    describe('setDefaultBranch', () => {
+        it('invokes setDefaultBranch without error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.SetDefaultBranchRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.SetDefaultBranchRequest', ['catalog']);
+            request.catalog = defaultValue1;
+            const expectedHeaderRequestParams = `catalog=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.setDefaultBranch = stubSimpleCall(expectedResponse);
+            const [response] = await client.setDefaultBranch(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setDefaultBranch as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setDefaultBranch as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setDefaultBranch without error using callback', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.SetDefaultBranchRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.SetDefaultBranchRequest', ['catalog']);
+            request.catalog = defaultValue1;
+            const expectedHeaderRequestParams = `catalog=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.setDefaultBranch = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setDefaultBranch(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setDefaultBranch as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setDefaultBranch as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setDefaultBranch with error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.SetDefaultBranchRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.SetDefaultBranchRequest', ['catalog']);
+            request.catalog = defaultValue1;
+            const expectedHeaderRequestParams = `catalog=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.setDefaultBranch = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setDefaultBranch(request), expectedError);
+            const actualRequest = (client.innerApiCalls.setDefaultBranch as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setDefaultBranch as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setDefaultBranch with closed client', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.SetDefaultBranchRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.SetDefaultBranchRequest', ['catalog']);
+            request.catalog = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.setDefaultBranch(request), expectedError);
+        });
+    });
+
+    describe('getDefaultBranch', () => {
+        it('invokes getDefaultBranch without error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.GetDefaultBranchRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.GetDefaultBranchRequest', ['catalog']);
+            request.catalog = defaultValue1;
+            const expectedHeaderRequestParams = `catalog=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.GetDefaultBranchResponse()
+            );
+            client.innerApiCalls.getDefaultBranch = stubSimpleCall(expectedResponse);
+            const [response] = await client.getDefaultBranch(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getDefaultBranch as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDefaultBranch as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDefaultBranch without error using callback', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.GetDefaultBranchRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.GetDefaultBranchRequest', ['catalog']);
+            request.catalog = defaultValue1;
+            const expectedHeaderRequestParams = `catalog=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.GetDefaultBranchResponse()
+            );
+            client.innerApiCalls.getDefaultBranch = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getDefaultBranch(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.retail.v2beta.IGetDefaultBranchResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getDefaultBranch as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDefaultBranch as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDefaultBranch with error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.GetDefaultBranchRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.GetDefaultBranchRequest', ['catalog']);
+            request.catalog = defaultValue1;
+            const expectedHeaderRequestParams = `catalog=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getDefaultBranch = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getDefaultBranch(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getDefaultBranch as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDefaultBranch as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDefaultBranch with closed client', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.GetDefaultBranchRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.GetDefaultBranchRequest', ['catalog']);
+            request.catalog = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getDefaultBranch(request), expectedError);
+        });
+    });
+
+    describe('getCompletionConfig', () => {
+        it('invokes getCompletionConfig without error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.GetCompletionConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.GetCompletionConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.CompletionConfig()
+            );
+            client.innerApiCalls.getCompletionConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.getCompletionConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getCompletionConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getCompletionConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getCompletionConfig without error using callback', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.GetCompletionConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.GetCompletionConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.CompletionConfig()
+            );
+            client.innerApiCalls.getCompletionConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getCompletionConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.retail.v2beta.ICompletionConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getCompletionConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getCompletionConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getCompletionConfig with error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.GetCompletionConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.GetCompletionConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getCompletionConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getCompletionConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getCompletionConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getCompletionConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getCompletionConfig with closed client', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.GetCompletionConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.GetCompletionConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getCompletionConfig(request), expectedError);
+        });
+    });
+
+    describe('updateCompletionConfig', () => {
+        it('invokes updateCompletionConfig without error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.UpdateCompletionConfigRequest()
+            );
+            request.completionConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.UpdateCompletionConfigRequest', ['completionConfig', 'name']);
+            request.completionConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `completion_config.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.CompletionConfig()
+            );
+            client.innerApiCalls.updateCompletionConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateCompletionConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateCompletionConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCompletionConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCompletionConfig without error using callback', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.UpdateCompletionConfigRequest()
+            );
+            request.completionConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.UpdateCompletionConfigRequest', ['completionConfig', 'name']);
+            request.completionConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `completion_config.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.CompletionConfig()
+            );
+            client.innerApiCalls.updateCompletionConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateCompletionConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.retail.v2beta.ICompletionConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateCompletionConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCompletionConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCompletionConfig with error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.UpdateCompletionConfigRequest()
+            );
+            request.completionConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.UpdateCompletionConfigRequest', ['completionConfig', 'name']);
+            request.completionConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `completion_config.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateCompletionConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateCompletionConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateCompletionConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCompletionConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCompletionConfig with closed client', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.UpdateCompletionConfigRequest()
+            );
+            request.completionConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.UpdateCompletionConfigRequest', ['completionConfig', 'name']);
+            request.completionConfig.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateCompletionConfig(request), expectedError);
+        });
+    });
+
+    describe('getAttributesConfig', () => {
+        it('invokes getAttributesConfig without error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.GetAttributesConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.GetAttributesConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.AttributesConfig()
+            );
+            client.innerApiCalls.getAttributesConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.getAttributesConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAttributesConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAttributesConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAttributesConfig without error using callback', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.GetAttributesConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.GetAttributesConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.AttributesConfig()
+            );
+            client.innerApiCalls.getAttributesConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getAttributesConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.retail.v2beta.IAttributesConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAttributesConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAttributesConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAttributesConfig with error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.GetAttributesConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.GetAttributesConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getAttributesConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getAttributesConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getAttributesConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAttributesConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAttributesConfig with closed client', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.GetAttributesConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.GetAttributesConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getAttributesConfig(request), expectedError);
+        });
+    });
+
+    describe('updateAttributesConfig', () => {
+        it('invokes updateAttributesConfig without error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.UpdateAttributesConfigRequest()
+            );
+            request.attributesConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.UpdateAttributesConfigRequest', ['attributesConfig', 'name']);
+            request.attributesConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `attributes_config.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.AttributesConfig()
+            );
+            client.innerApiCalls.updateAttributesConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateAttributesConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAttributesConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAttributesConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAttributesConfig without error using callback', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.UpdateAttributesConfigRequest()
+            );
+            request.attributesConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.UpdateAttributesConfigRequest', ['attributesConfig', 'name']);
+            request.attributesConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `attributes_config.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.AttributesConfig()
+            );
+            client.innerApiCalls.updateAttributesConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateAttributesConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.retail.v2beta.IAttributesConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAttributesConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAttributesConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAttributesConfig with error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.UpdateAttributesConfigRequest()
+            );
+            request.attributesConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.UpdateAttributesConfigRequest', ['attributesConfig', 'name']);
+            request.attributesConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `attributes_config.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAttributesConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateAttributesConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAttributesConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAttributesConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAttributesConfig with closed client', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.UpdateAttributesConfigRequest()
+            );
+            request.attributesConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.UpdateAttributesConfigRequest', ['attributesConfig', 'name']);
+            request.attributesConfig.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateAttributesConfig(request), expectedError);
+        });
+    });
+
+    describe('addCatalogAttribute', () => {
+        it('invokes addCatalogAttribute without error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.AddCatalogAttributeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.AddCatalogAttributeRequest', ['attributesConfig']);
+            request.attributesConfig = defaultValue1;
+            const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.AttributesConfig()
+            );
+            client.innerApiCalls.addCatalogAttribute = stubSimpleCall(expectedResponse);
+            const [response] = await client.addCatalogAttribute(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.addCatalogAttribute as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.addCatalogAttribute as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes addCatalogAttribute without error using callback', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.AddCatalogAttributeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.AddCatalogAttributeRequest', ['attributesConfig']);
+            request.attributesConfig = defaultValue1;
+            const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.AttributesConfig()
+            );
+            client.innerApiCalls.addCatalogAttribute = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.addCatalogAttribute(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.retail.v2beta.IAttributesConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.addCatalogAttribute as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.addCatalogAttribute as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes addCatalogAttribute with error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.AddCatalogAttributeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.AddCatalogAttributeRequest', ['attributesConfig']);
+            request.attributesConfig = defaultValue1;
+            const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.addCatalogAttribute = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.addCatalogAttribute(request), expectedError);
+            const actualRequest = (client.innerApiCalls.addCatalogAttribute as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.addCatalogAttribute as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes addCatalogAttribute with closed client', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.AddCatalogAttributeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.AddCatalogAttributeRequest', ['attributesConfig']);
+            request.attributesConfig = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.addCatalogAttribute(request), expectedError);
+        });
+    });
+
+    describe('removeCatalogAttribute', () => {
+        it('invokes removeCatalogAttribute without error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.RemoveCatalogAttributeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.RemoveCatalogAttributeRequest', ['attributesConfig']);
+            request.attributesConfig = defaultValue1;
+            const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.AttributesConfig()
+            );
+            client.innerApiCalls.removeCatalogAttribute = stubSimpleCall(expectedResponse);
+            const [response] = await client.removeCatalogAttribute(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.removeCatalogAttribute as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removeCatalogAttribute as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes removeCatalogAttribute without error using callback', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.RemoveCatalogAttributeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.RemoveCatalogAttributeRequest', ['attributesConfig']);
+            request.attributesConfig = defaultValue1;
+            const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.AttributesConfig()
+            );
+            client.innerApiCalls.removeCatalogAttribute = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.removeCatalogAttribute(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.retail.v2beta.IAttributesConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.removeCatalogAttribute as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removeCatalogAttribute as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes removeCatalogAttribute with error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.RemoveCatalogAttributeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.RemoveCatalogAttributeRequest', ['attributesConfig']);
+            request.attributesConfig = defaultValue1;
+            const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.removeCatalogAttribute = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.removeCatalogAttribute(request), expectedError);
+            const actualRequest = (client.innerApiCalls.removeCatalogAttribute as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removeCatalogAttribute as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes removeCatalogAttribute with closed client', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.RemoveCatalogAttributeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.RemoveCatalogAttributeRequest', ['attributesConfig']);
+            request.attributesConfig = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.removeCatalogAttribute(request), expectedError);
+        });
+    });
+
+    describe('batchRemoveCatalogAttributes', () => {
+        it('invokes batchRemoveCatalogAttributes without error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.BatchRemoveCatalogAttributesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.BatchRemoveCatalogAttributesRequest', ['attributesConfig']);
+            request.attributesConfig = defaultValue1;
+            const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.BatchRemoveCatalogAttributesResponse()
+            );
+            client.innerApiCalls.batchRemoveCatalogAttributes = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchRemoveCatalogAttributes(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchRemoveCatalogAttributes as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchRemoveCatalogAttributes as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchRemoveCatalogAttributes without error using callback', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.BatchRemoveCatalogAttributesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.BatchRemoveCatalogAttributesRequest', ['attributesConfig']);
+            request.attributesConfig = defaultValue1;
+            const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.BatchRemoveCatalogAttributesResponse()
+            );
+            client.innerApiCalls.batchRemoveCatalogAttributes = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchRemoveCatalogAttributes(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.retail.v2beta.IBatchRemoveCatalogAttributesResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchRemoveCatalogAttributes as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchRemoveCatalogAttributes as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchRemoveCatalogAttributes with error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.BatchRemoveCatalogAttributesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.BatchRemoveCatalogAttributesRequest', ['attributesConfig']);
+            request.attributesConfig = defaultValue1;
+            const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchRemoveCatalogAttributes = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchRemoveCatalogAttributes(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchRemoveCatalogAttributes as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchRemoveCatalogAttributes as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchRemoveCatalogAttributes with closed client', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.BatchRemoveCatalogAttributesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.BatchRemoveCatalogAttributesRequest', ['attributesConfig']);
+            request.attributesConfig = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchRemoveCatalogAttributes(request), expectedError);
+        });
+    });
+
+    describe('replaceCatalogAttribute', () => {
+        it('invokes replaceCatalogAttribute without error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.ReplaceCatalogAttributeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.ReplaceCatalogAttributeRequest', ['attributesConfig']);
+            request.attributesConfig = defaultValue1;
+            const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.AttributesConfig()
+            );
+            client.innerApiCalls.replaceCatalogAttribute = stubSimpleCall(expectedResponse);
+            const [response] = await client.replaceCatalogAttribute(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.replaceCatalogAttribute as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.replaceCatalogAttribute as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes replaceCatalogAttribute without error using callback', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.ReplaceCatalogAttributeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.ReplaceCatalogAttributeRequest', ['attributesConfig']);
+            request.attributesConfig = defaultValue1;
+            const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.AttributesConfig()
+            );
+            client.innerApiCalls.replaceCatalogAttribute = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.replaceCatalogAttribute(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.retail.v2beta.IAttributesConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.replaceCatalogAttribute as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.replaceCatalogAttribute as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes replaceCatalogAttribute with error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.ReplaceCatalogAttributeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.ReplaceCatalogAttributeRequest', ['attributesConfig']);
+            request.attributesConfig = defaultValue1;
+            const expectedHeaderRequestParams = `attributes_config=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.replaceCatalogAttribute = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.replaceCatalogAttribute(request), expectedError);
+            const actualRequest = (client.innerApiCalls.replaceCatalogAttribute as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.replaceCatalogAttribute as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes replaceCatalogAttribute with closed client', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.ReplaceCatalogAttributeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.ReplaceCatalogAttributeRequest', ['attributesConfig']);
+            request.attributesConfig = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.replaceCatalogAttribute(request), expectedError);
+        });
+    });
+
+    describe('listCatalogs', () => {
+        it('invokes listCatalogs without error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.ListCatalogsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.ListCatalogsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.retail.v2beta.Catalog()),
+              generateSampleMessage(new protos.google.cloud.retail.v2beta.Catalog()),
+              generateSampleMessage(new protos.google.cloud.retail.v2beta.Catalog()),
+            ];
+            client.innerApiCalls.listCatalogs = stubSimpleCall(expectedResponse);
+            const [response] = await client.listCatalogs(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listCatalogs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listCatalogs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listCatalogs without error using callback', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.ListCatalogsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.ListCatalogsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.retail.v2beta.Catalog()),
+              generateSampleMessage(new protos.google.cloud.retail.v2beta.Catalog()),
+              generateSampleMessage(new protos.google.cloud.retail.v2beta.Catalog()),
+            ];
+            client.innerApiCalls.listCatalogs = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listCatalogs(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.retail.v2beta.ICatalog[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listCatalogs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listCatalogs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listCatalogs with error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.ListCatalogsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.ListCatalogsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listCatalogs = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listCatalogs(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listCatalogs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listCatalogs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listCatalogsStream without error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.ListCatalogsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.ListCatalogsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.retail.v2beta.Catalog()),
+              generateSampleMessage(new protos.google.cloud.retail.v2beta.Catalog()),
+              generateSampleMessage(new protos.google.cloud.retail.v2beta.Catalog()),
+            ];
+            client.descriptors.page.listCatalogs.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listCatalogsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.retail.v2beta.Catalog[] = [];
+                stream.on('data', (response: protos.google.cloud.retail.v2beta.Catalog) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listCatalogs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listCatalogs, request));
+            assert(
+                (client.descriptors.page.listCatalogs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listCatalogsStream with error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.ListCatalogsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.ListCatalogsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listCatalogs.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listCatalogsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.retail.v2beta.Catalog[] = [];
+                stream.on('data', (response: protos.google.cloud.retail.v2beta.Catalog) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listCatalogs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listCatalogs, request));
+            assert(
+                (client.descriptors.page.listCatalogs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listCatalogs without error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.ListCatalogsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.ListCatalogsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.retail.v2beta.Catalog()),
+              generateSampleMessage(new protos.google.cloud.retail.v2beta.Catalog()),
+              generateSampleMessage(new protos.google.cloud.retail.v2beta.Catalog()),
+            ];
+            client.descriptors.page.listCatalogs.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.retail.v2beta.ICatalog[] = [];
+            const iterable = client.listCatalogsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listCatalogs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listCatalogs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listCatalogs with error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.retail.v2beta.ListCatalogsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.retail.v2beta.ListCatalogsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listCatalogs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listCatalogsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.retail.v2beta.ICatalog[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listCatalogs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listCatalogs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes getOperation with error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('getLocation', () => {
+        it('invokes getLocation without error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+            const response = await client.getLocation(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes getLocation without error using callback', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLocation(
+                    request,
+                    expectedOptions,
+                    (
+                        err?: Error | null,
+                        result?: LocationProtos.google.cloud.location.ILocation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getLocation with error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.locationsClient.getLocation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLocation(request, expectedOptions), expectedError);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .cancelOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+    describe('listLocationsAsync', () => {
+        it('uses async iteration with listLocations without error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+                new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedResponse = [
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+            ];
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+            const iterable = client.listLocationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+        it('uses async iteration with listLocations with error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedError = new Error('expected');
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLocationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes cancelOperation with error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes getOperation without error using callback', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .deleteOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.IOperation[] = [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.IOperation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('alertConfig', async () => {
-      const fakePath = '/rendered/path/alertConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.alertConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.alertConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('alertConfigPath', () => {
-        const result = client.alertConfigPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.alertConfigPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromAlertConfigName', () => {
-        const result = client.matchProjectFromAlertConfigName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.alertConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
     });
 
-    describe('attributesConfig', async () => {
-      const fakePath = '/rendered/path/attributesConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        catalog: 'catalogValue',
-      };
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.attributesConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.attributesConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('Path templates', () => {
 
-      it('attributesConfigPath', () => {
-        const result = client.attributesConfigPath(
-          'projectValue',
-          'locationValue',
-          'catalogValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.attributesConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('alertConfig', async () => {
+            const fakePath = "/rendered/path/alertConfig";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.alertConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.alertConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromAttributesConfigName', () => {
-        const result = client.matchProjectFromAttributesConfigName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.attributesConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('alertConfigPath', () => {
+                const result = client.alertConfigPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.alertConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromAttributesConfigName', () => {
-        const result = client.matchLocationFromAttributesConfigName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.attributesConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromAlertConfigName', () => {
+                const result = client.matchProjectFromAlertConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.alertConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
 
-      it('matchCatalogFromAttributesConfigName', () => {
-        const result = client.matchCatalogFromAttributesConfigName(fakePath);
-        assert.strictEqual(result, 'catalogValue');
-        assert(
-          (client.pathTemplates.attributesConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        describe('attributesConfig', async () => {
+            const fakePath = "/rendered/path/attributesConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                catalog: "catalogValue",
+            };
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.attributesConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.attributesConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('attributesConfigPath', () => {
+                const result = client.attributesConfigPath("projectValue", "locationValue", "catalogValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.attributesConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromAttributesConfigName', () => {
+                const result = client.matchProjectFromAttributesConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.attributesConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromAttributesConfigName', () => {
+                const result = client.matchLocationFromAttributesConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.attributesConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCatalogFromAttributesConfigName', () => {
+                const result = client.matchCatalogFromAttributesConfigName(fakePath);
+                assert.strictEqual(result, "catalogValue");
+                assert((client.pathTemplates.attributesConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('branch', async () => {
+            const fakePath = "/rendered/path/branch";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                catalog: "catalogValue",
+                branch: "branchValue",
+            };
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.branchPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.branchPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('branchPath', () => {
+                const result = client.branchPath("projectValue", "locationValue", "catalogValue", "branchValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.branchPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromBranchName', () => {
+                const result = client.matchProjectFromBranchName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.branchPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromBranchName', () => {
+                const result = client.matchLocationFromBranchName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.branchPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCatalogFromBranchName', () => {
+                const result = client.matchCatalogFromBranchName(fakePath);
+                assert.strictEqual(result, "catalogValue");
+                assert((client.pathTemplates.branchPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBranchFromBranchName', () => {
+                const result = client.matchBranchFromBranchName(fakePath);
+                assert.strictEqual(result, "branchValue");
+                assert((client.pathTemplates.branchPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('catalog', async () => {
+            const fakePath = "/rendered/path/catalog";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                catalog: "catalogValue",
+            };
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.catalogPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.catalogPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('catalogPath', () => {
+                const result = client.catalogPath("projectValue", "locationValue", "catalogValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.catalogPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromCatalogName', () => {
+                const result = client.matchProjectFromCatalogName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.catalogPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromCatalogName', () => {
+                const result = client.matchLocationFromCatalogName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.catalogPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCatalogFromCatalogName', () => {
+                const result = client.matchCatalogFromCatalogName(fakePath);
+                assert.strictEqual(result, "catalogValue");
+                assert((client.pathTemplates.catalogPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('completionConfig', async () => {
+            const fakePath = "/rendered/path/completionConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                catalog: "catalogValue",
+            };
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.completionConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.completionConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('completionConfigPath', () => {
+                const result = client.completionConfigPath("projectValue", "locationValue", "catalogValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.completionConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromCompletionConfigName', () => {
+                const result = client.matchProjectFromCompletionConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.completionConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromCompletionConfigName', () => {
+                const result = client.matchLocationFromCompletionConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.completionConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCatalogFromCompletionConfigName', () => {
+                const result = client.matchCatalogFromCompletionConfigName(fakePath);
+                assert.strictEqual(result, "catalogValue");
+                assert((client.pathTemplates.completionConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('control', async () => {
+            const fakePath = "/rendered/path/control";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                catalog: "catalogValue",
+                control: "controlValue",
+            };
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.controlPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.controlPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('controlPath', () => {
+                const result = client.controlPath("projectValue", "locationValue", "catalogValue", "controlValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.controlPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromControlName', () => {
+                const result = client.matchProjectFromControlName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.controlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromControlName', () => {
+                const result = client.matchLocationFromControlName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.controlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCatalogFromControlName', () => {
+                const result = client.matchCatalogFromControlName(fakePath);
+                assert.strictEqual(result, "catalogValue");
+                assert((client.pathTemplates.controlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchControlFromControlName', () => {
+                const result = client.matchControlFromControlName(fakePath);
+                assert.strictEqual(result, "controlValue");
+                assert((client.pathTemplates.controlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('model', async () => {
+            const fakePath = "/rendered/path/model";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                catalog: "catalogValue",
+                model: "modelValue",
+            };
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.modelPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.modelPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('modelPath', () => {
+                const result = client.modelPath("projectValue", "locationValue", "catalogValue", "modelValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.modelPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromModelName', () => {
+                const result = client.matchProjectFromModelName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.modelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromModelName', () => {
+                const result = client.matchLocationFromModelName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.modelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCatalogFromModelName', () => {
+                const result = client.matchCatalogFromModelName(fakePath);
+                assert.strictEqual(result, "catalogValue");
+                assert((client.pathTemplates.modelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchModelFromModelName', () => {
+                const result = client.matchModelFromModelName(fakePath);
+                assert.strictEqual(result, "modelValue");
+                assert((client.pathTemplates.modelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('product', async () => {
+            const fakePath = "/rendered/path/product";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                catalog: "catalogValue",
+                branch: "branchValue",
+                product: "productValue",
+            };
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.productPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.productPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('productPath', () => {
+                const result = client.productPath("projectValue", "locationValue", "catalogValue", "branchValue", "productValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.productPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProductName', () => {
+                const result = client.matchProjectFromProductName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.productPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProductName', () => {
+                const result = client.matchLocationFromProductName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.productPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCatalogFromProductName', () => {
+                const result = client.matchCatalogFromProductName(fakePath);
+                assert.strictEqual(result, "catalogValue");
+                assert((client.pathTemplates.productPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBranchFromProductName', () => {
+                const result = client.matchBranchFromProductName(fakePath);
+                assert.strictEqual(result, "branchValue");
+                assert((client.pathTemplates.productPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchProductFromProductName', () => {
+                const result = client.matchProductFromProductName(fakePath);
+                assert.strictEqual(result, "productValue");
+                assert((client.pathTemplates.productPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('servingConfig', async () => {
+            const fakePath = "/rendered/path/servingConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                catalog: "catalogValue",
+                serving_config: "servingConfigValue",
+            };
+            const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.servingConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.servingConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('servingConfigPath', () => {
+                const result = client.servingConfigPath("projectValue", "locationValue", "catalogValue", "servingConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.servingConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromServingConfigName', () => {
+                const result = client.matchProjectFromServingConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.servingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromServingConfigName', () => {
+                const result = client.matchLocationFromServingConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.servingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCatalogFromServingConfigName', () => {
+                const result = client.matchCatalogFromServingConfigName(fakePath);
+                assert.strictEqual(result, "catalogValue");
+                assert((client.pathTemplates.servingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServingConfigFromServingConfigName', () => {
+                const result = client.matchServingConfigFromServingConfigName(fakePath);
+                assert.strictEqual(result, "servingConfigValue");
+                assert((client.pathTemplates.servingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-
-    describe('branch', async () => {
-      const fakePath = '/rendered/path/branch';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        catalog: 'catalogValue',
-        branch: 'branchValue',
-      };
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.branchPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.branchPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('branchPath', () => {
-        const result = client.branchPath(
-          'projectValue',
-          'locationValue',
-          'catalogValue',
-          'branchValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.branchPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromBranchName', () => {
-        const result = client.matchProjectFromBranchName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.branchPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromBranchName', () => {
-        const result = client.matchLocationFromBranchName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.branchPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCatalogFromBranchName', () => {
-        const result = client.matchCatalogFromBranchName(fakePath);
-        assert.strictEqual(result, 'catalogValue');
-        assert(
-          (client.pathTemplates.branchPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchBranchFromBranchName', () => {
-        const result = client.matchBranchFromBranchName(fakePath);
-        assert.strictEqual(result, 'branchValue');
-        assert(
-          (client.pathTemplates.branchPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('catalog', async () => {
-      const fakePath = '/rendered/path/catalog';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        catalog: 'catalogValue',
-      };
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.catalogPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.catalogPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('catalogPath', () => {
-        const result = client.catalogPath(
-          'projectValue',
-          'locationValue',
-          'catalogValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.catalogPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromCatalogName', () => {
-        const result = client.matchProjectFromCatalogName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.catalogPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromCatalogName', () => {
-        const result = client.matchLocationFromCatalogName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.catalogPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCatalogFromCatalogName', () => {
-        const result = client.matchCatalogFromCatalogName(fakePath);
-        assert.strictEqual(result, 'catalogValue');
-        assert(
-          (client.pathTemplates.catalogPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('completionConfig', async () => {
-      const fakePath = '/rendered/path/completionConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        catalog: 'catalogValue',
-      };
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.completionConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.completionConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('completionConfigPath', () => {
-        const result = client.completionConfigPath(
-          'projectValue',
-          'locationValue',
-          'catalogValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.completionConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromCompletionConfigName', () => {
-        const result = client.matchProjectFromCompletionConfigName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.completionConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromCompletionConfigName', () => {
-        const result = client.matchLocationFromCompletionConfigName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.completionConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCatalogFromCompletionConfigName', () => {
-        const result = client.matchCatalogFromCompletionConfigName(fakePath);
-        assert.strictEqual(result, 'catalogValue');
-        assert(
-          (client.pathTemplates.completionConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('control', async () => {
-      const fakePath = '/rendered/path/control';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        catalog: 'catalogValue',
-        control: 'controlValue',
-      };
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.controlPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.controlPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('controlPath', () => {
-        const result = client.controlPath(
-          'projectValue',
-          'locationValue',
-          'catalogValue',
-          'controlValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.controlPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromControlName', () => {
-        const result = client.matchProjectFromControlName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.controlPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromControlName', () => {
-        const result = client.matchLocationFromControlName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.controlPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCatalogFromControlName', () => {
-        const result = client.matchCatalogFromControlName(fakePath);
-        assert.strictEqual(result, 'catalogValue');
-        assert(
-          (client.pathTemplates.controlPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchControlFromControlName', () => {
-        const result = client.matchControlFromControlName(fakePath);
-        assert.strictEqual(result, 'controlValue');
-        assert(
-          (client.pathTemplates.controlPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('location', async () => {
-      const fakePath = '/rendered/path/location';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('model', async () => {
-      const fakePath = '/rendered/path/model';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        catalog: 'catalogValue',
-        model: 'modelValue',
-      };
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.modelPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.modelPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('modelPath', () => {
-        const result = client.modelPath(
-          'projectValue',
-          'locationValue',
-          'catalogValue',
-          'modelValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.modelPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromModelName', () => {
-        const result = client.matchProjectFromModelName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.modelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromModelName', () => {
-        const result = client.matchLocationFromModelName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.modelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCatalogFromModelName', () => {
-        const result = client.matchCatalogFromModelName(fakePath);
-        assert.strictEqual(result, 'catalogValue');
-        assert(
-          (client.pathTemplates.modelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchModelFromModelName', () => {
-        const result = client.matchModelFromModelName(fakePath);
-        assert.strictEqual(result, 'modelValue');
-        assert(
-          (client.pathTemplates.modelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('product', async () => {
-      const fakePath = '/rendered/path/product';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        catalog: 'catalogValue',
-        branch: 'branchValue',
-        product: 'productValue',
-      };
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.productPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.productPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('productPath', () => {
-        const result = client.productPath(
-          'projectValue',
-          'locationValue',
-          'catalogValue',
-          'branchValue',
-          'productValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.productPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProductName', () => {
-        const result = client.matchProjectFromProductName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.productPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProductName', () => {
-        const result = client.matchLocationFromProductName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.productPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCatalogFromProductName', () => {
-        const result = client.matchCatalogFromProductName(fakePath);
-        assert.strictEqual(result, 'catalogValue');
-        assert(
-          (client.pathTemplates.productPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchBranchFromProductName', () => {
-        const result = client.matchBranchFromProductName(fakePath);
-        assert.strictEqual(result, 'branchValue');
-        assert(
-          (client.pathTemplates.productPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchProductFromProductName', () => {
-        const result = client.matchProductFromProductName(fakePath);
-        assert.strictEqual(result, 'productValue');
-        assert(
-          (client.pathTemplates.productPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('servingConfig', async () => {
-      const fakePath = '/rendered/path/servingConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        catalog: 'catalogValue',
-        serving_config: 'servingConfigValue',
-      };
-      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.servingConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.servingConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('servingConfigPath', () => {
-        const result = client.servingConfigPath(
-          'projectValue',
-          'locationValue',
-          'catalogValue',
-          'servingConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.servingConfigPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromServingConfigName', () => {
-        const result = client.matchProjectFromServingConfigName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.servingConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromServingConfigName', () => {
-        const result = client.matchLocationFromServingConfigName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.servingConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCatalogFromServingConfigName', () => {
-        const result = client.matchCatalogFromServingConfigName(fakePath);
-        assert.strictEqual(result, 'catalogValue');
-        assert(
-          (client.pathTemplates.servingConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServingConfigFromServingConfigName', () => {
-        const result = client.matchServingConfigFromServingConfigName(fakePath);
-        assert.strictEqual(result, 'servingConfigValue');
-        assert(
-          (client.pathTemplates.servingConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

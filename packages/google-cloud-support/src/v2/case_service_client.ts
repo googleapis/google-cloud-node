@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -107,41 +100,20 @@ export class CaseServiceClient {
    *     const client = new CaseServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof CaseServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'cloudsupport.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -167,7 +139,7 @@ export class CaseServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -181,7 +153,10 @@ export class CaseServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -208,10 +183,9 @@ export class CaseServiceClient {
       organizationCasePathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/cases/{case}'
       ),
-      organizationCaseAttachmentIdPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/cases/{case}/attachments/{attachment_id}'
-        ),
+      organizationCaseAttachmentIdPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/cases/{case}/attachments/{attachment_id}'
+      ),
       organizationCaseCommentPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/cases/{case}/comments/{comment}'
       ),
@@ -230,30 +204,18 @@ export class CaseServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listCases: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'cases'
-      ),
-      searchCases: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'cases'
-      ),
-      searchCaseClassifications: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'caseClassifications'
-      ),
+      listCases:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'cases'),
+      searchCases:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'cases'),
+      searchCaseClassifications:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'caseClassifications')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.support.v2.CaseService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.support.v2.CaseService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -284,44 +246,32 @@ export class CaseServiceClient {
     // Put together the "service stub" for
     // google.cloud.support.v2.CaseService.
     this.caseServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.support.v2.CaseService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.support.v2.CaseService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.support.v2.CaseService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const caseServiceStubMethods = [
-      'getCase',
-      'listCases',
-      'searchCases',
-      'createCase',
-      'updateCase',
-      'escalateCase',
-      'closeCase',
-      'searchCaseClassifications',
-    ];
+    const caseServiceStubMethods =
+        ['getCase', 'listCases', 'searchCases', 'createCase', 'updateCase', 'escalateCase', 'closeCase', 'searchCaseClassifications'];
     for (const methodName of caseServiceStubMethods) {
       const callPromise = this.caseServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -341,14 +291,8 @@ export class CaseServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'cloudsupport.googleapis.com';
   }
@@ -359,14 +303,8 @@ export class CaseServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'cloudsupport.googleapis.com';
   }
@@ -397,7 +335,9 @@ export class CaseServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -406,9 +346,8 @@ export class CaseServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -419,695 +358,606 @@ export class CaseServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Retrieve a case.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The full name of a case to be retrieved.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.support.v2.Case|Case}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/case_service.get_case.js</caption>
-   * region_tag:cloudsupport_v2_generated_CaseService_GetCase_async
-   */
+/**
+ * Retrieve a case.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The full name of a case to be retrieved.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.support.v2.Case|Case}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/case_service.get_case.js</caption>
+ * region_tag:cloudsupport_v2_generated_CaseService_GetCase_async
+ */
   getCase(
-    request?: protos.google.cloud.support.v2.IGetCaseRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.support.v2.ICase,
-      protos.google.cloud.support.v2.IGetCaseRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.support.v2.IGetCaseRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.support.v2.ICase,
+        protos.google.cloud.support.v2.IGetCaseRequest|undefined, {}|undefined
+      ]>;
   getCase(
-    request: protos.google.cloud.support.v2.IGetCaseRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.support.v2.ICase,
-      protos.google.cloud.support.v2.IGetCaseRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCase(
-    request: protos.google.cloud.support.v2.IGetCaseRequest,
-    callback: Callback<
-      protos.google.cloud.support.v2.ICase,
-      protos.google.cloud.support.v2.IGetCaseRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCase(
-    request?: protos.google.cloud.support.v2.IGetCaseRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.support.v2.IGetCaseRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.support.v2.ICase,
-          protos.google.cloud.support.v2.IGetCaseRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.support.v2.ICase,
-      protos.google.cloud.support.v2.IGetCaseRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.support.v2.ICase,
-      protos.google.cloud.support.v2.IGetCaseRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.support.v2.IGetCaseRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCase(
+      request: protos.google.cloud.support.v2.IGetCaseRequest,
+      callback: Callback<
+          protos.google.cloud.support.v2.ICase,
+          protos.google.cloud.support.v2.IGetCaseRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCase(
+      request?: protos.google.cloud.support.v2.IGetCaseRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.support.v2.ICase,
+          protos.google.cloud.support.v2.IGetCaseRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.support.v2.ICase,
+          protos.google.cloud.support.v2.IGetCaseRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.support.v2.ICase,
+        protos.google.cloud.support.v2.IGetCaseRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getCase request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.support.v2.ICase,
-          protos.google.cloud.support.v2.IGetCaseRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.support.v2.ICase,
+        protos.google.cloud.support.v2.IGetCaseRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCase response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getCase(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.support.v2.ICase,
-          protos.google.cloud.support.v2.IGetCaseRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getCase response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getCase(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.support.v2.ICase,
+        protos.google.cloud.support.v2.IGetCaseRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getCase response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Create a new case and associate it with a parent.
-   *
-   * It must have the following fields set: `display_name`, `description`,
-   * `classification`, and `priority`. If you're just testing the API and don't
-   * want to route your case to an agent, set `testCase=true`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent under which the case should be created.
-   * @param {google.cloud.support.v2.Case} request.case
-   *   Required. The case to be created.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.support.v2.Case|Case}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/case_service.create_case.js</caption>
-   * region_tag:cloudsupport_v2_generated_CaseService_CreateCase_async
-   */
+/**
+ * Create a new case and associate it with a parent.
+ *
+ * It must have the following fields set: `display_name`, `description`,
+ * `classification`, and `priority`. If you're just testing the API and don't
+ * want to route your case to an agent, set `testCase=true`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent under which the case should be created.
+ * @param {google.cloud.support.v2.Case} request.case
+ *   Required. The case to be created.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.support.v2.Case|Case}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/case_service.create_case.js</caption>
+ * region_tag:cloudsupport_v2_generated_CaseService_CreateCase_async
+ */
   createCase(
-    request?: protos.google.cloud.support.v2.ICreateCaseRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.support.v2.ICase,
-      protos.google.cloud.support.v2.ICreateCaseRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.support.v2.ICreateCaseRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.support.v2.ICase,
+        protos.google.cloud.support.v2.ICreateCaseRequest|undefined, {}|undefined
+      ]>;
   createCase(
-    request: protos.google.cloud.support.v2.ICreateCaseRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.support.v2.ICase,
-      protos.google.cloud.support.v2.ICreateCaseRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createCase(
-    request: protos.google.cloud.support.v2.ICreateCaseRequest,
-    callback: Callback<
-      protos.google.cloud.support.v2.ICase,
-      protos.google.cloud.support.v2.ICreateCaseRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createCase(
-    request?: protos.google.cloud.support.v2.ICreateCaseRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.support.v2.ICreateCaseRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.support.v2.ICase,
-          protos.google.cloud.support.v2.ICreateCaseRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.support.v2.ICase,
-      protos.google.cloud.support.v2.ICreateCaseRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.support.v2.ICase,
-      protos.google.cloud.support.v2.ICreateCaseRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.support.v2.ICreateCaseRequest|null|undefined,
+          {}|null|undefined>): void;
+  createCase(
+      request: protos.google.cloud.support.v2.ICreateCaseRequest,
+      callback: Callback<
+          protos.google.cloud.support.v2.ICase,
+          protos.google.cloud.support.v2.ICreateCaseRequest|null|undefined,
+          {}|null|undefined>): void;
+  createCase(
+      request?: protos.google.cloud.support.v2.ICreateCaseRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.support.v2.ICase,
+          protos.google.cloud.support.v2.ICreateCaseRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.support.v2.ICase,
+          protos.google.cloud.support.v2.ICreateCaseRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.support.v2.ICase,
+        protos.google.cloud.support.v2.ICreateCaseRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createCase request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.support.v2.ICase,
-          protos.google.cloud.support.v2.ICreateCaseRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.support.v2.ICase,
+        protos.google.cloud.support.v2.ICreateCaseRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createCase response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createCase(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.support.v2.ICase,
-          protos.google.cloud.support.v2.ICreateCaseRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createCase response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createCase(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.support.v2.ICase,
+        protos.google.cloud.support.v2.ICreateCaseRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createCase response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Update a case. Only some fields can be updated.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.support.v2.Case} request.case
-   *   Required. The case to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   A list of attributes of the case that should be updated. Supported values
-   *   are `priority`, `display_name`, and `subscriber_email_addresses`. If no
-   *   fields are specified, all supported fields are updated.
-   *
-   *   Be careful - if you do not provide a field mask, then you might
-   *   accidentally clear some fields. For example, if you leave the field mask
-   *   empty and do not provide a value for `subscriber_email_addresses`, then
-   *   `subscriber_email_addresses` is updated to empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.support.v2.Case|Case}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/case_service.update_case.js</caption>
-   * region_tag:cloudsupport_v2_generated_CaseService_UpdateCase_async
-   */
+/**
+ * Update a case. Only some fields can be updated.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.support.v2.Case} request.case
+ *   Required. The case to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   A list of attributes of the case that should be updated. Supported values
+ *   are `priority`, `display_name`, and `subscriber_email_addresses`. If no
+ *   fields are specified, all supported fields are updated.
+ *
+ *   Be careful - if you do not provide a field mask, then you might
+ *   accidentally clear some fields. For example, if you leave the field mask
+ *   empty and do not provide a value for `subscriber_email_addresses`, then
+ *   `subscriber_email_addresses` is updated to empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.support.v2.Case|Case}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/case_service.update_case.js</caption>
+ * region_tag:cloudsupport_v2_generated_CaseService_UpdateCase_async
+ */
   updateCase(
-    request?: protos.google.cloud.support.v2.IUpdateCaseRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.support.v2.ICase,
-      protos.google.cloud.support.v2.IUpdateCaseRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.support.v2.IUpdateCaseRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.support.v2.ICase,
+        protos.google.cloud.support.v2.IUpdateCaseRequest|undefined, {}|undefined
+      ]>;
   updateCase(
-    request: protos.google.cloud.support.v2.IUpdateCaseRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.support.v2.ICase,
-      protos.google.cloud.support.v2.IUpdateCaseRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateCase(
-    request: protos.google.cloud.support.v2.IUpdateCaseRequest,
-    callback: Callback<
-      protos.google.cloud.support.v2.ICase,
-      protos.google.cloud.support.v2.IUpdateCaseRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateCase(
-    request?: protos.google.cloud.support.v2.IUpdateCaseRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.support.v2.IUpdateCaseRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.support.v2.ICase,
-          protos.google.cloud.support.v2.IUpdateCaseRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.support.v2.ICase,
-      protos.google.cloud.support.v2.IUpdateCaseRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.support.v2.ICase,
-      protos.google.cloud.support.v2.IUpdateCaseRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.support.v2.IUpdateCaseRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateCase(
+      request: protos.google.cloud.support.v2.IUpdateCaseRequest,
+      callback: Callback<
+          protos.google.cloud.support.v2.ICase,
+          protos.google.cloud.support.v2.IUpdateCaseRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateCase(
+      request?: protos.google.cloud.support.v2.IUpdateCaseRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.support.v2.ICase,
+          protos.google.cloud.support.v2.IUpdateCaseRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.support.v2.ICase,
+          protos.google.cloud.support.v2.IUpdateCaseRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.support.v2.ICase,
+        protos.google.cloud.support.v2.IUpdateCaseRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'case.name': request.case!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'case.name': request.case!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateCase request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.support.v2.ICase,
-          protos.google.cloud.support.v2.IUpdateCaseRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.support.v2.ICase,
+        protos.google.cloud.support.v2.IUpdateCaseRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateCase response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateCase(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.support.v2.ICase,
-          protos.google.cloud.support.v2.IUpdateCaseRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateCase response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateCase(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.support.v2.ICase,
+        protos.google.cloud.support.v2.IUpdateCaseRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateCase response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Escalate a case, starting the Google Cloud Support escalation management
-   * process.
-   *
-   * This operation is only available for some support services. Go to
-   * https://cloud.google.com/support and look for 'Technical support
-   * escalations' in the feature list to find out which ones let you
-   * do that.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the case to be escalated.
-   * @param {google.cloud.support.v2.Escalation} request.escalation
-   *   The escalation information to be sent with the escalation request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.support.v2.Case|Case}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/case_service.escalate_case.js</caption>
-   * region_tag:cloudsupport_v2_generated_CaseService_EscalateCase_async
-   */
+/**
+ * Escalate a case, starting the Google Cloud Support escalation management
+ * process.
+ *
+ * This operation is only available for some support services. Go to
+ * https://cloud.google.com/support and look for 'Technical support
+ * escalations' in the feature list to find out which ones let you
+ * do that.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the case to be escalated.
+ * @param {google.cloud.support.v2.Escalation} request.escalation
+ *   The escalation information to be sent with the escalation request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.support.v2.Case|Case}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/case_service.escalate_case.js</caption>
+ * region_tag:cloudsupport_v2_generated_CaseService_EscalateCase_async
+ */
   escalateCase(
-    request?: protos.google.cloud.support.v2.IEscalateCaseRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.support.v2.ICase,
-      protos.google.cloud.support.v2.IEscalateCaseRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.support.v2.IEscalateCaseRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.support.v2.ICase,
+        protos.google.cloud.support.v2.IEscalateCaseRequest|undefined, {}|undefined
+      ]>;
   escalateCase(
-    request: protos.google.cloud.support.v2.IEscalateCaseRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.support.v2.ICase,
-      protos.google.cloud.support.v2.IEscalateCaseRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  escalateCase(
-    request: protos.google.cloud.support.v2.IEscalateCaseRequest,
-    callback: Callback<
-      protos.google.cloud.support.v2.ICase,
-      protos.google.cloud.support.v2.IEscalateCaseRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  escalateCase(
-    request?: protos.google.cloud.support.v2.IEscalateCaseRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.support.v2.IEscalateCaseRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.support.v2.ICase,
-          | protos.google.cloud.support.v2.IEscalateCaseRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.support.v2.ICase,
-      protos.google.cloud.support.v2.IEscalateCaseRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.support.v2.ICase,
-      protos.google.cloud.support.v2.IEscalateCaseRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.support.v2.IEscalateCaseRequest|null|undefined,
+          {}|null|undefined>): void;
+  escalateCase(
+      request: protos.google.cloud.support.v2.IEscalateCaseRequest,
+      callback: Callback<
+          protos.google.cloud.support.v2.ICase,
+          protos.google.cloud.support.v2.IEscalateCaseRequest|null|undefined,
+          {}|null|undefined>): void;
+  escalateCase(
+      request?: protos.google.cloud.support.v2.IEscalateCaseRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.support.v2.ICase,
+          protos.google.cloud.support.v2.IEscalateCaseRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.support.v2.ICase,
+          protos.google.cloud.support.v2.IEscalateCaseRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.support.v2.ICase,
+        protos.google.cloud.support.v2.IEscalateCaseRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('escalateCase request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.support.v2.ICase,
-          | protos.google.cloud.support.v2.IEscalateCaseRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.support.v2.ICase,
+        protos.google.cloud.support.v2.IEscalateCaseRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('escalateCase response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .escalateCase(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.support.v2.ICase,
-          protos.google.cloud.support.v2.IEscalateCaseRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('escalateCase response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.escalateCase(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.support.v2.ICase,
+        protos.google.cloud.support.v2.IEscalateCaseRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('escalateCase response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Close a case.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the case to close.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.support.v2.Case|Case}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/case_service.close_case.js</caption>
-   * region_tag:cloudsupport_v2_generated_CaseService_CloseCase_async
-   */
+/**
+ * Close a case.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the case to close.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.support.v2.Case|Case}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/case_service.close_case.js</caption>
+ * region_tag:cloudsupport_v2_generated_CaseService_CloseCase_async
+ */
   closeCase(
-    request?: protos.google.cloud.support.v2.ICloseCaseRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.support.v2.ICase,
-      protos.google.cloud.support.v2.ICloseCaseRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.support.v2.ICloseCaseRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.support.v2.ICase,
+        protos.google.cloud.support.v2.ICloseCaseRequest|undefined, {}|undefined
+      ]>;
   closeCase(
-    request: protos.google.cloud.support.v2.ICloseCaseRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.support.v2.ICase,
-      protos.google.cloud.support.v2.ICloseCaseRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  closeCase(
-    request: protos.google.cloud.support.v2.ICloseCaseRequest,
-    callback: Callback<
-      protos.google.cloud.support.v2.ICase,
-      protos.google.cloud.support.v2.ICloseCaseRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  closeCase(
-    request?: protos.google.cloud.support.v2.ICloseCaseRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.support.v2.ICloseCaseRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.support.v2.ICase,
-          protos.google.cloud.support.v2.ICloseCaseRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.support.v2.ICase,
-      protos.google.cloud.support.v2.ICloseCaseRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.support.v2.ICase,
-      protos.google.cloud.support.v2.ICloseCaseRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.support.v2.ICloseCaseRequest|null|undefined,
+          {}|null|undefined>): void;
+  closeCase(
+      request: protos.google.cloud.support.v2.ICloseCaseRequest,
+      callback: Callback<
+          protos.google.cloud.support.v2.ICase,
+          protos.google.cloud.support.v2.ICloseCaseRequest|null|undefined,
+          {}|null|undefined>): void;
+  closeCase(
+      request?: protos.google.cloud.support.v2.ICloseCaseRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.support.v2.ICase,
+          protos.google.cloud.support.v2.ICloseCaseRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.support.v2.ICase,
+          protos.google.cloud.support.v2.ICloseCaseRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.support.v2.ICase,
+        protos.google.cloud.support.v2.ICloseCaseRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('closeCase request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.support.v2.ICase,
-          protos.google.cloud.support.v2.ICloseCaseRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.support.v2.ICase,
+        protos.google.cloud.support.v2.ICloseCaseRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('closeCase response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .closeCase(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.support.v2.ICase,
-          protos.google.cloud.support.v2.ICloseCaseRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('closeCase response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.closeCase(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.support.v2.ICase,
+        protos.google.cloud.support.v2.ICloseCaseRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('closeCase response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Retrieve all cases under a parent, but not its children.
-   *
-   * For example, listing cases under an organization only returns the cases
-   * that are directly parented by that organization. To retrieve cases
-   * under an organization and its projects, use `cases.search`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of a parent to list cases under.
-   * @param {string} request.filter
-   *   An expression used to filter cases.
-   *
-   *   If it's an empty string, then no filtering happens. Otherwise, the endpoint
-   *   returns the cases that match the filter.
-   *
-   *   Expressions use the following fields separated by `AND` and specified with
-   *   `=`:
-   *
-   *   - `state`: Can be `OPEN` or `CLOSED`.
-   *   - `priority`: Can be `P0`, `P1`, `P2`, `P3`, or `P4`. You
-   *   can specify multiple values for priority using the `OR` operator. For
-   *   example, `priority=P1 OR priority=P2`.
-   *   - `creator.email`: The email address of the case creator.
-   *
-   *   EXAMPLES:
-   *
-   *   - `state=CLOSED`
-   *   - `state=OPEN AND creator.email="tester@example.com"`
-   *   - `state=OPEN AND (priority=P0 OR priority=P1)`
-   * @param {number} request.pageSize
-   *   The maximum number of cases fetched with each request. Defaults to 10.
-   * @param {string} request.pageToken
-   *   A token identifying the page of results to return. If unspecified, the
-   *   first page is retrieved.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.support.v2.Case|Case}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listCasesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Retrieve all cases under a parent, but not its children.
+ *
+ * For example, listing cases under an organization only returns the cases
+ * that are directly parented by that organization. To retrieve cases
+ * under an organization and its projects, use `cases.search`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of a parent to list cases under.
+ * @param {string} request.filter
+ *   An expression used to filter cases.
+ *
+ *   If it's an empty string, then no filtering happens. Otherwise, the endpoint
+ *   returns the cases that match the filter.
+ *
+ *   Expressions use the following fields separated by `AND` and specified with
+ *   `=`:
+ *
+ *   - `state`: Can be `OPEN` or `CLOSED`.
+ *   - `priority`: Can be `P0`, `P1`, `P2`, `P3`, or `P4`. You
+ *   can specify multiple values for priority using the `OR` operator. For
+ *   example, `priority=P1 OR priority=P2`.
+ *   - `creator.email`: The email address of the case creator.
+ *
+ *   EXAMPLES:
+ *
+ *   - `state=CLOSED`
+ *   - `state=OPEN AND creator.email="tester@example.com"`
+ *   - `state=OPEN AND (priority=P0 OR priority=P1)`
+ * @param {number} request.pageSize
+ *   The maximum number of cases fetched with each request. Defaults to 10.
+ * @param {string} request.pageToken
+ *   A token identifying the page of results to return. If unspecified, the
+ *   first page is retrieved.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.support.v2.Case|Case}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listCasesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCases(
-    request?: protos.google.cloud.support.v2.IListCasesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.support.v2.ICase[],
-      protos.google.cloud.support.v2.IListCasesRequest | null,
-      protos.google.cloud.support.v2.IListCasesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.support.v2.IListCasesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.support.v2.ICase[],
+        protos.google.cloud.support.v2.IListCasesRequest|null,
+        protos.google.cloud.support.v2.IListCasesResponse
+      ]>;
   listCases(
-    request: protos.google.cloud.support.v2.IListCasesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.support.v2.IListCasesRequest,
-      protos.google.cloud.support.v2.IListCasesResponse | null | undefined,
-      protos.google.cloud.support.v2.ICase
-    >
-  ): void;
-  listCases(
-    request: protos.google.cloud.support.v2.IListCasesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.support.v2.IListCasesRequest,
-      protos.google.cloud.support.v2.IListCasesResponse | null | undefined,
-      protos.google.cloud.support.v2.ICase
-    >
-  ): void;
-  listCases(
-    request?: protos.google.cloud.support.v2.IListCasesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.support.v2.IListCasesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.support.v2.IListCasesRequest,
-          protos.google.cloud.support.v2.IListCasesResponse | null | undefined,
-          protos.google.cloud.support.v2.ICase
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.support.v2.IListCasesRequest,
-      protos.google.cloud.support.v2.IListCasesResponse | null | undefined,
-      protos.google.cloud.support.v2.ICase
-    >
-  ): Promise<
-    [
-      protos.google.cloud.support.v2.ICase[],
-      protos.google.cloud.support.v2.IListCasesRequest | null,
-      protos.google.cloud.support.v2.IListCasesResponse,
-    ]
-  > | void {
+          protos.google.cloud.support.v2.IListCasesResponse|null|undefined,
+          protos.google.cloud.support.v2.ICase>): void;
+  listCases(
+      request: protos.google.cloud.support.v2.IListCasesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.support.v2.IListCasesRequest,
+          protos.google.cloud.support.v2.IListCasesResponse|null|undefined,
+          protos.google.cloud.support.v2.ICase>): void;
+  listCases(
+      request?: protos.google.cloud.support.v2.IListCasesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.support.v2.IListCasesRequest,
+          protos.google.cloud.support.v2.IListCasesResponse|null|undefined,
+          protos.google.cloud.support.v2.ICase>,
+      callback?: PaginationCallback<
+          protos.google.cloud.support.v2.IListCasesRequest,
+          protos.google.cloud.support.v2.IListCasesResponse|null|undefined,
+          protos.google.cloud.support.v2.ICase>):
+      Promise<[
+        protos.google.cloud.support.v2.ICase[],
+        protos.google.cloud.support.v2.IListCasesRequest|null,
+        protos.google.cloud.support.v2.IListCasesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.support.v2.IListCasesRequest,
-          protos.google.cloud.support.v2.IListCasesResponse | null | undefined,
-          protos.google.cloud.support.v2.ICase
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.support.v2.IListCasesRequest,
+      protos.google.cloud.support.v2.IListCasesResponse|null|undefined,
+      protos.google.cloud.support.v2.ICase>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listCases values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1116,77 +966,74 @@ export class CaseServiceClient {
     this._log.info('listCases request %j', request);
     return this.innerApiCalls
       .listCases(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.support.v2.ICase[],
-          protos.google.cloud.support.v2.IListCasesRequest | null,
-          protos.google.cloud.support.v2.IListCasesResponse,
-        ]) => {
-          this._log.info('listCases values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.support.v2.ICase[],
+        protos.google.cloud.support.v2.IListCasesRequest|null,
+        protos.google.cloud.support.v2.IListCasesResponse
+      ]) => {
+        this._log.info('listCases values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listCases`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of a parent to list cases under.
-   * @param {string} request.filter
-   *   An expression used to filter cases.
-   *
-   *   If it's an empty string, then no filtering happens. Otherwise, the endpoint
-   *   returns the cases that match the filter.
-   *
-   *   Expressions use the following fields separated by `AND` and specified with
-   *   `=`:
-   *
-   *   - `state`: Can be `OPEN` or `CLOSED`.
-   *   - `priority`: Can be `P0`, `P1`, `P2`, `P3`, or `P4`. You
-   *   can specify multiple values for priority using the `OR` operator. For
-   *   example, `priority=P1 OR priority=P2`.
-   *   - `creator.email`: The email address of the case creator.
-   *
-   *   EXAMPLES:
-   *
-   *   - `state=CLOSED`
-   *   - `state=OPEN AND creator.email="tester@example.com"`
-   *   - `state=OPEN AND (priority=P0 OR priority=P1)`
-   * @param {number} request.pageSize
-   *   The maximum number of cases fetched with each request. Defaults to 10.
-   * @param {string} request.pageToken
-   *   A token identifying the page of results to return. If unspecified, the
-   *   first page is retrieved.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.support.v2.Case|Case} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listCasesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listCases`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of a parent to list cases under.
+ * @param {string} request.filter
+ *   An expression used to filter cases.
+ *
+ *   If it's an empty string, then no filtering happens. Otherwise, the endpoint
+ *   returns the cases that match the filter.
+ *
+ *   Expressions use the following fields separated by `AND` and specified with
+ *   `=`:
+ *
+ *   - `state`: Can be `OPEN` or `CLOSED`.
+ *   - `priority`: Can be `P0`, `P1`, `P2`, `P3`, or `P4`. You
+ *   can specify multiple values for priority using the `OR` operator. For
+ *   example, `priority=P1 OR priority=P2`.
+ *   - `creator.email`: The email address of the case creator.
+ *
+ *   EXAMPLES:
+ *
+ *   - `state=CLOSED`
+ *   - `state=OPEN AND creator.email="tester@example.com"`
+ *   - `state=OPEN AND (priority=P0 OR priority=P1)`
+ * @param {number} request.pageSize
+ *   The maximum number of cases fetched with each request. Defaults to 10.
+ * @param {string} request.pageToken
+ *   A token identifying the page of results to return. If unspecified, the
+ *   first page is retrieved.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.support.v2.Case|Case} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listCasesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCasesStream(
-    request?: protos.google.cloud.support.v2.IListCasesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.support.v2.IListCasesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCases stream %j', request);
     return this.descriptors.page.listCases.createStream(
       this.innerApiCalls.listCases as GaxCall,
@@ -1195,68 +1042,67 @@ export class CaseServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listCases`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of a parent to list cases under.
-   * @param {string} request.filter
-   *   An expression used to filter cases.
-   *
-   *   If it's an empty string, then no filtering happens. Otherwise, the endpoint
-   *   returns the cases that match the filter.
-   *
-   *   Expressions use the following fields separated by `AND` and specified with
-   *   `=`:
-   *
-   *   - `state`: Can be `OPEN` or `CLOSED`.
-   *   - `priority`: Can be `P0`, `P1`, `P2`, `P3`, or `P4`. You
-   *   can specify multiple values for priority using the `OR` operator. For
-   *   example, `priority=P1 OR priority=P2`.
-   *   - `creator.email`: The email address of the case creator.
-   *
-   *   EXAMPLES:
-   *
-   *   - `state=CLOSED`
-   *   - `state=OPEN AND creator.email="tester@example.com"`
-   *   - `state=OPEN AND (priority=P0 OR priority=P1)`
-   * @param {number} request.pageSize
-   *   The maximum number of cases fetched with each request. Defaults to 10.
-   * @param {string} request.pageToken
-   *   A token identifying the page of results to return. If unspecified, the
-   *   first page is retrieved.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.support.v2.Case|Case}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/case_service.list_cases.js</caption>
-   * region_tag:cloudsupport_v2_generated_CaseService_ListCases_async
-   */
+/**
+ * Equivalent to `listCases`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of a parent to list cases under.
+ * @param {string} request.filter
+ *   An expression used to filter cases.
+ *
+ *   If it's an empty string, then no filtering happens. Otherwise, the endpoint
+ *   returns the cases that match the filter.
+ *
+ *   Expressions use the following fields separated by `AND` and specified with
+ *   `=`:
+ *
+ *   - `state`: Can be `OPEN` or `CLOSED`.
+ *   - `priority`: Can be `P0`, `P1`, `P2`, `P3`, or `P4`. You
+ *   can specify multiple values for priority using the `OR` operator. For
+ *   example, `priority=P1 OR priority=P2`.
+ *   - `creator.email`: The email address of the case creator.
+ *
+ *   EXAMPLES:
+ *
+ *   - `state=CLOSED`
+ *   - `state=OPEN AND creator.email="tester@example.com"`
+ *   - `state=OPEN AND (priority=P0 OR priority=P1)`
+ * @param {number} request.pageSize
+ *   The maximum number of cases fetched with each request. Defaults to 10.
+ * @param {string} request.pageToken
+ *   A token identifying the page of results to return. If unspecified, the
+ *   first page is retrieved.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.support.v2.Case|Case}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/case_service.list_cases.js</caption>
+ * region_tag:cloudsupport_v2_generated_CaseService_ListCases_async
+ */
   listCasesAsync(
-    request?: protos.google.cloud.support.v2.IListCasesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.support.v2.ICase> {
+      request?: protos.google.cloud.support.v2.IListCasesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.support.v2.ICase>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCases iterate %j', request);
     return this.descriptors.page.listCases.asyncIterate(
       this.innerApiCalls['listCases'] as GaxCall,
@@ -1264,141 +1110,122 @@ export class CaseServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.support.v2.ICase>;
   }
-  /**
-   * Search for cases using a query.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The name of the parent resource to search for cases under.
-   * @param {string} request.query
-   *   An expression used to filter cases.
-   *
-   *   Expressions use the following fields separated by `AND` and specified with
-   *   `=`:
-   *
-   *   - `organization`: An organization name in the form
-   *   `organizations/<organization_id>`.
-   *   - `project`: A project name in the form `projects/<project_id>`.
-   *   - `state`: Can be `OPEN` or `CLOSED`.
-   *   - `priority`: Can be `P0`, `P1`, `P2`, `P3`, or `P4`. You
-   *   can specify multiple values for priority using the `OR` operator. For
-   *   example, `priority=P1 OR priority=P2`.
-   *   - `creator.email`: The email address of the case creator.
-   *
-   *   You must specify either `organization` or `project`.
-   *
-   *   To search across `displayName`, `description`, and comments, use a global
-   *   restriction with no keyword or operator. For example, `"my search"`.
-   *
-   *   To search only cases updated after a certain date, use `update_time`
-   *   restricted with that particular date, time, and timezone in ISO datetime
-   *   format. For example, `update_time>"2020-01-01T00:00:00-05:00"`.
-   *   `update_time` only supports the greater than operator (`>`).
-   *
-   *   Examples:
-   *
-   *   - `organization="organizations/123456789"`
-   *   - `project="projects/my-project-id"`
-   *   - `project="projects/123456789"`
-   *   - `organization="organizations/123456789" AND state=CLOSED`
-   *   - `project="projects/my-project-id" AND creator.email="tester@example.com"`
-   *   - `project="projects/my-project-id" AND (priority=P0 OR priority=P1)`
-   * @param {number} request.pageSize
-   *   The maximum number of cases fetched with each request. The default page
-   *   size is 10.
-   * @param {string} request.pageToken
-   *   A token identifying the page of results to return. If unspecified, the
-   *   first page is retrieved.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.support.v2.Case|Case}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `searchCasesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Search for cases using a query.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   The name of the parent resource to search for cases under.
+ * @param {string} request.query
+ *   An expression used to filter cases.
+ *
+ *   Expressions use the following fields separated by `AND` and specified with
+ *   `=`:
+ *
+ *   - `organization`: An organization name in the form
+ *   `organizations/<organization_id>`.
+ *   - `project`: A project name in the form `projects/<project_id>`.
+ *   - `state`: Can be `OPEN` or `CLOSED`.
+ *   - `priority`: Can be `P0`, `P1`, `P2`, `P3`, or `P4`. You
+ *   can specify multiple values for priority using the `OR` operator. For
+ *   example, `priority=P1 OR priority=P2`.
+ *   - `creator.email`: The email address of the case creator.
+ *
+ *   You must specify either `organization` or `project`.
+ *
+ *   To search across `displayName`, `description`, and comments, use a global
+ *   restriction with no keyword or operator. For example, `"my search"`.
+ *
+ *   To search only cases updated after a certain date, use `update_time`
+ *   restricted with that particular date, time, and timezone in ISO datetime
+ *   format. For example, `update_time>"2020-01-01T00:00:00-05:00"`.
+ *   `update_time` only supports the greater than operator (`>`).
+ *
+ *   Examples:
+ *
+ *   - `organization="organizations/123456789"`
+ *   - `project="projects/my-project-id"`
+ *   - `project="projects/123456789"`
+ *   - `organization="organizations/123456789" AND state=CLOSED`
+ *   - `project="projects/my-project-id" AND creator.email="tester@example.com"`
+ *   - `project="projects/my-project-id" AND (priority=P0 OR priority=P1)`
+ * @param {number} request.pageSize
+ *   The maximum number of cases fetched with each request. The default page
+ *   size is 10.
+ * @param {string} request.pageToken
+ *   A token identifying the page of results to return. If unspecified, the
+ *   first page is retrieved.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.support.v2.Case|Case}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `searchCasesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchCases(
-    request?: protos.google.cloud.support.v2.ISearchCasesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.support.v2.ICase[],
-      protos.google.cloud.support.v2.ISearchCasesRequest | null,
-      protos.google.cloud.support.v2.ISearchCasesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.support.v2.ISearchCasesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.support.v2.ICase[],
+        protos.google.cloud.support.v2.ISearchCasesRequest|null,
+        protos.google.cloud.support.v2.ISearchCasesResponse
+      ]>;
   searchCases(
-    request: protos.google.cloud.support.v2.ISearchCasesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.support.v2.ISearchCasesRequest,
-      protos.google.cloud.support.v2.ISearchCasesResponse | null | undefined,
-      protos.google.cloud.support.v2.ICase
-    >
-  ): void;
-  searchCases(
-    request: protos.google.cloud.support.v2.ISearchCasesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.support.v2.ISearchCasesRequest,
-      protos.google.cloud.support.v2.ISearchCasesResponse | null | undefined,
-      protos.google.cloud.support.v2.ICase
-    >
-  ): void;
-  searchCases(
-    request?: protos.google.cloud.support.v2.ISearchCasesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.support.v2.ISearchCasesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.support.v2.ISearchCasesRequest,
-          | protos.google.cloud.support.v2.ISearchCasesResponse
-          | null
-          | undefined,
-          protos.google.cloud.support.v2.ICase
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.support.v2.ISearchCasesRequest,
-      protos.google.cloud.support.v2.ISearchCasesResponse | null | undefined,
-      protos.google.cloud.support.v2.ICase
-    >
-  ): Promise<
-    [
-      protos.google.cloud.support.v2.ICase[],
-      protos.google.cloud.support.v2.ISearchCasesRequest | null,
-      protos.google.cloud.support.v2.ISearchCasesResponse,
-    ]
-  > | void {
+          protos.google.cloud.support.v2.ISearchCasesResponse|null|undefined,
+          protos.google.cloud.support.v2.ICase>): void;
+  searchCases(
+      request: protos.google.cloud.support.v2.ISearchCasesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.support.v2.ISearchCasesRequest,
+          protos.google.cloud.support.v2.ISearchCasesResponse|null|undefined,
+          protos.google.cloud.support.v2.ICase>): void;
+  searchCases(
+      request?: protos.google.cloud.support.v2.ISearchCasesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.support.v2.ISearchCasesRequest,
+          protos.google.cloud.support.v2.ISearchCasesResponse|null|undefined,
+          protos.google.cloud.support.v2.ICase>,
+      callback?: PaginationCallback<
+          protos.google.cloud.support.v2.ISearchCasesRequest,
+          protos.google.cloud.support.v2.ISearchCasesResponse|null|undefined,
+          protos.google.cloud.support.v2.ICase>):
+      Promise<[
+        protos.google.cloud.support.v2.ICase[],
+        protos.google.cloud.support.v2.ISearchCasesRequest|null,
+        protos.google.cloud.support.v2.ISearchCasesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.support.v2.ISearchCasesRequest,
-          | protos.google.cloud.support.v2.ISearchCasesResponse
-          | null
-          | undefined,
-          protos.google.cloud.support.v2.ICase
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.support.v2.ISearchCasesRequest,
+      protos.google.cloud.support.v2.ISearchCasesResponse|null|undefined,
+      protos.google.cloud.support.v2.ICase>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('searchCases values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1407,91 +1234,88 @@ export class CaseServiceClient {
     this._log.info('searchCases request %j', request);
     return this.innerApiCalls
       .searchCases(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.support.v2.ICase[],
-          protos.google.cloud.support.v2.ISearchCasesRequest | null,
-          protos.google.cloud.support.v2.ISearchCasesResponse,
-        ]) => {
-          this._log.info('searchCases values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.support.v2.ICase[],
+        protos.google.cloud.support.v2.ISearchCasesRequest|null,
+        protos.google.cloud.support.v2.ISearchCasesResponse
+      ]) => {
+        this._log.info('searchCases values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `searchCases`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The name of the parent resource to search for cases under.
-   * @param {string} request.query
-   *   An expression used to filter cases.
-   *
-   *   Expressions use the following fields separated by `AND` and specified with
-   *   `=`:
-   *
-   *   - `organization`: An organization name in the form
-   *   `organizations/<organization_id>`.
-   *   - `project`: A project name in the form `projects/<project_id>`.
-   *   - `state`: Can be `OPEN` or `CLOSED`.
-   *   - `priority`: Can be `P0`, `P1`, `P2`, `P3`, or `P4`. You
-   *   can specify multiple values for priority using the `OR` operator. For
-   *   example, `priority=P1 OR priority=P2`.
-   *   - `creator.email`: The email address of the case creator.
-   *
-   *   You must specify either `organization` or `project`.
-   *
-   *   To search across `displayName`, `description`, and comments, use a global
-   *   restriction with no keyword or operator. For example, `"my search"`.
-   *
-   *   To search only cases updated after a certain date, use `update_time`
-   *   restricted with that particular date, time, and timezone in ISO datetime
-   *   format. For example, `update_time>"2020-01-01T00:00:00-05:00"`.
-   *   `update_time` only supports the greater than operator (`>`).
-   *
-   *   Examples:
-   *
-   *   - `organization="organizations/123456789"`
-   *   - `project="projects/my-project-id"`
-   *   - `project="projects/123456789"`
-   *   - `organization="organizations/123456789" AND state=CLOSED`
-   *   - `project="projects/my-project-id" AND creator.email="tester@example.com"`
-   *   - `project="projects/my-project-id" AND (priority=P0 OR priority=P1)`
-   * @param {number} request.pageSize
-   *   The maximum number of cases fetched with each request. The default page
-   *   size is 10.
-   * @param {string} request.pageToken
-   *   A token identifying the page of results to return. If unspecified, the
-   *   first page is retrieved.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.support.v2.Case|Case} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `searchCasesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `searchCases`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   The name of the parent resource to search for cases under.
+ * @param {string} request.query
+ *   An expression used to filter cases.
+ *
+ *   Expressions use the following fields separated by `AND` and specified with
+ *   `=`:
+ *
+ *   - `organization`: An organization name in the form
+ *   `organizations/<organization_id>`.
+ *   - `project`: A project name in the form `projects/<project_id>`.
+ *   - `state`: Can be `OPEN` or `CLOSED`.
+ *   - `priority`: Can be `P0`, `P1`, `P2`, `P3`, or `P4`. You
+ *   can specify multiple values for priority using the `OR` operator. For
+ *   example, `priority=P1 OR priority=P2`.
+ *   - `creator.email`: The email address of the case creator.
+ *
+ *   You must specify either `organization` or `project`.
+ *
+ *   To search across `displayName`, `description`, and comments, use a global
+ *   restriction with no keyword or operator. For example, `"my search"`.
+ *
+ *   To search only cases updated after a certain date, use `update_time`
+ *   restricted with that particular date, time, and timezone in ISO datetime
+ *   format. For example, `update_time>"2020-01-01T00:00:00-05:00"`.
+ *   `update_time` only supports the greater than operator (`>`).
+ *
+ *   Examples:
+ *
+ *   - `organization="organizations/123456789"`
+ *   - `project="projects/my-project-id"`
+ *   - `project="projects/123456789"`
+ *   - `organization="organizations/123456789" AND state=CLOSED`
+ *   - `project="projects/my-project-id" AND creator.email="tester@example.com"`
+ *   - `project="projects/my-project-id" AND (priority=P0 OR priority=P1)`
+ * @param {number} request.pageSize
+ *   The maximum number of cases fetched with each request. The default page
+ *   size is 10.
+ * @param {string} request.pageToken
+ *   A token identifying the page of results to return. If unspecified, the
+ *   first page is retrieved.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.support.v2.Case|Case} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `searchCasesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchCasesStream(
-    request?: protos.google.cloud.support.v2.ISearchCasesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.support.v2.ISearchCasesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['searchCases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchCases stream %j', request);
     return this.descriptors.page.searchCases.createStream(
       this.innerApiCalls.searchCases as GaxCall,
@@ -1500,82 +1324,81 @@ export class CaseServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `searchCases`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The name of the parent resource to search for cases under.
-   * @param {string} request.query
-   *   An expression used to filter cases.
-   *
-   *   Expressions use the following fields separated by `AND` and specified with
-   *   `=`:
-   *
-   *   - `organization`: An organization name in the form
-   *   `organizations/<organization_id>`.
-   *   - `project`: A project name in the form `projects/<project_id>`.
-   *   - `state`: Can be `OPEN` or `CLOSED`.
-   *   - `priority`: Can be `P0`, `P1`, `P2`, `P3`, or `P4`. You
-   *   can specify multiple values for priority using the `OR` operator. For
-   *   example, `priority=P1 OR priority=P2`.
-   *   - `creator.email`: The email address of the case creator.
-   *
-   *   You must specify either `organization` or `project`.
-   *
-   *   To search across `displayName`, `description`, and comments, use a global
-   *   restriction with no keyword or operator. For example, `"my search"`.
-   *
-   *   To search only cases updated after a certain date, use `update_time`
-   *   restricted with that particular date, time, and timezone in ISO datetime
-   *   format. For example, `update_time>"2020-01-01T00:00:00-05:00"`.
-   *   `update_time` only supports the greater than operator (`>`).
-   *
-   *   Examples:
-   *
-   *   - `organization="organizations/123456789"`
-   *   - `project="projects/my-project-id"`
-   *   - `project="projects/123456789"`
-   *   - `organization="organizations/123456789" AND state=CLOSED`
-   *   - `project="projects/my-project-id" AND creator.email="tester@example.com"`
-   *   - `project="projects/my-project-id" AND (priority=P0 OR priority=P1)`
-   * @param {number} request.pageSize
-   *   The maximum number of cases fetched with each request. The default page
-   *   size is 10.
-   * @param {string} request.pageToken
-   *   A token identifying the page of results to return. If unspecified, the
-   *   first page is retrieved.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.support.v2.Case|Case}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/case_service.search_cases.js</caption>
-   * region_tag:cloudsupport_v2_generated_CaseService_SearchCases_async
-   */
+/**
+ * Equivalent to `searchCases`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   The name of the parent resource to search for cases under.
+ * @param {string} request.query
+ *   An expression used to filter cases.
+ *
+ *   Expressions use the following fields separated by `AND` and specified with
+ *   `=`:
+ *
+ *   - `organization`: An organization name in the form
+ *   `organizations/<organization_id>`.
+ *   - `project`: A project name in the form `projects/<project_id>`.
+ *   - `state`: Can be `OPEN` or `CLOSED`.
+ *   - `priority`: Can be `P0`, `P1`, `P2`, `P3`, or `P4`. You
+ *   can specify multiple values for priority using the `OR` operator. For
+ *   example, `priority=P1 OR priority=P2`.
+ *   - `creator.email`: The email address of the case creator.
+ *
+ *   You must specify either `organization` or `project`.
+ *
+ *   To search across `displayName`, `description`, and comments, use a global
+ *   restriction with no keyword or operator. For example, `"my search"`.
+ *
+ *   To search only cases updated after a certain date, use `update_time`
+ *   restricted with that particular date, time, and timezone in ISO datetime
+ *   format. For example, `update_time>"2020-01-01T00:00:00-05:00"`.
+ *   `update_time` only supports the greater than operator (`>`).
+ *
+ *   Examples:
+ *
+ *   - `organization="organizations/123456789"`
+ *   - `project="projects/my-project-id"`
+ *   - `project="projects/123456789"`
+ *   - `organization="organizations/123456789" AND state=CLOSED`
+ *   - `project="projects/my-project-id" AND creator.email="tester@example.com"`
+ *   - `project="projects/my-project-id" AND (priority=P0 OR priority=P1)`
+ * @param {number} request.pageSize
+ *   The maximum number of cases fetched with each request. The default page
+ *   size is 10.
+ * @param {string} request.pageToken
+ *   A token identifying the page of results to return. If unspecified, the
+ *   first page is retrieved.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.support.v2.Case|Case}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/case_service.search_cases.js</caption>
+ * region_tag:cloudsupport_v2_generated_CaseService_SearchCases_async
+ */
   searchCasesAsync(
-    request?: protos.google.cloud.support.v2.ISearchCasesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.support.v2.ICase> {
+      request?: protos.google.cloud.support.v2.ISearchCasesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.support.v2.ICase>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['searchCases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchCases iterate %j', request);
     return this.descriptors.page.searchCases.asyncIterate(
       this.innerApiCalls['searchCases'] as GaxCall,
@@ -1583,121 +1406,95 @@ export class CaseServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.support.v2.ICase>;
   }
-  /**
-   * Retrieve valid classifications to use when creating a support case.
-   *
-   * Classifications are hierarchical. Each classification is a string
-   * containing all levels of the hierarchy separated by `" > "`. For example,
-   * `"Technical Issue > Compute > Compute Engine"`.
-   *
-   * Classification IDs returned by this endpoint are valid for at least six
-   * months. When a classification is deactivated, this endpoint immediately
-   * stops returning it. After six months, `case.create` requests using the
-   * classification will fail.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.query
-   *   An expression used to filter case classifications.
-   *
-   *   If it's an empty string, then no filtering happens. Otherwise, case
-   *   classifications will be returned that match the filter.
-   * @param {number} request.pageSize
-   *   The maximum number of classifications fetched with each request.
-   * @param {string} request.pageToken
-   *   A token identifying the page of results to return. If unspecified, the
-   *   first page is retrieved.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.support.v2.CaseClassification|CaseClassification}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `searchCaseClassificationsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Retrieve valid classifications to use when creating a support case.
+ *
+ * Classifications are hierarchical. Each classification is a string
+ * containing all levels of the hierarchy separated by `" > "`. For example,
+ * `"Technical Issue > Compute > Compute Engine"`.
+ *
+ * Classification IDs returned by this endpoint are valid for at least six
+ * months. When a classification is deactivated, this endpoint immediately
+ * stops returning it. After six months, `case.create` requests using the
+ * classification will fail.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.query
+ *   An expression used to filter case classifications.
+ *
+ *   If it's an empty string, then no filtering happens. Otherwise, case
+ *   classifications will be returned that match the filter.
+ * @param {number} request.pageSize
+ *   The maximum number of classifications fetched with each request.
+ * @param {string} request.pageToken
+ *   A token identifying the page of results to return. If unspecified, the
+ *   first page is retrieved.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.support.v2.CaseClassification|CaseClassification}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `searchCaseClassificationsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchCaseClassifications(
-    request?: protos.google.cloud.support.v2.ISearchCaseClassificationsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.support.v2.ICaseClassification[],
-      protos.google.cloud.support.v2.ISearchCaseClassificationsRequest | null,
-      protos.google.cloud.support.v2.ISearchCaseClassificationsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.support.v2.ISearchCaseClassificationsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.support.v2.ICaseClassification[],
+        protos.google.cloud.support.v2.ISearchCaseClassificationsRequest|null,
+        protos.google.cloud.support.v2.ISearchCaseClassificationsResponse
+      ]>;
   searchCaseClassifications(
-    request: protos.google.cloud.support.v2.ISearchCaseClassificationsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.support.v2.ISearchCaseClassificationsRequest,
-      | protos.google.cloud.support.v2.ISearchCaseClassificationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.support.v2.ICaseClassification
-    >
-  ): void;
-  searchCaseClassifications(
-    request: protos.google.cloud.support.v2.ISearchCaseClassificationsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.support.v2.ISearchCaseClassificationsRequest,
-      | protos.google.cloud.support.v2.ISearchCaseClassificationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.support.v2.ICaseClassification
-    >
-  ): void;
-  searchCaseClassifications(
-    request?: protos.google.cloud.support.v2.ISearchCaseClassificationsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.support.v2.ISearchCaseClassificationsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.support.v2.ISearchCaseClassificationsRequest,
-          | protos.google.cloud.support.v2.ISearchCaseClassificationsResponse
-          | null
-          | undefined,
-          protos.google.cloud.support.v2.ICaseClassification
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.support.v2.ISearchCaseClassificationsRequest,
-      | protos.google.cloud.support.v2.ISearchCaseClassificationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.support.v2.ICaseClassification
-    >
-  ): Promise<
-    [
-      protos.google.cloud.support.v2.ICaseClassification[],
-      protos.google.cloud.support.v2.ISearchCaseClassificationsRequest | null,
-      protos.google.cloud.support.v2.ISearchCaseClassificationsResponse,
-    ]
-  > | void {
+          protos.google.cloud.support.v2.ISearchCaseClassificationsResponse|null|undefined,
+          protos.google.cloud.support.v2.ICaseClassification>): void;
+  searchCaseClassifications(
+      request: protos.google.cloud.support.v2.ISearchCaseClassificationsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.support.v2.ISearchCaseClassificationsRequest,
+          protos.google.cloud.support.v2.ISearchCaseClassificationsResponse|null|undefined,
+          protos.google.cloud.support.v2.ICaseClassification>): void;
+  searchCaseClassifications(
+      request?: protos.google.cloud.support.v2.ISearchCaseClassificationsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.support.v2.ISearchCaseClassificationsRequest,
+          protos.google.cloud.support.v2.ISearchCaseClassificationsResponse|null|undefined,
+          protos.google.cloud.support.v2.ICaseClassification>,
+      callback?: PaginationCallback<
+          protos.google.cloud.support.v2.ISearchCaseClassificationsRequest,
+          protos.google.cloud.support.v2.ISearchCaseClassificationsResponse|null|undefined,
+          protos.google.cloud.support.v2.ICaseClassification>):
+      Promise<[
+        protos.google.cloud.support.v2.ICaseClassification[],
+        protos.google.cloud.support.v2.ISearchCaseClassificationsRequest|null,
+        protos.google.cloud.support.v2.ISearchCaseClassificationsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.support.v2.ISearchCaseClassificationsRequest,
-          | protos.google.cloud.support.v2.ISearchCaseClassificationsResponse
-          | null
-          | undefined,
-          protos.google.cloud.support.v2.ICaseClassification
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.support.v2.ISearchCaseClassificationsRequest,
+      protos.google.cloud.support.v2.ISearchCaseClassificationsResponse|null|undefined,
+      protos.google.cloud.support.v2.ICaseClassification>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('searchCaseClassifications values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1706,56 +1503,52 @@ export class CaseServiceClient {
     this._log.info('searchCaseClassifications request %j', request);
     return this.innerApiCalls
       .searchCaseClassifications(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.support.v2.ICaseClassification[],
-          protos.google.cloud.support.v2.ISearchCaseClassificationsRequest | null,
-          protos.google.cloud.support.v2.ISearchCaseClassificationsResponse,
-        ]) => {
-          this._log.info('searchCaseClassifications values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.support.v2.ICaseClassification[],
+        protos.google.cloud.support.v2.ISearchCaseClassificationsRequest|null,
+        protos.google.cloud.support.v2.ISearchCaseClassificationsResponse
+      ]) => {
+        this._log.info('searchCaseClassifications values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `searchCaseClassifications`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.query
-   *   An expression used to filter case classifications.
-   *
-   *   If it's an empty string, then no filtering happens. Otherwise, case
-   *   classifications will be returned that match the filter.
-   * @param {number} request.pageSize
-   *   The maximum number of classifications fetched with each request.
-   * @param {string} request.pageToken
-   *   A token identifying the page of results to return. If unspecified, the
-   *   first page is retrieved.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.support.v2.CaseClassification|CaseClassification} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `searchCaseClassificationsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `searchCaseClassifications`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.query
+ *   An expression used to filter case classifications.
+ *
+ *   If it's an empty string, then no filtering happens. Otherwise, case
+ *   classifications will be returned that match the filter.
+ * @param {number} request.pageSize
+ *   The maximum number of classifications fetched with each request.
+ * @param {string} request.pageToken
+ *   A token identifying the page of results to return. If unspecified, the
+ *   first page is retrieved.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.support.v2.CaseClassification|CaseClassification} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `searchCaseClassificationsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchCaseClassificationsStream(
-    request?: protos.google.cloud.support.v2.ISearchCaseClassificationsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.support.v2.ISearchCaseClassificationsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['searchCaseClassifications'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchCaseClassifications stream %j', request);
     return this.descriptors.page.searchCaseClassifications.createStream(
       this.innerApiCalls.searchCaseClassifications as GaxCall,
@@ -1764,47 +1557,45 @@ export class CaseServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `searchCaseClassifications`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.query
-   *   An expression used to filter case classifications.
-   *
-   *   If it's an empty string, then no filtering happens. Otherwise, case
-   *   classifications will be returned that match the filter.
-   * @param {number} request.pageSize
-   *   The maximum number of classifications fetched with each request.
-   * @param {string} request.pageToken
-   *   A token identifying the page of results to return. If unspecified, the
-   *   first page is retrieved.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.support.v2.CaseClassification|CaseClassification}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/case_service.search_case_classifications.js</caption>
-   * region_tag:cloudsupport_v2_generated_CaseService_SearchCaseClassifications_async
-   */
+/**
+ * Equivalent to `searchCaseClassifications`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.query
+ *   An expression used to filter case classifications.
+ *
+ *   If it's an empty string, then no filtering happens. Otherwise, case
+ *   classifications will be returned that match the filter.
+ * @param {number} request.pageSize
+ *   The maximum number of classifications fetched with each request.
+ * @param {string} request.pageToken
+ *   A token identifying the page of results to return. If unspecified, the
+ *   first page is retrieved.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.support.v2.CaseClassification|CaseClassification}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/case_service.search_case_classifications.js</caption>
+ * region_tag:cloudsupport_v2_generated_CaseService_SearchCaseClassifications_async
+ */
   searchCaseClassificationsAsync(
-    request?: protos.google.cloud.support.v2.ISearchCaseClassificationsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.support.v2.ICaseClassification> {
+      request?: protos.google.cloud.support.v2.ISearchCaseClassificationsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.support.v2.ICaseClassification>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['searchCaseClassifications'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchCaseClassifications iterate %j', request);
     return this.descriptors.page.searchCaseClassifications.asyncIterate(
       this.innerApiCalls['searchCaseClassifications'] as GaxCall,
@@ -1822,7 +1613,7 @@ export class CaseServiceClient {
    * @param {string} organization
    * @returns {string} Resource name string.
    */
-  organizationPath(organization: string) {
+  organizationPath(organization:string) {
     return this.pathTemplates.organizationPathTemplate.render({
       organization: organization,
     });
@@ -1836,8 +1627,7 @@ export class CaseServiceClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationName(organizationName: string) {
-    return this.pathTemplates.organizationPathTemplate.match(organizationName)
-      .organization;
+    return this.pathTemplates.organizationPathTemplate.match(organizationName).organization;
   }
 
   /**
@@ -1847,7 +1637,7 @@ export class CaseServiceClient {
    * @param {string} caseParam
    * @returns {string} Resource name string.
    */
-  organizationCasePath(organization: string, caseParam: string) {
+  organizationCasePath(organization:string,caseParam:string) {
     return this.pathTemplates.organizationCasePathTemplate.render({
       organization: organization,
       case: caseParam,
@@ -1862,9 +1652,7 @@ export class CaseServiceClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationCaseName(organizationCaseName: string) {
-    return this.pathTemplates.organizationCasePathTemplate.match(
-      organizationCaseName
-    ).organization;
+    return this.pathTemplates.organizationCasePathTemplate.match(organizationCaseName).organization;
   }
 
   /**
@@ -1875,9 +1663,7 @@ export class CaseServiceClient {
    * @returns {string} A string representing the case.
    */
   matchCaseFromOrganizationCaseName(organizationCaseName: string) {
-    return this.pathTemplates.organizationCasePathTemplate.match(
-      organizationCaseName
-    ).case;
+    return this.pathTemplates.organizationCasePathTemplate.match(organizationCaseName).case;
   }
 
   /**
@@ -1888,11 +1674,7 @@ export class CaseServiceClient {
    * @param {string} attachment_id
    * @returns {string} Resource name string.
    */
-  organizationCaseAttachmentIdPath(
-    organization: string,
-    caseParam: string,
-    attachmentId: string
-  ) {
+  organizationCaseAttachmentIdPath(organization:string,caseParam:string,attachmentId:string) {
     return this.pathTemplates.organizationCaseAttachmentIdPathTemplate.render({
       organization: organization,
       case: caseParam,
@@ -1907,12 +1689,8 @@ export class CaseServiceClient {
    *   A fully-qualified path representing organization_case_attachment_id resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationCaseAttachmentIdName(
-    organizationCaseAttachmentIdName: string
-  ) {
-    return this.pathTemplates.organizationCaseAttachmentIdPathTemplate.match(
-      organizationCaseAttachmentIdName
-    ).organization;
+  matchOrganizationFromOrganizationCaseAttachmentIdName(organizationCaseAttachmentIdName: string) {
+    return this.pathTemplates.organizationCaseAttachmentIdPathTemplate.match(organizationCaseAttachmentIdName).organization;
   }
 
   /**
@@ -1922,12 +1700,8 @@ export class CaseServiceClient {
    *   A fully-qualified path representing organization_case_attachment_id resource.
    * @returns {string} A string representing the case.
    */
-  matchCaseFromOrganizationCaseAttachmentIdName(
-    organizationCaseAttachmentIdName: string
-  ) {
-    return this.pathTemplates.organizationCaseAttachmentIdPathTemplate.match(
-      organizationCaseAttachmentIdName
-    ).case;
+  matchCaseFromOrganizationCaseAttachmentIdName(organizationCaseAttachmentIdName: string) {
+    return this.pathTemplates.organizationCaseAttachmentIdPathTemplate.match(organizationCaseAttachmentIdName).case;
   }
 
   /**
@@ -1937,12 +1711,8 @@ export class CaseServiceClient {
    *   A fully-qualified path representing organization_case_attachment_id resource.
    * @returns {string} A string representing the attachment_id.
    */
-  matchAttachmentIdFromOrganizationCaseAttachmentIdName(
-    organizationCaseAttachmentIdName: string
-  ) {
-    return this.pathTemplates.organizationCaseAttachmentIdPathTemplate.match(
-      organizationCaseAttachmentIdName
-    ).attachment_id;
+  matchAttachmentIdFromOrganizationCaseAttachmentIdName(organizationCaseAttachmentIdName: string) {
+    return this.pathTemplates.organizationCaseAttachmentIdPathTemplate.match(organizationCaseAttachmentIdName).attachment_id;
   }
 
   /**
@@ -1953,11 +1723,7 @@ export class CaseServiceClient {
    * @param {string} comment
    * @returns {string} Resource name string.
    */
-  organizationCaseCommentPath(
-    organization: string,
-    caseParam: string,
-    comment: string
-  ) {
+  organizationCaseCommentPath(organization:string,caseParam:string,comment:string) {
     return this.pathTemplates.organizationCaseCommentPathTemplate.render({
       organization: organization,
       case: caseParam,
@@ -1972,12 +1738,8 @@ export class CaseServiceClient {
    *   A fully-qualified path representing organization_case_comment resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationCaseCommentName(
-    organizationCaseCommentName: string
-  ) {
-    return this.pathTemplates.organizationCaseCommentPathTemplate.match(
-      organizationCaseCommentName
-    ).organization;
+  matchOrganizationFromOrganizationCaseCommentName(organizationCaseCommentName: string) {
+    return this.pathTemplates.organizationCaseCommentPathTemplate.match(organizationCaseCommentName).organization;
   }
 
   /**
@@ -1987,12 +1749,8 @@ export class CaseServiceClient {
    *   A fully-qualified path representing organization_case_comment resource.
    * @returns {string} A string representing the case.
    */
-  matchCaseFromOrganizationCaseCommentName(
-    organizationCaseCommentName: string
-  ) {
-    return this.pathTemplates.organizationCaseCommentPathTemplate.match(
-      organizationCaseCommentName
-    ).case;
+  matchCaseFromOrganizationCaseCommentName(organizationCaseCommentName: string) {
+    return this.pathTemplates.organizationCaseCommentPathTemplate.match(organizationCaseCommentName).case;
   }
 
   /**
@@ -2002,12 +1760,8 @@ export class CaseServiceClient {
    *   A fully-qualified path representing organization_case_comment resource.
    * @returns {string} A string representing the comment.
    */
-  matchCommentFromOrganizationCaseCommentName(
-    organizationCaseCommentName: string
-  ) {
-    return this.pathTemplates.organizationCaseCommentPathTemplate.match(
-      organizationCaseCommentName
-    ).comment;
+  matchCommentFromOrganizationCaseCommentName(organizationCaseCommentName: string) {
+    return this.pathTemplates.organizationCaseCommentPathTemplate.match(organizationCaseCommentName).comment;
   }
 
   /**
@@ -2017,7 +1771,7 @@ export class CaseServiceClient {
    * @param {string} caseParam
    * @returns {string} Resource name string.
    */
-  projectCasePath(project: string, caseParam: string) {
+  projectCasePath(project:string,caseParam:string) {
     return this.pathTemplates.projectCasePathTemplate.render({
       project: project,
       case: caseParam,
@@ -2032,8 +1786,7 @@ export class CaseServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectCaseName(projectCaseName: string) {
-    return this.pathTemplates.projectCasePathTemplate.match(projectCaseName)
-      .project;
+    return this.pathTemplates.projectCasePathTemplate.match(projectCaseName).project;
   }
 
   /**
@@ -2044,8 +1797,7 @@ export class CaseServiceClient {
    * @returns {string} A string representing the case.
    */
   matchCaseFromProjectCaseName(projectCaseName: string) {
-    return this.pathTemplates.projectCasePathTemplate.match(projectCaseName)
-      .case;
+    return this.pathTemplates.projectCasePathTemplate.match(projectCaseName).case;
   }
 
   /**
@@ -2056,11 +1808,7 @@ export class CaseServiceClient {
    * @param {string} attachment_id
    * @returns {string} Resource name string.
    */
-  projectCaseAttachmentIdPath(
-    project: string,
-    caseParam: string,
-    attachmentId: string
-  ) {
+  projectCaseAttachmentIdPath(project:string,caseParam:string,attachmentId:string) {
     return this.pathTemplates.projectCaseAttachmentIdPathTemplate.render({
       project: project,
       case: caseParam,
@@ -2075,12 +1823,8 @@ export class CaseServiceClient {
    *   A fully-qualified path representing project_case_attachment_id resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectCaseAttachmentIdName(
-    projectCaseAttachmentIdName: string
-  ) {
-    return this.pathTemplates.projectCaseAttachmentIdPathTemplate.match(
-      projectCaseAttachmentIdName
-    ).project;
+  matchProjectFromProjectCaseAttachmentIdName(projectCaseAttachmentIdName: string) {
+    return this.pathTemplates.projectCaseAttachmentIdPathTemplate.match(projectCaseAttachmentIdName).project;
   }
 
   /**
@@ -2090,12 +1834,8 @@ export class CaseServiceClient {
    *   A fully-qualified path representing project_case_attachment_id resource.
    * @returns {string} A string representing the case.
    */
-  matchCaseFromProjectCaseAttachmentIdName(
-    projectCaseAttachmentIdName: string
-  ) {
-    return this.pathTemplates.projectCaseAttachmentIdPathTemplate.match(
-      projectCaseAttachmentIdName
-    ).case;
+  matchCaseFromProjectCaseAttachmentIdName(projectCaseAttachmentIdName: string) {
+    return this.pathTemplates.projectCaseAttachmentIdPathTemplate.match(projectCaseAttachmentIdName).case;
   }
 
   /**
@@ -2105,12 +1845,8 @@ export class CaseServiceClient {
    *   A fully-qualified path representing project_case_attachment_id resource.
    * @returns {string} A string representing the attachment_id.
    */
-  matchAttachmentIdFromProjectCaseAttachmentIdName(
-    projectCaseAttachmentIdName: string
-  ) {
-    return this.pathTemplates.projectCaseAttachmentIdPathTemplate.match(
-      projectCaseAttachmentIdName
-    ).attachment_id;
+  matchAttachmentIdFromProjectCaseAttachmentIdName(projectCaseAttachmentIdName: string) {
+    return this.pathTemplates.projectCaseAttachmentIdPathTemplate.match(projectCaseAttachmentIdName).attachment_id;
   }
 
   /**
@@ -2121,7 +1857,7 @@ export class CaseServiceClient {
    * @param {string} comment
    * @returns {string} Resource name string.
    */
-  projectCaseCommentPath(project: string, caseParam: string, comment: string) {
+  projectCaseCommentPath(project:string,caseParam:string,comment:string) {
     return this.pathTemplates.projectCaseCommentPathTemplate.render({
       project: project,
       case: caseParam,
@@ -2137,9 +1873,7 @@ export class CaseServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectCaseCommentName(projectCaseCommentName: string) {
-    return this.pathTemplates.projectCaseCommentPathTemplate.match(
-      projectCaseCommentName
-    ).project;
+    return this.pathTemplates.projectCaseCommentPathTemplate.match(projectCaseCommentName).project;
   }
 
   /**
@@ -2150,9 +1884,7 @@ export class CaseServiceClient {
    * @returns {string} A string representing the case.
    */
   matchCaseFromProjectCaseCommentName(projectCaseCommentName: string) {
-    return this.pathTemplates.projectCaseCommentPathTemplate.match(
-      projectCaseCommentName
-    ).case;
+    return this.pathTemplates.projectCaseCommentPathTemplate.match(projectCaseCommentName).case;
   }
 
   /**
@@ -2163,9 +1895,7 @@ export class CaseServiceClient {
    * @returns {string} A string representing the comment.
    */
   matchCommentFromProjectCaseCommentName(projectCaseCommentName: string) {
-    return this.pathTemplates.projectCaseCommentPathTemplate.match(
-      projectCaseCommentName
-    ).comment;
+    return this.pathTemplates.projectCaseCommentPathTemplate.match(projectCaseCommentName).comment;
   }
 
   /**

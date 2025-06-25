@@ -16,12 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const storagebatchoperations = require('@google-cloud/storagebatchoperations');
 
 function main() {
-  const storageBatchOperationsClient =
-    new storagebatchoperations.StorageBatchOperationsClient();
+  const storageBatchOperationsClient = new storagebatchoperations.StorageBatchOperationsClient();
 }
 
 main();

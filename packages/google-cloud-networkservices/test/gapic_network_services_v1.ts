@@ -383,6 +383,222 @@ describe('v1.NetworkServicesClient', () => {
         });
     });
 
+    describe('getWasmPluginVersion', () => {
+        it('invokes getWasmPluginVersion without error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.GetWasmPluginVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.GetWasmPluginVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.WasmPluginVersion()
+            );
+            client.innerApiCalls.getWasmPluginVersion = stubSimpleCall(expectedResponse);
+            const [response] = await client.getWasmPluginVersion(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getWasmPluginVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getWasmPluginVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getWasmPluginVersion without error using callback', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.GetWasmPluginVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.GetWasmPluginVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.WasmPluginVersion()
+            );
+            client.innerApiCalls.getWasmPluginVersion = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getWasmPluginVersion(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networkservices.v1.IWasmPluginVersion|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getWasmPluginVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getWasmPluginVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getWasmPluginVersion with error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.GetWasmPluginVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.GetWasmPluginVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getWasmPluginVersion = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getWasmPluginVersion(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getWasmPluginVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getWasmPluginVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getWasmPluginVersion with closed client', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.GetWasmPluginVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.GetWasmPluginVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getWasmPluginVersion(request), expectedError);
+        });
+    });
+
+    describe('getWasmPlugin', () => {
+        it('invokes getWasmPlugin without error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.GetWasmPluginRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.GetWasmPluginRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.WasmPlugin()
+            );
+            client.innerApiCalls.getWasmPlugin = stubSimpleCall(expectedResponse);
+            const [response] = await client.getWasmPlugin(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getWasmPlugin as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getWasmPlugin as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getWasmPlugin without error using callback', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.GetWasmPluginRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.GetWasmPluginRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.WasmPlugin()
+            );
+            client.innerApiCalls.getWasmPlugin = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getWasmPlugin(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networkservices.v1.IWasmPlugin|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getWasmPlugin as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getWasmPlugin as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getWasmPlugin with error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.GetWasmPluginRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.GetWasmPluginRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getWasmPlugin = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getWasmPlugin(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getWasmPlugin as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getWasmPlugin as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getWasmPlugin with closed client', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.GetWasmPluginRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.GetWasmPluginRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getWasmPlugin(request), expectedError);
+        });
+    });
+
     describe('getGateway', () => {
         it('invokes getGateway without error', async () => {
             const client = new networkservicesModule.v1.NetworkServicesClient({
@@ -1924,6 +2140,780 @@ describe('v1.NetworkServicesClient', () => {
 
             client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.checkDeleteEndpointPolicyProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createWasmPluginVersion', () => {
+        it('invokes createWasmPluginVersion without error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.CreateWasmPluginVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.CreateWasmPluginVersionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createWasmPluginVersion = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createWasmPluginVersion(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createWasmPluginVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createWasmPluginVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createWasmPluginVersion without error using callback', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.CreateWasmPluginVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.CreateWasmPluginVersionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createWasmPluginVersion = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createWasmPluginVersion(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.networkservices.v1.IWasmPluginVersion, protos.google.cloud.networkservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.networkservices.v1.IWasmPluginVersion, protos.google.cloud.networkservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createWasmPluginVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createWasmPluginVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createWasmPluginVersion with call error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.CreateWasmPluginVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.CreateWasmPluginVersionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createWasmPluginVersion = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createWasmPluginVersion(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createWasmPluginVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createWasmPluginVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createWasmPluginVersion with LRO error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.CreateWasmPluginVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.CreateWasmPluginVersionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createWasmPluginVersion = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createWasmPluginVersion(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createWasmPluginVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createWasmPluginVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateWasmPluginVersionProgress without error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateWasmPluginVersionProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateWasmPluginVersionProgress with error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateWasmPluginVersionProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteWasmPluginVersion', () => {
+        it('invokes deleteWasmPluginVersion without error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteWasmPluginVersion = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteWasmPluginVersion(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteWasmPluginVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteWasmPluginVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteWasmPluginVersion without error using callback', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteWasmPluginVersion = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteWasmPluginVersion(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteWasmPluginVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteWasmPluginVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteWasmPluginVersion with call error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteWasmPluginVersion = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteWasmPluginVersion(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteWasmPluginVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteWasmPluginVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteWasmPluginVersion with LRO error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteWasmPluginVersion = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteWasmPluginVersion(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteWasmPluginVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteWasmPluginVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteWasmPluginVersionProgress without error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteWasmPluginVersionProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteWasmPluginVersionProgress with error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteWasmPluginVersionProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createWasmPlugin', () => {
+        it('invokes createWasmPlugin without error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.CreateWasmPluginRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.CreateWasmPluginRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createWasmPlugin = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createWasmPlugin(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createWasmPlugin as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createWasmPlugin as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createWasmPlugin without error using callback', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.CreateWasmPluginRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.CreateWasmPluginRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createWasmPlugin = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createWasmPlugin(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.networkservices.v1.IWasmPlugin, protos.google.cloud.networkservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.networkservices.v1.IWasmPlugin, protos.google.cloud.networkservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createWasmPlugin as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createWasmPlugin as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createWasmPlugin with call error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.CreateWasmPluginRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.CreateWasmPluginRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createWasmPlugin = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createWasmPlugin(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createWasmPlugin as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createWasmPlugin as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createWasmPlugin with LRO error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.CreateWasmPluginRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.CreateWasmPluginRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createWasmPlugin = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createWasmPlugin(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createWasmPlugin as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createWasmPlugin as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateWasmPluginProgress without error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateWasmPluginProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateWasmPluginProgress with error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateWasmPluginProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateWasmPlugin', () => {
+        it('invokes updateWasmPlugin without error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.UpdateWasmPluginRequest()
+            );
+            request.wasmPlugin ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.UpdateWasmPluginRequest', ['wasmPlugin', 'name']);
+            request.wasmPlugin.name = defaultValue1;
+            const expectedHeaderRequestParams = `wasm_plugin.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateWasmPlugin = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateWasmPlugin(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateWasmPlugin as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateWasmPlugin as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateWasmPlugin without error using callback', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.UpdateWasmPluginRequest()
+            );
+            request.wasmPlugin ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.UpdateWasmPluginRequest', ['wasmPlugin', 'name']);
+            request.wasmPlugin.name = defaultValue1;
+            const expectedHeaderRequestParams = `wasm_plugin.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateWasmPlugin = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateWasmPlugin(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.networkservices.v1.IWasmPlugin, protos.google.cloud.networkservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.networkservices.v1.IWasmPlugin, protos.google.cloud.networkservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateWasmPlugin as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateWasmPlugin as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateWasmPlugin with call error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.UpdateWasmPluginRequest()
+            );
+            request.wasmPlugin ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.UpdateWasmPluginRequest', ['wasmPlugin', 'name']);
+            request.wasmPlugin.name = defaultValue1;
+            const expectedHeaderRequestParams = `wasm_plugin.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateWasmPlugin = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateWasmPlugin(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateWasmPlugin as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateWasmPlugin as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateWasmPlugin with LRO error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.UpdateWasmPluginRequest()
+            );
+            request.wasmPlugin ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.UpdateWasmPluginRequest', ['wasmPlugin', 'name']);
+            request.wasmPlugin.name = defaultValue1;
+            const expectedHeaderRequestParams = `wasm_plugin.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateWasmPlugin = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateWasmPlugin(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateWasmPlugin as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateWasmPlugin as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateWasmPluginProgress without error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateWasmPluginProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateWasmPluginProgress with error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateWasmPluginProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteWasmPlugin', () => {
+        it('invokes deleteWasmPlugin without error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.DeleteWasmPluginRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.DeleteWasmPluginRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteWasmPlugin = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteWasmPlugin(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteWasmPlugin as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteWasmPlugin as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteWasmPlugin without error using callback', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.DeleteWasmPluginRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.DeleteWasmPluginRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteWasmPlugin = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteWasmPlugin(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteWasmPlugin as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteWasmPlugin as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteWasmPlugin with call error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.DeleteWasmPluginRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.DeleteWasmPluginRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteWasmPlugin = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteWasmPlugin(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteWasmPlugin as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteWasmPlugin as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteWasmPlugin with LRO error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.DeleteWasmPluginRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.DeleteWasmPluginRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteWasmPlugin = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteWasmPlugin(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteWasmPlugin as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteWasmPlugin as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteWasmPluginProgress without error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteWasmPluginProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteWasmPluginProgress with error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteWasmPluginProgress(''), expectedError);
             assert((client.operationsClient.getOperation as SinonStub)
                 .getCall(0));
         });
@@ -5902,6 +6892,496 @@ describe('v1.NetworkServicesClient', () => {
         });
     });
 
+    describe('listWasmPluginVersions', () => {
+        it('invokes listWasmPluginVersions without error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListWasmPluginVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListWasmPluginVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.WasmPluginVersion()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.WasmPluginVersion()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.WasmPluginVersion()),
+            ];
+            client.innerApiCalls.listWasmPluginVersions = stubSimpleCall(expectedResponse);
+            const [response] = await client.listWasmPluginVersions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listWasmPluginVersions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listWasmPluginVersions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listWasmPluginVersions without error using callback', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListWasmPluginVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListWasmPluginVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.WasmPluginVersion()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.WasmPluginVersion()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.WasmPluginVersion()),
+            ];
+            client.innerApiCalls.listWasmPluginVersions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listWasmPluginVersions(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networkservices.v1.IWasmPluginVersion[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listWasmPluginVersions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listWasmPluginVersions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listWasmPluginVersions with error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListWasmPluginVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListWasmPluginVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listWasmPluginVersions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listWasmPluginVersions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listWasmPluginVersions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listWasmPluginVersions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listWasmPluginVersionsStream without error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListWasmPluginVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListWasmPluginVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.WasmPluginVersion()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.WasmPluginVersion()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.WasmPluginVersion()),
+            ];
+            client.descriptors.page.listWasmPluginVersions.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listWasmPluginVersionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networkservices.v1.WasmPluginVersion[] = [];
+                stream.on('data', (response: protos.google.cloud.networkservices.v1.WasmPluginVersion) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listWasmPluginVersions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listWasmPluginVersions, request));
+            assert(
+                (client.descriptors.page.listWasmPluginVersions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listWasmPluginVersionsStream with error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListWasmPluginVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListWasmPluginVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listWasmPluginVersions.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listWasmPluginVersionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networkservices.v1.WasmPluginVersion[] = [];
+                stream.on('data', (response: protos.google.cloud.networkservices.v1.WasmPluginVersion) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listWasmPluginVersions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listWasmPluginVersions, request));
+            assert(
+                (client.descriptors.page.listWasmPluginVersions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listWasmPluginVersions without error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListWasmPluginVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListWasmPluginVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.WasmPluginVersion()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.WasmPluginVersion()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.WasmPluginVersion()),
+            ];
+            client.descriptors.page.listWasmPluginVersions.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.networkservices.v1.IWasmPluginVersion[] = [];
+            const iterable = client.listWasmPluginVersionsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listWasmPluginVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listWasmPluginVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listWasmPluginVersions with error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListWasmPluginVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListWasmPluginVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listWasmPluginVersions.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listWasmPluginVersionsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.networkservices.v1.IWasmPluginVersion[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listWasmPluginVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listWasmPluginVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listWasmPlugins', () => {
+        it('invokes listWasmPlugins without error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListWasmPluginsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListWasmPluginsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.WasmPlugin()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.WasmPlugin()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.WasmPlugin()),
+            ];
+            client.innerApiCalls.listWasmPlugins = stubSimpleCall(expectedResponse);
+            const [response] = await client.listWasmPlugins(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listWasmPlugins as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listWasmPlugins as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listWasmPlugins without error using callback', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListWasmPluginsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListWasmPluginsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.WasmPlugin()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.WasmPlugin()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.WasmPlugin()),
+            ];
+            client.innerApiCalls.listWasmPlugins = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listWasmPlugins(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networkservices.v1.IWasmPlugin[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listWasmPlugins as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listWasmPlugins as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listWasmPlugins with error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListWasmPluginsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListWasmPluginsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listWasmPlugins = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listWasmPlugins(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listWasmPlugins as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listWasmPlugins as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listWasmPluginsStream without error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListWasmPluginsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListWasmPluginsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.WasmPlugin()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.WasmPlugin()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.WasmPlugin()),
+            ];
+            client.descriptors.page.listWasmPlugins.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listWasmPluginsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networkservices.v1.WasmPlugin[] = [];
+                stream.on('data', (response: protos.google.cloud.networkservices.v1.WasmPlugin) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listWasmPlugins.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listWasmPlugins, request));
+            assert(
+                (client.descriptors.page.listWasmPlugins.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listWasmPluginsStream with error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListWasmPluginsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListWasmPluginsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listWasmPlugins.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listWasmPluginsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networkservices.v1.WasmPlugin[] = [];
+                stream.on('data', (response: protos.google.cloud.networkservices.v1.WasmPlugin) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listWasmPlugins.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listWasmPlugins, request));
+            assert(
+                (client.descriptors.page.listWasmPlugins.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listWasmPlugins without error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListWasmPluginsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListWasmPluginsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.WasmPlugin()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.WasmPlugin()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.WasmPlugin()),
+            ];
+            client.descriptors.page.listWasmPlugins.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.networkservices.v1.IWasmPlugin[] = [];
+            const iterable = client.listWasmPluginsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listWasmPlugins.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listWasmPlugins.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listWasmPlugins with error', async () => {
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListWasmPluginsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListWasmPluginsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listWasmPlugins.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listWasmPluginsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.networkservices.v1.IWasmPlugin[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listWasmPlugins.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listWasmPlugins.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
     describe('listGateways', () => {
         it('invokes listGateways without error', async () => {
             const client = new networkservicesModule.v1.NetworkServicesClient({
@@ -9051,6 +10531,52 @@ describe('v1.NetworkServicesClient', () => {
 
     describe('Path templates', () => {
 
+        describe('authzExtension', async () => {
+            const fakePath = "/rendered/path/authzExtension";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                authz_extension: "authzExtensionValue",
+            };
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.authzExtensionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.authzExtensionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('authzExtensionPath', () => {
+                const result = client.authzExtensionPath("projectValue", "locationValue", "authzExtensionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.authzExtensionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromAuthzExtensionName', () => {
+                const result = client.matchProjectFromAuthzExtensionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.authzExtensionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromAuthzExtensionName', () => {
+                const result = client.matchLocationFromAuthzExtensionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.authzExtensionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAuthzExtensionFromAuthzExtensionName', () => {
+                const result = client.matchAuthzExtensionFromAuthzExtensionName(fakePath);
+                assert.strictEqual(result, "authzExtensionValue");
+                assert((client.pathTemplates.authzExtensionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('endpointPolicy', async () => {
             const fakePath = "/rendered/path/endpointPolicy";
             const expectedParameters = {
@@ -9661,6 +11187,106 @@ describe('v1.NetworkServicesClient', () => {
                 const result = client.matchTlsRouteFromTlsRouteName(fakePath);
                 assert.strictEqual(result, "tlsRouteValue");
                 assert((client.pathTemplates.tlsRoutePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('wasmPlugin', async () => {
+            const fakePath = "/rendered/path/wasmPlugin";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                wasm_plugin: "wasmPluginValue",
+            };
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.wasmPluginPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.wasmPluginPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('wasmPluginPath', () => {
+                const result = client.wasmPluginPath("projectValue", "locationValue", "wasmPluginValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.wasmPluginPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromWasmPluginName', () => {
+                const result = client.matchProjectFromWasmPluginName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.wasmPluginPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromWasmPluginName', () => {
+                const result = client.matchLocationFromWasmPluginName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.wasmPluginPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchWasmPluginFromWasmPluginName', () => {
+                const result = client.matchWasmPluginFromWasmPluginName(fakePath);
+                assert.strictEqual(result, "wasmPluginValue");
+                assert((client.pathTemplates.wasmPluginPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('wasmPluginVersion', async () => {
+            const fakePath = "/rendered/path/wasmPluginVersion";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                wasm_plugin: "wasmPluginValue",
+                wasm_plugin_version: "wasmPluginVersionValue",
+            };
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.wasmPluginVersionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.wasmPluginVersionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('wasmPluginVersionPath', () => {
+                const result = client.wasmPluginVersionPath("projectValue", "locationValue", "wasmPluginValue", "wasmPluginVersionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.wasmPluginVersionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromWasmPluginVersionName', () => {
+                const result = client.matchProjectFromWasmPluginVersionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.wasmPluginVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromWasmPluginVersionName', () => {
+                const result = client.matchLocationFromWasmPluginVersionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.wasmPluginVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchWasmPluginFromWasmPluginVersionName', () => {
+                const result = client.matchWasmPluginFromWasmPluginVersionName(fakePath);
+                assert.strictEqual(result, "wasmPluginValue");
+                assert((client.pathTemplates.wasmPluginVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchWasmPluginVersionFromWasmPluginVersionName', () => {
+                const result = client.matchWasmPluginVersionFromWasmPluginVersionName(fakePath);
+                assert.strictEqual(result, "wasmPluginVersionValue");
+                assert((client.pathTemplates.wasmPluginVersionPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

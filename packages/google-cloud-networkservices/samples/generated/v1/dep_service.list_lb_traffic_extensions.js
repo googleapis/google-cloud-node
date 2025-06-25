@@ -30,7 +30,7 @@ function main(parent) {
    */
   /**
    *  Required. The project and location from which the `LbTrafficExtension`
-   *  resources are listed, specified in the following format:
+   *  resources are listed. These values are specified in the following format:
    *  `projects/{project}/locations/{location}`.
    */
   // const parent = 'abc123'
@@ -48,7 +48,7 @@ function main(parent) {
    */
   // const filter = 'abc123'
   /**
-   *  Optional. Hint for how to order the results.
+   *  Optional. Hint about how to order the results.
    */
   // const orderBy = 'abc123'
 

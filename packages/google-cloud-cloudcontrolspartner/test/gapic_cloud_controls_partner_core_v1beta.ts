@@ -29,3172 +29,2223 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1beta.CloudControlsPartnerCoreClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'cloudcontrolspartner.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient
-            .servicePath;
-        assert.strictEqual(servicePath, 'cloudcontrolspartner.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient
-            .apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'cloudcontrolspartner.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {universeDomain: 'example.com'}
-        );
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'cloudcontrolspartner.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {universe_domain: 'example.com'}
-        );
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'cloudcontrolspartner.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'cloudcontrolspartner.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'cloudcontrolspartner.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-              {universeDomain: 'configured.example.com'}
+        it('has universeDomain', () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
+        });
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient.servicePath;
+                assert.strictEqual(servicePath, 'cloudcontrolspartner.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'cloudcontrolspartner.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+        }
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'cloudcontrolspartner.example.com');
+        });
+
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'cloudcontrolspartner.example.com');
+        });
+
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'cloudcontrolspartner.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'cloudcontrolspartner.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
+        }
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
+
+        it('has port', () => {
+            const port = cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.cloudControlsPartnerCoreStub, undefined);
+            await client.initialize();
+            assert(client.cloudControlsPartnerCoreStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.cloudControlsPartnerCoreStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.cloudControlsPartnerCoreStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
+    });
+
+    describe('getWorkload', () => {
+        it('invokes getWorkload without error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.GetWorkloadRequest()
             );
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'cloudcontrolspartner.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.GetWorkloadRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.Workload()
+            );
+            client.innerApiCalls.getWorkload = stubSimpleCall(expectedResponse);
+            const [response] = await client.getWorkload(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getWorkload as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getWorkload as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {universe_domain: 'example.com', universeDomain: 'example.net'}
-        );
-      });
-    });
 
-    it('has port', () => {
-      const port =
-        cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient
-          .port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        it('invokes getWorkload without error using callback', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.GetWorkloadRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.GetWorkloadRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.Workload()
+            );
+            client.innerApiCalls.getWorkload = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getWorkload(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getWorkload as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getWorkload as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('should create a client with no option', () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient();
-      assert(client);
-    });
+        it('invokes getWorkload with error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.GetWorkloadRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.GetWorkloadRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getWorkload = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getWorkload(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getWorkload as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getWorkload as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('should create a client with gRPC fallback', () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            fallback: true,
-          }
-        );
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      assert.strictEqual(client.cloudControlsPartnerCoreStub, undefined);
-      await client.initialize();
-      assert(client.cloudControlsPartnerCoreStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.cloudControlsPartnerCoreStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
+        it('invokes getWorkload with closed client', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.GetWorkloadRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.GetWorkloadRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getWorkload(request), expectedError);
         });
     });
 
-    it('has close method for the non-initialized client', done => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      assert.strictEqual(client.cloudControlsPartnerCoreStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
+    describe('getCustomer', () => {
+        it('invokes getCustomer without error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.GetCustomerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.GetCustomerRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()
+            );
+            client.innerApiCalls.getCustomer = stubSimpleCall(expectedResponse);
+            const [response] = await client.getCustomer(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getCustomer as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getCustomer as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getCustomer without error using callback', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.GetCustomerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.GetCustomerRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()
+            );
+            client.innerApiCalls.getCustomer = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getCustomer(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getCustomer as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getCustomer as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getCustomer with error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.GetCustomerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.GetCustomerRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getCustomer = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getCustomer(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getCustomer as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getCustomer as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getCustomer with closed client', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.GetCustomerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.GetCustomerRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getCustomer(request), expectedError);
         });
     });
 
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
+    describe('getEkmConnections', () => {
+        it('invokes getEkmConnections without error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.GetEkmConnectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.GetEkmConnectionsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.EkmConnections()
+            );
+            client.innerApiCalls.getEkmConnections = stubSimpleCall(expectedResponse);
+            const [response] = await client.getEkmConnections(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getEkmConnections as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEkmConnections as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
 
-  describe('getWorkload', () => {
-    it('invokes getWorkload without error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.GetWorkloadRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.GetWorkloadRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.Workload()
-      );
-      client.innerApiCalls.getWorkload = stubSimpleCall(expectedResponse);
-      const [response] = await client.getWorkload(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getWorkload as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getWorkload as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('invokes getEkmConnections without error using callback', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.GetEkmConnectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.GetEkmConnectionsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.EkmConnections()
+            );
+            client.innerApiCalls.getEkmConnections = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getEkmConnections(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.cloudcontrolspartner.v1beta.IEkmConnections|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getEkmConnections as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEkmConnections as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEkmConnections with error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.GetEkmConnectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.GetEkmConnectionsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getEkmConnections = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getEkmConnections(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getEkmConnections as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEkmConnections as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEkmConnections with closed client', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.GetEkmConnectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.GetEkmConnectionsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getEkmConnections(request), expectedError);
+        });
     });
 
-    it('invokes getWorkload without error using callback', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.GetWorkloadRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.GetWorkloadRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.Workload()
-      );
-      client.innerApiCalls.getWorkload =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getWorkload(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('getPartnerPermissions', () => {
+        it('invokes getPartnerPermissions without error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.GetPartnerPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.GetPartnerPermissionsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.PartnerPermissions()
+            );
+            client.innerApiCalls.getPartnerPermissions = stubSimpleCall(expectedResponse);
+            const [response] = await client.getPartnerPermissions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPartnerPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPartnerPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPartnerPermissions without error using callback', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.GetPartnerPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.GetPartnerPermissionsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.PartnerPermissions()
+            );
+            client.innerApiCalls.getPartnerPermissions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getPartnerPermissions(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.cloudcontrolspartner.v1beta.IPartnerPermissions|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPartnerPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPartnerPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPartnerPermissions with error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.GetPartnerPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.GetPartnerPermissionsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getPartnerPermissions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getPartnerPermissions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getPartnerPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPartnerPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPartnerPermissions with closed client', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.GetPartnerPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.GetPartnerPermissionsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getPartnerPermissions(request), expectedError);
+        });
+    });
+
+    describe('getPartner', () => {
+        it('invokes getPartner without error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.GetPartnerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.GetPartnerRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.Partner()
+            );
+            client.innerApiCalls.getPartner = stubSimpleCall(expectedResponse);
+            const [response] = await client.getPartner(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPartner as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPartner as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPartner without error using callback', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.GetPartnerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.GetPartnerRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.Partner()
+            );
+            client.innerApiCalls.getPartner = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getPartner(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.cloudcontrolspartner.v1beta.IPartner|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPartner as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPartner as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPartner with error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.GetPartnerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.GetPartnerRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getPartner = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getPartner(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getPartner as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPartner as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPartner with closed client', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.GetPartnerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.GetPartnerRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getPartner(request), expectedError);
+        });
+    });
+
+    describe('createCustomer', () => {
+        it('invokes createCustomer without error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()
+            );
+            client.innerApiCalls.createCustomer = stubSimpleCall(expectedResponse);
+            const [response] = await client.createCustomer(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createCustomer as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCustomer as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCustomer without error using callback', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()
+            );
+            client.innerApiCalls.createCustomer = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createCustomer(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createCustomer as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCustomer as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCustomer with error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createCustomer = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createCustomer(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createCustomer as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCustomer as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCustomer with closed client', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createCustomer(request), expectedError);
+        });
+    });
+
+    describe('updateCustomer', () => {
+        it('invokes updateCustomer without error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest()
+            );
+            request.customer ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest', ['customer', 'name']);
+            request.customer.name = defaultValue1;
+            const expectedHeaderRequestParams = `customer.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()
+            );
+            client.innerApiCalls.updateCustomer = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateCustomer(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateCustomer as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCustomer as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCustomer without error using callback', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest()
+            );
+            request.customer ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest', ['customer', 'name']);
+            request.customer.name = defaultValue1;
+            const expectedHeaderRequestParams = `customer.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()
+            );
+            client.innerApiCalls.updateCustomer = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateCustomer(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateCustomer as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCustomer as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCustomer with error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest()
+            );
+            request.customer ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest', ['customer', 'name']);
+            request.customer.name = defaultValue1;
+            const expectedHeaderRequestParams = `customer.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateCustomer = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateCustomer(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateCustomer as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCustomer as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCustomer with closed client', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest()
+            );
+            request.customer ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest', ['customer', 'name']);
+            request.customer.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateCustomer(request), expectedError);
+        });
+    });
+
+    describe('deleteCustomer', () => {
+        it('invokes deleteCustomer without error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteCustomer = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteCustomer(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteCustomer as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCustomer as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteCustomer without error using callback', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteCustomer = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteCustomer(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteCustomer as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCustomer as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteCustomer with error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteCustomer = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteCustomer(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteCustomer as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCustomer as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteCustomer with closed client', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteCustomer(request), expectedError);
+        });
+    });
+
+    describe('listWorkloads', () => {
+        it('invokes listWorkloads without error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.Workload()),
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.Workload()),
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.Workload()),
+            ];
+            client.innerApiCalls.listWorkloads = stubSimpleCall(expectedResponse);
+            const [response] = await client.listWorkloads(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listWorkloads as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listWorkloads as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listWorkloads without error using callback', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.Workload()),
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.Workload()),
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.Workload()),
+            ];
+            client.innerApiCalls.listWorkloads = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listWorkloads(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listWorkloads as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listWorkloads as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listWorkloads with error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listWorkloads = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listWorkloads(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listWorkloads as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listWorkloads as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listWorkloadsStream without error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.Workload()),
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.Workload()),
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.Workload()),
+            ];
+            client.descriptors.page.listWorkloads.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listWorkloadsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.cloudcontrolspartner.v1beta.Workload[] = [];
+                stream.on('data', (response: protos.google.cloud.cloudcontrolspartner.v1beta.Workload) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listWorkloads.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listWorkloads, request));
+            assert(
+                (client.descriptors.page.listWorkloads.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listWorkloadsStream with error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listWorkloads.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listWorkloadsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.cloudcontrolspartner.v1beta.Workload[] = [];
+                stream.on('data', (response: protos.google.cloud.cloudcontrolspartner.v1beta.Workload) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listWorkloads.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listWorkloads, request));
+            assert(
+                (client.descriptors.page.listWorkloads.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listWorkloads without error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.Workload()),
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.Workload()),
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.Workload()),
+            ];
+            client.descriptors.page.listWorkloads.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload[] = [];
+            const iterable = client.listWorkloadsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getWorkload as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getWorkload as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listWorkloads.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listWorkloads.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listWorkloads with error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listWorkloads.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listWorkloadsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listWorkloads.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listWorkloads.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('invokes getWorkload with error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.GetWorkloadRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.GetWorkloadRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getWorkload = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getWorkload(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getWorkload as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getWorkload as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+    describe('listCustomers', () => {
+        it('invokes listCustomers without error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()),
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()),
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()),
+            ];
+            client.innerApiCalls.listCustomers = stubSimpleCall(expectedResponse);
+            const [response] = await client.listCustomers(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listCustomers as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listCustomers as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('invokes getWorkload with closed client', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.GetWorkloadRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.GetWorkloadRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getWorkload(request), expectedError);
-    });
-  });
+        it('invokes listCustomers without error using callback', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()),
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()),
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()),
+            ];
+            client.innerApiCalls.listCustomers = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listCustomers(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listCustomers as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listCustomers as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-  describe('getCustomer', () => {
-    it('invokes getCustomer without error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.GetCustomerRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.GetCustomerRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()
-      );
-      client.innerApiCalls.getCustomer = stubSimpleCall(expectedResponse);
-      const [response] = await client.getCustomer(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getCustomer as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getCustomer as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listCustomers with error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listCustomers = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listCustomers(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listCustomers as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listCustomers as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('invokes getCustomer without error using callback', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.GetCustomerRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.GetCustomerRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()
-      );
-      client.innerApiCalls.getCustomer =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getCustomer(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('invokes listCustomersStream without error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()),
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()),
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()),
+            ];
+            client.descriptors.page.listCustomers.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listCustomersStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.cloudcontrolspartner.v1beta.Customer[] = [];
+                stream.on('data', (response: protos.google.cloud.cloudcontrolspartner.v1beta.Customer) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listCustomers.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listCustomers, request));
+            assert(
+                (client.descriptors.page.listCustomers.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listCustomersStream with error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listCustomers.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listCustomersStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.cloudcontrolspartner.v1beta.Customer[] = [];
+                stream.on('data', (response: protos.google.cloud.cloudcontrolspartner.v1beta.Customer) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listCustomers.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listCustomers, request));
+            assert(
+                (client.descriptors.page.listCustomers.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listCustomers without error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()),
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()),
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()),
+            ];
+            client.descriptors.page.listCustomers.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer[] = [];
+            const iterable = client.listCustomersAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getCustomer as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getCustomer as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listCustomers.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listCustomers.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listCustomers with error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listCustomers.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listCustomersAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listCustomers.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listCustomers.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('invokes getCustomer with error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.GetCustomerRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.GetCustomerRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getCustomer = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getCustomer(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getCustomer as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getCustomer as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+    describe('listAccessApprovalRequests', () => {
+        it('invokes listAccessApprovalRequests without error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest()),
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest()),
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest()),
+            ];
+            client.innerApiCalls.listAccessApprovalRequests = stubSimpleCall(expectedResponse);
+            const [response] = await client.listAccessApprovalRequests(request);
+            assert(stub.calledOnce);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAccessApprovalRequests as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAccessApprovalRequests as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('invokes getCustomer with closed client', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.GetCustomerRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.GetCustomerRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getCustomer(request), expectedError);
-    });
-  });
+        it('invokes listAccessApprovalRequests without error using callback', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest()),
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest()),
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest()),
+            ];
+            client.innerApiCalls.listAccessApprovalRequests = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listAccessApprovalRequests(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.cloudcontrolspartner.v1beta.IAccessApprovalRequest[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert(stub.calledOnce);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAccessApprovalRequests as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAccessApprovalRequests as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-  describe('getEkmConnections', () => {
-    it('invokes getEkmConnections without error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.GetEkmConnectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.GetEkmConnectionsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.EkmConnections()
-      );
-      client.innerApiCalls.getEkmConnections = stubSimpleCall(expectedResponse);
-      const [response] = await client.getEkmConnections(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getEkmConnections as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEkmConnections as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listAccessApprovalRequests with error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listAccessApprovalRequests = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listAccessApprovalRequests(request), expectedError);
+            assert(stub.calledOnce);
+            const actualRequest = (client.innerApiCalls.listAccessApprovalRequests as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAccessApprovalRequests as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('invokes getEkmConnections without error using callback', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.GetEkmConnectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.GetEkmConnectionsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.EkmConnections()
-      );
-      client.innerApiCalls.getEkmConnections =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getEkmConnections(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.cloudcontrolspartner.v1beta.IEkmConnections | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('invokes listAccessApprovalRequestsStream without error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest()),
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest()),
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest()),
+            ];
+            client.descriptors.page.listAccessApprovalRequests.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listAccessApprovalRequestsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest[] = [];
+                stream.on('data', (response: protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert(stub.calledOnce);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listAccessApprovalRequests.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAccessApprovalRequests, request));
+            assert(
+                (client.descriptors.page.listAccessApprovalRequests.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listAccessApprovalRequestsStream with error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAccessApprovalRequests.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listAccessApprovalRequestsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest[] = [];
+                stream.on('data', (response: protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert(stub.calledOnce);
+            assert((client.descriptors.page.listAccessApprovalRequests.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAccessApprovalRequests, request));
+            assert(
+                (client.descriptors.page.listAccessApprovalRequests.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listAccessApprovalRequests without error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest()),
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest()),
+              generateSampleMessage(new protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest()),
+            ];
+            client.descriptors.page.listAccessApprovalRequests.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.cloudcontrolspartner.v1beta.IAccessApprovalRequest[] = [];
+            const iterable = client.listAccessApprovalRequestsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getEkmConnections as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEkmConnections as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEkmConnections with error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.GetEkmConnectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.GetEkmConnectionsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getEkmConnections = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getEkmConnections(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getEkmConnections as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEkmConnections as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEkmConnections with closed client', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.GetEkmConnectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.GetEkmConnectionsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getEkmConnections(request), expectedError);
-    });
-  });
-
-  describe('getPartnerPermissions', () => {
-    it('invokes getPartnerPermissions without error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.GetPartnerPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.GetPartnerPermissionsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.PartnerPermissions()
-      );
-      client.innerApiCalls.getPartnerPermissions =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getPartnerPermissions(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getPartnerPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPartnerPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPartnerPermissions without error using callback', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.GetPartnerPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.GetPartnerPermissionsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.PartnerPermissions()
-      );
-      client.innerApiCalls.getPartnerPermissions =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getPartnerPermissions(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.cloudcontrolspartner.v1beta.IPartnerPermissions | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getPartnerPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPartnerPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPartnerPermissions with error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.GetPartnerPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.GetPartnerPermissionsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getPartnerPermissions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getPartnerPermissions(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.getPartnerPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPartnerPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPartnerPermissions with closed client', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.GetPartnerPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.GetPartnerPermissionsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.getPartnerPermissions(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getPartner', () => {
-    it('invokes getPartner without error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.GetPartnerRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.GetPartnerRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.Partner()
-      );
-      client.innerApiCalls.getPartner = stubSimpleCall(expectedResponse);
-      const [response] = await client.getPartner(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getPartner as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPartner as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPartner without error using callback', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.GetPartnerRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.GetPartnerRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.Partner()
-      );
-      client.innerApiCalls.getPartner =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getPartner(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.cloudcontrolspartner.v1beta.IPartner | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getPartner as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPartner as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPartner with error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.GetPartnerRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.GetPartnerRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getPartner = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getPartner(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getPartner as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPartner as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPartner with closed client', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.GetPartnerRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.GetPartnerRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getPartner(request), expectedError);
-    });
-  });
-
-  describe('createCustomer', () => {
-    it('invokes createCustomer without error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()
-      );
-      client.innerApiCalls.createCustomer = stubSimpleCall(expectedResponse);
-      const [response] = await client.createCustomer(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createCustomer as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createCustomer as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createCustomer without error using callback', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()
-      );
-      client.innerApiCalls.createCustomer =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createCustomer(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createCustomer as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createCustomer as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createCustomer with error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createCustomer = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createCustomer(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createCustomer as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createCustomer as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createCustomer with closed client', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createCustomer(request), expectedError);
-    });
-  });
-
-  describe('updateCustomer', () => {
-    it('invokes updateCustomer without error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest()
-      );
-      request.customer ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest',
-        ['customer', 'name']
-      );
-      request.customer.name = defaultValue1;
-      const expectedHeaderRequestParams = `customer.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()
-      );
-      client.innerApiCalls.updateCustomer = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateCustomer(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateCustomer as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCustomer as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateCustomer without error using callback', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest()
-      );
-      request.customer ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest',
-        ['customer', 'name']
-      );
-      request.customer.name = defaultValue1;
-      const expectedHeaderRequestParams = `customer.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()
-      );
-      client.innerApiCalls.updateCustomer =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateCustomer(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateCustomer as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCustomer as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateCustomer with error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest()
-      );
-      request.customer ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest',
-        ['customer', 'name']
-      );
-      request.customer.name = defaultValue1;
-      const expectedHeaderRequestParams = `customer.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateCustomer = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateCustomer(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateCustomer as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCustomer as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateCustomer with closed client', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest()
-      );
-      request.customer ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest',
-        ['customer', 'name']
-      );
-      request.customer.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateCustomer(request), expectedError);
-    });
-  });
-
-  describe('deleteCustomer', () => {
-    it('invokes deleteCustomer without error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteCustomer = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteCustomer(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteCustomer as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteCustomer as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteCustomer without error using callback', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteCustomer =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteCustomer(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteCustomer as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteCustomer as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteCustomer with error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteCustomer = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteCustomer(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteCustomer as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteCustomer as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteCustomer with closed client', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteCustomer(request), expectedError);
-    });
-  });
-
-  describe('listWorkloads', () => {
-    it('invokes listWorkloads without error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.Workload()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.Workload()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.Workload()
-        ),
-      ];
-      client.innerApiCalls.listWorkloads = stubSimpleCall(expectedResponse);
-      const [response] = await client.listWorkloads(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listWorkloads as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listWorkloads as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listWorkloads without error using callback', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.Workload()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.Workload()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.Workload()
-        ),
-      ];
-      client.innerApiCalls.listWorkloads =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listWorkloads(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listWorkloads as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listWorkloads as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listWorkloads with error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listWorkloads = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listWorkloads(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listWorkloads as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listWorkloads as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listWorkloadsStream without error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.Workload()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.Workload()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.Workload()
-        ),
-      ];
-      client.descriptors.page.listWorkloads.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listWorkloadsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.cloudcontrolspartner.v1beta.Workload[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.cloudcontrolspartner.v1beta.Workload
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert(stub.calledOnce);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAccessApprovalRequests.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAccessApprovalRequests.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listAccessApprovalRequests with error', async () => {
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAccessApprovalRequests.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listAccessApprovalRequestsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.cloudcontrolspartner.v1beta.IAccessApprovalRequest[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert(stub.calledOnce);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAccessApprovalRequests.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAccessApprovalRequests.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listWorkloads.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listWorkloads, request)
-      );
-      assert(
-        (client.descriptors.page.listWorkloads.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listWorkloadsStream with error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listWorkloads.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listWorkloadsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.cloudcontrolspartner.v1beta.Workload[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.cloudcontrolspartner.v1beta.Workload
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('Path templates', () => {
+
+        describe('accessApprovalRequest', async () => {
+            const fakePath = "/rendered/path/accessApprovalRequest";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                customer: "customerValue",
+                workload: "workloadValue",
+                access_approval_request: "accessApprovalRequestValue",
+            };
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.accessApprovalRequestPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.accessApprovalRequestPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('accessApprovalRequestPath', () => {
+                const result = client.accessApprovalRequestPath("organizationValue", "locationValue", "customerValue", "workloadValue", "accessApprovalRequestValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.accessApprovalRequestPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromAccessApprovalRequestName', () => {
+                const result = client.matchOrganizationFromAccessApprovalRequestName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.accessApprovalRequestPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromAccessApprovalRequestName', () => {
+                const result = client.matchLocationFromAccessApprovalRequestName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.accessApprovalRequestPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCustomerFromAccessApprovalRequestName', () => {
+                const result = client.matchCustomerFromAccessApprovalRequestName(fakePath);
+                assert.strictEqual(result, "customerValue");
+                assert((client.pathTemplates.accessApprovalRequestPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchWorkloadFromAccessApprovalRequestName', () => {
+                const result = client.matchWorkloadFromAccessApprovalRequestName(fakePath);
+                assert.strictEqual(result, "workloadValue");
+                assert((client.pathTemplates.accessApprovalRequestPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAccessApprovalRequestFromAccessApprovalRequestName', () => {
+                const result = client.matchAccessApprovalRequestFromAccessApprovalRequestName(fakePath);
+                assert.strictEqual(result, "accessApprovalRequestValue");
+                assert((client.pathTemplates.accessApprovalRequestPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        describe('customer', async () => {
+            const fakePath = "/rendered/path/customer";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                customer: "customerValue",
+            };
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.customerPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.customerPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('customerPath', () => {
+                const result = client.customerPath("organizationValue", "locationValue", "customerValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.customerPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromCustomerName', () => {
+                const result = client.matchOrganizationFromCustomerName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.customerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromCustomerName', () => {
+                const result = client.matchLocationFromCustomerName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.customerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCustomerFromCustomerName', () => {
+                const result = client.matchCustomerFromCustomerName(fakePath);
+                assert.strictEqual(result, "customerValue");
+                assert((client.pathTemplates.customerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listWorkloads.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listWorkloads, request)
-      );
-      assert(
-        (client.descriptors.page.listWorkloads.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listWorkloads without error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.Workload()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.Workload()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.Workload()
-        ),
-      ];
-      client.descriptors.page.listWorkloads.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload[] =
-        [];
-      const iterable = client.listWorkloadsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listWorkloads.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listWorkloads.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        describe('ekmConnections', async () => {
+            const fakePath = "/rendered/path/ekmConnections";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                customer: "customerValue",
+                workload: "workloadValue",
+            };
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.ekmConnectionsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.ekmConnectionsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-    it('uses async iteration with listWorkloads with error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listWorkloads.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listWorkloadsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listWorkloads.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listWorkloads.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+            it('ekmConnectionsPath', () => {
+                const result = client.ekmConnectionsPath("organizationValue", "locationValue", "customerValue", "workloadValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.ekmConnectionsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-  describe('listCustomers', () => {
-    it('invokes listCustomers without error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()
-        ),
-      ];
-      client.innerApiCalls.listCustomers = stubSimpleCall(expectedResponse);
-      const [response] = await client.listCustomers(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listCustomers as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listCustomers as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+            it('matchOrganizationFromEkmConnectionsName', () => {
+                const result = client.matchOrganizationFromEkmConnectionsName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.ekmConnectionsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-    it('invokes listCustomers without error using callback', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()
-        ),
-      ];
-      client.innerApiCalls.listCustomers =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listCustomers(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listCustomers as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listCustomers as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+            it('matchLocationFromEkmConnectionsName', () => {
+                const result = client.matchLocationFromEkmConnectionsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.ekmConnectionsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-    it('invokes listCustomers with error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listCustomers = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listCustomers(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listCustomers as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listCustomers as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+            it('matchCustomerFromEkmConnectionsName', () => {
+                const result = client.matchCustomerFromEkmConnectionsName(fakePath);
+                assert.strictEqual(result, "customerValue");
+                assert((client.pathTemplates.ekmConnectionsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-    it('invokes listCustomersStream without error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()
-        ),
-      ];
-      client.descriptors.page.listCustomers.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listCustomersStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.cloudcontrolspartner.v1beta.Customer[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.cloudcontrolspartner.v1beta.Customer
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            it('matchWorkloadFromEkmConnectionsName', () => {
+                const result = client.matchWorkloadFromEkmConnectionsName(fakePath);
+                assert.strictEqual(result, "workloadValue");
+                assert((client.pathTemplates.ekmConnectionsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        describe('partner', async () => {
+            const fakePath = "/rendered/path/partner";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+            };
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.partnerPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.partnerPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('partnerPath', () => {
+                const result = client.partnerPath("organizationValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.partnerPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromPartnerName', () => {
+                const result = client.matchOrganizationFromPartnerName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.partnerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromPartnerName', () => {
+                const result = client.matchLocationFromPartnerName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.partnerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listCustomers.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listCustomers, request)
-      );
-      assert(
-        (client.descriptors.page.listCustomers.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listCustomersStream with error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listCustomers.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listCustomersStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.cloudcontrolspartner.v1beta.Customer[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.cloudcontrolspartner.v1beta.Customer
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        describe('partnerPermissions', async () => {
+            const fakePath = "/rendered/path/partnerPermissions";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                customer: "customerValue",
+                workload: "workloadValue",
+            };
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.partnerPermissionsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.partnerPermissionsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('partnerPermissionsPath', () => {
+                const result = client.partnerPermissionsPath("organizationValue", "locationValue", "customerValue", "workloadValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.partnerPermissionsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromPartnerPermissionsName', () => {
+                const result = client.matchOrganizationFromPartnerPermissionsName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.partnerPermissionsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromPartnerPermissionsName', () => {
+                const result = client.matchLocationFromPartnerPermissionsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.partnerPermissionsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCustomerFromPartnerPermissionsName', () => {
+                const result = client.matchCustomerFromPartnerPermissionsName(fakePath);
+                assert.strictEqual(result, "customerValue");
+                assert((client.pathTemplates.partnerPermissionsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchWorkloadFromPartnerPermissionsName', () => {
+                const result = client.matchWorkloadFromPartnerPermissionsName(fakePath);
+                assert.strictEqual(result, "workloadValue");
+                assert((client.pathTemplates.partnerPermissionsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        describe('violation', async () => {
+            const fakePath = "/rendered/path/violation";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                customer: "customerValue",
+                workload: "workloadValue",
+                violation: "violationValue",
+            };
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.violationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.violationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('violationPath', () => {
+                const result = client.violationPath("organizationValue", "locationValue", "customerValue", "workloadValue", "violationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.violationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromViolationName', () => {
+                const result = client.matchOrganizationFromViolationName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.violationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromViolationName', () => {
+                const result = client.matchLocationFromViolationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.violationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCustomerFromViolationName', () => {
+                const result = client.matchCustomerFromViolationName(fakePath);
+                assert.strictEqual(result, "customerValue");
+                assert((client.pathTemplates.violationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchWorkloadFromViolationName', () => {
+                const result = client.matchWorkloadFromViolationName(fakePath);
+                assert.strictEqual(result, "workloadValue");
+                assert((client.pathTemplates.violationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchViolationFromViolationName', () => {
+                const result = client.matchViolationFromViolationName(fakePath);
+                assert.strictEqual(result, "violationValue");
+                assert((client.pathTemplates.violationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listCustomers.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listCustomers, request)
-      );
-      assert(
-        (client.descriptors.page.listCustomers.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listCustomers without error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.Customer()
-        ),
-      ];
-      client.descriptors.page.listCustomers.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer[] =
-        [];
-      const iterable = client.listCustomersAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listCustomers.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listCustomers.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        describe('workload', async () => {
+            const fakePath = "/rendered/path/workload";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                customer: "customerValue",
+                workload: "workloadValue",
+            };
+            const client = new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.workloadPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.workloadPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-    it('uses async iteration with listCustomers with error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listCustomers.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listCustomersAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listCustomers.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listCustomers.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+            it('workloadPath', () => {
+                const result = client.workloadPath("organizationValue", "locationValue", "customerValue", "workloadValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.workloadPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-  describe('listAccessApprovalRequests', () => {
-    it('invokes listAccessApprovalRequests without error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest()
-        ),
-      ];
-      client.innerApiCalls.listAccessApprovalRequests =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listAccessApprovalRequests(request);
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAccessApprovalRequests as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAccessApprovalRequests as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+            it('matchOrganizationFromWorkloadName', () => {
+                const result = client.matchOrganizationFromWorkloadName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.workloadPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-    it('invokes listAccessApprovalRequests without error using callback', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest()
-        ),
-      ];
-      client.innerApiCalls.listAccessApprovalRequests =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listAccessApprovalRequests(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.cloudcontrolspartner.v1beta.IAccessApprovalRequest[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAccessApprovalRequests as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAccessApprovalRequests as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+            it('matchLocationFromWorkloadName', () => {
+                const result = client.matchLocationFromWorkloadName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.workloadPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-    it('invokes listAccessApprovalRequests with error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listAccessApprovalRequests = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listAccessApprovalRequests(request),
-        expectedError
-      );
-      assert(stub.calledOnce);
-      const actualRequest = (
-        client.innerApiCalls.listAccessApprovalRequests as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAccessApprovalRequests as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+            it('matchCustomerFromWorkloadName', () => {
+                const result = client.matchCustomerFromWorkloadName(fakePath);
+                assert.strictEqual(result, "customerValue");
+                assert((client.pathTemplates.workloadPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-    it('invokes listAccessApprovalRequestsStream without error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest()
-        ),
-      ];
-      client.descriptors.page.listAccessApprovalRequests.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listAccessApprovalRequestsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            it('matchWorkloadFromWorkloadName', () => {
+                const result = client.matchWorkloadFromWorkloadName(fakePath);
+                assert.strictEqual(result, "workloadValue");
+                assert((client.pathTemplates.workloadPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listAccessApprovalRequests
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAccessApprovalRequests, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listAccessApprovalRequests
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
     });
-
-    it('invokes listAccessApprovalRequestsStream with error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAccessApprovalRequests.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listAccessApprovalRequestsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(stub.calledOnce);
-      assert(
-        (
-          client.descriptors.page.listAccessApprovalRequests
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAccessApprovalRequests, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listAccessApprovalRequests
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listAccessApprovalRequests without error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest()
-        ),
-      ];
-      client.descriptors.page.listAccessApprovalRequests.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.cloudcontrolspartner.v1beta.IAccessApprovalRequest[] =
-        [];
-      const iterable = client.listAccessApprovalRequestsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAccessApprovalRequests
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listAccessApprovalRequests
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listAccessApprovalRequests with error', async () => {
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAccessApprovalRequests.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listAccessApprovalRequestsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.cloudcontrolspartner.v1beta.IAccessApprovalRequest[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAccessApprovalRequests
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listAccessApprovalRequests
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('accessApprovalRequest', async () => {
-      const fakePath = '/rendered/path/accessApprovalRequest';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-        customer: 'customerValue',
-        workload: 'workloadValue',
-        access_approval_request: 'accessApprovalRequestValue',
-      };
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.accessApprovalRequestPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.accessApprovalRequestPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('accessApprovalRequestPath', () => {
-        const result = client.accessApprovalRequestPath(
-          'organizationValue',
-          'locationValue',
-          'customerValue',
-          'workloadValue',
-          'accessApprovalRequestValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.accessApprovalRequestPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromAccessApprovalRequestName', () => {
-        const result =
-          client.matchOrganizationFromAccessApprovalRequestName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.accessApprovalRequestPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromAccessApprovalRequestName', () => {
-        const result =
-          client.matchLocationFromAccessApprovalRequestName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.accessApprovalRequestPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCustomerFromAccessApprovalRequestName', () => {
-        const result =
-          client.matchCustomerFromAccessApprovalRequestName(fakePath);
-        assert.strictEqual(result, 'customerValue');
-        assert(
-          (
-            client.pathTemplates.accessApprovalRequestPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchWorkloadFromAccessApprovalRequestName', () => {
-        const result =
-          client.matchWorkloadFromAccessApprovalRequestName(fakePath);
-        assert.strictEqual(result, 'workloadValue');
-        assert(
-          (
-            client.pathTemplates.accessApprovalRequestPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAccessApprovalRequestFromAccessApprovalRequestName', () => {
-        const result =
-          client.matchAccessApprovalRequestFromAccessApprovalRequestName(
-            fakePath
-          );
-        assert.strictEqual(result, 'accessApprovalRequestValue');
-        assert(
-          (
-            client.pathTemplates.accessApprovalRequestPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('customer', async () => {
-      const fakePath = '/rendered/path/customer';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-        customer: 'customerValue',
-      };
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.customerPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.customerPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('customerPath', () => {
-        const result = client.customerPath(
-          'organizationValue',
-          'locationValue',
-          'customerValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.customerPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromCustomerName', () => {
-        const result = client.matchOrganizationFromCustomerName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (client.pathTemplates.customerPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromCustomerName', () => {
-        const result = client.matchLocationFromCustomerName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.customerPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCustomerFromCustomerName', () => {
-        const result = client.matchCustomerFromCustomerName(fakePath);
-        assert.strictEqual(result, 'customerValue');
-        assert(
-          (client.pathTemplates.customerPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('ekmConnections', async () => {
-      const fakePath = '/rendered/path/ekmConnections';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-        customer: 'customerValue',
-        workload: 'workloadValue',
-      };
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.ekmConnectionsPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.ekmConnectionsPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('ekmConnectionsPath', () => {
-        const result = client.ekmConnectionsPath(
-          'organizationValue',
-          'locationValue',
-          'customerValue',
-          'workloadValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.ekmConnectionsPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromEkmConnectionsName', () => {
-        const result = client.matchOrganizationFromEkmConnectionsName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (client.pathTemplates.ekmConnectionsPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromEkmConnectionsName', () => {
-        const result = client.matchLocationFromEkmConnectionsName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.ekmConnectionsPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCustomerFromEkmConnectionsName', () => {
-        const result = client.matchCustomerFromEkmConnectionsName(fakePath);
-        assert.strictEqual(result, 'customerValue');
-        assert(
-          (client.pathTemplates.ekmConnectionsPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchWorkloadFromEkmConnectionsName', () => {
-        const result = client.matchWorkloadFromEkmConnectionsName(fakePath);
-        assert.strictEqual(result, 'workloadValue');
-        assert(
-          (client.pathTemplates.ekmConnectionsPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('partner', async () => {
-      const fakePath = '/rendered/path/partner';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-      };
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.partnerPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.partnerPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('partnerPath', () => {
-        const result = client.partnerPath('organizationValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.partnerPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromPartnerName', () => {
-        const result = client.matchOrganizationFromPartnerName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (client.pathTemplates.partnerPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromPartnerName', () => {
-        const result = client.matchLocationFromPartnerName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.partnerPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('partnerPermissions', async () => {
-      const fakePath = '/rendered/path/partnerPermissions';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-        customer: 'customerValue',
-        workload: 'workloadValue',
-      };
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.partnerPermissionsPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.partnerPermissionsPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('partnerPermissionsPath', () => {
-        const result = client.partnerPermissionsPath(
-          'organizationValue',
-          'locationValue',
-          'customerValue',
-          'workloadValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.partnerPermissionsPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromPartnerPermissionsName', () => {
-        const result =
-          client.matchOrganizationFromPartnerPermissionsName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.partnerPermissionsPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromPartnerPermissionsName', () => {
-        const result = client.matchLocationFromPartnerPermissionsName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.partnerPermissionsPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCustomerFromPartnerPermissionsName', () => {
-        const result = client.matchCustomerFromPartnerPermissionsName(fakePath);
-        assert.strictEqual(result, 'customerValue');
-        assert(
-          (
-            client.pathTemplates.partnerPermissionsPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchWorkloadFromPartnerPermissionsName', () => {
-        const result = client.matchWorkloadFromPartnerPermissionsName(fakePath);
-        assert.strictEqual(result, 'workloadValue');
-        assert(
-          (
-            client.pathTemplates.partnerPermissionsPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('violation', async () => {
-      const fakePath = '/rendered/path/violation';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-        customer: 'customerValue',
-        workload: 'workloadValue',
-        violation: 'violationValue',
-      };
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.violationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.violationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('violationPath', () => {
-        const result = client.violationPath(
-          'organizationValue',
-          'locationValue',
-          'customerValue',
-          'workloadValue',
-          'violationValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.violationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromViolationName', () => {
-        const result = client.matchOrganizationFromViolationName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (client.pathTemplates.violationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromViolationName', () => {
-        const result = client.matchLocationFromViolationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.violationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCustomerFromViolationName', () => {
-        const result = client.matchCustomerFromViolationName(fakePath);
-        assert.strictEqual(result, 'customerValue');
-        assert(
-          (client.pathTemplates.violationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchWorkloadFromViolationName', () => {
-        const result = client.matchWorkloadFromViolationName(fakePath);
-        assert.strictEqual(result, 'workloadValue');
-        assert(
-          (client.pathTemplates.violationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchViolationFromViolationName', () => {
-        const result = client.matchViolationFromViolationName(fakePath);
-        assert.strictEqual(result, 'violationValue');
-        assert(
-          (client.pathTemplates.violationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('workload', async () => {
-      const fakePath = '/rendered/path/workload';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-        customer: 'customerValue',
-        workload: 'workloadValue',
-      };
-      const client =
-        new cloudcontrolspartnercoreModule.v1beta.CloudControlsPartnerCoreClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.workloadPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.workloadPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('workloadPath', () => {
-        const result = client.workloadPath(
-          'organizationValue',
-          'locationValue',
-          'customerValue',
-          'workloadValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.workloadPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromWorkloadName', () => {
-        const result = client.matchOrganizationFromWorkloadName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (client.pathTemplates.workloadPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromWorkloadName', () => {
-        const result = client.matchLocationFromWorkloadName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.workloadPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCustomerFromWorkloadName', () => {
-        const result = client.matchCustomerFromWorkloadName(fakePath);
-        assert.strictEqual(result, 'customerValue');
-        assert(
-          (client.pathTemplates.workloadPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchWorkloadFromWorkloadName', () => {
-        const result = client.matchWorkloadFromWorkloadName(fakePath);
-        assert.strictEqual(result, 'workloadValue');
-        assert(
-          (client.pathTemplates.workloadPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

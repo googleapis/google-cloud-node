@@ -29,12000 +29,8485 @@ import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v2.SecurityCenterClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'securitycenter.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          securitycenterModule.v2.SecurityCenterClient.servicePath;
-        assert.strictEqual(servicePath, 'securitycenter.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          securitycenterModule.v2.SecurityCenterClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'securitycenter.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'securitycenter.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'securitycenter.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new securitycenterModule.v2.SecurityCenterClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'securitycenter.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'securitycenter.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new securitycenterModule.v2.SecurityCenterClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'securitycenter.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new securitycenterModule.v2.SecurityCenterClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = securitycenterModule.v2.SecurityCenterClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.securityCenterStub, undefined);
-      await client.initialize();
-      assert(client.securityCenterStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.securityCenterStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.securityCenterStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('batchCreateResourceValueConfigs', () => {
-    it('invokes batchCreateResourceValueConfigs without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.BatchCreateResourceValueConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.BatchCreateResourceValueConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.BatchCreateResourceValueConfigsResponse()
-      );
-      client.innerApiCalls.batchCreateResourceValueConfigs =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.batchCreateResourceValueConfigs(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.batchCreateResourceValueConfigs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchCreateResourceValueConfigs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchCreateResourceValueConfigs without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.BatchCreateResourceValueConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.BatchCreateResourceValueConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.BatchCreateResourceValueConfigsResponse()
-      );
-      client.innerApiCalls.batchCreateResourceValueConfigs =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.batchCreateResourceValueConfigs(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.batchCreateResourceValueConfigs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchCreateResourceValueConfigs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchCreateResourceValueConfigs with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.BatchCreateResourceValueConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.BatchCreateResourceValueConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.batchCreateResourceValueConfigs = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.batchCreateResourceValueConfigs(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.batchCreateResourceValueConfigs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchCreateResourceValueConfigs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchCreateResourceValueConfigs with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.BatchCreateResourceValueConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.BatchCreateResourceValueConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.batchCreateResourceValueConfigs(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('createBigQueryExport', () => {
-    it('invokes createBigQueryExport without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.CreateBigQueryExportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.CreateBigQueryExportRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.BigQueryExport()
-      );
-      client.innerApiCalls.createBigQueryExport =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.createBigQueryExport(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createBigQueryExport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBigQueryExport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBigQueryExport without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.CreateBigQueryExportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.CreateBigQueryExportRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.BigQueryExport()
-      );
-      client.innerApiCalls.createBigQueryExport =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createBigQueryExport(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.securitycenter.v2.IBigQueryExport | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createBigQueryExport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBigQueryExport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBigQueryExport with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.CreateBigQueryExportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.CreateBigQueryExportRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createBigQueryExport = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createBigQueryExport(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createBigQueryExport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBigQueryExport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBigQueryExport with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.CreateBigQueryExportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.CreateBigQueryExportRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createBigQueryExport(request), expectedError);
-    });
-  });
-
-  describe('createFinding', () => {
-    it('invokes createFinding without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.CreateFindingRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.CreateFindingRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.Finding()
-      );
-      client.innerApiCalls.createFinding = stubSimpleCall(expectedResponse);
-      const [response] = await client.createFinding(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createFinding as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createFinding as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createFinding without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.CreateFindingRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.CreateFindingRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.Finding()
-      );
-      client.innerApiCalls.createFinding =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createFinding(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.securitycenter.v2.IFinding | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createFinding as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createFinding as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createFinding with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.CreateFindingRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.CreateFindingRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createFinding = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createFinding(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createFinding as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createFinding as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createFinding with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.CreateFindingRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.CreateFindingRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createFinding(request), expectedError);
-    });
-  });
-
-  describe('createMuteConfig', () => {
-    it('invokes createMuteConfig without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.CreateMuteConfigRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      // path template: organizations/*/locations/{location=*}
-      request.parent = 'organizations/value/locations/value';
-      // path template: folders/*/locations/{location=*}
-      request.parent = 'folders/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.MuteConfig()
-      );
-      client.innerApiCalls.createMuteConfig = stubSimpleCall(expectedResponse);
-      const [response] = await client.createMuteConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createMuteConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createMuteConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createMuteConfig without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.CreateMuteConfigRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      // path template: organizations/*/locations/{location=*}
-      request.parent = 'organizations/value/locations/value';
-      // path template: folders/*/locations/{location=*}
-      request.parent = 'folders/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.MuteConfig()
-      );
-      client.innerApiCalls.createMuteConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createMuteConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.securitycenter.v2.IMuteConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createMuteConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createMuteConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createMuteConfig with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.CreateMuteConfigRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      // path template: organizations/*/locations/{location=*}
-      request.parent = 'organizations/value/locations/value';
-      // path template: folders/*/locations/{location=*}
-      request.parent = 'folders/value/locations/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createMuteConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createMuteConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createMuteConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createMuteConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createMuteConfig with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.CreateMuteConfigRequest()
-      );
-      // path template: projects/*/locations/{location=*}
-      request.parent = 'projects/value/locations/value';
-      // path template: organizations/*/locations/{location=*}
-      request.parent = 'organizations/value/locations/value';
-      // path template: folders/*/locations/{location=*}
-      request.parent = 'folders/value/locations/value';
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createMuteConfig(request), expectedError);
-    });
-  });
-
-  describe('createNotificationConfig', () => {
-    it('invokes createNotificationConfig without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.CreateNotificationConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.CreateNotificationConfigRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.NotificationConfig()
-      );
-      client.innerApiCalls.createNotificationConfig =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.createNotificationConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createNotificationConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createNotificationConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createNotificationConfig without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.CreateNotificationConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.CreateNotificationConfigRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.NotificationConfig()
-      );
-      client.innerApiCalls.createNotificationConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createNotificationConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.securitycenter.v2.INotificationConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createNotificationConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createNotificationConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createNotificationConfig with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.CreateNotificationConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.CreateNotificationConfigRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createNotificationConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.createNotificationConfig(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.createNotificationConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createNotificationConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createNotificationConfig with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.CreateNotificationConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.CreateNotificationConfigRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.createNotificationConfig(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('createSource', () => {
-    it('invokes createSource without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.CreateSourceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.CreateSourceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.Source()
-      );
-      client.innerApiCalls.createSource = stubSimpleCall(expectedResponse);
-      const [response] = await client.createSource(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createSource as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSource as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createSource without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.CreateSourceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.CreateSourceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.Source()
-      );
-      client.innerApiCalls.createSource =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createSource(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.securitycenter.v2.ISource | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createSource as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSource as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createSource with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.CreateSourceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.CreateSourceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createSource = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createSource(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createSource as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSource as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createSource with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.CreateSourceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.CreateSourceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createSource(request), expectedError);
-    });
-  });
-
-  describe('deleteBigQueryExport', () => {
-    it('invokes deleteBigQueryExport without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.DeleteBigQueryExportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.DeleteBigQueryExportRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteBigQueryExport =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteBigQueryExport(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteBigQueryExport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBigQueryExport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteBigQueryExport without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.DeleteBigQueryExportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.DeleteBigQueryExportRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteBigQueryExport =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteBigQueryExport(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteBigQueryExport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBigQueryExport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteBigQueryExport with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.DeleteBigQueryExportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.DeleteBigQueryExportRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteBigQueryExport = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteBigQueryExport(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteBigQueryExport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBigQueryExport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteBigQueryExport with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.DeleteBigQueryExportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.DeleteBigQueryExportRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteBigQueryExport(request), expectedError);
-    });
-  });
-
-  describe('deleteMuteConfig', () => {
-    it('invokes deleteMuteConfig without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.DeleteMuteConfigRequest()
-      );
-      // path template: projects/*/locations/{location=*}/muteConfigs/*
-      request.name = 'projects/value/locations/value/muteConfigs/value';
-      // path template: organizations/*/locations/{location=*}/muteConfigs/*
-      request.name = 'organizations/value/locations/value/muteConfigs/value';
-      // path template: folders/*/locations/{location=*}/muteConfigs/*
-      request.name = 'folders/value/locations/value/muteConfigs/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteMuteConfig = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteMuteConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteMuteConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteMuteConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteMuteConfig without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.DeleteMuteConfigRequest()
-      );
-      // path template: projects/*/locations/{location=*}/muteConfigs/*
-      request.name = 'projects/value/locations/value/muteConfigs/value';
-      // path template: organizations/*/locations/{location=*}/muteConfigs/*
-      request.name = 'organizations/value/locations/value/muteConfigs/value';
-      // path template: folders/*/locations/{location=*}/muteConfigs/*
-      request.name = 'folders/value/locations/value/muteConfigs/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteMuteConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteMuteConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteMuteConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteMuteConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteMuteConfig with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.DeleteMuteConfigRequest()
-      );
-      // path template: projects/*/locations/{location=*}/muteConfigs/*
-      request.name = 'projects/value/locations/value/muteConfigs/value';
-      // path template: organizations/*/locations/{location=*}/muteConfigs/*
-      request.name = 'organizations/value/locations/value/muteConfigs/value';
-      // path template: folders/*/locations/{location=*}/muteConfigs/*
-      request.name = 'folders/value/locations/value/muteConfigs/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteMuteConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteMuteConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteMuteConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteMuteConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteMuteConfig with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.DeleteMuteConfigRequest()
-      );
-      // path template: projects/*/locations/{location=*}/muteConfigs/*
-      request.name = 'projects/value/locations/value/muteConfigs/value';
-      // path template: organizations/*/locations/{location=*}/muteConfigs/*
-      request.name = 'organizations/value/locations/value/muteConfigs/value';
-      // path template: folders/*/locations/{location=*}/muteConfigs/*
-      request.name = 'folders/value/locations/value/muteConfigs/value';
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteMuteConfig(request), expectedError);
-    });
-  });
-
-  describe('deleteNotificationConfig', () => {
-    it('invokes deleteNotificationConfig without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.DeleteNotificationConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.DeleteNotificationConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteNotificationConfig =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteNotificationConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteNotificationConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteNotificationConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteNotificationConfig without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.DeleteNotificationConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.DeleteNotificationConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteNotificationConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteNotificationConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteNotificationConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteNotificationConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteNotificationConfig with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.DeleteNotificationConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.DeleteNotificationConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteNotificationConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.deleteNotificationConfig(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.deleteNotificationConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteNotificationConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteNotificationConfig with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.DeleteNotificationConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.DeleteNotificationConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.deleteNotificationConfig(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('deleteResourceValueConfig', () => {
-    it('invokes deleteResourceValueConfig without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.DeleteResourceValueConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.DeleteResourceValueConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteResourceValueConfig =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteResourceValueConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteResourceValueConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteResourceValueConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteResourceValueConfig without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.DeleteResourceValueConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.DeleteResourceValueConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteResourceValueConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteResourceValueConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteResourceValueConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteResourceValueConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteResourceValueConfig with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.DeleteResourceValueConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.DeleteResourceValueConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteResourceValueConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.deleteResourceValueConfig(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.deleteResourceValueConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteResourceValueConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteResourceValueConfig with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.DeleteResourceValueConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.DeleteResourceValueConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.deleteResourceValueConfig(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getBigQueryExport', () => {
-    it('invokes getBigQueryExport without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GetBigQueryExportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GetBigQueryExportRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.BigQueryExport()
-      );
-      client.innerApiCalls.getBigQueryExport = stubSimpleCall(expectedResponse);
-      const [response] = await client.getBigQueryExport(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBigQueryExport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBigQueryExport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBigQueryExport without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GetBigQueryExportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GetBigQueryExportRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.BigQueryExport()
-      );
-      client.innerApiCalls.getBigQueryExport =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getBigQueryExport(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.securitycenter.v2.IBigQueryExport | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBigQueryExport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBigQueryExport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBigQueryExport with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GetBigQueryExportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GetBigQueryExportRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getBigQueryExport = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getBigQueryExport(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getBigQueryExport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBigQueryExport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBigQueryExport with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GetBigQueryExportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GetBigQueryExportRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getBigQueryExport(request), expectedError);
-    });
-  });
-
-  describe('getSimulation', () => {
-    it('invokes getSimulation without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GetSimulationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GetSimulationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.Simulation()
-      );
-      client.innerApiCalls.getSimulation = stubSimpleCall(expectedResponse);
-      const [response] = await client.getSimulation(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getSimulation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSimulation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getSimulation without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GetSimulationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GetSimulationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.Simulation()
-      );
-      client.innerApiCalls.getSimulation =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getSimulation(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.securitycenter.v2.ISimulation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getSimulation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSimulation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getSimulation with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GetSimulationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GetSimulationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getSimulation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getSimulation(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getSimulation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSimulation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getSimulation with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GetSimulationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GetSimulationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getSimulation(request), expectedError);
-    });
-  });
-
-  describe('getValuedResource', () => {
-    it('invokes getValuedResource without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GetValuedResourceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GetValuedResourceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ValuedResource()
-      );
-      client.innerApiCalls.getValuedResource = stubSimpleCall(expectedResponse);
-      const [response] = await client.getValuedResource(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getValuedResource as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getValuedResource as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getValuedResource without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GetValuedResourceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GetValuedResourceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ValuedResource()
-      );
-      client.innerApiCalls.getValuedResource =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getValuedResource(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.securitycenter.v2.IValuedResource | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getValuedResource as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getValuedResource as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getValuedResource with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GetValuedResourceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GetValuedResourceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getValuedResource = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getValuedResource(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getValuedResource as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getValuedResource as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getValuedResource with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GetValuedResourceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GetValuedResourceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getValuedResource(request), expectedError);
-    });
-  });
-
-  describe('getIamPolicy', () => {
-    it('invokes getIamPolicy without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.GetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
-      );
-      client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
-      const [response] = await client.getIamPolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getIamPolicy without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.GetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
-      );
-      client.innerApiCalls.getIamPolicy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getIamPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.iam.v1.IPolicy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getIamPolicy with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.GetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getIamPolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getIamPolicy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getIamPolicy with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.GetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getIamPolicy(request), expectedError);
-    });
-  });
-
-  describe('getMuteConfig', () => {
-    it('invokes getMuteConfig without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GetMuteConfigRequest()
-      );
-      // path template: projects/*/locations/{location=*}/muteConfigs/*
-      request.name = 'projects/value/locations/value/muteConfigs/value';
-      // path template: organizations/*/locations/{location=*}/muteConfigs/*
-      request.name = 'organizations/value/locations/value/muteConfigs/value';
-      // path template: folders/*/locations/{location=*}/muteConfigs/*
-      request.name = 'folders/value/locations/value/muteConfigs/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.MuteConfig()
-      );
-      client.innerApiCalls.getMuteConfig = stubSimpleCall(expectedResponse);
-      const [response] = await client.getMuteConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getMuteConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getMuteConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getMuteConfig without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GetMuteConfigRequest()
-      );
-      // path template: projects/*/locations/{location=*}/muteConfigs/*
-      request.name = 'projects/value/locations/value/muteConfigs/value';
-      // path template: organizations/*/locations/{location=*}/muteConfigs/*
-      request.name = 'organizations/value/locations/value/muteConfigs/value';
-      // path template: folders/*/locations/{location=*}/muteConfigs/*
-      request.name = 'folders/value/locations/value/muteConfigs/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.MuteConfig()
-      );
-      client.innerApiCalls.getMuteConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getMuteConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.securitycenter.v2.IMuteConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getMuteConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getMuteConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getMuteConfig with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GetMuteConfigRequest()
-      );
-      // path template: projects/*/locations/{location=*}/muteConfigs/*
-      request.name = 'projects/value/locations/value/muteConfigs/value';
-      // path template: organizations/*/locations/{location=*}/muteConfigs/*
-      request.name = 'organizations/value/locations/value/muteConfigs/value';
-      // path template: folders/*/locations/{location=*}/muteConfigs/*
-      request.name = 'folders/value/locations/value/muteConfigs/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getMuteConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getMuteConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getMuteConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getMuteConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getMuteConfig with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GetMuteConfigRequest()
-      );
-      // path template: projects/*/locations/{location=*}/muteConfigs/*
-      request.name = 'projects/value/locations/value/muteConfigs/value';
-      // path template: organizations/*/locations/{location=*}/muteConfigs/*
-      request.name = 'organizations/value/locations/value/muteConfigs/value';
-      // path template: folders/*/locations/{location=*}/muteConfigs/*
-      request.name = 'folders/value/locations/value/muteConfigs/value';
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getMuteConfig(request), expectedError);
-    });
-  });
-
-  describe('getNotificationConfig', () => {
-    it('invokes getNotificationConfig without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GetNotificationConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GetNotificationConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.NotificationConfig()
-      );
-      client.innerApiCalls.getNotificationConfig =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getNotificationConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getNotificationConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getNotificationConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getNotificationConfig without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GetNotificationConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GetNotificationConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.NotificationConfig()
-      );
-      client.innerApiCalls.getNotificationConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getNotificationConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.securitycenter.v2.INotificationConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getNotificationConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getNotificationConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getNotificationConfig with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GetNotificationConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GetNotificationConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getNotificationConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getNotificationConfig(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.getNotificationConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getNotificationConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getNotificationConfig with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GetNotificationConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GetNotificationConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.getNotificationConfig(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getResourceValueConfig', () => {
-    it('invokes getResourceValueConfig without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GetResourceValueConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GetResourceValueConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ResourceValueConfig()
-      );
-      client.innerApiCalls.getResourceValueConfig =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getResourceValueConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getResourceValueConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getResourceValueConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getResourceValueConfig without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GetResourceValueConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GetResourceValueConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ResourceValueConfig()
-      );
-      client.innerApiCalls.getResourceValueConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getResourceValueConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.securitycenter.v2.IResourceValueConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getResourceValueConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getResourceValueConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getResourceValueConfig with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GetResourceValueConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GetResourceValueConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getResourceValueConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getResourceValueConfig(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.getResourceValueConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getResourceValueConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getResourceValueConfig with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GetResourceValueConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GetResourceValueConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.getResourceValueConfig(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getSource', () => {
-    it('invokes getSource without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GetSourceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GetSourceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.Source()
-      );
-      client.innerApiCalls.getSource = stubSimpleCall(expectedResponse);
-      const [response] = await client.getSource(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getSource as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSource as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getSource without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GetSourceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GetSourceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.Source()
-      );
-      client.innerApiCalls.getSource =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getSource(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.securitycenter.v2.ISource | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getSource as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSource as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getSource with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GetSourceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GetSourceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getSource = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getSource(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getSource as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSource as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getSource with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GetSourceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GetSourceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getSource(request), expectedError);
-    });
-  });
-
-  describe('setFindingState', () => {
-    it('invokes setFindingState without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.SetFindingStateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.SetFindingStateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.Finding()
-      );
-      client.innerApiCalls.setFindingState = stubSimpleCall(expectedResponse);
-      const [response] = await client.setFindingState(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setFindingState as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setFindingState as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setFindingState without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.SetFindingStateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.SetFindingStateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.Finding()
-      );
-      client.innerApiCalls.setFindingState =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setFindingState(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.securitycenter.v2.IFinding | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setFindingState as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setFindingState as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setFindingState with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.SetFindingStateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.SetFindingStateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.setFindingState = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.setFindingState(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.setFindingState as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setFindingState as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setFindingState with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.SetFindingStateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.SetFindingStateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.setFindingState(request), expectedError);
-    });
-  });
-
-  describe('setIamPolicy', () => {
-    it('invokes setIamPolicy without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.SetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
-      );
-      client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
-      const [response] = await client.setIamPolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setIamPolicy without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.SetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
-      );
-      client.innerApiCalls.setIamPolicy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setIamPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.iam.v1.IPolicy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setIamPolicy with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.SetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.setIamPolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.setIamPolicy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setIamPolicy with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.SetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.setIamPolicy(request), expectedError);
-    });
-  });
-
-  describe('setMute', () => {
-    it('invokes setMute without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.SetMuteRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.SetMuteRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.Finding()
-      );
-      client.innerApiCalls.setMute = stubSimpleCall(expectedResponse);
-      const [response] = await client.setMute(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.setMute as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setMute as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setMute without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.SetMuteRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.SetMuteRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.Finding()
-      );
-      client.innerApiCalls.setMute =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setMute(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.securitycenter.v2.IFinding | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.setMute as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setMute as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setMute with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.SetMuteRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.SetMuteRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.setMute = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.setMute(request), expectedError);
-      const actualRequest = (client.innerApiCalls.setMute as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setMute as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setMute with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.SetMuteRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.SetMuteRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.setMute(request), expectedError);
-    });
-  });
-
-  describe('testIamPermissions', () => {
-    it('invokes testIamPermissions without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.TestIamPermissionsRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsResponse()
-      );
-      client.innerApiCalls.testIamPermissions =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.testIamPermissions(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes testIamPermissions without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.TestIamPermissionsRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsResponse()
-      );
-      client.innerApiCalls.testIamPermissions =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.testIamPermissions(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.iam.v1.ITestIamPermissionsResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes testIamPermissions with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.TestIamPermissionsRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.testIamPermissions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.testIamPermissions(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes testIamPermissions with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.TestIamPermissionsRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.testIamPermissions(request), expectedError);
-    });
-  });
-
-  describe('updateBigQueryExport', () => {
-    it('invokes updateBigQueryExport without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateBigQueryExportRequest()
-      );
-      request.bigQueryExport ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.UpdateBigQueryExportRequest',
-        ['bigQueryExport', 'name']
-      );
-      request.bigQueryExport.name = defaultValue1;
-      const expectedHeaderRequestParams = `big_query_export.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.BigQueryExport()
-      );
-      client.innerApiCalls.updateBigQueryExport =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateBigQueryExport(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateBigQueryExport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateBigQueryExport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateBigQueryExport without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateBigQueryExportRequest()
-      );
-      request.bigQueryExport ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.UpdateBigQueryExportRequest',
-        ['bigQueryExport', 'name']
-      );
-      request.bigQueryExport.name = defaultValue1;
-      const expectedHeaderRequestParams = `big_query_export.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.BigQueryExport()
-      );
-      client.innerApiCalls.updateBigQueryExport =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateBigQueryExport(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.securitycenter.v2.IBigQueryExport | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateBigQueryExport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateBigQueryExport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateBigQueryExport with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateBigQueryExportRequest()
-      );
-      request.bigQueryExport ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.UpdateBigQueryExportRequest',
-        ['bigQueryExport', 'name']
-      );
-      request.bigQueryExport.name = defaultValue1;
-      const expectedHeaderRequestParams = `big_query_export.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateBigQueryExport = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateBigQueryExport(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateBigQueryExport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateBigQueryExport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateBigQueryExport with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateBigQueryExportRequest()
-      );
-      request.bigQueryExport ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.UpdateBigQueryExportRequest',
-        ['bigQueryExport', 'name']
-      );
-      request.bigQueryExport.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateBigQueryExport(request), expectedError);
-    });
-  });
-
-  describe('updateExternalSystem', () => {
-    it('invokes updateExternalSystem without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateExternalSystemRequest()
-      );
-      request.externalSystem ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.UpdateExternalSystemRequest',
-        ['externalSystem', 'name']
-      );
-      request.externalSystem.name = defaultValue1;
-      const expectedHeaderRequestParams = `external_system.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ExternalSystem()
-      );
-      client.innerApiCalls.updateExternalSystem =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateExternalSystem(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateExternalSystem as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateExternalSystem as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateExternalSystem without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateExternalSystemRequest()
-      );
-      request.externalSystem ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.UpdateExternalSystemRequest',
-        ['externalSystem', 'name']
-      );
-      request.externalSystem.name = defaultValue1;
-      const expectedHeaderRequestParams = `external_system.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ExternalSystem()
-      );
-      client.innerApiCalls.updateExternalSystem =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateExternalSystem(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.securitycenter.v2.IExternalSystem | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateExternalSystem as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateExternalSystem as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateExternalSystem with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateExternalSystemRequest()
-      );
-      request.externalSystem ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.UpdateExternalSystemRequest',
-        ['externalSystem', 'name']
-      );
-      request.externalSystem.name = defaultValue1;
-      const expectedHeaderRequestParams = `external_system.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateExternalSystem = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateExternalSystem(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateExternalSystem as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateExternalSystem as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateExternalSystem with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateExternalSystemRequest()
-      );
-      request.externalSystem ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.UpdateExternalSystemRequest',
-        ['externalSystem', 'name']
-      );
-      request.externalSystem.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateExternalSystem(request), expectedError);
-    });
-  });
-
-  describe('updateFinding', () => {
-    it('invokes updateFinding without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateFindingRequest()
-      );
-      request.finding ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.UpdateFindingRequest',
-        ['finding', 'name']
-      );
-      request.finding.name = defaultValue1;
-      const expectedHeaderRequestParams = `finding.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.Finding()
-      );
-      client.innerApiCalls.updateFinding = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateFinding(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateFinding as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateFinding as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateFinding without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateFindingRequest()
-      );
-      request.finding ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.UpdateFindingRequest',
-        ['finding', 'name']
-      );
-      request.finding.name = defaultValue1;
-      const expectedHeaderRequestParams = `finding.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.Finding()
-      );
-      client.innerApiCalls.updateFinding =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateFinding(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.securitycenter.v2.IFinding | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateFinding as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateFinding as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateFinding with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateFindingRequest()
-      );
-      request.finding ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.UpdateFindingRequest',
-        ['finding', 'name']
-      );
-      request.finding.name = defaultValue1;
-      const expectedHeaderRequestParams = `finding.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateFinding = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateFinding(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateFinding as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateFinding as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateFinding with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateFindingRequest()
-      );
-      request.finding ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.UpdateFindingRequest',
-        ['finding', 'name']
-      );
-      request.finding.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateFinding(request), expectedError);
-    });
-  });
-
-  describe('updateMuteConfig', () => {
-    it('invokes updateMuteConfig without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateMuteConfigRequest()
-      );
-      request.muteConfig = {};
-      // path template: projects/*/locations/{location=*}/muteConfigs/*
-      request.muteConfig.name =
-        'projects/value/locations/value/muteConfigs/value';
-      request.muteConfig = {};
-      // path template: organizations/*/locations/{location=*}/muteConfigs/*
-      request.muteConfig.name =
-        'organizations/value/locations/value/muteConfigs/value';
-      request.muteConfig = {};
-      // path template: folders/*/locations/{location=*}/muteConfigs/*
-      request.muteConfig.name =
-        'folders/value/locations/value/muteConfigs/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.MuteConfig()
-      );
-      client.innerApiCalls.updateMuteConfig = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateMuteConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateMuteConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateMuteConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateMuteConfig without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateMuteConfigRequest()
-      );
-      request.muteConfig = {};
-      // path template: projects/*/locations/{location=*}/muteConfigs/*
-      request.muteConfig.name =
-        'projects/value/locations/value/muteConfigs/value';
-      request.muteConfig = {};
-      // path template: organizations/*/locations/{location=*}/muteConfigs/*
-      request.muteConfig.name =
-        'organizations/value/locations/value/muteConfigs/value';
-      request.muteConfig = {};
-      // path template: folders/*/locations/{location=*}/muteConfigs/*
-      request.muteConfig.name =
-        'folders/value/locations/value/muteConfigs/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.MuteConfig()
-      );
-      client.innerApiCalls.updateMuteConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateMuteConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.securitycenter.v2.IMuteConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateMuteConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateMuteConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateMuteConfig with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateMuteConfigRequest()
-      );
-      request.muteConfig = {};
-      // path template: projects/*/locations/{location=*}/muteConfigs/*
-      request.muteConfig.name =
-        'projects/value/locations/value/muteConfigs/value';
-      request.muteConfig = {};
-      // path template: organizations/*/locations/{location=*}/muteConfigs/*
-      request.muteConfig.name =
-        'organizations/value/locations/value/muteConfigs/value';
-      request.muteConfig = {};
-      // path template: folders/*/locations/{location=*}/muteConfigs/*
-      request.muteConfig.name =
-        'folders/value/locations/value/muteConfigs/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateMuteConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateMuteConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateMuteConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateMuteConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateMuteConfig with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateMuteConfigRequest()
-      );
-      request.muteConfig = {};
-      // path template: projects/*/locations/{location=*}/muteConfigs/*
-      request.muteConfig.name =
-        'projects/value/locations/value/muteConfigs/value';
-      request.muteConfig = {};
-      // path template: organizations/*/locations/{location=*}/muteConfigs/*
-      request.muteConfig.name =
-        'organizations/value/locations/value/muteConfigs/value';
-      request.muteConfig = {};
-      // path template: folders/*/locations/{location=*}/muteConfigs/*
-      request.muteConfig.name =
-        'folders/value/locations/value/muteConfigs/value';
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateMuteConfig(request), expectedError);
-    });
-  });
-
-  describe('updateNotificationConfig', () => {
-    it('invokes updateNotificationConfig without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateNotificationConfigRequest()
-      );
-      request.notificationConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.UpdateNotificationConfigRequest',
-        ['notificationConfig', 'name']
-      );
-      request.notificationConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `notification_config.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.NotificationConfig()
-      );
-      client.innerApiCalls.updateNotificationConfig =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateNotificationConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateNotificationConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateNotificationConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateNotificationConfig without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateNotificationConfigRequest()
-      );
-      request.notificationConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.UpdateNotificationConfigRequest',
-        ['notificationConfig', 'name']
-      );
-      request.notificationConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `notification_config.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.NotificationConfig()
-      );
-      client.innerApiCalls.updateNotificationConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateNotificationConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.securitycenter.v2.INotificationConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateNotificationConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateNotificationConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateNotificationConfig with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateNotificationConfigRequest()
-      );
-      request.notificationConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.UpdateNotificationConfigRequest',
-        ['notificationConfig', 'name']
-      );
-      request.notificationConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `notification_config.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateNotificationConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.updateNotificationConfig(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.updateNotificationConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateNotificationConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateNotificationConfig with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateNotificationConfigRequest()
-      );
-      request.notificationConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.UpdateNotificationConfigRequest',
-        ['notificationConfig', 'name']
-      );
-      request.notificationConfig.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.updateNotificationConfig(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('updateResourceValueConfig', () => {
-    it('invokes updateResourceValueConfig without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateResourceValueConfigRequest()
-      );
-      request.resourceValueConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.UpdateResourceValueConfigRequest',
-        ['resourceValueConfig', 'name']
-      );
-      request.resourceValueConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `resource_value_config.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ResourceValueConfig()
-      );
-      client.innerApiCalls.updateResourceValueConfig =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateResourceValueConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateResourceValueConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateResourceValueConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateResourceValueConfig without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateResourceValueConfigRequest()
-      );
-      request.resourceValueConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.UpdateResourceValueConfigRequest',
-        ['resourceValueConfig', 'name']
-      );
-      request.resourceValueConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `resource_value_config.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ResourceValueConfig()
-      );
-      client.innerApiCalls.updateResourceValueConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateResourceValueConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.securitycenter.v2.IResourceValueConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateResourceValueConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateResourceValueConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateResourceValueConfig with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateResourceValueConfigRequest()
-      );
-      request.resourceValueConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.UpdateResourceValueConfigRequest',
-        ['resourceValueConfig', 'name']
-      );
-      request.resourceValueConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `resource_value_config.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateResourceValueConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.updateResourceValueConfig(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.updateResourceValueConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateResourceValueConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateResourceValueConfig with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateResourceValueConfigRequest()
-      );
-      request.resourceValueConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.UpdateResourceValueConfigRequest',
-        ['resourceValueConfig', 'name']
-      );
-      request.resourceValueConfig.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.updateResourceValueConfig(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('updateSecurityMarks', () => {
-    it('invokes updateSecurityMarks without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateSecurityMarksRequest()
-      );
-      request.securityMarks ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.UpdateSecurityMarksRequest',
-        ['securityMarks', 'name']
-      );
-      request.securityMarks.name = defaultValue1;
-      const expectedHeaderRequestParams = `security_marks.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.SecurityMarks()
-      );
-      client.innerApiCalls.updateSecurityMarks =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateSecurityMarks(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateSecurityMarks as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSecurityMarks as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSecurityMarks without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateSecurityMarksRequest()
-      );
-      request.securityMarks ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.UpdateSecurityMarksRequest',
-        ['securityMarks', 'name']
-      );
-      request.securityMarks.name = defaultValue1;
-      const expectedHeaderRequestParams = `security_marks.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.SecurityMarks()
-      );
-      client.innerApiCalls.updateSecurityMarks =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateSecurityMarks(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.securitycenter.v2.ISecurityMarks | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateSecurityMarks as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSecurityMarks as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSecurityMarks with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateSecurityMarksRequest()
-      );
-      request.securityMarks ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.UpdateSecurityMarksRequest',
-        ['securityMarks', 'name']
-      );
-      request.securityMarks.name = defaultValue1;
-      const expectedHeaderRequestParams = `security_marks.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateSecurityMarks = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateSecurityMarks(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateSecurityMarks as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSecurityMarks as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSecurityMarks with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateSecurityMarksRequest()
-      );
-      request.securityMarks ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.UpdateSecurityMarksRequest',
-        ['securityMarks', 'name']
-      );
-      request.securityMarks.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateSecurityMarks(request), expectedError);
-    });
-  });
-
-  describe('updateSource', () => {
-    it('invokes updateSource without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateSourceRequest()
-      );
-      request.source ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.UpdateSourceRequest',
-        ['source', 'name']
-      );
-      request.source.name = defaultValue1;
-      const expectedHeaderRequestParams = `source.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.Source()
-      );
-      client.innerApiCalls.updateSource = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateSource(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateSource as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSource as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSource without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateSourceRequest()
-      );
-      request.source ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.UpdateSourceRequest',
-        ['source', 'name']
-      );
-      request.source.name = defaultValue1;
-      const expectedHeaderRequestParams = `source.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.Source()
-      );
-      client.innerApiCalls.updateSource =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateSource(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.securitycenter.v2.ISource | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateSource as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSource as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSource with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateSourceRequest()
-      );
-      request.source ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.UpdateSourceRequest',
-        ['source', 'name']
-      );
-      request.source.name = defaultValue1;
-      const expectedHeaderRequestParams = `source.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateSource = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateSource(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateSource as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSource as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSource with closed client', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.UpdateSourceRequest()
-      );
-      request.source ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.UpdateSourceRequest',
-        ['source', 'name']
-      );
-      request.source.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateSource(request), expectedError);
-    });
-  });
-
-  describe('bulkMuteFindings', () => {
-    it('invokes bulkMuteFindings without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.BulkMuteFindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.BulkMuteFindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.bulkMuteFindings =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.bulkMuteFindings(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.bulkMuteFindings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.bulkMuteFindings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes bulkMuteFindings without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.BulkMuteFindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.BulkMuteFindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.bulkMuteFindings =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.bulkMuteFindings(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.securitycenter.v2.IBulkMuteFindingsResponse,
-              protos.google.protobuf.IEmpty
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.securitycenter.v2.IBulkMuteFindingsResponse,
-        protos.google.protobuf.IEmpty
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.bulkMuteFindings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.bulkMuteFindings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes bulkMuteFindings with call error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.BulkMuteFindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.BulkMuteFindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.bulkMuteFindings = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.bulkMuteFindings(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.bulkMuteFindings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.bulkMuteFindings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes bulkMuteFindings with LRO error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.BulkMuteFindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.BulkMuteFindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.bulkMuteFindings = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.bulkMuteFindings(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.bulkMuteFindings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.bulkMuteFindings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkBulkMuteFindingsProgress without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkBulkMuteFindingsProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkBulkMuteFindingsProgress with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkBulkMuteFindingsProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('groupFindings', () => {
-    it('invokes groupFindings without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GroupFindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GroupFindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.GroupResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.GroupResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.GroupResult()
-        ),
-      ];
-      client.innerApiCalls.groupFindings = stubSimpleCall(expectedResponse);
-      const [response] = await client.groupFindings(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.groupFindings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.groupFindings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes groupFindings without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GroupFindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GroupFindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.GroupResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.GroupResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.GroupResult()
-        ),
-      ];
-      client.innerApiCalls.groupFindings =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.groupFindings(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.securitycenter.v2.IGroupResult[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.groupFindings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.groupFindings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes groupFindings with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GroupFindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GroupFindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.groupFindings = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.groupFindings(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.groupFindings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.groupFindings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes groupFindingsStream without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GroupFindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GroupFindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.GroupResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.GroupResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.GroupResult()
-        ),
-      ];
-      client.descriptors.page.groupFindings.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.groupFindingsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v2.GroupResult[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.securitycenter.v2.GroupResult) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.groupFindings.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.groupFindings, request)
-      );
-      assert(
-        (client.descriptors.page.groupFindings.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes groupFindingsStream with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GroupFindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GroupFindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.groupFindings.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.groupFindingsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v2.GroupResult[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.securitycenter.v2.GroupResult) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.groupFindings.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.groupFindings, request)
-      );
-      assert(
-        (client.descriptors.page.groupFindings.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with groupFindings without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GroupFindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GroupFindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.GroupResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.GroupResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.GroupResult()
-        ),
-      ];
-      client.descriptors.page.groupFindings.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.securitycenter.v2.IGroupResult[] =
-        [];
-      const iterable = client.groupFindingsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.groupFindings.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.groupFindings.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with groupFindings with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.GroupFindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.GroupFindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.groupFindings.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.groupFindingsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.securitycenter.v2.IGroupResult[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = securitycenterModule.v2.SecurityCenterClient.servicePath;
+                assert.strictEqual(servicePath, 'securitycenter.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = securitycenterModule.v2.SecurityCenterClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'securitycenter.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.groupFindings.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.groupFindings.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listAttackPaths', () => {
-    it('invokes listAttackPaths without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListAttackPathsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListAttackPathsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.AttackPath()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.AttackPath()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.AttackPath()
-        ),
-      ];
-      client.innerApiCalls.listAttackPaths = stubSimpleCall(expectedResponse);
-      const [response] = await client.listAttackPaths(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAttackPaths as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAttackPaths as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAttackPaths without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListAttackPathsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListAttackPathsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.AttackPath()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.AttackPath()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.AttackPath()
-        ),
-      ];
-      client.innerApiCalls.listAttackPaths =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listAttackPaths(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.securitycenter.v2.IAttackPath[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAttackPaths as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAttackPaths as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAttackPaths with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListAttackPathsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListAttackPathsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listAttackPaths = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listAttackPaths(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listAttackPaths as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAttackPaths as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAttackPathsStream without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListAttackPathsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListAttackPathsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.AttackPath()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.AttackPath()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.AttackPath()
-        ),
-      ];
-      client.descriptors.page.listAttackPaths.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listAttackPathsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v2.AttackPath[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.securitycenter.v2.AttackPath) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'securitycenter.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listAttackPaths.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAttackPaths, request)
-      );
-      assert(
-        (client.descriptors.page.listAttackPaths.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listAttackPathsStream with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListAttackPathsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListAttackPathsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAttackPaths.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listAttackPathsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v2.AttackPath[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.securitycenter.v2.AttackPath) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'securitycenter.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listAttackPaths.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAttackPaths, request)
-      );
-      assert(
-        (client.descriptors.page.listAttackPaths.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listAttackPaths without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListAttackPathsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListAttackPathsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.AttackPath()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.AttackPath()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.AttackPath()
-        ),
-      ];
-      client.descriptors.page.listAttackPaths.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.securitycenter.v2.IAttackPath[] = [];
-      const iterable = client.listAttackPathsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAttackPaths.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listAttackPaths.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new securitycenterModule.v2.SecurityCenterClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'securitycenter.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with listAttackPaths with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListAttackPathsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListAttackPathsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAttackPaths.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listAttackPathsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.securitycenter.v2.IAttackPath[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new securitycenterModule.v2.SecurityCenterClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'securitycenter.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAttackPaths.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listAttackPaths.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new securitycenterModule.v2.SecurityCenterClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-  describe('listBigQueryExports', () => {
-    it('invokes listBigQueryExports without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListBigQueryExportsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListBigQueryExportsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.BigQueryExport()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.BigQueryExport()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.BigQueryExport()
-        ),
-      ];
-      client.innerApiCalls.listBigQueryExports =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listBigQueryExports(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listBigQueryExports as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBigQueryExports as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('has port', () => {
+            const port = securitycenterModule.v2.SecurityCenterClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.securityCenterStub, undefined);
+            await client.initialize();
+            assert(client.securityCenterStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.securityCenterStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.securityCenterStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    it('invokes listBigQueryExports without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListBigQueryExportsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListBigQueryExportsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.BigQueryExport()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.BigQueryExport()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.BigQueryExport()
-        ),
-      ];
-      client.innerApiCalls.listBigQueryExports =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listBigQueryExports(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.securitycenter.v2.IBigQueryExport[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('batchCreateResourceValueConfigs', () => {
+        it('invokes batchCreateResourceValueConfigs without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.BatchCreateResourceValueConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.BatchCreateResourceValueConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.BatchCreateResourceValueConfigsResponse()
+            );
+            client.innerApiCalls.batchCreateResourceValueConfigs = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchCreateResourceValueConfigs(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchCreateResourceValueConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateResourceValueConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreateResourceValueConfigs without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.BatchCreateResourceValueConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.BatchCreateResourceValueConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.BatchCreateResourceValueConfigsResponse()
+            );
+            client.innerApiCalls.batchCreateResourceValueConfigs = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchCreateResourceValueConfigs(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchCreateResourceValueConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateResourceValueConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreateResourceValueConfigs with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.BatchCreateResourceValueConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.BatchCreateResourceValueConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchCreateResourceValueConfigs = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchCreateResourceValueConfigs(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchCreateResourceValueConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateResourceValueConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreateResourceValueConfigs with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.BatchCreateResourceValueConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.BatchCreateResourceValueConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchCreateResourceValueConfigs(request), expectedError);
+        });
+    });
+
+    describe('createBigQueryExport', () => {
+        it('invokes createBigQueryExport without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.CreateBigQueryExportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.CreateBigQueryExportRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.BigQueryExport()
+            );
+            client.innerApiCalls.createBigQueryExport = stubSimpleCall(expectedResponse);
+            const [response] = await client.createBigQueryExport(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createBigQueryExport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBigQueryExport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBigQueryExport without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.CreateBigQueryExportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.CreateBigQueryExportRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.BigQueryExport()
+            );
+            client.innerApiCalls.createBigQueryExport = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createBigQueryExport(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.IBigQueryExport|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createBigQueryExport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBigQueryExport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBigQueryExport with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.CreateBigQueryExportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.CreateBigQueryExportRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createBigQueryExport = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createBigQueryExport(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createBigQueryExport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBigQueryExport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBigQueryExport with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.CreateBigQueryExportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.CreateBigQueryExportRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createBigQueryExport(request), expectedError);
+        });
+    });
+
+    describe('createFinding', () => {
+        it('invokes createFinding without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.CreateFindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.CreateFindingRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.Finding()
+            );
+            client.innerApiCalls.createFinding = stubSimpleCall(expectedResponse);
+            const [response] = await client.createFinding(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createFinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createFinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createFinding without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.CreateFindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.CreateFindingRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.Finding()
+            );
+            client.innerApiCalls.createFinding = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createFinding(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.IFinding|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createFinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createFinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createFinding with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.CreateFindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.CreateFindingRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createFinding = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createFinding(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createFinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createFinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createFinding with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.CreateFindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.CreateFindingRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createFinding(request), expectedError);
+        });
+    });
+
+    describe('createMuteConfig', () => {
+        it('invokes createMuteConfig without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.CreateMuteConfigRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            // path template: organizations/*/locations/{location=*}
+            request.parent = 'organizations/value/locations/value';
+            // path template: folders/*/locations/{location=*}
+            request.parent = 'folders/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.MuteConfig()
+            );
+            client.innerApiCalls.createMuteConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.createMuteConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createMuteConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createMuteConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createMuteConfig without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.CreateMuteConfigRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            // path template: organizations/*/locations/{location=*}
+            request.parent = 'organizations/value/locations/value';
+            // path template: folders/*/locations/{location=*}
+            request.parent = 'folders/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.MuteConfig()
+            );
+            client.innerApiCalls.createMuteConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createMuteConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.IMuteConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createMuteConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createMuteConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createMuteConfig with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.CreateMuteConfigRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            // path template: organizations/*/locations/{location=*}
+            request.parent = 'organizations/value/locations/value';
+            // path template: folders/*/locations/{location=*}
+            request.parent = 'folders/value/locations/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createMuteConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createMuteConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createMuteConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createMuteConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createMuteConfig with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.CreateMuteConfigRequest()
+            );
+            // path template: projects/*/locations/{location=*}
+            request.parent = 'projects/value/locations/value';
+            // path template: organizations/*/locations/{location=*}
+            request.parent = 'organizations/value/locations/value';
+            // path template: folders/*/locations/{location=*}
+            request.parent = 'folders/value/locations/value';
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createMuteConfig(request), expectedError);
+        });
+    });
+
+    describe('createNotificationConfig', () => {
+        it('invokes createNotificationConfig without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.CreateNotificationConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.CreateNotificationConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.NotificationConfig()
+            );
+            client.innerApiCalls.createNotificationConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.createNotificationConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createNotificationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createNotificationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createNotificationConfig without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.CreateNotificationConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.CreateNotificationConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.NotificationConfig()
+            );
+            client.innerApiCalls.createNotificationConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createNotificationConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.INotificationConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createNotificationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createNotificationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createNotificationConfig with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.CreateNotificationConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.CreateNotificationConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createNotificationConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createNotificationConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createNotificationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createNotificationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createNotificationConfig with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.CreateNotificationConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.CreateNotificationConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createNotificationConfig(request), expectedError);
+        });
+    });
+
+    describe('createSource', () => {
+        it('invokes createSource without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.CreateSourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.CreateSourceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.Source()
+            );
+            client.innerApiCalls.createSource = stubSimpleCall(expectedResponse);
+            const [response] = await client.createSource(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createSource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createSource without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.CreateSourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.CreateSourceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.Source()
+            );
+            client.innerApiCalls.createSource = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createSource(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.ISource|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createSource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createSource with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.CreateSourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.CreateSourceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createSource = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createSource(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createSource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createSource with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.CreateSourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.CreateSourceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createSource(request), expectedError);
+        });
+    });
+
+    describe('deleteBigQueryExport', () => {
+        it('invokes deleteBigQueryExport without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.DeleteBigQueryExportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.DeleteBigQueryExportRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteBigQueryExport = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteBigQueryExport(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteBigQueryExport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBigQueryExport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBigQueryExport without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.DeleteBigQueryExportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.DeleteBigQueryExportRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteBigQueryExport = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteBigQueryExport(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteBigQueryExport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBigQueryExport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBigQueryExport with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.DeleteBigQueryExportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.DeleteBigQueryExportRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteBigQueryExport = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteBigQueryExport(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteBigQueryExport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBigQueryExport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBigQueryExport with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.DeleteBigQueryExportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.DeleteBigQueryExportRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteBigQueryExport(request), expectedError);
+        });
+    });
+
+    describe('deleteMuteConfig', () => {
+        it('invokes deleteMuteConfig without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.DeleteMuteConfigRequest()
+            );
+            // path template: projects/*/locations/{location=*}/muteConfigs/*
+            request.name = 'projects/value/locations/value/muteConfigs/value';
+            // path template: organizations/*/locations/{location=*}/muteConfigs/*
+            request.name = 'organizations/value/locations/value/muteConfigs/value';
+            // path template: folders/*/locations/{location=*}/muteConfigs/*
+            request.name = 'folders/value/locations/value/muteConfigs/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteMuteConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteMuteConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteMuteConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteMuteConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteMuteConfig without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.DeleteMuteConfigRequest()
+            );
+            // path template: projects/*/locations/{location=*}/muteConfigs/*
+            request.name = 'projects/value/locations/value/muteConfigs/value';
+            // path template: organizations/*/locations/{location=*}/muteConfigs/*
+            request.name = 'organizations/value/locations/value/muteConfigs/value';
+            // path template: folders/*/locations/{location=*}/muteConfigs/*
+            request.name = 'folders/value/locations/value/muteConfigs/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteMuteConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteMuteConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteMuteConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteMuteConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteMuteConfig with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.DeleteMuteConfigRequest()
+            );
+            // path template: projects/*/locations/{location=*}/muteConfigs/*
+            request.name = 'projects/value/locations/value/muteConfigs/value';
+            // path template: organizations/*/locations/{location=*}/muteConfigs/*
+            request.name = 'organizations/value/locations/value/muteConfigs/value';
+            // path template: folders/*/locations/{location=*}/muteConfigs/*
+            request.name = 'folders/value/locations/value/muteConfigs/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteMuteConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteMuteConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteMuteConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteMuteConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteMuteConfig with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.DeleteMuteConfigRequest()
+            );
+            // path template: projects/*/locations/{location=*}/muteConfigs/*
+            request.name = 'projects/value/locations/value/muteConfigs/value';
+            // path template: organizations/*/locations/{location=*}/muteConfigs/*
+            request.name = 'organizations/value/locations/value/muteConfigs/value';
+            // path template: folders/*/locations/{location=*}/muteConfigs/*
+            request.name = 'folders/value/locations/value/muteConfigs/value';
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteMuteConfig(request), expectedError);
+        });
+    });
+
+    describe('deleteNotificationConfig', () => {
+        it('invokes deleteNotificationConfig without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.DeleteNotificationConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.DeleteNotificationConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteNotificationConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteNotificationConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteNotificationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteNotificationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteNotificationConfig without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.DeleteNotificationConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.DeleteNotificationConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteNotificationConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteNotificationConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteNotificationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteNotificationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteNotificationConfig with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.DeleteNotificationConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.DeleteNotificationConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteNotificationConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteNotificationConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteNotificationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteNotificationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteNotificationConfig with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.DeleteNotificationConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.DeleteNotificationConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteNotificationConfig(request), expectedError);
+        });
+    });
+
+    describe('deleteResourceValueConfig', () => {
+        it('invokes deleteResourceValueConfig without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.DeleteResourceValueConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.DeleteResourceValueConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteResourceValueConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteResourceValueConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteResourceValueConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteResourceValueConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteResourceValueConfig without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.DeleteResourceValueConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.DeleteResourceValueConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteResourceValueConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteResourceValueConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteResourceValueConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteResourceValueConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteResourceValueConfig with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.DeleteResourceValueConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.DeleteResourceValueConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteResourceValueConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteResourceValueConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteResourceValueConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteResourceValueConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteResourceValueConfig with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.DeleteResourceValueConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.DeleteResourceValueConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteResourceValueConfig(request), expectedError);
+        });
+    });
+
+    describe('getBigQueryExport', () => {
+        it('invokes getBigQueryExport without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GetBigQueryExportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GetBigQueryExportRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.BigQueryExport()
+            );
+            client.innerApiCalls.getBigQueryExport = stubSimpleCall(expectedResponse);
+            const [response] = await client.getBigQueryExport(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBigQueryExport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBigQueryExport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBigQueryExport without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GetBigQueryExportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GetBigQueryExportRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.BigQueryExport()
+            );
+            client.innerApiCalls.getBigQueryExport = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getBigQueryExport(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.IBigQueryExport|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBigQueryExport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBigQueryExport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBigQueryExport with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GetBigQueryExportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GetBigQueryExportRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getBigQueryExport = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getBigQueryExport(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getBigQueryExport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBigQueryExport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBigQueryExport with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GetBigQueryExportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GetBigQueryExportRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getBigQueryExport(request), expectedError);
+        });
+    });
+
+    describe('getSimulation', () => {
+        it('invokes getSimulation without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GetSimulationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GetSimulationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.Simulation()
+            );
+            client.innerApiCalls.getSimulation = stubSimpleCall(expectedResponse);
+            const [response] = await client.getSimulation(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSimulation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSimulation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSimulation without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GetSimulationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GetSimulationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.Simulation()
+            );
+            client.innerApiCalls.getSimulation = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getSimulation(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.ISimulation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSimulation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSimulation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSimulation with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GetSimulationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GetSimulationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getSimulation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getSimulation(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getSimulation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSimulation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSimulation with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GetSimulationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GetSimulationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getSimulation(request), expectedError);
+        });
+    });
+
+    describe('getValuedResource', () => {
+        it('invokes getValuedResource without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GetValuedResourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GetValuedResourceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ValuedResource()
+            );
+            client.innerApiCalls.getValuedResource = stubSimpleCall(expectedResponse);
+            const [response] = await client.getValuedResource(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getValuedResource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getValuedResource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getValuedResource without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GetValuedResourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GetValuedResourceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ValuedResource()
+            );
+            client.innerApiCalls.getValuedResource = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getValuedResource(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.IValuedResource|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getValuedResource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getValuedResource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getValuedResource with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GetValuedResourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GetValuedResourceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getValuedResource = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getValuedResource(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getValuedResource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getValuedResource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getValuedResource with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GetValuedResourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GetValuedResourceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getValuedResource(request), expectedError);
+        });
+    });
+
+    describe('getIamPolicy', () => {
+        it('invokes getIamPolicy without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.GetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.Policy()
+            );
+            client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
+            const [response] = await client.getIamPolicy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIamPolicy without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.GetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.Policy()
+            );
+            client.innerApiCalls.getIamPolicy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getIamPolicy(
+                    request,
+                    (err?: Error|null, result?: protos.google.iam.v1.IPolicy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIamPolicy with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.GetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getIamPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIamPolicy with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.GetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getIamPolicy(request), expectedError);
+        });
+    });
+
+    describe('getMuteConfig', () => {
+        it('invokes getMuteConfig without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GetMuteConfigRequest()
+            );
+            // path template: projects/*/locations/{location=*}/muteConfigs/*
+            request.name = 'projects/value/locations/value/muteConfigs/value';
+            // path template: organizations/*/locations/{location=*}/muteConfigs/*
+            request.name = 'organizations/value/locations/value/muteConfigs/value';
+            // path template: folders/*/locations/{location=*}/muteConfigs/*
+            request.name = 'folders/value/locations/value/muteConfigs/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.MuteConfig()
+            );
+            client.innerApiCalls.getMuteConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.getMuteConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getMuteConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMuteConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getMuteConfig without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GetMuteConfigRequest()
+            );
+            // path template: projects/*/locations/{location=*}/muteConfigs/*
+            request.name = 'projects/value/locations/value/muteConfigs/value';
+            // path template: organizations/*/locations/{location=*}/muteConfigs/*
+            request.name = 'organizations/value/locations/value/muteConfigs/value';
+            // path template: folders/*/locations/{location=*}/muteConfigs/*
+            request.name = 'folders/value/locations/value/muteConfigs/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.MuteConfig()
+            );
+            client.innerApiCalls.getMuteConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getMuteConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.IMuteConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getMuteConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMuteConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getMuteConfig with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GetMuteConfigRequest()
+            );
+            // path template: projects/*/locations/{location=*}/muteConfigs/*
+            request.name = 'projects/value/locations/value/muteConfigs/value';
+            // path template: organizations/*/locations/{location=*}/muteConfigs/*
+            request.name = 'organizations/value/locations/value/muteConfigs/value';
+            // path template: folders/*/locations/{location=*}/muteConfigs/*
+            request.name = 'folders/value/locations/value/muteConfigs/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getMuteConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getMuteConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getMuteConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMuteConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getMuteConfig with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GetMuteConfigRequest()
+            );
+            // path template: projects/*/locations/{location=*}/muteConfigs/*
+            request.name = 'projects/value/locations/value/muteConfigs/value';
+            // path template: organizations/*/locations/{location=*}/muteConfigs/*
+            request.name = 'organizations/value/locations/value/muteConfigs/value';
+            // path template: folders/*/locations/{location=*}/muteConfigs/*
+            request.name = 'folders/value/locations/value/muteConfigs/value';
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getMuteConfig(request), expectedError);
+        });
+    });
+
+    describe('getNotificationConfig', () => {
+        it('invokes getNotificationConfig without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GetNotificationConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GetNotificationConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.NotificationConfig()
+            );
+            client.innerApiCalls.getNotificationConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.getNotificationConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getNotificationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getNotificationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getNotificationConfig without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GetNotificationConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GetNotificationConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.NotificationConfig()
+            );
+            client.innerApiCalls.getNotificationConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getNotificationConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.INotificationConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getNotificationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getNotificationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getNotificationConfig with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GetNotificationConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GetNotificationConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getNotificationConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getNotificationConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getNotificationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getNotificationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getNotificationConfig with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GetNotificationConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GetNotificationConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getNotificationConfig(request), expectedError);
+        });
+    });
+
+    describe('getResourceValueConfig', () => {
+        it('invokes getResourceValueConfig without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GetResourceValueConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GetResourceValueConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ResourceValueConfig()
+            );
+            client.innerApiCalls.getResourceValueConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.getResourceValueConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getResourceValueConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getResourceValueConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getResourceValueConfig without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GetResourceValueConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GetResourceValueConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ResourceValueConfig()
+            );
+            client.innerApiCalls.getResourceValueConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getResourceValueConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.IResourceValueConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getResourceValueConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getResourceValueConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getResourceValueConfig with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GetResourceValueConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GetResourceValueConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getResourceValueConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getResourceValueConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getResourceValueConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getResourceValueConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getResourceValueConfig with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GetResourceValueConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GetResourceValueConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getResourceValueConfig(request), expectedError);
+        });
+    });
+
+    describe('getSource', () => {
+        it('invokes getSource without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GetSourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GetSourceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.Source()
+            );
+            client.innerApiCalls.getSource = stubSimpleCall(expectedResponse);
+            const [response] = await client.getSource(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSource without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GetSourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GetSourceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.Source()
+            );
+            client.innerApiCalls.getSource = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getSource(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.ISource|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSource with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GetSourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GetSourceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getSource = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getSource(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getSource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSource with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GetSourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GetSourceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getSource(request), expectedError);
+        });
+    });
+
+    describe('setFindingState', () => {
+        it('invokes setFindingState without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.SetFindingStateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.SetFindingStateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.Finding()
+            );
+            client.innerApiCalls.setFindingState = stubSimpleCall(expectedResponse);
+            const [response] = await client.setFindingState(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setFindingState as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setFindingState as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setFindingState without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.SetFindingStateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.SetFindingStateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.Finding()
+            );
+            client.innerApiCalls.setFindingState = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setFindingState(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.IFinding|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setFindingState as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setFindingState as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setFindingState with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.SetFindingStateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.SetFindingStateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.setFindingState = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setFindingState(request), expectedError);
+            const actualRequest = (client.innerApiCalls.setFindingState as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setFindingState as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setFindingState with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.SetFindingStateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.SetFindingStateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.setFindingState(request), expectedError);
+        });
+    });
+
+    describe('setIamPolicy', () => {
+        it('invokes setIamPolicy without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.SetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.Policy()
+            );
+            client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
+            const [response] = await client.setIamPolicy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setIamPolicy without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.SetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.Policy()
+            );
+            client.innerApiCalls.setIamPolicy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setIamPolicy(
+                    request,
+                    (err?: Error|null, result?: protos.google.iam.v1.IPolicy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setIamPolicy with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.SetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.setIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setIamPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setIamPolicy with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.SetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.setIamPolicy(request), expectedError);
+        });
+    });
+
+    describe('setMute', () => {
+        it('invokes setMute without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.SetMuteRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.SetMuteRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.Finding()
+            );
+            client.innerApiCalls.setMute = stubSimpleCall(expectedResponse);
+            const [response] = await client.setMute(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setMute as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setMute as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setMute without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.SetMuteRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.SetMuteRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.Finding()
+            );
+            client.innerApiCalls.setMute = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setMute(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.IFinding|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setMute as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setMute as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setMute with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.SetMuteRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.SetMuteRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.setMute = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setMute(request), expectedError);
+            const actualRequest = (client.innerApiCalls.setMute as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setMute as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setMute with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.SetMuteRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.SetMuteRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.setMute(request), expectedError);
+        });
+    });
+
+    describe('testIamPermissions', () => {
+        it('invokes testIamPermissions without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsResponse()
+            );
+            client.innerApiCalls.testIamPermissions = stubSimpleCall(expectedResponse);
+            const [response] = await client.testIamPermissions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes testIamPermissions without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsResponse()
+            );
+            client.innerApiCalls.testIamPermissions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.testIamPermissions(
+                    request,
+                    (err?: Error|null, result?: protos.google.iam.v1.ITestIamPermissionsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes testIamPermissions with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.testIamPermissions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.testIamPermissions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes testIamPermissions with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.testIamPermissions(request), expectedError);
+        });
+    });
+
+    describe('updateBigQueryExport', () => {
+        it('invokes updateBigQueryExport without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateBigQueryExportRequest()
+            );
+            request.bigQueryExport ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.UpdateBigQueryExportRequest', ['bigQueryExport', 'name']);
+            request.bigQueryExport.name = defaultValue1;
+            const expectedHeaderRequestParams = `big_query_export.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.BigQueryExport()
+            );
+            client.innerApiCalls.updateBigQueryExport = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateBigQueryExport(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateBigQueryExport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBigQueryExport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateBigQueryExport without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateBigQueryExportRequest()
+            );
+            request.bigQueryExport ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.UpdateBigQueryExportRequest', ['bigQueryExport', 'name']);
+            request.bigQueryExport.name = defaultValue1;
+            const expectedHeaderRequestParams = `big_query_export.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.BigQueryExport()
+            );
+            client.innerApiCalls.updateBigQueryExport = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateBigQueryExport(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.IBigQueryExport|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateBigQueryExport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBigQueryExport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateBigQueryExport with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateBigQueryExportRequest()
+            );
+            request.bigQueryExport ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.UpdateBigQueryExportRequest', ['bigQueryExport', 'name']);
+            request.bigQueryExport.name = defaultValue1;
+            const expectedHeaderRequestParams = `big_query_export.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateBigQueryExport = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateBigQueryExport(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateBigQueryExport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBigQueryExport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateBigQueryExport with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateBigQueryExportRequest()
+            );
+            request.bigQueryExport ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.UpdateBigQueryExportRequest', ['bigQueryExport', 'name']);
+            request.bigQueryExport.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateBigQueryExport(request), expectedError);
+        });
+    });
+
+    describe('updateExternalSystem', () => {
+        it('invokes updateExternalSystem without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateExternalSystemRequest()
+            );
+            request.externalSystem ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.UpdateExternalSystemRequest', ['externalSystem', 'name']);
+            request.externalSystem.name = defaultValue1;
+            const expectedHeaderRequestParams = `external_system.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ExternalSystem()
+            );
+            client.innerApiCalls.updateExternalSystem = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateExternalSystem(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateExternalSystem as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateExternalSystem as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateExternalSystem without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateExternalSystemRequest()
+            );
+            request.externalSystem ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.UpdateExternalSystemRequest', ['externalSystem', 'name']);
+            request.externalSystem.name = defaultValue1;
+            const expectedHeaderRequestParams = `external_system.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ExternalSystem()
+            );
+            client.innerApiCalls.updateExternalSystem = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateExternalSystem(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.IExternalSystem|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateExternalSystem as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateExternalSystem as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateExternalSystem with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateExternalSystemRequest()
+            );
+            request.externalSystem ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.UpdateExternalSystemRequest', ['externalSystem', 'name']);
+            request.externalSystem.name = defaultValue1;
+            const expectedHeaderRequestParams = `external_system.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateExternalSystem = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateExternalSystem(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateExternalSystem as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateExternalSystem as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateExternalSystem with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateExternalSystemRequest()
+            );
+            request.externalSystem ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.UpdateExternalSystemRequest', ['externalSystem', 'name']);
+            request.externalSystem.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateExternalSystem(request), expectedError);
+        });
+    });
+
+    describe('updateFinding', () => {
+        it('invokes updateFinding without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateFindingRequest()
+            );
+            request.finding ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.UpdateFindingRequest', ['finding', 'name']);
+            request.finding.name = defaultValue1;
+            const expectedHeaderRequestParams = `finding.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.Finding()
+            );
+            client.innerApiCalls.updateFinding = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateFinding(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateFinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateFinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateFinding without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateFindingRequest()
+            );
+            request.finding ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.UpdateFindingRequest', ['finding', 'name']);
+            request.finding.name = defaultValue1;
+            const expectedHeaderRequestParams = `finding.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.Finding()
+            );
+            client.innerApiCalls.updateFinding = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateFinding(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.IFinding|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateFinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateFinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateFinding with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateFindingRequest()
+            );
+            request.finding ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.UpdateFindingRequest', ['finding', 'name']);
+            request.finding.name = defaultValue1;
+            const expectedHeaderRequestParams = `finding.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateFinding = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateFinding(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateFinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateFinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateFinding with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateFindingRequest()
+            );
+            request.finding ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.UpdateFindingRequest', ['finding', 'name']);
+            request.finding.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateFinding(request), expectedError);
+        });
+    });
+
+    describe('updateMuteConfig', () => {
+        it('invokes updateMuteConfig without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateMuteConfigRequest()
+            );
+            request.muteConfig = {};
+            // path template: projects/*/locations/{location=*}/muteConfigs/*
+            request.muteConfig.name = 'projects/value/locations/value/muteConfigs/value';
+            request.muteConfig = {};
+            // path template: organizations/*/locations/{location=*}/muteConfigs/*
+            request.muteConfig.name = 'organizations/value/locations/value/muteConfigs/value';
+            request.muteConfig = {};
+            // path template: folders/*/locations/{location=*}/muteConfigs/*
+            request.muteConfig.name = 'folders/value/locations/value/muteConfigs/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.MuteConfig()
+            );
+            client.innerApiCalls.updateMuteConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateMuteConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateMuteConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateMuteConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateMuteConfig without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateMuteConfigRequest()
+            );
+            request.muteConfig = {};
+            // path template: projects/*/locations/{location=*}/muteConfigs/*
+            request.muteConfig.name = 'projects/value/locations/value/muteConfigs/value';
+            request.muteConfig = {};
+            // path template: organizations/*/locations/{location=*}/muteConfigs/*
+            request.muteConfig.name = 'organizations/value/locations/value/muteConfigs/value';
+            request.muteConfig = {};
+            // path template: folders/*/locations/{location=*}/muteConfigs/*
+            request.muteConfig.name = 'folders/value/locations/value/muteConfigs/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.MuteConfig()
+            );
+            client.innerApiCalls.updateMuteConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateMuteConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.IMuteConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateMuteConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateMuteConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateMuteConfig with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateMuteConfigRequest()
+            );
+            request.muteConfig = {};
+            // path template: projects/*/locations/{location=*}/muteConfigs/*
+            request.muteConfig.name = 'projects/value/locations/value/muteConfigs/value';
+            request.muteConfig = {};
+            // path template: organizations/*/locations/{location=*}/muteConfigs/*
+            request.muteConfig.name = 'organizations/value/locations/value/muteConfigs/value';
+            request.muteConfig = {};
+            // path template: folders/*/locations/{location=*}/muteConfigs/*
+            request.muteConfig.name = 'folders/value/locations/value/muteConfigs/value';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateMuteConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateMuteConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateMuteConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateMuteConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateMuteConfig with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateMuteConfigRequest()
+            );
+            request.muteConfig = {};
+            // path template: projects/*/locations/{location=*}/muteConfigs/*
+            request.muteConfig.name = 'projects/value/locations/value/muteConfigs/value';
+            request.muteConfig = {};
+            // path template: organizations/*/locations/{location=*}/muteConfigs/*
+            request.muteConfig.name = 'organizations/value/locations/value/muteConfigs/value';
+            request.muteConfig = {};
+            // path template: folders/*/locations/{location=*}/muteConfigs/*
+            request.muteConfig.name = 'folders/value/locations/value/muteConfigs/value';
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateMuteConfig(request), expectedError);
+        });
+    });
+
+    describe('updateNotificationConfig', () => {
+        it('invokes updateNotificationConfig without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateNotificationConfigRequest()
+            );
+            request.notificationConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.UpdateNotificationConfigRequest', ['notificationConfig', 'name']);
+            request.notificationConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `notification_config.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.NotificationConfig()
+            );
+            client.innerApiCalls.updateNotificationConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateNotificationConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateNotificationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateNotificationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateNotificationConfig without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateNotificationConfigRequest()
+            );
+            request.notificationConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.UpdateNotificationConfigRequest', ['notificationConfig', 'name']);
+            request.notificationConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `notification_config.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.NotificationConfig()
+            );
+            client.innerApiCalls.updateNotificationConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateNotificationConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.INotificationConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateNotificationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateNotificationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateNotificationConfig with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateNotificationConfigRequest()
+            );
+            request.notificationConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.UpdateNotificationConfigRequest', ['notificationConfig', 'name']);
+            request.notificationConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `notification_config.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateNotificationConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateNotificationConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateNotificationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateNotificationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateNotificationConfig with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateNotificationConfigRequest()
+            );
+            request.notificationConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.UpdateNotificationConfigRequest', ['notificationConfig', 'name']);
+            request.notificationConfig.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateNotificationConfig(request), expectedError);
+        });
+    });
+
+    describe('updateResourceValueConfig', () => {
+        it('invokes updateResourceValueConfig without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateResourceValueConfigRequest()
+            );
+            request.resourceValueConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.UpdateResourceValueConfigRequest', ['resourceValueConfig', 'name']);
+            request.resourceValueConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `resource_value_config.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ResourceValueConfig()
+            );
+            client.innerApiCalls.updateResourceValueConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateResourceValueConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateResourceValueConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateResourceValueConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateResourceValueConfig without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateResourceValueConfigRequest()
+            );
+            request.resourceValueConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.UpdateResourceValueConfigRequest', ['resourceValueConfig', 'name']);
+            request.resourceValueConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `resource_value_config.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ResourceValueConfig()
+            );
+            client.innerApiCalls.updateResourceValueConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateResourceValueConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.IResourceValueConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateResourceValueConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateResourceValueConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateResourceValueConfig with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateResourceValueConfigRequest()
+            );
+            request.resourceValueConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.UpdateResourceValueConfigRequest', ['resourceValueConfig', 'name']);
+            request.resourceValueConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `resource_value_config.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateResourceValueConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateResourceValueConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateResourceValueConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateResourceValueConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateResourceValueConfig with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateResourceValueConfigRequest()
+            );
+            request.resourceValueConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.UpdateResourceValueConfigRequest', ['resourceValueConfig', 'name']);
+            request.resourceValueConfig.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateResourceValueConfig(request), expectedError);
+        });
+    });
+
+    describe('updateSecurityMarks', () => {
+        it('invokes updateSecurityMarks without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateSecurityMarksRequest()
+            );
+            request.securityMarks ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.UpdateSecurityMarksRequest', ['securityMarks', 'name']);
+            request.securityMarks.name = defaultValue1;
+            const expectedHeaderRequestParams = `security_marks.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.SecurityMarks()
+            );
+            client.innerApiCalls.updateSecurityMarks = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateSecurityMarks(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateSecurityMarks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSecurityMarks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSecurityMarks without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateSecurityMarksRequest()
+            );
+            request.securityMarks ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.UpdateSecurityMarksRequest', ['securityMarks', 'name']);
+            request.securityMarks.name = defaultValue1;
+            const expectedHeaderRequestParams = `security_marks.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.SecurityMarks()
+            );
+            client.innerApiCalls.updateSecurityMarks = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateSecurityMarks(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.ISecurityMarks|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateSecurityMarks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSecurityMarks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSecurityMarks with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateSecurityMarksRequest()
+            );
+            request.securityMarks ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.UpdateSecurityMarksRequest', ['securityMarks', 'name']);
+            request.securityMarks.name = defaultValue1;
+            const expectedHeaderRequestParams = `security_marks.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateSecurityMarks = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateSecurityMarks(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateSecurityMarks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSecurityMarks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSecurityMarks with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateSecurityMarksRequest()
+            );
+            request.securityMarks ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.UpdateSecurityMarksRequest', ['securityMarks', 'name']);
+            request.securityMarks.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateSecurityMarks(request), expectedError);
+        });
+    });
+
+    describe('updateSource', () => {
+        it('invokes updateSource without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateSourceRequest()
+            );
+            request.source ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.UpdateSourceRequest', ['source', 'name']);
+            request.source.name = defaultValue1;
+            const expectedHeaderRequestParams = `source.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.Source()
+            );
+            client.innerApiCalls.updateSource = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateSource(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateSource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSource without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateSourceRequest()
+            );
+            request.source ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.UpdateSourceRequest', ['source', 'name']);
+            request.source.name = defaultValue1;
+            const expectedHeaderRequestParams = `source.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.Source()
+            );
+            client.innerApiCalls.updateSource = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateSource(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.ISource|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateSource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSource with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateSourceRequest()
+            );
+            request.source ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.UpdateSourceRequest', ['source', 'name']);
+            request.source.name = defaultValue1;
+            const expectedHeaderRequestParams = `source.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateSource = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateSource(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateSource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSource with closed client', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.UpdateSourceRequest()
+            );
+            request.source ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.UpdateSourceRequest', ['source', 'name']);
+            request.source.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateSource(request), expectedError);
+        });
+    });
+
+    describe('bulkMuteFindings', () => {
+        it('invokes bulkMuteFindings without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.BulkMuteFindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.BulkMuteFindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.bulkMuteFindings = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.bulkMuteFindings(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.bulkMuteFindings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.bulkMuteFindings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes bulkMuteFindings without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.BulkMuteFindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.BulkMuteFindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.bulkMuteFindings = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.bulkMuteFindings(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.securitycenter.v2.IBulkMuteFindingsResponse, protos.google.protobuf.IEmpty>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.securitycenter.v2.IBulkMuteFindingsResponse, protos.google.protobuf.IEmpty>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.bulkMuteFindings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.bulkMuteFindings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes bulkMuteFindings with call error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.BulkMuteFindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.BulkMuteFindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.bulkMuteFindings = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.bulkMuteFindings(request), expectedError);
+            const actualRequest = (client.innerApiCalls.bulkMuteFindings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.bulkMuteFindings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes bulkMuteFindings with LRO error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.BulkMuteFindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.BulkMuteFindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.bulkMuteFindings = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.bulkMuteFindings(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.bulkMuteFindings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.bulkMuteFindings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkBulkMuteFindingsProgress without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkBulkMuteFindingsProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkBulkMuteFindingsProgress with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkBulkMuteFindingsProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('groupFindings', () => {
+        it('invokes groupFindings without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GroupFindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GroupFindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.GroupResult()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.GroupResult()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.GroupResult()),
+            ];
+            client.innerApiCalls.groupFindings = stubSimpleCall(expectedResponse);
+            const [response] = await client.groupFindings(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.groupFindings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.groupFindings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes groupFindings without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GroupFindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GroupFindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.GroupResult()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.GroupResult()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.GroupResult()),
+            ];
+            client.innerApiCalls.groupFindings = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.groupFindings(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.IGroupResult[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.groupFindings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.groupFindings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes groupFindings with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GroupFindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GroupFindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.groupFindings = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.groupFindings(request), expectedError);
+            const actualRequest = (client.innerApiCalls.groupFindings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.groupFindings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes groupFindingsStream without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GroupFindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GroupFindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.GroupResult()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.GroupResult()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.GroupResult()),
+            ];
+            client.descriptors.page.groupFindings.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.groupFindingsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securitycenter.v2.GroupResult[] = [];
+                stream.on('data', (response: protos.google.cloud.securitycenter.v2.GroupResult) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.groupFindings.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.groupFindings, request));
+            assert(
+                (client.descriptors.page.groupFindings.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes groupFindingsStream with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GroupFindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GroupFindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.groupFindings.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.groupFindingsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securitycenter.v2.GroupResult[] = [];
+                stream.on('data', (response: protos.google.cloud.securitycenter.v2.GroupResult) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.groupFindings.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.groupFindings, request));
+            assert(
+                (client.descriptors.page.groupFindings.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with groupFindings without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GroupFindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GroupFindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.GroupResult()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.GroupResult()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.GroupResult()),
+            ];
+            client.descriptors.page.groupFindings.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.securitycenter.v2.IGroupResult[] = [];
+            const iterable = client.groupFindingsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listBigQueryExports as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBigQueryExports as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBigQueryExports with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListBigQueryExportsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListBigQueryExportsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listBigQueryExports = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listBigQueryExports(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listBigQueryExports as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBigQueryExports as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBigQueryExportsStream without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListBigQueryExportsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListBigQueryExportsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.BigQueryExport()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.BigQueryExport()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.BigQueryExport()
-        ),
-      ];
-      client.descriptors.page.listBigQueryExports.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listBigQueryExportsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v2.BigQueryExport[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.securitycenter.v2.BigQueryExport) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.groupFindings.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.groupFindings.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with groupFindings with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.GroupFindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.GroupFindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.groupFindings.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.groupFindingsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.securitycenter.v2.IGroupResult[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.groupFindings.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.groupFindings.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listBigQueryExports.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listBigQueryExports, request)
-      );
-      assert(
-        (client.descriptors.page.listBigQueryExports.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listBigQueryExportsStream with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListBigQueryExportsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListBigQueryExportsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listBigQueryExports.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listBigQueryExportsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v2.BigQueryExport[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.securitycenter.v2.BigQueryExport) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listAttackPaths', () => {
+        it('invokes listAttackPaths without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListAttackPathsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListAttackPathsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.AttackPath()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.AttackPath()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.AttackPath()),
+            ];
+            client.innerApiCalls.listAttackPaths = stubSimpleCall(expectedResponse);
+            const [response] = await client.listAttackPaths(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAttackPaths as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAttackPaths as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listAttackPaths without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListAttackPathsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListAttackPathsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.AttackPath()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.AttackPath()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.AttackPath()),
+            ];
+            client.innerApiCalls.listAttackPaths = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listAttackPaths(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.IAttackPath[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAttackPaths as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAttackPaths as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listBigQueryExports.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listBigQueryExports, request)
-      );
-      assert(
-        (client.descriptors.page.listBigQueryExports.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listBigQueryExports without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListBigQueryExportsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListBigQueryExportsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.BigQueryExport()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.BigQueryExport()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.BigQueryExport()
-        ),
-      ];
-      client.descriptors.page.listBigQueryExports.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.securitycenter.v2.IBigQueryExport[] =
-        [];
-      const iterable = client.listBigQueryExportsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listBigQueryExports.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listBigQueryExports.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listAttackPaths with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListAttackPathsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListAttackPathsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listAttackPaths = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listAttackPaths(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listAttackPaths as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAttackPaths as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listBigQueryExports with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListBigQueryExportsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListBigQueryExportsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listBigQueryExports.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listBigQueryExportsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.securitycenter.v2.IBigQueryExport[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listBigQueryExports.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listBigQueryExports.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listAttackPathsStream without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListAttackPathsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListAttackPathsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.AttackPath()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.AttackPath()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.AttackPath()),
+            ];
+            client.descriptors.page.listAttackPaths.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listAttackPathsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securitycenter.v2.AttackPath[] = [];
+                stream.on('data', (response: protos.google.cloud.securitycenter.v2.AttackPath) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listAttackPaths.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAttackPaths, request));
+            assert(
+                (client.descriptors.page.listAttackPaths.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listFindings', () => {
-    it('invokes listFindings without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListFindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListFindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult()
-        ),
-      ];
-      client.innerApiCalls.listFindings = stubSimpleCall(expectedResponse);
-      const [response] = await client.listFindings(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listFindings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listFindings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listAttackPathsStream with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListAttackPathsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListAttackPathsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAttackPaths.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listAttackPathsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securitycenter.v2.AttackPath[] = [];
+                stream.on('data', (response: protos.google.cloud.securitycenter.v2.AttackPath) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listAttackPaths.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAttackPaths, request));
+            assert(
+                (client.descriptors.page.listAttackPaths.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listFindings without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListFindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListFindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult()
-        ),
-      ];
-      client.innerApiCalls.listFindings =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listFindings(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.securitycenter.v2.ListFindingsResponse.IListFindingsResult[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listAttackPaths without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListAttackPathsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListAttackPathsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.AttackPath()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.AttackPath()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.AttackPath()),
+            ];
+            client.descriptors.page.listAttackPaths.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.securitycenter.v2.IAttackPath[] = [];
+            const iterable = client.listAttackPathsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listFindings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listFindings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listFindings with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListFindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListFindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listFindings = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listFindings(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listFindings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listFindings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listFindingsStream without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListFindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListFindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult()
-        ),
-      ];
-      client.descriptors.page.listFindings.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listFindingsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAttackPaths.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAttackPaths.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listAttackPaths with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListAttackPathsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListAttackPathsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAttackPaths.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listAttackPathsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.securitycenter.v2.IAttackPath[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAttackPaths.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAttackPaths.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listFindings.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listFindings, request)
-      );
-      assert(
-        (client.descriptors.page.listFindings.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listFindingsStream with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListFindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListFindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listFindings.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listFindingsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listBigQueryExports', () => {
+        it('invokes listBigQueryExports without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListBigQueryExportsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListBigQueryExportsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.BigQueryExport()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.BigQueryExport()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.BigQueryExport()),
+            ];
+            client.innerApiCalls.listBigQueryExports = stubSimpleCall(expectedResponse);
+            const [response] = await client.listBigQueryExports(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBigQueryExports as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBigQueryExports as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listBigQueryExports without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListBigQueryExportsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListBigQueryExportsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.BigQueryExport()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.BigQueryExport()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.BigQueryExport()),
+            ];
+            client.innerApiCalls.listBigQueryExports = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listBigQueryExports(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.IBigQueryExport[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBigQueryExports as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBigQueryExports as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listFindings.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listFindings, request)
-      );
-      assert(
-        (client.descriptors.page.listFindings.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listFindings without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListFindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListFindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult()
-        ),
-      ];
-      client.descriptors.page.listFindings.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.securitycenter.v2.ListFindingsResponse.IListFindingsResult[] =
-        [];
-      const iterable = client.listFindingsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listFindings.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listFindings.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listBigQueryExports with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListBigQueryExportsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListBigQueryExportsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listBigQueryExports = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listBigQueryExports(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listBigQueryExports as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBigQueryExports as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listFindings with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListFindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListFindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listFindings.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listFindingsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.securitycenter.v2.ListFindingsResponse.IListFindingsResult[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listFindings.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listFindings.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listBigQueryExportsStream without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListBigQueryExportsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListBigQueryExportsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.BigQueryExport()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.BigQueryExport()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.BigQueryExport()),
+            ];
+            client.descriptors.page.listBigQueryExports.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listBigQueryExportsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securitycenter.v2.BigQueryExport[] = [];
+                stream.on('data', (response: protos.google.cloud.securitycenter.v2.BigQueryExport) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listBigQueryExports.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBigQueryExports, request));
+            assert(
+                (client.descriptors.page.listBigQueryExports.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listMuteConfigs', () => {
-    it('invokes listMuteConfigs without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListMuteConfigsRequest()
-      );
-      // path template: projects/*/locations/{location=*}/muteConfigs
-      request.parent = 'projects/value/locations/value/muteConfigs';
-      // path template: organizations/*/locations/{location=*}/muteConfigs
-      request.parent = 'organizations/value/locations/value/muteConfigs';
-      // path template: folders/*/locations/{location=*}/muteConfigs
-      request.parent = 'folders/value/locations/value/muteConfigs';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.MuteConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.MuteConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.MuteConfig()
-        ),
-      ];
-      client.innerApiCalls.listMuteConfigs = stubSimpleCall(expectedResponse);
-      const [response] = await client.listMuteConfigs(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listMuteConfigs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listMuteConfigs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listBigQueryExportsStream with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListBigQueryExportsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListBigQueryExportsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBigQueryExports.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listBigQueryExportsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securitycenter.v2.BigQueryExport[] = [];
+                stream.on('data', (response: protos.google.cloud.securitycenter.v2.BigQueryExport) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listBigQueryExports.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBigQueryExports, request));
+            assert(
+                (client.descriptors.page.listBigQueryExports.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listMuteConfigs without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListMuteConfigsRequest()
-      );
-      // path template: projects/*/locations/{location=*}/muteConfigs
-      request.parent = 'projects/value/locations/value/muteConfigs';
-      // path template: organizations/*/locations/{location=*}/muteConfigs
-      request.parent = 'organizations/value/locations/value/muteConfigs';
-      // path template: folders/*/locations/{location=*}/muteConfigs
-      request.parent = 'folders/value/locations/value/muteConfigs';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.MuteConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.MuteConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.MuteConfig()
-        ),
-      ];
-      client.innerApiCalls.listMuteConfigs =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listMuteConfigs(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.securitycenter.v2.IMuteConfig[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listBigQueryExports without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListBigQueryExportsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListBigQueryExportsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.BigQueryExport()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.BigQueryExport()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.BigQueryExport()),
+            ];
+            client.descriptors.page.listBigQueryExports.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.securitycenter.v2.IBigQueryExport[] = [];
+            const iterable = client.listBigQueryExportsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listMuteConfigs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listMuteConfigs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listMuteConfigs with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListMuteConfigsRequest()
-      );
-      // path template: projects/*/locations/{location=*}/muteConfigs
-      request.parent = 'projects/value/locations/value/muteConfigs';
-      // path template: organizations/*/locations/{location=*}/muteConfigs
-      request.parent = 'organizations/value/locations/value/muteConfigs';
-      // path template: folders/*/locations/{location=*}/muteConfigs
-      request.parent = 'folders/value/locations/value/muteConfigs';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listMuteConfigs = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listMuteConfigs(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listMuteConfigs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listMuteConfigs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listMuteConfigsStream without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListMuteConfigsRequest()
-      );
-      // path template: projects/*/locations/{location=*}/muteConfigs
-      request.parent = 'projects/value/locations/value/muteConfigs';
-      // path template: organizations/*/locations/{location=*}/muteConfigs
-      request.parent = 'organizations/value/locations/value/muteConfigs';
-      // path template: folders/*/locations/{location=*}/muteConfigs
-      request.parent = 'folders/value/locations/value/muteConfigs';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.MuteConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.MuteConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.MuteConfig()
-        ),
-      ];
-      client.descriptors.page.listMuteConfigs.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listMuteConfigsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v2.MuteConfig[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.securitycenter.v2.MuteConfig) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBigQueryExports.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBigQueryExports.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listBigQueryExports with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListBigQueryExportsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListBigQueryExportsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBigQueryExports.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listBigQueryExportsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.securitycenter.v2.IBigQueryExport[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBigQueryExports.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBigQueryExports.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listMuteConfigs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listMuteConfigs, request)
-      );
-      assert(
-        (client.descriptors.page.listMuteConfigs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listMuteConfigsStream with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListMuteConfigsRequest()
-      );
-      // path template: projects/*/locations/{location=*}/muteConfigs
-      request.parent = 'projects/value/locations/value/muteConfigs';
-      // path template: organizations/*/locations/{location=*}/muteConfigs
-      request.parent = 'organizations/value/locations/value/muteConfigs';
-      // path template: folders/*/locations/{location=*}/muteConfigs
-      request.parent = 'folders/value/locations/value/muteConfigs';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.descriptors.page.listMuteConfigs.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listMuteConfigsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v2.MuteConfig[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.securitycenter.v2.MuteConfig) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listFindings', () => {
+        it('invokes listFindings without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListFindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListFindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult()),
+            ];
+            client.innerApiCalls.listFindings = stubSimpleCall(expectedResponse);
+            const [response] = await client.listFindings(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listFindings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listFindings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listFindings without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListFindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListFindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult()),
+            ];
+            client.innerApiCalls.listFindings = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listFindings(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.ListFindingsResponse.IListFindingsResult[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listFindings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listFindings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listMuteConfigs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listMuteConfigs, request)
-      );
-      assert(
-        (client.descriptors.page.listMuteConfigs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listMuteConfigs without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListMuteConfigsRequest()
-      );
-      // path template: projects/*/locations/{location=*}/muteConfigs
-      request.parent = 'projects/value/locations/value/muteConfigs';
-      // path template: organizations/*/locations/{location=*}/muteConfigs
-      request.parent = 'organizations/value/locations/value/muteConfigs';
-      // path template: folders/*/locations/{location=*}/muteConfigs
-      request.parent = 'folders/value/locations/value/muteConfigs';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.MuteConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.MuteConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.MuteConfig()
-        ),
-      ];
-      client.descriptors.page.listMuteConfigs.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.securitycenter.v2.IMuteConfig[] = [];
-      const iterable = client.listMuteConfigsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listMuteConfigs.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listMuteConfigs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listFindings with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListFindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListFindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listFindings = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listFindings(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listFindings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listFindings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listMuteConfigs with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListMuteConfigsRequest()
-      );
-      // path template: projects/*/locations/{location=*}/muteConfigs
-      request.parent = 'projects/value/locations/value/muteConfigs';
-      // path template: organizations/*/locations/{location=*}/muteConfigs
-      request.parent = 'organizations/value/locations/value/muteConfigs';
-      // path template: folders/*/locations/{location=*}/muteConfigs
-      request.parent = 'folders/value/locations/value/muteConfigs';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.descriptors.page.listMuteConfigs.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listMuteConfigsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.securitycenter.v2.IMuteConfig[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listMuteConfigs.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listMuteConfigs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listFindingsStream without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListFindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListFindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult()),
+            ];
+            client.descriptors.page.listFindings.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listFindingsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult[] = [];
+                stream.on('data', (response: protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listFindings.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listFindings, request));
+            assert(
+                (client.descriptors.page.listFindings.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listNotificationConfigs', () => {
-    it('invokes listNotificationConfigs without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListNotificationConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListNotificationConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.NotificationConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.NotificationConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.NotificationConfig()
-        ),
-      ];
-      client.innerApiCalls.listNotificationConfigs =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listNotificationConfigs(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listNotificationConfigs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listNotificationConfigs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listFindingsStream with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListFindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListFindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listFindings.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listFindingsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult[] = [];
+                stream.on('data', (response: protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listFindings.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listFindings, request));
+            assert(
+                (client.descriptors.page.listFindings.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listNotificationConfigs without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListNotificationConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListNotificationConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.NotificationConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.NotificationConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.NotificationConfig()
-        ),
-      ];
-      client.innerApiCalls.listNotificationConfigs =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listNotificationConfigs(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.securitycenter.v2.INotificationConfig[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listFindings without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListFindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListFindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult()),
+            ];
+            client.descriptors.page.listFindings.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.securitycenter.v2.ListFindingsResponse.IListFindingsResult[] = [];
+            const iterable = client.listFindingsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listNotificationConfigs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listNotificationConfigs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listNotificationConfigs with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListNotificationConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListNotificationConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listNotificationConfigs = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listNotificationConfigs(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listNotificationConfigs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listNotificationConfigs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listNotificationConfigsStream without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListNotificationConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListNotificationConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.NotificationConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.NotificationConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.NotificationConfig()
-        ),
-      ];
-      client.descriptors.page.listNotificationConfigs.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listNotificationConfigsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v2.NotificationConfig[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.securitycenter.v2.NotificationConfig
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listFindings.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listFindings.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listFindings with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListFindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListFindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listFindings.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listFindingsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.securitycenter.v2.ListFindingsResponse.IListFindingsResult[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listFindings.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listFindings.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listNotificationConfigs
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listNotificationConfigs, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listNotificationConfigs
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
     });
 
-    it('invokes listNotificationConfigsStream with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListNotificationConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListNotificationConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listNotificationConfigs.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listNotificationConfigsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v2.NotificationConfig[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.securitycenter.v2.NotificationConfig
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listMuteConfigs', () => {
+        it('invokes listMuteConfigs without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListMuteConfigsRequest()
+            );
+            // path template: projects/*/locations/{location=*}/muteConfigs
+            request.parent = 'projects/value/locations/value/muteConfigs';
+            // path template: organizations/*/locations/{location=*}/muteConfigs
+            request.parent = 'organizations/value/locations/value/muteConfigs';
+            // path template: folders/*/locations/{location=*}/muteConfigs
+            request.parent = 'folders/value/locations/value/muteConfigs';
+            const expectedHeaderRequestParams = 'location=value';const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.MuteConfig()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.MuteConfig()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.MuteConfig()),
+            ];
+            client.innerApiCalls.listMuteConfigs = stubSimpleCall(expectedResponse);
+            const [response] = await client.listMuteConfigs(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listMuteConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMuteConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listMuteConfigs without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListMuteConfigsRequest()
+            );
+            // path template: projects/*/locations/{location=*}/muteConfigs
+            request.parent = 'projects/value/locations/value/muteConfigs';
+            // path template: organizations/*/locations/{location=*}/muteConfigs
+            request.parent = 'organizations/value/locations/value/muteConfigs';
+            // path template: folders/*/locations/{location=*}/muteConfigs
+            request.parent = 'folders/value/locations/value/muteConfigs';
+            const expectedHeaderRequestParams = 'location=value';const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.MuteConfig()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.MuteConfig()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.MuteConfig()),
+            ];
+            client.innerApiCalls.listMuteConfigs = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listMuteConfigs(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.IMuteConfig[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listMuteConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMuteConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listNotificationConfigs
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listNotificationConfigs, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listNotificationConfigs
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('uses async iteration with listNotificationConfigs without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListNotificationConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListNotificationConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.NotificationConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.NotificationConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.NotificationConfig()
-        ),
-      ];
-      client.descriptors.page.listNotificationConfigs.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.securitycenter.v2.INotificationConfig[] =
-        [];
-      const iterable = client.listNotificationConfigsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listNotificationConfigs
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listNotificationConfigs
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
+        it('invokes listMuteConfigs with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListMuteConfigsRequest()
+            );
+            // path template: projects/*/locations/{location=*}/muteConfigs
+            request.parent = 'projects/value/locations/value/muteConfigs';
+            // path template: organizations/*/locations/{location=*}/muteConfigs
+            request.parent = 'organizations/value/locations/value/muteConfigs';
+            // path template: folders/*/locations/{location=*}/muteConfigs
+            request.parent = 'folders/value/locations/value/muteConfigs';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listMuteConfigs = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listMuteConfigs(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listMuteConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMuteConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listNotificationConfigs with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListNotificationConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListNotificationConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listNotificationConfigs.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listNotificationConfigsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.securitycenter.v2.INotificationConfig[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listNotificationConfigs
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listNotificationConfigs
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
+        it('invokes listMuteConfigsStream without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListMuteConfigsRequest()
+            );
+            // path template: projects/*/locations/{location=*}/muteConfigs
+            request.parent = 'projects/value/locations/value/muteConfigs';
+            // path template: organizations/*/locations/{location=*}/muteConfigs
+            request.parent = 'organizations/value/locations/value/muteConfigs';
+            // path template: folders/*/locations/{location=*}/muteConfigs
+            request.parent = 'folders/value/locations/value/muteConfigs';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.MuteConfig()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.MuteConfig()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.MuteConfig()),
+            ];
+            client.descriptors.page.listMuteConfigs.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listMuteConfigsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securitycenter.v2.MuteConfig[] = [];
+                stream.on('data', (response: protos.google.cloud.securitycenter.v2.MuteConfig) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listMuteConfigs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listMuteConfigs, request));
+            assert(
+                (client.descriptors.page.listMuteConfigs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listResourceValueConfigs', () => {
-    it('invokes listResourceValueConfigs without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ResourceValueConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ResourceValueConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ResourceValueConfig()
-        ),
-      ];
-      client.innerApiCalls.listResourceValueConfigs =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listResourceValueConfigs(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listResourceValueConfigs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listResourceValueConfigs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listMuteConfigsStream with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListMuteConfigsRequest()
+            );
+            // path template: projects/*/locations/{location=*}/muteConfigs
+            request.parent = 'projects/value/locations/value/muteConfigs';
+            // path template: organizations/*/locations/{location=*}/muteConfigs
+            request.parent = 'organizations/value/locations/value/muteConfigs';
+            // path template: folders/*/locations/{location=*}/muteConfigs
+            request.parent = 'folders/value/locations/value/muteConfigs';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.descriptors.page.listMuteConfigs.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listMuteConfigsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securitycenter.v2.MuteConfig[] = [];
+                stream.on('data', (response: protos.google.cloud.securitycenter.v2.MuteConfig) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listMuteConfigs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listMuteConfigs, request));
+            assert(
+                (client.descriptors.page.listMuteConfigs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listResourceValueConfigs without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ResourceValueConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ResourceValueConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ResourceValueConfig()
-        ),
-      ];
-      client.innerApiCalls.listResourceValueConfigs =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listResourceValueConfigs(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.securitycenter.v2.IResourceValueConfig[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listMuteConfigs without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListMuteConfigsRequest()
+            );
+            // path template: projects/*/locations/{location=*}/muteConfigs
+            request.parent = 'projects/value/locations/value/muteConfigs';
+            // path template: organizations/*/locations/{location=*}/muteConfigs
+            request.parent = 'organizations/value/locations/value/muteConfigs';
+            // path template: folders/*/locations/{location=*}/muteConfigs
+            request.parent = 'folders/value/locations/value/muteConfigs';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.MuteConfig()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.MuteConfig()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.MuteConfig()),
+            ];
+            client.descriptors.page.listMuteConfigs.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.securitycenter.v2.IMuteConfig[] = [];
+            const iterable = client.listMuteConfigsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listResourceValueConfigs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listResourceValueConfigs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listResourceValueConfigs with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listResourceValueConfigs = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listResourceValueConfigs(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listResourceValueConfigs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listResourceValueConfigs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listResourceValueConfigsStream without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ResourceValueConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ResourceValueConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ResourceValueConfig()
-        ),
-      ];
-      client.descriptors.page.listResourceValueConfigs.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listResourceValueConfigsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v2.ResourceValueConfig[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.securitycenter.v2.ResourceValueConfig
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listMuteConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listMuteConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listMuteConfigs with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListMuteConfigsRequest()
+            );
+            // path template: projects/*/locations/{location=*}/muteConfigs
+            request.parent = 'projects/value/locations/value/muteConfigs';
+            // path template: organizations/*/locations/{location=*}/muteConfigs
+            request.parent = 'organizations/value/locations/value/muteConfigs';
+            // path template: folders/*/locations/{location=*}/muteConfigs
+            request.parent = 'folders/value/locations/value/muteConfigs';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.descriptors.page.listMuteConfigs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listMuteConfigsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.securitycenter.v2.IMuteConfig[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listMuteConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listMuteConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listResourceValueConfigs
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listResourceValueConfigs, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listResourceValueConfigs
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
     });
 
-    it('invokes listResourceValueConfigsStream with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listResourceValueConfigs.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listResourceValueConfigsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v2.ResourceValueConfig[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.securitycenter.v2.ResourceValueConfig
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listNotificationConfigs', () => {
+        it('invokes listNotificationConfigs without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListNotificationConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListNotificationConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.NotificationConfig()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.NotificationConfig()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.NotificationConfig()),
+            ];
+            client.innerApiCalls.listNotificationConfigs = stubSimpleCall(expectedResponse);
+            const [response] = await client.listNotificationConfigs(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listNotificationConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listNotificationConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listNotificationConfigs without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListNotificationConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListNotificationConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.NotificationConfig()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.NotificationConfig()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.NotificationConfig()),
+            ];
+            client.innerApiCalls.listNotificationConfigs = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listNotificationConfigs(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.INotificationConfig[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listNotificationConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listNotificationConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listResourceValueConfigs
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listResourceValueConfigs, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listResourceValueConfigs
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('uses async iteration with listResourceValueConfigs without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ResourceValueConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ResourceValueConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ResourceValueConfig()
-        ),
-      ];
-      client.descriptors.page.listResourceValueConfigs.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.securitycenter.v2.IResourceValueConfig[] =
-        [];
-      const iterable = client.listResourceValueConfigsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listResourceValueConfigs
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listResourceValueConfigs
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
+        it('invokes listNotificationConfigs with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListNotificationConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListNotificationConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listNotificationConfigs = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listNotificationConfigs(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listNotificationConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listNotificationConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listResourceValueConfigs with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listResourceValueConfigs.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listResourceValueConfigsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.securitycenter.v2.IResourceValueConfig[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listResourceValueConfigs
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listResourceValueConfigs
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
+        it('invokes listNotificationConfigsStream without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListNotificationConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListNotificationConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.NotificationConfig()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.NotificationConfig()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.NotificationConfig()),
+            ];
+            client.descriptors.page.listNotificationConfigs.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listNotificationConfigsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securitycenter.v2.NotificationConfig[] = [];
+                stream.on('data', (response: protos.google.cloud.securitycenter.v2.NotificationConfig) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listNotificationConfigs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listNotificationConfigs, request));
+            assert(
+                (client.descriptors.page.listNotificationConfigs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listSources', () => {
-    it('invokes listSources without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListSourcesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListSourcesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.Source()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.Source()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.Source()
-        ),
-      ];
-      client.innerApiCalls.listSources = stubSimpleCall(expectedResponse);
-      const [response] = await client.listSources(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listSources as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSources as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listNotificationConfigsStream with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListNotificationConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListNotificationConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listNotificationConfigs.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listNotificationConfigsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securitycenter.v2.NotificationConfig[] = [];
+                stream.on('data', (response: protos.google.cloud.securitycenter.v2.NotificationConfig) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listNotificationConfigs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listNotificationConfigs, request));
+            assert(
+                (client.descriptors.page.listNotificationConfigs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listSources without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListSourcesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListSourcesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.Source()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.Source()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.Source()
-        ),
-      ];
-      client.innerApiCalls.listSources =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listSources(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.securitycenter.v2.ISource[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listNotificationConfigs without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListNotificationConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListNotificationConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.NotificationConfig()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.NotificationConfig()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.NotificationConfig()),
+            ];
+            client.descriptors.page.listNotificationConfigs.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.securitycenter.v2.INotificationConfig[] = [];
+            const iterable = client.listNotificationConfigsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listSources as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSources as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSources with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListSourcesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListSourcesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listSources = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listSources(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listSources as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSources as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSourcesStream without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListSourcesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListSourcesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.Source()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.Source()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.Source()
-        ),
-      ];
-      client.descriptors.page.listSources.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listSourcesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v2.Source[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.securitycenter.v2.Source) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listNotificationConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listNotificationConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listNotificationConfigs with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListNotificationConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListNotificationConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listNotificationConfigs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listNotificationConfigsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.securitycenter.v2.INotificationConfig[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listNotificationConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listNotificationConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listSources.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listSources, request)
-      );
-      assert(
-        (client.descriptors.page.listSources.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listSourcesStream with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListSourcesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListSourcesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listSources.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listSourcesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v2.Source[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.securitycenter.v2.Source) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listResourceValueConfigs', () => {
+        it('invokes listResourceValueConfigs without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ResourceValueConfig()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ResourceValueConfig()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ResourceValueConfig()),
+            ];
+            client.innerApiCalls.listResourceValueConfigs = stubSimpleCall(expectedResponse);
+            const [response] = await client.listResourceValueConfigs(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listResourceValueConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listResourceValueConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listResourceValueConfigs without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ResourceValueConfig()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ResourceValueConfig()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ResourceValueConfig()),
+            ];
+            client.innerApiCalls.listResourceValueConfigs = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listResourceValueConfigs(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.IResourceValueConfig[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listResourceValueConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listResourceValueConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listSources.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listSources, request)
-      );
-      assert(
-        (client.descriptors.page.listSources.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listSources without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListSourcesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListSourcesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.Source()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.Source()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.Source()
-        ),
-      ];
-      client.descriptors.page.listSources.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.securitycenter.v2.ISource[] = [];
-      const iterable = client.listSourcesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listSources.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listSources.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listResourceValueConfigs with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listResourceValueConfigs = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listResourceValueConfigs(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listResourceValueConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listResourceValueConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listSources with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListSourcesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListSourcesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listSources.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listSourcesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.securitycenter.v2.ISource[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listSources.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listSources.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listResourceValueConfigsStream without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ResourceValueConfig()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ResourceValueConfig()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ResourceValueConfig()),
+            ];
+            client.descriptors.page.listResourceValueConfigs.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listResourceValueConfigsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securitycenter.v2.ResourceValueConfig[] = [];
+                stream.on('data', (response: protos.google.cloud.securitycenter.v2.ResourceValueConfig) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listResourceValueConfigs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listResourceValueConfigs, request));
+            assert(
+                (client.descriptors.page.listResourceValueConfigs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listValuedResources', () => {
-    it('invokes listValuedResources without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListValuedResourcesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListValuedResourcesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ValuedResource()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ValuedResource()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ValuedResource()
-        ),
-      ];
-      client.innerApiCalls.listValuedResources =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listValuedResources(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listValuedResources as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listValuedResources as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listResourceValueConfigsStream with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listResourceValueConfigs.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listResourceValueConfigsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securitycenter.v2.ResourceValueConfig[] = [];
+                stream.on('data', (response: protos.google.cloud.securitycenter.v2.ResourceValueConfig) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listResourceValueConfigs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listResourceValueConfigs, request));
+            assert(
+                (client.descriptors.page.listResourceValueConfigs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listValuedResources without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListValuedResourcesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListValuedResourcesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ValuedResource()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ValuedResource()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ValuedResource()
-        ),
-      ];
-      client.innerApiCalls.listValuedResources =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listValuedResources(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.securitycenter.v2.IValuedResource[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listResourceValueConfigs without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ResourceValueConfig()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ResourceValueConfig()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ResourceValueConfig()),
+            ];
+            client.descriptors.page.listResourceValueConfigs.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.securitycenter.v2.IResourceValueConfig[] = [];
+            const iterable = client.listResourceValueConfigsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listValuedResources as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listValuedResources as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listValuedResources with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListValuedResourcesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListValuedResourcesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listValuedResources = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listValuedResources(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listValuedResources as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listValuedResources as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listValuedResourcesStream without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListValuedResourcesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListValuedResourcesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ValuedResource()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ValuedResource()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ValuedResource()
-        ),
-      ];
-      client.descriptors.page.listValuedResources.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listValuedResourcesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v2.ValuedResource[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.securitycenter.v2.ValuedResource) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listResourceValueConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listResourceValueConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listResourceValueConfigs with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listResourceValueConfigs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listResourceValueConfigsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.securitycenter.v2.IResourceValueConfig[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listResourceValueConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listResourceValueConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listValuedResources.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listValuedResources, request)
-      );
-      assert(
-        (client.descriptors.page.listValuedResources.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listValuedResourcesStream with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListValuedResourcesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListValuedResourcesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listValuedResources.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listValuedResourcesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v2.ValuedResource[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.securitycenter.v2.ValuedResource) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listSources', () => {
+        it('invokes listSources without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListSourcesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListSourcesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.Source()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.Source()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.Source()),
+            ];
+            client.innerApiCalls.listSources = stubSimpleCall(expectedResponse);
+            const [response] = await client.listSources(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listSources as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSources as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listSources without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListSourcesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListSourcesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.Source()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.Source()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.Source()),
+            ];
+            client.innerApiCalls.listSources = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listSources(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.ISource[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listSources as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSources as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listValuedResources.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listValuedResources, request)
-      );
-      assert(
-        (client.descriptors.page.listValuedResources.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listValuedResources without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListValuedResourcesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListValuedResourcesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ValuedResource()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ValuedResource()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.securitycenter.v2.ValuedResource()
-        ),
-      ];
-      client.descriptors.page.listValuedResources.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.securitycenter.v2.IValuedResource[] =
-        [];
-      const iterable = client.listValuedResourcesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listValuedResources.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listValuedResources.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listSources with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListSourcesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListSourcesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listSources = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listSources(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listSources as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSources as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listValuedResources with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.securitycenter.v2.ListValuedResourcesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.securitycenter.v2.ListValuedResourcesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listValuedResources.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listValuedResourcesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.securitycenter.v2.IValuedResource[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listValuedResources.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listValuedResources.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes getOperation without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .getOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: operationsProtos.google.longrunning.Operation | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+        it('invokes listSourcesStream without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListSourcesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListSourcesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.Source()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.Source()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.Source()),
+            ];
+            client.descriptors.page.listSources.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listSourcesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securitycenter.v2.Source[] = [];
+                stream.on('data', (response: protos.google.cloud.securitycenter.v2.Source) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listSources.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listSources, request));
+            assert(
+                (client.descriptors.page.listSources.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listSourcesStream with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListSourcesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListSourcesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listSources.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listSourcesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securitycenter.v2.Source[] = [];
+                stream.on('data', (response: protos.google.cloud.securitycenter.v2.Source) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listSources.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listSources, request));
+            assert(
+                (client.descriptors.page.listSources.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listSources without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListSourcesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListSourcesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.Source()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.Source()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.Source()),
+            ];
+            client.descriptors.page.listSources.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.securitycenter.v2.ISource[] = [];
+            const iterable = client.listSourcesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listSources.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listSources.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listSources with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListSourcesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListSourcesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listSources.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listSourcesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.securitycenter.v2.ISource[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listSources.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listSources.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes getOperation with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .cancelOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+
+    describe('listValuedResources', () => {
+        it('invokes listValuedResources without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListValuedResourcesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListValuedResourcesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ValuedResource()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ValuedResource()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ValuedResource()),
+            ];
+            client.innerApiCalls.listValuedResources = stubSimpleCall(expectedResponse);
+            const [response] = await client.listValuedResources(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listValuedResources as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listValuedResources as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listValuedResources without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListValuedResourcesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListValuedResourcesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ValuedResource()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ValuedResource()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ValuedResource()),
+            ];
+            client.innerApiCalls.listValuedResources = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listValuedResources(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securitycenter.v2.IValuedResource[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listValuedResources as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listValuedResources as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listValuedResources with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListValuedResourcesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListValuedResourcesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listValuedResources = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listValuedResources(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listValuedResources as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listValuedResources as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listValuedResourcesStream without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListValuedResourcesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListValuedResourcesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ValuedResource()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ValuedResource()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ValuedResource()),
+            ];
+            client.descriptors.page.listValuedResources.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listValuedResourcesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securitycenter.v2.ValuedResource[] = [];
+                stream.on('data', (response: protos.google.cloud.securitycenter.v2.ValuedResource) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listValuedResources.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listValuedResources, request));
+            assert(
+                (client.descriptors.page.listValuedResources.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listValuedResourcesStream with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListValuedResourcesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListValuedResourcesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listValuedResources.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listValuedResourcesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securitycenter.v2.ValuedResource[] = [];
+                stream.on('data', (response: protos.google.cloud.securitycenter.v2.ValuedResource) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listValuedResources.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listValuedResources, request));
+            assert(
+                (client.descriptors.page.listValuedResources.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listValuedResources without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListValuedResourcesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListValuedResourcesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ValuedResource()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ValuedResource()),
+              generateSampleMessage(new protos.google.cloud.securitycenter.v2.ValuedResource()),
+            ];
+            client.descriptors.page.listValuedResources.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.securitycenter.v2.IValuedResource[] = [];
+            const iterable = client.listValuedResourcesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listValuedResources.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listValuedResources.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listValuedResources with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securitycenter.v2.ListValuedResourcesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securitycenter.v2.ListValuedResourcesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listValuedResources.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listValuedResourcesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.securitycenter.v2.IValuedResource[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listValuedResources.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listValuedResources.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes cancelOperation with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes getOperation without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .deleteOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.IOperation[] = [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.IOperation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('folderAssetSecurityMarks', async () => {
-      const fakePath = '/rendered/path/folderAssetSecurityMarks';
-      const expectedParameters = {
-        folder: 'folderValue',
-        asset: 'assetValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderAssetSecurityMarksPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.folderAssetSecurityMarksPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('folderAssetSecurityMarksPath', () => {
-        const result = client.folderAssetSecurityMarksPath(
-          'folderValue',
-          'assetValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.folderAssetSecurityMarksPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderAssetSecurityMarksName', () => {
-        const result =
-          client.matchFolderFromFolderAssetSecurityMarksName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates.folderAssetSecurityMarksPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAssetFromFolderAssetSecurityMarksName', () => {
-        const result =
-          client.matchAssetFromFolderAssetSecurityMarksName(fakePath);
-        assert.strictEqual(result, 'assetValue');
-        assert(
-          (
-            client.pathTemplates.folderAssetSecurityMarksPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
     });
 
-    describe('folderConstraintName', async () => {
-      const fakePath = '/rendered/path/folderConstraintName';
-      const expectedParameters = {
-        folder: 'folderValue',
-        constraint_name: 'constraintNameValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderConstraintNamePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.folderConstraintNamePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('Path templates', () => {
 
-      it('folderConstraintNamePath', () => {
-        const result = client.folderConstraintNamePath(
-          'folderValue',
-          'constraintNameValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.folderConstraintNamePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('folderAssetSecurityMarks', async () => {
+            const fakePath = "/rendered/path/folderAssetSecurityMarks";
+            const expectedParameters = {
+                folder: "folderValue",
+                asset: "assetValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderAssetSecurityMarksPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderAssetSecurityMarksPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchFolderFromFolderConstraintNameName', () => {
-        const result = client.matchFolderFromFolderConstraintNameName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates.folderConstraintNamePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('folderAssetSecurityMarksPath', () => {
+                const result = client.folderAssetSecurityMarksPath("folderValue", "assetValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderAssetSecurityMarksPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchConstraintNameFromFolderConstraintNameName', () => {
-        const result =
-          client.matchConstraintNameFromFolderConstraintNameName(fakePath);
-        assert.strictEqual(result, 'constraintNameValue');
-        assert(
-          (
-            client.pathTemplates.folderConstraintNamePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchFolderFromFolderAssetSecurityMarksName', () => {
+                const result = client.matchFolderFromFolderAssetSecurityMarksName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderAssetSecurityMarksPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAssetFromFolderAssetSecurityMarksName', () => {
+                const result = client.matchAssetFromFolderAssetSecurityMarksName(fakePath);
+                assert.strictEqual(result, "assetValue");
+                assert((client.pathTemplates.folderAssetSecurityMarksPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderConstraintName', async () => {
+            const fakePath = "/rendered/path/folderConstraintName";
+            const expectedParameters = {
+                folder: "folderValue",
+                constraint_name: "constraintNameValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderConstraintNamePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderConstraintNamePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderConstraintNamePath', () => {
+                const result = client.folderConstraintNamePath("folderValue", "constraintNameValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderConstraintNamePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderConstraintNameName', () => {
+                const result = client.matchFolderFromFolderConstraintNameName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderConstraintNamePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConstraintNameFromFolderConstraintNameName', () => {
+                const result = client.matchConstraintNameFromFolderConstraintNameName(fakePath);
+                assert.strictEqual(result, "constraintNameValue");
+                assert((client.pathTemplates.folderConstraintNamePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderLocationBigQueryExports', async () => {
+            const fakePath = "/rendered/path/folderLocationBigQueryExports";
+            const expectedParameters = {
+                folder: "folderValue",
+                location: "locationValue",
+                export: "exportValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderLocationBigQueryExportsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderLocationBigQueryExportsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderLocationBigQueryExportsPath', () => {
+                const result = client.folderLocationBigQueryExportsPath("folderValue", "locationValue", "exportValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderLocationBigQueryExportsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderLocationBigQueryExportsName', () => {
+                const result = client.matchFolderFromFolderLocationBigQueryExportsName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderLocationBigQueryExportsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromFolderLocationBigQueryExportsName', () => {
+                const result = client.matchLocationFromFolderLocationBigQueryExportsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.folderLocationBigQueryExportsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchExportFromFolderLocationBigQueryExportsName', () => {
+                const result = client.matchExportFromFolderLocationBigQueryExportsName(fakePath);
+                assert.strictEqual(result, "exportValue");
+                assert((client.pathTemplates.folderLocationBigQueryExportsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderLocationMuteConfigs', async () => {
+            const fakePath = "/rendered/path/folderLocationMuteConfigs";
+            const expectedParameters = {
+                folder: "folderValue",
+                location: "locationValue",
+                mute_config: "muteConfigValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderLocationMuteConfigsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderLocationMuteConfigsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderLocationMuteConfigsPath', () => {
+                const result = client.folderLocationMuteConfigsPath("folderValue", "locationValue", "muteConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderLocationMuteConfigsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderLocationMuteConfigsName', () => {
+                const result = client.matchFolderFromFolderLocationMuteConfigsName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderLocationMuteConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromFolderLocationMuteConfigsName', () => {
+                const result = client.matchLocationFromFolderLocationMuteConfigsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.folderLocationMuteConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMuteConfigFromFolderLocationMuteConfigsName', () => {
+                const result = client.matchMuteConfigFromFolderLocationMuteConfigsName(fakePath);
+                assert.strictEqual(result, "muteConfigValue");
+                assert((client.pathTemplates.folderLocationMuteConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderLocationNotificationConfigs', async () => {
+            const fakePath = "/rendered/path/folderLocationNotificationConfigs";
+            const expectedParameters = {
+                folder: "folderValue",
+                location: "locationValue",
+                notification_config: "notificationConfigValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderLocationNotificationConfigsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderLocationNotificationConfigsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderLocationNotificationConfigsPath', () => {
+                const result = client.folderLocationNotificationConfigsPath("folderValue", "locationValue", "notificationConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderLocationNotificationConfigsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderLocationNotificationConfigsName', () => {
+                const result = client.matchFolderFromFolderLocationNotificationConfigsName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderLocationNotificationConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromFolderLocationNotificationConfigsName', () => {
+                const result = client.matchLocationFromFolderLocationNotificationConfigsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.folderLocationNotificationConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchNotificationConfigFromFolderLocationNotificationConfigsName', () => {
+                const result = client.matchNotificationConfigFromFolderLocationNotificationConfigsName(fakePath);
+                assert.strictEqual(result, "notificationConfigValue");
+                assert((client.pathTemplates.folderLocationNotificationConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderMuteConfigs', async () => {
+            const fakePath = "/rendered/path/folderMuteConfigs";
+            const expectedParameters = {
+                folder: "folderValue",
+                mute_config: "muteConfigValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderMuteConfigsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderMuteConfigsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderMuteConfigsPath', () => {
+                const result = client.folderMuteConfigsPath("folderValue", "muteConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderMuteConfigsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderMuteConfigsName', () => {
+                const result = client.matchFolderFromFolderMuteConfigsName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderMuteConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMuteConfigFromFolderMuteConfigsName', () => {
+                const result = client.matchMuteConfigFromFolderMuteConfigsName(fakePath);
+                assert.strictEqual(result, "muteConfigValue");
+                assert((client.pathTemplates.folderMuteConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderSource', async () => {
+            const fakePath = "/rendered/path/folderSource";
+            const expectedParameters = {
+                folder: "folderValue",
+                source: "sourceValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderSourcePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderSourcePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderSourcePath', () => {
+                const result = client.folderSourcePath("folderValue", "sourceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderSourcePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderSourceName', () => {
+                const result = client.matchFolderFromFolderSourceName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderSourcePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSourceFromFolderSourceName', () => {
+                const result = client.matchSourceFromFolderSourceName(fakePath);
+                assert.strictEqual(result, "sourceValue");
+                assert((client.pathTemplates.folderSourcePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderSourceFindingExternalsystem', async () => {
+            const fakePath = "/rendered/path/folderSourceFindingExternalsystem";
+            const expectedParameters = {
+                folder: "folderValue",
+                source: "sourceValue",
+                finding: "findingValue",
+                externalsystem: "externalsystemValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderSourceFindingExternalsystemPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderSourceFindingExternalsystemPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderSourceFindingExternalsystemPath', () => {
+                const result = client.folderSourceFindingExternalsystemPath("folderValue", "sourceValue", "findingValue", "externalsystemValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderSourceFindingExternalsystemPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderSourceFindingExternalsystemName', () => {
+                const result = client.matchFolderFromFolderSourceFindingExternalsystemName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderSourceFindingExternalsystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSourceFromFolderSourceFindingExternalsystemName', () => {
+                const result = client.matchSourceFromFolderSourceFindingExternalsystemName(fakePath);
+                assert.strictEqual(result, "sourceValue");
+                assert((client.pathTemplates.folderSourceFindingExternalsystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFindingFromFolderSourceFindingExternalsystemName', () => {
+                const result = client.matchFindingFromFolderSourceFindingExternalsystemName(fakePath);
+                assert.strictEqual(result, "findingValue");
+                assert((client.pathTemplates.folderSourceFindingExternalsystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchExternalsystemFromFolderSourceFindingExternalsystemName', () => {
+                const result = client.matchExternalsystemFromFolderSourceFindingExternalsystemName(fakePath);
+                assert.strictEqual(result, "externalsystemValue");
+                assert((client.pathTemplates.folderSourceFindingExternalsystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderSourceFindingSecurityMarks', async () => {
+            const fakePath = "/rendered/path/folderSourceFindingSecurityMarks";
+            const expectedParameters = {
+                folder: "folderValue",
+                source: "sourceValue",
+                finding: "findingValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderSourceFindingSecurityMarksPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderSourceFindingSecurityMarksPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderSourceFindingSecurityMarksPath', () => {
+                const result = client.folderSourceFindingSecurityMarksPath("folderValue", "sourceValue", "findingValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderSourceFindingSecurityMarksPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderSourceFindingSecurityMarksName', () => {
+                const result = client.matchFolderFromFolderSourceFindingSecurityMarksName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderSourceFindingSecurityMarksPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSourceFromFolderSourceFindingSecurityMarksName', () => {
+                const result = client.matchSourceFromFolderSourceFindingSecurityMarksName(fakePath);
+                assert.strictEqual(result, "sourceValue");
+                assert((client.pathTemplates.folderSourceFindingSecurityMarksPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFindingFromFolderSourceFindingSecurityMarksName', () => {
+                const result = client.matchFindingFromFolderSourceFindingSecurityMarksName(fakePath);
+                assert.strictEqual(result, "findingValue");
+                assert((client.pathTemplates.folderSourceFindingSecurityMarksPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderSourceFindings', async () => {
+            const fakePath = "/rendered/path/folderSourceFindings";
+            const expectedParameters = {
+                folder: "folderValue",
+                source: "sourceValue",
+                finding: "findingValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderSourceFindingsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderSourceFindingsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderSourceFindingsPath', () => {
+                const result = client.folderSourceFindingsPath("folderValue", "sourceValue", "findingValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderSourceFindingsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderSourceFindingsName', () => {
+                const result = client.matchFolderFromFolderSourceFindingsName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderSourceFindingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSourceFromFolderSourceFindingsName', () => {
+                const result = client.matchSourceFromFolderSourceFindingsName(fakePath);
+                assert.strictEqual(result, "sourceValue");
+                assert((client.pathTemplates.folderSourceFindingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFindingFromFolderSourceFindingsName', () => {
+                const result = client.matchFindingFromFolderSourceFindingsName(fakePath);
+                assert.strictEqual(result, "findingValue");
+                assert((client.pathTemplates.folderSourceFindingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderSourceLocationFindingExternalsystem', async () => {
+            const fakePath = "/rendered/path/folderSourceLocationFindingExternalsystem";
+            const expectedParameters = {
+                folder: "folderValue",
+                source: "sourceValue",
+                location: "locationValue",
+                finding: "findingValue",
+                externalsystem: "externalsystemValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderSourceLocationFindingExternalsystemPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderSourceLocationFindingExternalsystemPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderSourceLocationFindingExternalsystemPath', () => {
+                const result = client.folderSourceLocationFindingExternalsystemPath("folderValue", "sourceValue", "locationValue", "findingValue", "externalsystemValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderSourceLocationFindingExternalsystemPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderSourceLocationFindingExternalsystemName', () => {
+                const result = client.matchFolderFromFolderSourceLocationFindingExternalsystemName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderSourceLocationFindingExternalsystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSourceFromFolderSourceLocationFindingExternalsystemName', () => {
+                const result = client.matchSourceFromFolderSourceLocationFindingExternalsystemName(fakePath);
+                assert.strictEqual(result, "sourceValue");
+                assert((client.pathTemplates.folderSourceLocationFindingExternalsystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromFolderSourceLocationFindingExternalsystemName', () => {
+                const result = client.matchLocationFromFolderSourceLocationFindingExternalsystemName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.folderSourceLocationFindingExternalsystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFindingFromFolderSourceLocationFindingExternalsystemName', () => {
+                const result = client.matchFindingFromFolderSourceLocationFindingExternalsystemName(fakePath);
+                assert.strictEqual(result, "findingValue");
+                assert((client.pathTemplates.folderSourceLocationFindingExternalsystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchExternalsystemFromFolderSourceLocationFindingExternalsystemName', () => {
+                const result = client.matchExternalsystemFromFolderSourceLocationFindingExternalsystemName(fakePath);
+                assert.strictEqual(result, "externalsystemValue");
+                assert((client.pathTemplates.folderSourceLocationFindingExternalsystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderSourceLocationFindingSecurityMarks', async () => {
+            const fakePath = "/rendered/path/folderSourceLocationFindingSecurityMarks";
+            const expectedParameters = {
+                folder: "folderValue",
+                source: "sourceValue",
+                location: "locationValue",
+                finding: "findingValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderSourceLocationFindingSecurityMarksPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderSourceLocationFindingSecurityMarksPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderSourceLocationFindingSecurityMarksPath', () => {
+                const result = client.folderSourceLocationFindingSecurityMarksPath("folderValue", "sourceValue", "locationValue", "findingValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderSourceLocationFindingSecurityMarksPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderSourceLocationFindingSecurityMarksName', () => {
+                const result = client.matchFolderFromFolderSourceLocationFindingSecurityMarksName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderSourceLocationFindingSecurityMarksPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSourceFromFolderSourceLocationFindingSecurityMarksName', () => {
+                const result = client.matchSourceFromFolderSourceLocationFindingSecurityMarksName(fakePath);
+                assert.strictEqual(result, "sourceValue");
+                assert((client.pathTemplates.folderSourceLocationFindingSecurityMarksPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromFolderSourceLocationFindingSecurityMarksName', () => {
+                const result = client.matchLocationFromFolderSourceLocationFindingSecurityMarksName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.folderSourceLocationFindingSecurityMarksPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFindingFromFolderSourceLocationFindingSecurityMarksName', () => {
+                const result = client.matchFindingFromFolderSourceLocationFindingSecurityMarksName(fakePath);
+                assert.strictEqual(result, "findingValue");
+                assert((client.pathTemplates.folderSourceLocationFindingSecurityMarksPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderSourceLocationFindings', async () => {
+            const fakePath = "/rendered/path/folderSourceLocationFindings";
+            const expectedParameters = {
+                folder: "folderValue",
+                source: "sourceValue",
+                location: "locationValue",
+                finding: "findingValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderSourceLocationFindingsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderSourceLocationFindingsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderSourceLocationFindingsPath', () => {
+                const result = client.folderSourceLocationFindingsPath("folderValue", "sourceValue", "locationValue", "findingValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderSourceLocationFindingsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderSourceLocationFindingsName', () => {
+                const result = client.matchFolderFromFolderSourceLocationFindingsName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderSourceLocationFindingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSourceFromFolderSourceLocationFindingsName', () => {
+                const result = client.matchSourceFromFolderSourceLocationFindingsName(fakePath);
+                assert.strictEqual(result, "sourceValue");
+                assert((client.pathTemplates.folderSourceLocationFindingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromFolderSourceLocationFindingsName', () => {
+                const result = client.matchLocationFromFolderSourceLocationFindingsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.folderSourceLocationFindingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFindingFromFolderSourceLocationFindingsName', () => {
+                const result = client.matchFindingFromFolderSourceLocationFindingsName(fakePath);
+                assert.strictEqual(result, "findingValue");
+                assert((client.pathTemplates.folderSourceLocationFindingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organization', async () => {
+            const fakePath = "/rendered/path/organization";
+            const expectedParameters = {
+                organization: "organizationValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationPath', () => {
+                const result = client.organizationPath("organizationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationName', () => {
+                const result = client.matchOrganizationFromOrganizationName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationAssetSecurityMarks', async () => {
+            const fakePath = "/rendered/path/organizationAssetSecurityMarks";
+            const expectedParameters = {
+                organization: "organizationValue",
+                asset: "assetValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationAssetSecurityMarksPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationAssetSecurityMarksPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationAssetSecurityMarksPath', () => {
+                const result = client.organizationAssetSecurityMarksPath("organizationValue", "assetValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationAssetSecurityMarksPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationAssetSecurityMarksName', () => {
+                const result = client.matchOrganizationFromOrganizationAssetSecurityMarksName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationAssetSecurityMarksPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAssetFromOrganizationAssetSecurityMarksName', () => {
+                const result = client.matchAssetFromOrganizationAssetSecurityMarksName(fakePath);
+                assert.strictEqual(result, "assetValue");
+                assert((client.pathTemplates.organizationAssetSecurityMarksPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationConstraintName', async () => {
+            const fakePath = "/rendered/path/organizationConstraintName";
+            const expectedParameters = {
+                organization: "organizationValue",
+                constraint_name: "constraintNameValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationConstraintNamePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationConstraintNamePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationConstraintNamePath', () => {
+                const result = client.organizationConstraintNamePath("organizationValue", "constraintNameValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationConstraintNamePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationConstraintNameName', () => {
+                const result = client.matchOrganizationFromOrganizationConstraintNameName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationConstraintNamePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConstraintNameFromOrganizationConstraintNameName', () => {
+                const result = client.matchConstraintNameFromOrganizationConstraintNameName(fakePath);
+                assert.strictEqual(result, "constraintNameValue");
+                assert((client.pathTemplates.organizationConstraintNamePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocation', async () => {
+            const fakePath = "/rendered/path/organizationLocation";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationPath', () => {
+                const result = client.organizationLocationPath("organizationValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationName', () => {
+                const result = client.matchLocationFromOrganizationLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationBigQueryExports', async () => {
+            const fakePath = "/rendered/path/organizationLocationBigQueryExports";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                export: "exportValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationBigQueryExportsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationBigQueryExportsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationBigQueryExportsPath', () => {
+                const result = client.organizationLocationBigQueryExportsPath("organizationValue", "locationValue", "exportValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationBigQueryExportsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationBigQueryExportsName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationBigQueryExportsName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationBigQueryExportsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationBigQueryExportsName', () => {
+                const result = client.matchLocationFromOrganizationLocationBigQueryExportsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationBigQueryExportsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchExportFromOrganizationLocationBigQueryExportsName', () => {
+                const result = client.matchExportFromOrganizationLocationBigQueryExportsName(fakePath);
+                assert.strictEqual(result, "exportValue");
+                assert((client.pathTemplates.organizationLocationBigQueryExportsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationMuteConfigs', async () => {
+            const fakePath = "/rendered/path/organizationLocationMuteConfigs";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                mute_config: "muteConfigValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationMuteConfigsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationMuteConfigsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationMuteConfigsPath', () => {
+                const result = client.organizationLocationMuteConfigsPath("organizationValue", "locationValue", "muteConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationMuteConfigsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationMuteConfigsName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationMuteConfigsName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationMuteConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationMuteConfigsName', () => {
+                const result = client.matchLocationFromOrganizationLocationMuteConfigsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationMuteConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMuteConfigFromOrganizationLocationMuteConfigsName', () => {
+                const result = client.matchMuteConfigFromOrganizationLocationMuteConfigsName(fakePath);
+                assert.strictEqual(result, "muteConfigValue");
+                assert((client.pathTemplates.organizationLocationMuteConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationNotificationConfigs', async () => {
+            const fakePath = "/rendered/path/organizationLocationNotificationConfigs";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                notification_config: "notificationConfigValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationNotificationConfigsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationNotificationConfigsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationNotificationConfigsPath', () => {
+                const result = client.organizationLocationNotificationConfigsPath("organizationValue", "locationValue", "notificationConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationNotificationConfigsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationNotificationConfigsName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationNotificationConfigsName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationNotificationConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationNotificationConfigsName', () => {
+                const result = client.matchLocationFromOrganizationLocationNotificationConfigsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationNotificationConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchNotificationConfigFromOrganizationLocationNotificationConfigsName', () => {
+                const result = client.matchNotificationConfigFromOrganizationLocationNotificationConfigsName(fakePath);
+                assert.strictEqual(result, "notificationConfigValue");
+                assert((client.pathTemplates.organizationLocationNotificationConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationResourceValueConfigs', async () => {
+            const fakePath = "/rendered/path/organizationLocationResourceValueConfigs";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                resource_value_config: "resourceValueConfigValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationResourceValueConfigsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationResourceValueConfigsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationResourceValueConfigsPath', () => {
+                const result = client.organizationLocationResourceValueConfigsPath("organizationValue", "locationValue", "resourceValueConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationResourceValueConfigsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationResourceValueConfigsName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationResourceValueConfigsName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationResourceValueConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationResourceValueConfigsName', () => {
+                const result = client.matchLocationFromOrganizationLocationResourceValueConfigsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationResourceValueConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchResourceValueConfigFromOrganizationLocationResourceValueConfigsName', () => {
+                const result = client.matchResourceValueConfigFromOrganizationLocationResourceValueConfigsName(fakePath);
+                assert.strictEqual(result, "resourceValueConfigValue");
+                assert((client.pathTemplates.organizationLocationResourceValueConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationSimluationValuedResources', async () => {
+            const fakePath = "/rendered/path/organizationLocationSimluationValuedResources";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                simluation: "simluationValue",
+                valued_resource: "valuedResourceValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationSimluationValuedResourcesPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationSimluationValuedResourcesPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationSimluationValuedResourcesPath', () => {
+                const result = client.organizationLocationSimluationValuedResourcesPath("organizationValue", "locationValue", "simluationValue", "valuedResourceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationSimluationValuedResourcesPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationSimluationValuedResourcesName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationSimluationValuedResourcesName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationSimluationValuedResourcesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationSimluationValuedResourcesName', () => {
+                const result = client.matchLocationFromOrganizationLocationSimluationValuedResourcesName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationSimluationValuedResourcesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSimluationFromOrganizationLocationSimluationValuedResourcesName', () => {
+                const result = client.matchSimluationFromOrganizationLocationSimluationValuedResourcesName(fakePath);
+                assert.strictEqual(result, "simluationValue");
+                assert((client.pathTemplates.organizationLocationSimluationValuedResourcesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchValuedResourceFromOrganizationLocationSimluationValuedResourcesName', () => {
+                const result = client.matchValuedResourceFromOrganizationLocationSimluationValuedResourcesName(fakePath);
+                assert.strictEqual(result, "valuedResourceValue");
+                assert((client.pathTemplates.organizationLocationSimluationValuedResourcesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationSimulationValuedResourceAttackPaths', async () => {
+            const fakePath = "/rendered/path/organizationLocationSimulationValuedResourceAttackPaths";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                simulation: "simulationValue",
+                valued_resource: "valuedResourceValue",
+                attack_path: "attackPathValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationSimulationValuedResourceAttackPathsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationSimulationValuedResourceAttackPathsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationSimulationValuedResourceAttackPathsPath', () => {
+                const result = client.organizationLocationSimulationValuedResourceAttackPathsPath("organizationValue", "locationValue", "simulationValue", "valuedResourceValue", "attackPathValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationSimulationValuedResourceAttackPathsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationSimulationValuedResourceAttackPathsName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationSimulationValuedResourceAttackPathsName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationSimulationValuedResourceAttackPathsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationSimulationValuedResourceAttackPathsName', () => {
+                const result = client.matchLocationFromOrganizationLocationSimulationValuedResourceAttackPathsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationSimulationValuedResourceAttackPathsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSimulationFromOrganizationLocationSimulationValuedResourceAttackPathsName', () => {
+                const result = client.matchSimulationFromOrganizationLocationSimulationValuedResourceAttackPathsName(fakePath);
+                assert.strictEqual(result, "simulationValue");
+                assert((client.pathTemplates.organizationLocationSimulationValuedResourceAttackPathsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchValuedResourceFromOrganizationLocationSimulationValuedResourceAttackPathsName', () => {
+                const result = client.matchValuedResourceFromOrganizationLocationSimulationValuedResourceAttackPathsName(fakePath);
+                assert.strictEqual(result, "valuedResourceValue");
+                assert((client.pathTemplates.organizationLocationSimulationValuedResourceAttackPathsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAttackPathFromOrganizationLocationSimulationValuedResourceAttackPathsName', () => {
+                const result = client.matchAttackPathFromOrganizationLocationSimulationValuedResourceAttackPathsName(fakePath);
+                assert.strictEqual(result, "attackPathValue");
+                assert((client.pathTemplates.organizationLocationSimulationValuedResourceAttackPathsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationSimulations', async () => {
+            const fakePath = "/rendered/path/organizationLocationSimulations";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                simluation: "simluationValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationSimulationsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationSimulationsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationSimulationsPath', () => {
+                const result = client.organizationLocationSimulationsPath("organizationValue", "locationValue", "simluationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationSimulationsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationSimulationsName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationSimulationsName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationSimulationsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationSimulationsName', () => {
+                const result = client.matchLocationFromOrganizationLocationSimulationsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationSimulationsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSimluationFromOrganizationLocationSimulationsName', () => {
+                const result = client.matchSimluationFromOrganizationLocationSimulationsName(fakePath);
+                assert.strictEqual(result, "simluationValue");
+                assert((client.pathTemplates.organizationLocationSimulationsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationMuteConfigs', async () => {
+            const fakePath = "/rendered/path/organizationMuteConfigs";
+            const expectedParameters = {
+                organization: "organizationValue",
+                mute_config: "muteConfigValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationMuteConfigsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationMuteConfigsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationMuteConfigsPath', () => {
+                const result = client.organizationMuteConfigsPath("organizationValue", "muteConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationMuteConfigsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationMuteConfigsName', () => {
+                const result = client.matchOrganizationFromOrganizationMuteConfigsName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationMuteConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMuteConfigFromOrganizationMuteConfigsName', () => {
+                const result = client.matchMuteConfigFromOrganizationMuteConfigsName(fakePath);
+                assert.strictEqual(result, "muteConfigValue");
+                assert((client.pathTemplates.organizationMuteConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationResourceValueConfigs', async () => {
+            const fakePath = "/rendered/path/organizationResourceValueConfigs";
+            const expectedParameters = {
+                organization: "organizationValue",
+                resource_value_config: "resourceValueConfigValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationResourceValueConfigsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationResourceValueConfigsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationResourceValueConfigsPath', () => {
+                const result = client.organizationResourceValueConfigsPath("organizationValue", "resourceValueConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationResourceValueConfigsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationResourceValueConfigsName', () => {
+                const result = client.matchOrganizationFromOrganizationResourceValueConfigsName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationResourceValueConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchResourceValueConfigFromOrganizationResourceValueConfigsName', () => {
+                const result = client.matchResourceValueConfigFromOrganizationResourceValueConfigsName(fakePath);
+                assert.strictEqual(result, "resourceValueConfigValue");
+                assert((client.pathTemplates.organizationResourceValueConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationSimulationValuedResourceAttackPaths', async () => {
+            const fakePath = "/rendered/path/organizationSimulationValuedResourceAttackPaths";
+            const expectedParameters = {
+                organization: "organizationValue",
+                simulation: "simulationValue",
+                valued_resource: "valuedResourceValue",
+                attack_path: "attackPathValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationSimulationValuedResourceAttackPathsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationSimulationValuedResourceAttackPathsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationSimulationValuedResourceAttackPathsPath', () => {
+                const result = client.organizationSimulationValuedResourceAttackPathsPath("organizationValue", "simulationValue", "valuedResourceValue", "attackPathValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationSimulationValuedResourceAttackPathsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationSimulationValuedResourceAttackPathsName', () => {
+                const result = client.matchOrganizationFromOrganizationSimulationValuedResourceAttackPathsName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationSimulationValuedResourceAttackPathsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSimulationFromOrganizationSimulationValuedResourceAttackPathsName', () => {
+                const result = client.matchSimulationFromOrganizationSimulationValuedResourceAttackPathsName(fakePath);
+                assert.strictEqual(result, "simulationValue");
+                assert((client.pathTemplates.organizationSimulationValuedResourceAttackPathsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchValuedResourceFromOrganizationSimulationValuedResourceAttackPathsName', () => {
+                const result = client.matchValuedResourceFromOrganizationSimulationValuedResourceAttackPathsName(fakePath);
+                assert.strictEqual(result, "valuedResourceValue");
+                assert((client.pathTemplates.organizationSimulationValuedResourceAttackPathsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAttackPathFromOrganizationSimulationValuedResourceAttackPathsName', () => {
+                const result = client.matchAttackPathFromOrganizationSimulationValuedResourceAttackPathsName(fakePath);
+                assert.strictEqual(result, "attackPathValue");
+                assert((client.pathTemplates.organizationSimulationValuedResourceAttackPathsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationSimulationValuedResources', async () => {
+            const fakePath = "/rendered/path/organizationSimulationValuedResources";
+            const expectedParameters = {
+                organization: "organizationValue",
+                simulation: "simulationValue",
+                valued_resource: "valuedResourceValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationSimulationValuedResourcesPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationSimulationValuedResourcesPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationSimulationValuedResourcesPath', () => {
+                const result = client.organizationSimulationValuedResourcesPath("organizationValue", "simulationValue", "valuedResourceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationSimulationValuedResourcesPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationSimulationValuedResourcesName', () => {
+                const result = client.matchOrganizationFromOrganizationSimulationValuedResourcesName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationSimulationValuedResourcesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSimulationFromOrganizationSimulationValuedResourcesName', () => {
+                const result = client.matchSimulationFromOrganizationSimulationValuedResourcesName(fakePath);
+                assert.strictEqual(result, "simulationValue");
+                assert((client.pathTemplates.organizationSimulationValuedResourcesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchValuedResourceFromOrganizationSimulationValuedResourcesName', () => {
+                const result = client.matchValuedResourceFromOrganizationSimulationValuedResourcesName(fakePath);
+                assert.strictEqual(result, "valuedResourceValue");
+                assert((client.pathTemplates.organizationSimulationValuedResourcesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationSimulations', async () => {
+            const fakePath = "/rendered/path/organizationSimulations";
+            const expectedParameters = {
+                organization: "organizationValue",
+                simulation: "simulationValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationSimulationsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationSimulationsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationSimulationsPath', () => {
+                const result = client.organizationSimulationsPath("organizationValue", "simulationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationSimulationsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationSimulationsName', () => {
+                const result = client.matchOrganizationFromOrganizationSimulationsName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationSimulationsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSimulationFromOrganizationSimulationsName', () => {
+                const result = client.matchSimulationFromOrganizationSimulationsName(fakePath);
+                assert.strictEqual(result, "simulationValue");
+                assert((client.pathTemplates.organizationSimulationsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationSource', async () => {
+            const fakePath = "/rendered/path/organizationSource";
+            const expectedParameters = {
+                organization: "organizationValue",
+                source: "sourceValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationSourcePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationSourcePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationSourcePath', () => {
+                const result = client.organizationSourcePath("organizationValue", "sourceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationSourcePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationSourceName', () => {
+                const result = client.matchOrganizationFromOrganizationSourceName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationSourcePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSourceFromOrganizationSourceName', () => {
+                const result = client.matchSourceFromOrganizationSourceName(fakePath);
+                assert.strictEqual(result, "sourceValue");
+                assert((client.pathTemplates.organizationSourcePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationSourceFindingExternalsystem', async () => {
+            const fakePath = "/rendered/path/organizationSourceFindingExternalsystem";
+            const expectedParameters = {
+                organization: "organizationValue",
+                source: "sourceValue",
+                finding: "findingValue",
+                externalsystem: "externalsystemValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationSourceFindingExternalsystemPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationSourceFindingExternalsystemPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationSourceFindingExternalsystemPath', () => {
+                const result = client.organizationSourceFindingExternalsystemPath("organizationValue", "sourceValue", "findingValue", "externalsystemValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationSourceFindingExternalsystemPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationSourceFindingExternalsystemName', () => {
+                const result = client.matchOrganizationFromOrganizationSourceFindingExternalsystemName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationSourceFindingExternalsystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSourceFromOrganizationSourceFindingExternalsystemName', () => {
+                const result = client.matchSourceFromOrganizationSourceFindingExternalsystemName(fakePath);
+                assert.strictEqual(result, "sourceValue");
+                assert((client.pathTemplates.organizationSourceFindingExternalsystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFindingFromOrganizationSourceFindingExternalsystemName', () => {
+                const result = client.matchFindingFromOrganizationSourceFindingExternalsystemName(fakePath);
+                assert.strictEqual(result, "findingValue");
+                assert((client.pathTemplates.organizationSourceFindingExternalsystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchExternalsystemFromOrganizationSourceFindingExternalsystemName', () => {
+                const result = client.matchExternalsystemFromOrganizationSourceFindingExternalsystemName(fakePath);
+                assert.strictEqual(result, "externalsystemValue");
+                assert((client.pathTemplates.organizationSourceFindingExternalsystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationSourceFindingSecurityMarks', async () => {
+            const fakePath = "/rendered/path/organizationSourceFindingSecurityMarks";
+            const expectedParameters = {
+                organization: "organizationValue",
+                source: "sourceValue",
+                finding: "findingValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationSourceFindingSecurityMarksPath', () => {
+                const result = client.organizationSourceFindingSecurityMarksPath("organizationValue", "sourceValue", "findingValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationSourceFindingSecurityMarksName', () => {
+                const result = client.matchOrganizationFromOrganizationSourceFindingSecurityMarksName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSourceFromOrganizationSourceFindingSecurityMarksName', () => {
+                const result = client.matchSourceFromOrganizationSourceFindingSecurityMarksName(fakePath);
+                assert.strictEqual(result, "sourceValue");
+                assert((client.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFindingFromOrganizationSourceFindingSecurityMarksName', () => {
+                const result = client.matchFindingFromOrganizationSourceFindingSecurityMarksName(fakePath);
+                assert.strictEqual(result, "findingValue");
+                assert((client.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationSourceFindings', async () => {
+            const fakePath = "/rendered/path/organizationSourceFindings";
+            const expectedParameters = {
+                organization: "organizationValue",
+                source: "sourceValue",
+                finding: "findingValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationSourceFindingsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationSourceFindingsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationSourceFindingsPath', () => {
+                const result = client.organizationSourceFindingsPath("organizationValue", "sourceValue", "findingValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationSourceFindingsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationSourceFindingsName', () => {
+                const result = client.matchOrganizationFromOrganizationSourceFindingsName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationSourceFindingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSourceFromOrganizationSourceFindingsName', () => {
+                const result = client.matchSourceFromOrganizationSourceFindingsName(fakePath);
+                assert.strictEqual(result, "sourceValue");
+                assert((client.pathTemplates.organizationSourceFindingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFindingFromOrganizationSourceFindingsName', () => {
+                const result = client.matchFindingFromOrganizationSourceFindingsName(fakePath);
+                assert.strictEqual(result, "findingValue");
+                assert((client.pathTemplates.organizationSourceFindingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationSourceLocationFindingExternalsystem', async () => {
+            const fakePath = "/rendered/path/organizationSourceLocationFindingExternalsystem";
+            const expectedParameters = {
+                organization: "organizationValue",
+                source: "sourceValue",
+                location: "locationValue",
+                finding: "findingValue",
+                externalsystem: "externalsystemValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationSourceLocationFindingExternalsystemPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationSourceLocationFindingExternalsystemPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationSourceLocationFindingExternalsystemPath', () => {
+                const result = client.organizationSourceLocationFindingExternalsystemPath("organizationValue", "sourceValue", "locationValue", "findingValue", "externalsystemValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationSourceLocationFindingExternalsystemPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationSourceLocationFindingExternalsystemName', () => {
+                const result = client.matchOrganizationFromOrganizationSourceLocationFindingExternalsystemName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationSourceLocationFindingExternalsystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSourceFromOrganizationSourceLocationFindingExternalsystemName', () => {
+                const result = client.matchSourceFromOrganizationSourceLocationFindingExternalsystemName(fakePath);
+                assert.strictEqual(result, "sourceValue");
+                assert((client.pathTemplates.organizationSourceLocationFindingExternalsystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationSourceLocationFindingExternalsystemName', () => {
+                const result = client.matchLocationFromOrganizationSourceLocationFindingExternalsystemName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationSourceLocationFindingExternalsystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFindingFromOrganizationSourceLocationFindingExternalsystemName', () => {
+                const result = client.matchFindingFromOrganizationSourceLocationFindingExternalsystemName(fakePath);
+                assert.strictEqual(result, "findingValue");
+                assert((client.pathTemplates.organizationSourceLocationFindingExternalsystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchExternalsystemFromOrganizationSourceLocationFindingExternalsystemName', () => {
+                const result = client.matchExternalsystemFromOrganizationSourceLocationFindingExternalsystemName(fakePath);
+                assert.strictEqual(result, "externalsystemValue");
+                assert((client.pathTemplates.organizationSourceLocationFindingExternalsystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationSourceLocationFindingSecurityMarks', async () => {
+            const fakePath = "/rendered/path/organizationSourceLocationFindingSecurityMarks";
+            const expectedParameters = {
+                organization: "organizationValue",
+                source: "sourceValue",
+                location: "locationValue",
+                finding: "findingValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationSourceLocationFindingSecurityMarksPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationSourceLocationFindingSecurityMarksPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationSourceLocationFindingSecurityMarksPath', () => {
+                const result = client.organizationSourceLocationFindingSecurityMarksPath("organizationValue", "sourceValue", "locationValue", "findingValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationSourceLocationFindingSecurityMarksPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationSourceLocationFindingSecurityMarksName', () => {
+                const result = client.matchOrganizationFromOrganizationSourceLocationFindingSecurityMarksName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationSourceLocationFindingSecurityMarksPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSourceFromOrganizationSourceLocationFindingSecurityMarksName', () => {
+                const result = client.matchSourceFromOrganizationSourceLocationFindingSecurityMarksName(fakePath);
+                assert.strictEqual(result, "sourceValue");
+                assert((client.pathTemplates.organizationSourceLocationFindingSecurityMarksPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationSourceLocationFindingSecurityMarksName', () => {
+                const result = client.matchLocationFromOrganizationSourceLocationFindingSecurityMarksName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationSourceLocationFindingSecurityMarksPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFindingFromOrganizationSourceLocationFindingSecurityMarksName', () => {
+                const result = client.matchFindingFromOrganizationSourceLocationFindingSecurityMarksName(fakePath);
+                assert.strictEqual(result, "findingValue");
+                assert((client.pathTemplates.organizationSourceLocationFindingSecurityMarksPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationSourceLocationFindings', async () => {
+            const fakePath = "/rendered/path/organizationSourceLocationFindings";
+            const expectedParameters = {
+                organization: "organizationValue",
+                source: "sourceValue",
+                location: "locationValue",
+                finding: "findingValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationSourceLocationFindingsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationSourceLocationFindingsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationSourceLocationFindingsPath', () => {
+                const result = client.organizationSourceLocationFindingsPath("organizationValue", "sourceValue", "locationValue", "findingValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationSourceLocationFindingsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationSourceLocationFindingsName', () => {
+                const result = client.matchOrganizationFromOrganizationSourceLocationFindingsName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationSourceLocationFindingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSourceFromOrganizationSourceLocationFindingsName', () => {
+                const result = client.matchSourceFromOrganizationSourceLocationFindingsName(fakePath);
+                assert.strictEqual(result, "sourceValue");
+                assert((client.pathTemplates.organizationSourceLocationFindingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationSourceLocationFindingsName', () => {
+                const result = client.matchLocationFromOrganizationSourceLocationFindingsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationSourceLocationFindingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFindingFromOrganizationSourceLocationFindingsName', () => {
+                const result = client.matchFindingFromOrganizationSourceLocationFindingsName(fakePath);
+                assert.strictEqual(result, "findingValue");
+                assert((client.pathTemplates.organizationSourceLocationFindingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectAssetSecurityMarks', async () => {
+            const fakePath = "/rendered/path/projectAssetSecurityMarks";
+            const expectedParameters = {
+                project: "projectValue",
+                asset: "assetValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectAssetSecurityMarksPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectAssetSecurityMarksPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectAssetSecurityMarksPath', () => {
+                const result = client.projectAssetSecurityMarksPath("projectValue", "assetValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectAssetSecurityMarksPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectAssetSecurityMarksName', () => {
+                const result = client.matchProjectFromProjectAssetSecurityMarksName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectAssetSecurityMarksPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAssetFromProjectAssetSecurityMarksName', () => {
+                const result = client.matchAssetFromProjectAssetSecurityMarksName(fakePath);
+                assert.strictEqual(result, "assetValue");
+                assert((client.pathTemplates.projectAssetSecurityMarksPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectConstraintName', async () => {
+            const fakePath = "/rendered/path/projectConstraintName";
+            const expectedParameters = {
+                project: "projectValue",
+                constraint_name: "constraintNameValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectConstraintNamePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectConstraintNamePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectConstraintNamePath', () => {
+                const result = client.projectConstraintNamePath("projectValue", "constraintNameValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectConstraintNamePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectConstraintNameName', () => {
+                const result = client.matchProjectFromProjectConstraintNameName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectConstraintNamePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConstraintNameFromProjectConstraintNameName', () => {
+                const result = client.matchConstraintNameFromProjectConstraintNameName(fakePath);
+                assert.strictEqual(result, "constraintNameValue");
+                assert((client.pathTemplates.projectConstraintNamePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationBigQueryExports', async () => {
+            const fakePath = "/rendered/path/projectLocationBigQueryExports";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                export: "exportValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationBigQueryExportsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationBigQueryExportsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationBigQueryExportsPath', () => {
+                const result = client.projectLocationBigQueryExportsPath("projectValue", "locationValue", "exportValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationBigQueryExportsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationBigQueryExportsName', () => {
+                const result = client.matchProjectFromProjectLocationBigQueryExportsName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationBigQueryExportsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationBigQueryExportsName', () => {
+                const result = client.matchLocationFromProjectLocationBigQueryExportsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationBigQueryExportsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchExportFromProjectLocationBigQueryExportsName', () => {
+                const result = client.matchExportFromProjectLocationBigQueryExportsName(fakePath);
+                assert.strictEqual(result, "exportValue");
+                assert((client.pathTemplates.projectLocationBigQueryExportsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationMuteConfigs', async () => {
+            const fakePath = "/rendered/path/projectLocationMuteConfigs";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                mute_config: "muteConfigValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationMuteConfigsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationMuteConfigsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationMuteConfigsPath', () => {
+                const result = client.projectLocationMuteConfigsPath("projectValue", "locationValue", "muteConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationMuteConfigsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationMuteConfigsName', () => {
+                const result = client.matchProjectFromProjectLocationMuteConfigsName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationMuteConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationMuteConfigsName', () => {
+                const result = client.matchLocationFromProjectLocationMuteConfigsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationMuteConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMuteConfigFromProjectLocationMuteConfigsName', () => {
+                const result = client.matchMuteConfigFromProjectLocationMuteConfigsName(fakePath);
+                assert.strictEqual(result, "muteConfigValue");
+                assert((client.pathTemplates.projectLocationMuteConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationNotificationConfigs', async () => {
+            const fakePath = "/rendered/path/projectLocationNotificationConfigs";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                notification_config: "notificationConfigValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationNotificationConfigsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationNotificationConfigsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationNotificationConfigsPath', () => {
+                const result = client.projectLocationNotificationConfigsPath("projectValue", "locationValue", "notificationConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationNotificationConfigsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationNotificationConfigsName', () => {
+                const result = client.matchProjectFromProjectLocationNotificationConfigsName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationNotificationConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationNotificationConfigsName', () => {
+                const result = client.matchLocationFromProjectLocationNotificationConfigsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationNotificationConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchNotificationConfigFromProjectLocationNotificationConfigsName', () => {
+                const result = client.matchNotificationConfigFromProjectLocationNotificationConfigsName(fakePath);
+                assert.strictEqual(result, "notificationConfigValue");
+                assert((client.pathTemplates.projectLocationNotificationConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectMuteConfigs', async () => {
+            const fakePath = "/rendered/path/projectMuteConfigs";
+            const expectedParameters = {
+                project: "projectValue",
+                mute_config: "muteConfigValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectMuteConfigsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectMuteConfigsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectMuteConfigsPath', () => {
+                const result = client.projectMuteConfigsPath("projectValue", "muteConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectMuteConfigsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectMuteConfigsName', () => {
+                const result = client.matchProjectFromProjectMuteConfigsName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectMuteConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMuteConfigFromProjectMuteConfigsName', () => {
+                const result = client.matchMuteConfigFromProjectMuteConfigsName(fakePath);
+                assert.strictEqual(result, "muteConfigValue");
+                assert((client.pathTemplates.projectMuteConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectSource', async () => {
+            const fakePath = "/rendered/path/projectSource";
+            const expectedParameters = {
+                project: "projectValue",
+                source: "sourceValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectSourcePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectSourcePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectSourcePath', () => {
+                const result = client.projectSourcePath("projectValue", "sourceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectSourcePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectSourceName', () => {
+                const result = client.matchProjectFromProjectSourceName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectSourcePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSourceFromProjectSourceName', () => {
+                const result = client.matchSourceFromProjectSourceName(fakePath);
+                assert.strictEqual(result, "sourceValue");
+                assert((client.pathTemplates.projectSourcePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectSourceFindingExternalsystem', async () => {
+            const fakePath = "/rendered/path/projectSourceFindingExternalsystem";
+            const expectedParameters = {
+                project: "projectValue",
+                source: "sourceValue",
+                finding: "findingValue",
+                externalsystem: "externalsystemValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectSourceFindingExternalsystemPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectSourceFindingExternalsystemPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectSourceFindingExternalsystemPath', () => {
+                const result = client.projectSourceFindingExternalsystemPath("projectValue", "sourceValue", "findingValue", "externalsystemValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectSourceFindingExternalsystemPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectSourceFindingExternalsystemName', () => {
+                const result = client.matchProjectFromProjectSourceFindingExternalsystemName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectSourceFindingExternalsystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSourceFromProjectSourceFindingExternalsystemName', () => {
+                const result = client.matchSourceFromProjectSourceFindingExternalsystemName(fakePath);
+                assert.strictEqual(result, "sourceValue");
+                assert((client.pathTemplates.projectSourceFindingExternalsystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFindingFromProjectSourceFindingExternalsystemName', () => {
+                const result = client.matchFindingFromProjectSourceFindingExternalsystemName(fakePath);
+                assert.strictEqual(result, "findingValue");
+                assert((client.pathTemplates.projectSourceFindingExternalsystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchExternalsystemFromProjectSourceFindingExternalsystemName', () => {
+                const result = client.matchExternalsystemFromProjectSourceFindingExternalsystemName(fakePath);
+                assert.strictEqual(result, "externalsystemValue");
+                assert((client.pathTemplates.projectSourceFindingExternalsystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectSourceFindingSecurityMarks', async () => {
+            const fakePath = "/rendered/path/projectSourceFindingSecurityMarks";
+            const expectedParameters = {
+                project: "projectValue",
+                source: "sourceValue",
+                finding: "findingValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectSourceFindingSecurityMarksPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectSourceFindingSecurityMarksPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectSourceFindingSecurityMarksPath', () => {
+                const result = client.projectSourceFindingSecurityMarksPath("projectValue", "sourceValue", "findingValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectSourceFindingSecurityMarksPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectSourceFindingSecurityMarksName', () => {
+                const result = client.matchProjectFromProjectSourceFindingSecurityMarksName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectSourceFindingSecurityMarksPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSourceFromProjectSourceFindingSecurityMarksName', () => {
+                const result = client.matchSourceFromProjectSourceFindingSecurityMarksName(fakePath);
+                assert.strictEqual(result, "sourceValue");
+                assert((client.pathTemplates.projectSourceFindingSecurityMarksPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFindingFromProjectSourceFindingSecurityMarksName', () => {
+                const result = client.matchFindingFromProjectSourceFindingSecurityMarksName(fakePath);
+                assert.strictEqual(result, "findingValue");
+                assert((client.pathTemplates.projectSourceFindingSecurityMarksPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectSourceFindings', async () => {
+            const fakePath = "/rendered/path/projectSourceFindings";
+            const expectedParameters = {
+                project: "projectValue",
+                source: "sourceValue",
+                finding: "findingValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectSourceFindingsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectSourceFindingsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectSourceFindingsPath', () => {
+                const result = client.projectSourceFindingsPath("projectValue", "sourceValue", "findingValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectSourceFindingsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectSourceFindingsName', () => {
+                const result = client.matchProjectFromProjectSourceFindingsName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectSourceFindingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSourceFromProjectSourceFindingsName', () => {
+                const result = client.matchSourceFromProjectSourceFindingsName(fakePath);
+                assert.strictEqual(result, "sourceValue");
+                assert((client.pathTemplates.projectSourceFindingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFindingFromProjectSourceFindingsName', () => {
+                const result = client.matchFindingFromProjectSourceFindingsName(fakePath);
+                assert.strictEqual(result, "findingValue");
+                assert((client.pathTemplates.projectSourceFindingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectSourceLocationFindingExternalsystem', async () => {
+            const fakePath = "/rendered/path/projectSourceLocationFindingExternalsystem";
+            const expectedParameters = {
+                project: "projectValue",
+                source: "sourceValue",
+                location: "locationValue",
+                finding: "findingValue",
+                externalsystem: "externalsystemValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectSourceLocationFindingExternalsystemPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectSourceLocationFindingExternalsystemPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectSourceLocationFindingExternalsystemPath', () => {
+                const result = client.projectSourceLocationFindingExternalsystemPath("projectValue", "sourceValue", "locationValue", "findingValue", "externalsystemValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectSourceLocationFindingExternalsystemPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectSourceLocationFindingExternalsystemName', () => {
+                const result = client.matchProjectFromProjectSourceLocationFindingExternalsystemName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectSourceLocationFindingExternalsystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSourceFromProjectSourceLocationFindingExternalsystemName', () => {
+                const result = client.matchSourceFromProjectSourceLocationFindingExternalsystemName(fakePath);
+                assert.strictEqual(result, "sourceValue");
+                assert((client.pathTemplates.projectSourceLocationFindingExternalsystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectSourceLocationFindingExternalsystemName', () => {
+                const result = client.matchLocationFromProjectSourceLocationFindingExternalsystemName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectSourceLocationFindingExternalsystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFindingFromProjectSourceLocationFindingExternalsystemName', () => {
+                const result = client.matchFindingFromProjectSourceLocationFindingExternalsystemName(fakePath);
+                assert.strictEqual(result, "findingValue");
+                assert((client.pathTemplates.projectSourceLocationFindingExternalsystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchExternalsystemFromProjectSourceLocationFindingExternalsystemName', () => {
+                const result = client.matchExternalsystemFromProjectSourceLocationFindingExternalsystemName(fakePath);
+                assert.strictEqual(result, "externalsystemValue");
+                assert((client.pathTemplates.projectSourceLocationFindingExternalsystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectSourceLocationFindingSecurityMarks', async () => {
+            const fakePath = "/rendered/path/projectSourceLocationFindingSecurityMarks";
+            const expectedParameters = {
+                project: "projectValue",
+                source: "sourceValue",
+                location: "locationValue",
+                finding: "findingValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectSourceLocationFindingSecurityMarksPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectSourceLocationFindingSecurityMarksPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectSourceLocationFindingSecurityMarksPath', () => {
+                const result = client.projectSourceLocationFindingSecurityMarksPath("projectValue", "sourceValue", "locationValue", "findingValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectSourceLocationFindingSecurityMarksPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectSourceLocationFindingSecurityMarksName', () => {
+                const result = client.matchProjectFromProjectSourceLocationFindingSecurityMarksName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectSourceLocationFindingSecurityMarksPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSourceFromProjectSourceLocationFindingSecurityMarksName', () => {
+                const result = client.matchSourceFromProjectSourceLocationFindingSecurityMarksName(fakePath);
+                assert.strictEqual(result, "sourceValue");
+                assert((client.pathTemplates.projectSourceLocationFindingSecurityMarksPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectSourceLocationFindingSecurityMarksName', () => {
+                const result = client.matchLocationFromProjectSourceLocationFindingSecurityMarksName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectSourceLocationFindingSecurityMarksPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFindingFromProjectSourceLocationFindingSecurityMarksName', () => {
+                const result = client.matchFindingFromProjectSourceLocationFindingSecurityMarksName(fakePath);
+                assert.strictEqual(result, "findingValue");
+                assert((client.pathTemplates.projectSourceLocationFindingSecurityMarksPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectSourceLocationFindings', async () => {
+            const fakePath = "/rendered/path/projectSourceLocationFindings";
+            const expectedParameters = {
+                project: "projectValue",
+                source: "sourceValue",
+                location: "locationValue",
+                finding: "findingValue",
+            };
+            const client = new securitycenterModule.v2.SecurityCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectSourceLocationFindingsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectSourceLocationFindingsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectSourceLocationFindingsPath', () => {
+                const result = client.projectSourceLocationFindingsPath("projectValue", "sourceValue", "locationValue", "findingValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectSourceLocationFindingsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectSourceLocationFindingsName', () => {
+                const result = client.matchProjectFromProjectSourceLocationFindingsName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectSourceLocationFindingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSourceFromProjectSourceLocationFindingsName', () => {
+                const result = client.matchSourceFromProjectSourceLocationFindingsName(fakePath);
+                assert.strictEqual(result, "sourceValue");
+                assert((client.pathTemplates.projectSourceLocationFindingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectSourceLocationFindingsName', () => {
+                const result = client.matchLocationFromProjectSourceLocationFindingsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectSourceLocationFindingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFindingFromProjectSourceLocationFindingsName', () => {
+                const result = client.matchFindingFromProjectSourceLocationFindingsName(fakePath);
+                assert.strictEqual(result, "findingValue");
+                assert((client.pathTemplates.projectSourceLocationFindingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-
-    describe('folderLocationExport', async () => {
-      const fakePath = '/rendered/path/folderLocationExport';
-      const expectedParameters = {
-        folder: 'folderValue',
-        location: 'locationValue',
-        export: 'exportValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderLocationExportPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.folderLocationExportPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('folderLocationExportPath', () => {
-        const result = client.folderLocationExportPath(
-          'folderValue',
-          'locationValue',
-          'exportValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.folderLocationExportPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderLocationExportName', () => {
-        const result = client.matchFolderFromFolderLocationExportName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationExportPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromFolderLocationExportName', () => {
-        const result =
-          client.matchLocationFromFolderLocationExportName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationExportPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchExportFromFolderLocationExportName', () => {
-        const result = client.matchExportFromFolderLocationExportName(fakePath);
-        assert.strictEqual(result, 'exportValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationExportPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('folderLocationMuteConfig', async () => {
-      const fakePath = '/rendered/path/folderLocationMuteConfig';
-      const expectedParameters = {
-        folder: 'folderValue',
-        location: 'locationValue',
-        mute_config: 'muteConfigValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderLocationMuteConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.folderLocationMuteConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('folderLocationMuteConfigPath', () => {
-        const result = client.folderLocationMuteConfigPath(
-          'folderValue',
-          'locationValue',
-          'muteConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.folderLocationMuteConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderLocationMuteConfigName', () => {
-        const result =
-          client.matchFolderFromFolderLocationMuteConfigName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationMuteConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromFolderLocationMuteConfigName', () => {
-        const result =
-          client.matchLocationFromFolderLocationMuteConfigName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationMuteConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchMuteConfigFromFolderLocationMuteConfigName', () => {
-        const result =
-          client.matchMuteConfigFromFolderLocationMuteConfigName(fakePath);
-        assert.strictEqual(result, 'muteConfigValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationMuteConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('folderLocationNotificationConfig', async () => {
-      const fakePath = '/rendered/path/folderLocationNotificationConfig';
-      const expectedParameters = {
-        folder: 'folderValue',
-        location: 'locationValue',
-        notification_config: 'notificationConfigValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderLocationNotificationConfigPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.folderLocationNotificationConfigPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('folderLocationNotificationConfigPath', () => {
-        const result = client.folderLocationNotificationConfigPath(
-          'folderValue',
-          'locationValue',
-          'notificationConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.folderLocationNotificationConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderLocationNotificationConfigName', () => {
-        const result =
-          client.matchFolderFromFolderLocationNotificationConfigName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationNotificationConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromFolderLocationNotificationConfigName', () => {
-        const result =
-          client.matchLocationFromFolderLocationNotificationConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationNotificationConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchNotificationConfigFromFolderLocationNotificationConfigName', () => {
-        const result =
-          client.matchNotificationConfigFromFolderLocationNotificationConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'notificationConfigValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationNotificationConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('folderMuteConfig', async () => {
-      const fakePath = '/rendered/path/folderMuteConfig';
-      const expectedParameters = {
-        folder: 'folderValue',
-        mute_config: 'muteConfigValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderMuteConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.folderMuteConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('folderMuteConfigPath', () => {
-        const result = client.folderMuteConfigPath(
-          'folderValue',
-          'muteConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.folderMuteConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderMuteConfigName', () => {
-        const result = client.matchFolderFromFolderMuteConfigName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (client.pathTemplates.folderMuteConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchMuteConfigFromFolderMuteConfigName', () => {
-        const result = client.matchMuteConfigFromFolderMuteConfigName(fakePath);
-        assert.strictEqual(result, 'muteConfigValue');
-        assert(
-          (client.pathTemplates.folderMuteConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('folderSource', async () => {
-      const fakePath = '/rendered/path/folderSource';
-      const expectedParameters = {
-        folder: 'folderValue',
-        source: 'sourceValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderSourcePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.folderSourcePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('folderSourcePath', () => {
-        const result = client.folderSourcePath('folderValue', 'sourceValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.folderSourcePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderSourceName', () => {
-        const result = client.matchFolderFromFolderSourceName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (client.pathTemplates.folderSourcePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSourceFromFolderSourceName', () => {
-        const result = client.matchSourceFromFolderSourceName(fakePath);
-        assert.strictEqual(result, 'sourceValue');
-        assert(
-          (client.pathTemplates.folderSourcePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('folderSourceFinding', async () => {
-      const fakePath = '/rendered/path/folderSourceFinding';
-      const expectedParameters = {
-        folder: 'folderValue',
-        source: 'sourceValue',
-        finding: 'findingValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderSourceFindingPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.folderSourceFindingPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('folderSourceFindingPath', () => {
-        const result = client.folderSourceFindingPath(
-          'folderValue',
-          'sourceValue',
-          'findingValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.folderSourceFindingPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderSourceFindingName', () => {
-        const result = client.matchFolderFromFolderSourceFindingName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates.folderSourceFindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSourceFromFolderSourceFindingName', () => {
-        const result = client.matchSourceFromFolderSourceFindingName(fakePath);
-        assert.strictEqual(result, 'sourceValue');
-        assert(
-          (
-            client.pathTemplates.folderSourceFindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchFindingFromFolderSourceFindingName', () => {
-        const result = client.matchFindingFromFolderSourceFindingName(fakePath);
-        assert.strictEqual(result, 'findingValue');
-        assert(
-          (
-            client.pathTemplates.folderSourceFindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('folderSourceFindingExternalsystem', async () => {
-      const fakePath = '/rendered/path/folderSourceFindingExternalsystem';
-      const expectedParameters = {
-        folder: 'folderValue',
-        source: 'sourceValue',
-        finding: 'findingValue',
-        externalsystem: 'externalsystemValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderSourceFindingExternalsystemPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.folderSourceFindingExternalsystemPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('folderSourceFindingExternalsystemPath', () => {
-        const result = client.folderSourceFindingExternalsystemPath(
-          'folderValue',
-          'sourceValue',
-          'findingValue',
-          'externalsystemValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.folderSourceFindingExternalsystemPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderSourceFindingExternalsystemName', () => {
-        const result =
-          client.matchFolderFromFolderSourceFindingExternalsystemName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates.folderSourceFindingExternalsystemPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSourceFromFolderSourceFindingExternalsystemName', () => {
-        const result =
-          client.matchSourceFromFolderSourceFindingExternalsystemName(fakePath);
-        assert.strictEqual(result, 'sourceValue');
-        assert(
-          (
-            client.pathTemplates.folderSourceFindingExternalsystemPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchFindingFromFolderSourceFindingExternalsystemName', () => {
-        const result =
-          client.matchFindingFromFolderSourceFindingExternalsystemName(
-            fakePath
-          );
-        assert.strictEqual(result, 'findingValue');
-        assert(
-          (
-            client.pathTemplates.folderSourceFindingExternalsystemPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchExternalsystemFromFolderSourceFindingExternalsystemName', () => {
-        const result =
-          client.matchExternalsystemFromFolderSourceFindingExternalsystemName(
-            fakePath
-          );
-        assert.strictEqual(result, 'externalsystemValue');
-        assert(
-          (
-            client.pathTemplates.folderSourceFindingExternalsystemPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('folderSourceFindingSecurityMarks', async () => {
-      const fakePath = '/rendered/path/folderSourceFindingSecurityMarks';
-      const expectedParameters = {
-        folder: 'folderValue',
-        source: 'sourceValue',
-        finding: 'findingValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderSourceFindingSecurityMarksPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.folderSourceFindingSecurityMarksPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('folderSourceFindingSecurityMarksPath', () => {
-        const result = client.folderSourceFindingSecurityMarksPath(
-          'folderValue',
-          'sourceValue',
-          'findingValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.folderSourceFindingSecurityMarksPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderSourceFindingSecurityMarksName', () => {
-        const result =
-          client.matchFolderFromFolderSourceFindingSecurityMarksName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates.folderSourceFindingSecurityMarksPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSourceFromFolderSourceFindingSecurityMarksName', () => {
-        const result =
-          client.matchSourceFromFolderSourceFindingSecurityMarksName(fakePath);
-        assert.strictEqual(result, 'sourceValue');
-        assert(
-          (
-            client.pathTemplates.folderSourceFindingSecurityMarksPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchFindingFromFolderSourceFindingSecurityMarksName', () => {
-        const result =
-          client.matchFindingFromFolderSourceFindingSecurityMarksName(fakePath);
-        assert.strictEqual(result, 'findingValue');
-        assert(
-          (
-            client.pathTemplates.folderSourceFindingSecurityMarksPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('folderSourceLocationFinding', async () => {
-      const fakePath = '/rendered/path/folderSourceLocationFinding';
-      const expectedParameters = {
-        folder: 'folderValue',
-        source: 'sourceValue',
-        location: 'locationValue',
-        finding: 'findingValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderSourceLocationFindingPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.folderSourceLocationFindingPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('folderSourceLocationFindingPath', () => {
-        const result = client.folderSourceLocationFindingPath(
-          'folderValue',
-          'sourceValue',
-          'locationValue',
-          'findingValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.folderSourceLocationFindingPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderSourceLocationFindingName', () => {
-        const result =
-          client.matchFolderFromFolderSourceLocationFindingName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates.folderSourceLocationFindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSourceFromFolderSourceLocationFindingName', () => {
-        const result =
-          client.matchSourceFromFolderSourceLocationFindingName(fakePath);
-        assert.strictEqual(result, 'sourceValue');
-        assert(
-          (
-            client.pathTemplates.folderSourceLocationFindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromFolderSourceLocationFindingName', () => {
-        const result =
-          client.matchLocationFromFolderSourceLocationFindingName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.folderSourceLocationFindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchFindingFromFolderSourceLocationFindingName', () => {
-        const result =
-          client.matchFindingFromFolderSourceLocationFindingName(fakePath);
-        assert.strictEqual(result, 'findingValue');
-        assert(
-          (
-            client.pathTemplates.folderSourceLocationFindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('folderSourceLocationFindingExternalsystem', async () => {
-      const fakePath =
-        '/rendered/path/folderSourceLocationFindingExternalsystem';
-      const expectedParameters = {
-        folder: 'folderValue',
-        source: 'sourceValue',
-        location: 'locationValue',
-        finding: 'findingValue',
-        externalsystem: 'externalsystemValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderSourceLocationFindingExternalsystemPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.folderSourceLocationFindingExternalsystemPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('folderSourceLocationFindingExternalsystemPath', () => {
-        const result = client.folderSourceLocationFindingExternalsystemPath(
-          'folderValue',
-          'sourceValue',
-          'locationValue',
-          'findingValue',
-          'externalsystemValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .folderSourceLocationFindingExternalsystemPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderSourceLocationFindingExternalsystemName', () => {
-        const result =
-          client.matchFolderFromFolderSourceLocationFindingExternalsystemName(
-            fakePath
-          );
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates
-              .folderSourceLocationFindingExternalsystemPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSourceFromFolderSourceLocationFindingExternalsystemName', () => {
-        const result =
-          client.matchSourceFromFolderSourceLocationFindingExternalsystemName(
-            fakePath
-          );
-        assert.strictEqual(result, 'sourceValue');
-        assert(
-          (
-            client.pathTemplates
-              .folderSourceLocationFindingExternalsystemPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromFolderSourceLocationFindingExternalsystemName', () => {
-        const result =
-          client.matchLocationFromFolderSourceLocationFindingExternalsystemName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .folderSourceLocationFindingExternalsystemPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchFindingFromFolderSourceLocationFindingExternalsystemName', () => {
-        const result =
-          client.matchFindingFromFolderSourceLocationFindingExternalsystemName(
-            fakePath
-          );
-        assert.strictEqual(result, 'findingValue');
-        assert(
-          (
-            client.pathTemplates
-              .folderSourceLocationFindingExternalsystemPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchExternalsystemFromFolderSourceLocationFindingExternalsystemName', () => {
-        const result =
-          client.matchExternalsystemFromFolderSourceLocationFindingExternalsystemName(
-            fakePath
-          );
-        assert.strictEqual(result, 'externalsystemValue');
-        assert(
-          (
-            client.pathTemplates
-              .folderSourceLocationFindingExternalsystemPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('folderSourceLocationFindingSecurityMarks', async () => {
-      const fakePath =
-        '/rendered/path/folderSourceLocationFindingSecurityMarks';
-      const expectedParameters = {
-        folder: 'folderValue',
-        source: 'sourceValue',
-        location: 'locationValue',
-        finding: 'findingValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderSourceLocationFindingSecurityMarksPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.folderSourceLocationFindingSecurityMarksPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('folderSourceLocationFindingSecurityMarksPath', () => {
-        const result = client.folderSourceLocationFindingSecurityMarksPath(
-          'folderValue',
-          'sourceValue',
-          'locationValue',
-          'findingValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .folderSourceLocationFindingSecurityMarksPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderSourceLocationFindingSecurityMarksName', () => {
-        const result =
-          client.matchFolderFromFolderSourceLocationFindingSecurityMarksName(
-            fakePath
-          );
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates
-              .folderSourceLocationFindingSecurityMarksPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSourceFromFolderSourceLocationFindingSecurityMarksName', () => {
-        const result =
-          client.matchSourceFromFolderSourceLocationFindingSecurityMarksName(
-            fakePath
-          );
-        assert.strictEqual(result, 'sourceValue');
-        assert(
-          (
-            client.pathTemplates
-              .folderSourceLocationFindingSecurityMarksPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromFolderSourceLocationFindingSecurityMarksName', () => {
-        const result =
-          client.matchLocationFromFolderSourceLocationFindingSecurityMarksName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .folderSourceLocationFindingSecurityMarksPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchFindingFromFolderSourceLocationFindingSecurityMarksName', () => {
-        const result =
-          client.matchFindingFromFolderSourceLocationFindingSecurityMarksName(
-            fakePath
-          );
-        assert.strictEqual(result, 'findingValue');
-        assert(
-          (
-            client.pathTemplates
-              .folderSourceLocationFindingSecurityMarksPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organization', async () => {
-      const fakePath = '/rendered/path/organization';
-      const expectedParameters = {
-        organization: 'organizationValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('organizationPath', () => {
-        const result = client.organizationPath('organizationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.organizationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationName', () => {
-        const result = client.matchOrganizationFromOrganizationName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (client.pathTemplates.organizationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationAssetSecurityMarks', async () => {
-      const fakePath = '/rendered/path/organizationAssetSecurityMarks';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        asset: 'assetValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationAssetSecurityMarksPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationAssetSecurityMarksPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationAssetSecurityMarksPath', () => {
-        const result = client.organizationAssetSecurityMarksPath(
-          'organizationValue',
-          'assetValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationAssetSecurityMarksPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationAssetSecurityMarksName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationAssetSecurityMarksName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationAssetSecurityMarksPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAssetFromOrganizationAssetSecurityMarksName', () => {
-        const result =
-          client.matchAssetFromOrganizationAssetSecurityMarksName(fakePath);
-        assert.strictEqual(result, 'assetValue');
-        assert(
-          (
-            client.pathTemplates.organizationAssetSecurityMarksPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationConstraintName', async () => {
-      const fakePath = '/rendered/path/organizationConstraintName';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        constraint_name: 'constraintNameValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationConstraintNamePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationConstraintNamePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('organizationConstraintNamePath', () => {
-        const result = client.organizationConstraintNamePath(
-          'organizationValue',
-          'constraintNameValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationConstraintNamePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationConstraintNameName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationConstraintNameName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationConstraintNamePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchConstraintNameFromOrganizationConstraintNameName', () => {
-        const result =
-          client.matchConstraintNameFromOrganizationConstraintNameName(
-            fakePath
-          );
-        assert.strictEqual(result, 'constraintNameValue');
-        assert(
-          (
-            client.pathTemplates.organizationConstraintNamePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationLocation', async () => {
-      const fakePath = '/rendered/path/organizationLocation';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationLocationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationLocationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('organizationLocationPath', () => {
-        const result = client.organizationLocationPath(
-          'organizationValue',
-          'locationValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationLocationPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationLocationName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationLocationName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationLocationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromOrganizationLocationName', () => {
-        const result =
-          client.matchLocationFromOrganizationLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.organizationLocationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationLocationExport', async () => {
-      const fakePath = '/rendered/path/organizationLocationExport';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-        export: 'exportValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationLocationExportPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationLocationExportPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('organizationLocationExportPath', () => {
-        const result = client.organizationLocationExportPath(
-          'organizationValue',
-          'locationValue',
-          'exportValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationLocationExportPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationLocationExportName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationLocationExportName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationLocationExportPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromOrganizationLocationExportName', () => {
-        const result =
-          client.matchLocationFromOrganizationLocationExportName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.organizationLocationExportPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchExportFromOrganizationLocationExportName', () => {
-        const result =
-          client.matchExportFromOrganizationLocationExportName(fakePath);
-        assert.strictEqual(result, 'exportValue');
-        assert(
-          (
-            client.pathTemplates.organizationLocationExportPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationLocationMuteConfig', async () => {
-      const fakePath = '/rendered/path/organizationLocationMuteConfig';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-        mute_config: 'muteConfigValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationLocationMuteConfigPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationLocationMuteConfigPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationLocationMuteConfigPath', () => {
-        const result = client.organizationLocationMuteConfigPath(
-          'organizationValue',
-          'locationValue',
-          'muteConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationLocationMuteConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationLocationMuteConfigName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationLocationMuteConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationLocationMuteConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromOrganizationLocationMuteConfigName', () => {
-        const result =
-          client.matchLocationFromOrganizationLocationMuteConfigName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.organizationLocationMuteConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchMuteConfigFromOrganizationLocationMuteConfigName', () => {
-        const result =
-          client.matchMuteConfigFromOrganizationLocationMuteConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'muteConfigValue');
-        assert(
-          (
-            client.pathTemplates.organizationLocationMuteConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationLocationNotificationConfig', async () => {
-      const fakePath = '/rendered/path/organizationLocationNotificationConfig';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-        notification_config: 'notificationConfigValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationLocationNotificationConfigPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationLocationNotificationConfigPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationLocationNotificationConfigPath', () => {
-        const result = client.organizationLocationNotificationConfigPath(
-          'organizationValue',
-          'locationValue',
-          'notificationConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationNotificationConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationLocationNotificationConfigName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationLocationNotificationConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationNotificationConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromOrganizationLocationNotificationConfigName', () => {
-        const result =
-          client.matchLocationFromOrganizationLocationNotificationConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationNotificationConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchNotificationConfigFromOrganizationLocationNotificationConfigName', () => {
-        const result =
-          client.matchNotificationConfigFromOrganizationLocationNotificationConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'notificationConfigValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationNotificationConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationLocationResourceValueConfig', async () => {
-      const fakePath = '/rendered/path/organizationLocationResourceValueConfig';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-        resource_value_config: 'resourceValueConfigValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationLocationResourceValueConfigPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationLocationResourceValueConfigPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationLocationResourceValueConfigPath', () => {
-        const result = client.organizationLocationResourceValueConfigPath(
-          'organizationValue',
-          'locationValue',
-          'resourceValueConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationResourceValueConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationLocationResourceValueConfigName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationLocationResourceValueConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationResourceValueConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromOrganizationLocationResourceValueConfigName', () => {
-        const result =
-          client.matchLocationFromOrganizationLocationResourceValueConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationResourceValueConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchResourceValueConfigFromOrganizationLocationResourceValueConfigName', () => {
-        const result =
-          client.matchResourceValueConfigFromOrganizationLocationResourceValueConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'resourceValueConfigValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationResourceValueConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationLocationSimluation', async () => {
-      const fakePath = '/rendered/path/organizationLocationSimluation';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-        simluation: 'simluationValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationLocationSimluationPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationLocationSimluationPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationLocationSimluationPath', () => {
-        const result = client.organizationLocationSimluationPath(
-          'organizationValue',
-          'locationValue',
-          'simluationValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationLocationSimluationPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationLocationSimluationName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationLocationSimluationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationLocationSimluationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromOrganizationLocationSimluationName', () => {
-        const result =
-          client.matchLocationFromOrganizationLocationSimluationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.organizationLocationSimluationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSimluationFromOrganizationLocationSimluationName', () => {
-        const result =
-          client.matchSimluationFromOrganizationLocationSimluationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'simluationValue');
-        assert(
-          (
-            client.pathTemplates.organizationLocationSimluationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationLocationSimluationValuedResource', async () => {
-      const fakePath =
-        '/rendered/path/organizationLocationSimluationValuedResource';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-        simluation: 'simluationValue',
-        valued_resource: 'valuedResourceValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationLocationSimluationValuedResourcePathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationLocationSimluationValuedResourcePathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationLocationSimluationValuedResourcePath', () => {
-        const result = client.organizationLocationSimluationValuedResourcePath(
-          'organizationValue',
-          'locationValue',
-          'simluationValue',
-          'valuedResourceValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationSimluationValuedResourcePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationLocationSimluationValuedResourceName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationLocationSimluationValuedResourceName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationSimluationValuedResourcePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromOrganizationLocationSimluationValuedResourceName', () => {
-        const result =
-          client.matchLocationFromOrganizationLocationSimluationValuedResourceName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationSimluationValuedResourcePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSimluationFromOrganizationLocationSimluationValuedResourceName', () => {
-        const result =
-          client.matchSimluationFromOrganizationLocationSimluationValuedResourceName(
-            fakePath
-          );
-        assert.strictEqual(result, 'simluationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationSimluationValuedResourcePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchValuedResourceFromOrganizationLocationSimluationValuedResourceName', () => {
-        const result =
-          client.matchValuedResourceFromOrganizationLocationSimluationValuedResourceName(
-            fakePath
-          );
-        assert.strictEqual(result, 'valuedResourceValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationSimluationValuedResourcePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationLocationSimulationValuedResourceAttackPath', async () => {
-      const fakePath =
-        '/rendered/path/organizationLocationSimulationValuedResourceAttackPath';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-        simulation: 'simulationValue',
-        valued_resource: 'valuedResourceValue',
-        attack_path: 'attackPathValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationLocationSimulationValuedResourceAttackPathPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationLocationSimulationValuedResourceAttackPathPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationLocationSimulationValuedResourceAttackPathPath', () => {
-        const result =
-          client.organizationLocationSimulationValuedResourceAttackPathPath(
-            'organizationValue',
-            'locationValue',
-            'simulationValue',
-            'valuedResourceValue',
-            'attackPathValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationSimulationValuedResourceAttackPathPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationLocationSimulationValuedResourceAttackPathName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationLocationSimulationValuedResourceAttackPathName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationSimulationValuedResourceAttackPathPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromOrganizationLocationSimulationValuedResourceAttackPathName', () => {
-        const result =
-          client.matchLocationFromOrganizationLocationSimulationValuedResourceAttackPathName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationSimulationValuedResourceAttackPathPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSimulationFromOrganizationLocationSimulationValuedResourceAttackPathName', () => {
-        const result =
-          client.matchSimulationFromOrganizationLocationSimulationValuedResourceAttackPathName(
-            fakePath
-          );
-        assert.strictEqual(result, 'simulationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationSimulationValuedResourceAttackPathPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchValuedResourceFromOrganizationLocationSimulationValuedResourceAttackPathName', () => {
-        const result =
-          client.matchValuedResourceFromOrganizationLocationSimulationValuedResourceAttackPathName(
-            fakePath
-          );
-        assert.strictEqual(result, 'valuedResourceValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationSimulationValuedResourceAttackPathPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAttackPathFromOrganizationLocationSimulationValuedResourceAttackPathName', () => {
-        const result =
-          client.matchAttackPathFromOrganizationLocationSimulationValuedResourceAttackPathName(
-            fakePath
-          );
-        assert.strictEqual(result, 'attackPathValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationSimulationValuedResourceAttackPathPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationMuteConfig', async () => {
-      const fakePath = '/rendered/path/organizationMuteConfig';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        mute_config: 'muteConfigValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationMuteConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationMuteConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('organizationMuteConfigPath', () => {
-        const result = client.organizationMuteConfigPath(
-          'organizationValue',
-          'muteConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationMuteConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationMuteConfigName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationMuteConfigName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationMuteConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchMuteConfigFromOrganizationMuteConfigName', () => {
-        const result =
-          client.matchMuteConfigFromOrganizationMuteConfigName(fakePath);
-        assert.strictEqual(result, 'muteConfigValue');
-        assert(
-          (
-            client.pathTemplates.organizationMuteConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationResourceValueConfig', async () => {
-      const fakePath = '/rendered/path/organizationResourceValueConfig';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        resource_value_config: 'resourceValueConfigValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationResourceValueConfigPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationResourceValueConfigPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationResourceValueConfigPath', () => {
-        const result = client.organizationResourceValueConfigPath(
-          'organizationValue',
-          'resourceValueConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationResourceValueConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationResourceValueConfigName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationResourceValueConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationResourceValueConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchResourceValueConfigFromOrganizationResourceValueConfigName', () => {
-        const result =
-          client.matchResourceValueConfigFromOrganizationResourceValueConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'resourceValueConfigValue');
-        assert(
-          (
-            client.pathTemplates.organizationResourceValueConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationSimulation', async () => {
-      const fakePath = '/rendered/path/organizationSimulation';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        simulation: 'simulationValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationSimulationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationSimulationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('organizationSimulationPath', () => {
-        const result = client.organizationSimulationPath(
-          'organizationValue',
-          'simulationValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationSimulationPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationSimulationName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationSimulationName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationSimulationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSimulationFromOrganizationSimulationName', () => {
-        const result =
-          client.matchSimulationFromOrganizationSimulationName(fakePath);
-        assert.strictEqual(result, 'simulationValue');
-        assert(
-          (
-            client.pathTemplates.organizationSimulationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationSimulationValuedResource', async () => {
-      const fakePath = '/rendered/path/organizationSimulationValuedResource';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        simulation: 'simulationValue',
-        valued_resource: 'valuedResourceValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationSimulationValuedResourcePathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationSimulationValuedResourcePathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationSimulationValuedResourcePath', () => {
-        const result = client.organizationSimulationValuedResourcePath(
-          'organizationValue',
-          'simulationValue',
-          'valuedResourceValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .organizationSimulationValuedResourcePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationSimulationValuedResourceName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationSimulationValuedResourceName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationSimulationValuedResourcePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSimulationFromOrganizationSimulationValuedResourceName', () => {
-        const result =
-          client.matchSimulationFromOrganizationSimulationValuedResourceName(
-            fakePath
-          );
-        assert.strictEqual(result, 'simulationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationSimulationValuedResourcePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchValuedResourceFromOrganizationSimulationValuedResourceName', () => {
-        const result =
-          client.matchValuedResourceFromOrganizationSimulationValuedResourceName(
-            fakePath
-          );
-        assert.strictEqual(result, 'valuedResourceValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationSimulationValuedResourcePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationSimulationValuedResourceAttackPath', async () => {
-      const fakePath =
-        '/rendered/path/organizationSimulationValuedResourceAttackPath';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        simulation: 'simulationValue',
-        valued_resource: 'valuedResourceValue',
-        attack_path: 'attackPathValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationSimulationValuedResourceAttackPathPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationSimulationValuedResourceAttackPathPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationSimulationValuedResourceAttackPathPath', () => {
-        const result =
-          client.organizationSimulationValuedResourceAttackPathPath(
-            'organizationValue',
-            'simulationValue',
-            'valuedResourceValue',
-            'attackPathValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .organizationSimulationValuedResourceAttackPathPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationSimulationValuedResourceAttackPathName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationSimulationValuedResourceAttackPathName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationSimulationValuedResourceAttackPathPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSimulationFromOrganizationSimulationValuedResourceAttackPathName', () => {
-        const result =
-          client.matchSimulationFromOrganizationSimulationValuedResourceAttackPathName(
-            fakePath
-          );
-        assert.strictEqual(result, 'simulationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationSimulationValuedResourceAttackPathPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchValuedResourceFromOrganizationSimulationValuedResourceAttackPathName', () => {
-        const result =
-          client.matchValuedResourceFromOrganizationSimulationValuedResourceAttackPathName(
-            fakePath
-          );
-        assert.strictEqual(result, 'valuedResourceValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationSimulationValuedResourceAttackPathPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAttackPathFromOrganizationSimulationValuedResourceAttackPathName', () => {
-        const result =
-          client.matchAttackPathFromOrganizationSimulationValuedResourceAttackPathName(
-            fakePath
-          );
-        assert.strictEqual(result, 'attackPathValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationSimulationValuedResourceAttackPathPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationSource', async () => {
-      const fakePath = '/rendered/path/organizationSource';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        source: 'sourceValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationSourcePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationSourcePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('organizationSourcePath', () => {
-        const result = client.organizationSourcePath(
-          'organizationValue',
-          'sourceValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationSourcePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationSourceName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationSourceName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationSourcePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSourceFromOrganizationSourceName', () => {
-        const result = client.matchSourceFromOrganizationSourceName(fakePath);
-        assert.strictEqual(result, 'sourceValue');
-        assert(
-          (
-            client.pathTemplates.organizationSourcePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationSourceFinding', async () => {
-      const fakePath = '/rendered/path/organizationSourceFinding';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        source: 'sourceValue',
-        finding: 'findingValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationSourceFindingPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationSourceFindingPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('organizationSourceFindingPath', () => {
-        const result = client.organizationSourceFindingPath(
-          'organizationValue',
-          'sourceValue',
-          'findingValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationSourceFindingPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationSourceFindingName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationSourceFindingName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationSourceFindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSourceFromOrganizationSourceFindingName', () => {
-        const result =
-          client.matchSourceFromOrganizationSourceFindingName(fakePath);
-        assert.strictEqual(result, 'sourceValue');
-        assert(
-          (
-            client.pathTemplates.organizationSourceFindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchFindingFromOrganizationSourceFindingName', () => {
-        const result =
-          client.matchFindingFromOrganizationSourceFindingName(fakePath);
-        assert.strictEqual(result, 'findingValue');
-        assert(
-          (
-            client.pathTemplates.organizationSourceFindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationSourceFindingExternalsystem', async () => {
-      const fakePath = '/rendered/path/organizationSourceFindingExternalsystem';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        source: 'sourceValue',
-        finding: 'findingValue',
-        externalsystem: 'externalsystemValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationSourceFindingExternalsystemPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationSourceFindingExternalsystemPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationSourceFindingExternalsystemPath', () => {
-        const result = client.organizationSourceFindingExternalsystemPath(
-          'organizationValue',
-          'sourceValue',
-          'findingValue',
-          'externalsystemValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .organizationSourceFindingExternalsystemPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationSourceFindingExternalsystemName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationSourceFindingExternalsystemName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationSourceFindingExternalsystemPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSourceFromOrganizationSourceFindingExternalsystemName', () => {
-        const result =
-          client.matchSourceFromOrganizationSourceFindingExternalsystemName(
-            fakePath
-          );
-        assert.strictEqual(result, 'sourceValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationSourceFindingExternalsystemPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchFindingFromOrganizationSourceFindingExternalsystemName', () => {
-        const result =
-          client.matchFindingFromOrganizationSourceFindingExternalsystemName(
-            fakePath
-          );
-        assert.strictEqual(result, 'findingValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationSourceFindingExternalsystemPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchExternalsystemFromOrganizationSourceFindingExternalsystemName', () => {
-        const result =
-          client.matchExternalsystemFromOrganizationSourceFindingExternalsystemName(
-            fakePath
-          );
-        assert.strictEqual(result, 'externalsystemValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationSourceFindingExternalsystemPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationSourceFindingSecurityMarks', async () => {
-      const fakePath = '/rendered/path/organizationSourceFindingSecurityMarks';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        source: 'sourceValue',
-        finding: 'findingValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationSourceFindingSecurityMarksPath', () => {
-        const result = client.organizationSourceFindingSecurityMarksPath(
-          'organizationValue',
-          'sourceValue',
-          'findingValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .organizationSourceFindingSecurityMarksPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationSourceFindingSecurityMarksName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationSourceFindingSecurityMarksName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationSourceFindingSecurityMarksPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSourceFromOrganizationSourceFindingSecurityMarksName', () => {
-        const result =
-          client.matchSourceFromOrganizationSourceFindingSecurityMarksName(
-            fakePath
-          );
-        assert.strictEqual(result, 'sourceValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationSourceFindingSecurityMarksPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchFindingFromOrganizationSourceFindingSecurityMarksName', () => {
-        const result =
-          client.matchFindingFromOrganizationSourceFindingSecurityMarksName(
-            fakePath
-          );
-        assert.strictEqual(result, 'findingValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationSourceFindingSecurityMarksPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationSourceLocationFinding', async () => {
-      const fakePath = '/rendered/path/organizationSourceLocationFinding';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        source: 'sourceValue',
-        location: 'locationValue',
-        finding: 'findingValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationSourceLocationFindingPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationSourceLocationFindingPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationSourceLocationFindingPath', () => {
-        const result = client.organizationSourceLocationFindingPath(
-          'organizationValue',
-          'sourceValue',
-          'locationValue',
-          'findingValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationSourceLocationFindingPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationSourceLocationFindingName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationSourceLocationFindingName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationSourceLocationFindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSourceFromOrganizationSourceLocationFindingName', () => {
-        const result =
-          client.matchSourceFromOrganizationSourceLocationFindingName(fakePath);
-        assert.strictEqual(result, 'sourceValue');
-        assert(
-          (
-            client.pathTemplates.organizationSourceLocationFindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromOrganizationSourceLocationFindingName', () => {
-        const result =
-          client.matchLocationFromOrganizationSourceLocationFindingName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.organizationSourceLocationFindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchFindingFromOrganizationSourceLocationFindingName', () => {
-        const result =
-          client.matchFindingFromOrganizationSourceLocationFindingName(
-            fakePath
-          );
-        assert.strictEqual(result, 'findingValue');
-        assert(
-          (
-            client.pathTemplates.organizationSourceLocationFindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationSourceLocationFindingExternalsystem', async () => {
-      const fakePath =
-        '/rendered/path/organizationSourceLocationFindingExternalsystem';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        source: 'sourceValue',
-        location: 'locationValue',
-        finding: 'findingValue',
-        externalsystem: 'externalsystemValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationSourceLocationFindingExternalsystemPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationSourceLocationFindingExternalsystemPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationSourceLocationFindingExternalsystemPath', () => {
-        const result =
-          client.organizationSourceLocationFindingExternalsystemPath(
-            'organizationValue',
-            'sourceValue',
-            'locationValue',
-            'findingValue',
-            'externalsystemValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .organizationSourceLocationFindingExternalsystemPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationSourceLocationFindingExternalsystemName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationSourceLocationFindingExternalsystemName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationSourceLocationFindingExternalsystemPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSourceFromOrganizationSourceLocationFindingExternalsystemName', () => {
-        const result =
-          client.matchSourceFromOrganizationSourceLocationFindingExternalsystemName(
-            fakePath
-          );
-        assert.strictEqual(result, 'sourceValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationSourceLocationFindingExternalsystemPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromOrganizationSourceLocationFindingExternalsystemName', () => {
-        const result =
-          client.matchLocationFromOrganizationSourceLocationFindingExternalsystemName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationSourceLocationFindingExternalsystemPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchFindingFromOrganizationSourceLocationFindingExternalsystemName', () => {
-        const result =
-          client.matchFindingFromOrganizationSourceLocationFindingExternalsystemName(
-            fakePath
-          );
-        assert.strictEqual(result, 'findingValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationSourceLocationFindingExternalsystemPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchExternalsystemFromOrganizationSourceLocationFindingExternalsystemName', () => {
-        const result =
-          client.matchExternalsystemFromOrganizationSourceLocationFindingExternalsystemName(
-            fakePath
-          );
-        assert.strictEqual(result, 'externalsystemValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationSourceLocationFindingExternalsystemPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationSourceLocationFindingSecurityMarks', async () => {
-      const fakePath =
-        '/rendered/path/organizationSourceLocationFindingSecurityMarks';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        source: 'sourceValue',
-        location: 'locationValue',
-        finding: 'findingValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationSourceLocationFindingSecurityMarksPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationSourceLocationFindingSecurityMarksPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationSourceLocationFindingSecurityMarksPath', () => {
-        const result =
-          client.organizationSourceLocationFindingSecurityMarksPath(
-            'organizationValue',
-            'sourceValue',
-            'locationValue',
-            'findingValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .organizationSourceLocationFindingSecurityMarksPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationSourceLocationFindingSecurityMarksName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationSourceLocationFindingSecurityMarksName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationSourceLocationFindingSecurityMarksPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSourceFromOrganizationSourceLocationFindingSecurityMarksName', () => {
-        const result =
-          client.matchSourceFromOrganizationSourceLocationFindingSecurityMarksName(
-            fakePath
-          );
-        assert.strictEqual(result, 'sourceValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationSourceLocationFindingSecurityMarksPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromOrganizationSourceLocationFindingSecurityMarksName', () => {
-        const result =
-          client.matchLocationFromOrganizationSourceLocationFindingSecurityMarksName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationSourceLocationFindingSecurityMarksPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchFindingFromOrganizationSourceLocationFindingSecurityMarksName', () => {
-        const result =
-          client.matchFindingFromOrganizationSourceLocationFindingSecurityMarksName(
-            fakePath
-          );
-        assert.strictEqual(result, 'findingValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationSourceLocationFindingSecurityMarksPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectAssetSecurityMarks', async () => {
-      const fakePath = '/rendered/path/projectAssetSecurityMarks';
-      const expectedParameters = {
-        project: 'projectValue',
-        asset: 'assetValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectAssetSecurityMarksPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectAssetSecurityMarksPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectAssetSecurityMarksPath', () => {
-        const result = client.projectAssetSecurityMarksPath(
-          'projectValue',
-          'assetValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectAssetSecurityMarksPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectAssetSecurityMarksName', () => {
-        const result =
-          client.matchProjectFromProjectAssetSecurityMarksName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectAssetSecurityMarksPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAssetFromProjectAssetSecurityMarksName', () => {
-        const result =
-          client.matchAssetFromProjectAssetSecurityMarksName(fakePath);
-        assert.strictEqual(result, 'assetValue');
-        assert(
-          (
-            client.pathTemplates.projectAssetSecurityMarksPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectConstraintName', async () => {
-      const fakePath = '/rendered/path/projectConstraintName';
-      const expectedParameters = {
-        project: 'projectValue',
-        constraint_name: 'constraintNameValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectConstraintNamePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectConstraintNamePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectConstraintNamePath', () => {
-        const result = client.projectConstraintNamePath(
-          'projectValue',
-          'constraintNameValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectConstraintNamePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectConstraintNameName', () => {
-        const result =
-          client.matchProjectFromProjectConstraintNameName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectConstraintNamePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchConstraintNameFromProjectConstraintNameName', () => {
-        const result =
-          client.matchConstraintNameFromProjectConstraintNameName(fakePath);
-        assert.strictEqual(result, 'constraintNameValue');
-        assert(
-          (
-            client.pathTemplates.projectConstraintNamePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationExport', async () => {
-      const fakePath = '/rendered/path/projectLocationExport';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        export: 'exportValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationExportPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationExportPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectLocationExportPath', () => {
-        const result = client.projectLocationExportPath(
-          'projectValue',
-          'locationValue',
-          'exportValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationExportPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationExportName', () => {
-        const result =
-          client.matchProjectFromProjectLocationExportName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationExportPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationExportName', () => {
-        const result =
-          client.matchLocationFromProjectLocationExportName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationExportPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchExportFromProjectLocationExportName', () => {
-        const result =
-          client.matchExportFromProjectLocationExportName(fakePath);
-        assert.strictEqual(result, 'exportValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationExportPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationMuteConfig', async () => {
-      const fakePath = '/rendered/path/projectLocationMuteConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        mute_config: 'muteConfigValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationMuteConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationMuteConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectLocationMuteConfigPath', () => {
-        const result = client.projectLocationMuteConfigPath(
-          'projectValue',
-          'locationValue',
-          'muteConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationMuteConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationMuteConfigName', () => {
-        const result =
-          client.matchProjectFromProjectLocationMuteConfigName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationMuteConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationMuteConfigName', () => {
-        const result =
-          client.matchLocationFromProjectLocationMuteConfigName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationMuteConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchMuteConfigFromProjectLocationMuteConfigName', () => {
-        const result =
-          client.matchMuteConfigFromProjectLocationMuteConfigName(fakePath);
-        assert.strictEqual(result, 'muteConfigValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationMuteConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationNotificationConfig', async () => {
-      const fakePath = '/rendered/path/projectLocationNotificationConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        notification_config: 'notificationConfigValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationNotificationConfigPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationNotificationConfigPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationNotificationConfigPath', () => {
-        const result = client.projectLocationNotificationConfigPath(
-          'projectValue',
-          'locationValue',
-          'notificationConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationNotificationConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationNotificationConfigName', () => {
-        const result =
-          client.matchProjectFromProjectLocationNotificationConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationNotificationConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationNotificationConfigName', () => {
-        const result =
-          client.matchLocationFromProjectLocationNotificationConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationNotificationConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchNotificationConfigFromProjectLocationNotificationConfigName', () => {
-        const result =
-          client.matchNotificationConfigFromProjectLocationNotificationConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'notificationConfigValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationNotificationConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectMuteConfig', async () => {
-      const fakePath = '/rendered/path/projectMuteConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        mute_config: 'muteConfigValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectMuteConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectMuteConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectMuteConfigPath', () => {
-        const result = client.projectMuteConfigPath(
-          'projectValue',
-          'muteConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectMuteConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectMuteConfigName', () => {
-        const result = client.matchProjectFromProjectMuteConfigName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectMuteConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchMuteConfigFromProjectMuteConfigName', () => {
-        const result =
-          client.matchMuteConfigFromProjectMuteConfigName(fakePath);
-        assert.strictEqual(result, 'muteConfigValue');
-        assert(
-          (
-            client.pathTemplates.projectMuteConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectSource', async () => {
-      const fakePath = '/rendered/path/projectSource';
-      const expectedParameters = {
-        project: 'projectValue',
-        source: 'sourceValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectSourcePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectSourcePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectSourcePath', () => {
-        const result = client.projectSourcePath('projectValue', 'sourceValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectSourcePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectSourceName', () => {
-        const result = client.matchProjectFromProjectSourceName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectSourcePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSourceFromProjectSourceName', () => {
-        const result = client.matchSourceFromProjectSourceName(fakePath);
-        assert.strictEqual(result, 'sourceValue');
-        assert(
-          (client.pathTemplates.projectSourcePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectSourceFinding', async () => {
-      const fakePath = '/rendered/path/projectSourceFinding';
-      const expectedParameters = {
-        project: 'projectValue',
-        source: 'sourceValue',
-        finding: 'findingValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectSourceFindingPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectSourceFindingPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectSourceFindingPath', () => {
-        const result = client.projectSourceFindingPath(
-          'projectValue',
-          'sourceValue',
-          'findingValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectSourceFindingPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectSourceFindingName', () => {
-        const result =
-          client.matchProjectFromProjectSourceFindingName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectSourceFindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSourceFromProjectSourceFindingName', () => {
-        const result = client.matchSourceFromProjectSourceFindingName(fakePath);
-        assert.strictEqual(result, 'sourceValue');
-        assert(
-          (
-            client.pathTemplates.projectSourceFindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchFindingFromProjectSourceFindingName', () => {
-        const result =
-          client.matchFindingFromProjectSourceFindingName(fakePath);
-        assert.strictEqual(result, 'findingValue');
-        assert(
-          (
-            client.pathTemplates.projectSourceFindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectSourceFindingExternalsystem', async () => {
-      const fakePath = '/rendered/path/projectSourceFindingExternalsystem';
-      const expectedParameters = {
-        project: 'projectValue',
-        source: 'sourceValue',
-        finding: 'findingValue',
-        externalsystem: 'externalsystemValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectSourceFindingExternalsystemPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectSourceFindingExternalsystemPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectSourceFindingExternalsystemPath', () => {
-        const result = client.projectSourceFindingExternalsystemPath(
-          'projectValue',
-          'sourceValue',
-          'findingValue',
-          'externalsystemValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectSourceFindingExternalsystemPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectSourceFindingExternalsystemName', () => {
-        const result =
-          client.matchProjectFromProjectSourceFindingExternalsystemName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectSourceFindingExternalsystemPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSourceFromProjectSourceFindingExternalsystemName', () => {
-        const result =
-          client.matchSourceFromProjectSourceFindingExternalsystemName(
-            fakePath
-          );
-        assert.strictEqual(result, 'sourceValue');
-        assert(
-          (
-            client.pathTemplates.projectSourceFindingExternalsystemPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchFindingFromProjectSourceFindingExternalsystemName', () => {
-        const result =
-          client.matchFindingFromProjectSourceFindingExternalsystemName(
-            fakePath
-          );
-        assert.strictEqual(result, 'findingValue');
-        assert(
-          (
-            client.pathTemplates.projectSourceFindingExternalsystemPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchExternalsystemFromProjectSourceFindingExternalsystemName', () => {
-        const result =
-          client.matchExternalsystemFromProjectSourceFindingExternalsystemName(
-            fakePath
-          );
-        assert.strictEqual(result, 'externalsystemValue');
-        assert(
-          (
-            client.pathTemplates.projectSourceFindingExternalsystemPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectSourceFindingSecurityMarks', async () => {
-      const fakePath = '/rendered/path/projectSourceFindingSecurityMarks';
-      const expectedParameters = {
-        project: 'projectValue',
-        source: 'sourceValue',
-        finding: 'findingValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectSourceFindingSecurityMarksPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectSourceFindingSecurityMarksPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectSourceFindingSecurityMarksPath', () => {
-        const result = client.projectSourceFindingSecurityMarksPath(
-          'projectValue',
-          'sourceValue',
-          'findingValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectSourceFindingSecurityMarksPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectSourceFindingSecurityMarksName', () => {
-        const result =
-          client.matchProjectFromProjectSourceFindingSecurityMarksName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectSourceFindingSecurityMarksPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSourceFromProjectSourceFindingSecurityMarksName', () => {
-        const result =
-          client.matchSourceFromProjectSourceFindingSecurityMarksName(fakePath);
-        assert.strictEqual(result, 'sourceValue');
-        assert(
-          (
-            client.pathTemplates.projectSourceFindingSecurityMarksPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchFindingFromProjectSourceFindingSecurityMarksName', () => {
-        const result =
-          client.matchFindingFromProjectSourceFindingSecurityMarksName(
-            fakePath
-          );
-        assert.strictEqual(result, 'findingValue');
-        assert(
-          (
-            client.pathTemplates.projectSourceFindingSecurityMarksPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectSourceLocationFinding', async () => {
-      const fakePath = '/rendered/path/projectSourceLocationFinding';
-      const expectedParameters = {
-        project: 'projectValue',
-        source: 'sourceValue',
-        location: 'locationValue',
-        finding: 'findingValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectSourceLocationFindingPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectSourceLocationFindingPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectSourceLocationFindingPath', () => {
-        const result = client.projectSourceLocationFindingPath(
-          'projectValue',
-          'sourceValue',
-          'locationValue',
-          'findingValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectSourceLocationFindingPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectSourceLocationFindingName', () => {
-        const result =
-          client.matchProjectFromProjectSourceLocationFindingName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectSourceLocationFindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSourceFromProjectSourceLocationFindingName', () => {
-        const result =
-          client.matchSourceFromProjectSourceLocationFindingName(fakePath);
-        assert.strictEqual(result, 'sourceValue');
-        assert(
-          (
-            client.pathTemplates.projectSourceLocationFindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectSourceLocationFindingName', () => {
-        const result =
-          client.matchLocationFromProjectSourceLocationFindingName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectSourceLocationFindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchFindingFromProjectSourceLocationFindingName', () => {
-        const result =
-          client.matchFindingFromProjectSourceLocationFindingName(fakePath);
-        assert.strictEqual(result, 'findingValue');
-        assert(
-          (
-            client.pathTemplates.projectSourceLocationFindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectSourceLocationFindingExternalsystem', async () => {
-      const fakePath =
-        '/rendered/path/projectSourceLocationFindingExternalsystem';
-      const expectedParameters = {
-        project: 'projectValue',
-        source: 'sourceValue',
-        location: 'locationValue',
-        finding: 'findingValue',
-        externalsystem: 'externalsystemValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectSourceLocationFindingExternalsystemPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectSourceLocationFindingExternalsystemPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectSourceLocationFindingExternalsystemPath', () => {
-        const result = client.projectSourceLocationFindingExternalsystemPath(
-          'projectValue',
-          'sourceValue',
-          'locationValue',
-          'findingValue',
-          'externalsystemValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectSourceLocationFindingExternalsystemPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectSourceLocationFindingExternalsystemName', () => {
-        const result =
-          client.matchProjectFromProjectSourceLocationFindingExternalsystemName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectSourceLocationFindingExternalsystemPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSourceFromProjectSourceLocationFindingExternalsystemName', () => {
-        const result =
-          client.matchSourceFromProjectSourceLocationFindingExternalsystemName(
-            fakePath
-          );
-        assert.strictEqual(result, 'sourceValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectSourceLocationFindingExternalsystemPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectSourceLocationFindingExternalsystemName', () => {
-        const result =
-          client.matchLocationFromProjectSourceLocationFindingExternalsystemName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectSourceLocationFindingExternalsystemPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchFindingFromProjectSourceLocationFindingExternalsystemName', () => {
-        const result =
-          client.matchFindingFromProjectSourceLocationFindingExternalsystemName(
-            fakePath
-          );
-        assert.strictEqual(result, 'findingValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectSourceLocationFindingExternalsystemPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchExternalsystemFromProjectSourceLocationFindingExternalsystemName', () => {
-        const result =
-          client.matchExternalsystemFromProjectSourceLocationFindingExternalsystemName(
-            fakePath
-          );
-        assert.strictEqual(result, 'externalsystemValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectSourceLocationFindingExternalsystemPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectSourceLocationFindingSecurityMarks', async () => {
-      const fakePath =
-        '/rendered/path/projectSourceLocationFindingSecurityMarks';
-      const expectedParameters = {
-        project: 'projectValue',
-        source: 'sourceValue',
-        location: 'locationValue',
-        finding: 'findingValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectSourceLocationFindingSecurityMarksPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectSourceLocationFindingSecurityMarksPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectSourceLocationFindingSecurityMarksPath', () => {
-        const result = client.projectSourceLocationFindingSecurityMarksPath(
-          'projectValue',
-          'sourceValue',
-          'locationValue',
-          'findingValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectSourceLocationFindingSecurityMarksPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectSourceLocationFindingSecurityMarksName', () => {
-        const result =
-          client.matchProjectFromProjectSourceLocationFindingSecurityMarksName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectSourceLocationFindingSecurityMarksPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSourceFromProjectSourceLocationFindingSecurityMarksName', () => {
-        const result =
-          client.matchSourceFromProjectSourceLocationFindingSecurityMarksName(
-            fakePath
-          );
-        assert.strictEqual(result, 'sourceValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectSourceLocationFindingSecurityMarksPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectSourceLocationFindingSecurityMarksName', () => {
-        const result =
-          client.matchLocationFromProjectSourceLocationFindingSecurityMarksName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectSourceLocationFindingSecurityMarksPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchFindingFromProjectSourceLocationFindingSecurityMarksName', () => {
-        const result =
-          client.matchFindingFromProjectSourceLocationFindingSecurityMarksName(
-            fakePath
-          );
-        assert.strictEqual(result, 'findingValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectSourceLocationFindingSecurityMarksPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

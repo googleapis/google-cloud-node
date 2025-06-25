@@ -16,12 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const routeoptimization = require('@googlemaps/routeoptimization');
 
 function main() {
-  const routeOptimizationClient =
-    new routeoptimization.RouteOptimizationClient();
+  const routeOptimizationClient = new routeoptimization.RouteOptimizationClient();
 }
 
 main();
