@@ -313,6 +313,28 @@ function main(placement, visitorId) {
    *  for revenue optimization.
    */
   // const placeId = 'abc123'
+  /**
+   *  Optional. The user attributes that could be used for personalization of
+   *  search results.
+   *  * Populate at most 100 key-value pairs per query.
+   *  * Only supports string keys and repeated string values.
+   *  * Duplcate keys are not allowed within a single query.
+   *  Example:
+   *     user_attributes: 
+   *      { key: "pets"
+   *        value {
+   *          values: "dog"
+   *          values: "cat"
+   *        }
+   *      },
+   *      { key: "state"
+   *        value {
+   *          values: "CA"
+   *        }
+   *      }
+   *      
+   */
+  // const userAttributes = [1,2,3,4]
 
   // Imports the Retail library
   const {SearchServiceClient} = require('@google-cloud/retail').v2;
