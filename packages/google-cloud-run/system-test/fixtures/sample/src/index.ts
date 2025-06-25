@@ -16,14 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  BuildsClient,
-  ExecutionsClient,
-  JobsClient,
-  RevisionsClient,
-  ServicesClient,
-  TasksClient,
-} from '@google-cloud/run';
+import {BuildsClient, ExecutionsClient, JobsClient, RevisionsClient, ServicesClient, TasksClient} from '@google-cloud/run';
 
 // check that the client class type name can be used
 function doStuffWithBuildsClient(client: BuildsClient) {

@@ -22,7 +22,7 @@ import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOption
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -184,6 +184,9 @@ export class DeveloperConnectClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      accountConnectorPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/accountConnectors/{account_connector}'
+      ),
       connectionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/connections/{connection}'
       ),
@@ -192,6 +195,9 @@ export class DeveloperConnectClient {
       ),
       gitRepositoryLinkPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/connections/{connection}/gitRepositoryLinks/{git_repository_link}'
+      ),
+      insightsConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/insightsConfigs/{insights_config}'
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
@@ -204,6 +210,9 @@ export class DeveloperConnectClient {
       ),
       servicePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/namespaces/{namespace}/services/{service}'
+      ),
+      userPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/accountConnectors/{account_connector}/users/{user}'
       ),
     };
 
@@ -218,10 +227,14 @@ export class DeveloperConnectClient {
       fetchLinkableGitRepositories:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'linkableGitRepositories'),
       fetchGitRefs:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'refNames')
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'refNames'),
+      listAccountConnectors:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'accountConnectors'),
+      listUsers:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'users')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
@@ -254,6 +267,26 @@ export class DeveloperConnectClient {
       '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteGitRepositoryLinkMetadata = protoFilesRoot.lookup(
       '.google.cloud.developerconnect.v1.OperationMetadata') as gax.protobuf.Type;
+    const createAccountConnectorResponse = protoFilesRoot.lookup(
+      '.google.cloud.developerconnect.v1.AccountConnector') as gax.protobuf.Type;
+    const createAccountConnectorMetadata = protoFilesRoot.lookup(
+      '.google.cloud.developerconnect.v1.OperationMetadata') as gax.protobuf.Type;
+    const updateAccountConnectorResponse = protoFilesRoot.lookup(
+      '.google.cloud.developerconnect.v1.AccountConnector') as gax.protobuf.Type;
+    const updateAccountConnectorMetadata = protoFilesRoot.lookup(
+      '.google.cloud.developerconnect.v1.OperationMetadata') as gax.protobuf.Type;
+    const deleteAccountConnectorResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty') as gax.protobuf.Type;
+    const deleteAccountConnectorMetadata = protoFilesRoot.lookup(
+      '.google.cloud.developerconnect.v1.OperationMetadata') as gax.protobuf.Type;
+    const deleteUserResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty') as gax.protobuf.Type;
+    const deleteUserMetadata = protoFilesRoot.lookup(
+      '.google.cloud.developerconnect.v1.OperationMetadata') as gax.protobuf.Type;
+    const deleteSelfResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty') as gax.protobuf.Type;
+    const deleteSelfMetadata = protoFilesRoot.lookup(
+      '.google.cloud.developerconnect.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createConnection: new this._gaxModule.LongrunningDescriptor(
@@ -275,7 +308,27 @@ export class DeveloperConnectClient {
       deleteGitRepositoryLink: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteGitRepositoryLinkResponse.decode.bind(deleteGitRepositoryLinkResponse),
-        deleteGitRepositoryLinkMetadata.decode.bind(deleteGitRepositoryLinkMetadata))
+        deleteGitRepositoryLinkMetadata.decode.bind(deleteGitRepositoryLinkMetadata)),
+      createAccountConnector: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createAccountConnectorResponse.decode.bind(createAccountConnectorResponse),
+        createAccountConnectorMetadata.decode.bind(createAccountConnectorMetadata)),
+      updateAccountConnector: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateAccountConnectorResponse.decode.bind(updateAccountConnectorResponse),
+        updateAccountConnectorMetadata.decode.bind(updateAccountConnectorMetadata)),
+      deleteAccountConnector: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteAccountConnectorResponse.decode.bind(deleteAccountConnectorResponse),
+        deleteAccountConnectorMetadata.decode.bind(deleteAccountConnectorMetadata)),
+      deleteUser: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteUserResponse.decode.bind(deleteUserResponse),
+        deleteUserMetadata.decode.bind(deleteUserMetadata)),
+      deleteSelf: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteSelfResponse.decode.bind(deleteSelfResponse),
+        deleteSelfMetadata.decode.bind(deleteSelfMetadata))
     };
 
     // Put together the default options sent with requests.
@@ -321,7 +374,7 @@ export class DeveloperConnectClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const developerConnectStubMethods =
-        ['listConnections', 'getConnection', 'createConnection', 'updateConnection', 'deleteConnection', 'createGitRepositoryLink', 'deleteGitRepositoryLink', 'listGitRepositoryLinks', 'getGitRepositoryLink', 'fetchReadWriteToken', 'fetchReadToken', 'fetchLinkableGitRepositories', 'fetchGitHubInstallations', 'fetchGitRefs'];
+        ['listConnections', 'getConnection', 'createConnection', 'updateConnection', 'deleteConnection', 'createGitRepositoryLink', 'deleteGitRepositoryLink', 'listGitRepositoryLinks', 'getGitRepositoryLink', 'fetchReadWriteToken', 'fetchReadToken', 'fetchLinkableGitRepositories', 'fetchGitHubInstallations', 'fetchGitRefs', 'listAccountConnectors', 'getAccountConnector', 'createAccountConnector', 'updateAccountConnector', 'deleteAccountConnector', 'fetchAccessToken', 'listUsers', 'deleteUser', 'fetchSelf', 'deleteSelf'];
     for (const methodName of developerConnectStubMethods) {
       const callPromise = this.developerConnectStub.then(
         stub => (...args: Array<{}>) => {
@@ -511,6 +564,12 @@ export class DeveloperConnectClient {
       ]) => {
         this._log.info('getConnection response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -599,6 +658,12 @@ export class DeveloperConnectClient {
       ]) => {
         this._log.info('getGitRepositoryLink response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -688,6 +753,12 @@ export class DeveloperConnectClient {
       ]) => {
         this._log.info('fetchReadWriteToken response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -777,6 +848,12 @@ export class DeveloperConnectClient {
       ]) => {
         this._log.info('fetchReadToken response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -869,6 +946,295 @@ export class DeveloperConnectClient {
       ]) => {
         this._log.info('fetchGitHubInstallations response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Gets details of a single AccountConnector.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.developerconnect.v1.AccountConnector|AccountConnector}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.get_account_connector.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_GetAccountConnector_async
+ */
+  getAccountConnector(
+      request?: protos.google.cloud.developerconnect.v1.IGetAccountConnectorRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IAccountConnector,
+        protos.google.cloud.developerconnect.v1.IGetAccountConnectorRequest|undefined, {}|undefined
+      ]>;
+  getAccountConnector(
+      request: protos.google.cloud.developerconnect.v1.IGetAccountConnectorRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.developerconnect.v1.IAccountConnector,
+          protos.google.cloud.developerconnect.v1.IGetAccountConnectorRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAccountConnector(
+      request: protos.google.cloud.developerconnect.v1.IGetAccountConnectorRequest,
+      callback: Callback<
+          protos.google.cloud.developerconnect.v1.IAccountConnector,
+          protos.google.cloud.developerconnect.v1.IGetAccountConnectorRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAccountConnector(
+      request?: protos.google.cloud.developerconnect.v1.IGetAccountConnectorRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.developerconnect.v1.IAccountConnector,
+          protos.google.cloud.developerconnect.v1.IGetAccountConnectorRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.developerconnect.v1.IAccountConnector,
+          protos.google.cloud.developerconnect.v1.IGetAccountConnectorRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IAccountConnector,
+        protos.google.cloud.developerconnect.v1.IGetAccountConnectorRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getAccountConnector request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.developerconnect.v1.IAccountConnector,
+        protos.google.cloud.developerconnect.v1.IGetAccountConnectorRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAccountConnector response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getAccountConnector(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.developerconnect.v1.IAccountConnector,
+        protos.google.cloud.developerconnect.v1.IGetAccountConnectorRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getAccountConnector response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Fetches OAuth access token based on end user credentials.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.accountConnector
+ *   Required. The resource name of the AccountConnector in the format
+ *   `projects/* /locations/* /accountConnectors/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.developerconnect.v1.FetchAccessTokenResponse|FetchAccessTokenResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.fetch_access_token.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_FetchAccessToken_async
+ */
+  fetchAccessToken(
+      request?: protos.google.cloud.developerconnect.v1.IFetchAccessTokenRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IFetchAccessTokenResponse,
+        protos.google.cloud.developerconnect.v1.IFetchAccessTokenRequest|undefined, {}|undefined
+      ]>;
+  fetchAccessToken(
+      request: protos.google.cloud.developerconnect.v1.IFetchAccessTokenRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.developerconnect.v1.IFetchAccessTokenResponse,
+          protos.google.cloud.developerconnect.v1.IFetchAccessTokenRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchAccessToken(
+      request: protos.google.cloud.developerconnect.v1.IFetchAccessTokenRequest,
+      callback: Callback<
+          protos.google.cloud.developerconnect.v1.IFetchAccessTokenResponse,
+          protos.google.cloud.developerconnect.v1.IFetchAccessTokenRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchAccessToken(
+      request?: protos.google.cloud.developerconnect.v1.IFetchAccessTokenRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.developerconnect.v1.IFetchAccessTokenResponse,
+          protos.google.cloud.developerconnect.v1.IFetchAccessTokenRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.developerconnect.v1.IFetchAccessTokenResponse,
+          protos.google.cloud.developerconnect.v1.IFetchAccessTokenRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IFetchAccessTokenResponse,
+        protos.google.cloud.developerconnect.v1.IFetchAccessTokenRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'account_connector': request.accountConnector ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('fetchAccessToken request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.developerconnect.v1.IFetchAccessTokenResponse,
+        protos.google.cloud.developerconnect.v1.IFetchAccessTokenRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('fetchAccessToken response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.fetchAccessToken(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.developerconnect.v1.IFetchAccessTokenResponse,
+        protos.google.cloud.developerconnect.v1.IFetchAccessTokenRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('fetchAccessToken response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Fetch the User based on the user credentials.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the AccountConnector resource
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.developerconnect.v1.User|User}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.fetch_self.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_FetchSelf_async
+ */
+  fetchSelf(
+      request?: protos.google.cloud.developerconnect.v1.IFetchSelfRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IUser,
+        protos.google.cloud.developerconnect.v1.IFetchSelfRequest|undefined, {}|undefined
+      ]>;
+  fetchSelf(
+      request: protos.google.cloud.developerconnect.v1.IFetchSelfRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.developerconnect.v1.IUser,
+          protos.google.cloud.developerconnect.v1.IFetchSelfRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchSelf(
+      request: protos.google.cloud.developerconnect.v1.IFetchSelfRequest,
+      callback: Callback<
+          protos.google.cloud.developerconnect.v1.IUser,
+          protos.google.cloud.developerconnect.v1.IFetchSelfRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchSelf(
+      request?: protos.google.cloud.developerconnect.v1.IFetchSelfRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.developerconnect.v1.IUser,
+          protos.google.cloud.developerconnect.v1.IFetchSelfRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.developerconnect.v1.IUser,
+          protos.google.cloud.developerconnect.v1.IFetchSelfRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IUser,
+        protos.google.cloud.developerconnect.v1.IFetchSelfRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('fetchSelf request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.developerconnect.v1.IUser,
+        protos.google.cloud.developerconnect.v1.IFetchSelfRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('fetchSelf response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.fetchSelf(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.developerconnect.v1.IUser,
+        protos.google.cloud.developerconnect.v1.IFetchSelfRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('fetchSelf response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 
@@ -1522,6 +1888,632 @@ export class DeveloperConnectClient {
     const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteGitRepositoryLink, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.developerconnect.v1.OperationMetadata>;
+  }
+/**
+ * Creates a new AccountConnector in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Location resource name as the account_connector’s parent.
+ * @param {string} request.accountConnectorId
+ *   Required. The ID to use for the AccountConnector, which will become the
+ *   final component of the AccountConnector's resource name. Its format should
+ *   adhere to https://google.aip.dev/122#resource-id-segments Names must be
+ *   unique per-project per-location.
+ * @param {google.cloud.developerconnect.v1.AccountConnector} request.accountConnector
+ *   Required. The AccountConnector to create.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {boolean} [request.validateOnly]
+ *   Optional. If set, validate the request, but do not actually post it.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.create_account_connector.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_CreateAccountConnector_async
+ */
+  createAccountConnector(
+      request?: protos.google.cloud.developerconnect.v1.ICreateAccountConnectorRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.developerconnect.v1.IAccountConnector, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  createAccountConnector(
+      request: protos.google.cloud.developerconnect.v1.ICreateAccountConnectorRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.developerconnect.v1.IAccountConnector, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createAccountConnector(
+      request: protos.google.cloud.developerconnect.v1.ICreateAccountConnectorRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.developerconnect.v1.IAccountConnector, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createAccountConnector(
+      request?: protos.google.cloud.developerconnect.v1.ICreateAccountConnectorRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.developerconnect.v1.IAccountConnector, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.developerconnect.v1.IAccountConnector, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.developerconnect.v1.IAccountConnector, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.developerconnect.v1.IAccountConnector, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createAccountConnector response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createAccountConnector request %j', request);
+    return this.innerApiCalls.createAccountConnector(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.developerconnect.v1.IAccountConnector, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createAccountConnector response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `createAccountConnector()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.create_account_connector.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_CreateAccountConnector_async
+ */
+  async checkCreateAccountConnectorProgress(name: string): Promise<LROperation<protos.google.cloud.developerconnect.v1.AccountConnector, protos.google.cloud.developerconnect.v1.OperationMetadata>>{
+    this._log.info('createAccountConnector long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createAccountConnector, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.developerconnect.v1.AccountConnector, protos.google.cloud.developerconnect.v1.OperationMetadata>;
+  }
+/**
+ * Updates the parameters of a single AccountConnector.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. The list of fields to be updated.
+ * @param {google.cloud.developerconnect.v1.AccountConnector} request.accountConnector
+ *   Required. The AccountConnector to update.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {boolean} [request.allowMissing]
+ *   Optional. If set to true, and the accountConnector is not found a new
+ *   accountConnector will be created. In this situation `update_mask` is
+ *   ignored. The creation will succeed only if the input accountConnector has
+ *   all the necessary
+ * @param {boolean} [request.validateOnly]
+ *   Optional. If set, validate the request, but do not actually post it.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.update_account_connector.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_UpdateAccountConnector_async
+ */
+  updateAccountConnector(
+      request?: protos.google.cloud.developerconnect.v1.IUpdateAccountConnectorRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.developerconnect.v1.IAccountConnector, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  updateAccountConnector(
+      request: protos.google.cloud.developerconnect.v1.IUpdateAccountConnectorRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.developerconnect.v1.IAccountConnector, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateAccountConnector(
+      request: protos.google.cloud.developerconnect.v1.IUpdateAccountConnectorRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.developerconnect.v1.IAccountConnector, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateAccountConnector(
+      request?: protos.google.cloud.developerconnect.v1.IUpdateAccountConnectorRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.developerconnect.v1.IAccountConnector, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.developerconnect.v1.IAccountConnector, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.developerconnect.v1.IAccountConnector, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'account_connector.name': request.accountConnector!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.developerconnect.v1.IAccountConnector, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateAccountConnector response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateAccountConnector request %j', request);
+    return this.innerApiCalls.updateAccountConnector(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.developerconnect.v1.IAccountConnector, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateAccountConnector response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `updateAccountConnector()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.update_account_connector.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_UpdateAccountConnector_async
+ */
+  async checkUpdateAccountConnectorProgress(name: string): Promise<LROperation<protos.google.cloud.developerconnect.v1.AccountConnector, protos.google.cloud.developerconnect.v1.OperationMetadata>>{
+    this._log.info('updateAccountConnector long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateAccountConnector, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.developerconnect.v1.AccountConnector, protos.google.cloud.developerconnect.v1.OperationMetadata>;
+  }
+/**
+ * Deletes a single AccountConnector.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {boolean} [request.validateOnly]
+ *   Optional. If set, validate the request, but do not actually post it.
+ * @param {string} [request.etag]
+ *   Optional. The current etag of the AccountConnectorn.
+ *   If an etag is provided and does not match the current etag of the
+ *   AccountConnector, deletion will be blocked and an ABORTED error will be
+ *   returned.
+ * @param {boolean} [request.force]
+ *   Optional. If set to true, any Users from this AccountConnector will also
+ *   be deleted. (Otherwise, the request will only work if the AccountConnector
+ *   has no Users.)
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.delete_account_connector.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_DeleteAccountConnector_async
+ */
+  deleteAccountConnector(
+      request?: protos.google.cloud.developerconnect.v1.IDeleteAccountConnectorRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  deleteAccountConnector(
+      request: protos.google.cloud.developerconnect.v1.IDeleteAccountConnectorRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteAccountConnector(
+      request: protos.google.cloud.developerconnect.v1.IDeleteAccountConnectorRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteAccountConnector(
+      request?: protos.google.cloud.developerconnect.v1.IDeleteAccountConnectorRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteAccountConnector response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteAccountConnector request %j', request);
+    return this.innerApiCalls.deleteAccountConnector(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteAccountConnector response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `deleteAccountConnector()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.delete_account_connector.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_DeleteAccountConnector_async
+ */
+  async checkDeleteAccountConnectorProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.developerconnect.v1.OperationMetadata>>{
+    this._log.info('deleteAccountConnector long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteAccountConnector, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.developerconnect.v1.OperationMetadata>;
+  }
+/**
+ * Deletes a single User.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {boolean} [request.validateOnly]
+ *   Optional. If set, validate the request, but do not actually post it.
+ * @param {string} [request.etag]
+ *   Optional. This checksum is computed by the server based on the value of
+ *   other fields, and may be sent on update and delete requests to ensure the
+ *   client has an up-to-date value before proceeding.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.delete_user.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_DeleteUser_async
+ */
+  deleteUser(
+      request?: protos.google.cloud.developerconnect.v1.IDeleteUserRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  deleteUser(
+      request: protos.google.cloud.developerconnect.v1.IDeleteUserRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteUser(
+      request: protos.google.cloud.developerconnect.v1.IDeleteUserRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteUser(
+      request?: protos.google.cloud.developerconnect.v1.IDeleteUserRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteUser response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteUser request %j', request);
+    return this.innerApiCalls.deleteUser(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteUser response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `deleteUser()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.delete_user.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_DeleteUser_async
+ */
+  async checkDeleteUserProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.developerconnect.v1.OperationMetadata>>{
+    this._log.info('deleteUser long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteUser, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.developerconnect.v1.OperationMetadata>;
+  }
+/**
+ * Delete the User based on the user credentials.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the AccountConnector resource
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.delete_self.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_DeleteSelf_async
+ */
+  deleteSelf(
+      request?: protos.google.cloud.developerconnect.v1.IDeleteSelfRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  deleteSelf(
+      request: protos.google.cloud.developerconnect.v1.IDeleteSelfRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteSelf(
+      request: protos.google.cloud.developerconnect.v1.IDeleteSelfRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteSelf(
+      request?: protos.google.cloud.developerconnect.v1.IDeleteSelfRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteSelf response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteSelf request %j', request);
+    return this.innerApiCalls.deleteSelf(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteSelf response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `deleteSelf()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.delete_self.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_DeleteSelf_async
+ */
+  async checkDeleteSelfProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.developerconnect.v1.OperationMetadata>>{
+    this._log.info('deleteSelf long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteSelf, this._gaxModule.createDefaultBackoffSettings());
     return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.developerconnect.v1.OperationMetadata>;
   }
  /**
@@ -2331,6 +3323,418 @@ export class DeveloperConnectClient {
       callSettings
     ) as AsyncIterable<string>;
   }
+ /**
+ * Lists AccountConnectors in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListAccountConnectorsRequest
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.developerconnect.v1.AccountConnector|AccountConnector}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAccountConnectorsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listAccountConnectors(
+      request?: protos.google.cloud.developerconnect.v1.IListAccountConnectorsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IAccountConnector[],
+        protos.google.cloud.developerconnect.v1.IListAccountConnectorsRequest|null,
+        protos.google.cloud.developerconnect.v1.IListAccountConnectorsResponse
+      ]>;
+  listAccountConnectors(
+      request: protos.google.cloud.developerconnect.v1.IListAccountConnectorsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IListAccountConnectorsRequest,
+          protos.google.cloud.developerconnect.v1.IListAccountConnectorsResponse|null|undefined,
+          protos.google.cloud.developerconnect.v1.IAccountConnector>): void;
+  listAccountConnectors(
+      request: protos.google.cloud.developerconnect.v1.IListAccountConnectorsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IListAccountConnectorsRequest,
+          protos.google.cloud.developerconnect.v1.IListAccountConnectorsResponse|null|undefined,
+          protos.google.cloud.developerconnect.v1.IAccountConnector>): void;
+  listAccountConnectors(
+      request?: protos.google.cloud.developerconnect.v1.IListAccountConnectorsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IListAccountConnectorsRequest,
+          protos.google.cloud.developerconnect.v1.IListAccountConnectorsResponse|null|undefined,
+          protos.google.cloud.developerconnect.v1.IAccountConnector>,
+      callback?: PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IListAccountConnectorsRequest,
+          protos.google.cloud.developerconnect.v1.IListAccountConnectorsResponse|null|undefined,
+          protos.google.cloud.developerconnect.v1.IAccountConnector>):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IAccountConnector[],
+        protos.google.cloud.developerconnect.v1.IListAccountConnectorsRequest|null,
+        protos.google.cloud.developerconnect.v1.IListAccountConnectorsResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.developerconnect.v1.IListAccountConnectorsRequest,
+      protos.google.cloud.developerconnect.v1.IListAccountConnectorsResponse|null|undefined,
+      protos.google.cloud.developerconnect.v1.IAccountConnector>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAccountConnectors values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAccountConnectors request %j', request);
+    return this.innerApiCalls
+      .listAccountConnectors(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.developerconnect.v1.IAccountConnector[],
+        protos.google.cloud.developerconnect.v1.IListAccountConnectorsRequest|null,
+        protos.google.cloud.developerconnect.v1.IListAccountConnectorsResponse
+      ]) => {
+        this._log.info('listAccountConnectors values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listAccountConnectors`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListAccountConnectorsRequest
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.developerconnect.v1.AccountConnector|AccountConnector} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAccountConnectorsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listAccountConnectorsStream(
+      request?: protos.google.cloud.developerconnect.v1.IListAccountConnectorsRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listAccountConnectors'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listAccountConnectors stream %j', request);
+    return this.descriptors.page.listAccountConnectors.createStream(
+      this.innerApiCalls.listAccountConnectors as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listAccountConnectors`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListAccountConnectorsRequest
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.developerconnect.v1.AccountConnector|AccountConnector}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.list_account_connectors.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_ListAccountConnectors_async
+ */
+  listAccountConnectorsAsync(
+      request?: protos.google.cloud.developerconnect.v1.IListAccountConnectorsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.developerconnect.v1.IAccountConnector>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listAccountConnectors'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listAccountConnectors iterate %j', request);
+    return this.descriptors.page.listAccountConnectors.asyncIterate(
+      this.innerApiCalls['listAccountConnectors'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.developerconnect.v1.IAccountConnector>;
+  }
+ /**
+ * Lists Users in a given project, location, and account_connector.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListUsersRequest
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.developerconnect.v1.User|User}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listUsersAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listUsers(
+      request?: protos.google.cloud.developerconnect.v1.IListUsersRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IUser[],
+        protos.google.cloud.developerconnect.v1.IListUsersRequest|null,
+        protos.google.cloud.developerconnect.v1.IListUsersResponse
+      ]>;
+  listUsers(
+      request: protos.google.cloud.developerconnect.v1.IListUsersRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IListUsersRequest,
+          protos.google.cloud.developerconnect.v1.IListUsersResponse|null|undefined,
+          protos.google.cloud.developerconnect.v1.IUser>): void;
+  listUsers(
+      request: protos.google.cloud.developerconnect.v1.IListUsersRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IListUsersRequest,
+          protos.google.cloud.developerconnect.v1.IListUsersResponse|null|undefined,
+          protos.google.cloud.developerconnect.v1.IUser>): void;
+  listUsers(
+      request?: protos.google.cloud.developerconnect.v1.IListUsersRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IListUsersRequest,
+          protos.google.cloud.developerconnect.v1.IListUsersResponse|null|undefined,
+          protos.google.cloud.developerconnect.v1.IUser>,
+      callback?: PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IListUsersRequest,
+          protos.google.cloud.developerconnect.v1.IListUsersResponse|null|undefined,
+          protos.google.cloud.developerconnect.v1.IUser>):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IUser[],
+        protos.google.cloud.developerconnect.v1.IListUsersRequest|null,
+        protos.google.cloud.developerconnect.v1.IListUsersResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.developerconnect.v1.IListUsersRequest,
+      protos.google.cloud.developerconnect.v1.IListUsersResponse|null|undefined,
+      protos.google.cloud.developerconnect.v1.IUser>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listUsers values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listUsers request %j', request);
+    return this.innerApiCalls
+      .listUsers(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.developerconnect.v1.IUser[],
+        protos.google.cloud.developerconnect.v1.IListUsersRequest|null,
+        protos.google.cloud.developerconnect.v1.IListUsersResponse
+      ]) => {
+        this._log.info('listUsers values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listUsers`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListUsersRequest
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.developerconnect.v1.User|User} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listUsersAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listUsersStream(
+      request?: protos.google.cloud.developerconnect.v1.IListUsersRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listUsers'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listUsers stream %j', request);
+    return this.descriptors.page.listUsers.createStream(
+      this.innerApiCalls.listUsers as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listUsers`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListUsersRequest
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.developerconnect.v1.User|User}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.list_users.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_ListUsers_async
+ */
+  listUsersAsync(
+      request?: protos.google.cloud.developerconnect.v1.IListUsersRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.developerconnect.v1.IUser>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listUsers'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listUsers iterate %j', request);
+    return this.descriptors.page.listUsers.asyncIterate(
+      this.innerApiCalls['listUsers'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.developerconnect.v1.IUser>;
+  }
 /**
    * Gets information about a location.
    *
@@ -2638,6 +4042,55 @@ export class DeveloperConnectClient {
   // --------------------
 
   /**
+   * Return a fully-qualified accountConnector resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} account_connector
+   * @returns {string} Resource name string.
+   */
+  accountConnectorPath(project:string,location:string,accountConnector:string) {
+    return this.pathTemplates.accountConnectorPathTemplate.render({
+      project: project,
+      location: location,
+      account_connector: accountConnector,
+    });
+  }
+
+  /**
+   * Parse the project from AccountConnector resource.
+   *
+   * @param {string} accountConnectorName
+   *   A fully-qualified path representing AccountConnector resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAccountConnectorName(accountConnectorName: string) {
+    return this.pathTemplates.accountConnectorPathTemplate.match(accountConnectorName).project;
+  }
+
+  /**
+   * Parse the location from AccountConnector resource.
+   *
+   * @param {string} accountConnectorName
+   *   A fully-qualified path representing AccountConnector resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAccountConnectorName(accountConnectorName: string) {
+    return this.pathTemplates.accountConnectorPathTemplate.match(accountConnectorName).location;
+  }
+
+  /**
+   * Parse the account_connector from AccountConnector resource.
+   *
+   * @param {string} accountConnectorName
+   *   A fully-qualified path representing AccountConnector resource.
+   * @returns {string} A string representing the account_connector.
+   */
+  matchAccountConnectorFromAccountConnectorName(accountConnectorName: string) {
+    return this.pathTemplates.accountConnectorPathTemplate.match(accountConnectorName).account_connector;
+  }
+
+  /**
    * Return a fully-qualified connection resource name string.
    *
    * @param {string} project
@@ -2811,6 +4264,55 @@ export class DeveloperConnectClient {
   }
 
   /**
+   * Return a fully-qualified insightsConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} insights_config
+   * @returns {string} Resource name string.
+   */
+  insightsConfigPath(project:string,location:string,insightsConfig:string) {
+    return this.pathTemplates.insightsConfigPathTemplate.render({
+      project: project,
+      location: location,
+      insights_config: insightsConfig,
+    });
+  }
+
+  /**
+   * Parse the project from InsightsConfig resource.
+   *
+   * @param {string} insightsConfigName
+   *   A fully-qualified path representing InsightsConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromInsightsConfigName(insightsConfigName: string) {
+    return this.pathTemplates.insightsConfigPathTemplate.match(insightsConfigName).project;
+  }
+
+  /**
+   * Parse the location from InsightsConfig resource.
+   *
+   * @param {string} insightsConfigName
+   *   A fully-qualified path representing InsightsConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromInsightsConfigName(insightsConfigName: string) {
+    return this.pathTemplates.insightsConfigPathTemplate.match(insightsConfigName).location;
+  }
+
+  /**
+   * Parse the insights_config from InsightsConfig resource.
+   *
+   * @param {string} insightsConfigName
+   *   A fully-qualified path representing InsightsConfig resource.
+   * @returns {string} A string representing the insights_config.
+   */
+  matchInsightsConfigFromInsightsConfigName(insightsConfigName: string) {
+    return this.pathTemplates.insightsConfigPathTemplate.match(insightsConfigName).insights_config;
+  }
+
+  /**
    * Return a fully-qualified location resource name string.
    *
    * @param {string} project
@@ -2978,6 +4480,68 @@ export class DeveloperConnectClient {
    */
   matchServiceFromServiceName(serviceName: string) {
     return this.pathTemplates.servicePathTemplate.match(serviceName).service;
+  }
+
+  /**
+   * Return a fully-qualified user resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} account_connector
+   * @param {string} user
+   * @returns {string} Resource name string.
+   */
+  userPath(project:string,location:string,accountConnector:string,user:string) {
+    return this.pathTemplates.userPathTemplate.render({
+      project: project,
+      location: location,
+      account_connector: accountConnector,
+      user: user,
+    });
+  }
+
+  /**
+   * Parse the project from User resource.
+   *
+   * @param {string} userName
+   *   A fully-qualified path representing User resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromUserName(userName: string) {
+    return this.pathTemplates.userPathTemplate.match(userName).project;
+  }
+
+  /**
+   * Parse the location from User resource.
+   *
+   * @param {string} userName
+   *   A fully-qualified path representing User resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromUserName(userName: string) {
+    return this.pathTemplates.userPathTemplate.match(userName).location;
+  }
+
+  /**
+   * Parse the account_connector from User resource.
+   *
+   * @param {string} userName
+   *   A fully-qualified path representing User resource.
+   * @returns {string} A string representing the account_connector.
+   */
+  matchAccountConnectorFromUserName(userName: string) {
+    return this.pathTemplates.userPathTemplate.match(userName).account_connector;
+  }
+
+  /**
+   * Parse the user from User resource.
+   *
+   * @param {string} userName
+   *   A fully-qualified path representing User resource.
+   * @returns {string} A string representing the user.
+   */
+  matchUserFromUserName(userName: string) {
+    return this.pathTemplates.userPathTemplate.match(userName).user;
   }
 
   /**

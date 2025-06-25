@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -110,41 +101,20 @@ export class TagValuesClient {
    *     const client = new TagValuesClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof TagValuesClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'cloudresourcemanager.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -170,7 +140,7 @@ export class TagValuesClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -184,7 +154,10 @@ export class TagValuesClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -205,7 +178,9 @@ export class TagValuesClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      folderPathTemplate: new this._gaxModule.PathTemplate('folders/{folder}'),
+      folderPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}'
+      ),
       organizationPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}'
       ),
@@ -218,7 +193,9 @@ export class TagValuesClient {
       tagHoldPathTemplate: new this._gaxModule.PathTemplate(
         'tagValues/{tag_value}/tagHolds/{tag_hold}'
       ),
-      tagKeyPathTemplate: new this._gaxModule.PathTemplate('tagKeys/{tag_key}'),
+      tagKeyPathTemplate: new this._gaxModule.PathTemplate(
+        'tagKeys/{tag_key}'
+      ),
       tagValuePathTemplate: new this._gaxModule.PathTemplate(
         'tagValues/{tag_value}'
       ),
@@ -228,77 +205,55 @@ export class TagValuesClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listTagValues: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'tagValues'
-      ),
+      listTagValues:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'tagValues')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v3/{name=operations/**}',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v3/{name=operations/**}',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createTagValueResponse = protoFilesRoot.lookup(
-      '.google.cloud.resourcemanager.v3.TagValue'
-    ) as gax.protobuf.Type;
+      '.google.cloud.resourcemanager.v3.TagValue') as gax.protobuf.Type;
     const createTagValueMetadata = protoFilesRoot.lookup(
-      '.google.cloud.resourcemanager.v3.CreateTagValueMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.resourcemanager.v3.CreateTagValueMetadata') as gax.protobuf.Type;
     const updateTagValueResponse = protoFilesRoot.lookup(
-      '.google.cloud.resourcemanager.v3.TagValue'
-    ) as gax.protobuf.Type;
+      '.google.cloud.resourcemanager.v3.TagValue') as gax.protobuf.Type;
     const updateTagValueMetadata = protoFilesRoot.lookup(
-      '.google.cloud.resourcemanager.v3.UpdateTagValueMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.resourcemanager.v3.UpdateTagValueMetadata') as gax.protobuf.Type;
     const deleteTagValueResponse = protoFilesRoot.lookup(
-      '.google.cloud.resourcemanager.v3.TagValue'
-    ) as gax.protobuf.Type;
+      '.google.cloud.resourcemanager.v3.TagValue') as gax.protobuf.Type;
     const deleteTagValueMetadata = protoFilesRoot.lookup(
-      '.google.cloud.resourcemanager.v3.DeleteTagValueMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.resourcemanager.v3.DeleteTagValueMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createTagValue: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createTagValueResponse.decode.bind(createTagValueResponse),
-        createTagValueMetadata.decode.bind(createTagValueMetadata)
-      ),
+        createTagValueMetadata.decode.bind(createTagValueMetadata)),
       updateTagValue: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateTagValueResponse.decode.bind(updateTagValueResponse),
-        updateTagValueMetadata.decode.bind(updateTagValueMetadata)
-      ),
+        updateTagValueMetadata.decode.bind(updateTagValueMetadata)),
       deleteTagValue: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteTagValueResponse.decode.bind(deleteTagValueResponse),
-        deleteTagValueMetadata.decode.bind(deleteTagValueMetadata)
-      ),
+        deleteTagValueMetadata.decode.bind(deleteTagValueMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.resourcemanager.v3.TagValues',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.resourcemanager.v3.TagValues', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -329,43 +284,28 @@ export class TagValuesClient {
     // Put together the "service stub" for
     // google.cloud.resourcemanager.v3.TagValues.
     this.tagValuesStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.resourcemanager.v3.TagValues'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.resourcemanager.v3.TagValues') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.resourcemanager.v3.TagValues,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const tagValuesStubMethods = [
-      'listTagValues',
-      'getTagValue',
-      'getNamespacedTagValue',
-      'createTagValue',
-      'updateTagValue',
-      'deleteTagValue',
-      'getIamPolicy',
-      'setIamPolicy',
-      'testIamPermissions',
-    ];
+    const tagValuesStubMethods =
+        ['listTagValues', 'getTagValue', 'getNamespacedTagValue', 'createTagValue', 'updateTagValue', 'deleteTagValue', 'getIamPolicy', 'setIamPolicy', 'testIamPermissions'];
     for (const methodName of tagValuesStubMethods) {
       const callPromise = this.tagValuesStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -390,14 +330,8 @@ export class TagValuesClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'cloudresourcemanager.googleapis.com';
   }
@@ -408,14 +342,8 @@ export class TagValuesClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'cloudresourcemanager.googleapis.com';
   }
@@ -448,7 +376,7 @@ export class TagValuesClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/cloud-platform.read-only',
+      'https://www.googleapis.com/auth/cloud-platform.read-only'
     ];
   }
 
@@ -458,9 +386,8 @@ export class TagValuesClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -471,1253 +398,937 @@ export class TagValuesClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Retrieves a TagValue. This method will return `PERMISSION_DENIED` if the
-   * value does not exist or the user does not have permission to view it.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name for TagValue to be fetched in the format
-   *   `tagValues/456`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.resourcemanager.v3.TagValue|TagValue}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/tag_values.get_tag_value.js</caption>
-   * region_tag:cloudresourcemanager_v3_generated_TagValues_GetTagValue_async
-   */
+/**
+ * Retrieves a TagValue. This method will return `PERMISSION_DENIED` if the
+ * value does not exist or the user does not have permission to view it.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name for TagValue to be fetched in the format
+ *   `tagValues/456`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.resourcemanager.v3.TagValue|TagValue}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/tag_values.get_tag_value.js</caption>
+ * region_tag:cloudresourcemanager_v3_generated_TagValues_GetTagValue_async
+ */
   getTagValue(
-    request?: protos.google.cloud.resourcemanager.v3.IGetTagValueRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.resourcemanager.v3.ITagValue,
-      protos.google.cloud.resourcemanager.v3.IGetTagValueRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.resourcemanager.v3.IGetTagValueRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.resourcemanager.v3.ITagValue,
+        protos.google.cloud.resourcemanager.v3.IGetTagValueRequest|undefined, {}|undefined
+      ]>;
   getTagValue(
-    request: protos.google.cloud.resourcemanager.v3.IGetTagValueRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.resourcemanager.v3.ITagValue,
-      | protos.google.cloud.resourcemanager.v3.IGetTagValueRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getTagValue(
-    request: protos.google.cloud.resourcemanager.v3.IGetTagValueRequest,
-    callback: Callback<
-      protos.google.cloud.resourcemanager.v3.ITagValue,
-      | protos.google.cloud.resourcemanager.v3.IGetTagValueRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getTagValue(
-    request?: protos.google.cloud.resourcemanager.v3.IGetTagValueRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.resourcemanager.v3.IGetTagValueRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.resourcemanager.v3.ITagValue,
-          | protos.google.cloud.resourcemanager.v3.IGetTagValueRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.resourcemanager.v3.ITagValue,
-      | protos.google.cloud.resourcemanager.v3.IGetTagValueRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.resourcemanager.v3.ITagValue,
-      protos.google.cloud.resourcemanager.v3.IGetTagValueRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.resourcemanager.v3.IGetTagValueRequest|null|undefined,
+          {}|null|undefined>): void;
+  getTagValue(
+      request: protos.google.cloud.resourcemanager.v3.IGetTagValueRequest,
+      callback: Callback<
+          protos.google.cloud.resourcemanager.v3.ITagValue,
+          protos.google.cloud.resourcemanager.v3.IGetTagValueRequest|null|undefined,
+          {}|null|undefined>): void;
+  getTagValue(
+      request?: protos.google.cloud.resourcemanager.v3.IGetTagValueRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.resourcemanager.v3.ITagValue,
+          protos.google.cloud.resourcemanager.v3.IGetTagValueRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.resourcemanager.v3.ITagValue,
+          protos.google.cloud.resourcemanager.v3.IGetTagValueRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.resourcemanager.v3.ITagValue,
+        protos.google.cloud.resourcemanager.v3.IGetTagValueRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getTagValue request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.resourcemanager.v3.ITagValue,
-          | protos.google.cloud.resourcemanager.v3.IGetTagValueRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.resourcemanager.v3.ITagValue,
+        protos.google.cloud.resourcemanager.v3.IGetTagValueRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getTagValue response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getTagValue(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.resourcemanager.v3.ITagValue,
-          (
-            | protos.google.cloud.resourcemanager.v3.IGetTagValueRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getTagValue response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getTagValue(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.resourcemanager.v3.ITagValue,
+        protos.google.cloud.resourcemanager.v3.IGetTagValueRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getTagValue response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Retrieves a TagValue by its namespaced name.
-   * This method will return `PERMISSION_DENIED` if the value does not exist
-   * or the user does not have permission to view it.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. A namespaced tag value name in the following format:
-   *
-   *     `{parentId}/{tagKeyShort}/{tagValueShort}`
-   *
-   *   Examples:
-   *   - `42/foo/abc` for a value with short name "abc" under the key with short
-   *     name "foo" under the organization with ID 42
-   *   - `r2-d2/bar/xyz` for a value with short name "xyz" under the key with
-   *      short name "bar" under the project with ID "r2-d2"
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.resourcemanager.v3.TagValue|TagValue}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/tag_values.get_namespaced_tag_value.js</caption>
-   * region_tag:cloudresourcemanager_v3_generated_TagValues_GetNamespacedTagValue_async
-   */
+/**
+ * Retrieves a TagValue by its namespaced name.
+ * This method will return `PERMISSION_DENIED` if the value does not exist
+ * or the user does not have permission to view it.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A namespaced tag value name in the following format:
+ *
+ *     `{parentId}/{tagKeyShort}/{tagValueShort}`
+ *
+ *   Examples:
+ *   - `42/foo/abc` for a value with short name "abc" under the key with short
+ *     name "foo" under the organization with ID 42
+ *   - `r2-d2/bar/xyz` for a value with short name "xyz" under the key with
+ *      short name "bar" under the project with ID "r2-d2"
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.resourcemanager.v3.TagValue|TagValue}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/tag_values.get_namespaced_tag_value.js</caption>
+ * region_tag:cloudresourcemanager_v3_generated_TagValues_GetNamespacedTagValue_async
+ */
   getNamespacedTagValue(
-    request?: protos.google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.resourcemanager.v3.ITagValue,
-      (
-        | protos.google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.resourcemanager.v3.ITagValue,
+        protos.google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest|undefined, {}|undefined
+      ]>;
   getNamespacedTagValue(
-    request: protos.google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.resourcemanager.v3.ITagValue,
-      | protos.google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getNamespacedTagValue(
-    request: protos.google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest,
-    callback: Callback<
-      protos.google.cloud.resourcemanager.v3.ITagValue,
-      | protos.google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getNamespacedTagValue(
-    request?: protos.google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.resourcemanager.v3.ITagValue,
-          | protos.google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.resourcemanager.v3.ITagValue,
-      | protos.google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.resourcemanager.v3.ITagValue,
-      (
-        | protos.google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest|null|undefined,
+          {}|null|undefined>): void;
+  getNamespacedTagValue(
+      request: protos.google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest,
+      callback: Callback<
+          protos.google.cloud.resourcemanager.v3.ITagValue,
+          protos.google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest|null|undefined,
+          {}|null|undefined>): void;
+  getNamespacedTagValue(
+      request?: protos.google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.resourcemanager.v3.ITagValue,
+          protos.google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.resourcemanager.v3.ITagValue,
+          protos.google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.resourcemanager.v3.ITagValue,
+        protos.google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('getNamespacedTagValue request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.resourcemanager.v3.ITagValue,
-          | protos.google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.resourcemanager.v3.ITagValue,
+        protos.google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getNamespacedTagValue response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getNamespacedTagValue(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.resourcemanager.v3.ITagValue,
-          (
-            | protos.google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getNamespacedTagValue response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getNamespacedTagValue(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.resourcemanager.v3.ITagValue,
+        protos.google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getNamespacedTagValue response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the access control policy for a TagValue. The returned policy may be
-   * empty if no such policy or resource exists. The `resource` field should
-   * be the TagValue's resource name. For example: `tagValues/1234`.
-   * The caller must have the
-   * `cloudresourcemanager.googleapis.com/tagValues.getIamPolicy` permission on
-   * the identified TagValue to get the access control policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.GetPolicyOptions} request.options
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/tag_values.get_iam_policy.js</caption>
-   * region_tag:cloudresourcemanager_v3_generated_TagValues_GetIamPolicy_async
-   */
+/**
+ * Gets the access control policy for a TagValue. The returned policy may be
+ * empty if no such policy or resource exists. The `resource` field should
+ * be the TagValue's resource name. For example: `tagValues/1234`.
+ * The caller must have the
+ * `cloudresourcemanager.googleapis.com/tagValues.getIamPolicy` permission on
+ * the identified TagValue to get the access control policy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {google.iam.v1.GetPolicyOptions} request.options
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/tag_values.get_iam_policy.js</caption>
+ * region_tag:cloudresourcemanager_v3_generated_TagValues_GetIamPolicy_async
+ */
   getIamPolicy(
-    request?: protos.google.iam.v1.IGetIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.IGetIamPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
+      ]>;
   getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request?: protos.google.iam.v1.IGetIamPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.IGetIamPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request: protos.google.iam.v1.IGetIamPolicyRequest,
+      callback: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request?: protos.google.iam.v1.IGetIamPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getIamPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Sets the access control policy on a TagValue, replacing any existing
-   * policy. The `resource` field should be the TagValue's resource name.
-   * For example: `tagValues/1234`.
-   * The caller must have `resourcemanager.tagValues.setIamPolicy` permission
-   * on the identified tagValue.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being specified.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.Policy} request.policy
-   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
-   *   the policy is limited to a few 10s of KB. An empty policy is a
-   *   valid policy but certain Cloud Platform services (such as Projects)
-   *   might reject them.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
-   *   the fields in the mask will be modified. If no mask is provided, the
-   *   following default mask is used:
-   *
-   *   `paths: "bindings, etag"`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/tag_values.set_iam_policy.js</caption>
-   * region_tag:cloudresourcemanager_v3_generated_TagValues_SetIamPolicy_async
-   */
+/**
+ * Sets the access control policy on a TagValue, replacing any existing
+ * policy. The `resource` field should be the TagValue's resource name.
+ * For example: `tagValues/1234`.
+ * The caller must have `resourcemanager.tagValues.setIamPolicy` permission
+ * on the identified tagValue.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being specified.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {google.iam.v1.Policy} request.policy
+ *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+ *   the policy is limited to a few 10s of KB. An empty policy is a
+ *   valid policy but certain Cloud Platform services (such as Projects)
+ *   might reject them.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+ *   the fields in the mask will be modified. If no mask is provided, the
+ *   following default mask is used:
+ *
+ *   `paths: "bindings, etag"`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/tag_values.set_iam_policy.js</caption>
+ * region_tag:cloudresourcemanager_v3_generated_TagValues_SetIamPolicy_async
+ */
   setIamPolicy(
-    request?: protos.google.iam.v1.ISetIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.ISetIamPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
+      ]>;
   setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request?: protos.google.iam.v1.ISetIamPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.ISetIamPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request: protos.google.iam.v1.ISetIamPolicyRequest,
+      callback: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request?: protos.google.iam.v1.ISetIamPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('setIamPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.setIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns permissions that a caller has on the specified TagValue.
-   * The `resource` field should be the TagValue's resource name. For example:
-   * `tagValues/1234`.
-   *
-   * There are no permissions required for making this API call.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/tag_values.test_iam_permissions.js</caption>
-   * region_tag:cloudresourcemanager_v3_generated_TagValues_TestIamPermissions_async
-   */
+/**
+ * Returns permissions that a caller has on the specified TagValue.
+ * The `resource` field should be the TagValue's resource name. For example:
+ * `tagValues/1234`.
+ *
+ * There are no permissions required for making this API call.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see
+ *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/tag_values.test_iam_permissions.js</caption>
+ * region_tag:cloudresourcemanager_v3_generated_TagValues_TestIamPermissions_async
+ */
   testIamPermissions(
-    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
+      ]>;
   testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    callback: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.ITestIamPermissionsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request: protos.google.iam.v1.ITestIamPermissionsRequest,
+      callback: Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('testIamPermissions request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('testIamPermissions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .testIamPermissions(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('testIamPermissions response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.testIamPermissions(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('testIamPermissions response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Creates a TagValue as a child of the specified TagKey. If a another
-   * request with the same parameters is sent while the original request is in
-   * process the second request will receive an error. A maximum of 1000
-   * TagValues can exist under a TagKey at any given time.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.resourcemanager.v3.TagValue} request.tagValue
-   *   Required. The TagValue to be created. Only fields `short_name`,
-   *   `description`, and `parent` are considered during the creation request.
-   * @param {boolean} [request.validateOnly]
-   *   Optional. Set as true to perform the validations necessary for creating the
-   *   resource, but not actually perform the action.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/tag_values.create_tag_value.js</caption>
-   * region_tag:cloudresourcemanager_v3_generated_TagValues_CreateTagValue_async
-   */
+/**
+ * Creates a TagValue as a child of the specified TagKey. If a another
+ * request with the same parameters is sent while the original request is in
+ * process the second request will receive an error. A maximum of 1000
+ * TagValues can exist under a TagKey at any given time.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.resourcemanager.v3.TagValue} request.tagValue
+ *   Required. The TagValue to be created. Only fields `short_name`,
+ *   `description`, and `parent` are considered during the creation request.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. Set as true to perform the validations necessary for creating the
+ *   resource, but not actually perform the action.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/tag_values.create_tag_value.js</caption>
+ * region_tag:cloudresourcemanager_v3_generated_TagValues_CreateTagValue_async
+ */
   createTagValue(
-    request?: protos.google.cloud.resourcemanager.v3.ICreateTagValueRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagValue,
-        protos.google.cloud.resourcemanager.v3.ICreateTagValueMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.resourcemanager.v3.ICreateTagValueRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.resourcemanager.v3.ITagValue, protos.google.cloud.resourcemanager.v3.ICreateTagValueMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createTagValue(
-    request: protos.google.cloud.resourcemanager.v3.ICreateTagValueRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagValue,
-        protos.google.cloud.resourcemanager.v3.ICreateTagValueMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.resourcemanager.v3.ICreateTagValueRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagValue, protos.google.cloud.resourcemanager.v3.ICreateTagValueMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createTagValue(
-    request: protos.google.cloud.resourcemanager.v3.ICreateTagValueRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagValue,
-        protos.google.cloud.resourcemanager.v3.ICreateTagValueMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.resourcemanager.v3.ICreateTagValueRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagValue, protos.google.cloud.resourcemanager.v3.ICreateTagValueMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createTagValue(
-    request?: protos.google.cloud.resourcemanager.v3.ICreateTagValueRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.resourcemanager.v3.ITagValue,
-            protos.google.cloud.resourcemanager.v3.ICreateTagValueMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagValue,
-        protos.google.cloud.resourcemanager.v3.ICreateTagValueMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagValue,
-        protos.google.cloud.resourcemanager.v3.ICreateTagValueMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.resourcemanager.v3.ICreateTagValueRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagValue, protos.google.cloud.resourcemanager.v3.ICreateTagValueMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagValue, protos.google.cloud.resourcemanager.v3.ICreateTagValueMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.resourcemanager.v3.ITagValue, protos.google.cloud.resourcemanager.v3.ICreateTagValueMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.resourcemanager.v3.ITagValue,
-            protos.google.cloud.resourcemanager.v3.ICreateTagValueMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagValue, protos.google.cloud.resourcemanager.v3.ICreateTagValueMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createTagValue response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createTagValue request %j', request);
-    return this.innerApiCalls
-      .createTagValue(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.resourcemanager.v3.ITagValue,
-            protos.google.cloud.resourcemanager.v3.ICreateTagValueMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createTagValue response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createTagValue(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.resourcemanager.v3.ITagValue, protos.google.cloud.resourcemanager.v3.ICreateTagValueMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createTagValue response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createTagValue()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/tag_values.create_tag_value.js</caption>
-   * region_tag:cloudresourcemanager_v3_generated_TagValues_CreateTagValue_async
-   */
-  async checkCreateTagValueProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.resourcemanager.v3.TagValue,
-      protos.google.cloud.resourcemanager.v3.CreateTagValueMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createTagValue()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/tag_values.create_tag_value.js</caption>
+ * region_tag:cloudresourcemanager_v3_generated_TagValues_CreateTagValue_async
+ */
+  async checkCreateTagValueProgress(name: string): Promise<LROperation<protos.google.cloud.resourcemanager.v3.TagValue, protos.google.cloud.resourcemanager.v3.CreateTagValueMetadata>>{
     this._log.info('createTagValue long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createTagValue,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.resourcemanager.v3.TagValue,
-      protos.google.cloud.resourcemanager.v3.CreateTagValueMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createTagValue, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.resourcemanager.v3.TagValue, protos.google.cloud.resourcemanager.v3.CreateTagValueMetadata>;
   }
-  /**
-   * Updates the attributes of the TagValue resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.resourcemanager.v3.TagValue} request.tagValue
-   *   Required. The new definition of the TagValue. Only fields `description` and
-   *   `etag` fields can be updated by this request. If the `etag` field is
-   *   nonempty, it must match the `etag` field of the existing ControlGroup.
-   *   Otherwise, `ABORTED` will be returned.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Fields to be updated.
-   * @param {boolean} [request.validateOnly]
-   *   Optional. True to perform validations necessary for updating the resource,
-   *   but not actually perform the action.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/tag_values.update_tag_value.js</caption>
-   * region_tag:cloudresourcemanager_v3_generated_TagValues_UpdateTagValue_async
-   */
+/**
+ * Updates the attributes of the TagValue resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.resourcemanager.v3.TagValue} request.tagValue
+ *   Required. The new definition of the TagValue. Only fields `description` and
+ *   `etag` fields can be updated by this request. If the `etag` field is
+ *   nonempty, it must match the `etag` field of the existing ControlGroup.
+ *   Otherwise, `ABORTED` will be returned.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Fields to be updated.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. True to perform validations necessary for updating the resource,
+ *   but not actually perform the action.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/tag_values.update_tag_value.js</caption>
+ * region_tag:cloudresourcemanager_v3_generated_TagValues_UpdateTagValue_async
+ */
   updateTagValue(
-    request?: protos.google.cloud.resourcemanager.v3.IUpdateTagValueRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagValue,
-        protos.google.cloud.resourcemanager.v3.IUpdateTagValueMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.resourcemanager.v3.IUpdateTagValueRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.resourcemanager.v3.ITagValue, protos.google.cloud.resourcemanager.v3.IUpdateTagValueMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateTagValue(
-    request: protos.google.cloud.resourcemanager.v3.IUpdateTagValueRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagValue,
-        protos.google.cloud.resourcemanager.v3.IUpdateTagValueMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.resourcemanager.v3.IUpdateTagValueRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagValue, protos.google.cloud.resourcemanager.v3.IUpdateTagValueMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateTagValue(
-    request: protos.google.cloud.resourcemanager.v3.IUpdateTagValueRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagValue,
-        protos.google.cloud.resourcemanager.v3.IUpdateTagValueMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.resourcemanager.v3.IUpdateTagValueRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagValue, protos.google.cloud.resourcemanager.v3.IUpdateTagValueMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateTagValue(
-    request?: protos.google.cloud.resourcemanager.v3.IUpdateTagValueRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.resourcemanager.v3.ITagValue,
-            protos.google.cloud.resourcemanager.v3.IUpdateTagValueMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagValue,
-        protos.google.cloud.resourcemanager.v3.IUpdateTagValueMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagValue,
-        protos.google.cloud.resourcemanager.v3.IUpdateTagValueMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.resourcemanager.v3.IUpdateTagValueRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagValue, protos.google.cloud.resourcemanager.v3.IUpdateTagValueMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagValue, protos.google.cloud.resourcemanager.v3.IUpdateTagValueMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.resourcemanager.v3.ITagValue, protos.google.cloud.resourcemanager.v3.IUpdateTagValueMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'tag_value.name': request.tagValue!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'tag_value.name': request.tagValue!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.resourcemanager.v3.ITagValue,
-            protos.google.cloud.resourcemanager.v3.IUpdateTagValueMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagValue, protos.google.cloud.resourcemanager.v3.IUpdateTagValueMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateTagValue response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateTagValue request %j', request);
-    return this.innerApiCalls
-      .updateTagValue(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.resourcemanager.v3.ITagValue,
-            protos.google.cloud.resourcemanager.v3.IUpdateTagValueMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateTagValue response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateTagValue(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.resourcemanager.v3.ITagValue, protos.google.cloud.resourcemanager.v3.IUpdateTagValueMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateTagValue response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateTagValue()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/tag_values.update_tag_value.js</caption>
-   * region_tag:cloudresourcemanager_v3_generated_TagValues_UpdateTagValue_async
-   */
-  async checkUpdateTagValueProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.resourcemanager.v3.TagValue,
-      protos.google.cloud.resourcemanager.v3.UpdateTagValueMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateTagValue()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/tag_values.update_tag_value.js</caption>
+ * region_tag:cloudresourcemanager_v3_generated_TagValues_UpdateTagValue_async
+ */
+  async checkUpdateTagValueProgress(name: string): Promise<LROperation<protos.google.cloud.resourcemanager.v3.TagValue, protos.google.cloud.resourcemanager.v3.UpdateTagValueMetadata>>{
     this._log.info('updateTagValue long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateTagValue,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.resourcemanager.v3.TagValue,
-      protos.google.cloud.resourcemanager.v3.UpdateTagValueMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateTagValue, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.resourcemanager.v3.TagValue, protos.google.cloud.resourcemanager.v3.UpdateTagValueMetadata>;
   }
-  /**
-   * Deletes a TagValue. The TagValue cannot have any bindings when it is
-   * deleted.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name for TagValue to be deleted in the format
-   *   tagValues/456.
-   * @param {boolean} [request.validateOnly]
-   *   Optional. Set as true to perform the validations necessary for deletion,
-   *   but not actually perform the action.
-   * @param {string} [request.etag]
-   *   Optional. The etag known to the client for the expected state of the
-   *   TagValue. This is to be used for optimistic concurrency.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/tag_values.delete_tag_value.js</caption>
-   * region_tag:cloudresourcemanager_v3_generated_TagValues_DeleteTagValue_async
-   */
+/**
+ * Deletes a TagValue. The TagValue cannot have any bindings when it is
+ * deleted.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name for TagValue to be deleted in the format
+ *   tagValues/456.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. Set as true to perform the validations necessary for deletion,
+ *   but not actually perform the action.
+ * @param {string} [request.etag]
+ *   Optional. The etag known to the client for the expected state of the
+ *   TagValue. This is to be used for optimistic concurrency.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/tag_values.delete_tag_value.js</caption>
+ * region_tag:cloudresourcemanager_v3_generated_TagValues_DeleteTagValue_async
+ */
   deleteTagValue(
-    request?: protos.google.cloud.resourcemanager.v3.IDeleteTagValueRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagValue,
-        protos.google.cloud.resourcemanager.v3.IDeleteTagValueMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.resourcemanager.v3.IDeleteTagValueRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.resourcemanager.v3.ITagValue, protos.google.cloud.resourcemanager.v3.IDeleteTagValueMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteTagValue(
-    request: protos.google.cloud.resourcemanager.v3.IDeleteTagValueRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagValue,
-        protos.google.cloud.resourcemanager.v3.IDeleteTagValueMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.resourcemanager.v3.IDeleteTagValueRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagValue, protos.google.cloud.resourcemanager.v3.IDeleteTagValueMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteTagValue(
-    request: protos.google.cloud.resourcemanager.v3.IDeleteTagValueRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagValue,
-        protos.google.cloud.resourcemanager.v3.IDeleteTagValueMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.resourcemanager.v3.IDeleteTagValueRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagValue, protos.google.cloud.resourcemanager.v3.IDeleteTagValueMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteTagValue(
-    request?: protos.google.cloud.resourcemanager.v3.IDeleteTagValueRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.resourcemanager.v3.ITagValue,
-            protos.google.cloud.resourcemanager.v3.IDeleteTagValueMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagValue,
-        protos.google.cloud.resourcemanager.v3.IDeleteTagValueMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagValue,
-        protos.google.cloud.resourcemanager.v3.IDeleteTagValueMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.resourcemanager.v3.IDeleteTagValueRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagValue, protos.google.cloud.resourcemanager.v3.IDeleteTagValueMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagValue, protos.google.cloud.resourcemanager.v3.IDeleteTagValueMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.resourcemanager.v3.ITagValue, protos.google.cloud.resourcemanager.v3.IDeleteTagValueMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.resourcemanager.v3.ITagValue,
-            protos.google.cloud.resourcemanager.v3.IDeleteTagValueMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagValue, protos.google.cloud.resourcemanager.v3.IDeleteTagValueMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteTagValue response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteTagValue request %j', request);
-    return this.innerApiCalls
-      .deleteTagValue(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.resourcemanager.v3.ITagValue,
-            protos.google.cloud.resourcemanager.v3.IDeleteTagValueMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteTagValue response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteTagValue(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.resourcemanager.v3.ITagValue, protos.google.cloud.resourcemanager.v3.IDeleteTagValueMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteTagValue response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteTagValue()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/tag_values.delete_tag_value.js</caption>
-   * region_tag:cloudresourcemanager_v3_generated_TagValues_DeleteTagValue_async
-   */
-  async checkDeleteTagValueProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.resourcemanager.v3.TagValue,
-      protos.google.cloud.resourcemanager.v3.DeleteTagValueMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteTagValue()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/tag_values.delete_tag_value.js</caption>
+ * region_tag:cloudresourcemanager_v3_generated_TagValues_DeleteTagValue_async
+ */
+  async checkDeleteTagValueProgress(name: string): Promise<LROperation<protos.google.cloud.resourcemanager.v3.TagValue, protos.google.cloud.resourcemanager.v3.DeleteTagValueMetadata>>{
     this._log.info('deleteTagValue long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteTagValue,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.resourcemanager.v3.TagValue,
-      protos.google.cloud.resourcemanager.v3.DeleteTagValueMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteTagValue, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.resourcemanager.v3.TagValue, protos.google.cloud.resourcemanager.v3.DeleteTagValueMetadata>;
   }
-  /**
-   * Lists all TagValues for a specific TagKey.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of TagValues to return in the response. The
-   *   server allows a maximum of 300 TagValues to return. If unspecified, the
-   *   server will use 100 as the default.
-   * @param {string} [request.pageToken]
-   *   Optional. A pagination token returned from a previous call to
-   *   `ListTagValues` that indicates where this listing should continue from.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.resourcemanager.v3.TagValue|TagValue}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listTagValuesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all TagValues for a specific TagKey.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of TagValues to return in the response. The
+ *   server allows a maximum of 300 TagValues to return. If unspecified, the
+ *   server will use 100 as the default.
+ * @param {string} [request.pageToken]
+ *   Optional. A pagination token returned from a previous call to
+ *   `ListTagValues` that indicates where this listing should continue from.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.resourcemanager.v3.TagValue|TagValue}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listTagValuesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listTagValues(
-    request?: protos.google.cloud.resourcemanager.v3.IListTagValuesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.resourcemanager.v3.ITagValue[],
-      protos.google.cloud.resourcemanager.v3.IListTagValuesRequest | null,
-      protos.google.cloud.resourcemanager.v3.IListTagValuesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.resourcemanager.v3.IListTagValuesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.resourcemanager.v3.ITagValue[],
+        protos.google.cloud.resourcemanager.v3.IListTagValuesRequest|null,
+        protos.google.cloud.resourcemanager.v3.IListTagValuesResponse
+      ]>;
   listTagValues(
-    request: protos.google.cloud.resourcemanager.v3.IListTagValuesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.resourcemanager.v3.IListTagValuesRequest,
-      | protos.google.cloud.resourcemanager.v3.IListTagValuesResponse
-      | null
-      | undefined,
-      protos.google.cloud.resourcemanager.v3.ITagValue
-    >
-  ): void;
-  listTagValues(
-    request: protos.google.cloud.resourcemanager.v3.IListTagValuesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.resourcemanager.v3.IListTagValuesRequest,
-      | protos.google.cloud.resourcemanager.v3.IListTagValuesResponse
-      | null
-      | undefined,
-      protos.google.cloud.resourcemanager.v3.ITagValue
-    >
-  ): void;
-  listTagValues(
-    request?: protos.google.cloud.resourcemanager.v3.IListTagValuesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.resourcemanager.v3.IListTagValuesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.resourcemanager.v3.IListTagValuesRequest,
-          | protos.google.cloud.resourcemanager.v3.IListTagValuesResponse
-          | null
-          | undefined,
-          protos.google.cloud.resourcemanager.v3.ITagValue
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.resourcemanager.v3.IListTagValuesRequest,
-      | protos.google.cloud.resourcemanager.v3.IListTagValuesResponse
-      | null
-      | undefined,
-      protos.google.cloud.resourcemanager.v3.ITagValue
-    >
-  ): Promise<
-    [
-      protos.google.cloud.resourcemanager.v3.ITagValue[],
-      protos.google.cloud.resourcemanager.v3.IListTagValuesRequest | null,
-      protos.google.cloud.resourcemanager.v3.IListTagValuesResponse,
-    ]
-  > | void {
+          protos.google.cloud.resourcemanager.v3.IListTagValuesResponse|null|undefined,
+          protos.google.cloud.resourcemanager.v3.ITagValue>): void;
+  listTagValues(
+      request: protos.google.cloud.resourcemanager.v3.IListTagValuesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.resourcemanager.v3.IListTagValuesRequest,
+          protos.google.cloud.resourcemanager.v3.IListTagValuesResponse|null|undefined,
+          protos.google.cloud.resourcemanager.v3.ITagValue>): void;
+  listTagValues(
+      request?: protos.google.cloud.resourcemanager.v3.IListTagValuesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.resourcemanager.v3.IListTagValuesRequest,
+          protos.google.cloud.resourcemanager.v3.IListTagValuesResponse|null|undefined,
+          protos.google.cloud.resourcemanager.v3.ITagValue>,
+      callback?: PaginationCallback<
+          protos.google.cloud.resourcemanager.v3.IListTagValuesRequest,
+          protos.google.cloud.resourcemanager.v3.IListTagValuesResponse|null|undefined,
+          protos.google.cloud.resourcemanager.v3.ITagValue>):
+      Promise<[
+        protos.google.cloud.resourcemanager.v3.ITagValue[],
+        protos.google.cloud.resourcemanager.v3.IListTagValuesRequest|null,
+        protos.google.cloud.resourcemanager.v3.IListTagValuesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.resourcemanager.v3.IListTagValuesRequest,
-          | protos.google.cloud.resourcemanager.v3.IListTagValuesResponse
-          | null
-          | undefined,
-          protos.google.cloud.resourcemanager.v3.ITagValue
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.resourcemanager.v3.IListTagValuesRequest,
+      protos.google.cloud.resourcemanager.v3.IListTagValuesResponse|null|undefined,
+      protos.google.cloud.resourcemanager.v3.ITagValue>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listTagValues values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1726,55 +1337,51 @@ export class TagValuesClient {
     this._log.info('listTagValues request %j', request);
     return this.innerApiCalls
       .listTagValues(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.resourcemanager.v3.ITagValue[],
-          protos.google.cloud.resourcemanager.v3.IListTagValuesRequest | null,
-          protos.google.cloud.resourcemanager.v3.IListTagValuesResponse,
-        ]) => {
-          this._log.info('listTagValues values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.resourcemanager.v3.ITagValue[],
+        protos.google.cloud.resourcemanager.v3.IListTagValuesRequest|null,
+        protos.google.cloud.resourcemanager.v3.IListTagValuesResponse
+      ]) => {
+        this._log.info('listTagValues values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listTagValues`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of TagValues to return in the response. The
-   *   server allows a maximum of 300 TagValues to return. If unspecified, the
-   *   server will use 100 as the default.
-   * @param {string} [request.pageToken]
-   *   Optional. A pagination token returned from a previous call to
-   *   `ListTagValues` that indicates where this listing should continue from.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.resourcemanager.v3.TagValue|TagValue} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listTagValuesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listTagValues`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of TagValues to return in the response. The
+ *   server allows a maximum of 300 TagValues to return. If unspecified, the
+ *   server will use 100 as the default.
+ * @param {string} [request.pageToken]
+ *   Optional. A pagination token returned from a previous call to
+ *   `ListTagValues` that indicates where this listing should continue from.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.resourcemanager.v3.TagValue|TagValue} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listTagValuesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listTagValuesStream(
-    request?: protos.google.cloud.resourcemanager.v3.IListTagValuesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.resourcemanager.v3.IListTagValuesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listTagValues'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listTagValues stream %j', request);
     return this.descriptors.page.listTagValues.createStream(
       this.innerApiCalls.listTagValues as GaxCall,
@@ -1783,46 +1390,44 @@ export class TagValuesClient {
     );
   }
 
-  /**
-   * Equivalent to `listTagValues`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of TagValues to return in the response. The
-   *   server allows a maximum of 300 TagValues to return. If unspecified, the
-   *   server will use 100 as the default.
-   * @param {string} [request.pageToken]
-   *   Optional. A pagination token returned from a previous call to
-   *   `ListTagValues` that indicates where this listing should continue from.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.resourcemanager.v3.TagValue|TagValue}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/tag_values.list_tag_values.js</caption>
-   * region_tag:cloudresourcemanager_v3_generated_TagValues_ListTagValues_async
-   */
+/**
+ * Equivalent to `listTagValues`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of TagValues to return in the response. The
+ *   server allows a maximum of 300 TagValues to return. If unspecified, the
+ *   server will use 100 as the default.
+ * @param {string} [request.pageToken]
+ *   Optional. A pagination token returned from a previous call to
+ *   `ListTagValues` that indicates where this listing should continue from.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.resourcemanager.v3.TagValue|TagValue}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/tag_values.list_tag_values.js</caption>
+ * region_tag:cloudresourcemanager_v3_generated_TagValues_ListTagValues_async
+ */
   listTagValuesAsync(
-    request?: protos.google.cloud.resourcemanager.v3.IListTagValuesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.resourcemanager.v3.ITagValue> {
+      request?: protos.google.cloud.resourcemanager.v3.IListTagValuesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.resourcemanager.v3.ITagValue>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listTagValues'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listTagValues iterate %j', request);
     return this.descriptors.page.listTagValues.asyncIterate(
       this.innerApiCalls['listTagValues'] as GaxCall,
@@ -1830,7 +1435,7 @@ export class TagValuesClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.resourcemanager.v3.ITagValue>;
   }
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1875,20 +1480,20 @@ export class TagValuesClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1925,13 +1530,13 @@ export class TagValuesClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1965,7 +1570,7 @@ export class TagValuesClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1980,20 +1585,20 @@ export class TagValuesClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -2037,20 +1642,20 @@ export class TagValuesClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -2064,7 +1669,7 @@ export class TagValuesClient {
    * @param {string} folder
    * @returns {string} Resource name string.
    */
-  folderPath(folder: string) {
+  folderPath(folder:string) {
     return this.pathTemplates.folderPathTemplate.render({
       folder: folder,
     });
@@ -2087,7 +1692,7 @@ export class TagValuesClient {
    * @param {string} organization
    * @returns {string} Resource name string.
    */
-  organizationPath(organization: string) {
+  organizationPath(organization:string) {
     return this.pathTemplates.organizationPathTemplate.render({
       organization: organization,
     });
@@ -2101,8 +1706,7 @@ export class TagValuesClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationName(organizationName: string) {
-    return this.pathTemplates.organizationPathTemplate.match(organizationName)
-      .organization;
+    return this.pathTemplates.organizationPathTemplate.match(organizationName).organization;
   }
 
   /**
@@ -2111,7 +1715,7 @@ export class TagValuesClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2134,7 +1738,7 @@ export class TagValuesClient {
    * @param {string} tag_binding
    * @returns {string} Resource name string.
    */
-  tagBindingPath(tagBinding: string) {
+  tagBindingPath(tagBinding:string) {
     return this.pathTemplates.tagBindingPathTemplate.render({
       tag_binding: tagBinding,
     });
@@ -2148,8 +1752,7 @@ export class TagValuesClient {
    * @returns {string} A string representing the tag_binding.
    */
   matchTagBindingFromTagBindingName(tagBindingName: string) {
-    return this.pathTemplates.tagBindingPathTemplate.match(tagBindingName)
-      .tag_binding;
+    return this.pathTemplates.tagBindingPathTemplate.match(tagBindingName).tag_binding;
   }
 
   /**
@@ -2159,7 +1762,7 @@ export class TagValuesClient {
    * @param {string} tag_hold
    * @returns {string} Resource name string.
    */
-  tagHoldPath(tagValue: string, tagHold: string) {
+  tagHoldPath(tagValue:string,tagHold:string) {
     return this.pathTemplates.tagHoldPathTemplate.render({
       tag_value: tagValue,
       tag_hold: tagHold,
@@ -2194,7 +1797,7 @@ export class TagValuesClient {
    * @param {string} tag_key
    * @returns {string} Resource name string.
    */
-  tagKeyPath(tagKey: string) {
+  tagKeyPath(tagKey:string) {
     return this.pathTemplates.tagKeyPathTemplate.render({
       tag_key: tagKey,
     });
@@ -2217,7 +1820,7 @@ export class TagValuesClient {
    * @param {string} tag_value
    * @returns {string} Resource name string.
    */
-  tagValuePath(tagValue: string) {
+  tagValuePath(tagValue:string) {
     return this.pathTemplates.tagValuePathTemplate.render({
       tag_value: tagValue,
     });
@@ -2231,8 +1834,7 @@ export class TagValuesClient {
    * @returns {string} A string representing the tag_value.
    */
   matchTagValueFromTagValueName(tagValueName: string) {
-    return this.pathTemplates.tagValuePathTemplate.match(tagValueName)
-      .tag_value;
+    return this.pathTemplates.tagValuePathTemplate.match(tagValueName).tag_value;
   }
 
   /**

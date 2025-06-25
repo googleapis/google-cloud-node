@@ -18,24 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  IamClient,
-  IamProtos,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -118,42 +105,20 @@ export class CertificateAuthorityServiceClient {
    *     const client = new CertificateAuthorityServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof CertificateAuthorityServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof CertificateAuthorityServiceClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'privateca.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -179,7 +144,7 @@ export class CertificateAuthorityServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -192,14 +157,18 @@ export class CertificateAuthorityServiceClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
-
+  
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -244,326 +213,154 @@ export class CertificateAuthorityServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listCertificates: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'certificates'
-      ),
-      listCertificateAuthorities: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'certificateAuthorities'
-      ),
-      listCaPools: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'caPools'
-      ),
-      listCertificateRevocationLists: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'certificateRevocationLists'
-      ),
-      listCertificateTemplates: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'certificateTemplates'
-      ),
+      listCertificates:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'certificates'),
+      listCertificateAuthorities:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'certificateAuthorities'),
+      listCaPools:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'caPools'),
+      listCertificateRevocationLists:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'certificateRevocationLists'),
+      listCertificateTemplates:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'certificateTemplates')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          get: '/v1/{resource=projects/*/locations/*/caPools/*}:getIamPolicy',
-          additional_bindings: [
-            {
-              get: '/v1/{resource=projects/*/locations/*/certificateTemplates/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/caPools/*/certificateAuthorities/*/certificateRevocationLists/*}:getIamPolicy',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/v1/{resource=projects/*/locations/*/caPools/*}:setIamPolicy',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/locations/*/certificateTemplates/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/caPools/*/certificateAuthorities/*/certificateRevocationLists/*}:setIamPolicy',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/v1/{resource=projects/*/locations/*/caPools/*}:testIamPermissions',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/locations/*/certificateTemplates/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/caPools/*/certificateAuthorities/*/certificateRevocationLists/*}:testIamPermissions',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/locations/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/*/caPools/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/*/certificateTemplates/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/caPools/*/certificateAuthorities/*/certificateRevocationLists/*}:getIamPolicy',}],
+      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/caPools/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/certificateTemplates/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/caPools/*/certificateAuthorities/*/certificateRevocationLists/*}:setIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/caPools/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/certificateTemplates/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/caPools/*/certificateAuthorities/*/certificateRevocationLists/*}:testIamPermissions',body: '*',}],
+      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const activateCertificateAuthorityResponse = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1.CertificateAuthority'
-    ) as gax.protobuf.Type;
+      '.google.cloud.security.privateca.v1.CertificateAuthority') as gax.protobuf.Type;
     const activateCertificateAuthorityMetadata = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.security.privateca.v1.OperationMetadata') as gax.protobuf.Type;
     const createCertificateAuthorityResponse = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1.CertificateAuthority'
-    ) as gax.protobuf.Type;
+      '.google.cloud.security.privateca.v1.CertificateAuthority') as gax.protobuf.Type;
     const createCertificateAuthorityMetadata = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.security.privateca.v1.OperationMetadata') as gax.protobuf.Type;
     const disableCertificateAuthorityResponse = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1.CertificateAuthority'
-    ) as gax.protobuf.Type;
+      '.google.cloud.security.privateca.v1.CertificateAuthority') as gax.protobuf.Type;
     const disableCertificateAuthorityMetadata = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.security.privateca.v1.OperationMetadata') as gax.protobuf.Type;
     const enableCertificateAuthorityResponse = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1.CertificateAuthority'
-    ) as gax.protobuf.Type;
+      '.google.cloud.security.privateca.v1.CertificateAuthority') as gax.protobuf.Type;
     const enableCertificateAuthorityMetadata = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.security.privateca.v1.OperationMetadata') as gax.protobuf.Type;
     const undeleteCertificateAuthorityResponse = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1.CertificateAuthority'
-    ) as gax.protobuf.Type;
+      '.google.cloud.security.privateca.v1.CertificateAuthority') as gax.protobuf.Type;
     const undeleteCertificateAuthorityMetadata = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.security.privateca.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteCertificateAuthorityResponse = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1.CertificateAuthority'
-    ) as gax.protobuf.Type;
+      '.google.cloud.security.privateca.v1.CertificateAuthority') as gax.protobuf.Type;
     const deleteCertificateAuthorityMetadata = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.security.privateca.v1.OperationMetadata') as gax.protobuf.Type;
     const updateCertificateAuthorityResponse = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1.CertificateAuthority'
-    ) as gax.protobuf.Type;
+      '.google.cloud.security.privateca.v1.CertificateAuthority') as gax.protobuf.Type;
     const updateCertificateAuthorityMetadata = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.security.privateca.v1.OperationMetadata') as gax.protobuf.Type;
     const createCaPoolResponse = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1.CaPool'
-    ) as gax.protobuf.Type;
+      '.google.cloud.security.privateca.v1.CaPool') as gax.protobuf.Type;
     const createCaPoolMetadata = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.security.privateca.v1.OperationMetadata') as gax.protobuf.Type;
     const updateCaPoolResponse = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1.CaPool'
-    ) as gax.protobuf.Type;
+      '.google.cloud.security.privateca.v1.CaPool') as gax.protobuf.Type;
     const updateCaPoolMetadata = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.security.privateca.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteCaPoolResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteCaPoolMetadata = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.security.privateca.v1.OperationMetadata') as gax.protobuf.Type;
     const updateCertificateRevocationListResponse = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1.CertificateRevocationList'
-    ) as gax.protobuf.Type;
+      '.google.cloud.security.privateca.v1.CertificateRevocationList') as gax.protobuf.Type;
     const updateCertificateRevocationListMetadata = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.security.privateca.v1.OperationMetadata') as gax.protobuf.Type;
     const createCertificateTemplateResponse = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1.CertificateTemplate'
-    ) as gax.protobuf.Type;
+      '.google.cloud.security.privateca.v1.CertificateTemplate') as gax.protobuf.Type;
     const createCertificateTemplateMetadata = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.security.privateca.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteCertificateTemplateResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteCertificateTemplateMetadata = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.security.privateca.v1.OperationMetadata') as gax.protobuf.Type;
     const updateCertificateTemplateResponse = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1.CertificateTemplate'
-    ) as gax.protobuf.Type;
+      '.google.cloud.security.privateca.v1.CertificateTemplate') as gax.protobuf.Type;
     const updateCertificateTemplateMetadata = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.security.privateca.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       activateCertificateAuthority: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        activateCertificateAuthorityResponse.decode.bind(
-          activateCertificateAuthorityResponse
-        ),
-        activateCertificateAuthorityMetadata.decode.bind(
-          activateCertificateAuthorityMetadata
-        )
-      ),
+        activateCertificateAuthorityResponse.decode.bind(activateCertificateAuthorityResponse),
+        activateCertificateAuthorityMetadata.decode.bind(activateCertificateAuthorityMetadata)),
       createCertificateAuthority: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createCertificateAuthorityResponse.decode.bind(
-          createCertificateAuthorityResponse
-        ),
-        createCertificateAuthorityMetadata.decode.bind(
-          createCertificateAuthorityMetadata
-        )
-      ),
+        createCertificateAuthorityResponse.decode.bind(createCertificateAuthorityResponse),
+        createCertificateAuthorityMetadata.decode.bind(createCertificateAuthorityMetadata)),
       disableCertificateAuthority: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        disableCertificateAuthorityResponse.decode.bind(
-          disableCertificateAuthorityResponse
-        ),
-        disableCertificateAuthorityMetadata.decode.bind(
-          disableCertificateAuthorityMetadata
-        )
-      ),
+        disableCertificateAuthorityResponse.decode.bind(disableCertificateAuthorityResponse),
+        disableCertificateAuthorityMetadata.decode.bind(disableCertificateAuthorityMetadata)),
       enableCertificateAuthority: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        enableCertificateAuthorityResponse.decode.bind(
-          enableCertificateAuthorityResponse
-        ),
-        enableCertificateAuthorityMetadata.decode.bind(
-          enableCertificateAuthorityMetadata
-        )
-      ),
+        enableCertificateAuthorityResponse.decode.bind(enableCertificateAuthorityResponse),
+        enableCertificateAuthorityMetadata.decode.bind(enableCertificateAuthorityMetadata)),
       undeleteCertificateAuthority: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        undeleteCertificateAuthorityResponse.decode.bind(
-          undeleteCertificateAuthorityResponse
-        ),
-        undeleteCertificateAuthorityMetadata.decode.bind(
-          undeleteCertificateAuthorityMetadata
-        )
-      ),
+        undeleteCertificateAuthorityResponse.decode.bind(undeleteCertificateAuthorityResponse),
+        undeleteCertificateAuthorityMetadata.decode.bind(undeleteCertificateAuthorityMetadata)),
       deleteCertificateAuthority: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteCertificateAuthorityResponse.decode.bind(
-          deleteCertificateAuthorityResponse
-        ),
-        deleteCertificateAuthorityMetadata.decode.bind(
-          deleteCertificateAuthorityMetadata
-        )
-      ),
+        deleteCertificateAuthorityResponse.decode.bind(deleteCertificateAuthorityResponse),
+        deleteCertificateAuthorityMetadata.decode.bind(deleteCertificateAuthorityMetadata)),
       updateCertificateAuthority: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updateCertificateAuthorityResponse.decode.bind(
-          updateCertificateAuthorityResponse
-        ),
-        updateCertificateAuthorityMetadata.decode.bind(
-          updateCertificateAuthorityMetadata
-        )
-      ),
+        updateCertificateAuthorityResponse.decode.bind(updateCertificateAuthorityResponse),
+        updateCertificateAuthorityMetadata.decode.bind(updateCertificateAuthorityMetadata)),
       createCaPool: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createCaPoolResponse.decode.bind(createCaPoolResponse),
-        createCaPoolMetadata.decode.bind(createCaPoolMetadata)
-      ),
+        createCaPoolMetadata.decode.bind(createCaPoolMetadata)),
       updateCaPool: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateCaPoolResponse.decode.bind(updateCaPoolResponse),
-        updateCaPoolMetadata.decode.bind(updateCaPoolMetadata)
-      ),
+        updateCaPoolMetadata.decode.bind(updateCaPoolMetadata)),
       deleteCaPool: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteCaPoolResponse.decode.bind(deleteCaPoolResponse),
-        deleteCaPoolMetadata.decode.bind(deleteCaPoolMetadata)
-      ),
-      updateCertificateRevocationList:
-        new this._gaxModule.LongrunningDescriptor(
-          this.operationsClient,
-          updateCertificateRevocationListResponse.decode.bind(
-            updateCertificateRevocationListResponse
-          ),
-          updateCertificateRevocationListMetadata.decode.bind(
-            updateCertificateRevocationListMetadata
-          )
-        ),
+        deleteCaPoolMetadata.decode.bind(deleteCaPoolMetadata)),
+      updateCertificateRevocationList: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateCertificateRevocationListResponse.decode.bind(updateCertificateRevocationListResponse),
+        updateCertificateRevocationListMetadata.decode.bind(updateCertificateRevocationListMetadata)),
       createCertificateTemplate: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createCertificateTemplateResponse.decode.bind(
-          createCertificateTemplateResponse
-        ),
-        createCertificateTemplateMetadata.decode.bind(
-          createCertificateTemplateMetadata
-        )
-      ),
+        createCertificateTemplateResponse.decode.bind(createCertificateTemplateResponse),
+        createCertificateTemplateMetadata.decode.bind(createCertificateTemplateMetadata)),
       deleteCertificateTemplate: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteCertificateTemplateResponse.decode.bind(
-          deleteCertificateTemplateResponse
-        ),
-        deleteCertificateTemplateMetadata.decode.bind(
-          deleteCertificateTemplateMetadata
-        )
-      ),
+        deleteCertificateTemplateResponse.decode.bind(deleteCertificateTemplateResponse),
+        deleteCertificateTemplateMetadata.decode.bind(deleteCertificateTemplateMetadata)),
       updateCertificateTemplate: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updateCertificateTemplateResponse.decode.bind(
-          updateCertificateTemplateResponse
-        ),
-        updateCertificateTemplateMetadata.decode.bind(
-          updateCertificateTemplateMetadata
-        )
-      ),
+        updateCertificateTemplateResponse.decode.bind(updateCertificateTemplateResponse),
+        updateCertificateTemplateMetadata.decode.bind(updateCertificateTemplateMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.security.privateca.v1.CertificateAuthorityService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.security.privateca.v1.CertificateAuthorityService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -594,64 +391,28 @@ export class CertificateAuthorityServiceClient {
     // Put together the "service stub" for
     // google.cloud.security.privateca.v1.CertificateAuthorityService.
     this.certificateAuthorityServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.security.privateca.v1.CertificateAuthorityService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.security.privateca.v1
-            .CertificateAuthorityService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.security.privateca.v1.CertificateAuthorityService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.security.privateca.v1.CertificateAuthorityService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const certificateAuthorityServiceStubMethods = [
-      'createCertificate',
-      'getCertificate',
-      'listCertificates',
-      'revokeCertificate',
-      'updateCertificate',
-      'activateCertificateAuthority',
-      'createCertificateAuthority',
-      'disableCertificateAuthority',
-      'enableCertificateAuthority',
-      'fetchCertificateAuthorityCsr',
-      'getCertificateAuthority',
-      'listCertificateAuthorities',
-      'undeleteCertificateAuthority',
-      'deleteCertificateAuthority',
-      'updateCertificateAuthority',
-      'createCaPool',
-      'updateCaPool',
-      'getCaPool',
-      'listCaPools',
-      'deleteCaPool',
-      'fetchCaCerts',
-      'getCertificateRevocationList',
-      'listCertificateRevocationLists',
-      'updateCertificateRevocationList',
-      'createCertificateTemplate',
-      'deleteCertificateTemplate',
-      'getCertificateTemplate',
-      'listCertificateTemplates',
-      'updateCertificateTemplate',
-    ];
+    const certificateAuthorityServiceStubMethods =
+        ['createCertificate', 'getCertificate', 'listCertificates', 'revokeCertificate', 'updateCertificate', 'activateCertificateAuthority', 'createCertificateAuthority', 'disableCertificateAuthority', 'enableCertificateAuthority', 'fetchCertificateAuthorityCsr', 'getCertificateAuthority', 'listCertificateAuthorities', 'undeleteCertificateAuthority', 'deleteCertificateAuthority', 'updateCertificateAuthority', 'createCaPool', 'updateCaPool', 'getCaPool', 'listCaPools', 'deleteCaPool', 'fetchCaCerts', 'getCertificateRevocationList', 'listCertificateRevocationLists', 'updateCertificateRevocationList', 'createCertificateTemplate', 'deleteCertificateTemplate', 'getCertificateTemplate', 'listCertificateTemplates', 'updateCertificateTemplate'];
     for (const methodName of certificateAuthorityServiceStubMethods) {
       const callPromise = this.certificateAuthorityServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -676,14 +437,8 @@ export class CertificateAuthorityServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'privateca.googleapis.com';
   }
@@ -694,14 +449,8 @@ export class CertificateAuthorityServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'privateca.googleapis.com';
   }
@@ -732,7 +481,9 @@ export class CertificateAuthorityServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -741,9 +492,8 @@ export class CertificateAuthorityServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -754,4231 +504,2989 @@ export class CertificateAuthorityServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Create a new {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}
-   * in a given Project, Location from a particular
-   * {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the
-   *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool} associated with the
-   *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}, in the
-   *   format `projects/* /locations/* /caPools/*`.
-   * @param {string} [request.certificateId]
-   *   Optional. It must be unique within a location and match the regular
-   *   expression `[a-zA-Z0-9_-]{1,63}`. This field is required when using a
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
-   *   in the Enterprise {@link protos.|CertificateAuthority.Tier}, but is optional and its
-   *   value is ignored otherwise.
-   * @param {google.cloud.security.privateca.v1.Certificate} request.certificate
-   *   Required. A {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}
-   *   with initial field values.
-   * @param {string} [request.requestId]
-   *   Optional. An ID to identify requests. Specify a unique request ID so that
-   *   if you must retry your request, the server will know to ignore the request
-   *   if it has already been completed. The server will guarantee that for at
-   *   least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request ID,
-   *   the server can check if original operation with the same request ID was
-   *   received, and if so, will ignore the second request. This prevents clients
-   *   from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {boolean} [request.validateOnly]
-   *   Optional. If this is true, no
-   *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate} resource will
-   *   be persisted regardless of the
-   *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool}'s
-   *   {@link protos.google.cloud.security.privateca.v1.CaPool.tier|tier}, and the returned
-   *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate} will not
-   *   contain the
-   *   {@link protos.google.cloud.security.privateca.v1.Certificate.pem_certificate|pem_certificate}
-   *   field.
-   * @param {string} [request.issuingCertificateAuthorityId]
-   *   Optional. The resource ID of the
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
-   *   that should issue the certificate.  This optional field will ignore the
-   *   load-balancing scheme of the Pool and directly issue the certificate from
-   *   the CA with the specified ID, contained in the same
-   *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool} referenced by `parent`.
-   *   Per-CA quota rules apply. If left empty, a
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
-   *   will be chosen from the {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool}
-   *   by the service. For example, to issue a
-   *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate} from a
-   *   Certificate Authority with resource name
-   *   "projects/my-project/locations/us-central1/caPools/my-pool/certificateAuthorities/my-ca",
-   *   you can set the
-   *   {@link protos.google.cloud.security.privateca.v1.CreateCertificateRequest.parent|parent}
-   *   to "projects/my-project/locations/us-central1/caPools/my-pool" and the
-   *   {@link protos.google.cloud.security.privateca.v1.CreateCertificateRequest.issuing_certificate_authority_id|issuing_certificate_authority_id}
-   *   to "my-ca".
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.create_certificate.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_CreateCertificate_async
-   */
+/**
+ * Create a new {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}
+ * in a given Project, Location from a particular
+ * {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the
+ *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool} associated with the
+ *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}, in the
+ *   format `projects/* /locations/* /caPools/*`.
+ * @param {string} [request.certificateId]
+ *   Optional. It must be unique within a location and match the regular
+ *   expression `[a-zA-Z0-9_-]{1,63}`. This field is required when using a
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
+ *   in the Enterprise {@link protos.|CertificateAuthority.Tier}, but is optional and its
+ *   value is ignored otherwise.
+ * @param {google.cloud.security.privateca.v1.Certificate} request.certificate
+ *   Required. A {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}
+ *   with initial field values.
+ * @param {string} [request.requestId]
+ *   Optional. An ID to identify requests. Specify a unique request ID so that
+ *   if you must retry your request, the server will know to ignore the request
+ *   if it has already been completed. The server will guarantee that for at
+ *   least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request ID,
+ *   the server can check if original operation with the same request ID was
+ *   received, and if so, will ignore the second request. This prevents clients
+ *   from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {boolean} [request.validateOnly]
+ *   Optional. If this is true, no
+ *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate} resource will
+ *   be persisted regardless of the
+ *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool}'s
+ *   {@link protos.google.cloud.security.privateca.v1.CaPool.tier|tier}, and the returned
+ *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate} will not
+ *   contain the
+ *   {@link protos.google.cloud.security.privateca.v1.Certificate.pem_certificate|pem_certificate}
+ *   field.
+ * @param {string} [request.issuingCertificateAuthorityId]
+ *   Optional. The resource ID of the
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
+ *   that should issue the certificate.  This optional field will ignore the
+ *   load-balancing scheme of the Pool and directly issue the certificate from
+ *   the CA with the specified ID, contained in the same
+ *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool} referenced by `parent`.
+ *   Per-CA quota rules apply. If left empty, a
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
+ *   will be chosen from the {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool}
+ *   by the service. For example, to issue a
+ *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate} from a
+ *   Certificate Authority with resource name
+ *   "projects/my-project/locations/us-central1/caPools/my-pool/certificateAuthorities/my-ca",
+ *   you can set the
+ *   {@link protos.google.cloud.security.privateca.v1.CreateCertificateRequest.parent|parent}
+ *   to "projects/my-project/locations/us-central1/caPools/my-pool" and the
+ *   {@link protos.google.cloud.security.privateca.v1.CreateCertificateRequest.issuing_certificate_authority_id|issuing_certificate_authority_id}
+ *   to "my-ca".
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.create_certificate.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_CreateCertificate_async
+ */
   createCertificate(
-    request?: protos.google.cloud.security.privateca.v1.ICreateCertificateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.ICertificate,
-      (
-        | protos.google.cloud.security.privateca.v1.ICreateCertificateRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.ICreateCertificateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.ICertificate,
+        protos.google.cloud.security.privateca.v1.ICreateCertificateRequest|undefined, {}|undefined
+      ]>;
   createCertificate(
-    request: protos.google.cloud.security.privateca.v1.ICreateCertificateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.security.privateca.v1.ICertificate,
-      | protos.google.cloud.security.privateca.v1.ICreateCertificateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createCertificate(
-    request: protos.google.cloud.security.privateca.v1.ICreateCertificateRequest,
-    callback: Callback<
-      protos.google.cloud.security.privateca.v1.ICertificate,
-      | protos.google.cloud.security.privateca.v1.ICreateCertificateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createCertificate(
-    request?: protos.google.cloud.security.privateca.v1.ICreateCertificateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.security.privateca.v1.ICreateCertificateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.security.privateca.v1.ICertificate,
-          | protos.google.cloud.security.privateca.v1.ICreateCertificateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.security.privateca.v1.ICertificate,
-      | protos.google.cloud.security.privateca.v1.ICreateCertificateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.ICertificate,
-      (
-        | protos.google.cloud.security.privateca.v1.ICreateCertificateRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.security.privateca.v1.ICreateCertificateRequest|null|undefined,
+          {}|null|undefined>): void;
+  createCertificate(
+      request: protos.google.cloud.security.privateca.v1.ICreateCertificateRequest,
+      callback: Callback<
+          protos.google.cloud.security.privateca.v1.ICertificate,
+          protos.google.cloud.security.privateca.v1.ICreateCertificateRequest|null|undefined,
+          {}|null|undefined>): void;
+  createCertificate(
+      request?: protos.google.cloud.security.privateca.v1.ICreateCertificateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.security.privateca.v1.ICertificate,
+          protos.google.cloud.security.privateca.v1.ICreateCertificateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.security.privateca.v1.ICertificate,
+          protos.google.cloud.security.privateca.v1.ICreateCertificateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.ICertificate,
+        protos.google.cloud.security.privateca.v1.ICreateCertificateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createCertificate request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.security.privateca.v1.ICertificate,
-          | protos.google.cloud.security.privateca.v1.ICreateCertificateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.security.privateca.v1.ICertificate,
+        protos.google.cloud.security.privateca.v1.ICreateCertificateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createCertificate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createCertificate(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.security.privateca.v1.ICertificate,
-          (
-            | protos.google.cloud.security.privateca.v1.ICreateCertificateRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createCertificate response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createCertificate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.security.privateca.v1.ICertificate,
+        protos.google.cloud.security.privateca.v1.ICreateCertificateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createCertificate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns a {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The {@link protos.google.cloud.security.privateca.v1.Certificate.name|name}
-   *   of the {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate} to
-   *   get.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.get_certificate.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_GetCertificate_async
-   */
+/**
+ * Returns a {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The {@link protos.google.cloud.security.privateca.v1.Certificate.name|name}
+ *   of the {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate} to
+ *   get.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.get_certificate.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_GetCertificate_async
+ */
   getCertificate(
-    request?: protos.google.cloud.security.privateca.v1.IGetCertificateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.ICertificate,
-      (
-        | protos.google.cloud.security.privateca.v1.IGetCertificateRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.IGetCertificateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.ICertificate,
+        protos.google.cloud.security.privateca.v1.IGetCertificateRequest|undefined, {}|undefined
+      ]>;
   getCertificate(
-    request: protos.google.cloud.security.privateca.v1.IGetCertificateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.security.privateca.v1.ICertificate,
-      | protos.google.cloud.security.privateca.v1.IGetCertificateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCertificate(
-    request: protos.google.cloud.security.privateca.v1.IGetCertificateRequest,
-    callback: Callback<
-      protos.google.cloud.security.privateca.v1.ICertificate,
-      | protos.google.cloud.security.privateca.v1.IGetCertificateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCertificate(
-    request?: protos.google.cloud.security.privateca.v1.IGetCertificateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.security.privateca.v1.IGetCertificateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.security.privateca.v1.ICertificate,
-          | protos.google.cloud.security.privateca.v1.IGetCertificateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.security.privateca.v1.ICertificate,
-      | protos.google.cloud.security.privateca.v1.IGetCertificateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.ICertificate,
-      (
-        | protos.google.cloud.security.privateca.v1.IGetCertificateRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.security.privateca.v1.IGetCertificateRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCertificate(
+      request: protos.google.cloud.security.privateca.v1.IGetCertificateRequest,
+      callback: Callback<
+          protos.google.cloud.security.privateca.v1.ICertificate,
+          protos.google.cloud.security.privateca.v1.IGetCertificateRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCertificate(
+      request?: protos.google.cloud.security.privateca.v1.IGetCertificateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.security.privateca.v1.ICertificate,
+          protos.google.cloud.security.privateca.v1.IGetCertificateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.security.privateca.v1.ICertificate,
+          protos.google.cloud.security.privateca.v1.IGetCertificateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.ICertificate,
+        protos.google.cloud.security.privateca.v1.IGetCertificateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getCertificate request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.security.privateca.v1.ICertificate,
-          | protos.google.cloud.security.privateca.v1.IGetCertificateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.security.privateca.v1.ICertificate,
+        protos.google.cloud.security.privateca.v1.IGetCertificateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCertificate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getCertificate(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.security.privateca.v1.ICertificate,
-          (
-            | protos.google.cloud.security.privateca.v1.IGetCertificateRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getCertificate response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getCertificate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.security.privateca.v1.ICertificate,
+        protos.google.cloud.security.privateca.v1.IGetCertificateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getCertificate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Revoke a {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name for this
-   *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate} in the format
-   *   `projects/* /locations/* /caPools/* /certificates/*`.
-   * @param {google.cloud.security.privateca.v1.RevocationReason} request.reason
-   *   Required. The
-   *   {@link protos.google.cloud.security.privateca.v1.RevocationReason|RevocationReason} for
-   *   revoking this certificate.
-   * @param {string} [request.requestId]
-   *   Optional. An ID to identify requests. Specify a unique request ID so that
-   *   if you must retry your request, the server will know to ignore the request
-   *   if it has already been completed. The server will guarantee that for at
-   *   least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.revoke_certificate.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_RevokeCertificate_async
-   */
+/**
+ * Revoke a {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name for this
+ *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate} in the format
+ *   `projects/* /locations/* /caPools/* /certificates/*`.
+ * @param {google.cloud.security.privateca.v1.RevocationReason} request.reason
+ *   Required. The
+ *   {@link protos.google.cloud.security.privateca.v1.RevocationReason|RevocationReason} for
+ *   revoking this certificate.
+ * @param {string} [request.requestId]
+ *   Optional. An ID to identify requests. Specify a unique request ID so that
+ *   if you must retry your request, the server will know to ignore the request
+ *   if it has already been completed. The server will guarantee that for at
+ *   least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.revoke_certificate.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_RevokeCertificate_async
+ */
   revokeCertificate(
-    request?: protos.google.cloud.security.privateca.v1.IRevokeCertificateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.ICertificate,
-      (
-        | protos.google.cloud.security.privateca.v1.IRevokeCertificateRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.IRevokeCertificateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.ICertificate,
+        protos.google.cloud.security.privateca.v1.IRevokeCertificateRequest|undefined, {}|undefined
+      ]>;
   revokeCertificate(
-    request: protos.google.cloud.security.privateca.v1.IRevokeCertificateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.security.privateca.v1.ICertificate,
-      | protos.google.cloud.security.privateca.v1.IRevokeCertificateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  revokeCertificate(
-    request: protos.google.cloud.security.privateca.v1.IRevokeCertificateRequest,
-    callback: Callback<
-      protos.google.cloud.security.privateca.v1.ICertificate,
-      | protos.google.cloud.security.privateca.v1.IRevokeCertificateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  revokeCertificate(
-    request?: protos.google.cloud.security.privateca.v1.IRevokeCertificateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.security.privateca.v1.IRevokeCertificateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.security.privateca.v1.ICertificate,
-          | protos.google.cloud.security.privateca.v1.IRevokeCertificateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.security.privateca.v1.ICertificate,
-      | protos.google.cloud.security.privateca.v1.IRevokeCertificateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.ICertificate,
-      (
-        | protos.google.cloud.security.privateca.v1.IRevokeCertificateRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.security.privateca.v1.IRevokeCertificateRequest|null|undefined,
+          {}|null|undefined>): void;
+  revokeCertificate(
+      request: protos.google.cloud.security.privateca.v1.IRevokeCertificateRequest,
+      callback: Callback<
+          protos.google.cloud.security.privateca.v1.ICertificate,
+          protos.google.cloud.security.privateca.v1.IRevokeCertificateRequest|null|undefined,
+          {}|null|undefined>): void;
+  revokeCertificate(
+      request?: protos.google.cloud.security.privateca.v1.IRevokeCertificateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.security.privateca.v1.ICertificate,
+          protos.google.cloud.security.privateca.v1.IRevokeCertificateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.security.privateca.v1.ICertificate,
+          protos.google.cloud.security.privateca.v1.IRevokeCertificateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.ICertificate,
+        protos.google.cloud.security.privateca.v1.IRevokeCertificateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('revokeCertificate request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.security.privateca.v1.ICertificate,
-          | protos.google.cloud.security.privateca.v1.IRevokeCertificateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.security.privateca.v1.ICertificate,
+        protos.google.cloud.security.privateca.v1.IRevokeCertificateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('revokeCertificate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .revokeCertificate(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.security.privateca.v1.ICertificate,
-          (
-            | protos.google.cloud.security.privateca.v1.IRevokeCertificateRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('revokeCertificate response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.revokeCertificate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.security.privateca.v1.ICertificate,
+        protos.google.cloud.security.privateca.v1.IRevokeCertificateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('revokeCertificate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Update a {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}.
-   * Currently, the only field you can update is the
-   * {@link protos.google.cloud.security.privateca.v1.Certificate.labels|labels} field.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.security.privateca.v1.Certificate} request.certificate
-   *   Required. {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}
-   *   with updated values.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. A list of fields to be updated in this request.
-   * @param {string} [request.requestId]
-   *   Optional. An ID to identify requests. Specify a unique request ID so that
-   *   if you must retry your request, the server will know to ignore the request
-   *   if it has already been completed. The server will guarantee that for at
-   *   least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.update_certificate.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_UpdateCertificate_async
-   */
+/**
+ * Update a {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}.
+ * Currently, the only field you can update is the
+ * {@link protos.google.cloud.security.privateca.v1.Certificate.labels|labels} field.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.security.privateca.v1.Certificate} request.certificate
+ *   Required. {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}
+ *   with updated values.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. A list of fields to be updated in this request.
+ * @param {string} [request.requestId]
+ *   Optional. An ID to identify requests. Specify a unique request ID so that
+ *   if you must retry your request, the server will know to ignore the request
+ *   if it has already been completed. The server will guarantee that for at
+ *   least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.update_certificate.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_UpdateCertificate_async
+ */
   updateCertificate(
-    request?: protos.google.cloud.security.privateca.v1.IUpdateCertificateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.ICertificate,
-      (
-        | protos.google.cloud.security.privateca.v1.IUpdateCertificateRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.IUpdateCertificateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.ICertificate,
+        protos.google.cloud.security.privateca.v1.IUpdateCertificateRequest|undefined, {}|undefined
+      ]>;
   updateCertificate(
-    request: protos.google.cloud.security.privateca.v1.IUpdateCertificateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.security.privateca.v1.ICertificate,
-      | protos.google.cloud.security.privateca.v1.IUpdateCertificateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateCertificate(
-    request: protos.google.cloud.security.privateca.v1.IUpdateCertificateRequest,
-    callback: Callback<
-      protos.google.cloud.security.privateca.v1.ICertificate,
-      | protos.google.cloud.security.privateca.v1.IUpdateCertificateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateCertificate(
-    request?: protos.google.cloud.security.privateca.v1.IUpdateCertificateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.security.privateca.v1.IUpdateCertificateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.security.privateca.v1.ICertificate,
-          | protos.google.cloud.security.privateca.v1.IUpdateCertificateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.security.privateca.v1.ICertificate,
-      | protos.google.cloud.security.privateca.v1.IUpdateCertificateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.ICertificate,
-      (
-        | protos.google.cloud.security.privateca.v1.IUpdateCertificateRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.security.privateca.v1.IUpdateCertificateRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateCertificate(
+      request: protos.google.cloud.security.privateca.v1.IUpdateCertificateRequest,
+      callback: Callback<
+          protos.google.cloud.security.privateca.v1.ICertificate,
+          protos.google.cloud.security.privateca.v1.IUpdateCertificateRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateCertificate(
+      request?: protos.google.cloud.security.privateca.v1.IUpdateCertificateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.security.privateca.v1.ICertificate,
+          protos.google.cloud.security.privateca.v1.IUpdateCertificateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.security.privateca.v1.ICertificate,
+          protos.google.cloud.security.privateca.v1.IUpdateCertificateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.ICertificate,
+        protos.google.cloud.security.privateca.v1.IUpdateCertificateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'certificate.name': request.certificate!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'certificate.name': request.certificate!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateCertificate request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.security.privateca.v1.ICertificate,
-          | protos.google.cloud.security.privateca.v1.IUpdateCertificateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.security.privateca.v1.ICertificate,
+        protos.google.cloud.security.privateca.v1.IUpdateCertificateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateCertificate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateCertificate(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.security.privateca.v1.ICertificate,
-          (
-            | protos.google.cloud.security.privateca.v1.IUpdateCertificateRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateCertificate response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateCertificate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.security.privateca.v1.ICertificate,
+        protos.google.cloud.security.privateca.v1.IUpdateCertificateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateCertificate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Fetch a certificate signing request (CSR) from a
-   * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
-   * that is in state
-   * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority.State.AWAITING_USER_ACTIVATION|AWAITING_USER_ACTIVATION}
-   * and is of type
-   * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority.Type.SUBORDINATE|SUBORDINATE}.
-   * The CSR must then be signed by the desired parent Certificate Authority,
-   * which could be another
-   * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
-   * resource, or could be an on-prem certificate authority. See also
-   * {@link protos.google.cloud.security.privateca.v1.CertificateAuthorityService.ActivateCertificateAuthority|ActivateCertificateAuthority}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name for this
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
-   *   in the format `projects/* /locations/* /caPools/* /certificateAuthorities/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrResponse|FetchCertificateAuthorityCsrResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.fetch_certificate_authority_csr.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_FetchCertificateAuthorityCsr_async
-   */
+/**
+ * Fetch a certificate signing request (CSR) from a
+ * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
+ * that is in state
+ * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority.State.AWAITING_USER_ACTIVATION|AWAITING_USER_ACTIVATION}
+ * and is of type
+ * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority.Type.SUBORDINATE|SUBORDINATE}.
+ * The CSR must then be signed by the desired parent Certificate Authority,
+ * which could be another
+ * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
+ * resource, or could be an on-prem certificate authority. See also
+ * {@link protos.google.cloud.security.privateca.v1.CertificateAuthorityService.ActivateCertificateAuthority|ActivateCertificateAuthority}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name for this
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
+ *   in the format `projects/* /locations/* /caPools/* /certificateAuthorities/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrResponse|FetchCertificateAuthorityCsrResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.fetch_certificate_authority_csr.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_FetchCertificateAuthorityCsr_async
+ */
   fetchCertificateAuthorityCsr(
-    request?: protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrResponse,
-      (
-        | protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrResponse,
+        protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest|undefined, {}|undefined
+      ]>;
   fetchCertificateAuthorityCsr(
-    request: protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrResponse,
-      | protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  fetchCertificateAuthorityCsr(
-    request: protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest,
-    callback: Callback<
-      protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrResponse,
-      | protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  fetchCertificateAuthorityCsr(
-    request?: protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrResponse,
-          | protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrResponse,
-      | protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrResponse,
-      (
-        | protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchCertificateAuthorityCsr(
+      request: protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest,
+      callback: Callback<
+          protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrResponse,
+          protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchCertificateAuthorityCsr(
+      request?: protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrResponse,
+          protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrResponse,
+          protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrResponse,
+        protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('fetchCertificateAuthorityCsr request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrResponse,
-          | protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrResponse,
+        protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('fetchCertificateAuthorityCsr response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .fetchCertificateAuthorityCsr(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrResponse,
-          (
-            | protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('fetchCertificateAuthorityCsr response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.fetchCertificateAuthorityCsr(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrResponse,
+        protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('fetchCertificateAuthorityCsr response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns a
-   * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority.name|name} of the
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
-   *   to get.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.get_certificate_authority.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_GetCertificateAuthority_async
-   */
+/**
+ * Returns a
+ * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority.name|name} of the
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
+ *   to get.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.get_certificate_authority.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_GetCertificateAuthority_async
+ */
   getCertificateAuthority(
-    request?: protos.google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-      (
-        | protos.google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
+        protos.google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest|undefined, {}|undefined
+      ]>;
   getCertificateAuthority(
-    request: protos.google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-      | protos.google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCertificateAuthority(
-    request: protos.google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest,
-    callback: Callback<
-      protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-      | protos.google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCertificateAuthority(
-    request?: protos.google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-          | protos.google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-      | protos.google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-      (
-        | protos.google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCertificateAuthority(
+      request: protos.google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest,
+      callback: Callback<
+          protos.google.cloud.security.privateca.v1.ICertificateAuthority,
+          protos.google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCertificateAuthority(
+      request?: protos.google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.security.privateca.v1.ICertificateAuthority,
+          protos.google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.security.privateca.v1.ICertificateAuthority,
+          protos.google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
+        protos.google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getCertificateAuthority request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-          | protos.google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
+        protos.google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCertificateAuthority response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getCertificateAuthority(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-          (
-            | protos.google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getCertificateAuthority response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getCertificateAuthority(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
+        protos.google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getCertificateAuthority response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns a {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The {@link protos.google.cloud.security.privateca.v1.CaPool.name|name} of the
-   *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool} to get.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.get_ca_pool.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_GetCaPool_async
-   */
+/**
+ * Returns a {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The {@link protos.google.cloud.security.privateca.v1.CaPool.name|name} of the
+ *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool} to get.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.get_ca_pool.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_GetCaPool_async
+ */
   getCaPool(
-    request?: protos.google.cloud.security.privateca.v1.IGetCaPoolRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.ICaPool,
-      protos.google.cloud.security.privateca.v1.IGetCaPoolRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.IGetCaPoolRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.ICaPool,
+        protos.google.cloud.security.privateca.v1.IGetCaPoolRequest|undefined, {}|undefined
+      ]>;
   getCaPool(
-    request: protos.google.cloud.security.privateca.v1.IGetCaPoolRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.security.privateca.v1.ICaPool,
-      | protos.google.cloud.security.privateca.v1.IGetCaPoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCaPool(
-    request: protos.google.cloud.security.privateca.v1.IGetCaPoolRequest,
-    callback: Callback<
-      protos.google.cloud.security.privateca.v1.ICaPool,
-      | protos.google.cloud.security.privateca.v1.IGetCaPoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCaPool(
-    request?: protos.google.cloud.security.privateca.v1.IGetCaPoolRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.security.privateca.v1.IGetCaPoolRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.security.privateca.v1.ICaPool,
-          | protos.google.cloud.security.privateca.v1.IGetCaPoolRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.security.privateca.v1.ICaPool,
-      | protos.google.cloud.security.privateca.v1.IGetCaPoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.ICaPool,
-      protos.google.cloud.security.privateca.v1.IGetCaPoolRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.security.privateca.v1.IGetCaPoolRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCaPool(
+      request: protos.google.cloud.security.privateca.v1.IGetCaPoolRequest,
+      callback: Callback<
+          protos.google.cloud.security.privateca.v1.ICaPool,
+          protos.google.cloud.security.privateca.v1.IGetCaPoolRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCaPool(
+      request?: protos.google.cloud.security.privateca.v1.IGetCaPoolRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.security.privateca.v1.ICaPool,
+          protos.google.cloud.security.privateca.v1.IGetCaPoolRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.security.privateca.v1.ICaPool,
+          protos.google.cloud.security.privateca.v1.IGetCaPoolRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.ICaPool,
+        protos.google.cloud.security.privateca.v1.IGetCaPoolRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getCaPool request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.security.privateca.v1.ICaPool,
-          | protos.google.cloud.security.privateca.v1.IGetCaPoolRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.security.privateca.v1.ICaPool,
+        protos.google.cloud.security.privateca.v1.IGetCaPoolRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCaPool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getCaPool(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.security.privateca.v1.ICaPool,
-          (
-            | protos.google.cloud.security.privateca.v1.IGetCaPoolRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getCaPool response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getCaPool(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.security.privateca.v1.ICaPool,
+        protos.google.cloud.security.privateca.v1.IGetCaPoolRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getCaPool response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * FetchCaCerts returns the current trust anchor for the
-   * {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool}. This will include CA
-   * certificate chains for all certificate authorities in the ENABLED,
-   * DISABLED, or STAGED states.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.caPool
-   *   Required. The resource name for the
-   *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool} in the format
-   *   `projects/* /locations/* /caPools/*`.
-   * @param {string} [request.requestId]
-   *   Optional. An ID to identify requests. Specify a unique request ID so that
-   *   if you must retry your request, the server will know to ignore the request
-   *   if it has already been completed. The server will guarantee that for at
-   *   least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.security.privateca.v1.FetchCaCertsResponse|FetchCaCertsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.fetch_ca_certs.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_FetchCaCerts_async
-   */
+/**
+ * FetchCaCerts returns the current trust anchor for the
+ * {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool}. This will include CA
+ * certificate chains for all certificate authorities in the ENABLED,
+ * DISABLED, or STAGED states.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.caPool
+ *   Required. The resource name for the
+ *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool} in the format
+ *   `projects/* /locations/* /caPools/*`.
+ * @param {string} [request.requestId]
+ *   Optional. An ID to identify requests. Specify a unique request ID so that
+ *   if you must retry your request, the server will know to ignore the request
+ *   if it has already been completed. The server will guarantee that for at
+ *   least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.security.privateca.v1.FetchCaCertsResponse|FetchCaCertsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.fetch_ca_certs.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_FetchCaCerts_async
+ */
   fetchCaCerts(
-    request?: protos.google.cloud.security.privateca.v1.IFetchCaCertsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.IFetchCaCertsResponse,
-      (
-        | protos.google.cloud.security.privateca.v1.IFetchCaCertsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.IFetchCaCertsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.IFetchCaCertsResponse,
+        protos.google.cloud.security.privateca.v1.IFetchCaCertsRequest|undefined, {}|undefined
+      ]>;
   fetchCaCerts(
-    request: protos.google.cloud.security.privateca.v1.IFetchCaCertsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.security.privateca.v1.IFetchCaCertsResponse,
-      | protos.google.cloud.security.privateca.v1.IFetchCaCertsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  fetchCaCerts(
-    request: protos.google.cloud.security.privateca.v1.IFetchCaCertsRequest,
-    callback: Callback<
-      protos.google.cloud.security.privateca.v1.IFetchCaCertsResponse,
-      | protos.google.cloud.security.privateca.v1.IFetchCaCertsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  fetchCaCerts(
-    request?: protos.google.cloud.security.privateca.v1.IFetchCaCertsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.security.privateca.v1.IFetchCaCertsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.security.privateca.v1.IFetchCaCertsResponse,
-          | protos.google.cloud.security.privateca.v1.IFetchCaCertsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.security.privateca.v1.IFetchCaCertsResponse,
-      | protos.google.cloud.security.privateca.v1.IFetchCaCertsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.IFetchCaCertsResponse,
-      (
-        | protos.google.cloud.security.privateca.v1.IFetchCaCertsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.security.privateca.v1.IFetchCaCertsRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchCaCerts(
+      request: protos.google.cloud.security.privateca.v1.IFetchCaCertsRequest,
+      callback: Callback<
+          protos.google.cloud.security.privateca.v1.IFetchCaCertsResponse,
+          protos.google.cloud.security.privateca.v1.IFetchCaCertsRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchCaCerts(
+      request?: protos.google.cloud.security.privateca.v1.IFetchCaCertsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.security.privateca.v1.IFetchCaCertsResponse,
+          protos.google.cloud.security.privateca.v1.IFetchCaCertsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.security.privateca.v1.IFetchCaCertsResponse,
+          protos.google.cloud.security.privateca.v1.IFetchCaCertsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.IFetchCaCertsResponse,
+        protos.google.cloud.security.privateca.v1.IFetchCaCertsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        ca_pool: request.caPool ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'ca_pool': request.caPool ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('fetchCaCerts request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.security.privateca.v1.IFetchCaCertsResponse,
-          | protos.google.cloud.security.privateca.v1.IFetchCaCertsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.security.privateca.v1.IFetchCaCertsResponse,
+        protos.google.cloud.security.privateca.v1.IFetchCaCertsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('fetchCaCerts response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .fetchCaCerts(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.security.privateca.v1.IFetchCaCertsResponse,
-          (
-            | protos.google.cloud.security.privateca.v1.IFetchCaCertsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('fetchCaCerts response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.fetchCaCerts(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.security.privateca.v1.IFetchCaCertsResponse,
+        protos.google.cloud.security.privateca.v1.IFetchCaCertsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('fetchCaCerts response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns a
-   * {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationList}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList.name|name}
-   *   of the
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationList}
-   *   to get.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationList}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.get_certificate_revocation_list.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_GetCertificateRevocationList_async
-   */
+/**
+ * Returns a
+ * {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationList}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList.name|name}
+ *   of the
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationList}
+ *   to get.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationList}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.get_certificate_revocation_list.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_GetCertificateRevocationList_async
+ */
   getCertificateRevocationList(
-    request?: protos.google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.ICertificateRevocationList,
-      (
-        | protos.google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.ICertificateRevocationList,
+        protos.google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest|undefined, {}|undefined
+      ]>;
   getCertificateRevocationList(
-    request: protos.google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.security.privateca.v1.ICertificateRevocationList,
-      | protos.google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCertificateRevocationList(
-    request: protos.google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest,
-    callback: Callback<
-      protos.google.cloud.security.privateca.v1.ICertificateRevocationList,
-      | protos.google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCertificateRevocationList(
-    request?: protos.google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.security.privateca.v1.ICertificateRevocationList,
-          | protos.google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.security.privateca.v1.ICertificateRevocationList,
-      | protos.google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.ICertificateRevocationList,
-      (
-        | protos.google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCertificateRevocationList(
+      request: protos.google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest,
+      callback: Callback<
+          protos.google.cloud.security.privateca.v1.ICertificateRevocationList,
+          protos.google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCertificateRevocationList(
+      request?: protos.google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.security.privateca.v1.ICertificateRevocationList,
+          protos.google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.security.privateca.v1.ICertificateRevocationList,
+          protos.google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.ICertificateRevocationList,
+        protos.google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getCertificateRevocationList request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.security.privateca.v1.ICertificateRevocationList,
-          | protos.google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.security.privateca.v1.ICertificateRevocationList,
+        protos.google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCertificateRevocationList response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getCertificateRevocationList(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.security.privateca.v1.ICertificateRevocationList,
-          (
-            | protos.google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getCertificateRevocationList response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getCertificateRevocationList(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.security.privateca.v1.ICertificateRevocationList,
+        protos.google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getCertificateRevocationList response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns a
-   * {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplate}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate.name|name} of the
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplate}
-   *   to get.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplate}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.get_certificate_template.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_GetCertificateTemplate_async
-   */
+/**
+ * Returns a
+ * {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplate}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate.name|name} of the
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplate}
+ *   to get.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplate}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.get_certificate_template.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_GetCertificateTemplate_async
+ */
   getCertificateTemplate(
-    request?: protos.google.cloud.security.privateca.v1.IGetCertificateTemplateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.ICertificateTemplate,
-      (
-        | protos.google.cloud.security.privateca.v1.IGetCertificateTemplateRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.IGetCertificateTemplateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.ICertificateTemplate,
+        protos.google.cloud.security.privateca.v1.IGetCertificateTemplateRequest|undefined, {}|undefined
+      ]>;
   getCertificateTemplate(
-    request: protos.google.cloud.security.privateca.v1.IGetCertificateTemplateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.security.privateca.v1.ICertificateTemplate,
-      | protos.google.cloud.security.privateca.v1.IGetCertificateTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCertificateTemplate(
-    request: protos.google.cloud.security.privateca.v1.IGetCertificateTemplateRequest,
-    callback: Callback<
-      protos.google.cloud.security.privateca.v1.ICertificateTemplate,
-      | protos.google.cloud.security.privateca.v1.IGetCertificateTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCertificateTemplate(
-    request?: protos.google.cloud.security.privateca.v1.IGetCertificateTemplateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.security.privateca.v1.IGetCertificateTemplateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.security.privateca.v1.ICertificateTemplate,
-          | protos.google.cloud.security.privateca.v1.IGetCertificateTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.security.privateca.v1.ICertificateTemplate,
-      | protos.google.cloud.security.privateca.v1.IGetCertificateTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.ICertificateTemplate,
-      (
-        | protos.google.cloud.security.privateca.v1.IGetCertificateTemplateRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.security.privateca.v1.IGetCertificateTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCertificateTemplate(
+      request: protos.google.cloud.security.privateca.v1.IGetCertificateTemplateRequest,
+      callback: Callback<
+          protos.google.cloud.security.privateca.v1.ICertificateTemplate,
+          protos.google.cloud.security.privateca.v1.IGetCertificateTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCertificateTemplate(
+      request?: protos.google.cloud.security.privateca.v1.IGetCertificateTemplateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.security.privateca.v1.ICertificateTemplate,
+          protos.google.cloud.security.privateca.v1.IGetCertificateTemplateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.security.privateca.v1.ICertificateTemplate,
+          protos.google.cloud.security.privateca.v1.IGetCertificateTemplateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.ICertificateTemplate,
+        protos.google.cloud.security.privateca.v1.IGetCertificateTemplateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getCertificateTemplate request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.security.privateca.v1.ICertificateTemplate,
-          | protos.google.cloud.security.privateca.v1.IGetCertificateTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.security.privateca.v1.ICertificateTemplate,
+        protos.google.cloud.security.privateca.v1.IGetCertificateTemplateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCertificateTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getCertificateTemplate(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.security.privateca.v1.ICertificateTemplate,
-          (
-            | protos.google.cloud.security.privateca.v1.IGetCertificateTemplateRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getCertificateTemplate response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getCertificateTemplate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.security.privateca.v1.ICertificateTemplate,
+        protos.google.cloud.security.privateca.v1.IGetCertificateTemplateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getCertificateTemplate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Activate a
-   * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
-   * that is in state
-   * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority.State.AWAITING_USER_ACTIVATION|AWAITING_USER_ACTIVATION}
-   * and is of type
-   * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority.Type.SUBORDINATE|SUBORDINATE}.
-   * After the parent Certificate Authority signs a certificate signing request
-   * from
-   * {@link protos.google.cloud.security.privateca.v1.CertificateAuthorityService.FetchCertificateAuthorityCsr|FetchCertificateAuthorityCsr},
-   * this method can complete the activation process.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name for this
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
-   *   in the format `projects/* /locations/* /caPools/* /certificateAuthorities/*`.
-   * @param {string} request.pemCaCertificate
-   *   Required. The signed CA certificate issued from
-   *   {@link protos.google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrResponse.pem_csr|FetchCertificateAuthorityCsrResponse.pem_csr}.
-   * @param {google.cloud.security.privateca.v1.SubordinateConfig} request.subordinateConfig
-   *   Required. Must include information about the issuer of
-   *   'pem_ca_certificate', and any further issuers until the self-signed CA.
-   * @param {string} [request.requestId]
-   *   Optional. An ID to identify requests. Specify a unique request ID so that
-   *   if you must retry your request, the server will know to ignore the request
-   *   if it has already been completed. The server will guarantee that for at
-   *   least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.activate_certificate_authority.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_ActivateCertificateAuthority_async
-   */
+/**
+ * Activate a
+ * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
+ * that is in state
+ * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority.State.AWAITING_USER_ACTIVATION|AWAITING_USER_ACTIVATION}
+ * and is of type
+ * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority.Type.SUBORDINATE|SUBORDINATE}.
+ * After the parent Certificate Authority signs a certificate signing request
+ * from
+ * {@link protos.google.cloud.security.privateca.v1.CertificateAuthorityService.FetchCertificateAuthorityCsr|FetchCertificateAuthorityCsr},
+ * this method can complete the activation process.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name for this
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
+ *   in the format `projects/* /locations/* /caPools/* /certificateAuthorities/*`.
+ * @param {string} request.pemCaCertificate
+ *   Required. The signed CA certificate issued from
+ *   {@link protos.google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrResponse.pem_csr|FetchCertificateAuthorityCsrResponse.pem_csr}.
+ * @param {google.cloud.security.privateca.v1.SubordinateConfig} request.subordinateConfig
+ *   Required. Must include information about the issuer of
+ *   'pem_ca_certificate', and any further issuers until the self-signed CA.
+ * @param {string} [request.requestId]
+ *   Optional. An ID to identify requests. Specify a unique request ID so that
+ *   if you must retry your request, the server will know to ignore the request
+ *   if it has already been completed. The server will guarantee that for at
+ *   least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.activate_certificate_authority.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_ActivateCertificateAuthority_async
+ */
   activateCertificateAuthority(
-    request?: protos.google.cloud.security.privateca.v1.IActivateCertificateAuthorityRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.IActivateCertificateAuthorityRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   activateCertificateAuthority(
-    request: protos.google.cloud.security.privateca.v1.IActivateCertificateAuthorityRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.security.privateca.v1.IActivateCertificateAuthorityRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   activateCertificateAuthority(
-    request: protos.google.cloud.security.privateca.v1.IActivateCertificateAuthorityRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.security.privateca.v1.IActivateCertificateAuthorityRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   activateCertificateAuthority(
-    request?: protos.google.cloud.security.privateca.v1.IActivateCertificateAuthorityRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.security.privateca.v1.IActivateCertificateAuthorityRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
-            'activateCertificateAuthority response %j',
-            rawResponse
-          );
+          this._log.info('activateCertificateAuthority response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('activateCertificateAuthority request %j', request);
-    return this.innerApiCalls
-      .activateCertificateAuthority(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'activateCertificateAuthority response %j',
-            rawResponse
-          );
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.activateCertificateAuthority(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('activateCertificateAuthority response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `activateCertificateAuthority()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.activate_certificate_authority.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_ActivateCertificateAuthority_async
-   */
-  async checkActivateCertificateAuthorityProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.security.privateca.v1.CertificateAuthority,
-      protos.google.cloud.security.privateca.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `activateCertificateAuthority()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.activate_certificate_authority.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_ActivateCertificateAuthority_async
+ */
+  async checkActivateCertificateAuthorityProgress(name: string): Promise<LROperation<protos.google.cloud.security.privateca.v1.CertificateAuthority, protos.google.cloud.security.privateca.v1.OperationMetadata>>{
     this._log.info('activateCertificateAuthority long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.activateCertificateAuthority,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.security.privateca.v1.CertificateAuthority,
-      protos.google.cloud.security.privateca.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.activateCertificateAuthority, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.security.privateca.v1.CertificateAuthority, protos.google.cloud.security.privateca.v1.OperationMetadata>;
   }
-  /**
-   * Create a new
-   * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
-   * in a given Project and Location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the
-   *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool} associated with the
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthorities},
-   *   in the format `projects/* /locations/* /caPools/*`.
-   * @param {string} request.certificateAuthorityId
-   *   Required. It must be unique within a location and match the regular
-   *   expression `[a-zA-Z0-9_-]{1,63}`
-   * @param {google.cloud.security.privateca.v1.CertificateAuthority} request.certificateAuthority
-   *   Required. A
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
-   *   with initial field values.
-   * @param {string} [request.requestId]
-   *   Optional. An ID to identify requests. Specify a unique request ID so that
-   *   if you must retry your request, the server will know to ignore the request
-   *   if it has already been completed. The server will guarantee that for at
-   *   least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.create_certificate_authority.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_CreateCertificateAuthority_async
-   */
+/**
+ * Create a new
+ * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
+ * in a given Project and Location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the
+ *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool} associated with the
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthorities},
+ *   in the format `projects/* /locations/* /caPools/*`.
+ * @param {string} request.certificateAuthorityId
+ *   Required. It must be unique within a location and match the regular
+ *   expression `[a-zA-Z0-9_-]{1,63}`
+ * @param {google.cloud.security.privateca.v1.CertificateAuthority} request.certificateAuthority
+ *   Required. A
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
+ *   with initial field values.
+ * @param {string} [request.requestId]
+ *   Optional. An ID to identify requests. Specify a unique request ID so that
+ *   if you must retry your request, the server will know to ignore the request
+ *   if it has already been completed. The server will guarantee that for at
+ *   least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.create_certificate_authority.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_CreateCertificateAuthority_async
+ */
   createCertificateAuthority(
-    request?: protos.google.cloud.security.privateca.v1.ICreateCertificateAuthorityRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.ICreateCertificateAuthorityRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createCertificateAuthority(
-    request: protos.google.cloud.security.privateca.v1.ICreateCertificateAuthorityRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.security.privateca.v1.ICreateCertificateAuthorityRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createCertificateAuthority(
-    request: protos.google.cloud.security.privateca.v1.ICreateCertificateAuthorityRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.security.privateca.v1.ICreateCertificateAuthorityRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createCertificateAuthority(
-    request?: protos.google.cloud.security.privateca.v1.ICreateCertificateAuthorityRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.security.privateca.v1.ICreateCertificateAuthorityRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createCertificateAuthority response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createCertificateAuthority request %j', request);
-    return this.innerApiCalls
-      .createCertificateAuthority(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createCertificateAuthority response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createCertificateAuthority(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createCertificateAuthority response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createCertificateAuthority()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.create_certificate_authority.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_CreateCertificateAuthority_async
-   */
-  async checkCreateCertificateAuthorityProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.security.privateca.v1.CertificateAuthority,
-      protos.google.cloud.security.privateca.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createCertificateAuthority()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.create_certificate_authority.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_CreateCertificateAuthority_async
+ */
+  async checkCreateCertificateAuthorityProgress(name: string): Promise<LROperation<protos.google.cloud.security.privateca.v1.CertificateAuthority, protos.google.cloud.security.privateca.v1.OperationMetadata>>{
     this._log.info('createCertificateAuthority long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createCertificateAuthority,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.security.privateca.v1.CertificateAuthority,
-      protos.google.cloud.security.privateca.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createCertificateAuthority, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.security.privateca.v1.CertificateAuthority, protos.google.cloud.security.privateca.v1.OperationMetadata>;
   }
-  /**
-   * Disable a
-   * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name for this
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
-   *   in the format `projects/* /locations/* /caPools/* /certificateAuthorities/*`.
-   * @param {string} [request.requestId]
-   *   Optional. An ID to identify requests. Specify a unique request ID so that
-   *   if you must retry your request, the server will know to ignore the request
-   *   if it has already been completed. The server will guarantee that for at
-   *   least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {boolean} [request.ignoreDependentResources]
-   *   Optional. This field allows this CA to be disabled even if it's being
-   *   depended on by another resource. However, doing so may result in unintended
-   *   and unrecoverable effects on any dependent resources since the CA will
-   *   no longer be able to issue certificates.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.disable_certificate_authority.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_DisableCertificateAuthority_async
-   */
+/**
+ * Disable a
+ * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name for this
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
+ *   in the format `projects/* /locations/* /caPools/* /certificateAuthorities/*`.
+ * @param {string} [request.requestId]
+ *   Optional. An ID to identify requests. Specify a unique request ID so that
+ *   if you must retry your request, the server will know to ignore the request
+ *   if it has already been completed. The server will guarantee that for at
+ *   least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {boolean} [request.ignoreDependentResources]
+ *   Optional. This field allows this CA to be disabled even if it's being
+ *   depended on by another resource. However, doing so may result in unintended
+ *   and unrecoverable effects on any dependent resources since the CA will
+ *   no longer be able to issue certificates.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.disable_certificate_authority.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_DisableCertificateAuthority_async
+ */
   disableCertificateAuthority(
-    request?: protos.google.cloud.security.privateca.v1.IDisableCertificateAuthorityRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.IDisableCertificateAuthorityRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   disableCertificateAuthority(
-    request: protos.google.cloud.security.privateca.v1.IDisableCertificateAuthorityRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.security.privateca.v1.IDisableCertificateAuthorityRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   disableCertificateAuthority(
-    request: protos.google.cloud.security.privateca.v1.IDisableCertificateAuthorityRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.security.privateca.v1.IDisableCertificateAuthorityRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   disableCertificateAuthority(
-    request?: protos.google.cloud.security.privateca.v1.IDisableCertificateAuthorityRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.security.privateca.v1.IDisableCertificateAuthorityRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
-            'disableCertificateAuthority response %j',
-            rawResponse
-          );
+          this._log.info('disableCertificateAuthority response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('disableCertificateAuthority request %j', request);
-    return this.innerApiCalls
-      .disableCertificateAuthority(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'disableCertificateAuthority response %j',
-            rawResponse
-          );
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.disableCertificateAuthority(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('disableCertificateAuthority response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `disableCertificateAuthority()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.disable_certificate_authority.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_DisableCertificateAuthority_async
-   */
-  async checkDisableCertificateAuthorityProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.security.privateca.v1.CertificateAuthority,
-      protos.google.cloud.security.privateca.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `disableCertificateAuthority()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.disable_certificate_authority.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_DisableCertificateAuthority_async
+ */
+  async checkDisableCertificateAuthorityProgress(name: string): Promise<LROperation<protos.google.cloud.security.privateca.v1.CertificateAuthority, protos.google.cloud.security.privateca.v1.OperationMetadata>>{
     this._log.info('disableCertificateAuthority long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.disableCertificateAuthority,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.security.privateca.v1.CertificateAuthority,
-      protos.google.cloud.security.privateca.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.disableCertificateAuthority, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.security.privateca.v1.CertificateAuthority, protos.google.cloud.security.privateca.v1.OperationMetadata>;
   }
-  /**
-   * Enable a
-   * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name for this
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
-   *   in the format `projects/* /locations/* /caPools/* /certificateAuthorities/*`.
-   * @param {string} [request.requestId]
-   *   Optional. An ID to identify requests. Specify a unique request ID so that
-   *   if you must retry your request, the server will know to ignore the request
-   *   if it has already been completed. The server will guarantee that for at
-   *   least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.enable_certificate_authority.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_EnableCertificateAuthority_async
-   */
+/**
+ * Enable a
+ * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name for this
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
+ *   in the format `projects/* /locations/* /caPools/* /certificateAuthorities/*`.
+ * @param {string} [request.requestId]
+ *   Optional. An ID to identify requests. Specify a unique request ID so that
+ *   if you must retry your request, the server will know to ignore the request
+ *   if it has already been completed. The server will guarantee that for at
+ *   least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.enable_certificate_authority.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_EnableCertificateAuthority_async
+ */
   enableCertificateAuthority(
-    request?: protos.google.cloud.security.privateca.v1.IEnableCertificateAuthorityRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.IEnableCertificateAuthorityRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   enableCertificateAuthority(
-    request: protos.google.cloud.security.privateca.v1.IEnableCertificateAuthorityRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.security.privateca.v1.IEnableCertificateAuthorityRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   enableCertificateAuthority(
-    request: protos.google.cloud.security.privateca.v1.IEnableCertificateAuthorityRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.security.privateca.v1.IEnableCertificateAuthorityRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   enableCertificateAuthority(
-    request?: protos.google.cloud.security.privateca.v1.IEnableCertificateAuthorityRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.security.privateca.v1.IEnableCertificateAuthorityRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('enableCertificateAuthority response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('enableCertificateAuthority request %j', request);
-    return this.innerApiCalls
-      .enableCertificateAuthority(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('enableCertificateAuthority response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.enableCertificateAuthority(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('enableCertificateAuthority response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `enableCertificateAuthority()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.enable_certificate_authority.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_EnableCertificateAuthority_async
-   */
-  async checkEnableCertificateAuthorityProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.security.privateca.v1.CertificateAuthority,
-      protos.google.cloud.security.privateca.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `enableCertificateAuthority()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.enable_certificate_authority.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_EnableCertificateAuthority_async
+ */
+  async checkEnableCertificateAuthorityProgress(name: string): Promise<LROperation<protos.google.cloud.security.privateca.v1.CertificateAuthority, protos.google.cloud.security.privateca.v1.OperationMetadata>>{
     this._log.info('enableCertificateAuthority long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.enableCertificateAuthority,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.security.privateca.v1.CertificateAuthority,
-      protos.google.cloud.security.privateca.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.enableCertificateAuthority, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.security.privateca.v1.CertificateAuthority, protos.google.cloud.security.privateca.v1.OperationMetadata>;
   }
-  /**
-   * Undelete a
-   * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
-   * that has been deleted.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name for this
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
-   *   in the format `projects/* /locations/* /caPools/* /certificateAuthorities/*`.
-   * @param {string} [request.requestId]
-   *   Optional. An ID to identify requests. Specify a unique request ID so that
-   *   if you must retry your request, the server will know to ignore the request
-   *   if it has already been completed. The server will guarantee that for at
-   *   least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.undelete_certificate_authority.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_UndeleteCertificateAuthority_async
-   */
+/**
+ * Undelete a
+ * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
+ * that has been deleted.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name for this
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
+ *   in the format `projects/* /locations/* /caPools/* /certificateAuthorities/*`.
+ * @param {string} [request.requestId]
+ *   Optional. An ID to identify requests. Specify a unique request ID so that
+ *   if you must retry your request, the server will know to ignore the request
+ *   if it has already been completed. The server will guarantee that for at
+ *   least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.undelete_certificate_authority.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_UndeleteCertificateAuthority_async
+ */
   undeleteCertificateAuthority(
-    request?: protos.google.cloud.security.privateca.v1.IUndeleteCertificateAuthorityRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.IUndeleteCertificateAuthorityRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   undeleteCertificateAuthority(
-    request: protos.google.cloud.security.privateca.v1.IUndeleteCertificateAuthorityRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.security.privateca.v1.IUndeleteCertificateAuthorityRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   undeleteCertificateAuthority(
-    request: protos.google.cloud.security.privateca.v1.IUndeleteCertificateAuthorityRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.security.privateca.v1.IUndeleteCertificateAuthorityRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   undeleteCertificateAuthority(
-    request?: protos.google.cloud.security.privateca.v1.IUndeleteCertificateAuthorityRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.security.privateca.v1.IUndeleteCertificateAuthorityRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
-            'undeleteCertificateAuthority response %j',
-            rawResponse
-          );
+          this._log.info('undeleteCertificateAuthority response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('undeleteCertificateAuthority request %j', request);
-    return this.innerApiCalls
-      .undeleteCertificateAuthority(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'undeleteCertificateAuthority response %j',
-            rawResponse
-          );
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.undeleteCertificateAuthority(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('undeleteCertificateAuthority response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `undeleteCertificateAuthority()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.undelete_certificate_authority.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_UndeleteCertificateAuthority_async
-   */
-  async checkUndeleteCertificateAuthorityProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.security.privateca.v1.CertificateAuthority,
-      protos.google.cloud.security.privateca.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `undeleteCertificateAuthority()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.undelete_certificate_authority.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_UndeleteCertificateAuthority_async
+ */
+  async checkUndeleteCertificateAuthorityProgress(name: string): Promise<LROperation<protos.google.cloud.security.privateca.v1.CertificateAuthority, protos.google.cloud.security.privateca.v1.OperationMetadata>>{
     this._log.info('undeleteCertificateAuthority long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.undeleteCertificateAuthority,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.security.privateca.v1.CertificateAuthority,
-      protos.google.cloud.security.privateca.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.undeleteCertificateAuthority, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.security.privateca.v1.CertificateAuthority, protos.google.cloud.security.privateca.v1.OperationMetadata>;
   }
-  /**
-   * Delete a
-   * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name for this
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
-   *   in the format `projects/* /locations/* /caPools/* /certificateAuthorities/*`.
-   * @param {string} [request.requestId]
-   *   Optional. An ID to identify requests. Specify a unique request ID so that
-   *   if you must retry your request, the server will know to ignore the request
-   *   if it has already been completed. The server will guarantee that for at
-   *   least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {boolean} [request.ignoreActiveCertificates]
-   *   Optional. This field allows the CA to be deleted even if the CA has
-   *   active certs. Active certs include both unrevoked and unexpired certs.
-   * @param {boolean} [request.skipGracePeriod]
-   *   Optional. If this flag is set, the Certificate Authority will be deleted as
-   *   soon as possible without a 30-day grace period where undeletion would have
-   *   been allowed. If you proceed, there will be no way to recover this CA.
-   * @param {boolean} [request.ignoreDependentResources]
-   *   Optional. This field allows this CA to be deleted even if it's being
-   *   depended on by another resource. However, doing so may result in unintended
-   *   and unrecoverable effects on any dependent resources since the CA will
-   *   no longer be able to issue certificates.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.delete_certificate_authority.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_DeleteCertificateAuthority_async
-   */
+/**
+ * Delete a
+ * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name for this
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
+ *   in the format `projects/* /locations/* /caPools/* /certificateAuthorities/*`.
+ * @param {string} [request.requestId]
+ *   Optional. An ID to identify requests. Specify a unique request ID so that
+ *   if you must retry your request, the server will know to ignore the request
+ *   if it has already been completed. The server will guarantee that for at
+ *   least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {boolean} [request.ignoreActiveCertificates]
+ *   Optional. This field allows the CA to be deleted even if the CA has
+ *   active certs. Active certs include both unrevoked and unexpired certs.
+ * @param {boolean} [request.skipGracePeriod]
+ *   Optional. If this flag is set, the Certificate Authority will be deleted as
+ *   soon as possible without a 30-day grace period where undeletion would have
+ *   been allowed. If you proceed, there will be no way to recover this CA.
+ * @param {boolean} [request.ignoreDependentResources]
+ *   Optional. This field allows this CA to be deleted even if it's being
+ *   depended on by another resource. However, doing so may result in unintended
+ *   and unrecoverable effects on any dependent resources since the CA will
+ *   no longer be able to issue certificates.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.delete_certificate_authority.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_DeleteCertificateAuthority_async
+ */
   deleteCertificateAuthority(
-    request?: protos.google.cloud.security.privateca.v1.IDeleteCertificateAuthorityRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.IDeleteCertificateAuthorityRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteCertificateAuthority(
-    request: protos.google.cloud.security.privateca.v1.IDeleteCertificateAuthorityRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.security.privateca.v1.IDeleteCertificateAuthorityRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteCertificateAuthority(
-    request: protos.google.cloud.security.privateca.v1.IDeleteCertificateAuthorityRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.security.privateca.v1.IDeleteCertificateAuthorityRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteCertificateAuthority(
-    request?: protos.google.cloud.security.privateca.v1.IDeleteCertificateAuthorityRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.security.privateca.v1.IDeleteCertificateAuthorityRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteCertificateAuthority response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteCertificateAuthority request %j', request);
-    return this.innerApiCalls
-      .deleteCertificateAuthority(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteCertificateAuthority response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteCertificateAuthority(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteCertificateAuthority response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteCertificateAuthority()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.delete_certificate_authority.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_DeleteCertificateAuthority_async
-   */
-  async checkDeleteCertificateAuthorityProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.security.privateca.v1.CertificateAuthority,
-      protos.google.cloud.security.privateca.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteCertificateAuthority()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.delete_certificate_authority.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_DeleteCertificateAuthority_async
+ */
+  async checkDeleteCertificateAuthorityProgress(name: string): Promise<LROperation<protos.google.cloud.security.privateca.v1.CertificateAuthority, protos.google.cloud.security.privateca.v1.OperationMetadata>>{
     this._log.info('deleteCertificateAuthority long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteCertificateAuthority,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.security.privateca.v1.CertificateAuthority,
-      protos.google.cloud.security.privateca.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteCertificateAuthority, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.security.privateca.v1.CertificateAuthority, protos.google.cloud.security.privateca.v1.OperationMetadata>;
   }
-  /**
-   * Update a
-   * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.security.privateca.v1.CertificateAuthority} request.certificateAuthority
-   *   Required.
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
-   *   with updated values.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. A list of fields to be updated in this request.
-   * @param {string} [request.requestId]
-   *   Optional. An ID to identify requests. Specify a unique request ID so that
-   *   if you must retry your request, the server will know to ignore the request
-   *   if it has already been completed. The server will guarantee that for at
-   *   least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.update_certificate_authority.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_UpdateCertificateAuthority_async
-   */
+/**
+ * Update a
+ * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.security.privateca.v1.CertificateAuthority} request.certificateAuthority
+ *   Required.
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
+ *   with updated values.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. A list of fields to be updated in this request.
+ * @param {string} [request.requestId]
+ *   Optional. An ID to identify requests. Specify a unique request ID so that
+ *   if you must retry your request, the server will know to ignore the request
+ *   if it has already been completed. The server will guarantee that for at
+ *   least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.update_certificate_authority.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_UpdateCertificateAuthority_async
+ */
   updateCertificateAuthority(
-    request?: protos.google.cloud.security.privateca.v1.IUpdateCertificateAuthorityRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.IUpdateCertificateAuthorityRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateCertificateAuthority(
-    request: protos.google.cloud.security.privateca.v1.IUpdateCertificateAuthorityRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.security.privateca.v1.IUpdateCertificateAuthorityRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateCertificateAuthority(
-    request: protos.google.cloud.security.privateca.v1.IUpdateCertificateAuthorityRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.security.privateca.v1.IUpdateCertificateAuthorityRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateCertificateAuthority(
-    request?: protos.google.cloud.security.privateca.v1.IUpdateCertificateAuthorityRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.security.privateca.v1.IUpdateCertificateAuthorityRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'certificate_authority.name': request.certificateAuthority!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'certificate_authority.name': request.certificateAuthority!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateCertificateAuthority response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateCertificateAuthority request %j', request);
-    return this.innerApiCalls
-      .updateCertificateAuthority(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateCertificateAuthority response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateCertificateAuthority(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.security.privateca.v1.ICertificateAuthority, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateCertificateAuthority response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateCertificateAuthority()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.update_certificate_authority.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_UpdateCertificateAuthority_async
-   */
-  async checkUpdateCertificateAuthorityProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.security.privateca.v1.CertificateAuthority,
-      protos.google.cloud.security.privateca.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateCertificateAuthority()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.update_certificate_authority.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_UpdateCertificateAuthority_async
+ */
+  async checkUpdateCertificateAuthorityProgress(name: string): Promise<LROperation<protos.google.cloud.security.privateca.v1.CertificateAuthority, protos.google.cloud.security.privateca.v1.OperationMetadata>>{
     this._log.info('updateCertificateAuthority long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateCertificateAuthority,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.security.privateca.v1.CertificateAuthority,
-      protos.google.cloud.security.privateca.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateCertificateAuthority, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.security.privateca.v1.CertificateAuthority, protos.google.cloud.security.privateca.v1.OperationMetadata>;
   }
-  /**
-   * Create a {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the location associated with the
-   *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool}, in the format
-   *   `projects/* /locations/*`.
-   * @param {string} request.caPoolId
-   *   Required. It must be unique within a location and match the regular
-   *   expression `[a-zA-Z0-9_-]{1,63}`
-   * @param {google.cloud.security.privateca.v1.CaPool} request.caPool
-   *   Required. A {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool} with
-   *   initial field values.
-   * @param {string} [request.requestId]
-   *   Optional. An ID to identify requests. Specify a unique request ID so that
-   *   if you must retry your request, the server will know to ignore the request
-   *   if it has already been completed. The server will guarantee that for at
-   *   least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.create_ca_pool.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_CreateCaPool_async
-   */
+/**
+ * Create a {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the location associated with the
+ *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool}, in the format
+ *   `projects/* /locations/*`.
+ * @param {string} request.caPoolId
+ *   Required. It must be unique within a location and match the regular
+ *   expression `[a-zA-Z0-9_-]{1,63}`
+ * @param {google.cloud.security.privateca.v1.CaPool} request.caPool
+ *   Required. A {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool} with
+ *   initial field values.
+ * @param {string} [request.requestId]
+ *   Optional. An ID to identify requests. Specify a unique request ID so that
+ *   if you must retry your request, the server will know to ignore the request
+ *   if it has already been completed. The server will guarantee that for at
+ *   least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.create_ca_pool.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_CreateCaPool_async
+ */
   createCaPool(
-    request?: protos.google.cloud.security.privateca.v1.ICreateCaPoolRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICaPool,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.ICreateCaPoolRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.security.privateca.v1.ICaPool, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createCaPool(
-    request: protos.google.cloud.security.privateca.v1.ICreateCaPoolRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICaPool,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.security.privateca.v1.ICreateCaPoolRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICaPool, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createCaPool(
-    request: protos.google.cloud.security.privateca.v1.ICreateCaPoolRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICaPool,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.security.privateca.v1.ICreateCaPoolRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICaPool, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createCaPool(
-    request?: protos.google.cloud.security.privateca.v1.ICreateCaPoolRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICaPool,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICaPool,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICaPool,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.security.privateca.v1.ICreateCaPoolRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICaPool, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICaPool, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.security.privateca.v1.ICaPool, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICaPool,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICaPool, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createCaPool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createCaPool request %j', request);
-    return this.innerApiCalls
-      .createCaPool(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICaPool,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createCaPool response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createCaPool(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.security.privateca.v1.ICaPool, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createCaPool response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createCaPool()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.create_ca_pool.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_CreateCaPool_async
-   */
-  async checkCreateCaPoolProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.security.privateca.v1.CaPool,
-      protos.google.cloud.security.privateca.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createCaPool()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.create_ca_pool.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_CreateCaPool_async
+ */
+  async checkCreateCaPoolProgress(name: string): Promise<LROperation<protos.google.cloud.security.privateca.v1.CaPool, protos.google.cloud.security.privateca.v1.OperationMetadata>>{
     this._log.info('createCaPool long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createCaPool,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.security.privateca.v1.CaPool,
-      protos.google.cloud.security.privateca.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createCaPool, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.security.privateca.v1.CaPool, protos.google.cloud.security.privateca.v1.OperationMetadata>;
   }
-  /**
-   * Update a {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.security.privateca.v1.CaPool} request.caPool
-   *   Required. {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool} with updated
-   *   values.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. A list of fields to be updated in this request.
-   * @param {string} [request.requestId]
-   *   Optional. An ID to identify requests. Specify a unique request ID so that
-   *   if you must retry your request, the server will know to ignore the request
-   *   if it has already been completed. The server will guarantee that for at
-   *   least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.update_ca_pool.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_UpdateCaPool_async
-   */
+/**
+ * Update a {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.security.privateca.v1.CaPool} request.caPool
+ *   Required. {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool} with updated
+ *   values.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. A list of fields to be updated in this request.
+ * @param {string} [request.requestId]
+ *   Optional. An ID to identify requests. Specify a unique request ID so that
+ *   if you must retry your request, the server will know to ignore the request
+ *   if it has already been completed. The server will guarantee that for at
+ *   least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.update_ca_pool.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_UpdateCaPool_async
+ */
   updateCaPool(
-    request?: protos.google.cloud.security.privateca.v1.IUpdateCaPoolRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICaPool,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.IUpdateCaPoolRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.security.privateca.v1.ICaPool, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateCaPool(
-    request: protos.google.cloud.security.privateca.v1.IUpdateCaPoolRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICaPool,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.security.privateca.v1.IUpdateCaPoolRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICaPool, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateCaPool(
-    request: protos.google.cloud.security.privateca.v1.IUpdateCaPoolRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICaPool,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.security.privateca.v1.IUpdateCaPoolRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICaPool, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateCaPool(
-    request?: protos.google.cloud.security.privateca.v1.IUpdateCaPoolRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICaPool,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICaPool,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICaPool,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.security.privateca.v1.IUpdateCaPoolRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICaPool, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICaPool, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.security.privateca.v1.ICaPool, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'ca_pool.name': request.caPool!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'ca_pool.name': request.caPool!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICaPool,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICaPool, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateCaPool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateCaPool request %j', request);
-    return this.innerApiCalls
-      .updateCaPool(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICaPool,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateCaPool response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateCaPool(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.security.privateca.v1.ICaPool, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateCaPool response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateCaPool()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.update_ca_pool.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_UpdateCaPool_async
-   */
-  async checkUpdateCaPoolProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.security.privateca.v1.CaPool,
-      protos.google.cloud.security.privateca.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateCaPool()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.update_ca_pool.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_UpdateCaPool_async
+ */
+  async checkUpdateCaPoolProgress(name: string): Promise<LROperation<protos.google.cloud.security.privateca.v1.CaPool, protos.google.cloud.security.privateca.v1.OperationMetadata>>{
     this._log.info('updateCaPool long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateCaPool,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.security.privateca.v1.CaPool,
-      protos.google.cloud.security.privateca.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateCaPool, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.security.privateca.v1.CaPool, protos.google.cloud.security.privateca.v1.OperationMetadata>;
   }
-  /**
-   * Delete a {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name for this
-   *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool} in the format
-   *   `projects/* /locations/* /caPools/*`.
-   * @param {string} [request.requestId]
-   *   Optional. An ID to identify requests. Specify a unique request ID so that
-   *   if you must retry your request, the server will know to ignore the request
-   *   if it has already been completed. The server will guarantee that for at
-   *   least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {boolean} [request.ignoreDependentResources]
-   *   Optional. This field allows this pool to be deleted even if it's being
-   *   depended on by another resource. However, doing so may result in unintended
-   *   and unrecoverable effects on any dependent resources since the pool will
-   *   no longer be able to issue certificates.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.delete_ca_pool.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_DeleteCaPool_async
-   */
+/**
+ * Delete a {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name for this
+ *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool} in the format
+ *   `projects/* /locations/* /caPools/*`.
+ * @param {string} [request.requestId]
+ *   Optional. An ID to identify requests. Specify a unique request ID so that
+ *   if you must retry your request, the server will know to ignore the request
+ *   if it has already been completed. The server will guarantee that for at
+ *   least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {boolean} [request.ignoreDependentResources]
+ *   Optional. This field allows this pool to be deleted even if it's being
+ *   depended on by another resource. However, doing so may result in unintended
+ *   and unrecoverable effects on any dependent resources since the pool will
+ *   no longer be able to issue certificates.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.delete_ca_pool.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_DeleteCaPool_async
+ */
   deleteCaPool(
-    request?: protos.google.cloud.security.privateca.v1.IDeleteCaPoolRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.IDeleteCaPoolRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteCaPool(
-    request: protos.google.cloud.security.privateca.v1.IDeleteCaPoolRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.security.privateca.v1.IDeleteCaPoolRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteCaPool(
-    request: protos.google.cloud.security.privateca.v1.IDeleteCaPoolRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.security.privateca.v1.IDeleteCaPoolRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteCaPool(
-    request?: protos.google.cloud.security.privateca.v1.IDeleteCaPoolRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.security.privateca.v1.IDeleteCaPoolRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteCaPool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteCaPool request %j', request);
-    return this.innerApiCalls
-      .deleteCaPool(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteCaPool response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteCaPool(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteCaPool response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteCaPool()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.delete_ca_pool.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_DeleteCaPool_async
-   */
-  async checkDeleteCaPoolProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.security.privateca.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteCaPool()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.delete_ca_pool.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_DeleteCaPool_async
+ */
+  async checkDeleteCaPoolProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.security.privateca.v1.OperationMetadata>>{
     this._log.info('deleteCaPool long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteCaPool,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.security.privateca.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteCaPool, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.security.privateca.v1.OperationMetadata>;
   }
-  /**
-   * Update a
-   * {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationList}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.security.privateca.v1.CertificateRevocationList} request.certificateRevocationList
-   *   Required.
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationList}
-   *   with updated values.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. A list of fields to be updated in this request.
-   * @param {string} [request.requestId]
-   *   Optional. An ID to identify requests. Specify a unique request ID so that
-   *   if you must retry your request, the server will know to ignore the request
-   *   if it has already been completed. The server will guarantee that for at
-   *   least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.update_certificate_revocation_list.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_UpdateCertificateRevocationList_async
-   */
+/**
+ * Update a
+ * {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationList}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.security.privateca.v1.CertificateRevocationList} request.certificateRevocationList
+ *   Required.
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationList}
+ *   with updated values.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. A list of fields to be updated in this request.
+ * @param {string} [request.requestId]
+ *   Optional. An ID to identify requests. Specify a unique request ID so that
+ *   if you must retry your request, the server will know to ignore the request
+ *   if it has already been completed. The server will guarantee that for at
+ *   least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.update_certificate_revocation_list.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_UpdateCertificateRevocationList_async
+ */
   updateCertificateRevocationList(
-    request?: protos.google.cloud.security.privateca.v1.IUpdateCertificateRevocationListRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateRevocationList,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.IUpdateCertificateRevocationListRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.security.privateca.v1.ICertificateRevocationList, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateCertificateRevocationList(
-    request: protos.google.cloud.security.privateca.v1.IUpdateCertificateRevocationListRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateRevocationList,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.security.privateca.v1.IUpdateCertificateRevocationListRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateRevocationList, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateCertificateRevocationList(
-    request: protos.google.cloud.security.privateca.v1.IUpdateCertificateRevocationListRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateRevocationList,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.security.privateca.v1.IUpdateCertificateRevocationListRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateRevocationList, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateCertificateRevocationList(
-    request?: protos.google.cloud.security.privateca.v1.IUpdateCertificateRevocationListRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateRevocationList,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateRevocationList,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateRevocationList,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.security.privateca.v1.IUpdateCertificateRevocationListRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateRevocationList, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateRevocationList, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.security.privateca.v1.ICertificateRevocationList, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'certificate_revocation_list.name':
-          request.certificateRevocationList!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'certificate_revocation_list.name': request.certificateRevocationList!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateRevocationList,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateRevocationList, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
-            'updateCertificateRevocationList response %j',
-            rawResponse
-          );
+          this._log.info('updateCertificateRevocationList response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateCertificateRevocationList request %j', request);
-    return this.innerApiCalls
-      .updateCertificateRevocationList(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateRevocationList,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'updateCertificateRevocationList response %j',
-            rawResponse
-          );
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateCertificateRevocationList(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.security.privateca.v1.ICertificateRevocationList, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateCertificateRevocationList response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateCertificateRevocationList()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.update_certificate_revocation_list.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_UpdateCertificateRevocationList_async
-   */
-  async checkUpdateCertificateRevocationListProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.security.privateca.v1.CertificateRevocationList,
-      protos.google.cloud.security.privateca.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateCertificateRevocationList()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.update_certificate_revocation_list.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_UpdateCertificateRevocationList_async
+ */
+  async checkUpdateCertificateRevocationListProgress(name: string): Promise<LROperation<protos.google.cloud.security.privateca.v1.CertificateRevocationList, protos.google.cloud.security.privateca.v1.OperationMetadata>>{
     this._log.info('updateCertificateRevocationList long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateCertificateRevocationList,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.security.privateca.v1.CertificateRevocationList,
-      protos.google.cloud.security.privateca.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateCertificateRevocationList, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.security.privateca.v1.CertificateRevocationList, protos.google.cloud.security.privateca.v1.OperationMetadata>;
   }
-  /**
-   * Create a new
-   * {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplate}
-   * in a given Project and Location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the location associated with the
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplate},
-   *   in the format `projects/* /locations/*`.
-   * @param {string} request.certificateTemplateId
-   *   Required. It must be unique within a location and match the regular
-   *   expression `[a-zA-Z0-9_-]{1,63}`
-   * @param {google.cloud.security.privateca.v1.CertificateTemplate} request.certificateTemplate
-   *   Required. A
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplate}
-   *   with initial field values.
-   * @param {string} [request.requestId]
-   *   Optional. An ID to identify requests. Specify a unique request ID so that
-   *   if you must retry your request, the server will know to ignore the request
-   *   if it has already been completed. The server will guarantee that for at
-   *   least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.create_certificate_template.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_CreateCertificateTemplate_async
-   */
+/**
+ * Create a new
+ * {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplate}
+ * in a given Project and Location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the location associated with the
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplate},
+ *   in the format `projects/* /locations/*`.
+ * @param {string} request.certificateTemplateId
+ *   Required. It must be unique within a location and match the regular
+ *   expression `[a-zA-Z0-9_-]{1,63}`
+ * @param {google.cloud.security.privateca.v1.CertificateTemplate} request.certificateTemplate
+ *   Required. A
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplate}
+ *   with initial field values.
+ * @param {string} [request.requestId]
+ *   Optional. An ID to identify requests. Specify a unique request ID so that
+ *   if you must retry your request, the server will know to ignore the request
+ *   if it has already been completed. The server will guarantee that for at
+ *   least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.create_certificate_template.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_CreateCertificateTemplate_async
+ */
   createCertificateTemplate(
-    request?: protos.google.cloud.security.privateca.v1.ICreateCertificateTemplateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateTemplate,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.ICreateCertificateTemplateRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.security.privateca.v1.ICertificateTemplate, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createCertificateTemplate(
-    request: protos.google.cloud.security.privateca.v1.ICreateCertificateTemplateRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateTemplate,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.security.privateca.v1.ICreateCertificateTemplateRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateTemplate, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createCertificateTemplate(
-    request: protos.google.cloud.security.privateca.v1.ICreateCertificateTemplateRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateTemplate,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.security.privateca.v1.ICreateCertificateTemplateRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateTemplate, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createCertificateTemplate(
-    request?: protos.google.cloud.security.privateca.v1.ICreateCertificateTemplateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateTemplate,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateTemplate,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateTemplate,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.security.privateca.v1.ICreateCertificateTemplateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateTemplate, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateTemplate, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.security.privateca.v1.ICertificateTemplate, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateTemplate,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateTemplate, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createCertificateTemplate response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createCertificateTemplate request %j', request);
-    return this.innerApiCalls
-      .createCertificateTemplate(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateTemplate,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createCertificateTemplate response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createCertificateTemplate(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.security.privateca.v1.ICertificateTemplate, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createCertificateTemplate response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createCertificateTemplate()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.create_certificate_template.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_CreateCertificateTemplate_async
-   */
-  async checkCreateCertificateTemplateProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.security.privateca.v1.CertificateTemplate,
-      protos.google.cloud.security.privateca.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createCertificateTemplate()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.create_certificate_template.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_CreateCertificateTemplate_async
+ */
+  async checkCreateCertificateTemplateProgress(name: string): Promise<LROperation<protos.google.cloud.security.privateca.v1.CertificateTemplate, protos.google.cloud.security.privateca.v1.OperationMetadata>>{
     this._log.info('createCertificateTemplate long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createCertificateTemplate,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.security.privateca.v1.CertificateTemplate,
-      protos.google.cloud.security.privateca.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createCertificateTemplate, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.security.privateca.v1.CertificateTemplate, protos.google.cloud.security.privateca.v1.OperationMetadata>;
   }
-  /**
-   * DeleteCertificateTemplate deletes a
-   * {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplate}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name for this
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplate}
-   *   in the format `projects/* /locations/* /certificateTemplates/*`.
-   * @param {string} [request.requestId]
-   *   Optional. An ID to identify requests. Specify a unique request ID so that
-   *   if you must retry your request, the server will know to ignore the request
-   *   if it has already been completed. The server will guarantee that for at
-   *   least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.delete_certificate_template.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_DeleteCertificateTemplate_async
-   */
+/**
+ * DeleteCertificateTemplate deletes a
+ * {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplate}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name for this
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplate}
+ *   in the format `projects/* /locations/* /certificateTemplates/*`.
+ * @param {string} [request.requestId]
+ *   Optional. An ID to identify requests. Specify a unique request ID so that
+ *   if you must retry your request, the server will know to ignore the request
+ *   if it has already been completed. The server will guarantee that for at
+ *   least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.delete_certificate_template.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_DeleteCertificateTemplate_async
+ */
   deleteCertificateTemplate(
-    request?: protos.google.cloud.security.privateca.v1.IDeleteCertificateTemplateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.IDeleteCertificateTemplateRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteCertificateTemplate(
-    request: protos.google.cloud.security.privateca.v1.IDeleteCertificateTemplateRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.security.privateca.v1.IDeleteCertificateTemplateRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteCertificateTemplate(
-    request: protos.google.cloud.security.privateca.v1.IDeleteCertificateTemplateRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.security.privateca.v1.IDeleteCertificateTemplateRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteCertificateTemplate(
-    request?: protos.google.cloud.security.privateca.v1.IDeleteCertificateTemplateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.security.privateca.v1.IDeleteCertificateTemplateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteCertificateTemplate response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteCertificateTemplate request %j', request);
-    return this.innerApiCalls
-      .deleteCertificateTemplate(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteCertificateTemplate response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteCertificateTemplate(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteCertificateTemplate response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteCertificateTemplate()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.delete_certificate_template.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_DeleteCertificateTemplate_async
-   */
-  async checkDeleteCertificateTemplateProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.security.privateca.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteCertificateTemplate()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.delete_certificate_template.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_DeleteCertificateTemplate_async
+ */
+  async checkDeleteCertificateTemplateProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.security.privateca.v1.OperationMetadata>>{
     this._log.info('deleteCertificateTemplate long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteCertificateTemplate,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.security.privateca.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteCertificateTemplate, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.security.privateca.v1.OperationMetadata>;
   }
-  /**
-   * Update a
-   * {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplate}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.security.privateca.v1.CertificateTemplate} request.certificateTemplate
-   *   Required.
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplate}
-   *   with updated values.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. A list of fields to be updated in this request.
-   * @param {string} [request.requestId]
-   *   Optional. An ID to identify requests. Specify a unique request ID so that
-   *   if you must retry your request, the server will know to ignore the request
-   *   if it has already been completed. The server will guarantee that for at
-   *   least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.update_certificate_template.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_UpdateCertificateTemplate_async
-   */
+/**
+ * Update a
+ * {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplate}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.security.privateca.v1.CertificateTemplate} request.certificateTemplate
+ *   Required.
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplate}
+ *   with updated values.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. A list of fields to be updated in this request.
+ * @param {string} [request.requestId]
+ *   Optional. An ID to identify requests. Specify a unique request ID so that
+ *   if you must retry your request, the server will know to ignore the request
+ *   if it has already been completed. The server will guarantee that for at
+ *   least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.update_certificate_template.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_UpdateCertificateTemplate_async
+ */
   updateCertificateTemplate(
-    request?: protos.google.cloud.security.privateca.v1.IUpdateCertificateTemplateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateTemplate,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.IUpdateCertificateTemplateRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.security.privateca.v1.ICertificateTemplate, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateCertificateTemplate(
-    request: protos.google.cloud.security.privateca.v1.IUpdateCertificateTemplateRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateTemplate,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.security.privateca.v1.IUpdateCertificateTemplateRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateTemplate, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateCertificateTemplate(
-    request: protos.google.cloud.security.privateca.v1.IUpdateCertificateTemplateRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateTemplate,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.security.privateca.v1.IUpdateCertificateTemplateRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateTemplate, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateCertificateTemplate(
-    request?: protos.google.cloud.security.privateca.v1.IUpdateCertificateTemplateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateTemplate,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateTemplate,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1.ICertificateTemplate,
-        protos.google.cloud.security.privateca.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.security.privateca.v1.IUpdateCertificateTemplateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateTemplate, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateTemplate, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.security.privateca.v1.ICertificateTemplate, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'certificate_template.name': request.certificateTemplate!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'certificate_template.name': request.certificateTemplate!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateTemplate,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.security.privateca.v1.ICertificateTemplate, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateCertificateTemplate response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateCertificateTemplate request %j', request);
-    return this.innerApiCalls
-      .updateCertificateTemplate(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.security.privateca.v1.ICertificateTemplate,
-            protos.google.cloud.security.privateca.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateCertificateTemplate response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateCertificateTemplate(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.security.privateca.v1.ICertificateTemplate, protos.google.cloud.security.privateca.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateCertificateTemplate response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateCertificateTemplate()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.update_certificate_template.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_UpdateCertificateTemplate_async
-   */
-  async checkUpdateCertificateTemplateProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.security.privateca.v1.CertificateTemplate,
-      protos.google.cloud.security.privateca.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateCertificateTemplate()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.update_certificate_template.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_UpdateCertificateTemplate_async
+ */
+  async checkUpdateCertificateTemplateProgress(name: string): Promise<LROperation<protos.google.cloud.security.privateca.v1.CertificateTemplate, protos.google.cloud.security.privateca.v1.OperationMetadata>>{
     this._log.info('updateCertificateTemplate long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateCertificateTemplate,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.security.privateca.v1.CertificateTemplate,
-      protos.google.cloud.security.privateca.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateCertificateTemplate, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.security.privateca.v1.CertificateTemplate, protos.google.cloud.security.privateca.v1.OperationMetadata>;
   }
-  /**
-   * Lists {@link protos.google.cloud.security.privateca.v1.Certificate|Certificates}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the location associated with the
-   *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificates}, in the
-   *   format `projects/* /locations/* /caPools/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Limit on the number of
-   *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificates} to include
-   *   in the response. Further
-   *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificates} can
-   *   subsequently be obtained by including the
-   *   {@link protos.google.cloud.security.privateca.v1.ListCertificatesResponse.next_page_token|ListCertificatesResponse.next_page_token}
-   *   in a subsequent request. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Pagination token, returned earlier via
-   *   {@link protos.google.cloud.security.privateca.v1.ListCertificatesResponse.next_page_token|ListCertificatesResponse.next_page_token}.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response. For
-   *   details on supported filters and syntax, see [Certificates Filtering
-   *   documentation](https://cloud.google.com/certificate-authority-service/docs/sorting-filtering-certificates#filtering_support).
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted. For details on
-   *   supported fields and syntax, see [Certificates Sorting
-   *   documentation](https://cloud.google.com/certificate-authority-service/docs/sorting-filtering-certificates#sorting_support).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listCertificatesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists {@link protos.google.cloud.security.privateca.v1.Certificate|Certificates}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the location associated with the
+ *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificates}, in the
+ *   format `projects/* /locations/* /caPools/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Limit on the number of
+ *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificates} to include
+ *   in the response. Further
+ *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificates} can
+ *   subsequently be obtained by including the
+ *   {@link protos.google.cloud.security.privateca.v1.ListCertificatesResponse.next_page_token|ListCertificatesResponse.next_page_token}
+ *   in a subsequent request. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Pagination token, returned earlier via
+ *   {@link protos.google.cloud.security.privateca.v1.ListCertificatesResponse.next_page_token|ListCertificatesResponse.next_page_token}.
+ * @param {string} [request.filter]
+ *   Optional. Only include resources that match the filter in the response. For
+ *   details on supported filters and syntax, see [Certificates Filtering
+ *   documentation](https://cloud.google.com/certificate-authority-service/docs/sorting-filtering-certificates#filtering_support).
+ * @param {string} [request.orderBy]
+ *   Optional. Specify how the results should be sorted. For details on
+ *   supported fields and syntax, see [Certificates Sorting
+ *   documentation](https://cloud.google.com/certificate-authority-service/docs/sorting-filtering-certificates#sorting_support).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listCertificatesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCertificates(
-    request?: protos.google.cloud.security.privateca.v1.IListCertificatesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.ICertificate[],
-      protos.google.cloud.security.privateca.v1.IListCertificatesRequest | null,
-      protos.google.cloud.security.privateca.v1.IListCertificatesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.IListCertificatesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.ICertificate[],
+        protos.google.cloud.security.privateca.v1.IListCertificatesRequest|null,
+        protos.google.cloud.security.privateca.v1.IListCertificatesResponse
+      ]>;
   listCertificates(
-    request: protos.google.cloud.security.privateca.v1.IListCertificatesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.security.privateca.v1.IListCertificatesRequest,
-      | protos.google.cloud.security.privateca.v1.IListCertificatesResponse
-      | null
-      | undefined,
-      protos.google.cloud.security.privateca.v1.ICertificate
-    >
-  ): void;
-  listCertificates(
-    request: protos.google.cloud.security.privateca.v1.IListCertificatesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.security.privateca.v1.IListCertificatesRequest,
-      | protos.google.cloud.security.privateca.v1.IListCertificatesResponse
-      | null
-      | undefined,
-      protos.google.cloud.security.privateca.v1.ICertificate
-    >
-  ): void;
-  listCertificates(
-    request?: protos.google.cloud.security.privateca.v1.IListCertificatesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.security.privateca.v1.IListCertificatesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.security.privateca.v1.IListCertificatesRequest,
-          | protos.google.cloud.security.privateca.v1.IListCertificatesResponse
-          | null
-          | undefined,
-          protos.google.cloud.security.privateca.v1.ICertificate
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.security.privateca.v1.IListCertificatesRequest,
-      | protos.google.cloud.security.privateca.v1.IListCertificatesResponse
-      | null
-      | undefined,
-      protos.google.cloud.security.privateca.v1.ICertificate
-    >
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.ICertificate[],
-      protos.google.cloud.security.privateca.v1.IListCertificatesRequest | null,
-      protos.google.cloud.security.privateca.v1.IListCertificatesResponse,
-    ]
-  > | void {
+          protos.google.cloud.security.privateca.v1.IListCertificatesResponse|null|undefined,
+          protos.google.cloud.security.privateca.v1.ICertificate>): void;
+  listCertificates(
+      request: protos.google.cloud.security.privateca.v1.IListCertificatesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.security.privateca.v1.IListCertificatesRequest,
+          protos.google.cloud.security.privateca.v1.IListCertificatesResponse|null|undefined,
+          protos.google.cloud.security.privateca.v1.ICertificate>): void;
+  listCertificates(
+      request?: protos.google.cloud.security.privateca.v1.IListCertificatesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.security.privateca.v1.IListCertificatesRequest,
+          protos.google.cloud.security.privateca.v1.IListCertificatesResponse|null|undefined,
+          protos.google.cloud.security.privateca.v1.ICertificate>,
+      callback?: PaginationCallback<
+          protos.google.cloud.security.privateca.v1.IListCertificatesRequest,
+          protos.google.cloud.security.privateca.v1.IListCertificatesResponse|null|undefined,
+          protos.google.cloud.security.privateca.v1.ICertificate>):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.ICertificate[],
+        protos.google.cloud.security.privateca.v1.IListCertificatesRequest|null,
+        protos.google.cloud.security.privateca.v1.IListCertificatesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.security.privateca.v1.IListCertificatesRequest,
-          | protos.google.cloud.security.privateca.v1.IListCertificatesResponse
-          | null
-          | undefined,
-          protos.google.cloud.security.privateca.v1.ICertificate
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.security.privateca.v1.IListCertificatesRequest,
+      protos.google.cloud.security.privateca.v1.IListCertificatesResponse|null|undefined,
+      protos.google.cloud.security.privateca.v1.ICertificate>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listCertificates values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4987,74 +3495,71 @@ export class CertificateAuthorityServiceClient {
     this._log.info('listCertificates request %j', request);
     return this.innerApiCalls
       .listCertificates(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.security.privateca.v1.ICertificate[],
-          protos.google.cloud.security.privateca.v1.IListCertificatesRequest | null,
-          protos.google.cloud.security.privateca.v1.IListCertificatesResponse,
-        ]) => {
-          this._log.info('listCertificates values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.security.privateca.v1.ICertificate[],
+        protos.google.cloud.security.privateca.v1.IListCertificatesRequest|null,
+        protos.google.cloud.security.privateca.v1.IListCertificatesResponse
+      ]) => {
+        this._log.info('listCertificates values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listCertificates`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the location associated with the
-   *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificates}, in the
-   *   format `projects/* /locations/* /caPools/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Limit on the number of
-   *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificates} to include
-   *   in the response. Further
-   *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificates} can
-   *   subsequently be obtained by including the
-   *   {@link protos.google.cloud.security.privateca.v1.ListCertificatesResponse.next_page_token|ListCertificatesResponse.next_page_token}
-   *   in a subsequent request. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Pagination token, returned earlier via
-   *   {@link protos.google.cloud.security.privateca.v1.ListCertificatesResponse.next_page_token|ListCertificatesResponse.next_page_token}.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response. For
-   *   details on supported filters and syntax, see [Certificates Filtering
-   *   documentation](https://cloud.google.com/certificate-authority-service/docs/sorting-filtering-certificates#filtering_support).
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted. For details on
-   *   supported fields and syntax, see [Certificates Sorting
-   *   documentation](https://cloud.google.com/certificate-authority-service/docs/sorting-filtering-certificates#sorting_support).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listCertificatesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listCertificates`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the location associated with the
+ *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificates}, in the
+ *   format `projects/* /locations/* /caPools/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Limit on the number of
+ *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificates} to include
+ *   in the response. Further
+ *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificates} can
+ *   subsequently be obtained by including the
+ *   {@link protos.google.cloud.security.privateca.v1.ListCertificatesResponse.next_page_token|ListCertificatesResponse.next_page_token}
+ *   in a subsequent request. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Pagination token, returned earlier via
+ *   {@link protos.google.cloud.security.privateca.v1.ListCertificatesResponse.next_page_token|ListCertificatesResponse.next_page_token}.
+ * @param {string} [request.filter]
+ *   Optional. Only include resources that match the filter in the response. For
+ *   details on supported filters and syntax, see [Certificates Filtering
+ *   documentation](https://cloud.google.com/certificate-authority-service/docs/sorting-filtering-certificates#filtering_support).
+ * @param {string} [request.orderBy]
+ *   Optional. Specify how the results should be sorted. For details on
+ *   supported fields and syntax, see [Certificates Sorting
+ *   documentation](https://cloud.google.com/certificate-authority-service/docs/sorting-filtering-certificates#sorting_support).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listCertificatesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCertificatesStream(
-    request?: protos.google.cloud.security.privateca.v1.IListCertificatesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.security.privateca.v1.IListCertificatesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCertificates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCertificates stream %j', request);
     return this.descriptors.page.listCertificates.createStream(
       this.innerApiCalls.listCertificates as GaxCall,
@@ -5063,65 +3568,64 @@ export class CertificateAuthorityServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listCertificates`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the location associated with the
-   *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificates}, in the
-   *   format `projects/* /locations/* /caPools/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Limit on the number of
-   *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificates} to include
-   *   in the response. Further
-   *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificates} can
-   *   subsequently be obtained by including the
-   *   {@link protos.google.cloud.security.privateca.v1.ListCertificatesResponse.next_page_token|ListCertificatesResponse.next_page_token}
-   *   in a subsequent request. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Pagination token, returned earlier via
-   *   {@link protos.google.cloud.security.privateca.v1.ListCertificatesResponse.next_page_token|ListCertificatesResponse.next_page_token}.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response. For
-   *   details on supported filters and syntax, see [Certificates Filtering
-   *   documentation](https://cloud.google.com/certificate-authority-service/docs/sorting-filtering-certificates#filtering_support).
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted. For details on
-   *   supported fields and syntax, see [Certificates Sorting
-   *   documentation](https://cloud.google.com/certificate-authority-service/docs/sorting-filtering-certificates#sorting_support).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.list_certificates.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_ListCertificates_async
-   */
+/**
+ * Equivalent to `listCertificates`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the location associated with the
+ *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificates}, in the
+ *   format `projects/* /locations/* /caPools/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Limit on the number of
+ *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificates} to include
+ *   in the response. Further
+ *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificates} can
+ *   subsequently be obtained by including the
+ *   {@link protos.google.cloud.security.privateca.v1.ListCertificatesResponse.next_page_token|ListCertificatesResponse.next_page_token}
+ *   in a subsequent request. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Pagination token, returned earlier via
+ *   {@link protos.google.cloud.security.privateca.v1.ListCertificatesResponse.next_page_token|ListCertificatesResponse.next_page_token}.
+ * @param {string} [request.filter]
+ *   Optional. Only include resources that match the filter in the response. For
+ *   details on supported filters and syntax, see [Certificates Filtering
+ *   documentation](https://cloud.google.com/certificate-authority-service/docs/sorting-filtering-certificates#filtering_support).
+ * @param {string} [request.orderBy]
+ *   Optional. Specify how the results should be sorted. For details on
+ *   supported fields and syntax, see [Certificates Sorting
+ *   documentation](https://cloud.google.com/certificate-authority-service/docs/sorting-filtering-certificates#sorting_support).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.list_certificates.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_ListCertificates_async
+ */
   listCertificatesAsync(
-    request?: protos.google.cloud.security.privateca.v1.IListCertificatesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.security.privateca.v1.ICertificate> {
+      request?: protos.google.cloud.security.privateca.v1.IListCertificatesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.security.privateca.v1.ICertificate>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCertificates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCertificates iterate %j', request);
     return this.descriptors.page.listCertificates.asyncIterate(
       this.innerApiCalls['listCertificates'] as GaxCall,
@@ -5129,128 +3633,103 @@ export class CertificateAuthorityServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.security.privateca.v1.ICertificate>;
   }
-  /**
-   * Lists
-   * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthorities}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the
-   *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool} associated with the
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthorities},
-   *   in the format `projects/* /locations/* /caPools/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Limit on the number of
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthorities}
-   *   to include in the response. Further
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthorities}
-   *   can subsequently be obtained by including the
-   *   {@link protos.google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse.next_page_token|ListCertificateAuthoritiesResponse.next_page_token}
-   *   in a subsequent request. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Pagination token, returned earlier via
-   *   {@link protos.google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse.next_page_token|ListCertificateAuthoritiesResponse.next_page_token}.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response.
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listCertificateAuthoritiesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists
+ * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthorities}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the
+ *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool} associated with the
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthorities},
+ *   in the format `projects/* /locations/* /caPools/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Limit on the number of
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthorities}
+ *   to include in the response. Further
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthorities}
+ *   can subsequently be obtained by including the
+ *   {@link protos.google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse.next_page_token|ListCertificateAuthoritiesResponse.next_page_token}
+ *   in a subsequent request. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Pagination token, returned earlier via
+ *   {@link protos.google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse.next_page_token|ListCertificateAuthoritiesResponse.next_page_token}.
+ * @param {string} [request.filter]
+ *   Optional. Only include resources that match the filter in the response.
+ * @param {string} [request.orderBy]
+ *   Optional. Specify how the results should be sorted.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listCertificateAuthoritiesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCertificateAuthorities(
-    request?: protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.ICertificateAuthority[],
-      protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest | null,
-      protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.ICertificateAuthority[],
+        protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest|null,
+        protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesResponse
+      ]>;
   listCertificateAuthorities(
-    request: protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest,
-      | protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesResponse
-      | null
-      | undefined,
-      protos.google.cloud.security.privateca.v1.ICertificateAuthority
-    >
-  ): void;
-  listCertificateAuthorities(
-    request: protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest,
-      | protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesResponse
-      | null
-      | undefined,
-      protos.google.cloud.security.privateca.v1.ICertificateAuthority
-    >
-  ): void;
-  listCertificateAuthorities(
-    request?: protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest,
-          | protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesResponse
-          | null
-          | undefined,
-          protos.google.cloud.security.privateca.v1.ICertificateAuthority
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest,
-      | protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesResponse
-      | null
-      | undefined,
-      protos.google.cloud.security.privateca.v1.ICertificateAuthority
-    >
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.ICertificateAuthority[],
-      protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest | null,
-      protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesResponse,
-    ]
-  > | void {
+          protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesResponse|null|undefined,
+          protos.google.cloud.security.privateca.v1.ICertificateAuthority>): void;
+  listCertificateAuthorities(
+      request: protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest,
+          protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesResponse|null|undefined,
+          protos.google.cloud.security.privateca.v1.ICertificateAuthority>): void;
+  listCertificateAuthorities(
+      request?: protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest,
+          protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesResponse|null|undefined,
+          protos.google.cloud.security.privateca.v1.ICertificateAuthority>,
+      callback?: PaginationCallback<
+          protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest,
+          protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesResponse|null|undefined,
+          protos.google.cloud.security.privateca.v1.ICertificateAuthority>):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.ICertificateAuthority[],
+        protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest|null,
+        protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest,
-          | protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesResponse
-          | null
-          | undefined,
-          protos.google.cloud.security.privateca.v1.ICertificateAuthority
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest,
+      protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesResponse|null|undefined,
+      protos.google.cloud.security.privateca.v1.ICertificateAuthority>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listCertificateAuthorities values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5259,71 +3738,68 @@ export class CertificateAuthorityServiceClient {
     this._log.info('listCertificateAuthorities request %j', request);
     return this.innerApiCalls
       .listCertificateAuthorities(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.security.privateca.v1.ICertificateAuthority[],
-          protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest | null,
-          protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesResponse,
-        ]) => {
-          this._log.info('listCertificateAuthorities values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.security.privateca.v1.ICertificateAuthority[],
+        protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest|null,
+        protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesResponse
+      ]) => {
+        this._log.info('listCertificateAuthorities values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listCertificateAuthorities`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the
-   *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool} associated with the
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthorities},
-   *   in the format `projects/* /locations/* /caPools/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Limit on the number of
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthorities}
-   *   to include in the response. Further
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthorities}
-   *   can subsequently be obtained by including the
-   *   {@link protos.google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse.next_page_token|ListCertificateAuthoritiesResponse.next_page_token}
-   *   in a subsequent request. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Pagination token, returned earlier via
-   *   {@link protos.google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse.next_page_token|ListCertificateAuthoritiesResponse.next_page_token}.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response.
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listCertificateAuthoritiesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listCertificateAuthorities`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the
+ *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool} associated with the
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthorities},
+ *   in the format `projects/* /locations/* /caPools/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Limit on the number of
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthorities}
+ *   to include in the response. Further
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthorities}
+ *   can subsequently be obtained by including the
+ *   {@link protos.google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse.next_page_token|ListCertificateAuthoritiesResponse.next_page_token}
+ *   in a subsequent request. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Pagination token, returned earlier via
+ *   {@link protos.google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse.next_page_token|ListCertificateAuthoritiesResponse.next_page_token}.
+ * @param {string} [request.filter]
+ *   Optional. Only include resources that match the filter in the response.
+ * @param {string} [request.orderBy]
+ *   Optional. Specify how the results should be sorted.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listCertificateAuthoritiesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCertificateAuthoritiesStream(
-    request?: protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCertificateAuthorities'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCertificateAuthorities stream %j', request);
     return this.descriptors.page.listCertificateAuthorities.createStream(
       this.innerApiCalls.listCertificateAuthorities as GaxCall,
@@ -5332,62 +3808,61 @@ export class CertificateAuthorityServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listCertificateAuthorities`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the
-   *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool} associated with the
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthorities},
-   *   in the format `projects/* /locations/* /caPools/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Limit on the number of
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthorities}
-   *   to include in the response. Further
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthorities}
-   *   can subsequently be obtained by including the
-   *   {@link protos.google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse.next_page_token|ListCertificateAuthoritiesResponse.next_page_token}
-   *   in a subsequent request. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Pagination token, returned earlier via
-   *   {@link protos.google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse.next_page_token|ListCertificateAuthoritiesResponse.next_page_token}.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response.
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.list_certificate_authorities.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_ListCertificateAuthorities_async
-   */
+/**
+ * Equivalent to `listCertificateAuthorities`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the
+ *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool} associated with the
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthorities},
+ *   in the format `projects/* /locations/* /caPools/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Limit on the number of
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthorities}
+ *   to include in the response. Further
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthorities}
+ *   can subsequently be obtained by including the
+ *   {@link protos.google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse.next_page_token|ListCertificateAuthoritiesResponse.next_page_token}
+ *   in a subsequent request. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Pagination token, returned earlier via
+ *   {@link protos.google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse.next_page_token|ListCertificateAuthoritiesResponse.next_page_token}.
+ * @param {string} [request.filter]
+ *   Optional. Only include resources that match the filter in the response.
+ * @param {string} [request.orderBy]
+ *   Optional. Specify how the results should be sorted.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.list_certificate_authorities.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_ListCertificateAuthorities_async
+ */
   listCertificateAuthoritiesAsync(
-    request?: protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.security.privateca.v1.ICertificateAuthority> {
+      request?: protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.security.privateca.v1.ICertificateAuthority>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCertificateAuthorities'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCertificateAuthorities iterate %j', request);
     return this.descriptors.page.listCertificateAuthorities.asyncIterate(
       this.innerApiCalls['listCertificateAuthorities'] as GaxCall,
@@ -5395,125 +3870,100 @@ export class CertificateAuthorityServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.security.privateca.v1.ICertificateAuthority>;
   }
-  /**
-   * Lists {@link protos.google.cloud.security.privateca.v1.CaPool|CaPools}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the location associated with the
-   *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPools}, in the format
-   *   `projects/* /locations/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Limit on the number of
-   *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPools} to include in the
-   *   response. Further {@link protos.google.cloud.security.privateca.v1.CaPool|CaPools} can
-   *   subsequently be obtained by including the
-   *   {@link protos.google.cloud.security.privateca.v1.ListCaPoolsResponse.next_page_token|ListCaPoolsResponse.next_page_token}
-   *   in a subsequent request. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Pagination token, returned earlier via
-   *   {@link protos.google.cloud.security.privateca.v1.ListCaPoolsResponse.next_page_token|ListCaPoolsResponse.next_page_token}.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response.
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listCaPoolsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists {@link protos.google.cloud.security.privateca.v1.CaPool|CaPools}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the location associated with the
+ *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPools}, in the format
+ *   `projects/* /locations/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Limit on the number of
+ *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPools} to include in the
+ *   response. Further {@link protos.google.cloud.security.privateca.v1.CaPool|CaPools} can
+ *   subsequently be obtained by including the
+ *   {@link protos.google.cloud.security.privateca.v1.ListCaPoolsResponse.next_page_token|ListCaPoolsResponse.next_page_token}
+ *   in a subsequent request. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Pagination token, returned earlier via
+ *   {@link protos.google.cloud.security.privateca.v1.ListCaPoolsResponse.next_page_token|ListCaPoolsResponse.next_page_token}.
+ * @param {string} [request.filter]
+ *   Optional. Only include resources that match the filter in the response.
+ * @param {string} [request.orderBy]
+ *   Optional. Specify how the results should be sorted.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listCaPoolsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCaPools(
-    request?: protos.google.cloud.security.privateca.v1.IListCaPoolsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.ICaPool[],
-      protos.google.cloud.security.privateca.v1.IListCaPoolsRequest | null,
-      protos.google.cloud.security.privateca.v1.IListCaPoolsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.IListCaPoolsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.ICaPool[],
+        protos.google.cloud.security.privateca.v1.IListCaPoolsRequest|null,
+        protos.google.cloud.security.privateca.v1.IListCaPoolsResponse
+      ]>;
   listCaPools(
-    request: protos.google.cloud.security.privateca.v1.IListCaPoolsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.security.privateca.v1.IListCaPoolsRequest,
-      | protos.google.cloud.security.privateca.v1.IListCaPoolsResponse
-      | null
-      | undefined,
-      protos.google.cloud.security.privateca.v1.ICaPool
-    >
-  ): void;
-  listCaPools(
-    request: protos.google.cloud.security.privateca.v1.IListCaPoolsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.security.privateca.v1.IListCaPoolsRequest,
-      | protos.google.cloud.security.privateca.v1.IListCaPoolsResponse
-      | null
-      | undefined,
-      protos.google.cloud.security.privateca.v1.ICaPool
-    >
-  ): void;
-  listCaPools(
-    request?: protos.google.cloud.security.privateca.v1.IListCaPoolsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.security.privateca.v1.IListCaPoolsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.security.privateca.v1.IListCaPoolsRequest,
-          | protos.google.cloud.security.privateca.v1.IListCaPoolsResponse
-          | null
-          | undefined,
-          protos.google.cloud.security.privateca.v1.ICaPool
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.security.privateca.v1.IListCaPoolsRequest,
-      | protos.google.cloud.security.privateca.v1.IListCaPoolsResponse
-      | null
-      | undefined,
-      protos.google.cloud.security.privateca.v1.ICaPool
-    >
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.ICaPool[],
-      protos.google.cloud.security.privateca.v1.IListCaPoolsRequest | null,
-      protos.google.cloud.security.privateca.v1.IListCaPoolsResponse,
-    ]
-  > | void {
+          protos.google.cloud.security.privateca.v1.IListCaPoolsResponse|null|undefined,
+          protos.google.cloud.security.privateca.v1.ICaPool>): void;
+  listCaPools(
+      request: protos.google.cloud.security.privateca.v1.IListCaPoolsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.security.privateca.v1.IListCaPoolsRequest,
+          protos.google.cloud.security.privateca.v1.IListCaPoolsResponse|null|undefined,
+          protos.google.cloud.security.privateca.v1.ICaPool>): void;
+  listCaPools(
+      request?: protos.google.cloud.security.privateca.v1.IListCaPoolsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.security.privateca.v1.IListCaPoolsRequest,
+          protos.google.cloud.security.privateca.v1.IListCaPoolsResponse|null|undefined,
+          protos.google.cloud.security.privateca.v1.ICaPool>,
+      callback?: PaginationCallback<
+          protos.google.cloud.security.privateca.v1.IListCaPoolsRequest,
+          protos.google.cloud.security.privateca.v1.IListCaPoolsResponse|null|undefined,
+          protos.google.cloud.security.privateca.v1.ICaPool>):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.ICaPool[],
+        protos.google.cloud.security.privateca.v1.IListCaPoolsRequest|null,
+        protos.google.cloud.security.privateca.v1.IListCaPoolsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.security.privateca.v1.IListCaPoolsRequest,
-          | protos.google.cloud.security.privateca.v1.IListCaPoolsResponse
-          | null
-          | undefined,
-          protos.google.cloud.security.privateca.v1.ICaPool
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.security.privateca.v1.IListCaPoolsRequest,
+      protos.google.cloud.security.privateca.v1.IListCaPoolsResponse|null|undefined,
+      protos.google.cloud.security.privateca.v1.ICaPool>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listCaPools values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5522,69 +3972,66 @@ export class CertificateAuthorityServiceClient {
     this._log.info('listCaPools request %j', request);
     return this.innerApiCalls
       .listCaPools(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.security.privateca.v1.ICaPool[],
-          protos.google.cloud.security.privateca.v1.IListCaPoolsRequest | null,
-          protos.google.cloud.security.privateca.v1.IListCaPoolsResponse,
-        ]) => {
-          this._log.info('listCaPools values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.security.privateca.v1.ICaPool[],
+        protos.google.cloud.security.privateca.v1.IListCaPoolsRequest|null,
+        protos.google.cloud.security.privateca.v1.IListCaPoolsResponse
+      ]) => {
+        this._log.info('listCaPools values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listCaPools`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the location associated with the
-   *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPools}, in the format
-   *   `projects/* /locations/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Limit on the number of
-   *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPools} to include in the
-   *   response. Further {@link protos.google.cloud.security.privateca.v1.CaPool|CaPools} can
-   *   subsequently be obtained by including the
-   *   {@link protos.google.cloud.security.privateca.v1.ListCaPoolsResponse.next_page_token|ListCaPoolsResponse.next_page_token}
-   *   in a subsequent request. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Pagination token, returned earlier via
-   *   {@link protos.google.cloud.security.privateca.v1.ListCaPoolsResponse.next_page_token|ListCaPoolsResponse.next_page_token}.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response.
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listCaPoolsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listCaPools`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the location associated with the
+ *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPools}, in the format
+ *   `projects/* /locations/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Limit on the number of
+ *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPools} to include in the
+ *   response. Further {@link protos.google.cloud.security.privateca.v1.CaPool|CaPools} can
+ *   subsequently be obtained by including the
+ *   {@link protos.google.cloud.security.privateca.v1.ListCaPoolsResponse.next_page_token|ListCaPoolsResponse.next_page_token}
+ *   in a subsequent request. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Pagination token, returned earlier via
+ *   {@link protos.google.cloud.security.privateca.v1.ListCaPoolsResponse.next_page_token|ListCaPoolsResponse.next_page_token}.
+ * @param {string} [request.filter]
+ *   Optional. Only include resources that match the filter in the response.
+ * @param {string} [request.orderBy]
+ *   Optional. Specify how the results should be sorted.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listCaPoolsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCaPoolsStream(
-    request?: protos.google.cloud.security.privateca.v1.IListCaPoolsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.security.privateca.v1.IListCaPoolsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCaPools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCaPools stream %j', request);
     return this.descriptors.page.listCaPools.createStream(
       this.innerApiCalls.listCaPools as GaxCall,
@@ -5593,60 +4040,59 @@ export class CertificateAuthorityServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listCaPools`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the location associated with the
-   *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPools}, in the format
-   *   `projects/* /locations/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Limit on the number of
-   *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPools} to include in the
-   *   response. Further {@link protos.google.cloud.security.privateca.v1.CaPool|CaPools} can
-   *   subsequently be obtained by including the
-   *   {@link protos.google.cloud.security.privateca.v1.ListCaPoolsResponse.next_page_token|ListCaPoolsResponse.next_page_token}
-   *   in a subsequent request. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Pagination token, returned earlier via
-   *   {@link protos.google.cloud.security.privateca.v1.ListCaPoolsResponse.next_page_token|ListCaPoolsResponse.next_page_token}.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response.
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.list_ca_pools.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_ListCaPools_async
-   */
+/**
+ * Equivalent to `listCaPools`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the location associated with the
+ *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPools}, in the format
+ *   `projects/* /locations/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Limit on the number of
+ *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPools} to include in the
+ *   response. Further {@link protos.google.cloud.security.privateca.v1.CaPool|CaPools} can
+ *   subsequently be obtained by including the
+ *   {@link protos.google.cloud.security.privateca.v1.ListCaPoolsResponse.next_page_token|ListCaPoolsResponse.next_page_token}
+ *   in a subsequent request. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Pagination token, returned earlier via
+ *   {@link protos.google.cloud.security.privateca.v1.ListCaPoolsResponse.next_page_token|ListCaPoolsResponse.next_page_token}.
+ * @param {string} [request.filter]
+ *   Optional. Only include resources that match the filter in the response.
+ * @param {string} [request.orderBy]
+ *   Optional. Specify how the results should be sorted.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.list_ca_pools.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_ListCaPools_async
+ */
   listCaPoolsAsync(
-    request?: protos.google.cloud.security.privateca.v1.IListCaPoolsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.security.privateca.v1.ICaPool> {
+      request?: protos.google.cloud.security.privateca.v1.IListCaPoolsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.security.privateca.v1.ICaPool>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCaPools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCaPools iterate %j', request);
     return this.descriptors.page.listCaPools.asyncIterate(
       this.innerApiCalls['listCaPools'] as GaxCall,
@@ -5654,127 +4100,102 @@ export class CertificateAuthorityServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.security.privateca.v1.ICaPool>;
   }
-  /**
-   * Lists
-   * {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationLists}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the location associated with the
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationLists},
-   *   in the format `projects/* /locations/* /caPools/* /certificateAuthorities/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Limit on the number of
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationLists}
-   *   to include in the response. Further
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationLists}
-   *   can subsequently be obtained by including the
-   *   {@link protos.google.cloud.security.privateca.v1.ListCertificateRevocationListsResponse.next_page_token|ListCertificateRevocationListsResponse.next_page_token}
-   *   in a subsequent request. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Pagination token, returned earlier via
-   *   {@link protos.google.cloud.security.privateca.v1.ListCertificateRevocationListsResponse.next_page_token|ListCertificateRevocationListsResponse.next_page_token}.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response.
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationList}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listCertificateRevocationListsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists
+ * {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationLists}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the location associated with the
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationLists},
+ *   in the format `projects/* /locations/* /caPools/* /certificateAuthorities/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Limit on the number of
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationLists}
+ *   to include in the response. Further
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationLists}
+ *   can subsequently be obtained by including the
+ *   {@link protos.google.cloud.security.privateca.v1.ListCertificateRevocationListsResponse.next_page_token|ListCertificateRevocationListsResponse.next_page_token}
+ *   in a subsequent request. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Pagination token, returned earlier via
+ *   {@link protos.google.cloud.security.privateca.v1.ListCertificateRevocationListsResponse.next_page_token|ListCertificateRevocationListsResponse.next_page_token}.
+ * @param {string} [request.filter]
+ *   Optional. Only include resources that match the filter in the response.
+ * @param {string} [request.orderBy]
+ *   Optional. Specify how the results should be sorted.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationList}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listCertificateRevocationListsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCertificateRevocationLists(
-    request?: protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.ICertificateRevocationList[],
-      protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest | null,
-      protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.ICertificateRevocationList[],
+        protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest|null,
+        protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsResponse
+      ]>;
   listCertificateRevocationLists(
-    request: protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest,
-      | protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsResponse
-      | null
-      | undefined,
-      protos.google.cloud.security.privateca.v1.ICertificateRevocationList
-    >
-  ): void;
-  listCertificateRevocationLists(
-    request: protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest,
-      | protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsResponse
-      | null
-      | undefined,
-      protos.google.cloud.security.privateca.v1.ICertificateRevocationList
-    >
-  ): void;
-  listCertificateRevocationLists(
-    request?: protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest,
-          | protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsResponse
-          | null
-          | undefined,
-          protos.google.cloud.security.privateca.v1.ICertificateRevocationList
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest,
-      | protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsResponse
-      | null
-      | undefined,
-      protos.google.cloud.security.privateca.v1.ICertificateRevocationList
-    >
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.ICertificateRevocationList[],
-      protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest | null,
-      protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsResponse,
-    ]
-  > | void {
+          protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsResponse|null|undefined,
+          protos.google.cloud.security.privateca.v1.ICertificateRevocationList>): void;
+  listCertificateRevocationLists(
+      request: protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest,
+          protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsResponse|null|undefined,
+          protos.google.cloud.security.privateca.v1.ICertificateRevocationList>): void;
+  listCertificateRevocationLists(
+      request?: protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest,
+          protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsResponse|null|undefined,
+          protos.google.cloud.security.privateca.v1.ICertificateRevocationList>,
+      callback?: PaginationCallback<
+          protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest,
+          protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsResponse|null|undefined,
+          protos.google.cloud.security.privateca.v1.ICertificateRevocationList>):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.ICertificateRevocationList[],
+        protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest|null,
+        protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest,
-          | protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsResponse
-          | null
-          | undefined,
-          protos.google.cloud.security.privateca.v1.ICertificateRevocationList
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest,
+      protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsResponse|null|undefined,
+      protos.google.cloud.security.privateca.v1.ICertificateRevocationList>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listCertificateRevocationLists values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5783,71 +4204,67 @@ export class CertificateAuthorityServiceClient {
     this._log.info('listCertificateRevocationLists request %j', request);
     return this.innerApiCalls
       .listCertificateRevocationLists(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.security.privateca.v1.ICertificateRevocationList[],
-          protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest | null,
-          protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsResponse,
-        ]) => {
-          this._log.info('listCertificateRevocationLists values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.security.privateca.v1.ICertificateRevocationList[],
+        protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest|null,
+        protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsResponse
+      ]) => {
+        this._log.info('listCertificateRevocationLists values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listCertificateRevocationLists`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the location associated with the
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationLists},
-   *   in the format `projects/* /locations/* /caPools/* /certificateAuthorities/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Limit on the number of
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationLists}
-   *   to include in the response. Further
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationLists}
-   *   can subsequently be obtained by including the
-   *   {@link protos.google.cloud.security.privateca.v1.ListCertificateRevocationListsResponse.next_page_token|ListCertificateRevocationListsResponse.next_page_token}
-   *   in a subsequent request. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Pagination token, returned earlier via
-   *   {@link protos.google.cloud.security.privateca.v1.ListCertificateRevocationListsResponse.next_page_token|ListCertificateRevocationListsResponse.next_page_token}.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response.
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationList} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listCertificateRevocationListsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listCertificateRevocationLists`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the location associated with the
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationLists},
+ *   in the format `projects/* /locations/* /caPools/* /certificateAuthorities/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Limit on the number of
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationLists}
+ *   to include in the response. Further
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationLists}
+ *   can subsequently be obtained by including the
+ *   {@link protos.google.cloud.security.privateca.v1.ListCertificateRevocationListsResponse.next_page_token|ListCertificateRevocationListsResponse.next_page_token}
+ *   in a subsequent request. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Pagination token, returned earlier via
+ *   {@link protos.google.cloud.security.privateca.v1.ListCertificateRevocationListsResponse.next_page_token|ListCertificateRevocationListsResponse.next_page_token}.
+ * @param {string} [request.filter]
+ *   Optional. Only include resources that match the filter in the response.
+ * @param {string} [request.orderBy]
+ *   Optional. Specify how the results should be sorted.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationList} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listCertificateRevocationListsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCertificateRevocationListsStream(
-    request?: protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    const defaultCallSettings =
-      this._defaults['listCertificateRevocationLists'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    const defaultCallSettings = this._defaults['listCertificateRevocationLists'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
     this._log.info('listCertificateRevocationLists stream %j', request);
     return this.descriptors.page.listCertificateRevocationLists.createStream(
       this.innerApiCalls.listCertificateRevocationLists as GaxCall,
@@ -5856,62 +4273,60 @@ export class CertificateAuthorityServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listCertificateRevocationLists`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the location associated with the
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationLists},
-   *   in the format `projects/* /locations/* /caPools/* /certificateAuthorities/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Limit on the number of
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationLists}
-   *   to include in the response. Further
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationLists}
-   *   can subsequently be obtained by including the
-   *   {@link protos.google.cloud.security.privateca.v1.ListCertificateRevocationListsResponse.next_page_token|ListCertificateRevocationListsResponse.next_page_token}
-   *   in a subsequent request. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Pagination token, returned earlier via
-   *   {@link protos.google.cloud.security.privateca.v1.ListCertificateRevocationListsResponse.next_page_token|ListCertificateRevocationListsResponse.next_page_token}.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response.
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationList}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.list_certificate_revocation_lists.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_ListCertificateRevocationLists_async
-   */
+/**
+ * Equivalent to `listCertificateRevocationLists`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the location associated with the
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationLists},
+ *   in the format `projects/* /locations/* /caPools/* /certificateAuthorities/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Limit on the number of
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationLists}
+ *   to include in the response. Further
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationLists}
+ *   can subsequently be obtained by including the
+ *   {@link protos.google.cloud.security.privateca.v1.ListCertificateRevocationListsResponse.next_page_token|ListCertificateRevocationListsResponse.next_page_token}
+ *   in a subsequent request. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Pagination token, returned earlier via
+ *   {@link protos.google.cloud.security.privateca.v1.ListCertificateRevocationListsResponse.next_page_token|ListCertificateRevocationListsResponse.next_page_token}.
+ * @param {string} [request.filter]
+ *   Optional. Only include resources that match the filter in the response.
+ * @param {string} [request.orderBy]
+ *   Optional. Specify how the results should be sorted.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateRevocationList|CertificateRevocationList}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.list_certificate_revocation_lists.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_ListCertificateRevocationLists_async
+ */
   listCertificateRevocationListsAsync(
-    request?: protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.security.privateca.v1.ICertificateRevocationList> {
+      request?: protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.security.privateca.v1.ICertificateRevocationList>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    const defaultCallSettings =
-      this._defaults['listCertificateRevocationLists'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    const defaultCallSettings = this._defaults['listCertificateRevocationLists'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
     this._log.info('listCertificateRevocationLists iterate %j', request);
     return this.descriptors.page.listCertificateRevocationLists.asyncIterate(
       this.innerApiCalls['listCertificateRevocationLists'] as GaxCall,
@@ -5919,127 +4334,102 @@ export class CertificateAuthorityServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.security.privateca.v1.ICertificateRevocationList>;
   }
-  /**
-   * Lists
-   * {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplates}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the location associated with the
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplates},
-   *   in the format `projects/* /locations/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Limit on the number of
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplates}
-   *   to include in the response. Further
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplates}
-   *   can subsequently be obtained by including the
-   *   {@link protos.google.cloud.security.privateca.v1.ListCertificateTemplatesResponse.next_page_token|ListCertificateTemplatesResponse.next_page_token}
-   *   in a subsequent request. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Pagination token, returned earlier via
-   *   {@link protos.google.cloud.security.privateca.v1.ListCertificateTemplatesResponse.next_page_token|ListCertificateTemplatesResponse.next_page_token}.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response.
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplate}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listCertificateTemplatesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists
+ * {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplates}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the location associated with the
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplates},
+ *   in the format `projects/* /locations/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Limit on the number of
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplates}
+ *   to include in the response. Further
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplates}
+ *   can subsequently be obtained by including the
+ *   {@link protos.google.cloud.security.privateca.v1.ListCertificateTemplatesResponse.next_page_token|ListCertificateTemplatesResponse.next_page_token}
+ *   in a subsequent request. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Pagination token, returned earlier via
+ *   {@link protos.google.cloud.security.privateca.v1.ListCertificateTemplatesResponse.next_page_token|ListCertificateTemplatesResponse.next_page_token}.
+ * @param {string} [request.filter]
+ *   Optional. Only include resources that match the filter in the response.
+ * @param {string} [request.orderBy]
+ *   Optional. Specify how the results should be sorted.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplate}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listCertificateTemplatesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCertificateTemplates(
-    request?: protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.ICertificateTemplate[],
-      protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest | null,
-      protos.google.cloud.security.privateca.v1.IListCertificateTemplatesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.ICertificateTemplate[],
+        protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest|null,
+        protos.google.cloud.security.privateca.v1.IListCertificateTemplatesResponse
+      ]>;
   listCertificateTemplates(
-    request: protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest,
-      | protos.google.cloud.security.privateca.v1.IListCertificateTemplatesResponse
-      | null
-      | undefined,
-      protos.google.cloud.security.privateca.v1.ICertificateTemplate
-    >
-  ): void;
-  listCertificateTemplates(
-    request: protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest,
-      | protos.google.cloud.security.privateca.v1.IListCertificateTemplatesResponse
-      | null
-      | undefined,
-      protos.google.cloud.security.privateca.v1.ICertificateTemplate
-    >
-  ): void;
-  listCertificateTemplates(
-    request?: protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest,
-          | protos.google.cloud.security.privateca.v1.IListCertificateTemplatesResponse
-          | null
-          | undefined,
-          protos.google.cloud.security.privateca.v1.ICertificateTemplate
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest,
-      | protos.google.cloud.security.privateca.v1.IListCertificateTemplatesResponse
-      | null
-      | undefined,
-      protos.google.cloud.security.privateca.v1.ICertificateTemplate
-    >
-  ): Promise<
-    [
-      protos.google.cloud.security.privateca.v1.ICertificateTemplate[],
-      protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest | null,
-      protos.google.cloud.security.privateca.v1.IListCertificateTemplatesResponse,
-    ]
-  > | void {
+          protos.google.cloud.security.privateca.v1.IListCertificateTemplatesResponse|null|undefined,
+          protos.google.cloud.security.privateca.v1.ICertificateTemplate>): void;
+  listCertificateTemplates(
+      request: protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest,
+          protos.google.cloud.security.privateca.v1.IListCertificateTemplatesResponse|null|undefined,
+          protos.google.cloud.security.privateca.v1.ICertificateTemplate>): void;
+  listCertificateTemplates(
+      request?: protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest,
+          protos.google.cloud.security.privateca.v1.IListCertificateTemplatesResponse|null|undefined,
+          protos.google.cloud.security.privateca.v1.ICertificateTemplate>,
+      callback?: PaginationCallback<
+          protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest,
+          protos.google.cloud.security.privateca.v1.IListCertificateTemplatesResponse|null|undefined,
+          protos.google.cloud.security.privateca.v1.ICertificateTemplate>):
+      Promise<[
+        protos.google.cloud.security.privateca.v1.ICertificateTemplate[],
+        protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest|null,
+        protos.google.cloud.security.privateca.v1.IListCertificateTemplatesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest,
-          | protos.google.cloud.security.privateca.v1.IListCertificateTemplatesResponse
-          | null
-          | undefined,
-          protos.google.cloud.security.privateca.v1.ICertificateTemplate
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest,
+      protos.google.cloud.security.privateca.v1.IListCertificateTemplatesResponse|null|undefined,
+      protos.google.cloud.security.privateca.v1.ICertificateTemplate>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listCertificateTemplates values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6048,70 +4438,67 @@ export class CertificateAuthorityServiceClient {
     this._log.info('listCertificateTemplates request %j', request);
     return this.innerApiCalls
       .listCertificateTemplates(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.security.privateca.v1.ICertificateTemplate[],
-          protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest | null,
-          protos.google.cloud.security.privateca.v1.IListCertificateTemplatesResponse,
-        ]) => {
-          this._log.info('listCertificateTemplates values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.security.privateca.v1.ICertificateTemplate[],
+        protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest|null,
+        protos.google.cloud.security.privateca.v1.IListCertificateTemplatesResponse
+      ]) => {
+        this._log.info('listCertificateTemplates values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listCertificateTemplates`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the location associated with the
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplates},
-   *   in the format `projects/* /locations/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Limit on the number of
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplates}
-   *   to include in the response. Further
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplates}
-   *   can subsequently be obtained by including the
-   *   {@link protos.google.cloud.security.privateca.v1.ListCertificateTemplatesResponse.next_page_token|ListCertificateTemplatesResponse.next_page_token}
-   *   in a subsequent request. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Pagination token, returned earlier via
-   *   {@link protos.google.cloud.security.privateca.v1.ListCertificateTemplatesResponse.next_page_token|ListCertificateTemplatesResponse.next_page_token}.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response.
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplate} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listCertificateTemplatesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listCertificateTemplates`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the location associated with the
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplates},
+ *   in the format `projects/* /locations/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Limit on the number of
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplates}
+ *   to include in the response. Further
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplates}
+ *   can subsequently be obtained by including the
+ *   {@link protos.google.cloud.security.privateca.v1.ListCertificateTemplatesResponse.next_page_token|ListCertificateTemplatesResponse.next_page_token}
+ *   in a subsequent request. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Pagination token, returned earlier via
+ *   {@link protos.google.cloud.security.privateca.v1.ListCertificateTemplatesResponse.next_page_token|ListCertificateTemplatesResponse.next_page_token}.
+ * @param {string} [request.filter]
+ *   Optional. Only include resources that match the filter in the response.
+ * @param {string} [request.orderBy]
+ *   Optional. Specify how the results should be sorted.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplate} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listCertificateTemplatesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCertificateTemplatesStream(
-    request?: protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCertificateTemplates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCertificateTemplates stream %j', request);
     return this.descriptors.page.listCertificateTemplates.createStream(
       this.innerApiCalls.listCertificateTemplates as GaxCall,
@@ -6120,61 +4507,60 @@ export class CertificateAuthorityServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listCertificateTemplates`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the location associated with the
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplates},
-   *   in the format `projects/* /locations/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Limit on the number of
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplates}
-   *   to include in the response. Further
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplates}
-   *   can subsequently be obtained by including the
-   *   {@link protos.google.cloud.security.privateca.v1.ListCertificateTemplatesResponse.next_page_token|ListCertificateTemplatesResponse.next_page_token}
-   *   in a subsequent request. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Pagination token, returned earlier via
-   *   {@link protos.google.cloud.security.privateca.v1.ListCertificateTemplatesResponse.next_page_token|ListCertificateTemplatesResponse.next_page_token}.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response.
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplate}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_authority_service.list_certificate_templates.js</caption>
-   * region_tag:privateca_v1_generated_CertificateAuthorityService_ListCertificateTemplates_async
-   */
+/**
+ * Equivalent to `listCertificateTemplates`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the location associated with the
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplates},
+ *   in the format `projects/* /locations/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Limit on the number of
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplates}
+ *   to include in the response. Further
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplates}
+ *   can subsequently be obtained by including the
+ *   {@link protos.google.cloud.security.privateca.v1.ListCertificateTemplatesResponse.next_page_token|ListCertificateTemplatesResponse.next_page_token}
+ *   in a subsequent request. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Pagination token, returned earlier via
+ *   {@link protos.google.cloud.security.privateca.v1.ListCertificateTemplatesResponse.next_page_token|ListCertificateTemplatesResponse.next_page_token}.
+ * @param {string} [request.filter]
+ *   Optional. Only include resources that match the filter in the response.
+ * @param {string} [request.orderBy]
+ *   Optional. Specify how the results should be sorted.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateTemplate|CertificateTemplate}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_authority_service.list_certificate_templates.js</caption>
+ * region_tag:privateca_v1_generated_CertificateAuthorityService_ListCertificateTemplates_async
+ */
   listCertificateTemplatesAsync(
-    request?: protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.security.privateca.v1.ICertificateTemplate> {
+      request?: protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.security.privateca.v1.ICertificateTemplate>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCertificateTemplates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCertificateTemplates iterate %j', request);
     return this.descriptors.page.listCertificateTemplates.asyncIterate(
       this.innerApiCalls['listCertificateTemplates'] as GaxCall,
@@ -6182,31 +4568,31 @@ export class CertificateAuthorityServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.security.privateca.v1.ICertificateTemplate>;
   }
-  /**
-   * Gets the access control policy for a resource. Returns an empty policy
-   * if the resource exists and does not have a policy set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {Object} [request.options]
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`. This field is only used by Cloud IAM.
-   *
-   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Gets the access control policy for a resource. Returns an empty policy
+ * if the resource exists and does not have a policy set.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {Object} [request.options]
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`. This field is only used by Cloud IAM.
+ *
+ *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -6221,39 +4607,39 @@ export class CertificateAuthorityServiceClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+  ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -6268,40 +4654,40 @@ export class CertificateAuthorityServiceClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+  ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ *
+ */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -6316,11 +4702,11 @@ export class CertificateAuthorityServiceClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+  ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -6360,7 +4746,7 @@ export class CertificateAuthorityServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -6398,7 +4784,7 @@ export class CertificateAuthorityServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -6443,20 +4829,20 @@ export class CertificateAuthorityServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -6493,13 +4879,13 @@ export class CertificateAuthorityServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -6533,7 +4919,7 @@ export class CertificateAuthorityServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -6548,20 +4934,20 @@ export class CertificateAuthorityServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -6605,20 +4991,20 @@ export class CertificateAuthorityServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -6634,7 +5020,7 @@ export class CertificateAuthorityServiceClient {
    * @param {string} ca_pool
    * @returns {string} Resource name string.
    */
-  caPoolPath(project: string, location: string, caPool: string) {
+  caPoolPath(project:string,location:string,caPool:string) {
     return this.pathTemplates.caPoolPathTemplate.render({
       project: project,
       location: location,
@@ -6684,12 +5070,7 @@ export class CertificateAuthorityServiceClient {
    * @param {string} certificate
    * @returns {string} Resource name string.
    */
-  certificatePath(
-    project: string,
-    location: string,
-    caPool: string,
-    certificate: string
-  ) {
+  certificatePath(project:string,location:string,caPool:string,certificate:string) {
     return this.pathTemplates.certificatePathTemplate.render({
       project: project,
       location: location,
@@ -6706,8 +5087,7 @@ export class CertificateAuthorityServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCertificateName(certificateName: string) {
-    return this.pathTemplates.certificatePathTemplate.match(certificateName)
-      .project;
+    return this.pathTemplates.certificatePathTemplate.match(certificateName).project;
   }
 
   /**
@@ -6718,8 +5098,7 @@ export class CertificateAuthorityServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCertificateName(certificateName: string) {
-    return this.pathTemplates.certificatePathTemplate.match(certificateName)
-      .location;
+    return this.pathTemplates.certificatePathTemplate.match(certificateName).location;
   }
 
   /**
@@ -6730,8 +5109,7 @@ export class CertificateAuthorityServiceClient {
    * @returns {string} A string representing the ca_pool.
    */
   matchCaPoolFromCertificateName(certificateName: string) {
-    return this.pathTemplates.certificatePathTemplate.match(certificateName)
-      .ca_pool;
+    return this.pathTemplates.certificatePathTemplate.match(certificateName).ca_pool;
   }
 
   /**
@@ -6742,8 +5120,7 @@ export class CertificateAuthorityServiceClient {
    * @returns {string} A string representing the certificate.
    */
   matchCertificateFromCertificateName(certificateName: string) {
-    return this.pathTemplates.certificatePathTemplate.match(certificateName)
-      .certificate;
+    return this.pathTemplates.certificatePathTemplate.match(certificateName).certificate;
   }
 
   /**
@@ -6755,12 +5132,7 @@ export class CertificateAuthorityServiceClient {
    * @param {string} certificate_authority
    * @returns {string} Resource name string.
    */
-  certificateAuthorityPath(
-    project: string,
-    location: string,
-    caPool: string,
-    certificateAuthority: string
-  ) {
+  certificateAuthorityPath(project:string,location:string,caPool:string,certificateAuthority:string) {
     return this.pathTemplates.certificateAuthorityPathTemplate.render({
       project: project,
       location: location,
@@ -6777,9 +5149,7 @@ export class CertificateAuthorityServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCertificateAuthorityName(certificateAuthorityName: string) {
-    return this.pathTemplates.certificateAuthorityPathTemplate.match(
-      certificateAuthorityName
-    ).project;
+    return this.pathTemplates.certificateAuthorityPathTemplate.match(certificateAuthorityName).project;
   }
 
   /**
@@ -6790,9 +5160,7 @@ export class CertificateAuthorityServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCertificateAuthorityName(certificateAuthorityName: string) {
-    return this.pathTemplates.certificateAuthorityPathTemplate.match(
-      certificateAuthorityName
-    ).location;
+    return this.pathTemplates.certificateAuthorityPathTemplate.match(certificateAuthorityName).location;
   }
 
   /**
@@ -6803,9 +5171,7 @@ export class CertificateAuthorityServiceClient {
    * @returns {string} A string representing the ca_pool.
    */
   matchCaPoolFromCertificateAuthorityName(certificateAuthorityName: string) {
-    return this.pathTemplates.certificateAuthorityPathTemplate.match(
-      certificateAuthorityName
-    ).ca_pool;
+    return this.pathTemplates.certificateAuthorityPathTemplate.match(certificateAuthorityName).ca_pool;
   }
 
   /**
@@ -6815,12 +5181,8 @@ export class CertificateAuthorityServiceClient {
    *   A fully-qualified path representing CertificateAuthority resource.
    * @returns {string} A string representing the certificate_authority.
    */
-  matchCertificateAuthorityFromCertificateAuthorityName(
-    certificateAuthorityName: string
-  ) {
-    return this.pathTemplates.certificateAuthorityPathTemplate.match(
-      certificateAuthorityName
-    ).certificate_authority;
+  matchCertificateAuthorityFromCertificateAuthorityName(certificateAuthorityName: string) {
+    return this.pathTemplates.certificateAuthorityPathTemplate.match(certificateAuthorityName).certificate_authority;
   }
 
   /**
@@ -6833,13 +5195,7 @@ export class CertificateAuthorityServiceClient {
    * @param {string} certificate_revocation_list
    * @returns {string} Resource name string.
    */
-  certificateRevocationListPath(
-    project: string,
-    location: string,
-    caPool: string,
-    certificateAuthority: string,
-    certificateRevocationList: string
-  ) {
+  certificateRevocationListPath(project:string,location:string,caPool:string,certificateAuthority:string,certificateRevocationList:string) {
     return this.pathTemplates.certificateRevocationListPathTemplate.render({
       project: project,
       location: location,
@@ -6856,12 +5212,8 @@ export class CertificateAuthorityServiceClient {
    *   A fully-qualified path representing CertificateRevocationList resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromCertificateRevocationListName(
-    certificateRevocationListName: string
-  ) {
-    return this.pathTemplates.certificateRevocationListPathTemplate.match(
-      certificateRevocationListName
-    ).project;
+  matchProjectFromCertificateRevocationListName(certificateRevocationListName: string) {
+    return this.pathTemplates.certificateRevocationListPathTemplate.match(certificateRevocationListName).project;
   }
 
   /**
@@ -6871,12 +5223,8 @@ export class CertificateAuthorityServiceClient {
    *   A fully-qualified path representing CertificateRevocationList resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromCertificateRevocationListName(
-    certificateRevocationListName: string
-  ) {
-    return this.pathTemplates.certificateRevocationListPathTemplate.match(
-      certificateRevocationListName
-    ).location;
+  matchLocationFromCertificateRevocationListName(certificateRevocationListName: string) {
+    return this.pathTemplates.certificateRevocationListPathTemplate.match(certificateRevocationListName).location;
   }
 
   /**
@@ -6886,12 +5234,8 @@ export class CertificateAuthorityServiceClient {
    *   A fully-qualified path representing CertificateRevocationList resource.
    * @returns {string} A string representing the ca_pool.
    */
-  matchCaPoolFromCertificateRevocationListName(
-    certificateRevocationListName: string
-  ) {
-    return this.pathTemplates.certificateRevocationListPathTemplate.match(
-      certificateRevocationListName
-    ).ca_pool;
+  matchCaPoolFromCertificateRevocationListName(certificateRevocationListName: string) {
+    return this.pathTemplates.certificateRevocationListPathTemplate.match(certificateRevocationListName).ca_pool;
   }
 
   /**
@@ -6901,12 +5245,8 @@ export class CertificateAuthorityServiceClient {
    *   A fully-qualified path representing CertificateRevocationList resource.
    * @returns {string} A string representing the certificate_authority.
    */
-  matchCertificateAuthorityFromCertificateRevocationListName(
-    certificateRevocationListName: string
-  ) {
-    return this.pathTemplates.certificateRevocationListPathTemplate.match(
-      certificateRevocationListName
-    ).certificate_authority;
+  matchCertificateAuthorityFromCertificateRevocationListName(certificateRevocationListName: string) {
+    return this.pathTemplates.certificateRevocationListPathTemplate.match(certificateRevocationListName).certificate_authority;
   }
 
   /**
@@ -6916,12 +5256,8 @@ export class CertificateAuthorityServiceClient {
    *   A fully-qualified path representing CertificateRevocationList resource.
    * @returns {string} A string representing the certificate_revocation_list.
    */
-  matchCertificateRevocationListFromCertificateRevocationListName(
-    certificateRevocationListName: string
-  ) {
-    return this.pathTemplates.certificateRevocationListPathTemplate.match(
-      certificateRevocationListName
-    ).certificate_revocation_list;
+  matchCertificateRevocationListFromCertificateRevocationListName(certificateRevocationListName: string) {
+    return this.pathTemplates.certificateRevocationListPathTemplate.match(certificateRevocationListName).certificate_revocation_list;
   }
 
   /**
@@ -6932,11 +5268,7 @@ export class CertificateAuthorityServiceClient {
    * @param {string} certificate_template
    * @returns {string} Resource name string.
    */
-  certificateTemplatePath(
-    project: string,
-    location: string,
-    certificateTemplate: string
-  ) {
+  certificateTemplatePath(project:string,location:string,certificateTemplate:string) {
     return this.pathTemplates.certificateTemplatePathTemplate.render({
       project: project,
       location: location,
@@ -6952,9 +5284,7 @@ export class CertificateAuthorityServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCertificateTemplateName(certificateTemplateName: string) {
-    return this.pathTemplates.certificateTemplatePathTemplate.match(
-      certificateTemplateName
-    ).project;
+    return this.pathTemplates.certificateTemplatePathTemplate.match(certificateTemplateName).project;
   }
 
   /**
@@ -6965,9 +5295,7 @@ export class CertificateAuthorityServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCertificateTemplateName(certificateTemplateName: string) {
-    return this.pathTemplates.certificateTemplatePathTemplate.match(
-      certificateTemplateName
-    ).location;
+    return this.pathTemplates.certificateTemplatePathTemplate.match(certificateTemplateName).location;
   }
 
   /**
@@ -6977,12 +5305,8 @@ export class CertificateAuthorityServiceClient {
    *   A fully-qualified path representing CertificateTemplate resource.
    * @returns {string} A string representing the certificate_template.
    */
-  matchCertificateTemplateFromCertificateTemplateName(
-    certificateTemplateName: string
-  ) {
-    return this.pathTemplates.certificateTemplatePathTemplate.match(
-      certificateTemplateName
-    ).certificate_template;
+  matchCertificateTemplateFromCertificateTemplateName(certificateTemplateName: string) {
+    return this.pathTemplates.certificateTemplatePathTemplate.match(certificateTemplateName).certificate_template;
   }
 
   /**
@@ -6992,7 +5316,7 @@ export class CertificateAuthorityServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -7033,12 +5357,8 @@ export class CertificateAuthorityServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch(err => {
-          throw err;
-        });
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.iamClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -107,41 +100,20 @@ export class FeedServiceClient {
    *     const client = new FeedServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof FeedServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'cloudsupport.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -167,7 +139,7 @@ export class FeedServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -181,7 +153,10 @@ export class FeedServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -205,17 +180,15 @@ export class FeedServiceClient {
       organizationCasePathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/cases/{case}'
       ),
-      organizationCaseAttachmentIdPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/cases/{case}/attachments/{attachment_id}'
-        ),
+      organizationCaseAttachmentIdPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/cases/{case}/attachments/{attachment_id}'
+      ),
       organizationCaseCommentPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/cases/{case}/comments/{comment}'
       ),
-      organizationCaseEmailMessagePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/cases/{case}/emailMessages/{email_message}'
-        ),
+      organizationCaseEmailMessagesPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/cases/{case}/emailMessages/{email_message}'
+      ),
       projectCasePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/cases/{case}'
       ),
@@ -225,7 +198,7 @@ export class FeedServiceClient {
       projectCaseCommentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/cases/{case}/comments/{comment}'
       ),
-      projectCaseEmailMessagePathTemplate: new this._gaxModule.PathTemplate(
+      projectCaseEmailMessagesPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/cases/{case}/emailMessages/{email_message}'
       ),
     };
@@ -234,20 +207,14 @@ export class FeedServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      showFeed: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'feedItems'
-      ),
+      showFeed:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'feedItems')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.support.v2beta.FeedService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.support.v2beta.FeedService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -278,35 +245,32 @@ export class FeedServiceClient {
     // Put together the "service stub" for
     // google.cloud.support.v2beta.FeedService.
     this.feedServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.support.v2beta.FeedService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.support.v2beta.FeedService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.support.v2beta.FeedService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const feedServiceStubMethods = ['showFeed'];
+    const feedServiceStubMethods =
+        ['showFeed'];
     for (const methodName of feedServiceStubMethods) {
       const callPromise = this.feedServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -326,14 +290,8 @@ export class FeedServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'cloudsupport.googleapis.com';
   }
@@ -344,14 +302,8 @@ export class FeedServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'cloudsupport.googleapis.com';
   }
@@ -382,7 +334,9 @@ export class FeedServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -391,9 +345,8 @@ export class FeedServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -405,116 +358,97 @@ export class FeedServiceClient {
   // -- Service calls --
   // -------------------
 
-  /**
-   * Show items in the feed of this case, including case emails,
-   * attachments, and comments.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the case for which feed items should be
-   *   listed.
-   * @param {string} [request.orderBy]
-   *   Optional. Field to order feed items by, followed by `asc` or `desc`
-   *   postfix. The only valid field is
-   *   `creation_time`. This list is case-insensitive, default sorting order is
-   *   ascending, and the redundant space characters are insignificant.
-   *
-   *   Example: `creation_time desc`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of feed items fetched with each request.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying the page of results to return. If
-   *   unspecified, it retrieves the first page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.support.v2beta.FeedItem|FeedItem}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `showFeedAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Show items in the feed of this case, including case emails,
+ * attachments, and comments.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the case for which feed items should be
+ *   listed.
+ * @param {string} [request.orderBy]
+ *   Optional. Field to order feed items by, followed by `asc` or `desc`
+ *   postfix. The only valid field is
+ *   `creation_time`. This list is case-insensitive, default sorting order is
+ *   ascending, and the redundant space characters are insignificant.
+ *
+ *   Example: `creation_time desc`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of feed items fetched with each request.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying the page of results to return. If
+ *   unspecified, it retrieves the first page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.support.v2beta.FeedItem|FeedItem}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `showFeedAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   showFeed(
-    request?: protos.google.cloud.support.v2beta.IShowFeedRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.support.v2beta.IFeedItem[],
-      protos.google.cloud.support.v2beta.IShowFeedRequest | null,
-      protos.google.cloud.support.v2beta.IShowFeedResponse,
-    ]
-  >;
+      request?: protos.google.cloud.support.v2beta.IShowFeedRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.support.v2beta.IFeedItem[],
+        protos.google.cloud.support.v2beta.IShowFeedRequest|null,
+        protos.google.cloud.support.v2beta.IShowFeedResponse
+      ]>;
   showFeed(
-    request: protos.google.cloud.support.v2beta.IShowFeedRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.support.v2beta.IShowFeedRequest,
-      protos.google.cloud.support.v2beta.IShowFeedResponse | null | undefined,
-      protos.google.cloud.support.v2beta.IFeedItem
-    >
-  ): void;
-  showFeed(
-    request: protos.google.cloud.support.v2beta.IShowFeedRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.support.v2beta.IShowFeedRequest,
-      protos.google.cloud.support.v2beta.IShowFeedResponse | null | undefined,
-      protos.google.cloud.support.v2beta.IFeedItem
-    >
-  ): void;
-  showFeed(
-    request?: protos.google.cloud.support.v2beta.IShowFeedRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.support.v2beta.IShowFeedRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.support.v2beta.IShowFeedRequest,
-          | protos.google.cloud.support.v2beta.IShowFeedResponse
-          | null
-          | undefined,
-          protos.google.cloud.support.v2beta.IFeedItem
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.support.v2beta.IShowFeedRequest,
-      protos.google.cloud.support.v2beta.IShowFeedResponse | null | undefined,
-      protos.google.cloud.support.v2beta.IFeedItem
-    >
-  ): Promise<
-    [
-      protos.google.cloud.support.v2beta.IFeedItem[],
-      protos.google.cloud.support.v2beta.IShowFeedRequest | null,
-      protos.google.cloud.support.v2beta.IShowFeedResponse,
-    ]
-  > | void {
+          protos.google.cloud.support.v2beta.IShowFeedResponse|null|undefined,
+          protos.google.cloud.support.v2beta.IFeedItem>): void;
+  showFeed(
+      request: protos.google.cloud.support.v2beta.IShowFeedRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.support.v2beta.IShowFeedRequest,
+          protos.google.cloud.support.v2beta.IShowFeedResponse|null|undefined,
+          protos.google.cloud.support.v2beta.IFeedItem>): void;
+  showFeed(
+      request?: protos.google.cloud.support.v2beta.IShowFeedRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.support.v2beta.IShowFeedRequest,
+          protos.google.cloud.support.v2beta.IShowFeedResponse|null|undefined,
+          protos.google.cloud.support.v2beta.IFeedItem>,
+      callback?: PaginationCallback<
+          protos.google.cloud.support.v2beta.IShowFeedRequest,
+          protos.google.cloud.support.v2beta.IShowFeedResponse|null|undefined,
+          protos.google.cloud.support.v2beta.IFeedItem>):
+      Promise<[
+        protos.google.cloud.support.v2beta.IFeedItem[],
+        protos.google.cloud.support.v2beta.IShowFeedRequest|null,
+        protos.google.cloud.support.v2beta.IShowFeedResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.support.v2beta.IShowFeedRequest,
-          | protos.google.cloud.support.v2beta.IShowFeedResponse
-          | null
-          | undefined,
-          protos.google.cloud.support.v2beta.IFeedItem
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.support.v2beta.IShowFeedRequest,
+      protos.google.cloud.support.v2beta.IShowFeedResponse|null|undefined,
+      protos.google.cloud.support.v2beta.IFeedItem>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('showFeed values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -523,65 +457,62 @@ export class FeedServiceClient {
     this._log.info('showFeed request %j', request);
     return this.innerApiCalls
       .showFeed(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.support.v2beta.IFeedItem[],
-          protos.google.cloud.support.v2beta.IShowFeedRequest | null,
-          protos.google.cloud.support.v2beta.IShowFeedResponse,
-        ]) => {
-          this._log.info('showFeed values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.support.v2beta.IFeedItem[],
+        protos.google.cloud.support.v2beta.IShowFeedRequest|null,
+        protos.google.cloud.support.v2beta.IShowFeedResponse
+      ]) => {
+        this._log.info('showFeed values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `showFeed`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the case for which feed items should be
-   *   listed.
-   * @param {string} [request.orderBy]
-   *   Optional. Field to order feed items by, followed by `asc` or `desc`
-   *   postfix. The only valid field is
-   *   `creation_time`. This list is case-insensitive, default sorting order is
-   *   ascending, and the redundant space characters are insignificant.
-   *
-   *   Example: `creation_time desc`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of feed items fetched with each request.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying the page of results to return. If
-   *   unspecified, it retrieves the first page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.support.v2beta.FeedItem|FeedItem} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `showFeedAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `showFeed`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the case for which feed items should be
+ *   listed.
+ * @param {string} [request.orderBy]
+ *   Optional. Field to order feed items by, followed by `asc` or `desc`
+ *   postfix. The only valid field is
+ *   `creation_time`. This list is case-insensitive, default sorting order is
+ *   ascending, and the redundant space characters are insignificant.
+ *
+ *   Example: `creation_time desc`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of feed items fetched with each request.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying the page of results to return. If
+ *   unspecified, it retrieves the first page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.support.v2beta.FeedItem|FeedItem} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `showFeedAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   showFeedStream(
-    request?: protos.google.cloud.support.v2beta.IShowFeedRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.support.v2beta.IShowFeedRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['showFeed'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('showFeed stream %j', request);
     return this.descriptors.page.showFeed.createStream(
       this.innerApiCalls.showFeed as GaxCall,
@@ -590,56 +521,55 @@ export class FeedServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `showFeed`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the case for which feed items should be
-   *   listed.
-   * @param {string} [request.orderBy]
-   *   Optional. Field to order feed items by, followed by `asc` or `desc`
-   *   postfix. The only valid field is
-   *   `creation_time`. This list is case-insensitive, default sorting order is
-   *   ascending, and the redundant space characters are insignificant.
-   *
-   *   Example: `creation_time desc`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of feed items fetched with each request.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying the page of results to return. If
-   *   unspecified, it retrieves the first page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.support.v2beta.FeedItem|FeedItem}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/feed_service.show_feed.js</caption>
-   * region_tag:cloudsupport_v2beta_generated_FeedService_ShowFeed_async
-   */
+/**
+ * Equivalent to `showFeed`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the case for which feed items should be
+ *   listed.
+ * @param {string} [request.orderBy]
+ *   Optional. Field to order feed items by, followed by `asc` or `desc`
+ *   postfix. The only valid field is
+ *   `creation_time`. This list is case-insensitive, default sorting order is
+ *   ascending, and the redundant space characters are insignificant.
+ *
+ *   Example: `creation_time desc`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of feed items fetched with each request.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying the page of results to return. If
+ *   unspecified, it retrieves the first page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.support.v2beta.FeedItem|FeedItem}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/feed_service.show_feed.js</caption>
+ * region_tag:cloudsupport_v2beta_generated_FeedService_ShowFeed_async
+ */
   showFeedAsync(
-    request?: protos.google.cloud.support.v2beta.IShowFeedRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.support.v2beta.IFeedItem> {
+      request?: protos.google.cloud.support.v2beta.IShowFeedRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.support.v2beta.IFeedItem>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['showFeed'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('showFeed iterate %j', request);
     return this.descriptors.page.showFeed.asyncIterate(
       this.innerApiCalls['showFeed'] as GaxCall,
@@ -658,7 +588,7 @@ export class FeedServiceClient {
    * @param {string} caseParam
    * @returns {string} Resource name string.
    */
-  organizationCasePath(organization: string, caseParam: string) {
+  organizationCasePath(organization:string,caseParam:string) {
     return this.pathTemplates.organizationCasePathTemplate.render({
       organization: organization,
       case: caseParam,
@@ -673,9 +603,7 @@ export class FeedServiceClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationCaseName(organizationCaseName: string) {
-    return this.pathTemplates.organizationCasePathTemplate.match(
-      organizationCaseName
-    ).organization;
+    return this.pathTemplates.organizationCasePathTemplate.match(organizationCaseName).organization;
   }
 
   /**
@@ -686,9 +614,7 @@ export class FeedServiceClient {
    * @returns {string} A string representing the case.
    */
   matchCaseFromOrganizationCaseName(organizationCaseName: string) {
-    return this.pathTemplates.organizationCasePathTemplate.match(
-      organizationCaseName
-    ).case;
+    return this.pathTemplates.organizationCasePathTemplate.match(organizationCaseName).case;
   }
 
   /**
@@ -699,11 +625,7 @@ export class FeedServiceClient {
    * @param {string} attachment_id
    * @returns {string} Resource name string.
    */
-  organizationCaseAttachmentIdPath(
-    organization: string,
-    caseParam: string,
-    attachmentId: string
-  ) {
+  organizationCaseAttachmentIdPath(organization:string,caseParam:string,attachmentId:string) {
     return this.pathTemplates.organizationCaseAttachmentIdPathTemplate.render({
       organization: organization,
       case: caseParam,
@@ -718,12 +640,8 @@ export class FeedServiceClient {
    *   A fully-qualified path representing organization_case_attachment_id resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationCaseAttachmentIdName(
-    organizationCaseAttachmentIdName: string
-  ) {
-    return this.pathTemplates.organizationCaseAttachmentIdPathTemplate.match(
-      organizationCaseAttachmentIdName
-    ).organization;
+  matchOrganizationFromOrganizationCaseAttachmentIdName(organizationCaseAttachmentIdName: string) {
+    return this.pathTemplates.organizationCaseAttachmentIdPathTemplate.match(organizationCaseAttachmentIdName).organization;
   }
 
   /**
@@ -733,12 +651,8 @@ export class FeedServiceClient {
    *   A fully-qualified path representing organization_case_attachment_id resource.
    * @returns {string} A string representing the case.
    */
-  matchCaseFromOrganizationCaseAttachmentIdName(
-    organizationCaseAttachmentIdName: string
-  ) {
-    return this.pathTemplates.organizationCaseAttachmentIdPathTemplate.match(
-      organizationCaseAttachmentIdName
-    ).case;
+  matchCaseFromOrganizationCaseAttachmentIdName(organizationCaseAttachmentIdName: string) {
+    return this.pathTemplates.organizationCaseAttachmentIdPathTemplate.match(organizationCaseAttachmentIdName).case;
   }
 
   /**
@@ -748,12 +662,8 @@ export class FeedServiceClient {
    *   A fully-qualified path representing organization_case_attachment_id resource.
    * @returns {string} A string representing the attachment_id.
    */
-  matchAttachmentIdFromOrganizationCaseAttachmentIdName(
-    organizationCaseAttachmentIdName: string
-  ) {
-    return this.pathTemplates.organizationCaseAttachmentIdPathTemplate.match(
-      organizationCaseAttachmentIdName
-    ).attachment_id;
+  matchAttachmentIdFromOrganizationCaseAttachmentIdName(organizationCaseAttachmentIdName: string) {
+    return this.pathTemplates.organizationCaseAttachmentIdPathTemplate.match(organizationCaseAttachmentIdName).attachment_id;
   }
 
   /**
@@ -764,11 +674,7 @@ export class FeedServiceClient {
    * @param {string} comment
    * @returns {string} Resource name string.
    */
-  organizationCaseCommentPath(
-    organization: string,
-    caseParam: string,
-    comment: string
-  ) {
+  organizationCaseCommentPath(organization:string,caseParam:string,comment:string) {
     return this.pathTemplates.organizationCaseCommentPathTemplate.render({
       organization: organization,
       case: caseParam,
@@ -783,12 +689,8 @@ export class FeedServiceClient {
    *   A fully-qualified path representing organization_case_comment resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationCaseCommentName(
-    organizationCaseCommentName: string
-  ) {
-    return this.pathTemplates.organizationCaseCommentPathTemplate.match(
-      organizationCaseCommentName
-    ).organization;
+  matchOrganizationFromOrganizationCaseCommentName(organizationCaseCommentName: string) {
+    return this.pathTemplates.organizationCaseCommentPathTemplate.match(organizationCaseCommentName).organization;
   }
 
   /**
@@ -798,12 +700,8 @@ export class FeedServiceClient {
    *   A fully-qualified path representing organization_case_comment resource.
    * @returns {string} A string representing the case.
    */
-  matchCaseFromOrganizationCaseCommentName(
-    organizationCaseCommentName: string
-  ) {
-    return this.pathTemplates.organizationCaseCommentPathTemplate.match(
-      organizationCaseCommentName
-    ).case;
+  matchCaseFromOrganizationCaseCommentName(organizationCaseCommentName: string) {
+    return this.pathTemplates.organizationCaseCommentPathTemplate.match(organizationCaseCommentName).case;
   }
 
   /**
@@ -813,28 +711,20 @@ export class FeedServiceClient {
    *   A fully-qualified path representing organization_case_comment resource.
    * @returns {string} A string representing the comment.
    */
-  matchCommentFromOrganizationCaseCommentName(
-    organizationCaseCommentName: string
-  ) {
-    return this.pathTemplates.organizationCaseCommentPathTemplate.match(
-      organizationCaseCommentName
-    ).comment;
+  matchCommentFromOrganizationCaseCommentName(organizationCaseCommentName: string) {
+    return this.pathTemplates.organizationCaseCommentPathTemplate.match(organizationCaseCommentName).comment;
   }
 
   /**
-   * Return a fully-qualified organizationCaseEmailMessage resource name string.
+   * Return a fully-qualified organizationCaseEmailMessages resource name string.
    *
    * @param {string} organization
    * @param {string} caseParam
    * @param {string} email_message
    * @returns {string} Resource name string.
    */
-  organizationCaseEmailMessagePath(
-    organization: string,
-    caseParam: string,
-    emailMessage: string
-  ) {
-    return this.pathTemplates.organizationCaseEmailMessagePathTemplate.render({
+  organizationCaseEmailMessagesPath(organization:string,caseParam:string,emailMessage:string) {
+    return this.pathTemplates.organizationCaseEmailMessagesPathTemplate.render({
       organization: organization,
       case: caseParam,
       email_message: emailMessage,
@@ -842,48 +732,36 @@ export class FeedServiceClient {
   }
 
   /**
-   * Parse the organization from OrganizationCaseEmailMessage resource.
+   * Parse the organization from OrganizationCaseEmailMessages resource.
    *
-   * @param {string} organizationCaseEmailMessageName
-   *   A fully-qualified path representing organization_case_email_message resource.
+   * @param {string} organizationCaseEmailMessagesName
+   *   A fully-qualified path representing organization_case_emailMessages resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationCaseEmailMessageName(
-    organizationCaseEmailMessageName: string
-  ) {
-    return this.pathTemplates.organizationCaseEmailMessagePathTemplate.match(
-      organizationCaseEmailMessageName
-    ).organization;
+  matchOrganizationFromOrganizationCaseEmailMessagesName(organizationCaseEmailMessagesName: string) {
+    return this.pathTemplates.organizationCaseEmailMessagesPathTemplate.match(organizationCaseEmailMessagesName).organization;
   }
 
   /**
-   * Parse the case from OrganizationCaseEmailMessage resource.
+   * Parse the case from OrganizationCaseEmailMessages resource.
    *
-   * @param {string} organizationCaseEmailMessageName
-   *   A fully-qualified path representing organization_case_email_message resource.
+   * @param {string} organizationCaseEmailMessagesName
+   *   A fully-qualified path representing organization_case_emailMessages resource.
    * @returns {string} A string representing the case.
    */
-  matchCaseFromOrganizationCaseEmailMessageName(
-    organizationCaseEmailMessageName: string
-  ) {
-    return this.pathTemplates.organizationCaseEmailMessagePathTemplate.match(
-      organizationCaseEmailMessageName
-    ).case;
+  matchCaseFromOrganizationCaseEmailMessagesName(organizationCaseEmailMessagesName: string) {
+    return this.pathTemplates.organizationCaseEmailMessagesPathTemplate.match(organizationCaseEmailMessagesName).case;
   }
 
   /**
-   * Parse the email_message from OrganizationCaseEmailMessage resource.
+   * Parse the email_message from OrganizationCaseEmailMessages resource.
    *
-   * @param {string} organizationCaseEmailMessageName
-   *   A fully-qualified path representing organization_case_email_message resource.
+   * @param {string} organizationCaseEmailMessagesName
+   *   A fully-qualified path representing organization_case_emailMessages resource.
    * @returns {string} A string representing the email_message.
    */
-  matchEmailMessageFromOrganizationCaseEmailMessageName(
-    organizationCaseEmailMessageName: string
-  ) {
-    return this.pathTemplates.organizationCaseEmailMessagePathTemplate.match(
-      organizationCaseEmailMessageName
-    ).email_message;
+  matchEmailMessageFromOrganizationCaseEmailMessagesName(organizationCaseEmailMessagesName: string) {
+    return this.pathTemplates.organizationCaseEmailMessagesPathTemplate.match(organizationCaseEmailMessagesName).email_message;
   }
 
   /**
@@ -893,7 +771,7 @@ export class FeedServiceClient {
    * @param {string} caseParam
    * @returns {string} Resource name string.
    */
-  projectCasePath(project: string, caseParam: string) {
+  projectCasePath(project:string,caseParam:string) {
     return this.pathTemplates.projectCasePathTemplate.render({
       project: project,
       case: caseParam,
@@ -908,8 +786,7 @@ export class FeedServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectCaseName(projectCaseName: string) {
-    return this.pathTemplates.projectCasePathTemplate.match(projectCaseName)
-      .project;
+    return this.pathTemplates.projectCasePathTemplate.match(projectCaseName).project;
   }
 
   /**
@@ -920,8 +797,7 @@ export class FeedServiceClient {
    * @returns {string} A string representing the case.
    */
   matchCaseFromProjectCaseName(projectCaseName: string) {
-    return this.pathTemplates.projectCasePathTemplate.match(projectCaseName)
-      .case;
+    return this.pathTemplates.projectCasePathTemplate.match(projectCaseName).case;
   }
 
   /**
@@ -932,11 +808,7 @@ export class FeedServiceClient {
    * @param {string} attachment_id
    * @returns {string} Resource name string.
    */
-  projectCaseAttachmentIdPath(
-    project: string,
-    caseParam: string,
-    attachmentId: string
-  ) {
+  projectCaseAttachmentIdPath(project:string,caseParam:string,attachmentId:string) {
     return this.pathTemplates.projectCaseAttachmentIdPathTemplate.render({
       project: project,
       case: caseParam,
@@ -951,12 +823,8 @@ export class FeedServiceClient {
    *   A fully-qualified path representing project_case_attachment_id resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectCaseAttachmentIdName(
-    projectCaseAttachmentIdName: string
-  ) {
-    return this.pathTemplates.projectCaseAttachmentIdPathTemplate.match(
-      projectCaseAttachmentIdName
-    ).project;
+  matchProjectFromProjectCaseAttachmentIdName(projectCaseAttachmentIdName: string) {
+    return this.pathTemplates.projectCaseAttachmentIdPathTemplate.match(projectCaseAttachmentIdName).project;
   }
 
   /**
@@ -966,12 +834,8 @@ export class FeedServiceClient {
    *   A fully-qualified path representing project_case_attachment_id resource.
    * @returns {string} A string representing the case.
    */
-  matchCaseFromProjectCaseAttachmentIdName(
-    projectCaseAttachmentIdName: string
-  ) {
-    return this.pathTemplates.projectCaseAttachmentIdPathTemplate.match(
-      projectCaseAttachmentIdName
-    ).case;
+  matchCaseFromProjectCaseAttachmentIdName(projectCaseAttachmentIdName: string) {
+    return this.pathTemplates.projectCaseAttachmentIdPathTemplate.match(projectCaseAttachmentIdName).case;
   }
 
   /**
@@ -981,12 +845,8 @@ export class FeedServiceClient {
    *   A fully-qualified path representing project_case_attachment_id resource.
    * @returns {string} A string representing the attachment_id.
    */
-  matchAttachmentIdFromProjectCaseAttachmentIdName(
-    projectCaseAttachmentIdName: string
-  ) {
-    return this.pathTemplates.projectCaseAttachmentIdPathTemplate.match(
-      projectCaseAttachmentIdName
-    ).attachment_id;
+  matchAttachmentIdFromProjectCaseAttachmentIdName(projectCaseAttachmentIdName: string) {
+    return this.pathTemplates.projectCaseAttachmentIdPathTemplate.match(projectCaseAttachmentIdName).attachment_id;
   }
 
   /**
@@ -997,7 +857,7 @@ export class FeedServiceClient {
    * @param {string} comment
    * @returns {string} Resource name string.
    */
-  projectCaseCommentPath(project: string, caseParam: string, comment: string) {
+  projectCaseCommentPath(project:string,caseParam:string,comment:string) {
     return this.pathTemplates.projectCaseCommentPathTemplate.render({
       project: project,
       case: caseParam,
@@ -1013,9 +873,7 @@ export class FeedServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectCaseCommentName(projectCaseCommentName: string) {
-    return this.pathTemplates.projectCaseCommentPathTemplate.match(
-      projectCaseCommentName
-    ).project;
+    return this.pathTemplates.projectCaseCommentPathTemplate.match(projectCaseCommentName).project;
   }
 
   /**
@@ -1026,9 +884,7 @@ export class FeedServiceClient {
    * @returns {string} A string representing the case.
    */
   matchCaseFromProjectCaseCommentName(projectCaseCommentName: string) {
-    return this.pathTemplates.projectCaseCommentPathTemplate.match(
-      projectCaseCommentName
-    ).case;
+    return this.pathTemplates.projectCaseCommentPathTemplate.match(projectCaseCommentName).case;
   }
 
   /**
@@ -1039,25 +895,19 @@ export class FeedServiceClient {
    * @returns {string} A string representing the comment.
    */
   matchCommentFromProjectCaseCommentName(projectCaseCommentName: string) {
-    return this.pathTemplates.projectCaseCommentPathTemplate.match(
-      projectCaseCommentName
-    ).comment;
+    return this.pathTemplates.projectCaseCommentPathTemplate.match(projectCaseCommentName).comment;
   }
 
   /**
-   * Return a fully-qualified projectCaseEmailMessage resource name string.
+   * Return a fully-qualified projectCaseEmailMessages resource name string.
    *
    * @param {string} project
    * @param {string} caseParam
    * @param {string} email_message
    * @returns {string} Resource name string.
    */
-  projectCaseEmailMessagePath(
-    project: string,
-    caseParam: string,
-    emailMessage: string
-  ) {
-    return this.pathTemplates.projectCaseEmailMessagePathTemplate.render({
+  projectCaseEmailMessagesPath(project:string,caseParam:string,emailMessage:string) {
+    return this.pathTemplates.projectCaseEmailMessagesPathTemplate.render({
       project: project,
       case: caseParam,
       email_message: emailMessage,
@@ -1065,48 +915,36 @@ export class FeedServiceClient {
   }
 
   /**
-   * Parse the project from ProjectCaseEmailMessage resource.
+   * Parse the project from ProjectCaseEmailMessages resource.
    *
-   * @param {string} projectCaseEmailMessageName
-   *   A fully-qualified path representing project_case_email_message resource.
+   * @param {string} projectCaseEmailMessagesName
+   *   A fully-qualified path representing project_case_emailMessages resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectCaseEmailMessageName(
-    projectCaseEmailMessageName: string
-  ) {
-    return this.pathTemplates.projectCaseEmailMessagePathTemplate.match(
-      projectCaseEmailMessageName
-    ).project;
+  matchProjectFromProjectCaseEmailMessagesName(projectCaseEmailMessagesName: string) {
+    return this.pathTemplates.projectCaseEmailMessagesPathTemplate.match(projectCaseEmailMessagesName).project;
   }
 
   /**
-   * Parse the case from ProjectCaseEmailMessage resource.
+   * Parse the case from ProjectCaseEmailMessages resource.
    *
-   * @param {string} projectCaseEmailMessageName
-   *   A fully-qualified path representing project_case_email_message resource.
+   * @param {string} projectCaseEmailMessagesName
+   *   A fully-qualified path representing project_case_emailMessages resource.
    * @returns {string} A string representing the case.
    */
-  matchCaseFromProjectCaseEmailMessageName(
-    projectCaseEmailMessageName: string
-  ) {
-    return this.pathTemplates.projectCaseEmailMessagePathTemplate.match(
-      projectCaseEmailMessageName
-    ).case;
+  matchCaseFromProjectCaseEmailMessagesName(projectCaseEmailMessagesName: string) {
+    return this.pathTemplates.projectCaseEmailMessagesPathTemplate.match(projectCaseEmailMessagesName).case;
   }
 
   /**
-   * Parse the email_message from ProjectCaseEmailMessage resource.
+   * Parse the email_message from ProjectCaseEmailMessages resource.
    *
-   * @param {string} projectCaseEmailMessageName
-   *   A fully-qualified path representing project_case_email_message resource.
+   * @param {string} projectCaseEmailMessagesName
+   *   A fully-qualified path representing project_case_emailMessages resource.
    * @returns {string} A string representing the email_message.
    */
-  matchEmailMessageFromProjectCaseEmailMessageName(
-    projectCaseEmailMessageName: string
-  ) {
-    return this.pathTemplates.projectCaseEmailMessagePathTemplate.match(
-      projectCaseEmailMessageName
-    ).email_message;
+  matchEmailMessageFromProjectCaseEmailMessagesName(projectCaseEmailMessagesName: string) {
+    return this.pathTemplates.projectCaseEmailMessagesPathTemplate.match(projectCaseEmailMessagesName).email_message;
   }
 
   /**
